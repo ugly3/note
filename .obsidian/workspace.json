@@ -6,7 +6,7 @@
       {
         "id": "d91fa3c2c8aef432",
         "type": "tabs",
-        "dimension": 54.17705735660847,
+        "dimension": 47.282824276080916,
         "children": [
           {
             "id": "e0804101a1dc159f",
@@ -32,9 +32,9 @@
               "state": {
                 "file": "GD32F407VET6/原理图/核心板/SCH_核心板.pdf",
                 "page": 1,
-                "left": -40,
-                "top": 602,
-                "zoom": 0.3713921901528014
+                "left": -17,
+                "top": 603,
+                "zoom": 1.0080645161290325
               },
               "icon": "lucide-file-text",
               "title": "SCH_核心板"
@@ -46,7 +46,7 @@
       {
         "id": "1e356416e71055af",
         "type": "tabs",
-        "dimension": 45.82294264339153,
+        "dimension": 52.717175723919084,
         "children": [
           {
             "id": "563ea56ab508b5c9",
