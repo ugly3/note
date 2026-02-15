@@ -6,21 +6,20 @@
       {
         "id": "d91fa3c2c8aef432",
         "type": "tabs",
+        "dimension": 54.17705735660847,
         "children": [
           {
             "id": "e0804101a1dc159f",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
-                "page": 6,
-                "left": -17,
-                "top": 952,
-                "zoom": 0.9191176470588235
+                "file": "GD32F407VET6/GD32F407VET6.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "光子MINI-GD32F407VET6开发板实验教程V2.0"
+              "icon": "lucide-file",
+              "title": "GD32F407VET6"
             }
           }
         ]
@@ -28,6 +27,7 @@
       {
         "id": "1e356416e71055af",
         "type": "tabs",
+        "dimension": 45.82294264339153,
         "children": [
           {
             "id": "563ea56ab508b5c9",
@@ -219,10 +219,11 @@
       "obsidian-git:打开Git源代码管理": false
     }
   },
-  "active": "563ea56ab508b5c9",
+  "active": "e0804101a1dc159f",
   "lastOpenFiles": [
-    "GD32F407VET6/原理图/核心板/1.GD32F407xx_数据手册(英文).pdf",
     "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
+    "GD32F407VET6/beep.c",
+    "GD32F407VET6/原理图/核心板/1.GD32F407xx_数据手册(英文).pdf",
     "GD32F407VET6/GD32F407VET6.md",
     "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
     "GD32F407VET6/原理图/核心板/SCH_核心板.pdf",
