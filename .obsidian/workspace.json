@@ -11,14 +11,12 @@
             "id": "563ea56ab508b5c9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "职业技能大赛/GD32F407VET6.md",
-                "mode": "source",
-                "source": false
+                "file": "职业技能大赛/assets/GD32F407VET6/file-20260216003615469.png"
               },
-              "icon": "lucide-file",
-              "title": "GD32F407VET6"
+              "icon": "lucide-image",
+              "title": "file-20260216003615469"
             }
           }
         ]
@@ -200,6 +198,9 @@
   "active": "563ea56ab508b5c9",
   "lastOpenFiles": [
     "职业技能大赛/GD32F407VET6.md",
+    "职业技能大赛/assets/GD32F407VET6/file-20260216003615469.png",
+    "职业技能大赛/assets/GD32F407VET6",
+    "职业技能大赛/assets",
     "未命名.base",
     "未命名 1.base",
     "未命名.canvas",
@@ -210,8 +211,6 @@
     "职业技能大赛/原理图/扩展模块/SCH_10-指纹模块.pdf",
     "职业技能大赛/原理图/扩展模块/SCH_3-点阵屏.pdf",
     "职业技能大赛/原理图/扩展模块/SCH_2-数码管.pdf",
-    "职业技能大赛/原理图/扩展模块/SCH_1-矩阵按键 .pdf",
-    "职业技能大赛/原理图/扩展模块/SCH_6-RFID.pdf",
     "职业技能大赛/原理图/图片/Pasted image 20260215222844.png",
     "欢迎.md",
     "未命名.md"
