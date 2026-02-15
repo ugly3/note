@@ -11,30 +11,16 @@
             "id": "563ea56ab508b5c9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "职业技能大赛/GD32F407VET6.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "GD32F407VET6"
-            }
-          },
-          {
-            "id": "a090e14ea70d6fa6",
-            "type": "leaf",
-            "state": {
               "type": "pdf",
               "state": {
-                "file": "职业技能大赛/原理图/核心板/SCH_核心板.pdf",
-                "page": 1,
-                "left": -10,
-                "top": 313,
-                "zoom": 1.5492359932088287
+                "file": "职业技能大赛/原理图/扩展模块/4.GD32F4固件库使用指南(中文) 1.pdf",
+                "page": 2,
+                "left": -7,
+                "top": 108,
+                "zoom": 2.2072162870389036
               },
               "icon": "lucide-file-text",
-              "title": "SCH_核心板"
+              "title": "4.GD32F4固件库使用指南(中文) 1"
             }
           },
           {
@@ -47,15 +33,14 @@
                 "file": "职业技能大赛/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
                 "page": 3,
                 "left": -8,
-                "top": 864,
+                "top": 882,
                 "zoom": 2.1470588235294117
               },
               "icon": "lucide-file-text",
               "title": "光子MINI-GD32F407VET6开发板使用说明V2.0"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -232,19 +217,19 @@
       "obsidian-git:打开Git源代码管理": false
     }
   },
-  "active": "e0804101a1dc159f",
+  "active": "a3c5da6bc5162ffc",
   "lastOpenFiles": [
     "职业技能大赛/GD32F407VET6.md",
-    "职业技能大赛/原理图/核心板/SCH_核心板.pdf",
+    "职业技能大赛/原理图/扩展模块/4.GD32F4固件库使用指南(中文) 1.pdf",
+    "职业技能大赛/原理图/核心板/1.GD32F407xx_数据手册(英文).pdf",
     "职业技能大赛/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
+    "职业技能大赛/原理图/核心板/SCH_核心板.pdf",
     "职业技能大赛/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
     "职业技能大赛/原理图/扩展模块/4.GD32F4固件库使用指南(中文).pdf",
     "职业技能大赛/原理图/扩展模块/其他模块.pdf",
     "职业技能大赛/原理图/扩展模块/SCH_1-矩阵按键 .pdf",
     "职业技能大赛/原理图/扩展模块/SCH_2-数码管.pdf",
     "职业技能大赛/原理图/扩展模块/SCH_3-点阵屏.pdf",
-    "职业技能大赛/原理图/扩展模块/SCH_4-步进电机.pdf",
-    "职业技能大赛/原理图/扩展模块/SCH_5-风扇.pdf",
     "职业技能大赛/assets/GD32F407VET6/file-20260216003615469.png",
     "未命名.canvas",
     "SCH_核心板.webp",
