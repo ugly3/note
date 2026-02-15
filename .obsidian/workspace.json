@@ -11,14 +11,14 @@
             "id": "563ea56ab508b5c9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "split-diff-view",
               "state": {
-                "file": "职业技能大赛/GD32F407VET6.md",
-                "mode": "source",
-                "source": false
+                "aFile": ".obsidian/plugins/obsidian-git/data.json",
+                "bFile": ".obsidian/plugins/obsidian-git/data.json",
+                "aRef": ""
               },
-              "icon": "lucide-file",
-              "title": "GD32F407VET6"
+              "icon": "diff",
+              "title": "Diff: data.json  (Working Tree)"
             }
           }
         ]
@@ -94,7 +94,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "职业技能大赛/GD32F407VET6.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +103,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "GD32F407VET6 的反向链接列表"
+              "title": "反向链接"
             }
           },
           {
@@ -195,15 +194,14 @@
       "pdf-plus:PDF++: 切换自动复制": false,
       "pdf-plus:PDF++: 切换自动对焦": false,
       "pdf-plus:PDF++: 切换自动粘贴": false,
-      "obsidian-git:Open Git source control": false,
       "obsidian-git:打开Git源代码管理": false
     }
   },
-  "active": "a3c5da6bc5162ffc",
+  "active": "563ea56ab508b5c9",
   "lastOpenFiles": [
+    "职业技能大赛/GD32F407VET6.md",
     "未命名.base",
     "未命名 1.base",
-    "职业技能大赛/GD32F407VET6.md",
     "未命名.canvas",
     "职业技能大赛/原理图/核心板/SCH_核心板.pdf",
     "SCH_核心板.webp",
