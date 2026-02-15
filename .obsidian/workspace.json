@@ -15,10 +15,10 @@
               "type": "pdf",
               "state": {
                 "file": "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
-                "page": 4,
-                "left": -16,
-                "top": 713,
-                "zoom": 0.9166666666666666
+                "page": 3,
+                "left": -12,
+                "top": 1006,
+                "zoom": 1.2671568627450982
               },
               "icon": "lucide-file-text",
               "title": "光子MINI-GD32F407VET6开发板实验教程V2.0"
@@ -102,7 +102,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "6e5caea262b23ebc",
@@ -202,7 +203,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -221,10 +223,10 @@
       "obsidian-git:打开Git源代码管理": false
     }
   },
-  "active": "e0804101a1dc159f",
+  "active": "563ea56ab508b5c9",
   "lastOpenFiles": [
-    "GD32F407VET6/GD32F407VET6.md",
     "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
+    "GD32F407VET6/GD32F407VET6.md",
     "GD32F407VET6/beep.c",
     "GD32F407VET6/原理图/核心板/1.GD32F407xx_数据手册(英文).pdf",
     "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
