@@ -11,16 +11,14 @@
             "id": "563ea56ab508b5c9",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "职业技能大赛/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
-                "page": 2,
-                "left": -8,
-                "top": 484,
-                "zoom": 2.1470588235294117
+                "file": "职业技能大赛/GD32F407VET6.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "光子MINI-GD32F407VET6开发板使用说明V2.0"
+              "icon": "lucide-file",
+              "title": "GD32F407VET6"
             }
           },
           {
@@ -38,8 +36,26 @@
               "icon": "lucide-file-text",
               "title": "SCH_核心板"
             }
+          },
+          {
+            "id": "e0804101a1dc159f",
+            "type": "leaf",
+            "dimension": 50,
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "职业技能大赛/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
+                "page": 3,
+                "left": -8,
+                "top": 864,
+                "zoom": 2.1470588235294117
+              },
+              "icon": "lucide-file-text",
+              "title": "光子MINI-GD32F407VET6开发板使用说明V2.0"
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -216,13 +232,13 @@
       "obsidian-git:打开Git源代码管理": false
     }
   },
-  "active": "563ea56ab508b5c9",
+  "active": "e0804101a1dc159f",
   "lastOpenFiles": [
+    "职业技能大赛/GD32F407VET6.md",
+    "职业技能大赛/原理图/核心板/SCH_核心板.pdf",
+    "职业技能大赛/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
     "职业技能大赛/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
     "职业技能大赛/原理图/扩展模块/4.GD32F4固件库使用指南(中文).pdf",
-    "职业技能大赛/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
-    "职业技能大赛/原理图/核心板/SCH_核心板.pdf",
-    "职业技能大赛/GD32F407VET6.md",
     "职业技能大赛/原理图/扩展模块/其他模块.pdf",
     "职业技能大赛/原理图/扩展模块/SCH_1-矩阵按键 .pdf",
     "职业技能大赛/原理图/扩展模块/SCH_2-数码管.pdf",
