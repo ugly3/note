@@ -11,16 +11,14 @@
             "id": "563ea56ab508b5c9",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "职业技能大赛/原理图/扩展模块/4.GD32F4固件库使用指南(中文) 1.pdf",
-                "page": 2,
-                "left": -7,
-                "top": 108,
-                "zoom": 2.2072162870389036
+                "file": "职业技能大赛/GD32F407VET6.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "4.GD32F4固件库使用指南(中文) 1"
+              "icon": "lucide-file",
+              "title": "GD32F407VET6"
             }
           },
           {
@@ -30,14 +28,14 @@
             "state": {
               "type": "pdf",
               "state": {
-                "file": "职业技能大赛/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
-                "page": 3,
-                "left": -8,
-                "top": 882,
-                "zoom": 2.1470588235294117
+                "file": "职业技能大赛/原理图/核心板/SCH_核心板.pdf",
+                "page": 1,
+                "left": -10,
+                "top": 593,
+                "zoom": 1.5492359932088287
               },
               "icon": "lucide-file-text",
-              "title": "光子MINI-GD32F407VET6开发板使用说明V2.0"
+              "title": "SCH_核心板"
             }
           }
         ]
@@ -217,13 +215,13 @@
       "obsidian-git:打开Git源代码管理": false
     }
   },
-  "active": "a3c5da6bc5162ffc",
+  "active": "563ea56ab508b5c9",
   "lastOpenFiles": [
+    "职业技能大赛/原理图/核心板/SCH_核心板.pdf",
     "职业技能大赛/GD32F407VET6.md",
+    "职业技能大赛/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
     "职业技能大赛/原理图/扩展模块/4.GD32F4固件库使用指南(中文) 1.pdf",
     "职业技能大赛/原理图/核心板/1.GD32F407xx_数据手册(英文).pdf",
-    "职业技能大赛/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
-    "职业技能大赛/原理图/核心板/SCH_核心板.pdf",
     "职业技能大赛/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
     "职业技能大赛/原理图/扩展模块/4.GD32F4固件库使用指南(中文).pdf",
     "职业技能大赛/原理图/扩展模块/其他模块.pdf",
