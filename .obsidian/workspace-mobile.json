@@ -137,7 +137,7 @@
             "unlinkedCollapsed": true
           },
           "icon": "links-coming-in",
-          "title": "Backlinks"
+          "title": "反向链接"
         }
       },
       {
@@ -188,7 +188,7 @@
       "obsidian-git:打开Git源代码管理": false
     }
   },
-  "active": "1867d9c628bbd556",
+  "active": "b2f29737c3a40f1c",
   "lastOpenFiles": [
     "conflict-files-obsidian-git.md",
     "Arch日常使用.md",
