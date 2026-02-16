@@ -4,49 +4,8 @@
     "type": "split",
     "children": [
       {
-        "id": "d91fa3c2c8aef432",
-        "type": "tabs",
-        "dimension": 47.282824276080916,
-        "children": [
-          {
-            "id": "e0804101a1dc159f",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
-                "page": 2,
-                "left": -12,
-                "top": 205,
-                "zoom": 1.2671568627450982
-              },
-              "icon": "lucide-file-text",
-              "title": "光子MINI-GD32F407VET6开发板实验教程V2.0"
-            }
-          },
-          {
-            "id": "a03f69708159a85f",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "GD32F407VET6/原理图/核心板/SCH_核心板.pdf",
-                "page": 1,
-                "left": -31,
-                "top": 601,
-                "zoom": 0.5243704018109792
-              },
-              "icon": "lucide-file-text",
-              "title": "SCH_核心板"
-            }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
         "id": "1e356416e71055af",
         "type": "tabs",
-        "dimension": 52.717175723919084,
         "children": [
           {
             "id": "563ea56ab508b5c9",
