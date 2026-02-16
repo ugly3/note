@@ -31,3 +31,16 @@
 |`pacman -Qi <包名>`|查看已安装包的详细信息（版本、依赖、大小）|
 |`pacman -Ql <包名>`|列出已安装包的所有文件路径|
 |`pacman -Qo <文件路径>`|查看某个文件属于哪个已安装包|
+
+### 缓存清理与依赖管理
+
+Pacman 会将下载的包文件缓存至 `/var/cache/pacman/pkg/`，长期不清理会占用磁盘空间。同时，系统中可能存在“孤儿依赖”（不再被任何包需要的依赖），需定期清理。
+
+#### 常用命令[#](https://geek-blogs.com/blog/arch-linux-commands/#chang2-yong4-ming4-ling4)
+
+|命令|功能描述|
+|---|---|
+|`sudo pacman -Sc`|清理旧版本缓存（保留当前版本）|
+|`sudo pacman -Scc`|彻底清理所有缓存（谨慎使用！）|
+|`sudo pacman -Qdt`|列出孤儿依赖|
+|`sudo pacman -Rns $(pacman -Qdtq)`|自动移除孤儿依赖|
