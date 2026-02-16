@@ -32,9 +32,9 @@
               "state": {
                 "file": "GD32F407VET6/原理图/核心板/SCH_核心板.pdf",
                 "page": 1,
-                "left": -17,
-                "top": 603,
-                "zoom": 1.0080645161290323
+                "left": -31,
+                "top": 601,
+                "zoom": 0.5243704018109792
               },
               "icon": "lucide-file-text",
               "title": "SCH_核心板"
@@ -241,8 +241,8 @@
   },
   "active": "563ea56ab508b5c9",
   "lastOpenFiles": [
-    "GD32F407VET6/GD32F407VET6.md",
     "Arch日常使用.md",
+    "GD32F407VET6/GD32F407VET6.md",
     "GD32F407VET6/原理图/核心板/SCH_核心板.pdf",
     "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
     "GD32F407VET6/beep.c",
