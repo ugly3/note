@@ -20,3 +20,13 @@
     ```
     sudo pacman -Rns firefox  # -n：删除配置文件，-s：删除未被依赖的依赖
     ```
+    ### 搜索与查询软件信息[#](https://geek-blogs.com/blog/arch-linux-commands/#12-sou1-suo3-yu3-cha2-xun2-ruan3-jian4-xin4-xi1)
+
+当需要查找某个功能对应的软件，或了解已安装包的详情时，可使用以下命令：
+
+|命令|功能描述|
+|---|---|
+|`pacman -Ss <关键词>`|搜索仓库中的软件（含描述）|
+|`pacman -Qi <包名>`|查看已安装包的详细信息（版本、依赖、大小）|
+|`pacman -Ql <包名>`|列出已安装包的所有文件路径|
+|`pacman -Qo <文件路径>`|查看某个文件属于哪个已安装包|
