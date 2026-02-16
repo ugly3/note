@@ -27,9 +27,9 @@ Pacman 会将下载的包文件缓存至 `/var/cache/pacman/pkg/`，长期不清
 
 #### 常用命令
 
-|命令|功能描述|
-|---|---|
-|`sudo pacman -Sc`|清理旧版本缓存（保留当前版本）|
-|`sudo pacman -Scc`|彻底清理所有缓存（谨慎使用！）|
-|`sudo pacman -Qdt`|列出孤儿依赖|
-|`sudo pacman -Rns $(pacman -Qdtq)`|自动移除孤儿依赖|
+| 命令                                 | 功能描述            |
+| ---------------------------------- | --------------- |
+| `sudo pacman -Sc`                  | 清理旧版本缓存（保留当前版本） |
+| `sudo pacman -Scc`                 | 彻底清理所有缓存（谨慎使用！） |
+| `sudo pacman -Qdt`                 | 列出孤儿依赖          |
+| `sudo pacman -Rns $(pacman -Qdtq)` | 自动移除孤儿依赖        |
