@@ -72,7 +72,7 @@
             "sortOrder": "alphabetical"
           },
           "icon": "lucide-search",
-          "title": "Search"
+          "title": "搜索"
         }
       },
       {
@@ -115,7 +115,7 @@
         }
       }
     ],
-    "currentTab": 0
+    "currentTab": 1
   },
   "right": {
     "id": "daa6524a0491de06",
@@ -188,7 +188,7 @@
       "obsidian-git:打开Git源代码管理": false
     }
   },
-  "active": "b2f29737c3a40f1c",
+  "active": "1867d9c628bbd556",
   "lastOpenFiles": [
     "conflict-files-obsidian-git.md",
     "Arch日常使用.md",
