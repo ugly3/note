@@ -4,8 +4,49 @@
     "type": "split",
     "children": [
       {
+        "id": "d91fa3c2c8aef432",
+        "type": "tabs",
+        "dimension": 47.282824276080916,
+        "children": [
+          {
+            "id": "e0804101a1dc159f",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
+                "page": 2,
+                "left": -12,
+                "top": 205,
+                "zoom": 1.2671568627450982
+              },
+              "icon": "lucide-file-text",
+              "title": "光子MINI-GD32F407VET6开发板实验教程V2.0"
+            }
+          },
+          {
+            "id": "a03f69708159a85f",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "GD32F407VET6/原理图/核心板/SCH_核心板.pdf",
+                "page": 1,
+                "left": -17,
+                "top": 603,
+                "zoom": 1.0080645161290323
+              },
+              "icon": "lucide-file-text",
+              "title": "SCH_核心板"
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
         "id": "1e356416e71055af",
         "type": "tabs",
+        "dimension": 52.717175723919084,
         "children": [
           {
             "id": "563ea56ab508b5c9",
@@ -178,7 +219,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -201,11 +243,11 @@
   "lastOpenFiles": [
     "GD32F407VET6/GD32F407VET6.md",
     "Arch日常使用.md",
-    "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
-    "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
-    "GD32F407VET6/原理图/核心板/1.GD32F407xx_数据手册(英文).pdf",
     "GD32F407VET6/原理图/核心板/SCH_核心板.pdf",
+    "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
     "GD32F407VET6/beep.c",
+    "GD32F407VET6/原理图/核心板/1.GD32F407xx_数据手册(英文).pdf",
+    "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
     "GD32F407VET6/assets/GD32F407VET6/file-20260216003615469.png",
     "GD32F407VET6/原理图/扩展模块/4.GD32F4固件库使用指南(中文) 1.pdf",
     "GD32F407VET6/原理图/扩展模块/4.GD32F4固件库使用指南(中文).pdf",
