@@ -178,8 +178,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -200,10 +199,10 @@
   },
   "active": "563ea56ab508b5c9",
   "lastOpenFiles": [
-    "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
     "GD32F407VET6/GD32F407VET6.md",
-    "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
     "Arch日常使用.md",
+    "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
+    "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板实验教程V2.0.pdf",
     "GD32F407VET6/原理图/核心板/1.GD32F407xx_数据手册(英文).pdf",
     "GD32F407VET6/原理图/核心板/SCH_核心板.pdf",
     "GD32F407VET6/beep.c",
