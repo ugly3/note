@@ -1,22 +1,22 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
 #include "gd32f4xx_libopt.h"
 #include "systick.h"
-FlagStatus receive_flag;//ÅĞ¶ÏÊı¾İÊÇ·ñÓĞ½ÓÊÕµ½
+FlagStatus receive_flag;//åˆ¤æ–­æ•°æ®æ˜¯å¦æœ‰æ¥æ”¶åˆ°
 uint8_t transmit_number = 0x0;
-can_receive_message_struct receive_message;//½ÓÊÕÊı¾İ½á¹¹Ìå
-can_trasnmit_message_struct transmit_message;//·¢ËÍÊı¾İ½á¹¹Ìå
+can_receive_message_struct receive_message;//æ¥æ”¶æ•°æ®ç»“æ„ä½“
+can_trasnmit_message_struct transmit_message;//å‘é€æ•°æ®ç»“æ„ä½“
 #define CAN0_USED
 #define CANX CAN0//CAN0
 
-//CANÉèÖÃ£¬250kbps
+//CANè®¾ç½®ï¼Œ250kbps
 void can_networking_init(void)
 {
     can_parameter_struct            can_parameter;
@@ -60,13 +60,13 @@ void can_networking_init(void)
     can_filter.filter_enable = ENABLE;
     can_filter_init(&can_filter);
 }
-//CAN½ÓÊÕÖĞ¶ÏÊ¹ÄÜ
+//CANæ¥æ”¶ä¸­æ–­ä½¿èƒ½
 void nvic_config(void)
 {
     nvic_irq_enable(CAN0_RX1_IRQn,0,0);
 
 }
-//PB8,PB9ÅäÖÃ³ÉCAN¿Ú
+//PB8,PB9é…ç½®æˆCANå£
 void gpio_config(void)
 {
     /* enable CAN clock */
@@ -74,10 +74,10 @@ void gpio_config(void)
     rcu_periph_clock_enable(RCU_GPIOB);
 
     /* configure CAN0 GPIO */	
-		gpio_af_set(GPIOB, GPIO_AF_9, GPIO_PIN_8);//¸´ÓÃ¹¦ÄÜ9
+		gpio_af_set(GPIOB, GPIO_AF_9, GPIO_PIN_8);//å¤ç”¨åŠŸèƒ½9
 		gpio_mode_set(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_8);
 		gpio_output_options_set(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_8);
-		gpio_af_set(GPIOB, GPIO_AF_9, GPIO_PIN_9);//¸´ÓÃ¹¦ÄÜ9
+		gpio_af_set(GPIOB, GPIO_AF_9, GPIO_PIN_9);//å¤ç”¨åŠŸèƒ½9
 		gpio_mode_set(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_9);
 		gpio_output_options_set(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_9);
 	
@@ -85,10 +85,10 @@ void gpio_config(void)
 }
 int main(void)
 {
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-		gpio_config();//CAN GPIOÅäÖÃ
-		nvic_config();//ÖĞ¶ÏÅäÖÃ
-		can_networking_init();//ÅäÖÃ250kbps
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+		gpio_config();//CAN GPIOé…ç½®
+		nvic_config();//ä¸­æ–­é…ç½®
+		can_networking_init();//é…ç½®250kbps
 		/* enable CAN receive FIFO1 not empty interrupt */
 		can_interrupt_enable(CANX, CAN_INT_RFNE1);
 		/* initialize transmit message */
@@ -96,20 +96,20 @@ int main(void)
 		transmit_message.tx_sfid = 0x321;
 		transmit_message.tx_efid = 0x01;
 		transmit_message.tx_ft = CAN_FT_DATA;
-		transmit_message.tx_ff = CAN_FF_STANDARD;//±ê×¼Ö¡
+		transmit_message.tx_ff = CAN_FF_STANDARD;//æ ‡å‡†å¸§
 		transmit_message.tx_dlen = 8;
 		/* initialize receive message */
 		can_struct_para_init(CAN_RX_MESSAGE_STRUCT, &receive_message);
-		can_message_transmit(CANX, &transmit_message);//·¢ËÍÊı¾İ
+		can_message_transmit(CANX, &transmit_message);//å‘é€æ•°æ®
 	
     while(1)
     {
-			if(receive_flag==SET)//ÅĞ¶ÏÊÇ·ñÓĞÊı¾İÊÕµ½£¬CAN0_RX1_IRQHandlerº¯ÊıÖĞÖÃÎ»
+			if(receive_flag==SET)//åˆ¤æ–­æ˜¯å¦æœ‰æ•°æ®æ”¶åˆ°ï¼ŒCAN0_RX1_IRQHandlerå‡½æ•°ä¸­ç½®ä½
 			{
 				receive_flag=RESET;
 				transmit_message.tx_sfid=receive_message.rx_sfid;
-				memcpy(transmit_message.tx_data,receive_message.rx_data,8);//°Ñ½ÓÊÕÊı¾İ¿½±´µ½·¢ËÍ½á¹¹Ìå
-				can_message_transmit(CANX, &transmit_message);//·¢ËÍÊı¾İ
+				memcpy(transmit_message.tx_data,receive_message.rx_data,8);//æŠŠæ¥æ”¶æ•°æ®æ‹·è´åˆ°å‘é€ç»“æ„ä½“
+				can_message_transmit(CANX, &transmit_message);//å‘é€æ•°æ®
 				delay_1ms(1000); 
 			}			
 

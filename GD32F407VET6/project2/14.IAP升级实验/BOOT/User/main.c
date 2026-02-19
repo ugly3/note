@@ -1,27 +1,27 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
 #include "gd32f4xx_libopt.h"
 #include "systick.h"
-//USART0³õÊ¼»¯£¬Ê¹ÓÃPA9(TX),PA10(RX)½Å£¬115200²¨ÌØÂÊ£¬ÎŞĞ£Ñé£¬8Î»Êı¾İ£¬1Î»Í£Ö¹
+//USART0åˆå§‹åŒ–ï¼Œä½¿ç”¨PA9(TX),PA10(RX)è„šï¼Œ115200æ³¢ç‰¹ç‡ï¼Œæ— æ ¡éªŒï¼Œ8ä½æ•°æ®ï¼Œ1ä½åœæ­¢
 void gd_eval_com_init(void)
 {
     /* enable GPIO clock */
-    rcu_periph_clock_enable(RCU_GPIOA);//Ê¹ÄÜGPIOAÊ±ÖÓ
+    rcu_periph_clock_enable(RCU_GPIOA);//ä½¿èƒ½GPIOAæ—¶é’Ÿ
 
     /* enable USART clock */
-    rcu_periph_clock_enable(RCU_USART0);//Ê¹ÄÜUSART0Ê±ÖÓ
-		gpio_af_set(GPIOA, GPIO_AF_7, GPIO_PIN_9);//¸´ÓÃ¹¦ÄÜ7
-		gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_9);//PA9ÅäÖÃ³É´®¿ÚÊä³ö
+    rcu_periph_clock_enable(RCU_USART0);//ä½¿èƒ½USART0æ—¶é’Ÿ
+		gpio_af_set(GPIOA, GPIO_AF_7, GPIO_PIN_9);//å¤ç”¨åŠŸèƒ½7
+		gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_9);//PA9é…ç½®æˆä¸²å£è¾“å‡º
 		gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_9);
-		gpio_af_set(GPIOA, GPIO_AF_7, GPIO_PIN_10);//¸´ÓÃ¹¦ÄÜ7
-		gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_10);//PA10ÅäÖÃ³É´®¿ÚÊäÈë
+		gpio_af_set(GPIOA, GPIO_AF_7, GPIO_PIN_10);//å¤ç”¨åŠŸèƒ½7
+		gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_10);//PA10é…ç½®æˆä¸²å£è¾“å…¥
 		gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_10);
 	
     /* USART configure */
@@ -34,7 +34,7 @@ void gd_eval_com_init(void)
     usart_hardware_flow_cts_config(USART0, USART_CTS_DISABLE);
     usart_transmit_config(USART0, USART_TRANSMIT_ENABLE);
     usart_receive_config(USART0, USART_RECEIVE_ENABLE);
-    usart_enable(USART0);//Ê¹ÄÜUSART0
+    usart_enable(USART0);//ä½¿èƒ½USART0
 		
 }
 
@@ -44,10 +44,10 @@ int main(void)
 {
 
 
-  systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-	gd_eval_com_init();//´®¿Ú³õÊ¼»¯
+  systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+	gd_eval_com_init();//ä¸²å£åˆå§‹åŒ–
 	while(1)
 	{
-	   Main_Menu();//ÊµÏÖ³ÌĞòÉı¼¶²¢Ìø×ª£¬YmodemĞ­Òé
+	   Main_Menu();//å®ç°ç¨‹åºå‡çº§å¹¶è·³è½¬ï¼ŒYmodemåè®®
 	}
 }

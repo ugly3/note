@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -14,22 +14,22 @@ int main(void)
 {
 
 
-	systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-	rcu_periph_clock_enable(RCU_GPIOB);//Ê¹ÄÜGPIOBÊ±ÖÓ
-	gpio_mode_set(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_4);//PB4ÅäÖÃ³ÉÊä³ö
-	gpio_output_options_set(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_4);//PB4ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È
+	systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+	rcu_periph_clock_enable(RCU_GPIOB);//ä½¿èƒ½GPIOBæ—¶é’Ÿ
+	gpio_mode_set(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_4);//PB4é…ç½®æˆè¾“å‡º
+	gpio_output_options_set(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_4);//PB4é…ç½®æˆæ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
   /* enable IRC40K */
-  rcu_osci_on(RCU_IRC32K);//IRC32KÊ±ÖÓ´ò¿ª
+  rcu_osci_on(RCU_IRC32K);//IRC32Kæ—¶é’Ÿæ‰“å¼€
 	/* confiure FWDGT counter clock: 32KHz(IRC32K) / 64 = 0.5KHz */
-	fwdgt_config(2*500, FWDGT_PSC_DIV64);//¿´ÃÅ¹·Ê±¼äÉèÖÃ,ClockÎª500hz,1000¸ö¼ÆÊı¾ÍÊÇ2Ãë£¬¿´ÃÅ¹·¸´Î»Ê±¼ä¾ÍÊÇ2Ãë
-	fwdgt_enable();//¿´ÃÅ¹·Ê¹ÄÜ
-	fwdgt_counter_reload();//Î¹¹·
+	fwdgt_config(2*500, FWDGT_PSC_DIV64);//çœ‹é—¨ç‹—æ—¶é—´è®¾ç½®,Clockä¸º500hz,1000ä¸ªè®¡æ•°å°±æ˜¯2ç§’ï¼Œçœ‹é—¨ç‹—å¤ä½æ—¶é—´å°±æ˜¯2ç§’
+	fwdgt_enable();//çœ‹é—¨ç‹—ä½¿èƒ½
+	fwdgt_counter_reload();//å–‚ç‹—
 	while (1)
 	{
-		delay_1ms(500);//µÈ´ı500ms
-		gpio_bit_reset(GPIOB, GPIO_PIN_4);//PB4Êä³öµÍ
+		delay_1ms(500);//ç­‰å¾…500ms
+		gpio_bit_reset(GPIOB, GPIO_PIN_4);//PB4è¾“å‡ºä½
 		delay_1ms(500);
-		gpio_bit_set(GPIOB, GPIO_PIN_4);//PB4Êä³ö¸ß
-		fwdgt_counter_reload();//Î¹¹·
+		gpio_bit_set(GPIOB, GPIO_PIN_4);//PB4è¾“å‡ºé«˜
+		fwdgt_counter_reload();//å–‚ç‹—
 	}
 }

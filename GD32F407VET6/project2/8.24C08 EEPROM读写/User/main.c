@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -18,17 +18,17 @@ int main(void)
 {
 
 
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-    rcu_periph_clock_enable(RCU_GPIOB);//Ê¹ÄÜGPIOBÊ±ÖÓ
-		EE_IIC_Init();//EEPROM¹Ü½Å³õÊ¼»¯
-		EE_EE_IIC_SendByteToSlave(0xA0,0x00,0x33);//´æ´¢Êı¾İ
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+    rcu_periph_clock_enable(RCU_GPIOB);//ä½¿èƒ½GPIOBæ—¶é’Ÿ
+		EE_IIC_Init();//EEPROMç®¡è„šåˆå§‹åŒ–
+		EE_EE_IIC_SendByteToSlave(0xA0,0x00,0x33);//å­˜å‚¨æ•°æ®
 		delay_1ms(50);
-		EE_IIC_ReadByteFromSlave(0xA0,0x00,&EEDATA);//¶ÁÈ¡Êı¾İ
+		EE_IIC_ReadByteFromSlave(0xA0,0x00,&EEDATA);//è¯»å–æ•°æ®
     while(1)
 		{
-					EE_EE_IIC_SendByteToSlave(0xA0,0x00,0x33);//´æ´¢Êı¾İ
+					EE_EE_IIC_SendByteToSlave(0xA0,0x00,0x33);//å­˜å‚¨æ•°æ®
 					delay_1ms(1000);
-					EE_IIC_ReadByteFromSlave(0xA0,0x00,&EEDATA);//¶ÁÈ¡Êı¾İ
+					EE_IIC_ReadByteFromSlave(0xA0,0x00,&EEDATA);//è¯»å–æ•°æ®
 
     }
 }

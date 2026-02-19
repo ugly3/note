@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -13,9 +13,9 @@
  unsigned char  fseg[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};
  unsigned char  segbit[]={0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
  unsigned char  disbuf[4]={0,0,0,0};
-void LED4_Display (void);			// LEDÏÔÊ¾
-void LED_OUT(uchar X);				// LEDµ¥×Ö½Ú´®ĞĞÒÆÎ»º¯Êı
-unsigned char  LED_0F[17] = //µÍµçÆ½ÏÔÊ¾
+void LED4_Display (void);			// LEDæ˜¾ç¤º
+void LED_OUT(uchar X);				// LEDå•å­—èŠ‚ä¸²è¡Œç§»ä½å‡½æ•°
+unsigned char  LED_0F[17] = //ä½ç”µå¹³æ˜¾ç¤º
 {// 0	 1	  2	   3	4	 5	  6	   7	8	 9	  A	   b	C    d	  E    F    -
 	0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x90,0x8C,0xBF,0xC6,0xA1,0x86,0x7F,0x7F
 };
@@ -24,16 +24,16 @@ unsigned char  LED_0F[17] = //µÍµçÆ½ÏÔÊ¾
 #define SCLK_PIN GPIO_PIN_4
 #define RCLK_PIN GPIO_PIN_5
 #define DIO_PIN  GPIO_PIN_6
-uchar LED[8];	//ÓÃÓÚLEDµÄ8Î»ÏÔÊ¾»º´æ
+uchar LED[8];	//ç”¨äºLEDçš„8ä½æ˜¾ç¤ºç¼“å­˜
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 void LED4_Display (void)
 {
-	unsigned char  *led_table;          // ²é±íÖ¸Õë
+	unsigned char  *led_table;          // æŸ¥è¡¨æŒ‡é’ˆ
 	uchar i;
-	//ÏÔÊ¾µÚ1Î»
+	//æ˜¾ç¤ºç¬¬1ä½
 	led_table = LED_0F + LED[0];
 	i = *led_table;
 
@@ -41,10 +41,10 @@ void LED4_Display (void)
 	LED_OUT(0x01);		
 
 	
-	gpio_bit_write(GPIOA, RCLK_PIN, RESET);//¹Ü½ÅÊä³öµÍ
+	gpio_bit_write(GPIOA, RCLK_PIN, RESET);//ç®¡è„šè¾“å‡ºä½
   delay_1ms(1);
-	gpio_bit_write(GPIOA, RCLK_PIN, SET);//¹Ü½ÅÊä³ö¸ß
-	//ÏÔÊ¾µÚ2Î»
+	gpio_bit_write(GPIOA, RCLK_PIN, SET);//ç®¡è„šè¾“å‡ºé«˜
+	//æ˜¾ç¤ºç¬¬2ä½
 	led_table = LED_0F + LED[1];
 	i = *led_table;
 
@@ -54,7 +54,7 @@ void LED4_Display (void)
 	gpio_bit_write(GPIOA, RCLK_PIN, RESET);
   delay_1ms(1);
 	gpio_bit_write(GPIOA, RCLK_PIN, SET);
-	//ÏÔÊ¾µÚ3Î»
+	//æ˜¾ç¤ºç¬¬3ä½
 	led_table = LED_0F + LED[2];
 	i = *led_table&0X7F;
 
@@ -64,7 +64,7 @@ void LED4_Display (void)
 	gpio_bit_write(GPIOA, RCLK_PIN, RESET);
   delay_1ms(1);
 	gpio_bit_write(GPIOA, RCLK_PIN, SET);
-	//ÏÔÊ¾µÚ4Î»
+	//æ˜¾ç¤ºç¬¬4ä½
 	led_table = LED_0F + LED[3];
 	i = *led_table;
 
@@ -97,11 +97,11 @@ int main(void)
 {
 
 
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-    rcu_periph_clock_enable(RCU_GPIOA);//Ê¹ÄÜGPIOBÊ±ÖÓ
-    gpio_mode_set(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6);//PA4,PA5,PA6ÅäÖÃ³ÉÊä³ö
-    gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6);//ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È
-		LED[0]=1;//Êı×ÖÆ«ÒÆÁ¿
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+    rcu_periph_clock_enable(RCU_GPIOA);//ä½¿èƒ½GPIOBæ—¶é’Ÿ
+    gpio_mode_set(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6);//PA4,PA5,PA6é…ç½®æˆè¾“å‡º
+    gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6);//é…ç½®æˆæ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
+		LED[0]=1;//æ•°å­—åç§»é‡
 		LED[1]=2;
 		LED[2]=3;
 		LED[3]=4;
@@ -112,7 +112,7 @@ int main(void)
 
 		while(1) 
 		{		
-				LED4_Display();//ÊıÂë¹ÜÏÔÊ¾
+				LED4_Display();//æ•°ç ç®¡æ˜¾ç¤º
 
 		}	  
 }

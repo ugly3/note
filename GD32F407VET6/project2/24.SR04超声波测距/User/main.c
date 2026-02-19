@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼þ: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -11,7 +11,7 @@
 #include "systick.h"
 #include "oled.h"
 uint32_t HalTime1,HalTime2;
-//µÈ´ýÊ±¼ä£¬us¼¶±ð
+//ç­‰å¾…æ—¶é—´ï¼Œusçº§åˆ«
 void Delay_us(unsigned long i)
 {
 	unsigned long j;
@@ -20,24 +20,24 @@ void Delay_us(unsigned long i)
 			for(j=32;j>0;j--);
 	}
 }
-uint32_t Distance_Calculate(uint32_t count)//´«ÈëÊ±¼äµ¥Î»100us
+uint32_t Distance_Calculate(uint32_t count)//ä¼ å…¥æ—¶é—´å•ä½100us
 {
     uint32_t Distance = 0;
-    Distance = (uint32_t)(((float)count *17)/10);//¾àÀëµ¥Î»cm,ÉùËÙ340M/S£¬Ê±¼ä*ËÙ¶È/2=¾àÀë
+    Distance = (uint32_t)(((float)count *17)/10);//è·ç¦»å•ä½cm,å£°é€Ÿ340M/Sï¼Œæ—¶é—´*é€Ÿåº¦/2=è·ç¦»
     return Distance;
 }
 
 uint32_t Distance;
 uint32_t TimeCounter;
-//¶¨Ê±Æ÷ÅäÖÃ
+//å®šæ—¶å™¨é…ç½®
 void timer_config(void)
 {
     /* -----------------------------------------------------------------------
-	  ÏµÍ³Ö÷Æµ168MHZ,timer_initpara.prescalerÎª167£¬timer_initpara.periodÎª99£¬ÆµÂÊ¾ÍÎª100HZ
+	  ç³»ç»Ÿä¸»é¢‘168MHZ,timer_initpara.prescalerä¸º167ï¼Œtimer_initpara.periodä¸º99ï¼Œé¢‘çŽ‡å°±ä¸º100HZ
     ----------------------------------------------------------------------- */
     timer_parameter_struct timer_initpara;
     rcu_periph_clock_enable(RCU_TIMER1);
-	  rcu_timer_clock_prescaler_config(RCU_TIMER_PSC_MUL4);//AP1×ÜÏß×î¸ß42MHZ,ËùÒÔTIME1µ½168MÐèÒª4±¶Æµ
+	  rcu_timer_clock_prescaler_config(RCU_TIMER_PSC_MUL4);//AP1æ€»çº¿æœ€é«˜42MHZ,æ‰€ä»¥TIME1åˆ°168Méœ€è¦4å€é¢‘
     timer_deinit(TIMER1);
     /* TIMER1 configuration */
     timer_initpara.prescaler         = 167;
@@ -57,43 +57,43 @@ void timer_config(void)
 }
 int main(void)
 {
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-		rcu_periph_clock_enable(RCU_GPIOA);//Ê¹ÄÜGPIOAÊ±ÖÓ	
-		gpio_mode_set(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_0);//PA0ÅäÖÃ³ÉÊä³ö
-		gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_0);//ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È
-		gpio_mode_set(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO_PIN_1);//PA1ÅäÖÃ³ÉÊäÈë
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+		rcu_periph_clock_enable(RCU_GPIOA);//ä½¿èƒ½GPIOAæ—¶é’Ÿ	
+		gpio_mode_set(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_0);//PA0é…ç½®æˆè¾“å‡º
+		gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_0);//é…ç½®æˆæŽ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
+		gpio_mode_set(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO_PIN_1);//PA1é…ç½®æˆè¾“å…¥
 		timer_config();  
-		OLED_Init();//OLED³õÊ¼»¯  
-		OLED_Clear();//OLEDÇåÆÁ 
+		OLED_Init();//OLEDåˆå§‹åŒ–  
+		OLED_Clear();//OLEDæ¸…å± 
 
 	while(1) 
 	{		
-		gpio_bit_write(GPIOA, GPIO_PIN_0,RESET);//Ô¤ÏÈÀ­µÍTrigÒý½Å
+		gpio_bit_write(GPIOA, GPIO_PIN_0,RESET);//é¢„å…ˆæ‹‰ä½ŽTrigå¼•è„š
 		delay_1ms(5);
-		gpio_bit_write(GPIOA, GPIO_PIN_0,SET);//À­¸ßTrigÒý½Å
+		gpio_bit_write(GPIOA, GPIO_PIN_0,SET);//æ‹‰é«˜Trigå¼•è„š
 		Delay_us(20);
-		gpio_bit_write(GPIOA, GPIO_PIN_0,RESET);//À­µÍTrigÒý½Å
+		gpio_bit_write(GPIOA, GPIO_PIN_0,RESET);//æ‹‰ä½ŽTrigå¼•è„š
 		Delay_us(20);
-		while(gpio_input_bit_get(GPIOA, GPIO_PIN_1) == 0);//Èç¹ûÊÇµÍµçÆ½£¬Ò»Ö±µÈ
+		while(gpio_input_bit_get(GPIOA, GPIO_PIN_1) == 0);//å¦‚æžœæ˜¯ä½Žç”µå¹³ï¼Œä¸€ç›´ç­‰
 		HalTime1= TimeCounter;
-		while(gpio_input_bit_get(GPIOA, GPIO_PIN_1) == 1);//Èç¹ûÊÇ¸ßµçÆ½Ò»Ö±µÈ
+		while(gpio_input_bit_get(GPIOA, GPIO_PIN_1) == 1);//å¦‚æžœæ˜¯é«˜ç”µå¹³ä¸€ç›´ç­‰
 		if(TimeCounter>HalTime1)
 		{
 		HalTime2 = TimeCounter-HalTime1;
 		if(HalTime2<0x300)
 		{
-		Distance = Distance_Calculate(HalTime2);//¼ÆËã¾àÀëÖµ
+		Distance = Distance_Calculate(HalTime2);//è®¡ç®—è·ç¦»å€¼
 		}
 		}
 	  OLED_Clear();
-    OLED_ShowCHinese(18,0,0);//¹â
-		OLED_ShowCHinese(36,0,1);//×Ó
-		OLED_ShowCHinese(54,0,2);//Îï
-		OLED_ShowCHinese(72,0,3);//Áª
-		OLED_ShowCHinese(90,0,4);//Íø
+    OLED_ShowCHinese(18,0,0);//å…‰
+		OLED_ShowCHinese(36,0,1);//å­
+		OLED_ShowCHinese(54,0,2);//ç‰©
+		OLED_ShowCHinese(72,0,3);//è”
+		OLED_ShowCHinese(90,0,4);//ç½‘
 		OLED_ShowString(24,3,"SR04 TEST");
 		OLED_ShowString(0,6,"Dis: ");  
-		OLED_ShowNum(30,6,Distance,3,16);//ÏÔÊ¾¾àÀë£¬µ¥Î»cm  
+		OLED_ShowNum(30,6,Distance,3,16);//æ˜¾ç¤ºè·ç¦»ï¼Œå•ä½cm  
 		OLED_ShowString(60,6,"cm"); 
     delay_1ms(200);		
 	

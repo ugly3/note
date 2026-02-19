@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -11,22 +11,22 @@
 #include "systick.h"
 #define uchar unsigned char
 #define uint  unsigned int
-uchar phasecw[4] ={GPIO_PIN_5,GPIO_PIN_4,GPIO_PIN_3,GPIO_PIN_2};//Õı×ªµç»úµ¼Í¨ÏàĞòD-C-B-A
-uchar phaseccw[4]={GPIO_PIN_2,GPIO_PIN_3,GPIO_PIN_4,GPIO_PIN_5};//·´×ªµç»úµ¼Í¨ÏàĞòA-B-C-D
+uchar phasecw[4] ={GPIO_PIN_5,GPIO_PIN_4,GPIO_PIN_3,GPIO_PIN_2};//æ­£è½¬ç”µæœºå¯¼é€šç›¸åºD-C-B-A
+uchar phaseccw[4]={GPIO_PIN_2,GPIO_PIN_3,GPIO_PIN_4,GPIO_PIN_5};//åè½¬ç”µæœºå¯¼é€šç›¸åºA-B-C-D
 
-//Õı×ª
+//æ­£è½¬
 void MotorCW(void)
 {
  uchar i;
  for(i=0;i<4;i++)
   {
 
-		gpio_bit_write(GPIOE,phasecw[i],SET);//Êä³ö¸ß
-    delay_1ms(10);//µÈ´ı5ms
-		gpio_bit_write(GPIOE,phasecw[i],RESET);//Êä³öµÍ
+		gpio_bit_write(GPIOE,phasecw[i],SET);//è¾“å‡ºé«˜
+    delay_1ms(10);//ç­‰å¾…5ms
+		gpio_bit_write(GPIOE,phasecw[i],RESET);//è¾“å‡ºä½
   }
 }
-//·´×ª
+//åè½¬
 void MotorCCW(void)
 {
  uchar i;
@@ -34,31 +34,31 @@ void MotorCCW(void)
  for(i=0;i<4;i++)
   {
 
-		gpio_bit_write(GPIOE,phaseccw[i],SET);//Êä³ö¸ß
-    delay_1ms(10);//µÈ´ı5ms
-		gpio_bit_write(GPIOE,phaseccw[i],RESET);//Êä³öµÍ
+		gpio_bit_write(GPIOE,phaseccw[i],SET);//è¾“å‡ºé«˜
+    delay_1ms(10);//ç­‰å¾…5ms
+		gpio_bit_write(GPIOE,phaseccw[i],RESET);//è¾“å‡ºä½
   }
 }
 int main(void)
 {
 		int i;
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-    rcu_periph_clock_enable(RCU_GPIOE);//Ê¹ÄÜGPIOEÊ±ÖÓ
-    gpio_mode_set(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5);//PE2,PE3,PE4,PE5ÅäÖÃ³ÉÊä³ö
-    gpio_output_options_set(GPIOE, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5);//ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+    rcu_periph_clock_enable(RCU_GPIOE);//ä½¿èƒ½GPIOEæ—¶é’Ÿ
+    gpio_mode_set(GPIOE, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5);//PE2,PE3,PE4,PE5é…ç½®æˆè¾“å‡º
+    gpio_output_options_set(GPIOE, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5);//é…ç½®æˆæ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
 		while(1)
     {
 			
-				delay_1ms(50);//µÈ´ı50ms			
+				delay_1ms(50);//ç­‰å¾…50ms			
 				for(i=0;i<500;i++)
 				{
-				MotorCW();   //Õı×ª
+				MotorCW();   //æ­£è½¬
 				} 
 				delay_1ms(500);
 				for(i=0;i<500;i++)
 				{
-				MotorCCW();  //·´×ª
+				MotorCCW();  //åè½¬
 				} 
-			delay_1ms(500); //µÈ´ı500ms
+			delay_1ms(500); //ç­‰å¾…500ms
     }
 }

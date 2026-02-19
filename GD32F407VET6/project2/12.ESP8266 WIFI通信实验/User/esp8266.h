@@ -14,7 +14,7 @@ typedef unsigned long u32;
 
 
 
-//ESP8266Ä£Ê½Ñ¡Ôñ
+//ESP8266æ¨¡å¼é€‰æ‹©
 typedef enum
 {
     STA,
@@ -22,12 +22,12 @@ typedef enum
     STA_AP  
 }ENUM_Net_ModeTypeDef;
 
-//ÍøÂç´«Êä²ãĞ­Òé£¬Ã¶¾ÙÀàĞÍ
+//ç½‘ç»œä¼ è¾“å±‚åè®®ï¼Œæšä¸¾ç±»å‹
 typedef enum{
      enumTCP,
      enumUDP,
 } ENUM_NetPro_TypeDef;
-//Á¬½ÓºÅ£¬Ö¸¶¨Îª¸ÃÁ¬½ÓºÅ¿ÉÒÔ·ÀÖ¹ÆäËû¼ÆËã»ú·ÃÎÊÍ¬Ò»¶Ë¿Ú¶ø·¢Éú´íÎó
+//è¿æ¥å·ï¼ŒæŒ‡å®šä¸ºè¯¥è¿æ¥å·å¯ä»¥é˜²æ­¢å…¶ä»–è®¡ç®—æœºè®¿é—®åŒä¸€ç«¯å£è€Œå‘ç”Ÿé”™è¯¯
 typedef enum{
     Multiple_ID_0 = 0,
     Multiple_ID_1 = 1,
@@ -37,9 +37,9 @@ typedef enum{
     Single_ID_0 = 5,
 } ENUM_ID_NO_TypeDef;
 
-#define ESP8266_RST_Pin                   GPIO_PIN_13    //¸´Î»¹Ü½Å
-#define ESP8266_RST_Pin_Port              GPIOC    //¸´Î» 
-#define ESP8266_RST_Pin_Periph_Clock()   rcu_periph_clock_enable(RCU_GPIOC)       //PCÊ±ÖÓ
+#define ESP8266_RST_Pin                   GPIO_PIN_13    //å¤ä½ç®¡è„š
+#define ESP8266_RST_Pin_Port              GPIOC    //å¤ä½ 
+#define ESP8266_RST_Pin_Periph_Clock()   rcu_periph_clock_enable(RCU_GPIOC)       //PCæ—¶é’Ÿ
 
 
 
@@ -51,12 +51,12 @@ typedef enum{
 
 
 #define ESP8266_USART(fmt, ...)  USART_printf (USART5, fmt, ##__VA_ARGS__)    
-#define PC_USART(fmt, ...)       printf(fmt, ##__VA_ARGS__)       //ÕâÊÇ´®¿Ú´òÓ¡º¯Êı£¬´®¿Ú1£¬Ö´ĞĞprintfºó»á×Ô¶¯Ö´ĞĞfputº¯Êı£¬ÖØ¶¨ÏòÁËprintf¡£
+#define PC_USART(fmt, ...)       printf(fmt, ##__VA_ARGS__)       //è¿™æ˜¯ä¸²å£æ‰“å°å‡½æ•°ï¼Œä¸²å£1ï¼Œæ‰§è¡Œprintfåä¼šè‡ªåŠ¨æ‰§è¡Œfputå‡½æ•°ï¼Œé‡å®šå‘äº†printfã€‚
 
 
 
-#define RX_BUF_MAX_LEN 1024       //×î´ó×Ö½ÚÊı
-extern struct STRUCT_USART_Fram   //Êı¾İÖ¡½á¹¹Ìå
+#define RX_BUF_MAX_LEN 1024       //æœ€å¤§å­—èŠ‚æ•°
+extern struct STRUCT_USART_Fram   //æ•°æ®å¸§ç»“æ„ä½“
 {
     char Data_RX_BUF[RX_BUF_MAX_LEN];
     union 
@@ -72,7 +72,7 @@ extern struct STRUCT_USART_Fram   //Êı¾İÖ¡½á¹¹Ìå
 }ESP8266_Fram_Record_Struct;
 
 
-//³õÊ¼»¯ºÍTCP¹¦ÄÜº¯Êı
+//åˆå§‹åŒ–å’ŒTCPåŠŸèƒ½å‡½æ•°
 void ESP8266_Init(void);
 void ESP8266_AT_Test(void);
 bool ESP8266_Send_AT_Cmd(char *cmd,char *ack1,char *ack2,u32 time);
@@ -87,7 +87,7 @@ void ESP8266_ExitUnvarnishSend ( void );
 u8 ESP8266_Get_LinkStatus ( void );
 void USART_printf( uint32_t USARTx, char * Data, ... );
 
-//MQTT¹¦ÄÜº¯Êı
+//MQTTåŠŸèƒ½å‡½æ•°
 bool ESP8266_MQTTUSERCFG( char * pClient_Id, char * pUserName,char * PassWord);
 bool ESP8266_MQTTCONN( char * Ip, int Num);
 bool ESP8266_MQTTSUB(char * Topic);

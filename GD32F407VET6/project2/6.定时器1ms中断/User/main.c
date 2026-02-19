@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -11,15 +11,15 @@
 #include "systick.h"
 
 
-//¶¨Ê±Æ÷ÅäÖÃ
+//å®šæ—¶å™¨é…ç½®
 void timer_config(void)
 {
     /* -----------------------------------------------------------------------
-	  ÏµÍ³Ö÷Æµ168MHZ,timer_initpara.prescalerÎª167£¬timer_initpara.periodÎª999£¬ÆµÂÊ¾ÍÎª1KHZ
+	  ç³»ç»Ÿä¸»é¢‘168MHZ,timer_initpara.prescalerä¸º167ï¼Œtimer_initpara.periodä¸º999ï¼Œé¢‘ç‡å°±ä¸º1KHZ
     ----------------------------------------------------------------------- */
     timer_parameter_struct timer_initpara;
     rcu_periph_clock_enable(RCU_TIMER1);
-	  rcu_timer_clock_prescaler_config(RCU_TIMER_PSC_MUL4);//AP1×ÜÏß×î¸ß42MHZ,ËùÒÔTIME1µ½168MĞèÒª4±¶Æµ
+	  rcu_timer_clock_prescaler_config(RCU_TIMER_PSC_MUL4);//AP1æ€»çº¿æœ€é«˜42MHZ,æ‰€ä»¥TIME1åˆ°168Méœ€è¦4å€é¢‘
     timer_deinit(TIMER1);
     /* TIMER1 configuration */
     timer_initpara.prescaler         = 167;
@@ -39,11 +39,11 @@ void timer_config(void)
 }
 int main(void)
 {
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-		rcu_periph_clock_enable(RCU_GPIOB);//GPIOBÊ±ÖÓÊ¹ÄÜ
-		gpio_mode_set(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_4);//PB4ÅäÖÃ³ÉÊä³ö
-		gpio_output_options_set(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_4);//PB4ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È
-		timer_config();//¶¨Ê±Æ÷1ÅäÖÃ£¬1msÖĞ¶ÏÒ»´Î
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+		rcu_periph_clock_enable(RCU_GPIOB);//GPIOBæ—¶é’Ÿä½¿èƒ½
+		gpio_mode_set(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_4);//PB4é…ç½®æˆè¾“å‡º
+		gpio_output_options_set(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_4);//PB4é…ç½®æˆæ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
+		timer_config();//å®šæ—¶å™¨1é…ç½®ï¼Œ1msä¸­æ–­ä¸€æ¬¡
 	
     while(1)
 		{

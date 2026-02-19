@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -27,9 +27,9 @@ void timer_config(void)
     rcu_timer_clock_prescaler_config(RCU_TIMER_PSC_MUL2);
     timer_struct_para_init(&timer_initpara);
     timer_deinit(TIMER0);
-		timer_primary_output_config(TIMER0,ENABLE);//¸ß¼¶¶¨Ê±Æ÷0,7ĞèÒªÊ¹ÄÜ
+		timer_primary_output_config(TIMER0,ENABLE);//é«˜çº§å®šæ—¶å™¨0,7éœ€è¦ä½¿èƒ½
     /* TIMER1 configuration */
-    timer_initpara.prescaler         = 167;//168·ÖÆµ£¬ÅäºÏºóÃæµÄ999£¬²úÉú1KHZ
+    timer_initpara.prescaler         = 167;//168åˆ†é¢‘ï¼Œé…åˆåé¢çš„999ï¼Œäº§ç”Ÿ1KHZ
     timer_initpara.alignedmode       = TIMER_COUNTER_EDGE;
     timer_initpara.counterdirection  = TIMER_COUNTER_UP;
     timer_initpara.period            = 999;
@@ -49,7 +49,7 @@ void timer_config(void)
 
 
     /* CH1 configuration in PWM mode1,duty cycle 50% */
-    timer_channel_output_pulse_value_config(TIMER0,TIMER_CH_1,499);//Õ¼¿Õ±È500/1000,50%
+    timer_channel_output_pulse_value_config(TIMER0,TIMER_CH_1,499);//å ç©ºæ¯”500/1000,50%
     timer_channel_output_mode_config(TIMER0,TIMER_CH_1,TIMER_OC_MODE_PWM0);
     timer_channel_output_shadow_config(TIMER0,TIMER_CH_1,TIMER_OC_SHADOW_DISABLE);
     /* auto-reload preload enable */
@@ -59,11 +59,11 @@ void timer_config(void)
 }
 int main(void)
 {
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-    rcu_periph_clock_enable(RCU_GPIOA);//Ê¹ÄÜGPIOAÊ±ÖÓ
-    gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_9);//PA9ÅäÖÃ³É¶¨Ê±Æ÷Êä³ö
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+    rcu_periph_clock_enable(RCU_GPIOA);//ä½¿èƒ½GPIOAæ—¶é’Ÿ
+    gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_9);//PA9é…ç½®æˆå®šæ—¶å™¨è¾“å‡º
     gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_9);
-    gpio_af_set(GPIOA, GPIO_AF_1, GPIO_PIN_9);//PA9Îª¶¨Ê±Æ÷0Í¨µÀ1
+    gpio_af_set(GPIOA, GPIO_AF_1, GPIO_PIN_9);//PA9ä¸ºå®šæ—¶å™¨0é€šé“1
 		timer_config();
 	
     while(1)

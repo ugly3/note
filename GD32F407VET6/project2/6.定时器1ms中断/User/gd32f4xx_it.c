@@ -152,12 +152,12 @@ void TIMER1_IRQHandler(void)
 		LedFlag^=0x01;
 
 	}
-	if(LedFlag)//¼ÆÊýµ½500ms,·­×ªÊä³ö
+	if(LedFlag)//è®¡æ•°åˆ°500ms,ç¿»è½¬è¾“å‡º
 	{
-		gpio_bit_set(GPIOB,GPIO_PIN_4);//PB4Êä³ö¸ßµçÆ½
+		gpio_bit_set(GPIOB,GPIO_PIN_4);//PB4è¾“å‡ºé«˜ç”µå¹³
 		
 	}else
 	{
-		gpio_bit_reset(GPIOB,GPIO_PIN_4);//PB4Êä³öµÍµçÆ½
+		gpio_bit_reset(GPIOB,GPIO_PIN_4);//PB4è¾“å‡ºä½Žç”µå¹³
 	}
 }

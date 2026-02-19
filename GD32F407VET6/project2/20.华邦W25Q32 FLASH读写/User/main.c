@@ -1,19 +1,19 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
 #include "gd32f4xx_libopt.h"
 #include "systick.h"
-uint32_t FlashJedecid,FlashDeviceid;//FLASH ID±äÁ¿
+uint32_t FlashJedecid,FlashDeviceid;//FLASH IDå˜é‡
 extern void Flash_TestDataInit(void);
 extern uint32_t spi_flash_read_id(void);
 extern uint16_t SFLASH_ReadID(void);
-uint8_t ReadBuff[10],WriteBuff[10]={0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55};//¶ÁĞ´´æ´¢
+uint8_t ReadBuff[10],WriteBuff[10]={0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55,0x55};//è¯»å†™å­˜å‚¨
 
 extern void Flash_ReadSomeBytes(uint8_t *ucpBuffer, uint32_t _ulReadAddr, uint16_t _usNByte);
 extern void Flash_WriteSomeBytes(uint8_t *ucpBuffer, uint32_t _ulWriteAddr, uint16_t _usNByte);
@@ -49,28 +49,28 @@ int main(void)
 {
 
 
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-    rcu_periph_clock_enable(RCU_GPIOC);//Ê¹ÄÜGPIOCÊ±ÖÓ	
-		rcu_periph_clock_enable(RCU_GPIOD);//Ê¹ÄÜGPIODÊ±ÖÓ	
-		rcu_periph_clock_enable(RCU_SPI2);//Ê¹ÄÜSPI2Ê±ÖÓ 
-		gpio_af_set(GPIOC, GPIO_AF_6, GPIO_PIN_10);//¸´ÓÃ¹¦ÄÜ6
-		gpio_af_set(GPIOC, GPIO_AF_6, GPIO_PIN_11);//¸´ÓÃ¹¦ÄÜ6
-		gpio_af_set(GPIOC, GPIO_AF_6, GPIO_PIN_12);//¸´ÓÃ¹¦ÄÜ6
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+    rcu_periph_clock_enable(RCU_GPIOC);//ä½¿èƒ½GPIOCæ—¶é’Ÿ	
+		rcu_periph_clock_enable(RCU_GPIOD);//ä½¿èƒ½GPIODæ—¶é’Ÿ	
+		rcu_periph_clock_enable(RCU_SPI2);//ä½¿èƒ½SPI2æ—¶é’Ÿ 
+		gpio_af_set(GPIOC, GPIO_AF_6, GPIO_PIN_10);//å¤ç”¨åŠŸèƒ½6
+		gpio_af_set(GPIOC, GPIO_AF_6, GPIO_PIN_11);//å¤ç”¨åŠŸèƒ½6
+		gpio_af_set(GPIOC, GPIO_AF_6, GPIO_PIN_12);//å¤ç”¨åŠŸèƒ½6
 	  gpio_mode_set(GPIOC, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_12); /* SPI2 GPIO config:SCK/PC10, MISO/PC11, MOSI/PC12 */
     gpio_output_options_set(GPIOC, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_12);
 	  gpio_mode_set(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_0); /* PD0 CS */
     gpio_output_options_set(GPIOD, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_0);	
 	
-		spi_config();//SPI³õÊ¼»¯
-		FlashJedecid = spi_flash_read_id();//¶ÁÈ¡Jedecid
-		FlashDeviceid=SFLASH_ReadID();//¶ÁÈ¡Device ID
+		spi_config();//SPIåˆå§‹åŒ–
+		FlashJedecid = spi_flash_read_id();//è¯»å–Jedecid
+		FlashDeviceid=SFLASH_ReadID();//è¯»å–Device ID
 		/* USER CODE END 2 */
-		Flash_ReadSomeBytes(ReadBuff,0,8);//´ÓFLASH 0µØÖ·¶ÁÈ¡8×Ö½ÚÄÚÈİ·ÅÈëReadBuffÊı×é
-		Flash_WriteSR(0x42);//½â³ı±£»¤
+		Flash_ReadSomeBytes(ReadBuff,0,8);//ä»FLASH 0åœ°å€è¯»å–8å­—èŠ‚å†…å®¹æ”¾å…¥ReadBuffæ•°ç»„
+		Flash_WriteSR(0x42);//è§£é™¤ä¿æŠ¤
 		delay_1ms(100);
-		Flash_ReadSR();//¶Á×´Ì¬¼Ä´æÆ÷
-		Flash_WriteSomeBytes(WriteBuff,0,8);//°ÑWriteBuffÊı×éÖĞµÄÄÚÈİĞ´ÈëFLASH 0µØÖ·
+		Flash_ReadSR();//è¯»çŠ¶æ€å¯„å­˜å™¨
+		Flash_WriteSomeBytes(WriteBuff,0,8);//æŠŠWriteBuffæ•°ç»„ä¸­çš„å†…å®¹å†™å…¥FLASH 0åœ°å€
 		delay_1ms(100);
-		Flash_ReadSomeBytes(ReadBuff,0,8);//´ÓFLASH 0µØÖ·¶ÁÈ¡8×Ö½ÚÄÚÈİ·ÅÈëReadBuffÊı×é
+		Flash_ReadSomeBytes(ReadBuff,0,8);//ä»FLASH 0åœ°å€è¯»å–8å­—èŠ‚å†…å®¹æ”¾å…¥ReadBuffæ•°ç»„
 		while(1);
 }

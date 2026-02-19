@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 //gd32
@@ -18,31 +18,31 @@
 
 
 
-//ÈÎÎñÓÅÏÈ¼¶
+//ä»»åŠ¡ä¼˜å…ˆçº§
 #define START_TASK_PRIO		1
-//ÈÎÎñ¶ÑÕ»´óĞ¡	
+//ä»»åŠ¡å †æ ˆå¤§å°	
 #define START_STK_SIZE 		128  
-//ÈÎÎñ¾ä±ú
+//ä»»åŠ¡å¥æŸ„
 TaskHandle_t StartTask_Handler;
-//ÈÎÎñº¯Êı
+//ä»»åŠ¡å‡½æ•°
 void start_task(void *pvParameters);
 
-//ÈÎÎñÓÅÏÈ¼¶
+//ä»»åŠ¡ä¼˜å…ˆçº§
 #define LED1_TASK_PRIO		3
-//ÈÎÎñ¶ÑÕ»´óĞ¡	
+//ä»»åŠ¡å †æ ˆå¤§å°	
 #define LED1_STK_SIZE 		50  
-//ÈÎÎñ¾ä±ú
+//ä»»åŠ¡å¥æŸ„
 TaskHandle_t LED1Task_Handler;
-//ÈÎÎñº¯Êı
+//ä»»åŠ¡å‡½æ•°
 void LED_Thread1(void *pvParameters);
 
-//ÈÎÎñÓÅÏÈ¼¶
+//ä»»åŠ¡ä¼˜å…ˆçº§
 #define LED2_TASK_PRIO		4
-//ÈÎÎñ¶ÑÕ»´óĞ¡	
+//ä»»åŠ¡å †æ ˆå¤§å°	
 #define LED2_STK_SIZE 		50  
-//ÈÎÎñ¾ä±ú
+//ä»»åŠ¡å¥æŸ„
 TaskHandle_t LED2Task_Handler;
-//ÈÎÎñº¯Êı
+//ä»»åŠ¡å‡½æ•°
 void LED_Thread2(void *pvParameters);
 
 /*!
@@ -53,27 +53,27 @@ void LED_Thread2(void *pvParameters);
 */
 int main(void)
 { 
-	systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)	
-	rcu_periph_clock_enable(RCU_GPIOB);//Ê¹ÄÜGPIOBÊ±ÖÓ
-	gpio_mode_set(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_4);//PB4ÅäÖÃ³ÉÊä³ö
-	gpio_output_options_set(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_4);//PB4ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È	
+	systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)	
+	rcu_periph_clock_enable(RCU_GPIOB);//ä½¿èƒ½GPIOBæ—¶é’Ÿ
+	gpio_mode_set(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_4);//PB4é…ç½®æˆè¾“å‡º
+	gpio_output_options_set(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_4);//PB4é…ç½®æˆæ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦	
 	
-	//´´½¨¿ªÊ¼ÈÎÎñ
-	xTaskCreate((TaskFunction_t )start_task,            //ÈÎÎñº¯Êı
-							(const char*    )"start_task",          //ÈÎÎñÃû³Æ
-							(uint16_t       )START_STK_SIZE,        //ÈÎÎñ¶ÑÕ»´óĞ¡
-							(void*          )NULL,                  //´«µİ¸øÈÎÎñº¯ÊıµÄ²ÎÊı
-							(UBaseType_t    )START_TASK_PRIO,       //ÈÎÎñÓÅÏÈ¼¶
-							(TaskHandle_t*  )&StartTask_Handler);   //ÈÎÎñ¾ä±ú   
+	//åˆ›å»ºå¼€å§‹ä»»åŠ¡
+	xTaskCreate((TaskFunction_t )start_task,            //ä»»åŠ¡å‡½æ•°
+							(const char*    )"start_task",          //ä»»åŠ¡åç§°
+							(uint16_t       )START_STK_SIZE,        //ä»»åŠ¡å †æ ˆå¤§å°
+							(void*          )NULL,                  //ä¼ é€’ç»™ä»»åŠ¡å‡½æ•°çš„å‚æ•°
+							(UBaseType_t    )START_TASK_PRIO,       //ä»»åŠ¡ä¼˜å…ˆçº§
+							(TaskHandle_t*  )&StartTask_Handler);   //ä»»åŠ¡å¥æŸ„   
 							
-	vTaskStartScheduler();          //¿ªÆôÈÎÎñµ÷¶È
+	vTaskStartScheduler();          //å¼€å¯ä»»åŠ¡è°ƒåº¦
 }
 
-//¿ªÊ¼ÈÎÎñÈÎÎñº¯Êı
+//å¼€å§‹ä»»åŠ¡ä»»åŠ¡å‡½æ•°
 void start_task(void *pvParameters)
 {
-    taskENTER_CRITICAL();           //½øÈëÁÙ½çÇø
-    //´´½¨LED1ÈÎÎñ
+    taskENTER_CRITICAL();           //è¿›å…¥ä¸´ç•ŒåŒº
+    //åˆ›å»ºLED1ä»»åŠ¡
     xTaskCreate((TaskFunction_t )LED_Thread1,     	
                 (const char*    )"led1_task",   	
                 (uint16_t       )LED1_STK_SIZE, 
@@ -90,27 +90,27 @@ void start_task(void *pvParameters)
                 (TaskHandle_t*  )&LED2Task_Handler);   
 													
 							
-    vTaskDelete(StartTask_Handler); //É¾³ı¿ªÊ¼ÈÎÎñ
-    taskEXIT_CRITICAL();            //ÍË³öÁÙ½çÇø
+    vTaskDelete(StartTask_Handler); //åˆ é™¤å¼€å§‹ä»»åŠ¡
+    taskEXIT_CRITICAL();            //é€€å‡ºä¸´ç•ŒåŒº
 
 }
 
-//LED1ÈÎÎñº¯Êı 
+//LED1ä»»åŠ¡å‡½æ•° 
 void LED_Thread1(void *pvParameters)
 {
     while(1)
     {
-      gpio_bit_set(GPIOB, GPIO_PIN_4);//PB4Êä³ö¸ßµçÆ½
+      gpio_bit_set(GPIOB, GPIO_PIN_4);//PB4è¾“å‡ºé«˜ç”µå¹³
       vTaskDelay(100);
     }
 } 
 
-//LED2ÈÎÎñº¯Êı 
+//LED2ä»»åŠ¡å‡½æ•° 
 void LED_Thread2(void *pvParameters)
 {
     while(1)
     {
-			gpio_bit_reset(GPIOB, GPIO_PIN_4);//PB4Êä³öµÍµçÆ½
+			gpio_bit_reset(GPIOB, GPIO_PIN_4);//PB4è¾“å‡ºä½ç”µå¹³
       vTaskDelay(250);
     }
 }  

@@ -1,36 +1,36 @@
 /***************************************************************************//**
-  ÎÄ¼þ: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
 #include "gd32f4xx_libopt.h"
 #include "systick.h"
-uint8_t transmitter_buffer[] = "HELLOWORLD";//¶¨Òå·¢ËÍÊý×é
-uint8_t receiver_buffer[10];//¶¨Òå½ÓÊÕÊý×é
+uint8_t transmitter_buffer[] = "HELLOWORLD";//å®šä¹‰å‘é€æ•°ç»„
+uint8_t receiver_buffer[10];//å®šä¹‰æŽ¥æ”¶æ•°ç»„
 #define ARRAYNUM(arr_nanme)      (uint32_t)(sizeof(arr_nanme) / sizeof(*(arr_nanme)))
-#define TRANSMIT_SIZE   (ARRAYNUM(transmitter_buffer) - 1)//¼ÆËã´óÐ¡
+#define TRANSMIT_SIZE   (ARRAYNUM(transmitter_buffer) - 1)//è®¡ç®—å¤§å°
 uint8_t transfersize = TRANSMIT_SIZE;
 uint8_t receivesize = 10;
 __IO uint8_t txcount = 0; 
 __IO uint16_t rxcount = 0; 
 
-//USART0³õÊ¼»¯£¬Ê¹ÓÃPA9(TX),PA10(RX)½Å£¬115200²¨ÌØÂÊ£¬ÎÞÐ£Ñé£¬8Î»Êý¾Ý£¬1Î»Í£Ö¹
+//USART0åˆå§‹åŒ–ï¼Œä½¿ç”¨PA9(TX),PA10(RX)è„šï¼Œ115200æ³¢ç‰¹çŽ‡ï¼Œæ— æ ¡éªŒï¼Œ8ä½æ•°æ®ï¼Œ1ä½åœæ­¢
 void gd_eval_com_init(void)
 {
     /* enable GPIO clock */
-    rcu_periph_clock_enable(RCU_GPIOA);//Ê¹ÄÜGPIOAÊ±ÖÓ
+    rcu_periph_clock_enable(RCU_GPIOA);//ä½¿èƒ½GPIOAæ—¶é’Ÿ
 
     /* enable USART clock */
-    rcu_periph_clock_enable(RCU_USART0);//Ê¹ÄÜUSART0Ê±ÖÓ
-		gpio_af_set(GPIOA, GPIO_AF_7, GPIO_PIN_9);//¸´ÓÃ¹¦ÄÜ7
-		gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_9);//PA9ÅäÖÃ³É´®¿ÚÊä³ö
+    rcu_periph_clock_enable(RCU_USART0);//ä½¿èƒ½USART0æ—¶é’Ÿ
+		gpio_af_set(GPIOA, GPIO_AF_7, GPIO_PIN_9);//å¤ç”¨åŠŸèƒ½7
+		gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_9);//PA9é…ç½®æˆä¸²å£è¾“å‡º
 		gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_9);
-		gpio_af_set(GPIOA, GPIO_AF_7, GPIO_PIN_10);//¸´ÓÃ¹¦ÄÜ7
-		gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_10);//PA10ÅäÖÃ³É´®¿ÚÊäÈë
+		gpio_af_set(GPIOA, GPIO_AF_7, GPIO_PIN_10);//å¤ç”¨åŠŸèƒ½7
+		gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_10);//PA10é…ç½®æˆä¸²å£è¾“å…¥
 		gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_10);
 	
     /* USART configure */
@@ -43,7 +43,7 @@ void gd_eval_com_init(void)
     usart_hardware_flow_cts_config(USART0, USART_CTS_DISABLE);
     usart_transmit_config(USART0, USART_TRANSMIT_ENABLE);
     usart_receive_config(USART0, USART_RECEIVE_ENABLE);
-    usart_enable(USART0);//Ê¹ÄÜUSART0
+    usart_enable(USART0);//ä½¿èƒ½USART0
 		
 }
 
@@ -51,21 +51,21 @@ int main(void)
 {
 
 
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-		//USARTÏà¹ØÅäÖÃ
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+		//USARTç›¸å…³é…ç½®
 		gd_eval_com_init();
-		nvic_irq_enable(USART0_IRQn, 0, 0);//Ê¹ÄÜUSART1ÖÐ¶Ï
-		usart_interrupt_enable(USART0, USART_INT_RBNE);//½ÓÊÕÖÐ¶Ï´ò¿ª
+		nvic_irq_enable(USART0_IRQn, 0, 0);//ä½¿èƒ½USART1ä¸­æ–­
+		usart_interrupt_enable(USART0, USART_INT_RBNE);//æŽ¥æ”¶ä¸­æ–­æ‰“å¼€
     while(1)
     {
-			if(rxcount >= receivesize)//½ÓÊÕÂú10¸ö×Ö½Ú£¬ÔÚUSART1_IRQHandlerº¯ÊýÖÐ¼ÆÊý
+			if(rxcount >= receivesize)//æŽ¥æ”¶æ»¡10ä¸ªå­—èŠ‚ï¼Œåœ¨USART1_IRQHandlerå‡½æ•°ä¸­è®¡æ•°
 			{
 				rxcount=0;
 				txcount=0;
-				usart_interrupt_enable(USART0, USART_INT_TBE);//·¢ËÍÖÐ¶Ï´ò¿ª
-				while(txcount < transfersize);//µÈ´ý·¢ËÍÍê³É£¬ÔÚUSART1_IRQHandlerº¯ÊýÖÐ¼ÆÊý
-				while (RESET == usart_flag_get(USART0, USART_FLAG_TC));//·¢ËÍÍê³ÉÅÐ¶Ï
-				usart_interrupt_enable(USART0, USART_INT_RBNE);//½ÓÊÕÖÐ¶Ï´ò¿ª
+				usart_interrupt_enable(USART0, USART_INT_TBE);//å‘é€ä¸­æ–­æ‰“å¼€
+				while(txcount < transfersize);//ç­‰å¾…å‘é€å®Œæˆï¼Œåœ¨USART1_IRQHandlerå‡½æ•°ä¸­è®¡æ•°
+				while (RESET == usart_flag_get(USART0, USART_FLAG_TC));//å‘é€å®Œæˆåˆ¤æ–­
+				usart_interrupt_enable(USART0, USART_INT_RBNE);//æŽ¥æ”¶ä¸­æ–­æ‰“å¼€
 				rxcount=0;
 			}
 			

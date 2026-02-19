@@ -1,16 +1,16 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
 #include "gd32f4xx_libopt.h"
 #include "systick.h"
 
-#define FMC_WRITE_START_ADDR    ((uint32_t)0x08004000U)//ÉÈÇø1,16K×Ö½Ú
+#define FMC_WRITE_START_ADDR    ((uint32_t)0x08004000U)//æ‰‡åŒº1,16Kå­—èŠ‚
 #define FMC_WRITE_END_ADDR      ((uint32_t)0x08007fffU)
 
 uint32_t *ptrd;
@@ -110,11 +110,11 @@ void fmc_program_check(void)
 }
 int main(void)
 {
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-		fmc_erase_pages();//FLASH ²Á³ı
-		fmc_erase_pages_check();//¶Á³öÀ´ÑéÖ¤
-		fmc_program();//FLASHĞ´Èë
-		fmc_program_check();//Ğ´ÈëµÄÊı¾İÑéÖ¤
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+		fmc_erase_pages();//FLASH æ“¦é™¤
+		fmc_erase_pages_check();//è¯»å‡ºæ¥éªŒè¯
+		fmc_program();//FLASHå†™å…¥
+		fmc_program_check();//å†™å…¥çš„æ•°æ®éªŒè¯
     while(1)
 		{
   

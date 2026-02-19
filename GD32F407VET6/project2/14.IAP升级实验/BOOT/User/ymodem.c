@@ -34,7 +34,7 @@ typedef  void (*pFunction)(void);
 #define APPLICATION_ADDRESS     (uint32_t)0x08004000      /* Start user code address: ADDR_FLASH_PAGE_8 */
 pFunction JumpToApplication;
 uint32_t JumpAddress;
-#define CLI() __set_PRIMASK(1)//¹Ø±Õ×ÜÖĞ¶Ï  
+#define CLI() __set_PRIMASK(1)//å…³é—­æ€»ä¸­æ–­  
 
 void NVIC_DeInit(void)
 {
@@ -614,11 +614,11 @@ int32_t Ymodem_Receive (uint8_t *buf)
 							rcu_deinit();
 							NVIC_DeInit();
 						
-							JumpAddress = *(__IO uint32_t*) (APPLICATION_ADDRESS + 4);//¶¨ÒåÌø×ªµØÖ·ÊÇ0x08004000
+							JumpAddress = *(__IO uint32_t*) (APPLICATION_ADDRESS + 4);//å®šä¹‰è·³è½¬åœ°å€æ˜¯0x08004000
 							JumpToApplication = (pFunction) JumpAddress;
 							/* Initialize user application's Stack Pointer */
 							__set_MSP(*(__IO uint32_t*) APPLICATION_ADDRESS);
-							JumpToApplication();//Ìø×ªµ½Ó¦ÓÃ³ÌĞò
+							JumpToApplication();//è·³è½¬åˆ°åº”ç”¨ç¨‹åº
 						
 						
 					}
@@ -993,11 +993,11 @@ void SerialDownload(void)
 		SerialPutString("----------Jump To App-------------\r\n");
 		CLI();
 		NVIC_DeInit();
-		JumpAddress = *(__IO uint32_t*) (APPLICATION_ADDRESS + 4);//¶¨ÒåÌø×ªµØÖ·ÊÇ0x08004000
+		JumpAddress = *(__IO uint32_t*) (APPLICATION_ADDRESS + 4);//å®šä¹‰è·³è½¬åœ°å€æ˜¯0x08004000
 		JumpToApplication = (pFunction) JumpAddress;
 		/* Initialize user application's Stack Pointer */
 		__set_MSP(*(__IO uint32_t*) APPLICATION_ADDRESS);
-		JumpToApplication();//Ìø×ªµ½Ó¦ÓÃ³ÌĞò
+		JumpToApplication();//è·³è½¬åˆ°åº”ç”¨ç¨‹åº
 
   }
   else if (Size == -1)

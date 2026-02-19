@@ -11,7 +11,7 @@
 
 #include "gd32f4xx.h"
 #include "systick.h"
-#include "FreeRTOS.h"					//os 使用	 
+#include "FreeRTOS.h"					//os 浣跨敤	 
 #include "task.h"
 
 
@@ -46,7 +46,7 @@ void systick_config(void)
 */
 void SysTick_Handler(void)
 {
-	if(xTaskGetSchedulerState()!=taskSCHEDULER_NOT_STARTED)//系统已经运行
+	if(xTaskGetSchedulerState()!=taskSCHEDULER_NOT_STARTED)//绯荤粺宸茬粡杩愯
 	{
 		xPortSysTickHandler();
 	}

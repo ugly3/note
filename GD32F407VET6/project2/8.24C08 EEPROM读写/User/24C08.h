@@ -12,11 +12,11 @@
 
 					  
 /* Private define ------------------------------------------------------------*/
-#define AT24C01A		/* 24C01A,I2CÊ±ĞòºÍÍùºóµÄ24C02Ò»Ñù */
-//#define AT24C01		/* 24C01,I2CµÄÊ±ĞòºÍÆÕÍ¨µÄÓĞµã²»Í¬ */
+#define AT24C01A		/* 24C01A,I2Cæ—¶åºå’Œå¾€åçš„24C02ä¸€æ · */
+//#define AT24C01		/* 24C01,I2Cçš„æ—¶åºå’Œæ™®é€šçš„æœ‰ç‚¹ä¸åŒ */
 
 #define ADDR_24LC02		0xA0
-#define I2C_PAGESIZE	4		/* 24C01/01AÒ³»º³åÊÇ4¸ö */
+#define I2C_PAGESIZE	4		/* 24C01/01Aé¡µç¼“å†²æ˜¯4ä¸ª */
 
 /* Private function prototypes -----------------------------------------------*/
 void I2C_Configuration(void);

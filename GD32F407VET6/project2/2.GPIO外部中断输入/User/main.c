@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -14,17 +14,17 @@ int main(void)
 {
 
 
-	systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-	rcu_periph_clock_enable(RCU_GPIOB);//Ê¹ÄÜGPIOBÊ±ÖÓ
-	gpio_mode_set(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_4);//PB4ÅäÖÃ³ÉÊä³ö
-	gpio_output_options_set(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_4);//PB4ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È
-	//ÅäÖÃPA0Íâ²¿ÖĞ¶Ï
+	systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+	rcu_periph_clock_enable(RCU_GPIOB);//ä½¿èƒ½GPIOBæ—¶é’Ÿ
+	gpio_mode_set(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_4);//PB4é…ç½®æˆè¾“å‡º
+	gpio_output_options_set(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_4);//PB4é…ç½®æˆæ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
+	//é…ç½®PA0å¤–éƒ¨ä¸­æ–­
 	rcu_periph_clock_enable(RCU_GPIOA);
-	gpio_mode_set(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, GPIO_PIN_0);//PA0ÅäÖÃ³ÉÏÂÀ­ÊäÈë
+	gpio_mode_set(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, GPIO_PIN_0);//PA0é…ç½®æˆä¸‹æ‹‰è¾“å…¥
 	/* enable and set key EXTI interrupt to the lowest priority */
-	nvic_irq_enable(EXTI0_IRQn, 2U, 0U);//ÖĞ¶ÏÊ¹ÄÜ
+	nvic_irq_enable(EXTI0_IRQn, 2U, 0U);//ä¸­æ–­ä½¿èƒ½
 	/* configure key EXTI line */
-	exti_init(EXTI_0, EXTI_INTERRUPT, EXTI_TRIG_RISING);//ÉÏÉıÑØ´¥·¢
+	exti_init(EXTI_0, EXTI_INTERRUPT, EXTI_TRIG_RISING);//ä¸Šå‡æ²¿è§¦å‘
 	exti_interrupt_flag_clear(EXTI_0);
 	while(1)
 	{

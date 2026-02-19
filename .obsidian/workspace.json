@@ -11,16 +11,12 @@
             "id": "563ea56ab508b5c9",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "code-space-view",
               "state": {
-                "file": "GD32F407VET6/原理图/核心板/光子MINI-GD32F407VET6开发板使用说明V2.0.pdf",
-                "page": 11,
-                "left": -10,
-                "top": 265,
-                "zoom": 1.5465686274509804
+                "file": "GD32F407VET6/project2/26.BH170光照强度检测实验/User/gd32f4xx_libopt.h"
               },
-              "icon": "lucide-file-text",
-              "title": "光子MINI-GD32F407VET6开发板使用说明V2.0"
+              "icon": "lucide-file",
+              "title": "gd32f4xx_libopt.h"
             }
           }
         ]
@@ -202,17 +198,17 @@
   },
   "active": "563ea56ab508b5c9",
   "lastOpenFiles": [
-    "GD32F407VET6/project2/6.定时器1ms中断/project/Listings/template.map",
-    "GD32F407VET6/project2/6.定时器1ms中断/project/Listings/startup_gd32f407.lst",
-    "GD32F407VET6/project2/6.定时器1ms中断/project/Listings/startup_gd32f405.lst",
-    "GD32F407VET6/project2/6.定时器1ms中断/project/Listings/startup_gd32f20x_cl.lst",
-    "GD32F407VET6/project2/6.定时器1ms中断/project/Listings/startup_gd32f10x_md.lst",
-    "GD32F407VET6/project2/6.定时器1ms中断/Library/Source/gd32f4xx_wwdgt.c",
-    "GD32F407VET6/project2/6.定时器1ms中断/Library/Source/gd32f4xx_usart.c",
-    "GD32F407VET6/project2/6.定时器1ms中断/Library/Source/gd32f4xx_trng.c",
-    "GD32F407VET6/project2/6.定时器1ms中断/Library/Source/gd32f4xx_tli.c",
-    "GD32F407VET6/project2/6.定时器1ms中断/Library/Source/gd32f4xx_timer.c",
-    "GD32F407VET6/project2/6.定时器1ms中断/Library/Source/gd32f4xx_syscfg.c",
+    "GD32F407VET6/project2/26.BH170光照强度检测实验/User/gd32f4xx_it.h",
+    "GD32F407VET6/project2/26.BH170光照强度检测实验/User/oled.h",
+    "GD32F407VET6/project2/26.BH170光照强度检测实验/User/oled.c",
+    "GD32F407VET6/project2/26.BH170光照强度检测实验/User/main.h",
+    "GD32F407VET6/project2/26.BH170光照强度检测实验/User/main.c",
+    "GD32F407VET6/project2/6.定时器1ms中断/User/main.c.tmp",
+    "GD32F407VET6/project2/6.定时器1ms中断/User/gd32f4xx_it.c.tmp",
+    "GD32F407VET6/project2/30.LAN8720以太网通讯实验/Projects/Eth/Ethernet/Project/Raw_tcpudp/src/main.c.tmp",
+    "GD32F407VET6/project2/30.LAN8720以太网通讯实验/Projects/Eth/Ethernet/Project/Raw_tcpudp/src/hello_gigadevice.c.tmp",
+    "GD32F407VET6/project2/9.内部FLASH读写/User/main.c.tmp",
+    "GD32F407VET6/project2/7.485(USART串口)通讯实验/User/main.c.tmp",
     "Arch日常使用.md",
     "GD32F407VET6/GD32F407VET6.md",
     "GD32F407VET6/红外检测.md",

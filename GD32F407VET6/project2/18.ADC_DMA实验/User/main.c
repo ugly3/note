@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -13,42 +13,42 @@
 uint16_t adc_value[2];
 
 
-//ADCÅäÖÃ£¬DMAÅäÖÃ
+//ADCé…ç½®ï¼ŒDMAé…ç½®
 void ADC_config(void)
 {
 		dma_single_data_parameter_struct  dma_single_data_parameter;
 		rcu_periph_clock_enable(RCU_GPIOA);
-		gpio_mode_set(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO_PIN_4);//PA4ÅäÖÃ³ÉÊäÈë
-		gpio_mode_set(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO_PIN_5);//PA5ÅäÖÃ³ÉÊäÈë
-		//ADCÏà¹ØÊ±ÖÓÅäÖÃ
+		gpio_mode_set(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO_PIN_4);//PA4é…ç½®æˆè¾“å…¥
+		gpio_mode_set(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO_PIN_5);//PA5é…ç½®æˆè¾“å…¥
+		//ADCç›¸å…³æ—¶é’Ÿé…ç½®
 		rcu_periph_clock_enable(RCU_GPIOA);
 		rcu_periph_clock_enable(RCU_DMA1);
 		rcu_periph_clock_enable(RCU_ADC0);
 		adc_clock_config(ADC_ADCCK_PCLK2_DIV6);
 
-    /* DMAÏà¹ØÅäÖÃ DMA1 CH0*/
+    /* DMAç›¸å…³é…ç½® DMA1 CH0*/
     dma_deinit(DMA1, DMA_CH0);
     dma_single_data_parameter.periph_addr = (uint32_t)(&ADC_RDATA(ADC0));
     dma_single_data_parameter.periph_inc = DMA_PERIPH_INCREASE_DISABLE;
     dma_single_data_parameter.memory0_addr = (uint32_t)(&adc_value);
-    dma_single_data_parameter.memory_inc = DMA_MEMORY_INCREASE_ENABLE;                         // ´æ´¢Æ÷µØÖ·ÊÇ·ñÎªÔöÁ¿Ä£Ê½
+    dma_single_data_parameter.memory_inc = DMA_MEMORY_INCREASE_ENABLE;                         // å­˜å‚¨å™¨åœ°å€æ˜¯å¦ä¸ºå¢é‡æ¨¡å¼
     dma_single_data_parameter.periph_memory_width = DMA_PERIPH_WIDTH_16BIT;
-    dma_single_data_parameter.circular_mode = DMA_CIRCULAR_MODE_ENABLE;                        // Ñ­»·Ä£Ê½
-    dma_single_data_parameter.direction = DMA_PERIPH_TO_MEMORY;                                // ÍâÉèµ½´æ´¢Æ÷
-    dma_single_data_parameter.number = 2;                                                      // DMA»º´æ´óĞ¡
+    dma_single_data_parameter.circular_mode = DMA_CIRCULAR_MODE_ENABLE;                        // å¾ªç¯æ¨¡å¼
+    dma_single_data_parameter.direction = DMA_PERIPH_TO_MEMORY;                                // å¤–è®¾åˆ°å­˜å‚¨å™¨
+    dma_single_data_parameter.number = 2;                                                      // DMAç¼“å­˜å¤§å°
     dma_single_data_parameter.priority = DMA_PRIORITY_HIGH;
     dma_single_data_mode_init(DMA1,DMA_CH0,&dma_single_data_parameter);
     dma_channel_enable(DMA1, DMA_CH0);
 		dma_circulation_enable(DMA1, DMA_CH0);        
    
-		//ADCÏà¹ØÅäÖÃ
-		adc_deinit();      // ¸´Î»ADC
-		adc_sync_mode_config(ADC_SYNC_MODE_INDEPENDENT);                         //¶ÀÁ¢Ä£Ê½
+		//ADCç›¸å…³é…ç½®
+		adc_deinit();      // å¤ä½ADC
+		adc_sync_mode_config(ADC_SYNC_MODE_INDEPENDENT);                         //ç‹¬ç«‹æ¨¡å¼
 
-		adc_special_function_config(ADC0, ADC_SCAN_MODE, ENABLE);               // É¨ÃèÄ£Ê½
-		adc_special_function_config(ADC0, ADC_CONTINUOUS_MODE, ENABLE);         // Á¬ĞøÄ£Ê½
-		adc_data_alignment_config(ADC0, ADC_DATAALIGN_RIGHT);                  // ÓÒ¶ÔÆë
-		adc_channel_length_config(ADC0, ADC_REGULAR_CHANNEL, 2);              //¶ÁÈ¡2Í¨ĞÅ
+		adc_special_function_config(ADC0, ADC_SCAN_MODE, ENABLE);               // æ‰«ææ¨¡å¼
+		adc_special_function_config(ADC0, ADC_CONTINUOUS_MODE, ENABLE);         // è¿ç»­æ¨¡å¼
+		adc_data_alignment_config(ADC0, ADC_DATAALIGN_RIGHT);                  // å³å¯¹é½
+		adc_channel_length_config(ADC0, ADC_REGULAR_CHANNEL, 2);              //è¯»å–2é€šä¿¡
 
 		/* ADC regular channel config */
 		adc_regular_channel_config(ADC0, 0, ADC_CHANNEL_4, ADC_SAMPLETIME_144);
@@ -66,13 +66,13 @@ uint16_t Vol_Value1,Vol_Value2;
 int main(void)
 {
 
-  systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-	ADC_config();	//ÅäÖÃADC
+  systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+	ADC_config();	//é…ç½®ADC
 	while(1)
 	{
 		 
-				Vol_Value1=adc_value[0]*3300/4095;//×ª»»³ÉµçÑ¹Öµ
-		  	Vol_Value2=adc_value[1]*3300/4095;//×ª»»³ÉµçÑ¹Öµ
+				Vol_Value1=adc_value[0]*3300/4095;//è½¬æ¢æˆç”µå‹å€¼
+		  	Vol_Value2=adc_value[1]*3300/4095;//è½¬æ¢æˆç”µå‹å€¼
 
 		
 	}

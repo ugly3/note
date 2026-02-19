@@ -1,15 +1,15 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
 #include "gd32f4xx_libopt.h"
 #include "systick.h"
-#define RTC_CLOCK_SOURCE_LXTAL //ÅäÖÃÊ±ÖÓÔ´
+#define RTC_CLOCK_SOURCE_LXTAL //é…ç½®æ—¶é’Ÿæº
 #define BKP_VALUE    0x32F1
 
 rtc_parameter_struct   rtc_initpara;
@@ -77,25 +77,25 @@ void rtc_setup(void)
         RTC_BKP0 = BKP_VALUE;
     }
 }
-uint8_t aShowTime[16] = "hh:ms:ss";//¶¨ÒåÊ±·ÖÃë
-uint8_t aShowDate[16] = "dd-mm-yyyy";//¶¨ÒåÄêÔÂÈÕ
+uint8_t aShowTime[16] = "hh:ms:ss";//å®šä¹‰æ—¶åˆ†ç§’
+uint8_t aShowDate[16] = "dd-mm-yyyy";//å®šä¹‰å¹´æœˆæ—¥
 int main(void)
 {
 
 
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
     /* enable PMU clock */
     rcu_periph_clock_enable(RCU_PMU);
     /* enable the access of the RTC registers */
     pmu_backup_write_enable();
-    rtc_pre_config();//ÅäÖÃRTC
-		rtc_setup(); //ÉèÖÃÊ±¼ä2016Äê4ÔÂ30ÈÕ£¬0µã0·Ö0Ãë
+    rtc_pre_config();//é…ç½®RTC
+		rtc_setup(); //è®¾ç½®æ—¶é—´2016å¹´4æœˆ30æ—¥ï¼Œ0ç‚¹0åˆ†0ç§’
     
     while(1)
 		{
 
-				delay_1ms(500);//500msµÈ´ı
-        rtc_show_time();//¶ÁÈ¡Ê±¼ä
+				delay_1ms(500);//500msç­‰å¾…
+        rtc_show_time();//è¯»å–æ—¶é—´
 			  sprintf((char *)aShowTime, "%2x:%2x:%2x", rtc_initpara.hour, rtc_initpara.minute, rtc_initpara.second);
         sprintf((char *)aShowDate, "%2x-%2x-%2x", rtc_initpara.month, rtc_initpara.date, 0x2000 + rtc_initpara.year);
     

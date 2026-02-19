@@ -23,16 +23,16 @@
 #define  FLASH_READ_DEVICE_ID      		0x90
 #define  FLASH_READ_JEDEC_ID      		0x9f
 
-#define 	W25Q_FLASH_SIZE	 (1*1024*1024)	// 1M×Ö½Ú
+#define 	W25Q_FLASH_SIZE	 (1*1024*1024)	// 1Må­—èŠ‚
 #define		PAGE_SIZE			8192	// 256 bytes
 #define 	SECTOR_SIZE		512	 // 4-Kbyte
 #define		BLOCK_SIZE		32	// 64-Kbyte	
 
-#define PAGE_LEN		255	 //Ò»Ò³256×Ö½Ú
+#define PAGE_LEN		255	 //ä¸€é¡µ256å­—èŠ‚
 
 __align(4) uint8_t g_DataTmpBuffer[4096] = {0};
 #define SectorBuf  g_DataTmpBuffer
-//¶¨ÒåFLASHÏà¹ØÊôĞÔ¶¨Òå
+//å®šä¹‰FLASHç›¸å…³å±æ€§å®šä¹‰
 struct Flash_Attr  {
 	uint16_t flash_id;
 	uint16_t page_size;
@@ -92,7 +92,7 @@ void spi_master_recv_some_bytes( uint8_t *pbdata, uint16_t recv_length)
 
 	while (recv_length--)
 	{
-		*temp_data++ = spi_master_send_recv_byte(0xFF);	//·¢ËÍ 0xff Îª´ÓÉè±¸Ìá¹©Ê±ÖÓ
+		*temp_data++ = spi_master_send_recv_byte(0xFF);	//å‘é€ 0xff ä¸ºä»è®¾å¤‡æä¾›æ—¶é’Ÿ
 	}
 	
 }
@@ -119,17 +119,17 @@ uint32_t spi_flash_read_id(void)
 uint16_t SFLASH_ReadID(void)
 {
   uint16_t ID = 0;
-   FLASH_CS_0();                              //Ê¹ÄÜÆ÷¼ş
+   FLASH_CS_0();                              //ä½¿èƒ½å™¨ä»¶
 
-	spi_master_send_recv_byte(0x90);//·¢ËÍ¶ÁÈ¡IDÃüÁî	    
+	spi_master_send_recv_byte(0x90);//å‘é€è¯»å–IDå‘½ä»¤	    
 	spi_master_send_recv_byte(0x00); 	    
 	spi_master_send_recv_byte(0x00); 	    
 	spi_master_send_recv_byte(0x00); 
 
-	ID |= spi_master_send_recv_byte(0xFF)<<8;              //¶ÁÈ¡ID
+	ID |= spi_master_send_recv_byte(0xFF)<<8;              //è¯»å–ID
 	ID |= spi_master_send_recv_byte(0xFF);
   
-   FLASH_CS_1();                             //Ê§ÄÜÆ÷¼ş
+   FLASH_CS_1();                             //å¤±èƒ½å™¨ä»¶
 	
   return ID;
 }
@@ -148,7 +148,7 @@ void Flash_WriteEnable(void)
 	uint8_t command = FLASH_WRITE_ENABLE_CMD;
 
 	FLASH_CS_0();	
-	spi_master_send_recv_byte(command);//¿ªÆôĞ´Ê¹ÄÜ
+	spi_master_send_recv_byte(command);//å¼€å¯å†™ä½¿èƒ½
 	FLASH_CS_1();
 }
 
@@ -170,7 +170,7 @@ uint8_t Flash_ReadSR(void)
 void Flash_WaitNobusy(void)
 {
 	
-	while(((Flash_ReadSR()) & 0x01)==0x01);	//µÈ´ıBUSYÎ»Çå¿Õ
+	while(((Flash_ReadSR()) & 0x01)==0x01);	//ç­‰å¾…BUSYä½æ¸…ç©º
 }
 void Flash_WriteSR(uint8_t _ucByte)
 {
@@ -181,7 +181,7 @@ void Flash_WriteSR(uint8_t _ucByte)
 
 	FLASH_CS_0();	
 	spi_master_send_recv_byte(command);	//01h
-	spi_master_send_recv_byte(_ucByte);	//Ğ´ÈëÒ»¸ö×Ö½Ú
+	spi_master_send_recv_byte(_ucByte);	//å†™å…¥ä¸€ä¸ªå­—èŠ‚
   FLASH_CS_1();
 }
 
@@ -193,12 +193,12 @@ void Flash_ErasePage(uint32_t _ulPageAddr)
 	Flash_WaitNobusy();
 	
 	FLASH_CS_0();
-	spi_master_send_recv_byte(FLASH_ERASE_PAGE);//Ò³²Á³ıÖ¸Áî
-	spi_master_send_recv_byte((uint8_t)(_ulPageAddr>>16));	//Ğ´Èë24Î»µØÖ·
+	spi_master_send_recv_byte(FLASH_ERASE_PAGE);//é¡µæ“¦é™¤æŒ‡ä»¤
+	spi_master_send_recv_byte((uint8_t)(_ulPageAddr>>16));	//å†™å…¥24ä½åœ°å€
 	spi_master_send_recv_byte((uint8_t)(_ulPageAddr>>8));
 	spi_master_send_recv_byte((uint8_t)(_ulPageAddr>>0));
 	FLASH_CS_1();
-	Flash_WaitNobusy();	//µÈ´ıĞ´Èë½áÊø
+	Flash_WaitNobusy();	//ç­‰å¾…å†™å…¥ç»“æŸ
 }
 
 
@@ -211,7 +211,7 @@ void Flash_EraseSector(uint32_t _ulSectorAddr)
 	temp_buff[1] = (uint8_t)(_ulSectorAddr >> 8);
 	temp_buff[2] = (uint8_t)(_ulSectorAddr >> 0);
 	
-	_ulSectorAddr *= 4096;	//1¸öÉÈÇø 4 KBytes
+	_ulSectorAddr *= 4096;	//1ä¸ªæ‰‡åŒº 4 KBytes
 	
 	Flash_WriteEnable();
 	Flash_WaitNobusy();
@@ -223,14 +223,14 @@ void Flash_EraseSector(uint32_t _ulSectorAddr)
 	spi_master_send_recv_byte(temp_buff[2]);
 	FLASH_CS_1();
 	
-	Flash_WaitNobusy();	//µÈ´ıĞ´Èë½áÊø
+	Flash_WaitNobusy();	//ç­‰å¾…å†™å…¥ç»“æŸ
 }
 
 
 void Flash_EraseBlock(uint32_t _ulBlockAddr)
 {
 	uint8_t command = FLASH_ERASE_BLOCK;
-	_ulBlockAddr *= 65536;	//¿éµØÖ·,Ò»¿é64K
+	_ulBlockAddr *= 65536;	//å—åœ°å€,ä¸€å—64K
 	
 	Flash_WriteEnable();
 	Flash_WaitNobusy();
@@ -242,7 +242,7 @@ void Flash_EraseBlock(uint32_t _ulBlockAddr)
 	spi_master_send_recv_byte(_ulBlockAddr>>0);
 	FLASH_CS_1();
 
-	Flash_WaitNobusy();	//µÈ´ıĞ´Èë½áÊø
+	Flash_WaitNobusy();	//ç­‰å¾…å†™å…¥ç»“æŸ
 }
 
 
@@ -250,13 +250,13 @@ void Flash_EraseChip(void)
 {
 	uint8_t command = FLASH_ERASE_CHIP;
 
-	Flash_WriteEnable();	//flashĞ¾Æ¬Ğ´Ê¹ÄÜ
-	Flash_WaitNobusy();	//µÈ´ıĞ´²Ù×÷Íê³É
+	Flash_WriteEnable();	//flashèŠ¯ç‰‡å†™ä½¿èƒ½
+	Flash_WaitNobusy();	//ç­‰å¾…å†™æ“ä½œå®Œæˆ
 	
 	FLASH_CS_0();
 	spi_master_send_recv_byte(command);
 	FLASH_CS_1();
-	Flash_WaitNobusy();	//µÈ´ıĞ´Èë½áÊø
+	Flash_WaitNobusy();	//ç­‰å¾…å†™å…¥ç»“æŸ
 }
 void Flash_ReadSomeBytes(uint8_t *ucpBuffer, uint32_t _ulReadAddr, uint16_t _usNByte)
 {
@@ -282,32 +282,32 @@ void Flash_WritePage(uint8_t *ucpBuffer, uint32_t _ulWriteAddr, uint16_t _usNByt
 {
 	
 
-	Flash_WriteEnable();	//Ğ´Ê¹ÄÜ
-	Flash_WaitNobusy();	//µÈ´ıĞ´Èë½áÊø
+	Flash_WriteEnable();	//å†™ä½¿èƒ½
+	Flash_WaitNobusy();	//ç­‰å¾…å†™å…¥ç»“æŸ
 	
 
 	
   FLASH_CS_0();
 	
 	spi_master_send_recv_byte(FLASH_WRITE_PAGE);	//02h
-	spi_master_send_recv_byte(_ulWriteAddr>>16);	//Ğ´Èë24Î»µØÖ·
+	spi_master_send_recv_byte(_ulWriteAddr>>16);	//å†™å…¥24ä½åœ°å€
 	spi_master_send_recv_byte(_ulWriteAddr>>8);
 	spi_master_send_recv_byte(_ulWriteAddr>>0);
 	while(_usNByte--)
 	{
-		spi_master_send_recv_byte(*ucpBuffer);	//SPI Ğ´Èëµ¥¸ö×Ö½Ú
+		spi_master_send_recv_byte(*ucpBuffer);	//SPI å†™å…¥å•ä¸ªå­—èŠ‚
 		ucpBuffer++;
 	}
 	FLASH_CS_1();
-	Flash_WaitNobusy();	//µÈ´ıĞ´Èë½áÊø
+	Flash_WaitNobusy();	//ç­‰å¾…å†™å…¥ç»“æŸ
 }
 
-//²»´øĞ£ÑéĞ´Èë£¬µÃ±£Ö¤FLASHÊı¾İÒÑ¾­±»²Á³ı³É0xFF
+//ä¸å¸¦æ ¡éªŒå†™å…¥ï¼Œå¾—ä¿è¯FLASHæ•°æ®å·²ç»è¢«æ“¦é™¤æˆ0xFF
 void Flash_WriteNoCheck(uint8_t *ucpBuffer, uint32_t _ulWriteAddr, uint16_t _usNByte)
 {
-	uint16_t PageByte = 256 - _ulWriteAddr % 256;//µ¥Ò³Ê£Óà¿ÉĞ´×Ö½ÚÊı
+	uint16_t PageByte = 256 - _ulWriteAddr % 256;//å•é¡µå‰©ä½™å¯å†™å­—èŠ‚æ•°
 
-	if(_usNByte <= PageByte)	//²»´óÓÚ256×Ö½Ú
+	if(_usNByte <= PageByte)	//ä¸å¤§äº256å­—èŠ‚
 	{
 		PageByte = _usNByte;
 	}
@@ -315,13 +315,13 @@ void Flash_WriteNoCheck(uint8_t *ucpBuffer, uint32_t _ulWriteAddr, uint16_t _usN
 	while(1)
 	{
 		Flash_WritePage(ucpBuffer, _ulWriteAddr, PageByte);
-		if(_usNByte == PageByte)	//Ğ´Èë½áÊø
+		if(_usNByte == PageByte)	//å†™å…¥ç»“æŸ
 			break;
 		else
 		{
-			ucpBuffer += PageByte;	//ÏÂÒ»Ò³Ğ´ÈëµÄÊı¾İ
-			_ulWriteAddr += PageByte;	//ÏÂÒ»Ò³Ğ´ÈëµÄµØÖ·
-			_usNByte -= PageByte;	//´ıĞ´ÈëµÄ×Ö½ÚÊıµİ¼õ
+			ucpBuffer += PageByte;	//ä¸‹ä¸€é¡µå†™å…¥çš„æ•°æ®
+			_ulWriteAddr += PageByte;	//ä¸‹ä¸€é¡µå†™å…¥çš„åœ°å€
+			_usNByte -= PageByte;	//å¾…å†™å…¥çš„å­—èŠ‚æ•°é€’å‡
 			if(_usNByte > 256)
 			{
 				PageByte = 256;
@@ -336,62 +336,62 @@ void Flash_WriteNoCheck(uint8_t *ucpBuffer, uint32_t _ulWriteAddr, uint16_t _usN
 
 void Flash_WriteSomeBytes(uint8_t *ucpBuffer, uint32_t _ulWriteAddr, uint16_t _usNByte)
 {
-	uint32_t ulSecPos = 0;				//µÃµ½ÉÈÇøÎ»ÖÃ
-	uint16_t usSecOff = 0;				//ÉÈÇøÆ«ÒÆ
-	uint16_t usSecRemain = 0;		//Ê£ÓàÉÈÇø
+	uint32_t ulSecPos = 0;				//å¾—åˆ°æ‰‡åŒºä½ç½®
+	uint16_t usSecOff = 0;				//æ‰‡åŒºåç§»
+	uint16_t usSecRemain = 0;		//å‰©ä½™æ‰‡åŒº
 	uint32_t i = 0;
 
-	ulSecPos = _ulWriteAddr / 4096;//µØÖ·ËùÔÚÉÈÇø(0--511)
-	usSecOff = _ulWriteAddr % 4096;//ÉÈÇøÄÚµØÖ·Æ«ÒÆ
-	usSecRemain = 4096 - usSecOff;//ÉÈÇø³ıÈ¥Æ«ÒÆ£¬»¹Ê£¶àÉÙ×Ö½Ú
+	ulSecPos = _ulWriteAddr / 4096;//åœ°å€æ‰€åœ¨æ‰‡åŒº(0--511)
+	usSecOff = _ulWriteAddr % 4096;//æ‰‡åŒºå†…åœ°å€åç§»
+	usSecRemain = 4096 - usSecOff;//æ‰‡åŒºé™¤å»åç§»ï¼Œè¿˜å‰©å¤šå°‘å­—èŠ‚
 
-	if(_usNByte <= usSecRemain)	//Ğ´ÈëÊı¾İ´óĞ¡ < Ê£ÓàÉÈÇø¿Õ¼ä´óĞ¡
+	if(_usNByte <= usSecRemain)	//å†™å…¥æ•°æ®å¤§å° < å‰©ä½™æ‰‡åŒºç©ºé—´å¤§å°
 	{
 		usSecRemain = _usNByte;
 	}
 
 	while(1)
 	{
-		Flash_ReadSomeBytes(SectorBuf, ulSecPos*4096, 4096);//¶Á³öÕû¸öÉÈÇøµÄÄÚÈİ
-		for (i = 0; i < usSecRemain; i++)	//Ğ£ÑéÊı¾İ
+		Flash_ReadSomeBytes(SectorBuf, ulSecPos*4096, 4096);//è¯»å‡ºæ•´ä¸ªæ‰‡åŒºçš„å†…å®¹
+		for (i = 0; i < usSecRemain; i++)	//æ ¡éªŒæ•°æ®
 		{
-			if (SectorBuf[usSecOff + i] != 0xFF)//´¢´æÊı¾İ²»Îª0xFF£¬ĞèÒª²Á³ı
+			if (SectorBuf[usSecOff + i] != 0xFF)//å‚¨å­˜æ•°æ®ä¸ä¸º0xFFï¼Œéœ€è¦æ“¦é™¤
 				break;
 		}
 		
-		if(i < usSecRemain)	//ĞèÒª²Á³ı
+		if(i < usSecRemain)	//éœ€è¦æ“¦é™¤
 		{
-			Flash_EraseSector(ulSecPos);	//²Á³ıÕâ¸öÉÈÇø
-			for(i = 0; i < usSecRemain; i++)	//±£´æĞ´ÈëµÄÊı¾İ
+			Flash_EraseSector(ulSecPos);	//æ“¦é™¤è¿™ä¸ªæ‰‡åŒº
+			for(i = 0; i < usSecRemain; i++)	//ä¿å­˜å†™å…¥çš„æ•°æ®
 			{
 				SectorBuf[usSecOff + i] = ucpBuffer[i];
 			}
-			Flash_WriteNoCheck(SectorBuf, ulSecPos*4096, 4096);	//Ğ´ÈëÕû¸öÉÈÇø(ÉÈÇø=ÀÏÊı¾İ+ĞÂĞ´ÈëÊı¾İ)
+			Flash_WriteNoCheck(SectorBuf, ulSecPos*4096, 4096);	//å†™å…¥æ•´ä¸ªæ‰‡åŒº(æ‰‡åŒº=è€æ•°æ®+æ–°å†™å…¥æ•°æ®)
 		}
 		else
 		{
-			Flash_WriteNoCheck(ucpBuffer, _ulWriteAddr, usSecRemain);//²»ĞèÒª²Á³ı,Ö±½ÓĞ´ÈëÉÈÇø
+			Flash_WriteNoCheck(ucpBuffer, _ulWriteAddr, usSecRemain);//ä¸éœ€è¦æ“¦é™¤,ç›´æ¥å†™å…¥æ‰‡åŒº
 		}
-		if(_usNByte == usSecRemain)	//Ğ´Èë½áÊø
+		if(_usNByte == usSecRemain)	//å†™å…¥ç»“æŸ
 		{
 			Flash_WriteDisable();
 			break;
 		}
 		else
 		{
-			ulSecPos++;		//ÉÈÇøµØÖ·Ôö¼Ó1
-			usSecOff = 0;		//ÉÈÇøÆ«ÒÆ¹éÁã
-			ucpBuffer += usSecRemain;	//Ö¸ÕëÆ«ÒÆ
-			_ulWriteAddr += usSecRemain;	//Ğ´µØÖ·Æ«ÒÆ
-			_usNByte -= usSecRemain;	//´ıĞ´ÈëµÄ×Ö½Úµİ¼õ
+			ulSecPos++;		//æ‰‡åŒºåœ°å€å¢åŠ 1
+			usSecOff = 0;		//æ‰‡åŒºåç§»å½’é›¶
+			ucpBuffer += usSecRemain;	//æŒ‡é’ˆåç§»
+			_ulWriteAddr += usSecRemain;	//å†™åœ°å€åç§»
+			_usNByte -= usSecRemain;	//å¾…å†™å…¥çš„å­—èŠ‚é€’å‡
 
 			if(_usNByte > 4096)
 			{
-				usSecRemain = 4096;	//´ıĞ´ÈëÒ»ÉÈÇø(4096×Ö½Ú´óĞ¡)
+				usSecRemain = 4096;	//å¾…å†™å…¥ä¸€æ‰‡åŒº(4096å­—èŠ‚å¤§å°)
 			}
 			else
 			{
-				usSecRemain = _usNByte;		//´ıĞ´ÈëÉÙÓÚÒ»ÉÈÇøµÄÊı¾İ
+				usSecRemain = _usNByte;		//å¾…å†™å…¥å°‘äºä¸€æ‰‡åŒºçš„æ•°æ®
 			}
 		}
 		

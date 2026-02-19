@@ -48,7 +48,7 @@
 	extern uint32_t SystemCoreClock;
 #endif
 
-//¶ÏÑÔ
+//æ–­è¨€
 //#define vAssertCalled(char,int) printf("Error:%s,%d\r\n",char,int)
 //#define configASSERT(x) if((x)==0) vAssertCalled(__FILE__,__LINE__)
 

@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -15,22 +15,22 @@ int main(void)
 {
 
 
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-    rcu_periph_clock_enable(RCU_GPIOB);//Ê¹ÄÜGPIOBÊ±ÖÓ
-	OLED_Init();//OLED³õÊ¼»¯  
-	OLED_Clear();//OLEDÇåÆÁ 
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+    rcu_periph_clock_enable(RCU_GPIOB);//ä½¿èƒ½GPIOBæ—¶é’Ÿ
+	OLED_Init();//OLEDåˆå§‹åŒ–  
+	OLED_Clear();//OLEDæ¸…å± 
 	while(1)
 	{
-		OLED_Clear();//OLEDÇåÆÁ 
-		OLED_ShowCHinese(18,0,0);//ÏÔÊ¾ÖĞÎÄ(¹â)
-		OLED_ShowCHinese(36,0,1);//ÏÔÊ¾ÖĞÎÄ(×Ó)
-		OLED_ShowCHinese(54,0,2);//ÏÔÊ¾ÖĞÎÄ(Îï)
-		OLED_ShowCHinese(72,0,3);//ÏÔÊ¾ÖĞÎÄ(Áª)
-		OLED_ShowCHinese(90,0,4);//ÏÔÊ¾ÖĞÎÄ(Íø)
-		OLED_ShowString(6,3,(u8 *)"GD32F407 TEST");//ÏÔÊ¾×Ö·û
-		OLED_ShowString(0,6,(u8 *)"ASCII:");//ÏÔÊ¾×Ö·û  
-		OLED_ShowString(63,6,(u8 *)"CODE:");//ÏÔÊ¾×Ö·û  
-		delay_1ms(5000);//µÈ´ı5Ãë
+		OLED_Clear();//OLEDæ¸…å± 
+		OLED_ShowCHinese(18,0,0);//æ˜¾ç¤ºä¸­æ–‡(å…‰)
+		OLED_ShowCHinese(36,0,1);//æ˜¾ç¤ºä¸­æ–‡(å­)
+		OLED_ShowCHinese(54,0,2);//æ˜¾ç¤ºä¸­æ–‡(ç‰©)
+		OLED_ShowCHinese(72,0,3);//æ˜¾ç¤ºä¸­æ–‡(è”)
+		OLED_ShowCHinese(90,0,4);//æ˜¾ç¤ºä¸­æ–‡(ç½‘)
+		OLED_ShowString(6,3,(u8 *)"GD32F407 TEST");//æ˜¾ç¤ºå­—ç¬¦
+		OLED_ShowString(0,6,(u8 *)"ASCII:");//æ˜¾ç¤ºå­—ç¬¦  
+		OLED_ShowString(63,6,(u8 *)"CODE:");//æ˜¾ç¤ºå­—ç¬¦  
+		delay_1ms(5000);//ç­‰å¾…5ç§’
 	}
  
 }

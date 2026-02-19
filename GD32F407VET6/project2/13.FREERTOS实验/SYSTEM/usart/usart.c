@@ -92,10 +92,10 @@ void DEBUG_USART_RX_IRQHandler(void)
 
 
 //////////////////////////////////////////////////////////////////
-//加入以下代码,支持printf函数,而不需要选择use MicroLIB	  
+//鍔犲叆浠ヤ笅浠ｇ爜,鏀寔printf鍑芥暟,鑰屼笉闇�瑕侀�夋嫨use MicroLIB	  
 #if 1
 #pragma import(__use_no_semihosting)             
-//标准库需要的支持函数                 
+//鏍囧噯搴撻渶瑕佺殑鏀寔鍑芥暟                 
 struct __FILE 
 { 
 	int handle; 
@@ -103,7 +103,7 @@ struct __FILE
 }; 
 
 FILE __stdout;       
-//定义_sys_exit()以避免使用半主机模式    
+//瀹氫箟_sys_exit()浠ラ伩鍏嶄娇鐢ㄥ崐涓绘満妯″紡    
 void _sys_exit(int x) 
 { 
 	x = x; 
@@ -114,7 +114,7 @@ void _ttywrch(int ch)
 	ch = ch;
 } 
 
-//重定义fputc函数 
+//閲嶅畾涔塮putc鍑芥暟 
 /* retarget the C library printf function to the USART */
 int fputc(int ch, FILE *f)
 {

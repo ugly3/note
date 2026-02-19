@@ -43,7 +43,7 @@ OF SUCH DAMAGE.
                           \n\r== GD32 ==\
                           \n\r== Telnet SUCCESS==\
                           \n\rHello. What is your name?\r\n"
-#define HELLO            "\n\rGigaDevice°æ8000°øPORT Hello "
+#define HELLO            "\n\rGigaDevice„Äê8000„ÄëPORT Hello "
 #define MAX_NAME_SIZE    32
 
 extern const uint8_t gd32_str[];

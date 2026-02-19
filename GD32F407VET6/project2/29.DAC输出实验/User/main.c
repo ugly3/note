@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -34,11 +34,11 @@ int main(void)
 {
 
 
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-		//ÅäÖÃPA4 PA5 DACÒı½Å
-		rcu_periph_clock_enable(RCU_GPIOA);//GPIOAÊ±ÖÓÊ¹ÄÜ
-		rcu_periph_clock_enable(RCU_DAC);//DACÊ±ÖÓÊ¹ÄÜ
-		gpio_mode_set(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO_PIN_4|GPIO_PIN_5);//PA4,PA5ÅäÖÃ³ÉAD
-		dac_config();//DACÅäÖÃ
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+		//é…ç½®PA4 PA5 DACå¼•è„š
+		rcu_periph_clock_enable(RCU_GPIOA);//GPIOAæ—¶é’Ÿä½¿èƒ½
+		rcu_periph_clock_enable(RCU_DAC);//DACæ—¶é’Ÿä½¿èƒ½
+		gpio_mode_set(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO_PIN_4|GPIO_PIN_5);//PA4,PA5é…ç½®æˆAD
+		dac_config();//DACé…ç½®
 		while(1);
 }

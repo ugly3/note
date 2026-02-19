@@ -1,27 +1,27 @@
 /*****************************************************************************
-  ÎÄ¼þ: mpu6050.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20200401
-	Æ½Ì¨:MINI-F030C8T6
+  æ–‡ä»¶: mpu6050.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20200401
+	å¹³å°:MINI-F030C8T6
 
 *******************************************************************************/
 
-/* °üº¬Í·ÎÄ¼þ ----------------------------------------------------------------*/
+/* åŒ…å«å¤´æ–‡ä»¶ ----------------------------------------------------------------*/
 #include "mpu6050.h"
 #include "main.h"
-/* Ë½ÓÐÀàÐÍ¶¨Òå --------------------------------------------------------------*/
-/* Ë½ÓÐºê¶¨Òå ----------------------------------------------------------------*/
-/* Ë½ÓÐ±äÁ¿ ------------------------------------------------------------------*/
-/* À©Õ¹±äÁ¿ ------------------------------------------------------------------*/
-/* Ë½ÓÐº¯ÊýÔ­ÐÎ --------------------------------------------------------------*/
-/* º¯ÊýÌå --------------------------------------------------------------------*/
+/* ç§æœ‰ç±»åž‹å®šä¹‰ --------------------------------------------------------------*/
+/* ç§æœ‰å®å®šä¹‰ ----------------------------------------------------------------*/
+/* ç§æœ‰å˜é‡ ------------------------------------------------------------------*/
+/* æ‰©å±•å˜é‡ ------------------------------------------------------------------*/
+/* ç§æœ‰å‡½æ•°åŽŸå½¢ --------------------------------------------------------------*/
+/* å‡½æ•°ä½“ --------------------------------------------------------------------*/
 
 /**
-  * º¯Êý¹¦ÄÜ: Ð´Êý¾Ýµ½MPU6050¼Ä´æÆ÷
-  * ÊäÈë²ÎÊý: ÎÞ
-  * ·µ »Ø Öµ: ÎÞ
-  * Ëµ    Ã÷: ÎÞ
+  * å‡½æ•°åŠŸèƒ½: å†™æ•°æ®åˆ°MPU6050å¯„å­˜å™¨
+  * è¾“å…¥å‚æ•°: æ— 
+  * è¿” å›ž å€¼: æ— 
+  * è¯´    æ˜Ž: æ— 
   */ 
 void MPU6050_WriteReg(uint8_t reg_add,uint8_t reg_dat)
 {
@@ -66,10 +66,10 @@ void MPU6050_WriteReg(uint8_t reg_add,uint8_t reg_dat)
 }
 
 /**
-  * º¯Êý¹¦ÄÜ: ´ÓMPU6050¼Ä´æÆ÷¶ÁÈ¡Êý¾Ý
-  * ÊäÈë²ÎÊý: ÎÞ
-  * ·µ »Ø Öµ: ÎÞ
-  * Ëµ    Ã÷: ÎÞ
+  * å‡½æ•°åŠŸèƒ½: ä»ŽMPU6050å¯„å­˜å™¨è¯»å–æ•°æ®
+  * è¾“å…¥å‚æ•°: æ— 
+  * è¿” å›ž å€¼: æ— 
+  * è¯´    æ˜Ž: æ— 
   */ 
 void MPU6050_ReadData(uint8_t reg_add,unsigned char*Read,uint8_t num)
 {
@@ -172,41 +172,41 @@ void MPU6050_ReadData(uint8_t reg_add,unsigned char*Read,uint8_t num)
 }
 
 
-void Motion_Interrupt(void)             //ÔË¶¯ÖÐ¶Ï
+void Motion_Interrupt(void)             //è¿åŠ¨ä¸­æ–­
 {
-    MPU6050_WriteReg(MPU6050_RA_MOT_THR,30);              //ÔË¶¯ãÐÖµ£¬Èç¹ûÒªÔö¼ÓÁéÃô¶È£¬¿ÉÒÔ°ÑÖµ¸Äµ½10ÒÔÏÂ
-    MPU6050_WriteReg(MPU6050_RA_MOT_DUR,0x14);            //¼ì²âÊ±¼ä20ms µ¥Î»1ms 
+    MPU6050_WriteReg(MPU6050_RA_MOT_THR,30);              //è¿åŠ¨é˜ˆå€¼ï¼Œå¦‚æžœè¦å¢žåŠ çµæ•åº¦ï¼Œå¯ä»¥æŠŠå€¼æ”¹åˆ°10ä»¥ä¸‹
+    MPU6050_WriteReg(MPU6050_RA_MOT_DUR,0x14);            //æ£€æµ‹æ—¶é—´20ms å•ä½1ms 
 }
 
 /**
-  * º¯Êý¹¦ÄÜ: ÖÐ¶Ï³õÊ¼»¯ÉèÖÃ
-  * ÊäÈë²ÎÊý: ÎÞ
-  * ·µ »Ø Öµ: ÎÞ
-  * Ëµ    Ã÷: ÎÞ
+  * å‡½æ•°åŠŸèƒ½: ä¸­æ–­åˆå§‹åŒ–è®¾ç½®
+  * è¾“å…¥å‚æ•°: æ— 
+  * è¿” å›ž å€¼: æ— 
+  * è¯´    æ˜Ž: æ— 
   */ 
 void MPU_INT_Init(void)
 {
 
  
-//×ÔÓÉÂäÌå¡¢ÔË¶¯¡¢¾²Ö¹ÖÐ¶Ï ÈýÑ¡Ò»  
-//    Free_Fall_Interrupt();                          //×ÔÓÉÂäÌåÖÐ¶Ï
-    Motion_Interrupt();                               //ÔË¶¯ÖÐ¶Ï
-//    Zero_Motion_Interrupt();                        //¾²Ö¹ÖÐ¶Ï
-    MPU6050_WriteReg(MPU6050_RA_CONFIG,0x04);           //ÅäÖÃÍâ²¿Òý½Å²ÉÑùºÍDLPFÊý×ÖµÍÍ¨ÂË²¨Æ÷
-    MPU6050_WriteReg(MPU6050_RA_ACCEL_CONFIG,0x04);     //¼ÓËÙ¶È´«¸ÐÆ÷Á¿³ÌºÍ¸ßÍ¨ÂË²¨Æ÷ÅäÖÃ
-    MPU6050_WriteReg(MPU6050_RA_INT_PIN_CFG,0X1C);      //INTÒý½ÅµÍµçÆ½Æ½Ê±
-    MPU6050_WriteReg(MPU6050_RA_INT_ENABLE,0x40);       //ÖÐ¶ÏÊ¹ÄÜ¼Ä´æÆ÷
+//è‡ªç”±è½ä½“ã€è¿åŠ¨ã€é™æ­¢ä¸­æ–­ ä¸‰é€‰ä¸€  
+//    Free_Fall_Interrupt();                          //è‡ªç”±è½ä½“ä¸­æ–­
+    Motion_Interrupt();                               //è¿åŠ¨ä¸­æ–­
+//    Zero_Motion_Interrupt();                        //é™æ­¢ä¸­æ–­
+    MPU6050_WriteReg(MPU6050_RA_CONFIG,0x04);           //é…ç½®å¤–éƒ¨å¼•è„šé‡‡æ ·å’ŒDLPFæ•°å­—ä½Žé€šæ»¤æ³¢å™¨
+    MPU6050_WriteReg(MPU6050_RA_ACCEL_CONFIG,0x04);     //åŠ é€Ÿåº¦ä¼ æ„Ÿå™¨é‡ç¨‹å’Œé«˜é€šæ»¤æ³¢å™¨é…ç½®
+    MPU6050_WriteReg(MPU6050_RA_INT_PIN_CFG,0X1C);      //INTå¼•è„šä½Žç”µå¹³å¹³æ—¶
+    MPU6050_WriteReg(MPU6050_RA_INT_ENABLE,0x40);       //ä¸­æ–­ä½¿èƒ½å¯„å­˜å™¨
 }
 /**
-  * º¯Êý¹¦ÄÜ: ³õÊ¼»¯MPU6050Ð¾Æ¬
-  * ÊäÈë²ÎÊý: ÎÞ
-  * ·µ »Ø Öµ: ÎÞ
-  * Ëµ    Ã÷: ÎÞ
+  * å‡½æ•°åŠŸèƒ½: åˆå§‹åŒ–MPU6050èŠ¯ç‰‡
+  * è¾“å…¥å‚æ•°: æ— 
+  * è¿” å›ž å€¼: æ— 
+  * è¯´    æ˜Ž: æ— 
   */ 
 void MPU6050_Init(void)
 {
   int i=0,j=0;
-  //ÔÚ³õÊ¼»¯Ö®Ç°ÒªÑÓÊ±Ò»¶ÎÊ±¼ä£¬ÈôÃ»ÓÐÑÓÊ±£¬Ôò¶ÏµçºóÔÙÉÏµçÊý¾Ý¿ÉÄÜ»á³ö´í
+  //åœ¨åˆå§‹åŒ–ä¹‹å‰è¦å»¶æ—¶ä¸€æ®µæ—¶é—´ï¼Œè‹¥æ²¡æœ‰å»¶æ—¶ï¼Œåˆ™æ–­ç”µåŽå†ä¸Šç”µæ•°æ®å¯èƒ½ä¼šå‡ºé”™
   for(i=0;i<1000;i++)
   {
     for(j=0;j<1000;j++)
@@ -214,29 +214,29 @@ void MPU6050_Init(void)
       ;
     }
   }
-	MPU6050_WriteReg(MPU6050_RA_PWR_MGMT_1, 0x00);	    //½â³ýÐÝÃß×´Ì¬
-	MPU6050_WriteReg(MPU6050_RA_SMPLRT_DIV , 0x07);	    //ÍÓÂÝÒÇ²ÉÑùÂÊ£¬1KHz
-	MPU6050_WriteReg(MPU6050_RA_CONFIG , 0x06);	        //µÍÍ¨ÂË²¨Æ÷µÄÉèÖÃ£¬½ØÖ¹ÆµÂÊÊÇ1K£¬´ø¿íÊÇ5K
-	MPU6050_WriteReg(MPU6050_RA_ACCEL_CONFIG , 0x00);	  //ÅäÖÃ¼ÓËÙ¶È´«¸ÐÆ÷¹¤×÷ÔÚ2GÄ£Ê½£¬²»×Ô¼ì
-	MPU6050_WriteReg(MPU6050_RA_GYRO_CONFIG, 0x18);     //ÍÓÂÝÒÇ×Ô¼ì¼°²âÁ¿·¶Î§£¬µäÐÍÖµ£º0x18(²»×Ô¼ì£¬2000deg/s)
+	MPU6050_WriteReg(MPU6050_RA_PWR_MGMT_1, 0x00);	    //è§£é™¤ä¼‘çœ çŠ¶æ€
+	MPU6050_WriteReg(MPU6050_RA_SMPLRT_DIV , 0x07);	    //é™€èžºä»ªé‡‡æ ·çŽ‡ï¼Œ1KHz
+	MPU6050_WriteReg(MPU6050_RA_CONFIG , 0x06);	        //ä½Žé€šæ»¤æ³¢å™¨çš„è®¾ç½®ï¼Œæˆªæ­¢é¢‘çŽ‡æ˜¯1Kï¼Œå¸¦å®½æ˜¯5K
+	MPU6050_WriteReg(MPU6050_RA_ACCEL_CONFIG , 0x00);	  //é…ç½®åŠ é€Ÿåº¦ä¼ æ„Ÿå™¨å·¥ä½œåœ¨2Gæ¨¡å¼ï¼Œä¸è‡ªæ£€
+	MPU6050_WriteReg(MPU6050_RA_GYRO_CONFIG, 0x18);     //é™€èžºä»ªè‡ªæ£€åŠæµ‹é‡èŒƒå›´ï¼Œå…¸åž‹å€¼ï¼š0x18(ä¸è‡ªæ£€ï¼Œ2000deg/s)
 	MPU_INT_Init();
 	
 
 }
 
 /**
-  * º¯Êý¹¦ÄÜ: ¶ÁÈ¡MPU6050µÄID
-  * ÊäÈë²ÎÊý: ÎÞ
-  * ·µ »Ø Öµ: ÎÞ
-  * Ëµ    Ã÷: ÎÞ
+  * å‡½æ•°åŠŸèƒ½: è¯»å–MPU6050çš„ID
+  * è¾“å…¥å‚æ•°: æ— 
+  * è¿” å›ž å€¼: æ— 
+  * è¯´    æ˜Ž: æ— 
   */ 
 uint8_t MPU6050ReadID(void)
 {
 	unsigned char Re = 0;
-    MPU6050_ReadData(MPU6050_RA_WHO_AM_I,&Re,1);    //¶ÁÆ÷¼þµØÖ·
+    MPU6050_ReadData(MPU6050_RA_WHO_AM_I,&Re,1);    //è¯»å™¨ä»¶åœ°å€
 	if(Re != 0x68)
 	{
-	//	printf("MPU6050 dectected error!\r\n¼ì²â²»µ½MPU6050Ä£¿é£¬Çë¼ì²éÄ£¿éÓë¿ª·¢°åµÄ½ÓÏß");
+	//	printf("MPU6050 dectected error!\r\næ£€æµ‹ä¸åˆ°MPU6050æ¨¡å—ï¼Œè¯·æ£€æŸ¥æ¨¡å—ä¸Žå¼€å‘æ¿çš„æŽ¥çº¿");
 		return 0;
 	}
 	else
@@ -248,10 +248,10 @@ uint8_t MPU6050ReadID(void)
 }
 
 /**
-  * º¯Êý¹¦ÄÜ: ¶ÁÈ¡MPU6050µÄ¼ÓËÙ¶ÈÊý¾Ý
-  * ÊäÈë²ÎÊý: ÎÞ
-  * ·µ »Ø Öµ: ÎÞ
-  * Ëµ    Ã÷: ÎÞ
+  * å‡½æ•°åŠŸèƒ½: è¯»å–MPU6050çš„åŠ é€Ÿåº¦æ•°æ®
+  * è¾“å…¥å‚æ•°: æ— 
+  * è¿” å›ž å€¼: æ— 
+  * è¯´    æ˜Ž: æ— 
   */ 
 void MPU6050ReadAcc(short *accData)
 {
@@ -265,10 +265,10 @@ void MPU6050ReadAcc(short *accData)
 }
 
 /**
-  * º¯Êý¹¦ÄÜ: ¶ÁÈ¡MPU6050µÄ½ÇËÙ¶ÈÊý¾Ý
-  * ÊäÈë²ÎÊý: ÎÞ
-  * ·µ »Ø Öµ: ÎÞ
-  * Ëµ    Ã÷: ÎÞ
+  * å‡½æ•°åŠŸèƒ½: è¯»å–MPU6050çš„è§’é€Ÿåº¦æ•°æ®
+  * è¾“å…¥å‚æ•°: æ— 
+  * è¿” å›ž å€¼: æ— 
+  * è¯´    æ˜Ž: æ— 
   */ 
 void MPU6050ReadGyro(short *gyroData)
 {
@@ -280,30 +280,30 @@ void MPU6050ReadGyro(short *gyroData)
 }
 
 /**
-  * º¯Êý¹¦ÄÜ: ¶ÁÈ¡MPU6050µÄÔ­Ê¼ÎÂ¶ÈÊý¾Ý
-  * ÊäÈë²ÎÊý: ÎÞ
-  * ·µ »Ø Öµ: ÎÞ
-  * Ëµ    Ã÷: ÎÞ
+  * å‡½æ•°åŠŸèƒ½: è¯»å–MPU6050çš„åŽŸå§‹æ¸©åº¦æ•°æ®
+  * è¾“å…¥å‚æ•°: æ— 
+  * è¿” å›ž å€¼: æ— 
+  * è¯´    æ˜Ž: æ— 
   */ 
 void MPU6050ReadTemp(short *tempData)
 {
 	uint8_t buf[2];
-	MPU6050_ReadData(MPU6050_RA_TEMP_OUT_H,buf,2);     //¶ÁÈ¡ÎÂ¶ÈÖµ
+	MPU6050_ReadData(MPU6050_RA_TEMP_OUT_H,buf,2);     //è¯»å–æ¸©åº¦å€¼
 	*tempData = (buf[0] << 8) | buf[1];
 }
 
 /**
-  * º¯Êý¹¦ÄÜ: ¶ÁÈ¡MPU6050µÄÎÂ¶ÈÊý¾Ý£¬×ª»¯³ÉÉãÊÏ¶È
-  * ÊäÈë²ÎÊý: ÎÞ
-  * ·µ »Ø Öµ: ÎÞ
-  * Ëµ    Ã÷: ÎÞ
+  * å‡½æ•°åŠŸèƒ½: è¯»å–MPU6050çš„æ¸©åº¦æ•°æ®ï¼Œè½¬åŒ–æˆæ‘„æ°åº¦
+  * è¾“å…¥å‚æ•°: æ— 
+  * è¿” å›ž å€¼: æ— 
+  * è¯´    æ˜Ž: æ— 
   */ 
 void MPU6050_ReturnTemp(short*Temperature)
 {
 	short temp3;
 	uint8_t buf[2];
 	
-	MPU6050_ReadData(MPU6050_RA_TEMP_OUT_H,buf,2);     //¶ÁÈ¡ÎÂ¶ÈÖµ
+	MPU6050_ReadData(MPU6050_RA_TEMP_OUT_H,buf,2);     //è¯»å–æ¸©åº¦å€¼
 	temp3= (buf[0] << 8) | buf[1];
 	*Temperature=(((double) (temp3 + 13200)) / 280)-13;
 }

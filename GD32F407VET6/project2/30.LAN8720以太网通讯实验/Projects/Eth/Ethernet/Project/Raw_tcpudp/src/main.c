@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -21,8 +21,8 @@ __IO uint32_t g_localtime = 0; /* for creating a time reference incremented by 1
 uint32_t g_timedelay;
 extern struct tcp_pcb *tcp_active_pcbs;
 /***********************************************************************
-º¯ÊıÃû³Æ£ºCheck_TCP_Connect(void)
-¹¦    ÄÜ£º¼ì²éÁ¬½Ó 
+å‡½æ•°åç§°ï¼šCheck_TCP_Connect(void)
+åŠŸ    èƒ½ï¼šæ£€æŸ¥è¿æ¥ 
 ***********************************************************************/
 struct tcp_pcb *Check_TCP_Connect(void)
 {
@@ -30,14 +30,14 @@ struct tcp_pcb *Check_TCP_Connect(void)
 
 	for(cpcb = tcp_active_pcbs;cpcb != NULL; cpcb = cpcb->next)
 	{
-		if(cpcb -> state == ESTABLISHED)  //Èç¹ûµÃµ½Ó¦´ğ£¬ÔòÖ¤Ã÷ÒÑ¾­Á¬½ÓÉÏ
+		if(cpcb -> state == ESTABLISHED)  //å¦‚æœå¾—åˆ°åº”ç­”ï¼Œåˆ™è¯æ˜å·²ç»è¿æ¥ä¸Š
 		{
 			break;							   	
 		}
 	}
 	return cpcb;	
 }
-unsigned char tcp_data[] = "tcp ¿Í»§¶ËÊµÑé!\n";
+unsigned char tcp_data[] = "tcp å®¢æˆ·ç«¯å®éªŒ!\n";
 struct tcp_pcb *pcb;
 int main(void)
 {
@@ -46,13 +46,13 @@ int main(void)
     enet_system_setup();
     /* initilaize the LwIP stack */
     lwip_stack_init();
-     tcp_client_init();//tcpÁ¬½Ó£¬¶Ô·½¶Ë¿ÚºÅÊÇ8888£¬IPµØÖ·ÊÇ192.168.1.11
+     tcp_client_init();//tcpè¿æ¥ï¼Œå¯¹æ–¹ç«¯å£å·æ˜¯8888ï¼ŒIPåœ°å€æ˜¯192.168.1.11
     while(1){
 			delay_10ms(50);
-				pcb = Check_TCP_Connect();//²éÑ¯ÊÇ·ñÁ¬½Ó
+				pcb = Check_TCP_Connect();//æŸ¥è¯¢æ˜¯å¦è¿æ¥
 		   if(pcb!=0)
 			 {
-				 tcp_write(pcb, tcp_data,sizeof(tcp_data), 1);//·¢ËÍÊı¾İ    
+				 tcp_write(pcb, tcp_data,sizeof(tcp_data), 1);//å‘é€æ•°æ®    
 			 }
 #ifndef USE_ENET_INTERRUPT
         /* check if any packet received */

@@ -20,20 +20,20 @@ void ESP8266_STA_TCPClient_Test(void)
     while(!ESP8266_UnvarnishSend());
     while ( 1 )
     {       
-			  sprintf (str,"º¼Öİ¹â×ÓÎïÁª¿Æ¼¼ÓĞÏŞ¹«Ë¾\r\n" );//¸ñÊ½»¯·¢ËÍ×Ö·û´®µ½TCP·şÎñÆ÷
+			  sprintf (str,"æ­å·å…‰å­ç‰©è”ç§‘æŠ€æœ‰é™å…¬å¸\r\n" );//æ ¼å¼åŒ–å‘é€å­—ç¬¦ä¸²åˆ°TCPæœåŠ¡å™¨
         ESP8266_SendString ( ENABLE, str, 0, Single_ID_0 );
         delay_1ms(200);
-			  Uart_RecvFlag();//½ÓÊÕÊı¾İ
-        if(TcpClosedFlag) //ÅĞ¶ÏÊÇ·ñÊ§È¥Á¬½Ó
+			  Uart_RecvFlag();//æ¥æ”¶æ•°æ®
+        if(TcpClosedFlag) //åˆ¤æ–­æ˜¯å¦å¤±å»è¿æ¥
         {
-            ESP8266_ExitUnvarnishSend(); //ÍË³öÍ¸´«Ä£Ê½
+            ESP8266_ExitUnvarnishSend(); //é€€å‡ºé€ä¼ æ¨¡å¼
             do
             {
-                res = ESP8266_Get_LinkStatus();     //»ñÈ¡Á¬½Ó×´Ì¬
+                res = ESP8266_Get_LinkStatus();     //è·å–è¿æ¥çŠ¶æ€
             }   
             while(!res);
 
-            if(res == 4)                     //È·ÈÏÊ§È¥Á¬½Ó£¬ÖØÁ¬
+            if(res == 4)                     //ç¡®è®¤å¤±å»è¿æ¥ï¼Œé‡è¿
             {               
                 while (!ESP8266_JoinAP(User_ESP8266_SSID, User_ESP8266_PWD ) );
                 while (!ESP8266_Link_Server(enumTCP, User_ESP8266_TCPServer_IP, User_ESP8266_TCPServer_PORT, Single_ID_0 ) );        

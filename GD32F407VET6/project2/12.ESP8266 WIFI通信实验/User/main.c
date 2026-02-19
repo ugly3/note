@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -16,7 +16,7 @@ uint8_t UartTxbuf[512]={1,2,3,4,5,6,7,8,9,10};
 uint8_t UartRxbuf[512],UartIntRxbuf[512];
 uint16_t UartRxIndex=0,UartRxFlag,UartRxLen=0,UartRxTimer,UartRxOKFlag,UartIntRxLen;
 
-//´®¿ÚÇå³ı
+//ä¸²å£æ¸…é™¤
 uint8_t UartRecv_Clear(void)
 {
 	UartRxOKFlag=0;
@@ -26,49 +26,49 @@ uint8_t UartRecv_Clear(void)
 	return 1;
 }
 
-//½ÓÊÕ±êÖ¾º¯Êı£¬·µ»Ø0ËµÃ÷Ã»ÊÕ¾İ½ÓÊÕ£¬·µ»Ø1ËµÃ÷ÓĞÊı¾İÊÕµ½
+//æ¥æ”¶æ ‡å¿—å‡½æ•°ï¼Œè¿”å›0è¯´æ˜æ²¡æ”¶æ®æ¥æ”¶ï¼Œè¿”å›1è¯´æ˜æœ‰æ•°æ®æ”¶åˆ°
 uint8_t Uart_RecvFlag(void)
 {
 		if(UartRxOKFlag==0x55)
 		{
 			UartRxOKFlag=0;
 			UartRxLen=UartIntRxLen;
-			memcpy(UartRxbuf,UartIntRxbuf,UartIntRxLen);//°Ñ»º³åÇøµÄÊı¾İ£¬·ÅÈëĞèÒª½âÎöµÄÊı×é
+			memcpy(UartRxbuf,UartIntRxbuf,UartIntRxLen);//æŠŠç¼“å†²åŒºçš„æ•°æ®ï¼Œæ”¾å…¥éœ€è¦è§£æçš„æ•°ç»„
 			UartIntRxLen=0;
 			TcpClosedFlag = strstr (UartRxbuf, "CLOSED\r\n" ) ? 1 : 0;
 			return 1;
 		}
 		return 0;
 }
-//´®¿Ú2ÔÚ1×Ö½Ú½ÓÊÕÍê³É»Øµ÷º¯Êı
+//ä¸²å£2åœ¨1å­—èŠ‚æ¥æ”¶å®Œæˆå›è°ƒå‡½æ•°
 void HAL_UART_RxCpltCallback(void)
 {
 	
 
-		UartRxFlag=0x55;//½ÓÊÕ±êÖ¾ÖÃÎ»
-		UartIntRxbuf[UartRxIndex]=usart_data_receive(USART5);//Êı¾İĞ´Èë»º³åÇø
-		UartRxIndex++;//¼ÇÔØÊıÄ¿¼Ó1
-		if(UartRxIndex>=512)//»º³åÇøÊÇ512×Ö½Ú£¬Èç¹û´æÂú£¬¹éÁã
+		UartRxFlag=0x55;//æ¥æ”¶æ ‡å¿—ç½®ä½
+		UartIntRxbuf[UartRxIndex]=usart_data_receive(USART5);//æ•°æ®å†™å…¥ç¼“å†²åŒº
+		UartRxIndex++;//è®°è½½æ•°ç›®åŠ 1
+		if(UartRxIndex>=512)//ç¼“å†²åŒºæ˜¯512å­—èŠ‚ï¼Œå¦‚æœå­˜æ»¡ï¼Œå½’é›¶
 		{
 			UartRxIndex=0;
 		}
-		usart_interrupt_enable(USART5, USART_INT_RBNE);//½ÓÊÕÖĞ¶Ï´ò¿ª
+		usart_interrupt_enable(USART5, USART_INT_RBNE);//æ¥æ”¶ä¸­æ–­æ‰“å¼€
 
 
 }
 
-//1msµ÷ÓÃÒ»´Î£¬ÓÃÀ´ÅĞ¶ÏÊÇ·ñÊÕÍêÒ»Ö¡
+//1msè°ƒç”¨ä¸€æ¬¡ï¼Œç”¨æ¥åˆ¤æ–­æ˜¯å¦æ”¶å®Œä¸€å¸§
 void UART_RecvDealwith(void)
 {
 	if(UartRxFlag==0x55)
 	{
-		if(UartIntRxLen<UartRxIndex)//UartIntRxLenĞ¡ÓÚUartRxIndex£¬ËµÃ÷ÓĞÊÕµ½ĞÂµÄÊı¾İ£¬°Ñ½ÓÊÕ³¤¶ÈÔö¼Ó
+		if(UartIntRxLen<UartRxIndex)//UartIntRxLenå°äºUartRxIndexï¼Œè¯´æ˜æœ‰æ”¶åˆ°æ–°çš„æ•°æ®ï¼ŒæŠŠæ¥æ”¶é•¿åº¦å¢åŠ 
 		{
 		UartIntRxLen=UartRxIndex;
 		}else
 		{
 			UartRxTimer++;
-			if(UartRxTimer>=50)//50ms,µÈ´ı£¬Ã»ÊÕµ½ĞÂÊı¾İ£¬ËµÃ÷ÒÑ¾­ÊÕÍêÒ»Ö¡
+			if(UartRxTimer>=50)//50ms,ç­‰å¾…ï¼Œæ²¡æ”¶åˆ°æ–°æ•°æ®ï¼Œè¯´æ˜å·²ç»æ”¶å®Œä¸€å¸§
 			{
 				UartRxTimer=0;
 				UartRxFlag=0;
@@ -79,24 +79,24 @@ void UART_RecvDealwith(void)
 	}
 }
 
-//USART0³õÊ¼»¯£¬Ê¹ÓÃPC6(TX),PC7(RX)½Å£¬115200²¨ÌØÂÊ£¬ÎŞĞ£Ñé£¬8Î»Êı¾İ£¬1Î»Í£Ö¹
+//USART0åˆå§‹åŒ–ï¼Œä½¿ç”¨PC6(TX),PC7(RX)è„šï¼Œ115200æ³¢ç‰¹ç‡ï¼Œæ— æ ¡éªŒï¼Œ8ä½æ•°æ®ï¼Œ1ä½åœæ­¢
 void gd_eval_com_init(void)
 {
 	/* enable GPIO clock */
-	rcu_periph_clock_enable(RCU_GPIOC);//Ê¹ÄÜGPIOCÊ±ÖÓ
+	rcu_periph_clock_enable(RCU_GPIOC);//ä½¿èƒ½GPIOCæ—¶é’Ÿ
 
 	/* enable USART clock */
-	rcu_periph_clock_enable(RCU_USART5);//Ê¹ÄÜUSART5Ê±ÖÓ
-	//gpio_pin_remap_config(GPIO_USART0_REMAP, ENABLE);//PB6,PB7ĞèÒªÖØÓ³Éä
+	rcu_periph_clock_enable(RCU_USART5);//ä½¿èƒ½USART5æ—¶é’Ÿ
+	//gpio_pin_remap_config(GPIO_USART0_REMAP, ENABLE);//PB6,PB7éœ€è¦é‡æ˜ å°„
 
-	gpio_af_set(GPIOC,GPIO_AF_8,GPIO_PIN_6);//pc6×÷ÎªUSRAT5ĞèÒª¸ù¾İĞ¾Æ¬ÊÖ²á£¬ÅäÖÃAF_8
-	gpio_af_set(GPIOC,GPIO_AF_8,GPIO_PIN_7);//pc7×÷ÎªUSRAT5ĞèÒª¸ù¾İĞ¾Æ¬ÊÖ²á£¬ÅäÖÃAF_8
-	 gpio_mode_set(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO_PIN_6);//PC6ÅäÖÃ³ÉÊä³ö
-  gpio_output_options_set(GPIOC, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_6);//PC6ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È
+	gpio_af_set(GPIOC,GPIO_AF_8,GPIO_PIN_6);//pc6ä½œä¸ºUSRAT5éœ€è¦æ ¹æ®èŠ¯ç‰‡æ‰‹å†Œï¼Œé…ç½®AF_8
+	gpio_af_set(GPIOC,GPIO_AF_8,GPIO_PIN_7);//pc7ä½œä¸ºUSRAT5éœ€è¦æ ¹æ®èŠ¯ç‰‡æ‰‹å†Œï¼Œé…ç½®AF_8
+	 gpio_mode_set(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO_PIN_6);//PC6é…ç½®æˆè¾“å‡º
+  gpio_output_options_set(GPIOC, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_6);//PC6é…ç½®æˆæ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
 	
 	/* configure USART Rx as alternate function push-pull */
 
-	gpio_mode_set(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO_PIN_7);//PC7ÅäÖÃ³ÉÊäÈë
+	gpio_mode_set(GPIOC, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO_PIN_7);//PC7é…ç½®æˆè¾“å…¥
 	  gpio_output_options_set(GPIOC, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_7);//PC7
 
 
@@ -109,21 +109,21 @@ void gd_eval_com_init(void)
 
 	usart_transmit_config(USART5, USART_TRANSMIT_ENABLE);
 	usart_receive_config(USART5, USART_RECEIVE_ENABLE);
-	usart_enable(USART5);//Ê¹ÄÜUSART5
+	usart_enable(USART5);//ä½¿èƒ½USART5
 }
 int main(void)
 {
 
 
-	systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-	rcu_periph_clock_enable(RCU_GPIOB);//Ê¹ÄÜGPIOBÊ±ÖÓ
-	rcu_periph_clock_enable(RCU_GPIOC); //Ê¹ÄÜGPIOCÊ±ÖÓ
+	systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+	rcu_periph_clock_enable(RCU_GPIOB);//ä½¿èƒ½GPIOBæ—¶é’Ÿ
+	rcu_periph_clock_enable(RCU_GPIOC); //ä½¿èƒ½GPIOCæ—¶é’Ÿ
 	gd_eval_com_init();
-	nvic_irq_enable(USART5_IRQn, 0, 0);//Ê¹ÄÜUSART5ÖĞ¶Ï
-	usart_interrupt_enable(USART5, USART_INT_RBNE);//½ÓÊÕÖĞ¶Ï´ò¿ª
+	nvic_irq_enable(USART5_IRQn, 0, 0);//ä½¿èƒ½USART5ä¸­æ–­
+	usart_interrupt_enable(USART5, USART_INT_RBNE);//æ¥æ”¶ä¸­æ–­æ‰“å¼€
 	ESP8266_Init();
 	while(1)
 	{
-	ESP8266_STA_TCPClient_Test();//²âÊÔTCPÍ¨Ñ¶
+	ESP8266_STA_TCPClient_Test();//æµ‹è¯•TCPé€šè®¯
 	}
 }

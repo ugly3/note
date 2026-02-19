@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -13,32 +13,32 @@
 
 int main(void)
 {
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-		gpio_mode_set(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO_PIN_0);//PA0ÅäÖÃ³ÉÊäÊäÈë
-		OLED_Init();//OLED³õÊ¼»¯  
-		OLED_Clear();//OLEDÇåÆÁ 
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+		gpio_mode_set(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO_PIN_0);//PA0é…ç½®æˆè¾“è¾“å…¥
+		OLED_Init();//OLEDåˆå§‹åŒ–  
+		OLED_Clear();//OLEDæ¸…å± 
 
 	while(1) 
 	{		
 		OLED_Clear();
-    OLED_ShowCHinese(18,0,0);//¹â
-		OLED_ShowCHinese(36,0,1);//×Ó
-		OLED_ShowCHinese(54,0,2);//Îï
-		OLED_ShowCHinese(72,0,3);//Áª
-		OLED_ShowCHinese(90,0,4);//Íø
-		OLED_ShowCHinese(10,3,5);//ÕÏ
-		OLED_ShowCHinese(28,3,6);//°­
-		OLED_ShowCHinese(46,3,7);//Îï
+    OLED_ShowCHinese(18,0,0);//å…‰
+		OLED_ShowCHinese(36,0,1);//å­
+		OLED_ShowCHinese(54,0,2);//ç‰©
+		OLED_ShowCHinese(72,0,3);//è”
+		OLED_ShowCHinese(90,0,4);//ç½‘
+		OLED_ShowCHinese(10,3,5);//éšœ
+		OLED_ShowCHinese(28,3,6);//ç¢
+		OLED_ShowCHinese(46,3,7);//ç‰©
 	  OLED_ShowString(80,3,"TEST");
 
-		if(gpio_input_bit_get(GPIOA,GPIO_PIN_0)==0)//¶ÁÈ¡PA0Òı½ÅµçÆ½£¬Èç¹ûÊÇµÍµçÆ½£¬ËµÃ÷ÓĞÕÏ°­Îï
+		if(gpio_input_bit_get(GPIOA,GPIO_PIN_0)==0)//è¯»å–PA0å¼•è„šç”µå¹³ï¼Œå¦‚æœæ˜¯ä½ç”µå¹³ï¼Œè¯´æ˜æœ‰éšœç¢ç‰©
 		{
-				OLED_ShowCHinese(46,6,8);//ÓĞ
+				OLED_ShowCHinese(46,6,8);//æœ‰
 		}else
 		{	
-				OLED_ShowCHinese(46,6,9);//ÎŞ
+				OLED_ShowCHinese(46,6,9);//æ— 
 		}
-		delay_1ms(1000);//µÈ´ı1Ãë
+		delay_1ms(1000);//ç­‰å¾…1ç§’
 	}	  
  
 }

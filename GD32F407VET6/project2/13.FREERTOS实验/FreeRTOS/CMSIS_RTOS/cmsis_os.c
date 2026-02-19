@@ -974,7 +974,7 @@ osStatus osMessagePut (osMessageQId queue_id, uint32_t info, uint32_t millisec)
       return osErrorOS;
     }
   }
-	/*通知调度器现在就切换到其他任务，不必等到本任务时间片耗尽*/
+	/*閫氱煡璋冨害鍣ㄧ幇鍦ㄥ氨鍒囨崲鍒板叾浠栦换鍔★紝涓嶅繀绛夊埌鏈换鍔℃椂闂寸墖鑰楀敖*/
 	taskYIELD();
   return osOK;
 }

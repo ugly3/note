@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -13,7 +13,7 @@
 typedef unsigned char u8;
 typedef unsigned long u32;
 void Init18b20 (void);
-void WriteByte (unsigned char wr);  //µ¥×Ö½ÚĞ´Èë
+void WriteByte (unsigned char wr);  //å•å­—èŠ‚å†™å…¥
 void read_bytes (unsigned char j);
 unsigned char Temp_CRC (unsigned char j);
 void GemTemp (void);
@@ -22,7 +22,7 @@ void ReadID (void);
 void TemperatuerResult(void);
 void SystemClock_Config(void);
 unsigned long Count;
-//1usµÈ´ı£¬168MÖ÷Æµ
+//1usç­‰å¾…ï¼Œ168Mä¸»é¢‘
 void Delay_us(unsigned long i)
 {
 	unsigned long j;
@@ -33,7 +33,7 @@ void Delay_us(unsigned long i)
 }
 unsigned char  flag;
 unsigned int   Temperature;
-unsigned char  temp_buff[9]; //´æ´¢¶ÁÈ¡µÄ×Ö½Ú£¬read scratchpadÎª9×Ö½Ú£¬read rom IDÎª8×Ö½Ú
+unsigned char  temp_buff[9]; //å­˜å‚¨è¯»å–çš„å­—èŠ‚ï¼Œread scratchpadä¸º9å­—èŠ‚ï¼Œread rom IDä¸º8å­—èŠ‚
 unsigned char  id_buff[8];
 unsigned char  *p;
 unsigned char  crc_data;
@@ -60,7 +60,7 @@ const unsigned char  CrcTable [256]={
 
 
 /************************************************************
-*Function:18B20³õÊ¼»¯
+*Function:18B20åˆå§‹åŒ–
 *parameter:
 *Return:
 *Modify:
@@ -68,11 +68,11 @@ const unsigned char  CrcTable [256]={
 void Init18b20 (void)
 {
 	rcu_periph_clock_enable(RCU_GPIOA);
-	gpio_mode_set(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_0);//PA0ÅäÖÃ³ÉÊä³ö
-	gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_0);//PA0ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È
+	gpio_mode_set(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_0);//PA0é…ç½®æˆè¾“å‡º
+	gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_0);//PA0é…ç½®æˆæ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
 
 	gpio_bit_write(GPIOA, GPIO_PIN_0,SET);
-	Delay_us(2); //ÑÓÊ±2Î¢Ãë
+	Delay_us(2); //å»¶æ—¶2å¾®ç§’
 
  gpio_bit_write(GPIOA, GPIO_PIN_0,RESET);
 
@@ -83,17 +83,17 @@ void Init18b20 (void)
 		flag = 1;   //detect 1820 success!
 	else
 		flag = 0;    //detect 1820 fail!
-	Delay_us(480);        //ÑÓÊ±480Î¢Ãë
+	Delay_us(480);        //å»¶æ—¶480å¾®ç§’
 gpio_bit_write(GPIOA, GPIO_PIN_0,SET);
 }
 
 /************************************************************
-*Function:Ïò18B20Ğ´ÈëÒ»¸ö×Ö½Ú
+*Function:å‘18B20å†™å…¥ä¸€ä¸ªå­—èŠ‚
 *parameter:
 *Return:
 *Modify:
 *************************************************************/
-void WriteByte (unsigned char  wr)  //µ¥×Ö½ÚĞ´Èë
+void WriteByte (unsigned char  wr)  //å•å­—èŠ‚å†™å…¥
 {
 	unsigned char  i;
 	for (i=0;i<8;i++)
@@ -110,12 +110,12 @@ void WriteByte (unsigned char  wr)  //µ¥×Ö½ÚĞ´Èë
 }
 
 /************************************************************
-*Function:¶Á18B20µÄÒ»¸ö×Ö½Ú
+*Function:è¯»18B20çš„ä¸€ä¸ªå­—èŠ‚
 *parameter:
 *Return:
 *Modify:
 *************************************************************/
-unsigned char ReadByte (void)     //¶ÁÈ¡µ¥×Ö½Ú
+unsigned char ReadByte (void)     //è¯»å–å•å­—èŠ‚
 {
 	unsigned char  i,u=0;
 	for(i=0;i<8;i++)
@@ -134,7 +134,7 @@ unsigned char ReadByte (void)     //¶ÁÈ¡µ¥×Ö½Ú
 }
 
 /************************************************************
-*Function:¶Á18B20
+*Function:è¯»18B20
 *parameter:
 *Return:
 *Modify:
@@ -150,7 +150,7 @@ void read_bytes (unsigned char  j)
 }
 
 /************************************************************
-*Function:CRCĞ£Ñé
+*Function:CRCæ ¡éªŒ
 *parameter:
 *Return:
 *Modify:
@@ -158,13 +158,13 @@ void read_bytes (unsigned char  j)
 unsigned char Temp_CRC (unsigned char j)
 {
    	unsigned char  i,crc_data=0;
-  	for(i=0;i<j;i++)  //²é±íĞ£Ñé
+  	for(i=0;i<j;i++)  //æŸ¥è¡¨æ ¡éªŒ
     	crc_data = CrcTable[crc_data^temp_buff[i]];
     return (crc_data);
 }
 
 /************************************************************
-*Function:¶ÁÈ¡ÎÂ¶È
+*Function:è¯»å–æ¸©åº¦
 *parameter:
 *Return:
 *Modify:
@@ -172,7 +172,7 @@ unsigned char Temp_CRC (unsigned char j)
 void GemTemp (void)
 {
    read_bytes (9);
-   if (Temp_CRC(9)==0) //Ğ£ÑéÕıÈ·
+   if (Temp_CRC(9)==0) //æ ¡éªŒæ­£ç¡®
    {
 	  Temperature = temp_buff[1]*0x100 + temp_buff[0];
 		Temperature /= 16;
@@ -181,34 +181,34 @@ void GemTemp (void)
 }
 
 /************************************************************
-*Function:ÄÚ²¿ÅäÖÃ
+*Function:å†…éƒ¨é…ç½®
 *parameter:
 *Return:
 *Modify:
 *************************************************************/
-void Config18b20 (void)  //ÖØĞÂÅäÖÃ±¨¾¯ÏŞ¶¨ÖµºÍ·Ö±æÂÊ
+void Config18b20 (void)  //é‡æ–°é…ç½®æŠ¥è­¦é™å®šå€¼å’Œåˆ†è¾¨ç‡
 {
      Init18b20();
      WriteByte(0xcc);  //skip rom
      WriteByte(0x4e);  //write scratchpad
-     WriteByte(0x19);  //ÉÏÏŞ
-     WriteByte(0x1a);  //ÏÂÏŞ
+     WriteByte(0x19);  //ä¸Šé™
+     WriteByte(0x1a);  //ä¸‹é™
      WriteByte(0x7f);     //set 12 bit (0.125)
      Init18b20();
      WriteByte(0xcc);  //skip rom
-     WriteByte(0x48);  //±£´æÉè¶¨Öµ
+     WriteByte(0x48);  //ä¿å­˜è®¾å®šå€¼
      Init18b20();
      WriteByte(0xcc);  //skip rom
-     WriteByte(0xb8);  //»Øµ÷Éè¶¨Öµ
+     WriteByte(0xb8);  //å›è°ƒè®¾å®šå€¼
 }
 
 /************************************************************
-*Function:¶Á18B20ID
+*Function:è¯»18B20ID
 *parameter:
 *Return:
 *Modify:
 *************************************************************/
-void ReadID (void)//¶ÁÈ¡Æ÷¼ş id
+void ReadID (void)//è¯»å–å™¨ä»¶ id
 {
 	Init18b20();
 	WriteByte(0x33);  //read rom
@@ -216,7 +216,7 @@ void ReadID (void)//¶ÁÈ¡Æ÷¼ş id
 }
 
 /************************************************************
-*Function:18B20IDÈ«´¦Àí
+*Function:18B20IDå…¨å¤„ç†
 *parameter:
 *Return:
 *Modify:
@@ -242,7 +242,7 @@ void TemperatuerResult(void)
 
 void GetTemp(void)
 {       
-   if(Count == 2) //Ã¿¸ôÒ»¶ÎÊ±¼ä¶ÁÈ¡ÎÂ¶È
+   if(Count == 2) //æ¯éš”ä¸€æ®µæ—¶é—´è¯»å–æ¸©åº¦
 	{  
 		 Count=0;
 	   TemperatuerResult();
@@ -255,23 +255,23 @@ int main(void)
 {
 
 
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-		OLED_Init();//OLED³õÊ¼»¯  
-		OLED_Clear();//OLEDÇåÆÁ 
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+		OLED_Init();//OLEDåˆå§‹åŒ–  
+		OLED_Clear();//OLEDæ¸…å± 
 		GetTemp();
 		GetTemp();
 		while(1) 
 		{		
-		GetTemp();//»ñÈ¡ÎÂ¶È
+		GetTemp();//è·å–æ¸©åº¦
 		OLED_Clear();
-		OLED_ShowCHinese(18,0,0);//¹â
-		OLED_ShowCHinese(36,0,1);//×Ó
-		OLED_ShowCHinese(54,0,2);//Îï
-		OLED_ShowCHinese(72,0,3);//Áª
-		OLED_ShowCHinese(90,0,4);//Íø
+		OLED_ShowCHinese(18,0,0);//å…‰
+		OLED_ShowCHinese(36,0,1);//å­
+		OLED_ShowCHinese(54,0,2);//ç‰©
+		OLED_ShowCHinese(72,0,3);//è”
+		OLED_ShowCHinese(90,0,4);//ç½‘
 		OLED_ShowString(6,3,"DS18B20 Test");
 		OLED_ShowString(0,6,"Temperature:");  
-		OLED_ShowNum(100,6,Temperature,3,16);//ÎÂ¶ÈÖµ£¬µ¥Î»¶È	   
+		OLED_ShowNum(100,6,Temperature,3,16);//æ¸©åº¦å€¼ï¼Œå•ä½åº¦	   
 		delay_1ms(500);
 	}	 
  

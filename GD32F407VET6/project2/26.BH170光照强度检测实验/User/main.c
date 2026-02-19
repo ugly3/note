@@ -1,9 +1,9 @@
 /***************************************************************************//**
-  ÎÄ¼ş: main.c
-  ×÷Õß: Zhengyu https://gzwelink.taobao.com
-  °æ±¾: V1.0.0
-  Ê±¼ä: 20220401
-	Æ½Ì¨:MINI-F407VET6
+  æ–‡ä»¶: main.c
+  ä½œè€…: Zhengyu https://gzwelink.taobao.com
+  ç‰ˆæœ¬: V1.0.0
+  æ—¶é—´: 20220401
+	å¹³å°:MINI-F407VET6
 
 *******************************************************************************/
 #include "gd32f4xx.h"
@@ -22,7 +22,7 @@ void i2c_config(void)
     /* enable acknowledge */
     i2c_ack_config(I2C0, I2C_ACK_ENABLE);
 }
-//Ğ´Èë1×Ö½ÚÊı¾İµ½BH170,Éè±¸µØÖ·0x46
+//å†™å…¥1å­—èŠ‚æ•°æ®åˆ°BH170,è®¾å¤‡åœ°å€0x46
 void BH170_WriteReg(uint8_t reg_add)
 {
 
@@ -55,7 +55,7 @@ void BH170_WriteReg(uint8_t reg_add)
   
 }
 
-//¶ÁÈ¡BH170Êı¾İ,Éè±¸µØÖ·0x46
+//è¯»å–BH170æ•°æ®,è®¾å¤‡åœ°å€0x46
 void BH170_ReadData(unsigned char*Read)
 {
 
@@ -88,41 +88,41 @@ void BH170_ReadData(unsigned char*Read)
 
 	
 }
-uint8_t DataBuff[2];//´æ´¢Êı×é
-float LightData;//¹âÕÕÇ¿¶È£¨º¬Ğ¡ÊıÎ»£¬µ¥Î»lx£©
-uint32_t LightData_Hex;//¹âÕÕÇ¿¶È£¨ÕûÊı£¬µ¥Î»lx£©
+uint8_t DataBuff[2];//å­˜å‚¨æ•°ç»„
+float LightData;//å…‰ç…§å¼ºåº¦ï¼ˆå«å°æ•°ä½ï¼Œå•ä½lxï¼‰
+uint32_t LightData_Hex;//å…‰ç…§å¼ºåº¦ï¼ˆæ•´æ•°ï¼Œå•ä½lxï¼‰
 int main(void)
 {
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
-		rcu_periph_clock_enable(RCU_GPIOB);//GPIOBÊ±ÖÓÊ¹ÄÜ
-		gpio_af_set(GPIOB, GPIO_AF_4, GPIO_PIN_6);//¸´ÓÃ¹¦ÄÜ4
-		gpio_af_set(GPIOB, GPIO_AF_4, GPIO_PIN_7);//¸´ÓÃ¹¦ÄÜ4
-	  gpio_mode_set(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP,GPIO_PIN_6);//PB6,PB7ÅäÖÃ³ÉI2C
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+		rcu_periph_clock_enable(RCU_GPIOB);//GPIOBæ—¶é’Ÿä½¿èƒ½
+		gpio_af_set(GPIOB, GPIO_AF_4, GPIO_PIN_6);//å¤ç”¨åŠŸèƒ½4
+		gpio_af_set(GPIOB, GPIO_AF_4, GPIO_PIN_7);//å¤ç”¨åŠŸèƒ½4
+	  gpio_mode_set(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP,GPIO_PIN_6);//PB6,PB7é…ç½®æˆI2C
     gpio_output_options_set(GPIOB, GPIO_OTYPE_OD, GPIO_OSPEED_50MHZ,GPIO_PIN_6);
     gpio_mode_set(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP,GPIO_PIN_7);
     gpio_output_options_set(GPIOB, GPIO_OTYPE_OD, GPIO_OSPEED_50MHZ,GPIO_PIN_7);
-		OLED_Init();//OLED³õÊ¼»¯  
-		OLED_Clear();//OLEDÇåÆÁ 
-		rcu_periph_clock_enable(RCU_I2C0);//I2C0Ê±ÖÓÊ¹ÄÜ
+		OLED_Init();//OLEDåˆå§‹åŒ–  
+		OLED_Clear();//OLEDæ¸…å± 
+		rcu_periph_clock_enable(RCU_I2C0);//I2C0æ—¶é’Ÿä½¿èƒ½
 		i2c_config();
 		BH170_WriteReg(0x01);// power on
 		BH170_WriteReg(0x10);//H- resolution mode
-		delay_1ms(180);//µÈ´ı180ms
+		delay_1ms(180);//ç­‰å¾…180ms
 	while(1) 
 	{		
 		BH170_WriteReg(0x01);// power on
 		BH170_WriteReg(0x10);//H- resolution mode
-		delay_1ms(180);//µÈ´ı180ms
-		BH170_ReadData(DataBuff);//¶ÁÈ¡Êı¾İ
-		LightData=((DataBuff[0]<<8)+DataBuff[1])/1.2f;//Êı¾İ×ª»»³É¹âÇ¿¶È£¬µ¥Î»lx
-    LightData_Hex=LightData;//float×ª»»³ÉÕûÊı
-		OLED_ShowNum(6,3,LightData_Hex,5,16);//ÏÔÊ¾¹âÇ¿¶È
-		OLED_ShowString(72,3,"lx");//ÏÔÊ¾¹âÇ¿¶Èµ¥Î»lx
-		OLED_ShowCHinese(18,0,0);//¹â
-		OLED_ShowCHinese(36,0,1);//×Ó
-		OLED_ShowCHinese(54,0,2);//Îï
-		OLED_ShowCHinese(72,0,3);//Áª
-		OLED_ShowCHinese(90,0,4);//Íø
+		delay_1ms(180);//ç­‰å¾…180ms
+		BH170_ReadData(DataBuff);//è¯»å–æ•°æ®
+		LightData=((DataBuff[0]<<8)+DataBuff[1])/1.2f;//æ•°æ®è½¬æ¢æˆå…‰å¼ºåº¦ï¼Œå•ä½lx
+    LightData_Hex=LightData;//floatè½¬æ¢æˆæ•´æ•°
+		OLED_ShowNum(6,3,LightData_Hex,5,16);//æ˜¾ç¤ºå…‰å¼ºåº¦
+		OLED_ShowString(72,3,"lx");//æ˜¾ç¤ºå…‰å¼ºåº¦å•ä½lx
+		OLED_ShowCHinese(18,0,0);//å…‰
+		OLED_ShowCHinese(36,0,1);//å­
+		OLED_ShowCHinese(54,0,2);//ç‰©
+		OLED_ShowCHinese(72,0,3);//è”
+		OLED_ShowCHinese(90,0,4);//ç½‘
 	}	  
  
 }
