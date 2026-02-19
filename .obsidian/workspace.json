@@ -178,8 +178,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -200,17 +199,17 @@
   },
   "active": "563ea56ab508b5c9",
   "lastOpenFiles": [
-    "GD32F407VET6/Project/12-舵机/Firmware/GD32F4xx_usb_library/host/class/msc/Source/usbh_msc_scsi.c",
-    "GD32F407VET6/Project/12-舵机/Firmware/GD32F4xx_usb_library/host/class/msc/Source/usbh_msc_fatfs.c",
-    "GD32F407VET6/Project/12-舵机/Firmware/GD32F4xx_usb_library/host/class/msc/Source/usbh_msc_core.c",
-    "GD32F407VET6/Project/12-舵机/Firmware/GD32F4xx_usb_library/host/class/msc/Source/usbh_msc_bbb.c",
-    "GD32F407VET6/Project/12-舵机/Firmware/GD32F4xx_usb_library/host/class/msc/Include/usbh_msc_scsi.h",
-    "GD32F407VET6/Project/12-舵机/Firmware/GD32F4xx_usb_library/host/class/msc/Include/usbh_msc_core.h",
-    "GD32F407VET6/Project/12-舵机/Firmware/GD32F4xx_usb_library/host/class/msc/Include/usbh_msc_bbb.h",
-    "GD32F407VET6/Project/12-舵机/Firmware/GD32F4xx_usb_library/host/class/hid/Source/usbh_standard_hid.c",
-    "GD32F407VET6/Project/12-舵机/Firmware/GD32F4xx_usb_library/host/class/hid/Source/usbh_hid_core.c",
-    "GD32F407VET6/Project/12-舵机/Firmware/GD32F4xx_usb_library/host/class/hid/Include/usbh_standard_hid.h",
-    "GD32F407VET6/Project/12-舵机/Firmware/GD32F4xx_usb_library/host/class/hid/Include/usbh_hid_core.h",
+    "GD32F407VET6/Project/0-基础板载/Firmware/GD32F4xx_usb_library/host/class/msc/Source/usbh_msc_scsi.c",
+    "GD32F407VET6/Project/0-基础板载/Firmware/GD32F4xx_usb_library/host/class/msc/Source/usbh_msc_fatfs.c",
+    "GD32F407VET6/Project/0-基础板载/Firmware/GD32F4xx_usb_library/host/class/msc/Source/usbh_msc_core.c",
+    "GD32F407VET6/Project/0-基础板载/Firmware/GD32F4xx_usb_library/host/class/msc/Source/usbh_msc_bbb.c",
+    "GD32F407VET6/Project/0-基础板载/Firmware/GD32F4xx_usb_library/host/class/msc/Include/usbh_msc_scsi.h",
+    "GD32F407VET6/Project/0-基础板载/Firmware/GD32F4xx_usb_library/host/class/msc/Include/usbh_msc_core.h",
+    "GD32F407VET6/Project/0-基础板载/Firmware/GD32F4xx_usb_library/host/class/msc/Include/usbh_msc_bbb.h",
+    "GD32F407VET6/Project/0-基础板载/Firmware/GD32F4xx_usb_library/host/class/hid/Source/usbh_standard_hid.c",
+    "GD32F407VET6/Project/0-基础板载/Firmware/GD32F4xx_usb_library/host/class/hid/Source/usbh_hid_core.c",
+    "GD32F407VET6/Project/0-基础板载/Firmware/GD32F4xx_usb_library/host/class/hid/Include/usbh_standard_hid.h",
+    "GD32F407VET6/Project/0-基础板载/Firmware/GD32F4xx_usb_library/host/class/hid/Include/usbh_hid_core.h",
     "GD32F407VET6/Project/17-红外传感/API_REFERENCE.md",
     "GD32F407VET6/GD32F407VET6.md",
     "Arch日常使用.md",
