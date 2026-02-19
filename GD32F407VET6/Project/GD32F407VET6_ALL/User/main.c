@@ -29,10 +29,10 @@ void OLED_view_MPU(void);
 u8 Buf[30];
 
 int i,j=0;
-short Accel[3];//¼ÓËÙ¶È
-short Gyro [3];//½ÇËÙ¶È
-long AccelData[3];//µ¥Î»mg
-long GyroData[3];//µ¥Î»mdps
+short Accel[3];//åŠ é€Ÿåº¦
+short Gyro [3];//è§’é€Ÿåº¦
+long AccelData[3];//å•ä½mg
+long GyroData[3];//å•ä½mdps
 
 uint16_t value=0;
 uint8_t key_num=0;
@@ -40,38 +40,38 @@ uint8_t key_Data;
 
 int main(void)
 {
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
     
     LED_Init();
-	OLED_Init();              //OLED³õÊ¼»¯
-    Buzze_Init();             //·äÃùÆ÷³õÊ¼»¯
-    MyRTC_Init();             //RTCÊ±ÖÓ³õÊ¼»¯
-    HC_Init();                //³¬Éù²¨³õÊ¼»¯
-    ADC_config();             //Èı¸öADCÍ¨µÀ
-    Walk_Motor_Init();        //²½½øµç»ú³õÊ¼»¯
-    Body_Hw_Init();           //ÈËÌåºìÍâ¼ì²âÄ£¿é³õÊ¼»¯
-//    HX711_Init();             //Ñ¹Á¦´«¸ĞÆ÷³õÊ¼»¯
+	OLED_Init();              //OLEDåˆå§‹åŒ–
+    Buzze_Init();             //èœ‚é¸£å™¨åˆå§‹åŒ–
+    MyRTC_Init();             //RTCæ—¶é’Ÿåˆå§‹åŒ–
+    HC_Init();                //è¶…å£°æ³¢åˆå§‹åŒ–
+    ADC_config();             //ä¸‰ä¸ªADCé€šé“
+    Walk_Motor_Init();        //æ­¥è¿›ç”µæœºåˆå§‹åŒ–
+    Body_Hw_Init();           //äººä½“çº¢å¤–æ£€æµ‹æ¨¡å—åˆå§‹åŒ–
+//    HX711_Init();             //å‹åŠ›ä¼ æ„Ÿå™¨åˆå§‹åŒ–
     
-    BH1750_Init();            //¹âÇ¿¶È´«¸ĞÆ÷³õÊ¼»¯ £¨±ØĞëÁ¬ÉÏ£¬·ñÔò¿¨×¡£©
-    DHT11_Init();		      // ÎÂÊª¶È´«¸ĞÆ÷³õÊ¼»¯ £¨±ØĞëÁ¬ÉÏ£¬·ñÔò¿¨×¡£©
+    BH1750_Init();            //å…‰å¼ºåº¦ä¼ æ„Ÿå™¨åˆå§‹åŒ– ï¼ˆå¿…é¡»è¿ä¸Šï¼Œå¦åˆ™å¡ä½ï¼‰
+    DHT11_Init();		      // æ¸©æ¹¿åº¦ä¼ æ„Ÿå™¨åˆå§‹åŒ– ï¼ˆå¿…é¡»è¿ä¸Šï¼Œå¦åˆ™å¡ä½ï¼‰
     
-    InitRc522();              //RFID¿¨
+    InitRc522();              //RFIDå¡
     
     key_tree_init();
 
-    TIMER0_config();          //PWM³õÊ¼»¯
-    TIMER2_config();          //1msÖĞ¶Ï
+    TIMER0_config();          //PWMåˆå§‹åŒ–
+    TIMER2_config();          //1msä¸­æ–­
     
-    ShuMaGuan_Display_Init();   //ÊıÂë¹Ü³õÊ¼»¯
-    HC595_Init();               //µãÕó
+    ShuMaGuan_Display_Init();   //æ•°ç ç®¡åˆå§‹åŒ–
+    HC595_Init();               //ç‚¹é˜µ
     
     USART_Init();
    
-//     MPU6050_Init();             //MPU6050³õÊ¼»¯    I2C1
-//    I2C_Key_Init();              //ÓĞÎÊÌâ
+//     MPU6050_Init();             //MPU6050åˆå§‹åŒ–    I2C1
+//    I2C_Key_Init();              //æœ‰é—®é¢˜
     
 
-	OLED_Clear();//OLEDÇåÆÁ 
+	OLED_Clear();//OLEDæ¸…å± 
 //    delay_1ms(500);
 
 
@@ -92,16 +92,16 @@ int main(void)
 
         
         if(LED_Speed_flag==1)
-            ShuMaGuan_Display(Weight_Shiwu*10);         //ÊıÂë¹ÜÏÔÊ¾
+            ShuMaGuan_Display(Weight_Shiwu*10);         //æ•°ç ç®¡æ˜¾ç¤º
         if(LED_Speed_flag==2)
-            Matrix_LED_RIGHT_LEFT_Run_Display(DZLL,sizeof(DZLL));    //µãÕó
+            Matrix_LED_RIGHT_LEFT_Run_Display(DZLL,sizeof(DZLL));    //ç‚¹é˜µ
         
-        //°´¼ü
+        //æŒ‰é”®
 //        I2c_key_scan();
 //        process_password_input();
         
         
-//         Get_Weight(1);              //³ÆÖØ
+//         Get_Weight(1);              //ç§°é‡
 //        OLED_ShowString(0,4,(u8*)"2");
 //        OLED_ShowString(0,0,(u8*)"1");
 //        sprintf((char *)Buf,"Weight: %dg ",Weight_Shiwu);
@@ -112,8 +112,8 @@ int main(void)
 //        OLED_view_MPU();
 
         
-        //¾ØÕó¼üÅÌ
-//        gpio_bit_set(COL_PORT, ROW1_PIN|ROW2_PIN|ROW3_PIN|ROW4_PIN|COL1_PIN|COL2_PIN|COL3_PIN|COL4_PIN); // ÉèÖÃÁĞÎª¸ßµçÆ½
+        //çŸ©é˜µé”®ç›˜
+//        gpio_bit_set(COL_PORT, ROW1_PIN|ROW2_PIN|ROW3_PIN|ROW4_PIN|COL1_PIN|COL2_PIN|COL3_PIN|COL4_PIN); // è®¾ç½®åˆ—ä¸ºé«˜ç”µå¹³
 //        gpio_bit_reset(COL_PORT, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7);
        
 //      key_num = keyscanf();
@@ -134,10 +134,10 @@ int main(void)
 //            key_Data=KEY_SCAN();
 //            if(key_Data!=0)
 //            {
-//                OLED_ShowNum(48,4,key_Data,3,16);//ÏÔÊ¾Êı×Ö
+//                OLED_ShowNum(48,4,key_Data,3,16);//æ˜¾ç¤ºæ•°å­—
 //            }
 
-//            OLED_ShowNum(48,6,key_Data,3,16);//ÏÔÊ¾Êı×Ö
+//            OLED_ShowNum(48,6,key_Data,3,16);//æ˜¾ç¤ºæ•°å­—
 
 
 	}
@@ -151,60 +151,60 @@ void OLED_view_MPU(void)
         for(i=0;i<3;i++)
         {
             if(Accel[i]>=0)
-                AccelData[i]=Accel[i]*2000/32768;//×ª»»³Éµ¥Î»mg
+                AccelData[i]=Accel[i]*2000/32768;//è½¬æ¢æˆå•ä½mg
             else
                 AccelData[i]=-(-Accel[i]+1)*2000/32768;
             if(Gyro[i]>=0)
-                GyroData[i]=Gyro[i]*2000/32768;//×ª»»³Éµ¥Î»mdps
+                GyroData[i]=Gyro[i]*2000/32768;//è½¬æ¢æˆå•ä½mdps
             else
                 GyroData[i]=-(-Gyro[i]+1)*2000/32768;
         }
         
-        if(AccelData[0]<0)//ÅĞ¶ÏÊÇ·ñÎª¸ºÊı
+        if(AccelData[0]<0)//åˆ¤æ–­æ˜¯å¦ä¸ºè´Ÿæ•°
 		{
 			OLED_ShowString(0,3,"-");
-			OLED_ShowNum(8,3,-AccelData[0],4,16);//¼ÓËÙ¶Èx	
+			OLED_ShowNum(8,3,-AccelData[0],4,16);//åŠ é€Ÿåº¦x	
 		}
         else
-			OLED_ShowNum(8,3,AccelData[0],4,16);//¼ÓËÙ¶Èx
+			OLED_ShowNum(8,3,AccelData[0],4,16);//åŠ é€Ÿåº¦x
 		
-		if(AccelData[1]<0)//ÅĞ¶ÏÊÇ·ñÎª¸ºÊı
+		if(AccelData[1]<0)//åˆ¤æ–­æ˜¯å¦ä¸ºè´Ÿæ•°
 		{
 			OLED_ShowString(40,3,"-");
-			OLED_ShowNum(48,3,-AccelData[1],4,16);//¼ÓËÙ¶Èy
+			OLED_ShowNum(48,3,-AccelData[1],4,16);//åŠ é€Ÿåº¦y
 		}
         else
-			OLED_ShowNum(48,3,AccelData[1],4,16);//¼ÓËÙ¶Èy
+			OLED_ShowNum(48,3,AccelData[1],4,16);//åŠ é€Ÿåº¦y
 		
-		if(AccelData[2]<0)//ÅĞ¶ÏÊÇ·ñÎª¸ºÊı
+		if(AccelData[2]<0)//åˆ¤æ–­æ˜¯å¦ä¸ºè´Ÿæ•°
 		{
 			OLED_ShowString(80,3,"-");
-			OLED_ShowNum(88,3,-AccelData[2],4,16);//¼ÓËÙ¶Èz
+			OLED_ShowNum(88,3,-AccelData[2],4,16);//åŠ é€Ÿåº¦z
 		}
         else
-			OLED_ShowNum(88,3,AccelData[2],4,16);//¼ÓËÙ¶Èz
-        if(GyroData[0]<0)//ÅĞ¶ÏÊÇ·ñÎª¸ºÊı
+			OLED_ShowNum(88,3,AccelData[2],4,16);//åŠ é€Ÿåº¦z
+        if(GyroData[0]<0)//åˆ¤æ–­æ˜¯å¦ä¸ºè´Ÿæ•°
 		{
 			OLED_ShowString(0,6,"-");
-			OLED_ShowNum(8,6,-GyroData[0],4,16);//ÍÓÂİÒÇxÖá
+			OLED_ShowNum(8,6,-GyroData[0],4,16);//é™€èºä»ªxè½´
 		}
         else
-			OLED_ShowNum(8,6,GyroData[0],4,16);//ÍÓÂİÒÇxÖá
+			OLED_ShowNum(8,6,GyroData[0],4,16);//é™€èºä»ªxè½´
         
-		if(GyroData[1]<0)//ÅĞ¶ÏÊÇ·ñÎª¸ºÊı
+		if(GyroData[1]<0)//åˆ¤æ–­æ˜¯å¦ä¸ºè´Ÿæ•°
 		{
 			OLED_ShowString(40,6,"-");
-			OLED_ShowNum(48,6,-GyroData[1],4,16);//ÍÓÂİÒÇyÖá
+			OLED_ShowNum(48,6,-GyroData[1],4,16);//é™€èºä»ªyè½´
 		}
         else
-			OLED_ShowNum(48,6,GyroData[1],4,16);//ÍÓÂİÒÇyÖá
+			OLED_ShowNum(48,6,GyroData[1],4,16);//é™€èºä»ªyè½´
 		
-		if(GyroData[2]<0)//ÅĞ¶ÏÊÇ·ñÎª¸ºÊı
+		if(GyroData[2]<0)//åˆ¤æ–­æ˜¯å¦ä¸ºè´Ÿæ•°
 		{
 			OLED_ShowString(80,6,"-");
-			OLED_ShowNum(88,6,-GyroData[2],4,16);//ÍÓÂİÒÇzÖá
+			OLED_ShowNum(88,6,-GyroData[2],4,16);//é™€èºä»ªzè½´
 		}
         else
-			OLED_ShowNum(88,6,GyroData[2],4,16);//ÍÓÂİÒÇzÖá
+			OLED_ShowNum(88,6,GyroData[2],4,16);//é™€èºä»ªzè½´
 
 }

@@ -11,96 +11,96 @@
 int cardnumber=-1,tempcard;
 char sto[20];
 
-//¶Á¿¨º¯Êı£¬¶Á¿¨²¢»ñÈ¡¿¨±àºÅ
+//è¯»å¡å‡½æ•°ï¼Œè¯»å¡å¹¶è·å–å¡ç¼–å·
 void RFID_Check(void)									
 {
-	cardnumber = Read_Card();	//»ñÈ¡¿¨±àºÅ
-	if(cardnumber == 0)			//Èç¹ûÎª0£¬±íÊ¾¡°¿¨Æ¬´íÎó¡±£¬ÏµÍ³ÖĞÃ»ÓĞÕâÕÅ¿¨
+	cardnumber = Read_Card();	//è·å–å¡ç¼–å·
+	if(cardnumber == 0)			//å¦‚æœä¸º0ï¼Œè¡¨ç¤ºâ€œå¡ç‰‡é”™è¯¯â€ï¼Œç³»ç»Ÿä¸­æ²¡æœ‰è¿™å¼ å¡
 	{
         cardnumber=-1;
         OLED_Clear();
-		OLED_ShowCHinese(34,2,35);//¿¨
-        OLED_ShowCHinese(51,2,36);//Æ¬
-        OLED_ShowCHinese(68,2,49);//´í
-        OLED_ShowCHinese(85,2,50);//Îó
-        Buzze_roll(3);		//·äÃùÆ÷·¢³ö¾¯±¨
+		OLED_ShowCHinese(34,2,35);//å¡
+        OLED_ShowCHinese(51,2,36);//ç‰‡
+        OLED_ShowCHinese(68,2,49);//é”™
+        OLED_ShowCHinese(85,2,50);//è¯¯
+        Buzze_roll(3);		//èœ‚é¸£å™¨å‘å‡ºè­¦æŠ¥
         delay_1ms(1500);
-        Set_Buzze(0);       //·äÃùÆ÷¹Ø±Õ
-        WaitCardOff();		//µÈ´ı¿¨Æ¬ÒÆ¿ª
+        Set_Buzze(0);       //èœ‚é¸£å™¨å…³é—­
+        WaitCardOff();		//ç­‰å¾…å¡ç‰‡ç§»å¼€
         OLED_Clear();
 	}
-	else if(cardnumber==1||cardnumber==2||cardnumber==3||cardnumber == 4)			//Èç¹û¿¨±àºÅÎª1-4£¬ËµÃ÷ÊÇÏµÍ³ÖĞµÄ4ÕÅ¿¨
+	else if(cardnumber==1||cardnumber==2||cardnumber==3||cardnumber == 4)			//å¦‚æœå¡ç¼–å·ä¸º1-4ï¼Œè¯´æ˜æ˜¯ç³»ç»Ÿä¸­çš„4å¼ å¡
 	{	
         OLED_Clear();
-		OLED_ShowCHinese(34,2,51);//½â
-		OLED_ShowCHinese(51,2,52);//Ëø
-        OLED_ShowCHinese(68,2,53);//³É
-        OLED_ShowCHinese(85,2,54);//¹¦
+		OLED_ShowCHinese(34,2,51);//è§£
+		OLED_ShowCHinese(51,2,52);//é”
+        OLED_ShowCHinese(68,2,53);//æˆ
+        OLED_ShowCHinese(85,2,54);//åŠŸ
         
         Buzze_roll(1);
         door_status=1; 
         task2_is_start=1;
         delay_1ms(200);
-//        WaitCardOff();		//µÈ´ı¿¨Æ¬ÒÆ¿ª
+//        WaitCardOff();		//ç­‰å¾…å¡ç‰‡ç§»å¼€
         OLED_Clear();
 	}	
 }
 
  
 
-void RFID_ADD(void)	        //Â¼Èë¿¨Æ¬
+void RFID_ADD(void)	        //å½•å…¥å¡ç‰‡
 {
 //    uint8_t i;
 //    uint8_t str[30];
 
 	uint8_t status;
-	uint8_t s=0x00;//µØÖ·¿ì
-	//¿¨ÀàĞÍ
+	uint8_t s=0x00;//åœ°å€å¿«
+	//å¡ç±»å‹
 	unsigned char CT[2];
-	//¿¨ºÅ
+	//å¡å·
 	unsigned char SN[4];
-	//´æ·ÅRFID 
+	//å­˜æ”¾RFID 
 	unsigned char RFID[5];			
 	uint8_t KEY[6]={0xff,0xff,0xff,0xff,0xff,0xff};
-    /*Œ¤¿¨*/
+    /*å°‹å¡*/
 	status = PcdRequest(PICC_REQALL,CT);
-	//Œ¤¿¨³É¹¦
+	//å°‹å¡æˆåŠŸ
 	if(status==MI_OK)
 	{            
 			delay_1ms(200);
 			status=MI_ERR;
-			/*·À³å×²*/
+			/*é˜²å†²æ’*/
 			status = PcdAnticoll(SN);
 	}
-	//·ÀĞn×²³É¹¦
+	//é˜²è¡æ’æˆåŠŸ
 	if (status==MI_OK)
 	{   
 			status=MI_ERR;	
 			status =PcdSelect(SN);
 
 	}
-    //Ñ¡¿¨³É¹¦
+    //é€‰å¡æˆåŠŸ
 	if(status==MI_OK)
 	{
 		status=MI_ERR;
 		status =PcdAuthState(0x60,s,KEY,SN);
-        //ÑéÖ¤³É¹¦
+        //éªŒè¯æˆåŠŸ
 		if(status==MI_OK)		
 		{
 			status=MI_ERR;
-			//¶Á¿¨
+			//è¯»å¡
 			status=	PcdRead(s,RFID);
-			//×x¿¨³É¹¦
+			//è®€å¡æˆåŠŸ
             
             if(status==MI_OK)
             {
-                if(UI0[0] == 0xFF && UI0[1] == 0xFF && UI0[2] == 0xFF && UI0[3] == 0xFF)      tempcard = 0;	//ÅĞ¶ÏÏµÍ³¸÷¿¨Êı¾İÇøÊÇ·ñÎª¿Õ£¬Îª¿Õ²ÅÄÜĞ´ÈëĞÂ¿¨
+                if(UI0[0] == 0xFF && UI0[1] == 0xFF && UI0[2] == 0xFF && UI0[3] == 0xFF)      tempcard = 0;	//åˆ¤æ–­ç³»ç»Ÿå„å¡æ•°æ®åŒºæ˜¯å¦ä¸ºç©ºï¼Œä¸ºç©ºæ‰èƒ½å†™å…¥æ–°å¡
                 else if(UI1[0] == 0xFF && UI1[1] == 0xFF && UI1[2] == 0xFF && UI1[3] == 0xFF) tempcard = 1;
                 else if(UI2[0] == 0xFF && UI2[1] == 0xFF && UI2[2] == 0xFF && UI2[3] == 0xFF) tempcard = 2;
                 else if(UI3[0] == 0xFF && UI3[1] == 0xFF && UI3[2] == 0xFF && UI3[3] == 0xFF) tempcard = 3;
                 else tempcard = 4;
             
-                if(RFID[0]==UI0[0] && RFID[1]==UI0[1] && RFID[2]==UI0[2] && RFID[3]==UI0[3])	//ÅĞ¶ÏĞÂ¿¨ÊÇ·ñÒÑ¾­Â¼Èë
+                if(RFID[0]==UI0[0] && RFID[1]==UI0[1] && RFID[2]==UI0[2] && RFID[3]==UI0[3])	//åˆ¤æ–­æ–°å¡æ˜¯å¦å·²ç»å½•å…¥
                 {
                     tempcard = 5;
                 }
@@ -120,20 +120,20 @@ void RFID_ADD(void)	        //Â¼Èë¿¨Æ¬
             switch(tempcard)
             {
                 case 0:
-                    UI0[0] = RFID[0];	//½«ĞÂ¿¨Êı¾İĞ´ÈëUI0[]Êı×é
+                    UI0[0] = RFID[0];	//å°†æ–°å¡æ•°æ®å†™å…¥UI0[]æ•°ç»„
                     UI0[1] = RFID[1];
                     UI0[2] = RFID[2];
                     UI0[3] = RFID[3];
-//                    FLASH_W(FLASH_ADDR1,UI0[0],UI0[1],UI0[2],UI0[3]);	//½«ĞÂ¿¨Êı¾İ´æÈëflash
-                    OLED_ShowCHinese(17,2,35);//¿¨
-                    OLED_ShowCHinese(34,2,42);//Ò»
-                    OLED_ShowCHinese(51,2,33);//Â¼
-                    OLED_ShowCHinese(68,2,34);//Èë
-                    OLED_ShowCHinese(85,2,53);//³É
-                    OLED_ShowCHinese(102,2,54);//¹¦
+//                    FLASH_W(FLASH_ADDR1,UI0[0],UI0[1],UI0[2],UI0[3]);	//å°†æ–°å¡æ•°æ®å­˜å…¥flash
+                    OLED_ShowCHinese(17,2,35);//å¡
+                    OLED_ShowCHinese(34,2,42);//ä¸€
+                    OLED_ShowCHinese(51,2,33);//å½•
+                    OLED_ShowCHinese(68,2,34);//å…¥
+                    OLED_ShowCHinese(85,2,53);//æˆ
+                    OLED_ShowCHinese(102,2,54);//åŠŸ
                 
-                    Buzze_roll(1);//Ğ´¿¨³É¹¦£¬·äÃùÆ÷ÏìÒ»Éù
-//                    WaitCardOff();	//µÈ´ı¿¨Æ¬ÒÆ×ß
+                    Buzze_roll(1);//å†™å¡æˆåŠŸï¼Œèœ‚é¸£å™¨å“ä¸€å£°
+//                    WaitCardOff();	//ç­‰å¾…å¡ç‰‡ç§»èµ°
                     delay_1ms(1500);
                     task9_1_is_start=0;
                     task9_2_is_start=0;
@@ -148,12 +148,12 @@ void RFID_ADD(void)	        //Â¼Èë¿¨Æ¬
                     UI1[2] = RFID[2];
                     UI1[3] = RFID[3];
 //                    FLASH_W(FLASH_ADDR2,UI1[0],UI1[1],UI1[2],UI1[3]);
-                    OLED_ShowCHinese(17,2,35);//¿¨
-                    OLED_ShowCHinese(34,2,55);//¶ş
-                    OLED_ShowCHinese(51,2,33);//Â¼
-                    OLED_ShowCHinese(68,2,34);//Èë
-                    OLED_ShowCHinese(85,2,53);//³É
-                    OLED_ShowCHinese(102,2,54);//¹¦
+                    OLED_ShowCHinese(17,2,35);//å¡
+                    OLED_ShowCHinese(34,2,55);//äºŒ
+                    OLED_ShowCHinese(51,2,33);//å½•
+                    OLED_ShowCHinese(68,2,34);//å…¥
+                    OLED_ShowCHinese(85,2,53);//æˆ
+                    OLED_ShowCHinese(102,2,54);//åŠŸ
                 
                     Buzze_roll(1);
 //                    WaitCardOff();
@@ -172,12 +172,12 @@ void RFID_ADD(void)	        //Â¼Èë¿¨Æ¬
                     UI2[2] = RFID[2];
                     UI2[3] = RFID[3];
 //                    FLASH_W(FLASH_ADDR3,UI2[0],UI2[1],UI2[2],UI2[3]);
-                    OLED_ShowCHinese(17,2,35);//¿¨
-                    OLED_ShowCHinese(34,2,56);//Èı
-                    OLED_ShowCHinese(51,2,33);//Â¼
-                    OLED_ShowCHinese(68,2,34);//Èë
-                    OLED_ShowCHinese(85,2,53);//³É
-                    OLED_ShowCHinese(102,2,54);//¹¦
+                    OLED_ShowCHinese(17,2,35);//å¡
+                    OLED_ShowCHinese(34,2,56);//ä¸‰
+                    OLED_ShowCHinese(51,2,33);//å½•
+                    OLED_ShowCHinese(68,2,34);//å…¥
+                    OLED_ShowCHinese(85,2,53);//æˆ
+                    OLED_ShowCHinese(102,2,54);//åŠŸ
                     
                     Buzze_roll(1);
 //                    WaitCardOff();
@@ -196,12 +196,12 @@ void RFID_ADD(void)	        //Â¼Èë¿¨Æ¬
                     UI3[2] = RFID[2];
                     UI3[3] = RFID[3];
 //                    FLASH_W(FLASH_ADDR4,UI3[0],UI3[1],UI3[2],UI3[3]);
-                    OLED_ShowCHinese(17,2,35);//¿¨
-                    OLED_ShowCHinese(34,2,57);//ËÄ
-                    OLED_ShowCHinese(51,2,33);//Â¼
-                    OLED_ShowCHinese(68,2,34);//Èë
-                    OLED_ShowCHinese(85,2,53);//³É
-                    OLED_ShowCHinese(102,2,54);//¹¦
+                    OLED_ShowCHinese(17,2,35);//å¡
+                    OLED_ShowCHinese(34,2,57);//å››
+                    OLED_ShowCHinese(51,2,33);//å½•
+                    OLED_ShowCHinese(68,2,34);//å…¥
+                    OLED_ShowCHinese(85,2,53);//æˆ
+                    OLED_ShowCHinese(102,2,54);//åŠŸ
                     Buzze_roll(1);
 //                    WaitCardOff();
                     delay_1ms(1500);
@@ -214,13 +214,13 @@ void RFID_ADD(void)	        //Â¼Èë¿¨Æ¬
 //                        printf("\r\n");
                     break;
                 case 4:
-                    OLED_ShowCHinese(17,2,58);//Ö»
-                    OLED_ShowCHinese(34,2,59);//ÄÜ
-                    OLED_ShowCHinese(51,2,33);//Â¼
-                    OLED_ShowCHinese(68,2,34);//Èë
-                    OLED_ShowCHinese(85,2,57);//ËÄ
-                    OLED_ShowCHinese(102,2,60);//ÕÅ
-                    OLED_ShowCHinese(119,2,35);//¿¨
+                    OLED_ShowCHinese(17,2,58);//åª
+                    OLED_ShowCHinese(34,2,59);//èƒ½
+                    OLED_ShowCHinese(51,2,33);//å½•
+                    OLED_ShowCHinese(68,2,34);//å…¥
+                    OLED_ShowCHinese(85,2,57);//å››
+                    OLED_ShowCHinese(102,2,60);//å¼ 
+                    OLED_ShowCHinese(119,2,35);//å¡
                     Buzze_roll(3);
 //                    WaitCardOff();
                     delay_1ms(1500);
@@ -229,12 +229,12 @@ void RFID_ADD(void)	        //Â¼Èë¿¨Æ¬
                     OLED_Clear();
                     break;
                 case 5:
-//                    OLED_ShowCHinese(20,6,"¿¨Æ¬ÒÑÂ¼¹ı");
-                    OLED_ShowCHinese(17,2,35);//¿¨
-                    OLED_ShowCHinese(34,2,36);//Æ¬
-                    OLED_ShowCHinese(51,2,61);//ÒÑ
-                    OLED_ShowCHinese(68,2,33);//Â¼
-                    OLED_ShowCHinese(85,2,62);//¹ı
+//                    OLED_ShowCHinese(20,6,"å¡ç‰‡å·²å½•è¿‡");
+                    OLED_ShowCHinese(17,2,35);//å¡
+                    OLED_ShowCHinese(34,2,36);//ç‰‡
+                    OLED_ShowCHinese(51,2,61);//å·²
+                    OLED_ShowCHinese(68,2,33);//å½•
+                    OLED_ShowCHinese(85,2,62);//è¿‡
                     Buzze_roll(3);
                     WaitCardOff();
                     delay_1ms(1500);
@@ -251,19 +251,19 @@ void RFID_ADD(void)	        //Â¼Èë¿¨Æ¬
     }
     else
     {
-        PcdReset();												//¸´Î»RC522
-        PcdAntennaOff(); 	 									//¹ØÌìÏß 		
-        PcdAntennaOn();  										//¿ªÌìÏß
+        PcdReset();												//å¤ä½RC522
+        PcdAntennaOff(); 	 									//å…³å¤©çº¿ 		
+        PcdAntennaOn();  										//å¼€å¤©çº¿
     }
 }
 
-void RFID_DELETE(void)	        //É¾³ı¿¨Æ¬
+void RFID_DELETE(void)	        //åˆ é™¤å¡ç‰‡
 {
     switch (select_card)
     {      
         case 1:
         {   
-            if(1==OLED_CONFIRM)	//ÔÚÉ¾¿¨Ä£Ê½ÏÂ°´ÏÂ3¼ü£¬É¾³ı¶ÔÓ¦µÄ¿¨Æ¬
+            if(1==OLED_CONFIRM)	//åœ¨åˆ å¡æ¨¡å¼ä¸‹æŒ‰ä¸‹3é”®ï¼Œåˆ é™¤å¯¹åº”çš„å¡ç‰‡
             {
                 OLED_Clear();
 //                FLASH_Clear(FLASH_ADDR1);	
@@ -272,17 +272,17 @@ void RFID_DELETE(void)	        //É¾³ı¿¨Æ¬
                 UI0[2]=0xFF;
                 UI0[3]=0xFF;
                 
-                OLED_ShowCHinese(17,2,35); //¿¨
-                OLED_ShowCHinese(34,2,42); //Ò»
-                OLED_ShowCHinese(51,2,61); //ÒÑ
-                OLED_ShowCHinese(68,2,37); //É¾
-                OLED_ShowCHinese(85,2,38); //³ı
+                OLED_ShowCHinese(17,2,35); //å¡
+                OLED_ShowCHinese(34,2,42); //ä¸€
+                OLED_ShowCHinese(51,2,61); //å·²
+                OLED_ShowCHinese(68,2,37); //åˆ 
+                OLED_ShowCHinese(85,2,38); //é™¤
                 
                 select_card=0;
                 task9_1_is_start=0;
                 task9_2_is_start=0;
                 OLED_CONFIRM=0;
-                Buzze_roll(1);	//É¾³ı³É¹¦ºó·äÃùÆ÷ÏìÒ»Éù
+                Buzze_roll(1);	//åˆ é™¤æˆåŠŸåèœ‚é¸£å™¨å“ä¸€å£°
                 OLED_SELECT=OLED_SELECT_flag;
                 delay_1ms(1000);
                 OLED_Clear();
@@ -299,17 +299,17 @@ void RFID_DELETE(void)	        //É¾³ı¿¨Æ¬
                 UI1[2]=0xFF;
                 UI1[3]=0xFF;
 
-                OLED_ShowCHinese(17,2,35); //¿¨
-                OLED_ShowCHinese(34,2,55); //¶ş
-                OLED_ShowCHinese(51,2,61); //ÒÑ
-                OLED_ShowCHinese(68,2,37); //É¾
-                OLED_ShowCHinese(85,2,38); //³ı
+                OLED_ShowCHinese(17,2,35); //å¡
+                OLED_ShowCHinese(34,2,55); //äºŒ
+                OLED_ShowCHinese(51,2,61); //å·²
+                OLED_ShowCHinese(68,2,37); //åˆ 
+                OLED_ShowCHinese(85,2,38); //é™¤
                 
                 select_card=0;
                 task9_1_is_start=0;
                 task9_2_is_start=0;
                 OLED_CONFIRM=0;
-                Buzze_roll(1);	//É¾³ı³É¹¦ºó·äÃùÆ÷ÏìÒ»Éù
+                Buzze_roll(1);	//åˆ é™¤æˆåŠŸåèœ‚é¸£å™¨å“ä¸€å£°
                 OLED_SELECT=OLED_SELECT_flag;
                 delay_1ms(1000);
                 OLED_Clear();
@@ -327,17 +327,17 @@ void RFID_DELETE(void)	        //É¾³ı¿¨Æ¬
                 UI2[2]=0xFF;
                 UI2[3]=0xFF;
 
-                OLED_ShowCHinese(17,2,35); //¿¨
-                OLED_ShowCHinese(34,2,56); //Èı
-                OLED_ShowCHinese(51,2,61); //ÒÑ
-                OLED_ShowCHinese(68,2,37); //É¾
-                OLED_ShowCHinese(85,2,38); //³ı
+                OLED_ShowCHinese(17,2,35); //å¡
+                OLED_ShowCHinese(34,2,56); //ä¸‰
+                OLED_ShowCHinese(51,2,61); //å·²
+                OLED_ShowCHinese(68,2,37); //åˆ 
+                OLED_ShowCHinese(85,2,38); //é™¤
                 
                 select_card=0;
                 task9_1_is_start=0;
                 task9_2_is_start=0;
                 OLED_CONFIRM=0;
-                Buzze_roll(1);	//É¾³ı³É¹¦ºó·äÃùÆ÷ÏìÒ»Éù
+                Buzze_roll(1);	//åˆ é™¤æˆåŠŸåèœ‚é¸£å™¨å“ä¸€å£°
                 OLED_SELECT=OLED_SELECT_flag;
                 delay_1ms(1000);
                 OLED_Clear();
@@ -355,17 +355,17 @@ void RFID_DELETE(void)	        //É¾³ı¿¨Æ¬
                 UI3[2]=0xFF;
                 UI3[3]=0xFF;
 
-                OLED_ShowCHinese(17,2,35); //¿¨
-                OLED_ShowCHinese(34,2,57); //ËÄ
-                OLED_ShowCHinese(51,2,61); //ÒÑ
-                OLED_ShowCHinese(68,2,37); //É¾
-                OLED_ShowCHinese(85,2,38); //³ı
+                OLED_ShowCHinese(17,2,35); //å¡
+                OLED_ShowCHinese(34,2,57); //å››
+                OLED_ShowCHinese(51,2,61); //å·²
+                OLED_ShowCHinese(68,2,37); //åˆ 
+                OLED_ShowCHinese(85,2,38); //é™¤
                 
                 select_card=0;
                 task9_1_is_start=0;
                 task9_2_is_start=0;
                 OLED_CONFIRM=0;
-                Buzze_roll(1);	//É¾³ı³É¹¦ºó·äÃùÆ÷ÏìÒ»Éù
+                Buzze_roll(1);	//åˆ é™¤æˆåŠŸåèœ‚é¸£å™¨å“ä¸€å£°
                 OLED_SELECT=OLED_SELECT_flag;
                 delay_1ms(1000);
                 OLED_Clear();

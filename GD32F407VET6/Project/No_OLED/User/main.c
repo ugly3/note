@@ -7,37 +7,37 @@ void OLED_view_MPU(void);
 
 int main(void)
 {
-    systick_config();//ÅäÖÃÏµÍ³Ö÷Æµ168M,Íâ²¿8M¾§Õñ,ÅäÖÃÔÚ#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
+    systick_config();//é…ç½®ç³»ç»Ÿä¸»é¢‘168M,å¤–éƒ¨8Mæ™¶æŒ¯,é…ç½®åœ¨#define __SYSTEM_CLOCK_168M_PLL_8M_HXTAL        (uint32_t)(168000000)
     
     LED_Init();
     IIC_config(&hiic1);
     OLED_Init(&hiic1);
-    Buzze_Init();             //·äÃùÆ÷³õÊ¼»¯
-    MyRTC_Init();             //RTCÊ±ÖÓ³õÊ¼»¯
-    HC_Init();                //³¬Éù²¨³õÊ¼»¯
-    ADC_config();             //Èı¸öADCÍ¨µÀ
-    Walk_Motor_Init();        //²½½øµç»ú³õÊ¼»¯
-    Body_Hw_Init();           //ÈËÌİºìÍâ¼ì²âÄ£¿é³õÊ¼»¯
-//    HX711_Init();             //Ñ¹Á¦´«¸ĞÆ÷³õÊ¼»¯
+    Buzze_Init();             //èœ‚é¸£å™¨åˆå§‹åŒ–
+    MyRTC_Init();             //RTCæ—¶é’Ÿåˆå§‹åŒ–
+    HC_Init();                //è¶…å£°æ³¢åˆå§‹åŒ–
+    ADC_config();             //ä¸‰ä¸ªADCé€šé“
+    Walk_Motor_Init();        //æ­¥è¿›ç”µæœºåˆå§‹åŒ–
+    Body_Hw_Init();           //äººæ¢¯çº¢å¤–æ£€æµ‹æ¨¡å—åˆå§‹åŒ–
+//    HX711_Init();             //å‹åŠ›ä¼ æ„Ÿå™¨åˆå§‹åŒ–
     
-//    BH1750_Init();            //¹âÇ¿¶È´«¸ĞÆ÷³õÊ¼»¯ £¨±ØĞëÁ¬ÉÏ£¬·ñÔò¿¨×¡£©
-//    DHT11_Init();		      // ÎÂÊª¶È´«¸ĞÆ÷³õÊ¼»¯ £¨±ØĞëÁ¬ÉÏ£¬·ñÔò¿¨×¡£©
+//    BH1750_Init();            //å…‰å¼ºåº¦ä¼ æ„Ÿå™¨åˆå§‹åŒ– ï¼ˆå¿…é¡»è¿ä¸Šï¼Œå¦åˆ™å¡ä½ï¼‰
+//    DHT11_Init();		      // æ¸©æ¹¿åº¦ä¼ æ„Ÿå™¨åˆå§‹åŒ– ï¼ˆå¿…é¡»è¿ä¸Šï¼Œå¦åˆ™å¡ä½ï¼‰
     
-    InitRc522();              //RFID¿¨
+    InitRc522();              //RFIDå¡
     
     key_tree_init();
 
-    TIMER0_config();          //PWM³õÊ¼»¯
-    TIMER2_config();          //1msÖĞ¶Ï
+    TIMER0_config();          //PWMåˆå§‹åŒ–
+    TIMER2_config();          //1msä¸­æ–­
     
-    ShuMaGuan_Display_Init();   //ÊıÂë¹Ü³õÊ¼»¯
-    HC595_Init();               //µãÕó
+    ShuMaGuan_Display_Init();   //æ•°ç ç®¡åˆå§‹åŒ–
+    HC595_Init();               //ç‚¹é˜µ
     
     USART_Init();
    
 
 
-//	OLED_Clear();//OLEDÇåÆÁ 
+//	OLED_Clear();//OLEDæ¸…å± 
 
 
     delay_1ms(500);
@@ -60,16 +60,16 @@ int main(void)
 
         
         if(DLED_view_flag==1)
-            ShuMaGuan_Display(Weight_Shiwu*10);         //ÊıÂë¹ÜÏÔÊ¾
+            ShuMaGuan_Display(Weight_Shiwu*10);         //æ•°ç ç®¡æ˜¾ç¤º
         if(DLED_view_flag==2)
-            Matrix_LED_RIGHT_LEFT_Run_Display(DZLL,sizeof(DZLL));    //µãÕó
+            Matrix_LED_RIGHT_LEFT_Run_Display(DZLL,sizeof(DZLL));    //ç‚¹é˜µ
         
-        //I2C°´¼ü
+        //I2CæŒ‰é”®
 
 //        process_password_input();
         
         
-//        Get_Weight(1);              //³ÆÖØ
+//        Get_Weight(1);              //ç§°é‡
 //        OLED_ShowString(0,4,(u8*)"2");
 //        OLED_ShowString(0,0,(u8*)"1");
 //        sprintf((char *)Buf,"Weight: %dg ",Weight_Shiwu);
@@ -80,8 +80,8 @@ int main(void)
 //        OLED_view_MPU();
 
         
-        //¾ØÕó¼üÅÌ
-//        gpio_bit_set(COL_PORT, ROW1_PIN|ROW2_PIN|ROW3_PIN|ROW4_PIN|COL1_PIN|COL2_PIN|COL3_PIN|COL4_PIN); // ÉèÖÃÁĞÎª¸ßµçÆ½
+        //çŸ©é˜µé”®ç›˜
+//        gpio_bit_set(COL_PORT, ROW1_PIN|ROW2_PIN|ROW3_PIN|ROW4_PIN|COL1_PIN|COL2_PIN|COL3_PIN|COL4_PIN); // è®¾ç½®åˆ—ä¸ºé«˜ç”µå¹³
 //        gpio_bit_reset(COL_PORT, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7);
        
 //      key_num = keyscanf();

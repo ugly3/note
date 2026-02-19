@@ -1,39 +1,39 @@
 #include "I2C_Key.h"
-//#include "ssd1315.h"  // ÒıÈëSSD1315Çı¶¯¿â[^4^]
+//#include "ssd1315.h"  // å¼•å…¥SSD1315é©±åŠ¨åº“[^4^]
 #include "String.h"
 //#include "oled.h"
 #include "systick.h"
 
-// CH455G I2CµØÖ·£¨7Î»µØÖ·Ä£Ê½£©
+// CH455G I2Cåœ°å€ï¼ˆ7ä½åœ°å€æ¨¡å¼ï¼‰
 #define CH455G_I2C_ADDR      0x24  
-#define CH455G_I2C_MASK      0x3E  // ÃüÁîÑÚÂë
-#define CH455G_GET_KEY       0x0700  // »ñÈ¡°´¼ü×´Ì¬µÄÃüÁî
+#define CH455G_I2C_MASK      0x3E  // å‘½ä»¤æ©ç 
+#define CH455G_GET_KEY       0x0700  // è·å–æŒ‰é”®çŠ¶æ€çš„å‘½ä»¤
 #define I2C_PORT             I2C0
 
-// °´¼ü×´Ì¬¶¨Òå
+// æŒ‰é”®çŠ¶æ€å®šä¹‰
 #define KEY_STATE_RELEASED      0
 #define KEY_STATE_PRESSED       1
 
 
-// °´¼ü¾ØÕó´óĞ¡£¨4x4¾ØÕó£©
+// æŒ‰é”®çŸ©é˜µå¤§å°ï¼ˆ4x4çŸ©é˜µï¼‰
 #define ROWS                 4
 #define COLS                 4
 
-// ÃÜÂëÏà¹Ø¶¨Òå
+// å¯†ç ç›¸å…³å®šä¹‰
 #define PASSWORD_LENGTH      6
 #define MAX_PASSWORD_ATTEMPTS 3
 
-// °´¼ü×´Ì¬Êı×é
+// æŒ‰é”®çŠ¶æ€æ•°ç»„
 uint8_t key_state[ROWS][COLS] = {0};
 
-// °´¼üĞÅÏ¢±í
+// æŒ‰é”®ä¿¡æ¯è¡¨
 typedef struct {
-    uint8_t row;            // °´¼üËùÔÚµÄĞĞ
-    uint8_t col;            // °´¼üËùÔÚµÄÁĞ
-    char key_char;          // °´¼ü¶ÔÓ¦µÄ×Ö·û
+    uint8_t row;            // æŒ‰é”®æ‰€åœ¨çš„è¡Œ
+    uint8_t col;            // æŒ‰é”®æ‰€åœ¨çš„åˆ—
+    char key_char;          // æŒ‰é”®å¯¹åº”çš„å­—ç¬¦
 } KeyInfo;
 
-// °´¼üĞÅÏ¢±í
+// æŒ‰é”®ä¿¡æ¯è¡¨
 KeyInfo key_info[ROWS][COLS] = {
     {{0, 0, '1'}, {0, 1, '2'}, {0, 2, '3'}, {0, 3, 'A'}},
     {{1, 0, '4'}, {1, 1, '5'}, {1, 2, '6'}, {1, 3, 'B'}},
@@ -41,67 +41,67 @@ KeyInfo key_info[ROWS][COLS] = {
     {{3, 0, '*'}, {3, 1, '0'}, {3, 2, '#'}, {3, 3, 'D'}}
 };
 
-// ÃÜÂëÏà¹Ø±äÁ¿
-char password[PASSWORD_LENGTH + 1] = "123456"; // µ±Ç°ÃÜÂë
-char input_password[PASSWORD_LENGTH + 1] = {0}; // ÓÃ»§ÊäÈëµÄÃÜÂë
-char new_password[PASSWORD_LENGTH + 1] = {0}; // ĞÂÃÜÂë
-uint8_t input_index = 0; // ÊäÈëË÷Òı
-uint8_t door_flag = 0; // ½âËø±êÖ¾
-uint8_t BUzze_flage = 0; // ´íÎó±êÖ¾
-uint8_t change_password_mode = 0; // ĞŞ¸ÄÃÜÂëÄ£Ê½±êÖ¾
-uint8_t password_attempts = 0; // ÃÜÂë³¢ÊÔ´ÎÊı
-char display_str[PASSWORD_LENGTH + 1] = {0}; // ÏÔÊ¾µ±Ç°ÊäÈëµÄÃÜÂë
+// å¯†ç ç›¸å…³å˜é‡
+char password[PASSWORD_LENGTH + 1] = "123456"; // å½“å‰å¯†ç 
+char input_password[PASSWORD_LENGTH + 1] = {0}; // ç”¨æˆ·è¾“å…¥çš„å¯†ç 
+char new_password[PASSWORD_LENGTH + 1] = {0}; // æ–°å¯†ç 
+uint8_t input_index = 0; // è¾“å…¥ç´¢å¼•
+uint8_t door_flag = 0; // è§£é”æ ‡å¿—
+uint8_t BUzze_flage = 0; // é”™è¯¯æ ‡å¿—
+uint8_t change_password_mode = 0; // ä¿®æ”¹å¯†ç æ¨¡å¼æ ‡å¿—
+uint8_t password_attempts = 0; // å¯†ç å°è¯•æ¬¡æ•°
+char display_str[PASSWORD_LENGTH + 1] = {0}; // æ˜¾ç¤ºå½“å‰è¾“å…¥çš„å¯†ç 
 
-// I2C³õÊ¼»¯º¯Êı
+// I2Cåˆå§‹åŒ–å‡½æ•°
 void key_i2cx_config(void) {
     i2c_deinit(I2C_PORT);
-    i2c_clock_config(I2C_PORT, 100000, I2C_DTCY_2);  // ÅäÖÃI2CÊ±ÖÓÎª100kHz
+    i2c_clock_config(I2C_PORT, 100000, I2C_DTCY_2);  // é…ç½®I2Cæ—¶é’Ÿä¸º100kHz
     i2c_mode_addr_config(I2C_PORT, I2C_I2CMODE_ENABLE, I2C_ADDFORMAT_7BITS, CH455G_I2C_ADDR<<1);
-    i2c_enable(I2C_PORT);  // Ê¹ÄÜI2C
-    i2c_ack_config(I2C_PORT, I2C_ACK_ENABLE);  // ÆôÓÃACK
+    i2c_enable(I2C_PORT);  // ä½¿èƒ½I2C
+    i2c_ack_config(I2C_PORT, I2C_ACK_ENABLE);  // å¯ç”¨ACK
 }
 
-// ´ÓCH455G¶ÁÈ¡°´¼ü×´Ì¬
+// ä»CH455Gè¯»å–æŒ‰é”®çŠ¶æ€
 uint8_t CH455G_ReadKey(void) {
     unsigned char keycode[1];
     unsigned short cmd_data1 = (unsigned char)((CH455G_GET_KEY >> 7) & CH455G_I2C_MASK) | 0x01;
-    // ·¢ËÍĞ´ÃüÁî£¨Ö¸¶¨¶ÁÈ¡µØÖ·£©
+    // å‘é€å†™å‘½ä»¤ï¼ˆæŒ‡å®šè¯»å–åœ°å€ï¼‰
     i2c_start_on_bus(I2C_PORT);
     while (!i2c_flag_get(I2C_PORT, I2C_FLAG_SBSEND));OLED_ShowString(10,1,(u8*)"2");
     i2c_master_addressing(I2C_PORT, CH455G_I2C_ADDR<<1, I2C_TRANSMITTER);
     while (!i2c_flag_get(I2C_PORT, I2C_FLAG_ADDSEND));OLED_ShowString(18,1,(u8*)"3");
     i2c_flag_clear(I2C_PORT, I2C_FLAG_ADDSEND);
-    i2c_data_transmit(I2C_PORT, cmd_data1); // ·¢ËÍ¼Ä´æÆ÷µØÖ·
+    i2c_data_transmit(I2C_PORT, cmd_data1); // å‘é€å¯„å­˜å™¨åœ°å€
     while (!i2c_flag_get(I2C_PORT, I2C_FLAG_TBE));OLED_ShowString(24,1,(u8*)"4");
 
     delay_1ms(200);
-    // ÇĞ»»µ½¶ÁÄ£Ê½
+    // åˆ‡æ¢åˆ°è¯»æ¨¡å¼
     i2c_start_on_bus(I2C_PORT);
     while (!i2c_flag_get(I2C_PORT, I2C_FLAG_SBSEND));OLED_ShowString(32,1,(u8*)"5");
-    i2c_master_addressing(I2C_PORT, CH455G_I2C_ADDR<<1, I2C_RECEIVER); // ¶ÁÄ£Ê½µØÖ·
+    i2c_master_addressing(I2C_PORT, CH455G_I2C_ADDR<<1, I2C_RECEIVER); // è¯»æ¨¡å¼åœ°å€
     while (!i2c_flag_get(I2C_PORT, I2C_FLAG_ADDSEND));OLED_ShowString(40,6,(u8*)"6");
     i2c_flag_clear(I2C_PORT, I2C_FLAG_ADDSEND);
 
-    // ¶ÁÈ¡Êı¾İ
+    // è¯»å–æ•°æ®
     keycode[0] = i2c_data_receive(I2C_PORT);
 
-    // ·¢ËÍÍ£Ö¹Ìõ¼ş
+    // å‘é€åœæ­¢æ¡ä»¶
     i2c_stop_on_bus(I2C_PORT);
     OLED_ShowString(48,6,(u8*)"7");
     return keycode[0];
     
 }
 
-// °´¼üÉ¨Ãèº¯Êı
+// æŒ‰é”®æ‰«æå‡½æ•°
 void I2c_key_scan(void) {
     uint8_t key_data[2] = {0};
     uint8_t row, col;
 
-    // ¶ÁÈ¡°´¼ü×´Ì¬
-    key_data[0] = CH455G_ReadKey(); // ¶ÁÈ¡µÚÒ»¸ö×Ö½Ú
+    // è¯»å–æŒ‰é”®çŠ¶æ€
+    key_data[0] = CH455G_ReadKey(); // è¯»å–ç¬¬ä¸€ä¸ªå­—èŠ‚
     key_data[1] = CH455G_ReadKey();
     OLED_ShowString(56,6,(u8*)"8");
-    // ¸üĞÂ°´¼ü×´Ì¬Êı×é
+    // æ›´æ–°æŒ‰é”®çŠ¶æ€æ•°ç»„
     for (row = 0; row < ROWS; row++) {
         for (col = 0; col < COLS; col++) {
             uint8_t mask = (1 << (row * COLS + col));
@@ -114,20 +114,20 @@ void I2c_key_scan(void) {
     }
 }
 
-// ³õÊ¼»¯I2C°´¼üÄ£¿é
+// åˆå§‹åŒ–I2CæŒ‰é”®æ¨¡å—
 void I2C_Key_Init(void) {
-    rcu_periph_clock_enable(RCU_GPIOB); // Ê¹ÄÜGPIOBÊ±ÖÓ
-    gpio_af_set(GPIOB, GPIO_AF_4, GPIO_PIN_8); // ¸´ÓÃ¹¦ÄÜ4
-    gpio_af_set(GPIOB, GPIO_AF_4, GPIO_PIN_9); // ¸´ÓÃ¹¦ÄÜ4
-    gpio_mode_set(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO_PIN_8); // PB10ÅäÖÃ³ÉI2C1
+    rcu_periph_clock_enable(RCU_GPIOB); // ä½¿èƒ½GPIOBæ—¶é’Ÿ
+    gpio_af_set(GPIOB, GPIO_AF_4, GPIO_PIN_8); // å¤ç”¨åŠŸèƒ½4
+    gpio_af_set(GPIOB, GPIO_AF_4, GPIO_PIN_9); // å¤ç”¨åŠŸèƒ½4
+    gpio_mode_set(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO_PIN_8); // PB10é…ç½®æˆI2C1
     gpio_output_options_set(GPIOB, GPIO_OTYPE_OD, GPIO_OSPEED_50MHZ, GPIO_PIN_8);
     gpio_mode_set(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO_PIN_9);
     gpio_output_options_set(GPIOB, GPIO_OTYPE_OD, GPIO_OSPEED_50MHZ, GPIO_PIN_9);
 
-    rcu_periph_clock_enable(RCU_I2C0); // I2C0Ê±ÖÓÊ¹ÄÜ
-    key_i2cx_config(); // ÅäÖÃI2C
+    rcu_periph_clock_enable(RCU_I2C0); // I2C0æ—¶é’Ÿä½¿èƒ½
+    key_i2cx_config(); // é…ç½®I2C
 }
-// ´¦ÀíÃÜÂëÊäÈë
+// å¤„ç†å¯†ç è¾“å…¥
 void process_password_input(void) 
 {
     uint8_t row,col;
@@ -141,10 +141,10 @@ void process_password_input(void)
 
                 if (change_password_mode) 
                 {
-                    // ĞŞ¸ÄÃÜÂëÄ£Ê½
+                    // ä¿®æ”¹å¯†ç æ¨¡å¼
                     if (pressed_char == '*' && input_index == PASSWORD_LENGTH) 
                     {
-                        // È·ÈÏĞÂÃÜÂë
+                        // ç¡®è®¤æ–°å¯†ç 
                         strncpy(password, new_password, PASSWORD_LENGTH);
                         password[PASSWORD_LENGTH] = '\0';
 //                        oled_display_password("Password changed");
@@ -155,21 +155,21 @@ void process_password_input(void)
                     } 
                     else if (pressed_char == '#' && input_index > 0) 
                     {
-                        // É¾³ıÉÏÒ»¸öÊäÈëµÄ×Ö·û
+                        // åˆ é™¤ä¸Šä¸€ä¸ªè¾“å…¥çš„å­—ç¬¦
                         input_index--;
                         new_password[input_index] = '\0';
                     } 
                     else if (input_index < PASSWORD_LENGTH) 
                     {
-                        // ÊäÈëĞÂÃÜÂë×Ö·û
+                        // è¾“å…¥æ–°å¯†ç å­—ç¬¦
                         new_password[input_index] = pressed_char;
                         input_index++;
                     }
                 } 
-                else // Õı³£½âËøÄ£Ê½
+                else // æ­£å¸¸è§£é”æ¨¡å¼
                 {
                     
-                    if (pressed_char == '*' && input_index == PASSWORD_LENGTH)  // È·ÈÏÊäÈëµÄÃÜÂë
+                    if (pressed_char == '*' && input_index == PASSWORD_LENGTH)  // ç¡®è®¤è¾“å…¥çš„å¯†ç 
                     {
                        
                         input_password[input_index] = '\0';
@@ -193,19 +193,19 @@ void process_password_input(void)
                                 password_attempts = 0;
                             }
                         }
-                        // ÖØÖÃÊäÈë
+                        // é‡ç½®è¾“å…¥
                         input_index = 0;
                         memset(input_password, 0, PASSWORD_LENGTH + 1);
                     } 
                     else if (pressed_char == '#' && input_index > 0) 
                     {
-                        // É¾³ıÉÏÒ»¸öÊäÈëµÄ×Ö·û
+                        // åˆ é™¤ä¸Šä¸€ä¸ªè¾“å…¥çš„å­—ç¬¦
                         input_index--;
                         input_password[input_index] = '\0';
                     } 
                     else if (input_index < PASSWORD_LENGTH) 
                     {
-                        // ÊäÈëÃÜÂë×Ö·û
+                        // è¾“å…¥å¯†ç å­—ç¬¦
                         input_password[input_index] = pressed_char;
                         input_index++;
                     }
@@ -213,9 +213,9 @@ void process_password_input(void)
 
                 
                 strncpy(display_str, change_password_mode ? new_password : input_password, input_index);
-//                oled_display_password(display_str);//OLEDÊµÊ±ÏÔÊ¾ÊäÈëµÄÃÜÂë
+//                oled_display_password(display_str);//OLEDå®æ—¶æ˜¾ç¤ºè¾“å…¥çš„å¯†ç 
                     OLED_ShowString(20,2,(u8*)display_str);
-                // Çå³ı°´¼ü×´Ì¬
+                // æ¸…é™¤æŒ‰é”®çŠ¶æ€
                 key_state[row][col] = KEY_STATE_RELEASED;
             }
         }

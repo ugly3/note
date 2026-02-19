@@ -40,7 +40,7 @@ OF SUCH DAMAGE.
 
 volatile static uint32_t delay;
 
-void delay_100ns(uint32_t ns)//Êµ¼ÊÑÓÊ±Ê±¼ä=ns*100 + 100
+void delay_100ns(uint32_t ns)//å®é™…å»¶æ—¶æ—¶é—´=ns*100 + 100
 {
   static volatile uint32_t i;
   for(i=0;i<ns;i++)
@@ -53,18 +53,18 @@ void delay_us(uint32_t nus)
 {		
 	uint32_t ticks;
 	uint32_t told,tnow,tcnt=0;
-	uint32_t reload=SysTick->LOAD;				//LOADµÄÖµ	  
-	ticks=nus*168; 						//ĞèÒªµÄ½ÚÅÄÊı  
-	told=SysTick->VAL;        				//¸Õ½øÈëÊ±µÄ¼ÆÊıÆ÷Öµ
+	uint32_t reload=SysTick->LOAD;				//LOADçš„å€¼	  
+	ticks=nus*168; 						//éœ€è¦çš„èŠ‚æ‹æ•°  
+	told=SysTick->VAL;        				//åˆšè¿›å…¥æ—¶çš„è®¡æ•°å™¨å€¼
 	while(1)
 	{
 		tnow=SysTick->VAL;	
 		if(tnow!=told)
 		{	    
-			if(tnow<told)tcnt+=told-tnow;	//ÕâÀï×¢ÒâÒ»ÏÂSYSTICKÊÇÒ»¸öµİ¼õµÄ¼ÆÊıÆ÷¾Í¿ÉÒÔÁË.
+			if(tnow<told)tcnt+=told-tnow;	//è¿™é‡Œæ³¨æ„ä¸€ä¸‹SYSTICKæ˜¯ä¸€ä¸ªé€’å‡çš„è®¡æ•°å™¨å°±å¯ä»¥äº†.
 			else tcnt+=reload-tnow+told;	    
 			told=tnow;
-			if(tcnt>=ticks)break;			//Ê±¼ä³¬¹ı/µÈÓÚÒªÑÓ³ÙµÄÊ±¼ä,ÔòÍË³ö.
+			if(tcnt>=ticks)break;			//æ—¶é—´è¶…è¿‡/ç­‰äºè¦å»¶è¿Ÿçš„æ—¶é—´,åˆ™é€€å‡º.
 		}  
 	};
 }

@@ -3,7 +3,7 @@
 
 
 
-void Door_Servo_SetAngle(uint8_t flag)           //´óÃÅ   ¶¨Ê±Æ÷0 CH1  PA9
+void Door_Servo_SetAngle(uint8_t flag)           //å¤§é—¨   å®šæ—¶å™¨0 CH1  PA9
 {
     if(flag==1)
         SteerGear_PWM_CH1(90.0 / 180 * 2000 + 500);
@@ -12,7 +12,7 @@ void Door_Servo_SetAngle(uint8_t flag)           //´óÃÅ   ¶¨Ê±Æ÷0 CH1  PA9
 }
 
 
-void Lajitong_Servo_SetAngle(uint8_t flag)         //À¬»øÍ°   PA10
+void Lajitong_Servo_SetAngle(uint8_t flag)         //åžƒåœ¾æ¡¶   PA10
 {
     if(flag==1)
         SteerGear_PWM_CH2(90.0 / 180 * 2000 + 500);

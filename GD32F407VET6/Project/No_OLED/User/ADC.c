@@ -6,43 +6,43 @@
 
 //double ppm;
     
-//ADCÅäÖÃ£¬DMAÅäÖÃ
+//ADCé…ç½®ï¼ŒDMAé…ç½®
 void ADC_config(void)
 {
 		dma_single_data_parameter_struct  dma_single_data_parameter;
 		rcu_periph_clock_enable(RCU_GPIOC);
-		gpio_mode_set(GPIOC, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO_PIN_0);//PA4ÅäÖÃ³ÉÊäÈë
-		gpio_mode_set(GPIOC, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO_PIN_1);//PA5ÅäÖÃ³ÉÊäÈë
-        gpio_mode_set(GPIOC, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO_PIN_2);//PA5ÅäÖÃ³ÉÊäÈë
-		//ADCÏà¹ØÊ±ÖÓÅäÖÃ
-		rcu_periph_clock_enable(RCU_GPIOC); //ÆôÓÃ GPIOA µÄÊ±ÖÓ
-		rcu_periph_clock_enable(RCU_DMA1);  //ÆôÓÃ DMA1 µÄÊ±ÖÓ
-		rcu_periph_clock_enable(RCU_ADC0);  //³õÊ¼»¯ DMA1 µÄÍ¨µÀ 0
-		adc_clock_config(ADC_ADCCK_PCLK2_DIV6); //ÅäÖÃ ADC Ê±ÖÓ£¬½« ADC Ê±ÖÓÉèÖÃÎª PCLK2 µÄ 1/6
+		gpio_mode_set(GPIOC, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO_PIN_0);//PA4é…ç½®æˆè¾“å…¥
+		gpio_mode_set(GPIOC, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO_PIN_1);//PA5é…ç½®æˆè¾“å…¥
+        gpio_mode_set(GPIOC, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO_PIN_2);//PA5é…ç½®æˆè¾“å…¥
+		//ADCç›¸å…³æ—¶é’Ÿé…ç½®
+		rcu_periph_clock_enable(RCU_GPIOC); //å¯ç”¨ GPIOA çš„æ—¶é’Ÿ
+		rcu_periph_clock_enable(RCU_DMA1);  //å¯ç”¨ DMA1 çš„æ—¶é’Ÿ
+		rcu_periph_clock_enable(RCU_ADC0);  //åˆå§‹åŒ– DMA1 çš„é€šé“ 0
+		adc_clock_config(ADC_ADCCK_PCLK2_DIV6); //é…ç½® ADC æ—¶é’Ÿï¼Œå°† ADC æ—¶é’Ÿè®¾ç½®ä¸º PCLK2 çš„ 1/6
 
-    /* DMAÏà¹ØÅäÖÃ DMA1 CH0*/
+    /* DMAç›¸å…³é…ç½® DMA1 CH0*/
     dma_deinit(DMA1, DMA_CH0);
-    dma_single_data_parameter.periph_addr = (uint32_t)(&ADC_RDATA(ADC0));//ÉèÖÃ DMA ÍâÉèµØÖ·£¬ÕâÀïÉèÖÃÎª ADC0 µÄÊı¾İ¼Ä´æÆ÷µØÖ·
-    dma_single_data_parameter.periph_inc = DMA_PERIPH_INCREASE_DISABLE;  //ÉèÖÃÍâÉèµØÖ·ÊÇ·ñµİÔö£¬ÕâÀïÉèÖÃÎª²»µİÔö
-    dma_single_data_parameter.memory0_addr = (uint32_t)(&adc_value);     //ÉèÖÃ DMA ´æ´¢Æ÷µØÖ·
-    dma_single_data_parameter.memory_inc = DMA_MEMORY_INCREASE_ENABLE;     //ÉèÖÃ´æ´¢Æ÷µØÖ·ÊÇ·ñµİÔö£¬ÕâÀïÉèÖÃÎªµİÔö         
-    dma_single_data_parameter.periph_memory_width = DMA_PERIPH_WIDTH_16BIT;   //ÉèÖÃÍâÉèºÍ´æ´¢Æ÷µÄÊı¾İ¿í¶È£¬ÕâÀïÉèÖÃÎª 16 Î»
-    dma_single_data_parameter.circular_mode = DMA_CIRCULAR_MODE_ENABLE;                      // Ñ­»·Ä£Ê½
-    dma_single_data_parameter.direction = DMA_PERIPH_TO_MEMORY;                              // ÉèÖÃ DMA Êı¾İ´«Êä·½Ïò£¬ÕâÀïÉèÖÃÎªÍâÉèµ½´æ´¢Æ÷
-    dma_single_data_parameter.number = 3;                                                    // ÉèÖÃ DMA ´«ÊäµÄÊı¾İÁ¿£¬ÕâÀïÉèÖÃÎª 2
-    dma_single_data_parameter.priority = DMA_PRIORITY_HIGH;                                  //ÉèÖÃ DMA Í¨µÀµÄÓÅÏÈ¼¶£¬ÕâÀïÉèÖÃÎª¸ßÓÅÏÈ¼¶
-    dma_single_data_mode_init(DMA1,DMA_CH0,&dma_single_data_parameter);                      //³õÊ¼»¯ DMA1 µÄÍ¨µÀ 0
-    dma_channel_enable(DMA1, DMA_CH0);           //ÆôÓÃ DMA1 µÄÍ¨µÀ 0                          
-	dma_circulation_enable(DMA1, DMA_CH0);       //ÆôÓÃ DMA1 µÄÍ¨µÀ 0 µÄÑ­»·Ä£Ê½
+    dma_single_data_parameter.periph_addr = (uint32_t)(&ADC_RDATA(ADC0));//è®¾ç½® DMA å¤–è®¾åœ°å€ï¼Œè¿™é‡Œè®¾ç½®ä¸º ADC0 çš„æ•°æ®å¯„å­˜å™¨åœ°å€
+    dma_single_data_parameter.periph_inc = DMA_PERIPH_INCREASE_DISABLE;  //è®¾ç½®å¤–è®¾åœ°å€æ˜¯å¦é€’å¢ï¼Œè¿™é‡Œè®¾ç½®ä¸ºä¸é€’å¢
+    dma_single_data_parameter.memory0_addr = (uint32_t)(&adc_value);     //è®¾ç½® DMA å­˜å‚¨å™¨åœ°å€
+    dma_single_data_parameter.memory_inc = DMA_MEMORY_INCREASE_ENABLE;     //è®¾ç½®å­˜å‚¨å™¨åœ°å€æ˜¯å¦é€’å¢ï¼Œè¿™é‡Œè®¾ç½®ä¸ºé€’å¢         
+    dma_single_data_parameter.periph_memory_width = DMA_PERIPH_WIDTH_16BIT;   //è®¾ç½®å¤–è®¾å’Œå­˜å‚¨å™¨çš„æ•°æ®å®½åº¦ï¼Œè¿™é‡Œè®¾ç½®ä¸º 16 ä½
+    dma_single_data_parameter.circular_mode = DMA_CIRCULAR_MODE_ENABLE;                      // å¾ªç¯æ¨¡å¼
+    dma_single_data_parameter.direction = DMA_PERIPH_TO_MEMORY;                              // è®¾ç½® DMA æ•°æ®ä¼ è¾“æ–¹å‘ï¼Œè¿™é‡Œè®¾ç½®ä¸ºå¤–è®¾åˆ°å­˜å‚¨å™¨
+    dma_single_data_parameter.number = 3;                                                    // è®¾ç½® DMA ä¼ è¾“çš„æ•°æ®é‡ï¼Œè¿™é‡Œè®¾ç½®ä¸º 2
+    dma_single_data_parameter.priority = DMA_PRIORITY_HIGH;                                  //è®¾ç½® DMA é€šé“çš„ä¼˜å…ˆçº§ï¼Œè¿™é‡Œè®¾ç½®ä¸ºé«˜ä¼˜å…ˆçº§
+    dma_single_data_mode_init(DMA1,DMA_CH0,&dma_single_data_parameter);                      //åˆå§‹åŒ– DMA1 çš„é€šé“ 0
+    dma_channel_enable(DMA1, DMA_CH0);           //å¯ç”¨ DMA1 çš„é€šé“ 0                          
+	dma_circulation_enable(DMA1, DMA_CH0);       //å¯ç”¨ DMA1 çš„é€šé“ 0 çš„å¾ªç¯æ¨¡å¼
    
-		//ADCÏà¹ØÅäÖÃ
-		adc_deinit();      // ¸´Î»ADC
-		adc_sync_mode_config(ADC_SYNC_MODE_INDEPENDENT);                         //¶ÀÁ¢Ä£Ê½
+		//ADCç›¸å…³é…ç½®
+		adc_deinit();      // å¤ä½ADC
+		adc_sync_mode_config(ADC_SYNC_MODE_INDEPENDENT);                         //ç‹¬ç«‹æ¨¡å¼
 
-		adc_special_function_config(ADC0, ADC_SCAN_MODE, ENABLE);               // É¨ÃèÄ£Ê½
-		adc_special_function_config(ADC0, ADC_CONTINUOUS_MODE, ENABLE);         // Á¬ĞøÄ£Ê½
-		adc_data_alignment_config(ADC0, ADC_DATAALIGN_RIGHT);                  // ÓÒ¶ÔÆë
-		adc_channel_length_config(ADC0, ADC_REGULAR_CHANNEL, 3);              //¶ÁÈ¡2Í¨ĞÅ
+		adc_special_function_config(ADC0, ADC_SCAN_MODE, ENABLE);               // æ‰«ææ¨¡å¼
+		adc_special_function_config(ADC0, ADC_CONTINUOUS_MODE, ENABLE);         // è¿ç»­æ¨¡å¼
+		adc_data_alignment_config(ADC0, ADC_DATAALIGN_RIGHT);                  // å³å¯¹é½
+		adc_channel_length_config(ADC0, ADC_REGULAR_CHANNEL, 3);              //è¯»å–2é€šä¿¡
 
 		/* ADC regular channel config */
 		adc_regular_channel_config(ADC0, 0, ADC_CHANNEL_10, ADC_SAMPLETIME_144);
@@ -70,8 +70,8 @@ void ADC_config(void)
 //    tempData /= 10;
 
 //    
-////    Vol_Value1=adc_value[0]*3300/4095;//×ª»»³ÉµçÑ¹Öµ
-////	Vol_Value2=adc_value[1]*3300/4095;//×ª»»³ÉµçÑ¹Öµ
-////    Vol_Value3=adc_value[2]*3300/4095;//×ª»»³ÉµçÑ¹Öµ
+////    Vol_Value1=adc_value[0]*3300/4095;//è½¬æ¢æˆç”µå‹å€¼
+////	Vol_Value2=adc_value[1]*3300/4095;//è½¬æ¢æˆç”µå‹å€¼
+////    Vol_Value3=adc_value[2]*3300/4095;//è½¬æ¢æˆç”µå‹å€¼
 //}
 

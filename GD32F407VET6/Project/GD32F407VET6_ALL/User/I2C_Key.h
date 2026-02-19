@@ -11,7 +11,7 @@
 
 void I2C_Key_Init(void);
 void I2c_key_scan(void);  
-void process_password_input(void);// ´¦ÀíÃÜÂëÊäÈë
+void process_password_input(void);// å¤„ç†å¯†ç è¾“å…¥
 
 
 

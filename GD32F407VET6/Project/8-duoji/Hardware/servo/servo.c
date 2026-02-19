@@ -4,39 +4,39 @@
 
 
 void GPIO_Config(void) {
-    // Ê¹ÄÜ GPIOC Ê±ÖÓ
+    // ä½¿èƒ½ GPIOC æ—¶é’Ÿ
     rcu_periph_clock_enable(SERVO_RTC);
 
-    // ÅäÖÃ PC9 Îª¸´ÓÃÍÆÍìÊä³ö£¨TIMER2_CH3£©
-    gpio_af_set(SERVO_GPIO_Port, GPIO_AF_2, SERVO_Pin);  // AF2 ÊÇ TIMER2 µÄ¸´ÓÃ¹¦ÄÜ
+    // é…ç½® PC9 ä¸ºå¤ç”¨æ¨æŒ½è¾“å‡ºï¼ˆTIMER2_CH3ï¼‰
+    gpio_af_set(SERVO_GPIO_Port, GPIO_AF_2, SERVO_Pin);  // AF2 æ˜¯ TIMER2 çš„å¤ç”¨åŠŸèƒ½
     gpio_mode_set(SERVO_GPIO_Port, GPIO_MODE_AF, GPIO_PUPD_NONE, SERVO_Pin);
     gpio_output_options_set(SERVO_GPIO_Port, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, SERVO_Pin);
 }
 
 void TIMER2_PWM_Config(void) {
-    // Ê¹ÄÜ TIMER2 Ê±ÖÓ
+    // ä½¿èƒ½ TIMER2 æ—¶é’Ÿ
     rcu_periph_clock_enable(RCU_TIMER2);
 
-    // ÅäÖÃ TIMER2
+    // é…ç½® TIMER2
     timer_deinit(TIMER2);
 
-    // ÉèÖÃ TIMER2 ÎªÏòÉÏ¼ÆÊıÄ£Ê½
+    // è®¾ç½® TIMER2 ä¸ºå‘ä¸Šè®¡æ•°æ¨¡å¼
     timer_counter_value_config(TIMER2, 0);
     timer_prescaler_config(TIMER2, 83, TIMER_PSC_RELOAD_NOW);  // 84MHz / (83 + 1) = 1MHz
-    timer_autoreload_value_config(TIMER2, 19999);  // 1MHz / 20000 = 50Hz£¨20ms ÖÜÆÚ£©
+    timer_autoreload_value_config(TIMER2, 19999);  // 1MHz / 20000 = 50Hzï¼ˆ20ms å‘¨æœŸï¼‰
 
-    // ÅäÖÃ TIMER2_CH3 Îª PWM Ä£Ê½ 1
+    // é…ç½® TIMER2_CH3 ä¸º PWM æ¨¡å¼ 1
     timer_channel_output_mode_config(TIMER2, TIMER_CH_3, TIMER_OC_MODE_PWM1);
     timer_channel_output_polarity_config(TIMER2, TIMER_CH_3, TIMER_OC_POLARITY_LOW);
     timer_channel_output_fast_config(TIMER2, TIMER_CH_3, TIMER_OC_FAST_DISABLE);
 
-    // ÉèÖÃ³õÊ¼Õ¼¿Õ±È£¨1.5ms Âö³å¿í¶È£©
+    // è®¾ç½®åˆå§‹å ç©ºæ¯”ï¼ˆ1.5ms è„‰å†²å®½åº¦ï¼‰
     timer_channel_output_pulse_value_config(TIMER2, TIMER_CH_3, 1500);  // 1.5ms / 20ms * 20000 = 1500
 
-    // Ê¹ÄÜ TIMER2_CH3 Êä³ö
+    // ä½¿èƒ½ TIMER2_CH3 è¾“å‡º
     timer_channel_output_state_config(TIMER2, TIMER_CH_3, TIMER_CCX_ENABLE);
 
-    // Ê¹ÄÜ TIMER2
+    // ä½¿èƒ½ TIMER2
     timer_auto_reload_shadow_enable(TIMER2);
     timer_enable(TIMER2);
 }
@@ -47,13 +47,13 @@ void servo_init(void){
 }
 
 void Set_Servo_Angle(uint16_t angle) {
-    // ÏŞÖÆÂö³å¿í¶ÈÔÚ 500 µ½ 2500 Ö®¼ä£¨0.5ms µ½ 2.5ms£©
+    // é™åˆ¶è„‰å†²å®½åº¦åœ¨ 500 åˆ° 2500 ä¹‹é—´ï¼ˆ0.5ms åˆ° 2.5msï¼‰
 		uint16_t pulse_width;
 		pulse_width=angle*11.11+500;
     if (pulse_width < 500) pulse_width = 500;
     if (pulse_width > 2500) pulse_width = 2500;
 
-    // ÉèÖÃ TIMER2_CH3 µÄÂö³å¿í¶È
+    // è®¾ç½® TIMER2_CH3 çš„è„‰å†²å®½åº¦
     timer_channel_output_pulse_value_config(TIMER2, TIMER_CH_3, pulse_width);
 }
 

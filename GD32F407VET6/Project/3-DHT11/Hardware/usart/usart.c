@@ -2,39 +2,39 @@
 
 
 
-// ³õÊ¼»¯ USART0
+// åˆå§‹åŒ– USART0
 void USART0_init(uint32_t Baud) {
-    // Ê¹ÄÜ GPIOA ºÍ USART0 Ê±ÖÓ
+    // ä½¿èƒ½ GPIOA å’Œ USART0 æ—¶é’Ÿ
     rcu_periph_clock_enable(RCU_GPIOA);
     rcu_periph_clock_enable(RCU_USART0);
 
-    // ÅäÖÃ PA9 Îª¸´ÓÃÍÆÍìÊä³ö£¨USART0 TX£©
+    // é…ç½® PA9 ä¸ºå¤ç”¨æ¨æŒ½è¾“å‡ºï¼ˆUSART0 TXï¼‰
     gpio_af_set(GPIOA, GPIO_AF_7, GPIO_PIN_9);
     gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_9);
     gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_9);
 
-    // ÅäÖÃ PA10 Îª¸¡¿ÕÊäÈë£¨USART0 RX£©
+    // é…ç½® PA10 ä¸ºæµ®ç©ºè¾“å…¥ï¼ˆUSART0 RXï¼‰
     gpio_af_set(GPIOA, GPIO_AF_7, GPIO_PIN_10);
     gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_10);
 
-    // ÅäÖÃ USART0
+    // é…ç½® USART0
     usart_deinit(USART0);
-    usart_baudrate_set(USART0, Baud);  // ²¨ÌØÂÊ 
-    usart_word_length_set(USART0, USART_WL_8BIT);  // 8 Î»Êı¾İÎ»
-    usart_stop_bit_set(USART0, USART_STB_1BIT);  // 1 Î»Í£Ö¹Î»
-    usart_parity_config(USART0, USART_PM_NONE);  // ÎŞĞ£ÑéÎ»
-    usart_hardware_flow_rts_config(USART0, USART_RTS_DISABLE);  // ½ûÓÃ RTS
-    usart_hardware_flow_cts_config(USART0, USART_CTS_DISABLE);  // ½ûÓÃ CTS
-    usart_receive_config(USART0, USART_RECEIVE_ENABLE);  // Ê¹ÄÜ½ÓÊÕ
-    usart_transmit_config(USART0, USART_TRANSMIT_ENABLE);  // Ê¹ÄÜ·¢ËÍ
-    usart_enable(USART0);  // Ê¹ÄÜ USART0
+    usart_baudrate_set(USART0, Baud);  // æ³¢ç‰¹ç‡ 
+    usart_word_length_set(USART0, USART_WL_8BIT);  // 8 ä½æ•°æ®ä½
+    usart_stop_bit_set(USART0, USART_STB_1BIT);  // 1 ä½åœæ­¢ä½
+    usart_parity_config(USART0, USART_PM_NONE);  // æ— æ ¡éªŒä½
+    usart_hardware_flow_rts_config(USART0, USART_RTS_DISABLE);  // ç¦ç”¨ RTS
+    usart_hardware_flow_cts_config(USART0, USART_CTS_DISABLE);  // ç¦ç”¨ CTS
+    usart_receive_config(USART0, USART_RECEIVE_ENABLE);  // ä½¿èƒ½æ¥æ”¶
+    usart_transmit_config(USART0, USART_TRANSMIT_ENABLE);  // ä½¿èƒ½å‘é€
+    usart_enable(USART0);  // ä½¿èƒ½ USART0
 }
 
-// ÖØ¶¨Ïò printf µ½ USART0
+// é‡å®šå‘ printf åˆ° USART0
 int fputc(int ch,FILE *p){
 	
-	usart_data_transmit(USART0, (uint8_t)ch);  // ·¢ËÍÒ»¸ö×Ö·û
-	while (RESET == usart_flag_get(USART0, USART_FLAG_TBE));  // µÈ´ı·¢ËÍÍê³É
+	usart_data_transmit(USART0, (uint8_t)ch);  // å‘é€ä¸€ä¸ªå­—ç¬¦
+	while (RESET == usart_flag_get(USART0, USART_FLAG_TBE));  // ç­‰å¾…å‘é€å®Œæˆ
 	
 	return ch;
 }

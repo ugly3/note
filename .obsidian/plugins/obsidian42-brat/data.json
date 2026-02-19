@@ -1,8 +1,13 @@
 {
   "pluginList": [
+    "UNLINEARITY/Obsidian-CodeSpace",
     "0011000000110010/obsidian-i18n"
   ],
   "pluginSubListFrozenVersion": [
+    {
+      "repo": "UNLINEARITY/Obsidian-CodeSpace",
+      "version": "latest"
+    },
     {
       "repo": "0011000000110010/obsidian-i18n",
       "version": ""
@@ -17,7 +22,7 @@
   "loggingVerboseEnabled": false,
   "debuggingMode": false,
   "notificationsEnabled": true,
-  "globalTokenName": "",
+  "globalTokenName": "ugly3",
   "personalAccessToken": "",
   "selectLatestPluginVersionByDefault": false,
   "allowIncompatiblePlugins": false

@@ -15,12 +15,12 @@ void IR_Test(void)
 		OLED_Clear();
 		OLED_PrintString(0,0, "somebody", 1);
     OLED_Refresh();
-		printf("有人\r\n");
+		printf("鏈変汉\r\n");
 	}else{
 		OLED_Clear();
 		OLED_PrintString(0,0, "nobody ", 1);
     OLED_Refresh();
-		printf("无人\r\n");printf("有人\r\n");
+		printf("鏃犱汉\r\n");printf("鏈変汉\r\n");
 	}
 	
 }

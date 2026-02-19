@@ -1,8 +1,8 @@
 /********************************************************************************
-  * ÎÄ ¼ş Ãû: main.c
-  * ¹¦ÄÜ½éÉÜ:          
+  * æ–‡ ä»¶ å: main.c
+  * åŠŸèƒ½ä»‹ç»:          
   ******************************************************************************
-  * ×¢ÒâÊÂÏî:
+  * æ³¨æ„äº‹é¡¹:
 *********************************************************************************/
 
 #include "gd32f4xx.h"
@@ -22,7 +22,7 @@ int main(void)
 {
 		uint16_t temp,humi;
 		char chdat[30];
-    systick_config();   // µÎ´ğ¶¨Ê±Æ÷³õÊ¼»¯
+    systick_config();   // æ»´ç­”å®šæ—¶å™¨åˆå§‹åŒ–
 	  USART0_init(115200);
 		LED_config();
 		Btn_config();
@@ -32,7 +32,7 @@ int main(void)
 		DHT11_Init();
     while(1) {
 			DHT11_Read_Data(&temp,&humi);
-			printf("ÎÂ¶È=%d,Êª¶È=%d\r\n",temp,humi);
+			printf("æ¸©åº¦=%d,æ¹¿åº¦=%d\r\n",temp,humi);
 			OLED_Clear();
 			sprintf(chdat,"temp=%d",temp);
 			OLED_PrintString(0,0,chdat,1);

@@ -1,10 +1,10 @@
 #include "ALL.h"
 
-//Ð£×¼²ÎÊý
-//ÒòÎª²»Í¬µÄ´«¸ÐÆ÷ÌØÐÔÇúÏß²»ÊÇºÜÒ»ÖÂ£¬Òò´Ë£¬Ã¿Ò»¸ö´«¸ÐÆ÷ÐèÒª½ÃÕýÕâÀïÕâ¸ö²ÎÊý²ÅÄÜÊ¹²âÁ¿ÖµºÜ×¼È·¡£
-//µ±·¢ÏÖ²âÊÔ³öÀ´µÄÖØÁ¿Æ«´óÊ±£¬Ôö¼Ó¸ÃÊýÖµ¡£
-//Èç¹û²âÊÔ³öÀ´µÄÖØÁ¿Æ«Ð¡Ê±£¬¼õÐ¡¸ÄÊýÖµ¡£
-//¸ÃÖµ¿ÉÒÔÎªÐ¡Êý
+//æ ¡å‡†å‚æ•°
+//å› ä¸ºä¸åŒçš„ä¼ æ„Ÿå™¨ç‰¹æ€§æ›²çº¿ä¸æ˜¯å¾ˆä¸€è‡´ï¼Œå› æ­¤ï¼Œæ¯ä¸€ä¸ªä¼ æ„Ÿå™¨éœ€è¦çŸ«æ­£è¿™é‡Œè¿™ä¸ªå‚æ•°æ‰èƒ½ä½¿æµ‹é‡å€¼å¾ˆå‡†ç¡®ã€‚
+//å½“å‘çŽ°æµ‹è¯•å‡ºæ¥çš„é‡é‡åå¤§æ—¶ï¼Œå¢žåŠ è¯¥æ•°å€¼ã€‚
+//å¦‚æžœæµ‹è¯•å‡ºæ¥çš„é‡é‡åå°æ—¶ï¼Œå‡å°æ”¹æ•°å€¼ã€‚
+//è¯¥å€¼å¯ä»¥ä¸ºå°æ•°
 #define GapValue  900.5
 
 uint32_t HX711_Buffer;
@@ -13,21 +13,21 @@ uint8_t Flag_Error = 0;
 
 void HX711_Init(void)
 {
-    rcu_periph_clock_enable(HX711_RCU_GPIOX);//Ê¹ÄÜGPIOBÊ±ÖÓ
-    gpio_mode_set(HX711_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, HX711_PIN_SCK);//Êä³ö
-    gpio_output_options_set(HX711_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, HX711_PIN_SCK);//ÍÆÍìÊä³ö£¬50MËÙ¶È
+    rcu_periph_clock_enable(HX711_RCU_GPIOX);//ä½¿èƒ½GPIOBæ—¶é’Ÿ
+    gpio_mode_set(HX711_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, HX711_PIN_SCK);//è¾“å‡º
+    gpio_output_options_set(HX711_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, HX711_PIN_SCK);//æŽ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
     
-    gpio_mode_set(HX711_PORT, GPIO_MODE_INPUT, GPIO_PUPD_PULLUP, HX711_PIN_DOUT);//ÉÏÀ­ÊäÈë
+    gpio_mode_set(HX711_PORT, GPIO_MODE_INPUT, GPIO_PUPD_PULLUP, HX711_PIN_DOUT);//ä¸Šæ‹‰è¾“å…¥
     
     gpio_bit_set(HX711_PORT, HX711_PIN_SCK);
-    Get_Maopi();		      //³ÆÃ«Æ¤ÖØÁ¿
+    Get_Maopi();		      //ç§°æ¯›çš®é‡é‡
 }
 
 
 //****************************************************
-//¶ÁÈ¡HX711
+//è¯»å–HX711
 //****************************************************
-uint32_t HX711_Read(void)	//ÔöÒæ128
+uint32_t HX711_Read(void)	//å¢žç›Š128
 {
 	unsigned long count; 
 //	unsigned char timeout;
@@ -49,14 +49,14 @@ uint32_t HX711_Read(void)	//ÔöÒæ128
 		delay_1us(20);
 	} 
  	gpio_bit_set(HX711_PORT, HX711_PIN_SCK);  
-    count=count^0x800000;//µÚ25¸öÂö³åÏÂ½µÑØÀ´Ê±£¬×ª»»Êý¾Ý
+    count=count^0x800000;//ç¬¬25ä¸ªè„‰å†²ä¸‹é™æ²¿æ¥æ—¶ï¼Œè½¬æ¢æ•°æ®
 	delay_1us(20);
 	gpio_bit_reset(HX711_PORT, HX711_PIN_SCK);   
 	return count;
 }
 
 //****************************************************
-//»ñÈ¡Ã«Æ¤ÖØÁ¿
+//èŽ·å–æ¯›çš®é‡é‡
 //****************************************************
 void Get_Maopi(void)
 {
@@ -65,7 +65,7 @@ void Get_Maopi(void)
 
 
 //****************************************************
-//³ÆÖØ
+//ç§°é‡
 //****************************************************
 void Get_Weight(uint8_t status)
 {
@@ -73,15 +73,15 @@ void Get_Weight(uint8_t status)
     {
         HX711_Buffer = HX711_Read();
         Weight_Shiwu = HX711_Buffer;
-        Weight_Shiwu = Weight_Shiwu - Weight_Maopi;				//»ñÈ¡ÊµÎïµÄAD²ÉÑùÊýÖµ¡£
+        Weight_Shiwu = Weight_Shiwu - Weight_Maopi;				//èŽ·å–å®žç‰©çš„ADé‡‡æ ·æ•°å€¼ã€‚
         
         if(Weight_Shiwu > 0)			
         {
             
-            Weight_Shiwu = (float)(Weight_Shiwu/(float)GapValue); 	//¼ÆËãÊµÎïµÄÊµ¼ÊÖØÁ¿
-                                                            //ÒòÎª²»Í¬µÄ´«¸ÐÆ÷ÌØÐÔÇúÏß²»Ò»Ñù£¬Òò´Ë£¬Ã¿Ò»¸ö´«¸ÐÆ÷ÐèÒª½ÃÕýÕâÀïµÄGapValueÕâ¸ö³ýÊý¡£
-                                                            //µ±·¢ÏÖ²âÊÔ³öÀ´µÄÖØÁ¿Æ«´óÊ±£¬Ôö¼Ó¸ÃÊýÖµ¡£
-                                                            //Èç¹û²âÊÔ³öÀ´µÄÖØÁ¿Æ«Ð¡Ê±£¬¼õÐ¡¸ÄÊýÖµ¡£
+            Weight_Shiwu = (float)(Weight_Shiwu/(float)GapValue); 	//è®¡ç®—å®žç‰©çš„å®žé™…é‡é‡
+                                                            //å› ä¸ºä¸åŒçš„ä¼ æ„Ÿå™¨ç‰¹æ€§æ›²çº¿ä¸ä¸€æ ·ï¼Œå› æ­¤ï¼Œæ¯ä¸€ä¸ªä¼ æ„Ÿå™¨éœ€è¦çŸ«æ­£è¿™é‡Œçš„GapValueè¿™ä¸ªé™¤æ•°ã€‚
+                                                            //å½“å‘çŽ°æµ‹è¯•å‡ºæ¥çš„é‡é‡åå¤§æ—¶ï¼Œå¢žåŠ è¯¥æ•°å€¼ã€‚
+                                                            //å¦‚æžœæµ‹è¯•å‡ºæ¥çš„é‡é‡åå°æ—¶ï¼Œå‡å°æ”¹æ•°å€¼ã€‚
         }
         
     }

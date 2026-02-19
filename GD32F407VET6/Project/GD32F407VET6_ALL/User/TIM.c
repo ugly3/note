@@ -16,19 +16,19 @@ void TIMER0_config(void)
     timer_oc_parameter_struct timer_ocintpara;
     timer_parameter_struct timer_initpara;
     
-    pwm_gpio_config();          //PWMÒı½Å³õÊ¼»¯
+    pwm_gpio_config();          //PWMå¼•è„šåˆå§‹åŒ–
 
     rcu_periph_clock_enable(RCU_TIMER0);
     rcu_timer_clock_prescaler_config(RCU_TIMER_PSC_MUL4);
     
     timer_struct_para_init(&timer_initpara);
     timer_deinit(TIMER0);
-	timer_primary_output_config(TIMER0,ENABLE);//¸ß¼¶¶¨Ê±Æ÷0,7ĞèÒªÊ¹ÄÜ
+	timer_primary_output_config(TIMER0,ENABLE);//é«˜çº§å®šæ—¶å™¨0,7éœ€è¦ä½¿èƒ½
     /* TIMER1 configuration */
-    timer_initpara.prescaler         = 168-1;//168·ÖÆµ£¬ÅäºÏºóÃæµÄ9999£¬²úÉú50HZ
+    timer_initpara.prescaler         = 168-1;//168åˆ†é¢‘ï¼Œé…åˆåé¢çš„9999ï¼Œäº§ç”Ÿ50HZ
     timer_initpara.alignedmode       = TIMER_COUNTER_EDGE;
     timer_initpara.counterdirection  = TIMER_COUNTER_UP;
-    timer_initpara.period            = 20000-1;//¼ÆÊıÖµ
+    timer_initpara.period            = 20000-1;//è®¡æ•°å€¼
     timer_initpara.clockdivision     = TIMER_CKDIV_DIV1;
     timer_initpara.repetitioncounter = 0;
     timer_init(TIMER0,&timer_initpara);
@@ -47,10 +47,10 @@ void TIMER0_config(void)
     timer_channel_output_config(TIMER0,TIMER_CH_3,&timer_ocintpara);
 
     /* CH1 configuration in PWM mode1,duty cycle 0% */
-//    timer_channel_output_pulse_value_config(TIMER0,TIMER_CH_0,0);//Õ¼¿Õ±È0
-    timer_channel_output_pulse_value_config(TIMER0,TIMER_CH_1,0);//Õ¼¿Õ±È
-    timer_channel_output_pulse_value_config(TIMER0,TIMER_CH_2,0);//Õ¼¿Õ±È0
-    timer_channel_output_pulse_value_config(TIMER0,TIMER_CH_3,0);//Õ¼¿Õ±È0
+//    timer_channel_output_pulse_value_config(TIMER0,TIMER_CH_0,0);//å ç©ºæ¯”0
+    timer_channel_output_pulse_value_config(TIMER0,TIMER_CH_1,0);//å ç©ºæ¯”
+    timer_channel_output_pulse_value_config(TIMER0,TIMER_CH_2,0);//å ç©ºæ¯”0
+    timer_channel_output_pulse_value_config(TIMER0,TIMER_CH_3,0);//å ç©ºæ¯”0
 
     
 //    timer_channel_output_mode_config(TIMER0,TIMER_CH_0,TIMER_OC_MODE_PWM0);
@@ -70,9 +70,9 @@ void TIMER0_config(void)
     timer_enable(TIMER0);
 }
 /**************************************************************
-*¹¦  ÄÜ£º	µ÷½ÚPWM
-*²Î  Êı£º	ÎŞ
-*·µ»ØÖµ£º	ÎŞ 
+*åŠŸ  èƒ½ï¼š	è°ƒèŠ‚PWM
+*å‚  æ•°ï¼š	æ— 
+*è¿”å›å€¼ï¼š	æ—  
 **************************************************************/
 void SteerGear_PWM_CH1(uint16_t duty)
 {
@@ -104,15 +104,15 @@ void SteerGear_PWM_CH3(uint16_t duty)
 
 
 
-//¶¨Ê±Æ÷ÅäÖÃ
+//å®šæ—¶å™¨é…ç½®
 void TIMER1_config(void)
 {
     /* -----------------------------------------------------------------------
-	  ÏµÍ³Ö÷Æµ168MHZ,timer_initpara.prescalerÎª167£¬timer_initpara.periodÎª99£¬ÆµÂÊ¾ÍÎª10kHZ
+	  ç³»ç»Ÿä¸»é¢‘168MHZ,timer_initpara.prescalerä¸º167ï¼Œtimer_initpara.periodä¸º99ï¼Œé¢‘ç‡å°±ä¸º10kHZ
     ----------------------------------------------------------------------- */
     timer_parameter_struct timer_initpara;
     rcu_periph_clock_enable(RCU_TIMER1);
-	  rcu_timer_clock_prescaler_config(RCU_TIMER_PSC_MUL4);//AP1×ÜÏß×î¸ß42MHZ,ËùÒÔTIME1µ½168MĞèÒª4±¶Æµ
+	  rcu_timer_clock_prescaler_config(RCU_TIMER_PSC_MUL4);//AP1æ€»çº¿æœ€é«˜42MHZ,æ‰€ä»¥TIME1åˆ°168Méœ€è¦4å€é¢‘
     timer_deinit(TIMER1);
     /* TIMER1 configuration */
     timer_initpara.prescaler         = 167;
@@ -134,11 +134,11 @@ void TIMER1_config(void)
 void TIMER2_config(void)
 {
     /* -----------------------------------------------------------------------
-	  ÏµÍ³Ö÷Æµ168MHZ,timer_initpara.prescalerÎª167£¬timer_initpara.periodÎª999£¬ÆµÂÊ¾ÍÎª1KHZ
+	  ç³»ç»Ÿä¸»é¢‘168MHZ,timer_initpara.prescalerä¸º167ï¼Œtimer_initpara.periodä¸º999ï¼Œé¢‘ç‡å°±ä¸º1KHZ
     ----------------------------------------------------------------------- */
     timer_parameter_struct timer_initpara;
     rcu_periph_clock_enable(RCU_TIMER2);
-    rcu_timer_clock_prescaler_config(RCU_TIMER_PSC_MUL4);//AP1×ÜÏß×î¸ß42MHZ,ËùÒÔTIME1µ½168MĞèÒª4±¶Æµ
+    rcu_timer_clock_prescaler_config(RCU_TIMER_PSC_MUL4);//AP1æ€»çº¿æœ€é«˜42MHZ,æ‰€ä»¥TIME1åˆ°168Méœ€è¦4å€é¢‘
     timer_deinit(TIMER2);
     /* TIMER1 configuration */
     timer_initpara.prescaler         = 167;
@@ -165,7 +165,7 @@ void TIMER2_config(void)
 
 
 uint32_t TimeCounter;
-void TIMER1_IRQHandler(void)//(0.1msÖĞ¶ÏÒ»´Î)
+void TIMER1_IRQHandler(void)//(0.1msä¸­æ–­ä¸€æ¬¡)
 {
 	timer_flag_clear(TIMER1,TIMER_FLAG_UP);
     TimeCounter++;
@@ -181,7 +181,7 @@ uint8_t index_800ms_flag=0;
 uint8_t index_1000ms_flag=0;
 uint8_t index_1300ms_flag=0;
 
-void TIMER2_IRQHandler(void)//(1msÖĞ¶ÏÒ»´Î)
+void TIMER2_IRQHandler(void)//(1msä¸­æ–­ä¸€æ¬¡)
 {
 	timer_flag_clear(TIMER2,TIMER_FLAG_UP);
     index_1ms++;
@@ -189,31 +189,31 @@ void TIMER2_IRQHandler(void)//(1msÖĞ¶ÏÒ»´Î)
     {
         index_5ms_flag=1;
     }
-    if(index_1ms%10==0)//Ã¿10msÖ´ĞĞÒ»´Î 
+    if(index_1ms%10==0)//æ¯10msæ‰§è¡Œä¸€æ¬¡ 
     {
         index_10ms_flag =1;
     }
-    if(index_1ms%50==0)//Ã¿20msÖ´ĞĞÒ»´Î 
+    if(index_1ms%50==0)//æ¯20msæ‰§è¡Œä¸€æ¬¡ 
     {
         index_50ms_flag =1;
     }
-    if(index_1ms%200==0)//Ã¿200msÖ´ĞĞÒ»´Î 
+    if(index_1ms%200==0)//æ¯200msæ‰§è¡Œä¸€æ¬¡ 
     {   
         index_200ms_flag=1;
     }
-    if(index_1ms%500==0)//Ã¿500msÖ´ĞĞÒ»´Î 
+    if(index_1ms%500==0)//æ¯500msæ‰§è¡Œä¸€æ¬¡ 
     {
         index_500ms_flag = 1;
     }
-    if(index_1ms%800==0)//Ã¿800msÖ´ĞĞÒ»´Î 
+    if(index_1ms%800==0)//æ¯800msæ‰§è¡Œä¸€æ¬¡ 
     {
         index_800ms_flag = 1;
     }
-    if(index_1ms%1000==0)//Ã¿800msÖ´ĞĞÒ»´Î
+    if(index_1ms%1000==0)//æ¯800msæ‰§è¡Œä¸€æ¬¡
     {
         index_1000ms_flag = 1;
     }
-    if(index_1ms%1500==0)//Ã¿1500msÖ´ĞĞÒ»´Î 
+    if(index_1ms%1500==0)//æ¯1500msæ‰§è¡Œä¸€æ¬¡ 
     {   
         index_1300ms_flag=1;
     }

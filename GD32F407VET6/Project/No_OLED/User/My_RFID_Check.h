@@ -7,9 +7,9 @@
 
 
 
-void RFID_Check(void);          //ʶ�����Ƿ���ȷ
-void RFID_ADD(void);	        //¼�뿨Ƭ
-void RFID_DELETE(void);	        //ɾ����Ƭ
+void RFID_Check(void);          //识卡看是否正确
+void RFID_ADD(void);	        //录入卡片
+void RFID_DELETE(void);	        //删除卡片
 
 
 

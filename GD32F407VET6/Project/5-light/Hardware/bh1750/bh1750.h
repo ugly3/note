@@ -8,7 +8,7 @@
 void BH1750_init(void);
 
 
-#define BH1750_Addr 0x46				//0100 0110   ¼´µØÖ·Î» = 0£»
+#define BH1750_Addr 0x46				//0100 0110   å³åœ°å€ä½ = 0ï¼›
 #define BH1750_ON   0x01
 #define BH1750_CON  0x10
 #define BH1750_ONE  0x20
@@ -18,8 +18,8 @@ void BH1750_init(void);
 void BH1750_Hardware_Init(void);
 void BH1750_Software_Init(void);
 
-void Start_BH1750(void);				//ÉÏµç£¬ÉèÖÃÇå³ıÊı¾İ¼Ä´æÆ÷
-void Read_BH1750(void);					//Á¬ĞøµÄ¶ÁÈ¡ÄÚ²¿¼Ä´æÆ÷Êı¾İ
+void Start_BH1750(void);				//ä¸Šç”µï¼Œè®¾ç½®æ¸…é™¤æ•°æ®å¯„å­˜å™¨
+void Read_BH1750(void);					//è¿ç»­çš„è¯»å–å†…éƒ¨å¯„å­˜å™¨æ•°æ®
 void Convert_BH1750(void);
 uint16_t BH1750_Read(void); 
 

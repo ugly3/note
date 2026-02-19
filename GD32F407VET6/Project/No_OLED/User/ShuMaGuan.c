@@ -4,7 +4,7 @@
 // unsigned char  segbit[]={0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
 // unsigned char  disbuf[4]={0,0,0,0};
 
-unsigned char  LED_0F[17] = //µÍµçÆ½ÏÔÊ¾£¨¹²Ñô£©
+unsigned char  LED_0F[17] = //ä½ç”µå¹³æ˜¾ç¤ºï¼ˆå…±é˜³ï¼‰
 {// 0	 1	  2	   3	4	 5	  6	   7	8	 9	  A	   b	C    d	  E    F    .
 	0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x90,0x8C,0xBF,0xC6,0xA1,0x86,0x8F,0x7F
 };
@@ -15,9 +15,9 @@ unsigned char  LED_0F[17] = //µÍµçÆ½ÏÔÊ¾£¨¹²Ñô£©
 
 void ShuMaGuan_Display_Init(void)
 {
-    rcu_periph_clock_enable(ShuMaGuan_RTC);//Ê¹ÄÜÊ±ÖÓ
-    gpio_mode_set(ShuMaGuan_GPIO_Port, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, SCLK_PIN|RCLK_PIN|DIO_PIN);//ÅäÖÃ³ÉÊä³ö
-    gpio_output_options_set(ShuMaGuan_GPIO_Port, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, SCLK_PIN|RCLK_PIN|DIO_PIN);//ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È
+    rcu_periph_clock_enable(ShuMaGuan_RTC);//ä½¿èƒ½æ—¶é’Ÿ
+    gpio_mode_set(ShuMaGuan_GPIO_Port, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, SCLK_PIN|RCLK_PIN|DIO_PIN);//é…ç½®æˆè¾“å‡º
+    gpio_output_options_set(ShuMaGuan_GPIO_Port, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, SCLK_PIN|RCLK_PIN|DIO_PIN);//é…ç½®æˆæ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
 }
 
 
@@ -34,7 +34,7 @@ void LED_OUT(unsigned char X)
 			gpio_bit_write(ShuMaGuan_GPIO_Port, DIO_PIN, RESET);
 		}
 		X<<=1;
-        //ÒÆÎ»¼Ä´æÆ÷Ê±ÖÓ£¬ÉÏÉıÑØÓĞĞ§£¨ÏÈÀ­µÍÔÙÀ­¸ßµçÆ½£©£¬Êı¾İ½«ÒÆÈëÒÆÎ»¼Ä´æÆ÷
+        //ç§»ä½å¯„å­˜å™¨æ—¶é’Ÿï¼Œä¸Šå‡æ²¿æœ‰æ•ˆï¼ˆå…ˆæ‹‰ä½å†æ‹‰é«˜ç”µå¹³ï¼‰ï¼Œæ•°æ®å°†ç§»å…¥ç§»ä½å¯„å­˜å™¨
 		gpio_bit_write(ShuMaGuan_GPIO_Port, SCLK_PIN, RESET);
 		gpio_bit_write(ShuMaGuan_GPIO_Port, SCLK_PIN, SET);
 	}
@@ -43,28 +43,28 @@ void LED_OUT(unsigned char X)
 
 void ShuMaGuan_Display(int16_t Data)
 {
-	unsigned char  *led_table;          // ²é±íÖ¸Õë
+	unsigned char  *led_table;          // æŸ¥è¡¨æŒ‡é’ˆ
 	unsigned char i,Data1,Data2,Data3,Data4;
     
-    Data1=(Data/1000)%10;//Ç§Î»
-    Data2=(Data/100)%10;//°ÙÎ»
-    Data3=(Data/10)%10;//Ê®Î»
-    Data4=Data%10;//¸öÎ»
+    Data1=(Data/1000)%10;//åƒä½
+    Data2=(Data/100)%10;//ç™¾ä½
+    Data3=(Data/10)%10;//åä½
+    Data4=Data%10;//ä¸ªä½
     
-	//×ó±ßËãÆğµÚ1Î»ÏÔÊ¾
+	//å·¦è¾¹ç®—èµ·ç¬¬1ä½æ˜¾ç¤º
 	led_table = LED_0F + Data1;
 	i = *led_table;
 
 	LED_OUT(i);			
-	LED_OUT(0x08);		//·¢ËÍÎ»Ñ¡ĞÅºÅ£¬Ñ¡ÔñµÚ1Î»ÊıÂë¹Ü
+	LED_OUT(0x08);		//å‘é€ä½é€‰ä¿¡å·ï¼Œé€‰æ‹©ç¬¬1ä½æ•°ç ç®¡
 
-	//´æ´¢¼Ä´æÆ÷Ê±ÖÓĞÅºÅ£¬»òÕß¿ÉÒÔÀí½âÎªËø´æÆ÷£¬µ±¸ßµçÆ½Ê±£¬ÒÆÎ»¼Ä´æÆ÷µÄÊı¾İ»á¸´ÖÆµ½Ëø´æ¼Ä´æÆ÷ÖĞ£¬²¢½«×îÖÕ½á¹ûÍÆËÍµ½²¢ĞĞÊı¾İÊä³ö½ÅÎ»
-	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, RESET);//¹Ü½ÅÊä³öµÍ
+	//å­˜å‚¨å¯„å­˜å™¨æ—¶é’Ÿä¿¡å·ï¼Œæˆ–è€…å¯ä»¥ç†è§£ä¸ºé”å­˜å™¨ï¼Œå½“é«˜ç”µå¹³æ—¶ï¼Œç§»ä½å¯„å­˜å™¨çš„æ•°æ®ä¼šå¤åˆ¶åˆ°é”å­˜å¯„å­˜å™¨ä¸­ï¼Œå¹¶å°†æœ€ç»ˆç»“æœæ¨é€åˆ°å¹¶è¡Œæ•°æ®è¾“å‡ºè„šä½
+	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, RESET);//ç®¡è„šè¾“å‡ºä½
   delay_1ms(1);
-	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, SET);//¹Ü½ÅÊä³ö¸ß
+	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, SET);//ç®¡è„šè¾“å‡ºé«˜
     
-	//×ó±ßËãÆğµÚ2Î»ÏÔÊ¾
-	led_table = LED_0F + Data2; //Ö¸Õë²Ù×÷
+	//å·¦è¾¹ç®—èµ·ç¬¬2ä½æ˜¾ç¤º
+	led_table = LED_0F + Data2; //æŒ‡é’ˆæ“ä½œ
 	i = *led_table;
 
 	LED_OUT(i);		
@@ -73,7 +73,7 @@ void ShuMaGuan_Display(int16_t Data)
 	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, RESET);
   delay_1ms(1);
 	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, SET);
-	//×ó±ßËãÆğµÚ3Î»ÏÔÊ¾
+	//å·¦è¾¹ç®—èµ·ç¬¬3ä½æ˜¾ç¤º
 	led_table = LED_0F + Data3;
 	i = *led_table&0X7F;//
 
@@ -83,7 +83,7 @@ void ShuMaGuan_Display(int16_t Data)
 	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, RESET);
   delay_1ms(1);
 	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, SET);
-	//×ó±ßËãÆğµÚ4Î»ÏÔÊ¾
+	//å·¦è¾¹ç®—èµ·ç¬¬4ä½æ˜¾ç¤º
 	led_table = LED_0F + Data4;
 	i = *led_table;
 
@@ -99,26 +99,26 @@ void ShuMaGuan_Display(int16_t Data)
 void ShuMaGuan_OFF(void)
 {
 	LED_OUT(0xFF);			
-	LED_OUT(0x08);		//·¢ËÍÎ»Ñ¡ĞÅºÅ£¬Ñ¡ÔñµÚ1Î»ÊıÂë¹Ü
-	//´æ´¢¼Ä´æÆ÷Ê±ÖÓĞÅºÅ£¬»òÕß¿ÉÒÔÀí½âÎªËø´æÆ÷£¬µ±¸ßµçÆ½Ê±£¬ÒÆÎ»¼Ä´æÆ÷µÄÊı¾İ»á¸´ÖÆµ½Ëø´æ¼Ä´æÆ÷ÖĞ£¬²¢½«×îÖÕ½á¹ûÍÆËÍµ½²¢ĞĞÊı¾İÊä³ö½ÅÎ»
-	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, RESET);//¹Ü½ÅÊä³öµÍ
+	LED_OUT(0x08);		//å‘é€ä½é€‰ä¿¡å·ï¼Œé€‰æ‹©ç¬¬1ä½æ•°ç ç®¡
+	//å­˜å‚¨å¯„å­˜å™¨æ—¶é’Ÿä¿¡å·ï¼Œæˆ–è€…å¯ä»¥ç†è§£ä¸ºé”å­˜å™¨ï¼Œå½“é«˜ç”µå¹³æ—¶ï¼Œç§»ä½å¯„å­˜å™¨çš„æ•°æ®ä¼šå¤åˆ¶åˆ°é”å­˜å¯„å­˜å™¨ä¸­ï¼Œå¹¶å°†æœ€ç»ˆç»“æœæ¨é€åˆ°å¹¶è¡Œæ•°æ®è¾“å‡ºè„šä½
+	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, RESET);//ç®¡è„šè¾“å‡ºä½
     delay_1ms(1);
-	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, SET);//¹Ü½ÅÊä³ö¸ß
+	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, SET);//ç®¡è„šè¾“å‡ºé«˜
     
-	//×ó±ßËãÆğµÚ2Î»ÏÔÊ¾
+	//å·¦è¾¹ç®—èµ·ç¬¬2ä½æ˜¾ç¤º
 	LED_OUT(0xFF);		
 	LED_OUT(0x04);		
 	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, RESET);
     delay_1ms(1);
 	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, SET);
-	//×ó±ßËãÆğµÚ3Î»ÏÔÊ¾
+	//å·¦è¾¹ç®—èµ·ç¬¬3ä½æ˜¾ç¤º
 	LED_OUT(0xFF);			
 	LED_OUT(0x02);	
 	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, RESET);
     delay_1ms(0xFF);
 	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, SET);
     
-	//×ó±ßËãÆğµÚ4Î»ÏÔÊ¾
+	//å·¦è¾¹ç®—èµ·ç¬¬4ä½æ˜¾ç¤º
 	LED_OUT(0xFF);			
 	LED_OUT(0x01);		
 	gpio_bit_write(ShuMaGuan_GPIO_Port, RCLK_PIN, RESET);

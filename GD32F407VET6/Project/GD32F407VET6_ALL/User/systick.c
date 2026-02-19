@@ -71,7 +71,7 @@ void delay_1ms(uint32_t count)
     }
 }
 
-//等待时间，us级别
+//绛夊緟鏃堕棿锛寀s绾у埆
 void delay_1us(unsigned long i)
 {
 	unsigned long j;

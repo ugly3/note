@@ -1,8 +1,8 @@
 /********************************************************************************
-  * ÎÄ ¼ş Ãû: main.c
-  * ¹¦ÄÜ½éÉÜ:          
+  * æ–‡ ä»¶ å: main.c
+  * åŠŸèƒ½ä»‹ç»:          
   ******************************************************************************
-  * ×¢ÒâÊÂÏî:
+  * æ³¨æ„äº‹é¡¹:
 *********************************************************************************/
 
 #include "gd32f4xx.h"
@@ -22,7 +22,7 @@ int main(void)
 {
 	  char chdat[50];
 		uint16_t lx_dat;
-    systick_config();   // µÎ´ğ¶¨Ê±Æ÷³õÊ¼»¯
+    systick_config();   // æ»´ç­”å®šæ—¶å™¨åˆå§‹åŒ–
 	  USART0_init(115200);
 		LED_config();
 		Btn_config();
@@ -39,7 +39,7 @@ int main(void)
 			sprintf(chdat,"brightness=%d",lx_dat);
 			OLED_PrintString(0,0,chdat,1);
 			OLED_Refresh();
-			printf("¹âÕÕÇ¿¶È:%d\r\n",lx_dat);
+			printf("å…‰ç…§å¼ºåº¦:%d\r\n",lx_dat);
 			gpio_bit_toggle(LED1_GPIO_Port,LED1_Pin);
 			delay_1ms(50);
     }

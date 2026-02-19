@@ -2,10 +2,10 @@
 
 void LED_Init(void)
 {
-    rcu_periph_clock_enable(LED_RCU_GPIOX);//Ê¹ÄÜGPIOBÊ±ÖÓ
-    gpio_mode_set(LED_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED_PIN);//ÅäÖÃ³ÉÊä³ö
-    gpio_output_options_set(LED_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, LED_PIN);//ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È
-    gpio_bit_set(LED_PORT, LED_PIN);//Êä³ö¸ßµçÆ½£¨Ãğ£©
+    rcu_periph_clock_enable(LED_RCU_GPIOX);//ä½¿èƒ½GPIOBæ—¶é’Ÿ
+    gpio_mode_set(LED_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LED_PIN);//é…ç½®æˆè¾“å‡º
+    gpio_output_options_set(LED_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, LED_PIN);//é…ç½®æˆæ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
+    gpio_bit_set(LED_PORT, LED_PIN);//è¾“å‡ºé«˜ç”µå¹³ï¼ˆç­ï¼‰
 }
 
 
@@ -22,7 +22,7 @@ void led_roll(uint8_t count)
     {
         gpio_bit_reset(LED_PORT, LED_PIN);
         delay_1ms(400);
-        gpio_bit_set(LED_PORT, LED_PIN);//PB4Êä³ö¸ßµçÆ½£¨Ãğ£©
+        gpio_bit_set(LED_PORT, LED_PIN);//PB4è¾“å‡ºé«˜ç”µå¹³ï¼ˆç­ï¼‰
         delay_1ms(400);
     }
 }

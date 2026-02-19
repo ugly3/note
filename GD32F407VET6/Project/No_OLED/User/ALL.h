@@ -39,16 +39,16 @@ extern int i,j;
 
 
 //MPU6050
-extern short Accel[3];//¼ÓËÙ¶È
-extern short Gyro [3];//½ÇËÙ¶È
-extern long AccelData[3];//µ¥Î»mg
-extern long GyroData[3];//µ¥Î»mdps
+extern short Accel[3];//åŠ é€Ÿåº¦
+extern short Gyro [3];//è§’é€Ÿåº¦
+extern long AccelData[3];//å•ä½mg
+extern long GyroData[3];//å•ä½mdps
 
 
 extern uint16_t temp_value;
 extern uint16_t humi_value;
 extern uint32_t MQ2_yuzhi,Huoyan_yuzhi;
-//Ó²¼ş¿ØÖÆ±êÖ¾Î»£¬0´ú±í¹Ø£¬1´ú±í¿ª
+//ç¡¬ä»¶æ§åˆ¶æ ‡å¿—ä½ï¼Œ0ä»£è¡¨å…³ï¼Œ1ä»£è¡¨å¼€
 extern uint8_t led_status;
 extern uint8_t door_status;
 extern uint8_t Walkmotor_status;
@@ -59,7 +59,7 @@ extern uint8_t Body_Hw_ZD_status;
 extern uint8_t Fan_ZD_status;
 
 
-//¶¨Ê±Æ÷2 ¶¨Ê±Ö´ĞĞÈÎÎñ
+//å®šæ—¶å™¨2 å®šæ—¶æ‰§è¡Œä»»åŠ¡
 extern uint32_t TimeCounter;
 extern uint32_t index_5ms_flag;
 extern uint8_t index_10ms_flag;
@@ -70,7 +70,7 @@ extern uint8_t index_800ms_flag;
 extern uint8_t index_1000ms_flag;
 extern uint8_t index_1300ms_flag;
 
-//ÈÎÎñ¿ªÊ¼±êÖ¾
+//ä»»åŠ¡å¼€å§‹æ ‡å¿—
 extern uint8_t task1_is_start;
 extern uint8_t task2_is_start;
 extern uint8_t task3_is_start;
@@ -88,33 +88,33 @@ extern uint8_t task9_2_is_start;
 extern uint8_t task9_3_is_start;
 
 
-extern uint8_t RFID_Stop;      //0´ú±í¼ì²âRFID£¬1´ú±í²»¼ì²âRFID
-extern uint8_t select_card;    //Ñ¡ÔñÉ¾³ıÏëÒªµÄRFID¿¨
-extern uint8_t DLED_view_flag;       //ÊıÂë¹Ü¡¢µãÕóÖ´ĞĞ±êÖ¾Î»£¬1´ú±í¹Ø±ÕÒ»Ğ©ÖĞ¶ÏÈÎÎñ£¬·ÀÖ¹ÊıÂë¹Ü¡¢µãÕóÉÁË¸²»ÎÈ¶¨
+extern uint8_t RFID_Stop;      //0ä»£è¡¨æ£€æµ‹RFIDï¼Œ1ä»£è¡¨ä¸æ£€æµ‹RFID
+extern uint8_t select_card;    //é€‰æ‹©åˆ é™¤æƒ³è¦çš„RFIDå¡
+extern uint8_t DLED_view_flag;       //æ•°ç ç®¡ã€ç‚¹é˜µæ‰§è¡Œæ ‡å¿—ä½ï¼Œ1ä»£è¡¨å…³é—­ä¸€äº›ä¸­æ–­ä»»åŠ¡ï¼Œé˜²æ­¢æ•°ç ç®¡ã€ç‚¹é˜µé—ªçƒä¸ç¨³å®š
 
 
-//Èı¸ö¶ÀÁ¢°´¼ü
-extern int OLED_SELECT_flag;   //ÉÏÒ»´ÎÑ¡Ôñ²ÎÊı
+//ä¸‰ä¸ªç‹¬ç«‹æŒ‰é”®
+extern int OLED_SELECT_flag;   //ä¸Šä¸€æ¬¡é€‰æ‹©å‚æ•°
 extern int OLED_SELECT;      
 extern uint8_t OLED_CONFIRM;
 
-//ãĞÖµ
+//é˜ˆå€¼
 extern uint32_t LightData_yuzhi;
 extern uint32_t temp_yuzhi,humi_yuzhi;
 
-//³¬Éù²¨¾àÀë
+//è¶…å£°æ³¢è·ç¦»
 extern uint32_t Distance;
 
-//¹âÕÕÇ¿¶È£¨ÕûÊı£¬µ¥Î»lx£©
+//å…‰ç…§å¼ºåº¦ï¼ˆæ•´æ•°ï¼Œå•ä½lxï¼‰
 extern uint32_t LightData_Hex;
 
-//´æ´¢RFID¿¨ºÅID
-extern uint8_t UI0[4];		 	//¿¨0IDºÅ
-extern uint8_t UI1[4];	 		//¿¨1IDºÅ
-extern uint8_t UI2[4];			//¿¨2IDºÅ
-extern uint8_t UI3[4];			//¿¨3IDºÅ
+//å­˜å‚¨RFIDå¡å·ID
+extern uint8_t UI0[4];		 	//å¡0IDå·
+extern uint8_t UI1[4];	 		//å¡1IDå·
+extern uint8_t UI2[4];			//å¡2IDå·
+extern uint8_t UI3[4];			//å¡3IDå·
 
-//Èı¸öADCÍ¨µÀ×ª»»Öµ
+//ä¸‰ä¸ªADCé€šé“è½¬æ¢å€¼
 extern uint16_t adc_value[3];
 
 

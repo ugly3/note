@@ -6,10 +6,10 @@
 #include "Servo.h"
 
 /*
- *½ÓÏß£º
- *  ·çÉÈĞÅºÅÏß    PA11
- *  Õı¼«          5V
- *  ¸º¼«          GND
+ *æ¥çº¿ï¼š
+ *  é£æ‰‡ä¿¡å·çº¿    PA11
+ *  æ­£æ          5V
+ *  è´Ÿæ          GND
 */
 
 void Fan_motor_duty(uint8_t flag);

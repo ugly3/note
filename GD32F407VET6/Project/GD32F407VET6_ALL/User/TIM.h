@@ -5,7 +5,7 @@
 #include "gd32f4xx.h"                   // Device header
 #define PWM_RTC 				RCU_GPIOA
 #define PWM_GPIO_Port		GPIOA
-#define PWM_Pin 				 GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11//GPIO_PIN_8 |OLEDÓÃµ½PA8
+#define PWM_Pin 				 GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11//GPIO_PIN_8 |OLEDç”¨åˆ°PA8
 
 void TIMER0_config(void);
 void TIMER1_config(void);

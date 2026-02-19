@@ -8,7 +8,7 @@
 #define COL_PORT GPIOE
 #define NO_KEY 0xFF
 
-// ¶¨Òå¼üÅÌĞĞºÍÁĞµÄGPIO¶Ë¿ÚºÍÒı½Å
+// å®šä¹‰é”®ç›˜è¡Œå’Œåˆ—çš„GPIOç«¯å£å’Œå¼•è„š
 #define ROW1_PIN GPIO_PIN_8
 #define ROW2_PIN GPIO_PIN_9
 #define ROW3_PIN GPIO_PIN_10
@@ -21,7 +21,7 @@
 
 
 
-//Èı¸ö¶ÀÁ¢°´¼ü
+//ä¸‰ä¸ªç‹¬ç«‹æŒ‰é”®
 #define KEY_tree_RCU_GPIOX     RCU_GPIOE
 #define KEY_tree_PORT          GPIOE
 #define KEY_tree_PIN1          GPIO_PIN_11    
@@ -40,7 +40,7 @@ void OLED_view(void);
     
     
 extern unsigned char KeyCode[];
-extern int OLED_SELECT_flag;   //ÉÏÒ»´ÎÑ¡Ôñ²ÎÊı
+extern int OLED_SELECT_flag;   //ä¸Šä¸€æ¬¡é€‰æ‹©å‚æ•°
 extern int OLED_SELECT;      
 extern uint8_t OLED_CONFIRM;
 extern uint8_t LED_Speed_flag;

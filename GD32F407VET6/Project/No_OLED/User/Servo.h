@@ -6,8 +6,8 @@
 
 
 
-void Door_Servo_SetAngle(uint8_t flag);           //´óÃÅ
-void Lajitong_Servo_SetAngle(uint8_t flag);         //À¬»øÍ°
+void Door_Servo_SetAngle(uint8_t flag);           //å¤§é—¨
+void Lajitong_Servo_SetAngle(uint8_t flag);         //åžƒåœ¾æ¡¶
 
 
 

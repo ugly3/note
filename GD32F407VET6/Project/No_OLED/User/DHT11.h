@@ -12,21 +12,21 @@
 #define DQ_GPIO_Port	GPIOD
 #define DQ_Pin 			GPIO_PIN_7
 
-//IO·½ÏòÉèÖÃ
+//IOæ–¹å‘è®¾ç½®
 #define DHT11_IO_IN()    DQ_IN()
 #define DHT11_IO_OUT()   DQ_OUT()
 
-////IO²Ù×÷º¯Êı			  					    			   
+////IOæ“ä½œå‡½æ•°			  					    			   
 #define	DHT11_DQ_OUT_1 	gpio_bit_write(DQ_GPIO_Port,DQ_Pin,SET)	
 #define	DHT11_DQ_OUT_0 	gpio_bit_write(DQ_GPIO_Port,DQ_Pin,RESET)
 #define	DHT11_DQ_IN()  	gpio_input_bit_get(DQ_GPIO_Port,DQ_Pin)
 
 
-uint8_t DHT11_Read_Data(uint16_t *temp,uint16_t *humi);	//¶ÁÈ¡ÎÂÊª¶È
-uint8_t DHT11_Read_Byte(void);				//¶Á³öÒ»¸ö×Ö½Ú
-uint8_t DHT11_Read_Bit(void);				//¶Á³öÒ»¸öÎ»
-uint8_t DHT11_Check(void);					//¼ì²âÊÇ·ñ´æÔÚDHT11
-void DHT11_Rst(void);						//¸´Î»DHT11   
+uint8_t DHT11_Read_Data(uint16_t *temp,uint16_t *humi);	//è¯»å–æ¸©æ¹¿åº¦
+uint8_t DHT11_Read_Byte(void);				//è¯»å‡ºä¸€ä¸ªå­—èŠ‚
+uint8_t DHT11_Read_Bit(void);				//è¯»å‡ºä¸€ä¸ªä½
+uint8_t DHT11_Check(void);					//æ£€æµ‹æ˜¯å¦å­˜åœ¨DHT11
+void DHT11_Rst(void);						//å¤ä½DHT11   
 void DQ_OUT(void);
 void DQ_IN(void);
 void DHT11_WHILE(void);

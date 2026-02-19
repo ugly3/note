@@ -21,17 +21,17 @@ typedef struct {
 extern iic_bus_typ hiic1;
 extern iic_bus_typ hiic2;
 
-//IICËùÓĞ²Ù×÷º¯Êı
+//IICæ‰€æœ‰æ“ä½œå‡½æ•°
 
 void IIC_config(iic_bus_typ *hiic);
 		 
-void IIC_Start(iic_bus_typ *hiic);				        //·¢ËÍIIC¿ªÊ¼ĞÅºÅ
-void IIC_Stop(iic_bus_typ *hiic);	  			        //·¢ËÍIICÍ£Ö¹ĞÅºÅ
-void IIC_Send_Byte(iic_bus_typ *hiic,uint8_t txd);			//IIC·¢ËÍÒ»¸ö×Ö½Ú
-uint8_t IIC_Read_Byte(iic_bus_typ *hiic,unsigned char ack);   //IIC¶ÁÈ¡Ò»¸ö×Ö½Ú
-uint8_t IIC_Wait_Ack(iic_bus_typ *hiic); 				//IICµÈ´ıACKĞÅºÅ
-void IIC_Ack(iic_bus_typ *hiic);					        //IIC·¢ËÍACKĞÅºÅ
-void IIC_NAck(iic_bus_typ *hiic);				        //IIC²»·¢ËÍACKĞÅºÅ
+void IIC_Start(iic_bus_typ *hiic);				        //å‘é€IICå¼€å§‹ä¿¡å·
+void IIC_Stop(iic_bus_typ *hiic);	  			        //å‘é€IICåœæ­¢ä¿¡å·
+void IIC_Send_Byte(iic_bus_typ *hiic,uint8_t txd);			//IICå‘é€ä¸€ä¸ªå­—èŠ‚
+uint8_t IIC_Read_Byte(iic_bus_typ *hiic,unsigned char ack);   //IICè¯»å–ä¸€ä¸ªå­—èŠ‚
+uint8_t IIC_Wait_Ack(iic_bus_typ *hiic); 				//IICç­‰å¾…ACKä¿¡å·
+void IIC_Ack(iic_bus_typ *hiic);					        //IICå‘é€ACKä¿¡å·
+void IIC_NAck(iic_bus_typ *hiic);				        //IICä¸å‘é€ACKä¿¡å·
 
 void IIC_Master_Transmit(iic_bus_typ *hiic,uint16_t DevAddress, uint8_t *pData, uint16_t Size);
 void IIC_Mem_Write(iic_bus_typ *hiic ,uint16_t DevAddress,uint16_t MemAddress,uint8_t MemAddSize, uint8_t *pData, uint16_t Size);

@@ -2,36 +2,36 @@
 
 
 /**************************************************************
-*¹¦  ÄÜ£º¸´Î»DHT11
-*²Î  Êý: ÎÞ
-*·µ»ØÖµ: ÎÞ 
+*åŠŸ  èƒ½ï¼šå¤ä½DHT11
+*å‚  æ•°: æ— 
+*è¿”å›žå€¼: æ—  
 **************************************************************/
 void DHT11_Rst(void)
 {
 	DHT11_IO_OUT(); 	//SET OUTPUT
-    DHT11_DQ_OUT_0; 	//À­µÍDQ
-    delay_1ms(20);    	//À­µÍÖÁÉÙ18ms
+    DHT11_DQ_OUT_0; 	//æ‹‰ä½ŽDQ
+    delay_1ms(20);    	//æ‹‰ä½Žè‡³å°‘18ms
     DHT11_DQ_OUT_1; 	//DQ=1
-	delay_1us(40);     	//Ö÷»úÀ­¸ß20~40us
+	delay_1us(40);     	//ä¸»æœºæ‹‰é«˜20~40us
 }
 
 /**************************************************************
-*¹¦  ÄÜ£ºµÈ´ýDHT11µÄ»ØÓ¦
-*²Î  Êý: ÎÞ
-*·µ»ØÖµ: ·µ»Ø1:Î´¼ì²âµ½DHT11µÄ´æÔÚ£» ·µ»Ø0:´æÔÚ
+*åŠŸ  èƒ½ï¼šç­‰å¾…DHT11çš„å›žåº”
+*å‚  æ•°: æ— 
+*è¿”å›žå€¼: è¿”å›ž1:æœªæ£€æµ‹åˆ°DHT11çš„å­˜åœ¨ï¼› è¿”å›ž0:å­˜åœ¨
 **************************************************************/
 uint8_t DHT11_Check(void) 	   
 {
 	uint8_t retry=0;
 	DHT11_IO_IN();						//SET INPUT	 
-    while (DHT11_DQ_IN()&&retry<100)		//DHT11»áÀ­µÍ40~80us
+    while (DHT11_DQ_IN()&&retry<100)		//DHT11ä¼šæ‹‰ä½Ž40~80us
 	{
 		retry++;
 		delay_1us(1);
 	}
 	if(retry>=100)return 1;
 	else retry=0;
-    while (!DHT11_DQ_IN()&&retry<100)		//DHT11À­µÍºó»áÔÙ´ÎÀ­¸ß40~80us
+    while (!DHT11_DQ_IN()&&retry<100)		//DHT11æ‹‰ä½ŽåŽä¼šå†æ¬¡æ‹‰é«˜40~80us
 	{
 		retry++;
 		delay_1us(1);
@@ -41,33 +41,33 @@ uint8_t DHT11_Check(void)
 }
 
 /**************************************************************
-*¹¦  ÄÜ£º´ÓDHT11¶ÁÈ¡Ò»¸öÎ»
-*²Î  Êý: ÎÞ
-*·µ»ØÖµ: 1/0
+*åŠŸ  èƒ½ï¼šä»ŽDHT11è¯»å–ä¸€ä¸ªä½
+*å‚  æ•°: æ— 
+*è¿”å›žå€¼: 1/0
 **************************************************************/
 uint8_t DHT11_Read_Bit(void) 			 
 {
  	uint8_t retry=0;
-	while(DHT11_DQ_IN()&&retry<100)	//µÈ´ý±äÎªµÍµçÆ½
+	while(DHT11_DQ_IN()&&retry<100)	//ç­‰å¾…å˜ä¸ºä½Žç”µå¹³
 	{
 		retry++;
 		delay_1us(1);
 	}
 	retry=0;
-	while(!DHT11_DQ_IN()&&retry<100)	//µÈ´ý±ä¸ßµçÆ½
+	while(!DHT11_DQ_IN()&&retry<100)	//ç­‰å¾…å˜é«˜ç”µå¹³
 	{
 		retry++;
 		delay_1us(1);
 	}
-	delay_1us(40);					//µÈ´ý40us
+	delay_1us(40);					//ç­‰å¾…40us
 	if(DHT11_DQ_IN())return 1;
 	else return 0;
 }
 
 /**************************************************************
-*¹¦  ÄÜ£º´ÓDHT11¶ÁÈ¡Ò»¸ö×Ö½Ú
-*²Î  Êý: ÎÞ
-*·µ»ØÖµ: ¶Áµ½µÄÊý¾Ý 
+*åŠŸ  èƒ½ï¼šä»ŽDHT11è¯»å–ä¸€ä¸ªå­—èŠ‚
+*å‚  æ•°: æ— 
+*è¿”å›žå€¼: è¯»åˆ°çš„æ•°æ® 
 **************************************************************/
 uint8_t DHT11_Read_Byte(void)    
 {        
@@ -82,9 +82,9 @@ uint8_t DHT11_Read_Byte(void)
 }
 
 /**************************************************************
-*¹¦  ÄÜ£º´ÓDHT11¶ÁÈ¡Ò»´ÎÊý¾Ý
-*²Î  Êý: temp:ÎÂ¶ÈÖµ(·¶Î§:0~50¡ã)£»humi:Êª¶ÈÖµ(·¶Î§:20%~90%)
-*·µ»ØÖµ: 0,Õý³£;1,¶ÁÈ¡Ê§°Ü 
+*åŠŸ  èƒ½ï¼šä»ŽDHT11è¯»å–ä¸€æ¬¡æ•°æ®
+*å‚  æ•°: temp:æ¸©åº¦å€¼(èŒƒå›´:0~50Â°)ï¼›humi:æ¹¿åº¦å€¼(èŒƒå›´:20%~90%)
+*è¿”å›žå€¼: 0,æ­£å¸¸;1,è¯»å–å¤±è´¥ 
 **************************************************************/
 uint8_t DHT11_Read_Data(uint16_t *temp,uint16_t *humi)    
 {        
@@ -95,7 +95,7 @@ uint8_t DHT11_Read_Data(uint16_t *temp,uint16_t *humi)
     DHT11_Rst();
 	if(DHT11_Check()==0)
 	{
-		for(i=0;i<5;i++)	//¶ÁÈ¡40Î»Êý¾Ý
+		for(i=0;i<5;i++)	//è¯»å–40ä½æ•°æ®
 		{
 			buf[i]=DHT11_Read_Byte();
 		}
@@ -136,8 +136,8 @@ void DHT11_Hardware_Init(void)
 
 void DHT11_Software_Init(void)
 {
-	DHT11_Rst();  			//¸´Î»DHT11
-	while(DHT11_Check());	// ·µ»Ø1:²»´æÔÚ£»·µ»Ø0:´æÔÚ
+	DHT11_Rst();  			//å¤ä½DHT11
+	while(DHT11_Check());	// è¿”å›ž1:ä¸å­˜åœ¨ï¼›è¿”å›ž0:å­˜åœ¨
 }
 
 void DHT11_Init(void)

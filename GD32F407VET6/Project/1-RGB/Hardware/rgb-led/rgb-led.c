@@ -1,11 +1,11 @@
 #include "rgb-led.h"
 
 /************************************************
-º¯ÊýÃû³Æ £º RGBled_config
-¹¦    ÄÜ £º ledµÆgpioÒý½ÅÅäÖÃ
-²Î    Êý £º ÎÞ
-·µ »Ø Öµ £º ÎÞ
-×÷    Õß £º 
+å‡½æ•°åç§° ï¼š RGBled_config
+åŠŸ    èƒ½ ï¼š ledç¯gpioå¼•è„šé…ç½®
+å‚    æ•° ï¼š æ— 
+è¿” å›ž å€¼ ï¼š æ— 
+ä½œ    è€… ï¼š 
 *************************************************/
 
 uint32_t RGB_colors[RGBnum];

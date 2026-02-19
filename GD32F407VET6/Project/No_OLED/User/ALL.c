@@ -6,10 +6,10 @@ int i,j=0;
 
 
 //MPU6050
-short Accel[3];//¼ÓËÙ¶È
-short Gyro [3];//½ÇËÙ¶È
-long AccelData[3];//µ¥Î»mg
-long GyroData[3];//µ¥Î»mdps
+short Accel[3];//åŠ é€Ÿåº¦
+short Gyro [3];//è§’é€Ÿåº¦
+long AccelData[3];//å•ä½mg
+long GyroData[3];//å•ä½mdps
 
 
 
@@ -17,7 +17,7 @@ uint16_t temp_value =0;
 uint16_t humi_value =0;
 
 
-//Ó²¼ş¿ØÖÆ±êÖ¾Î»£¬0´ú±í¹Ø£¬1´ú±í¿ª
+//ç¡¬ä»¶æ§åˆ¶æ ‡å¿—ä½ï¼Œ0ä»£è¡¨å…³ï¼Œ1ä»£è¡¨å¼€
 uint8_t led_status = 0;
 uint8_t door_status = 0;
 uint8_t Walkmotor_status = 0;
@@ -27,10 +27,10 @@ uint8_t Weight_status = 0;
 uint8_t Body_Hw_ZD_status=0;
 uint8_t Fan_ZD_status=0;
 
-//¶¨Ê±Æ÷1  ¼Æ´Î±äÁ¿
+//å®šæ—¶å™¨1  è®¡æ¬¡å˜é‡
 uint32_t TimeCounter;
 
-//¶¨Ê±Æ÷2 ¶¨Ê±Ö´ĞĞÈÎÎñ
+//å®šæ—¶å™¨2 å®šæ—¶æ‰§è¡Œä»»åŠ¡
 uint32_t index_5ms_flag=0;
 uint8_t index_10ms_flag=0;
 uint8_t index_50ms_flag=0;
@@ -40,7 +40,7 @@ uint8_t index_800ms_flag=0;
 uint8_t index_1000ms_flag=0;
 uint8_t index_1300ms_flag=0;
 
-//ÈÎÎñ¿ªÊ¼±êÖ¾
+//ä»»åŠ¡å¼€å§‹æ ‡å¿—
 uint8_t task1_is_start = 0;  
 uint8_t task2_is_start = 0;  
 uint8_t task3_is_start = 0; 
@@ -58,37 +58,37 @@ uint8_t task9_2_is_start=0;
 uint8_t task9_3_is_start=0;
 
 
-uint8_t RFID_Stop=0;    //0´ú±í¼ì²âRFID£¬1´ú±í²»¼ì²âRFID
-uint8_t select_card=0;  //Ñ¡ÔñÉ¾³ıÏëÒªµÄRFID¿¨
-uint8_t DLED_view_flag=0;        //ÊıÂë¹Ü¡¢µãÕóÖ´ĞĞ±êÖ¾Î»£¬1´ú±í¹Ø±ÕÒ»Ğ©ÖĞ¶ÏÈÎÎñ£¬·ÀÖ¹ÊıÂë¹Ü¡¢µãÕóÉÁË¸²»ÎÈ¶¨
+uint8_t RFID_Stop=0;    //0ä»£è¡¨æ£€æµ‹RFIDï¼Œ1ä»£è¡¨ä¸æ£€æµ‹RFID
+uint8_t select_card=0;  //é€‰æ‹©åˆ é™¤æƒ³è¦çš„RFIDå¡
+uint8_t DLED_view_flag=0;        //æ•°ç ç®¡ã€ç‚¹é˜µæ‰§è¡Œæ ‡å¿—ä½ï¼Œ1ä»£è¡¨å…³é—­ä¸€äº›ä¸­æ–­ä»»åŠ¡ï¼Œé˜²æ­¢æ•°ç ç®¡ã€ç‚¹é˜µé—ªçƒä¸ç¨³å®š
 
-//Èı¸ö¶ÀÁ¢°´¼ü
-int OLED_SELECT=0;        //µ±Ç°µÄÑ¡Ôñ²ÎÊı
-int OLED_SELECT_flag=-1;   //ÉÏÒ»´ÎÑ¡Ôñ²ÎÊı
-uint8_t OLED_CONFIRM=0;       //È·ÈÏ¼ü
+//ä¸‰ä¸ªç‹¬ç«‹æŒ‰é”®
+int OLED_SELECT=0;        //å½“å‰çš„é€‰æ‹©å‚æ•°
+int OLED_SELECT_flag=-1;   //ä¸Šä¸€æ¬¡é€‰æ‹©å‚æ•°
+uint8_t OLED_CONFIRM=0;       //ç¡®è®¤é”®
 
 
 
-//ãĞÖµ
+//é˜ˆå€¼
 uint32_t LightData_yuzhi = 100;
 uint32_t temp_yuzhi=29,humi_yuzhi=50;
 uint32_t MQ2_yuzhi = 100,Huoyan_yuzhi = 150;
 
-//³¬Éù²¨¾àÀë
+//è¶…å£°æ³¢è·ç¦»
 uint32_t Distance;
 
-//¹âÕÕÇ¿¶È£¨ÕûÊı£¬µ¥Î»lx£©
+//å…‰ç…§å¼ºåº¦ï¼ˆæ•´æ•°ï¼Œå•ä½lxï¼‰
 uint32_t LightData_Hex;
 
-//³ÆÖØ/g
+//ç§°é‡/g
 float Weight_Shiwu;
 
-//´æ´¢RFID¿¨ºÅID
-uint8_t UI0[4]={0xFF,0xFF,0xFF,0xFF};		 	//¿¨0 IDºÅ
-uint8_t UI1[4]={0xFF,0xFF,0xFF,0xFF};	 		//¿¨1 IDºÅ
-uint8_t UI2[4]={0xFF,0xFF,0xFF,0xFF};			//¿¨2 IDºÅ
-uint8_t UI3[4]={0xFF,0xFF,0xFF,0xFF};			//¿¨3 IDºÅ
+//å­˜å‚¨RFIDå¡å·ID
+uint8_t UI0[4]={0xFF,0xFF,0xFF,0xFF};		 	//å¡0 IDå·
+uint8_t UI1[4]={0xFF,0xFF,0xFF,0xFF};	 		//å¡1 IDå·
+uint8_t UI2[4]={0xFF,0xFF,0xFF,0xFF};			//å¡2 IDå·
+uint8_t UI3[4]={0xFF,0xFF,0xFF,0xFF};			//å¡3 IDå·
 
-//Èı¸öADCÍ¨µÀ×ª»»Öµ
+//ä¸‰ä¸ªADCé€šé“è½¬æ¢å€¼
 uint16_t adc_value[3];
 

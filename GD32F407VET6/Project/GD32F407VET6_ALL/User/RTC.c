@@ -2,7 +2,7 @@
 #include "gd32f4xx_libopt.h"
 
 
-#define RTC_CLOCK_SOURCE_LXTAL //ÅäÖÃÊ±ÖÓÔ´
+#define RTC_CLOCK_SOURCE_LXTAL //é…ç½®æ—¶é’Ÿæº
 #define BKP_VALUE    0x32F1
 
 rtc_parameter_struct   rtc_initpara;
@@ -10,10 +10,10 @@ __IO uint32_t prescaler_a = 0, prescaler_s = 0;
 
 void rtc_pre_config(void)
 {
-    // Çå³ıËùÓĞ¸´Î»±êÖ¾
+    // æ¸…é™¤æ‰€æœ‰å¤ä½æ ‡å¿—
     rcu_all_reset_flag_clear();
 
-    // ÆôÓÃ±¸·İÓò·ÃÎÊ
+    // å¯ç”¨å¤‡ä»½åŸŸè®¿é—®
     pmu_backup_write_enable();
     
     #if defined (RTC_CLOCK_SOURCE_IRC32K) 
@@ -52,7 +52,7 @@ void rtc_setup(void)
     rtc_initpara.factor_syn = prescaler_s;
     rtc_initpara.year = 0x25;
     rtc_initpara.day_of_week = RTC_SATURDAY;
-    rtc_initpara.month = RTC_MAR;//ÈıÔÂ
+    rtc_initpara.month = RTC_MAR;//ä¸‰æœˆ
     rtc_initpara.date = 0x08;
     rtc_initpara.display_format = RTC_24HOUR;
     rtc_initpara.am_pm = RTC_PM;
@@ -75,13 +75,13 @@ void MyRTC_Init(void)
 {
     /* enable PMU clock */
     rcu_periph_clock_enable(RCU_PMU);
-    rtc_pre_config();//ÅäÖÃRTC
-	rtc_setup(); //ÉèÖÃÊ±¼ä2025Äê03ÔÂ08ÈÕ£¬14µã0·Ö0Ãë
+    rtc_pre_config();//é…ç½®RTC
+	rtc_setup(); //è®¾ç½®æ—¶é—´2025å¹´03æœˆ08æ—¥ï¼Œ14ç‚¹0åˆ†0ç§’
 }
    
 void RTC_Show_Time(void)
 {
-    rtc_show_time();//¶ÁÈ¡Ê±¼ä
+    rtc_show_time();//è¯»å–æ—¶é—´
 }
 
 

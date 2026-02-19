@@ -693,7 +693,7 @@ void rcu_pll48m_clock_config(uint32_t pll48m_clock_source)
 }
 
 /*!
-    \brief    configure the TIMER clock prescaler selection(配置定时器时钟预分频器选择)
+    \brief    configure the TIMER clock prescaler selection(閰嶇疆瀹氭椂鍣ㄦ椂閽熼鍒嗛鍣ㄩ�夋嫨)
     \param[in]  timer_clock_prescaler: TIMER clock selection
                 only one parameter can be selected which is shown as below:
       \arg        RCU_TIMER_PSC_MUL2: if APB1PSC/APB2PSC in RCU_CFG0 register is 0b0xx(CK_APBx = CK_AHB) 

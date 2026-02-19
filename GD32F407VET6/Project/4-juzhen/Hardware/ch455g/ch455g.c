@@ -5,11 +5,11 @@ static iic_bus_typ *hi2c_ch455;
 
 void CH455G_Init(iic_bus_typ *hi2c){
 	hi2c_ch455=hi2c;
-	CH455_Write(CH455_8SEG_ON);// ¿ªÆôÏÔÊ¾ºÍ¼üÅÌ
+	CH455_Write(CH455_8SEG_ON);// å¼€å¯æ˜¾ç¤ºå’Œé”®ç›˜
 }
 
 
-void CH455_Write( unsigned short cmd )	//Ğ´ÃüÁî
+void CH455_Write( unsigned short cmd )	//å†™å‘½ä»¤
 {
 
 	IIC_Master_Transmit(hi2c_ch455,((uint8_t)(cmd>>7)&CH455_I2C_MASK)|CH455_I2C_ADDR, (uint8_t*)&cmd, 1);
@@ -17,7 +17,7 @@ void CH455_Write( unsigned short cmd )	//Ğ´ÃüÁî
 
 
 
-unsigned char CH455_Read( void )		//¶ÁÈ¡°´¼ü
+unsigned char CH455_Read( void )		//è¯»å–æŒ‰é”®
 {
 	unsigned char keycode;
 

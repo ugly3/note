@@ -149,8 +149,8 @@ void gpio_mode_set(uint32_t gpio_periph, uint32_t mode, uint32_t pull_up_down, u
                 only one parameter can be selected which is shown as below:
       \arg        GPIOx(x = A,B,C,D,E,F,G,H,I)
     \param[in]  otype: GPIO pin output mode
-      \arg        GPIO_OTYPE_PP: push pull mode(推挽输出)
-      \arg        GPIO_OTYPE_OD: open drain mode（开漏输出）
+      \arg        GPIO_OTYPE_PP: push pull mode(鎺ㄦ尳杈撳嚭)
+      \arg        GPIO_OTYPE_OD: open drain mode锛堝紑婕忚緭鍑猴級
     \param[in]  speed: GPIO pin output max speed
       \arg        GPIO_OSPEED_2MHZ: output max speed 2MHz 
       \arg        GPIO_OSPEED_25MHZ: output max speed 25MHz 

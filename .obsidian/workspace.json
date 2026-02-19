@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "GD32F407VET6/红外检测.md",
+                "file": "GD32F407VET6/GD32F407VET6.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "红外检测"
+              "title": "GD32F407VET6"
             }
           }
         ]
@@ -193,25 +193,26 @@
       "pdf-plus:PDF++: 切换自动复制": false,
       "pdf-plus:PDF++: 切换自动对焦": false,
       "pdf-plus:PDF++: 切换自动粘贴": false,
-      "obsidian-git:打开Git源代码管理": false
+      "obsidian-git:打开Git源代码管理": false,
+      "code-space:打开 Code Space 主面板": false
     }
   },
-  "active": "a3c5da6bc5162ffc",
+  "active": "563ea56ab508b5c9",
   "lastOpenFiles": [
-    "GD32F407VET6/Project/17-hongwaichuangan/Firmware/GD32F4xx_usb_library/host/class/msc/Source/usbh_msc_scsi.c",
-    "GD32F407VET6/Project/17-hongwaichuangan/Firmware/GD32F4xx_usb_library/host/class/msc/Source/usbh_msc_fatfs.c",
-    "GD32F407VET6/Project/17-hongwaichuangan/Firmware/GD32F4xx_usb_library/host/class/msc/Source/usbh_msc_core.c",
-    "GD32F407VET6/Project/17-hongwaichuangan/Firmware/GD32F4xx_usb_library/host/class/msc/Source/usbh_msc_bbb.c",
-    "GD32F407VET6/Project/17-hongwaichuangan/Firmware/GD32F4xx_usb_library/host/class/msc/Include/usbh_msc_scsi.h",
-    "GD32F407VET6/Project/17-hongwaichuangan/Firmware/GD32F4xx_usb_library/host/class/msc/Include/usbh_msc_core.h",
-    "GD32F407VET6/Project/17-hongwaichuangan/Firmware/GD32F4xx_usb_library/host/class/msc/Include/usbh_msc_bbb.h",
-    "GD32F407VET6/Project/17-hongwaichuangan/Firmware/GD32F4xx_usb_library/host/class/hid/Source/usbh_standard_hid.c",
-    "GD32F407VET6/Project/17-hongwaichuangan/Firmware/GD32F4xx_usb_library/host/class/hid/Source/usbh_hid_core.c",
-    "GD32F407VET6/Project/17-hongwaichuangan/Firmware/GD32F4xx_usb_library/host/class/hid/Include/usbh_standard_hid.h",
-    "GD32F407VET6/Project/17-hongwaichuangan/Firmware/GD32F4xx_usb_library/host/class/hid/Include/usbh_hid_core.h",
+    "GD32F407VET6/Project/17-hongwaichuangan",
+    "GD32F407VET6/Project/16-smog",
+    "GD32F407VET6/Project/15-fire",
+    "GD32F407VET6/Project/14-fengshan",
+    "GD32F407VET6/Project/13-RFID",
+    "GD32F407VET6/Project/12-duoji",
+    "GD32F407VET6/Project/11-dianzhen",
+    "GD32F407VET6/Project/10-shumaguan",
+    "GD32F407VET6/Project/9-LCD",
+    "GD32F407VET6/Project/8-duoji",
+    "GD32F407VET6/Project/7-chaoshengbo",
+    "GD32F407VET6/红外检测.md",
     "GD32F407VET6/Project/17-hongwaichuangan/API_REFERENCE.md",
     "GD32F407VET6/GD32F407VET6.md",
-    "GD32F407VET6/红外检测.md",
     "Arch日常使用.md",
     "GD32F407VET6/assets/GD32F407VET6/file-20260216003615469.png",
     "未命名.canvas",

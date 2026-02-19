@@ -8,7 +8,7 @@ uint16_t rx_size = 26;
 uint16_t rxcount = 0;
 uint16_t USART_FLAG = 0x00;
 
-//´®¿ÚÆÁ
+//ä¸²å£å±
 void USART_Init(void)
 {
 	/* enable GPIO clock */
@@ -32,19 +32,19 @@ void USART_Init(void)
 		
     /* USART configure */
 	usart_deinit(USARTx);
-    usart_baudrate_set(USARTx, 		baudrate);  					// ²¨ÌØÂÊ115200
-    usart_parity_config(USARTx, 	USART_PM_NONE);  				// ÎŞĞ£¼ì
-    usart_word_length_set(USARTx,	USART_WL_8BIT);  				// 8Î»Êı¾İÎ»
-    usart_stop_bit_set(USARTx, 		USART_STB_1BIT);  				// 1Î»Í£Ö¹Î»
-    usart_transmit_config(USARTx, 	USART_TRANSMIT_ENABLE);			// Ê¹ÄÜ´®¿Ú·¢ËÍ
-    usart_receive_config(USARTx, 	USART_RECEIVE_ENABLE);			// Ê¹ÄÜ´®¿Ú½ÓÊÕ
-	usart_hardware_flow_coherence_config(USARTx,USART_HCM_NONE);	//ÎŞÓ²¼şÁ÷¿Ø
+    usart_baudrate_set(USARTx, 		baudrate);  					// æ³¢ç‰¹ç‡115200
+    usart_parity_config(USARTx, 	USART_PM_NONE);  				// æ— æ ¡æ£€
+    usart_word_length_set(USARTx,	USART_WL_8BIT);  				// 8ä½æ•°æ®ä½
+    usart_stop_bit_set(USARTx, 		USART_STB_1BIT);  				// 1ä½åœæ­¢ä½
+    usart_transmit_config(USARTx, 	USART_TRANSMIT_ENABLE);			// ä½¿èƒ½ä¸²å£å‘é€
+    usart_receive_config(USARTx, 	USART_RECEIVE_ENABLE);			// ä½¿èƒ½ä¸²å£æ¥æ”¶
+	usart_hardware_flow_coherence_config(USARTx,USART_HCM_NONE);	//æ— ç¡¬ä»¶æµæ§
 	
 	/* USART IRQn configure */
-	nvic_irq_enable(USART1_IRQn,5,0);								//ÅäÖÃÖĞ¶Ï
-	usart_interrupt_enable(USARTx,USART_INT_RBNE);					//Ê¹ÄÜÖĞ¶Ï	
-	usart_data_first_config(USARTx,USART_MSBF_LSB);					//´ó¶ËĞ¡¶ËÓëMSBºÍLSB
-	usart_enable(USARTx);  											// Ê¹ÄÜ´®¿Ú
+	nvic_irq_enable(USART1_IRQn,5,0);								//é…ç½®ä¸­æ–­
+	usart_interrupt_enable(USARTx,USART_INT_RBNE);					//ä½¿èƒ½ä¸­æ–­	
+	usart_data_first_config(USARTx,USART_MSBF_LSB);					//å¤§ç«¯å°ç«¯ä¸MSBå’ŒLSB
+	usart_enable(USARTx);  											// ä½¿èƒ½ä¸²å£
 }
 
 
@@ -97,7 +97,7 @@ void USART1_IRQHandler(void)
         /* receive data */
         rxbuffer[rxcount++] = usart_data_receive(USARTx);
 		
-		if(rxbuffer[rxcount-2] == 0x0D && rxbuffer[rxcount-1] == 0x0A){	//¼ì²âµ½ÍêÕûµÄÊı¾İ
+		if(rxbuffer[rxcount-2] == 0x0D && rxbuffer[rxcount-1] == 0x0A){	//æ£€æµ‹åˆ°å®Œæ•´çš„æ•°æ®
 			USART_FLAG = 0x01;	
 		}
 		

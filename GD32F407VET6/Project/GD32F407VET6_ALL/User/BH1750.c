@@ -2,7 +2,7 @@
 #include "systick.h"
 
 
-//´Ó»úBH1750Éè±¸µØÖ·
+//ä»æœºBH1750è®¾å¤‡åœ°å€
 #define I2C1_SLAVE_ADDRESS7    0x46
 
 void i2cx_config(void)
@@ -16,7 +16,7 @@ void i2cx_config(void)
     /* enable acknowledge */
     i2c_ack_config(I2CX, I2C_ACK_ENABLE);
 }
-//Ğ´Èë1×Ö½ÚÊı¾İµ½BH170,Éè±¸µØÖ·0x46
+//å†™å…¥1å­—èŠ‚æ•°æ®åˆ°BH170,è®¾å¤‡åœ°å€0x46
 void BH170_WriteReg(uint8_t reg_add)
 {
 
@@ -29,7 +29,7 @@ void BH170_WriteReg(uint8_t reg_add)
     /* wait until SBSEND bit is set */
     while(!i2c_flag_get(I2CX, I2C_FLAG_SBSEND));
 
-    /* send slave address to I2C bus£¨½«´ÓµØÖ··¢ËÍµ½I2C×ÜÏß£©*/
+    /* send slave address to I2C busï¼ˆå°†ä»åœ°å€å‘é€åˆ°I2Cæ€»çº¿ï¼‰*/
     i2c_master_addressing(I2CX, I2C1_SLAVE_ADDRESS7, I2C_TRANSMITTER);
 
     /* wait until ADDSEND bit is set*/
@@ -48,7 +48,7 @@ void BH170_WriteReg(uint8_t reg_add)
     while(I2C_CTL0(I2CX)&0x0200);
   
 }
-//¶ÁÈ¡BH170Êı¾İ,Éè±¸µØÖ·0x46
+//è¯»å–BH170æ•°æ®,è®¾å¤‡åœ°å€0x46
 void BH170_ReadData(unsigned char*Read)
 {
 	 /* wait until I2C bus is idle */
@@ -80,32 +80,32 @@ void BH170_ReadData(unsigned char*Read)
 
 void BH1750_Init(void)
 {
-    rcu_periph_clock_enable(BH1750_RCU_GPIOX);//GPIOBÊ±ÖÓÊ¹ÄÜ
-    gpio_af_set(BH1750_PORT, GPIO_AF_4, BH1750_PIN_SCL);//¸´ÓÃ¹¦ÄÜ4£¬GPIO_AF_4ÅäÖÃ³ÉI2C
-    gpio_af_set(BH1750_PORT, GPIO_AF_4, BH1750_PIN_SDA);//¸´ÓÃ¹¦ÄÜ4£¬GPIO_AF_4ÖÃ³ÉI2C
+    rcu_periph_clock_enable(BH1750_RCU_GPIOX);//GPIOBæ—¶é’Ÿä½¿èƒ½
+    gpio_af_set(BH1750_PORT, GPIO_AF_4, BH1750_PIN_SCL);//å¤ç”¨åŠŸèƒ½4ï¼ŒGPIO_AF_4é…ç½®æˆI2C
+    gpio_af_set(BH1750_PORT, GPIO_AF_4, BH1750_PIN_SDA);//å¤ç”¨åŠŸèƒ½4ï¼ŒGPIO_AF_4ç½®æˆI2C
     gpio_mode_set(BH1750_PORT, GPIO_MODE_AF, GPIO_PUPD_PULLUP,BH1750_PIN_SCL);
     gpio_output_options_set(BH1750_PORT, GPIO_OTYPE_OD, GPIO_OSPEED_50MHZ,BH1750_PIN_SCL);
     gpio_mode_set(BH1750_PORT, GPIO_MODE_AF, GPIO_PUPD_PULLUP,BH1750_PIN_SDA);
     gpio_output_options_set(BH1750_PORT, GPIO_OTYPE_OD, GPIO_OSPEED_50MHZ,BH1750_PIN_SDA);
-    rcu_periph_clock_enable(BH1750_RCU_I2CX);//I2C0Ê±ÖÓÊ¹ÄÜ
+    rcu_periph_clock_enable(BH1750_RCU_I2CX);//I2C0æ—¶é’Ÿä½¿èƒ½
     i2cx_config();
-    BH170_WriteReg(0x01);// power on£¨¿ª»ú£©
-    BH170_WriteReg(0x10);//H- resolution mode(H-·Ö±æÂÊÄ£Ê½)
-    delay_1ms(180);//µÈ´ı180ms
+    BH170_WriteReg(0x01);// power onï¼ˆå¼€æœºï¼‰
+    BH170_WriteReg(0x10);//H- resolution mode(H-åˆ†è¾¨ç‡æ¨¡å¼)
+    delay_1ms(180);//ç­‰å¾…180ms
 }
 
-uint8_t DataBuff[2];//´æ´¢Êı×é
-float LightData;//¹âÕÕÇ¿¶È£¨º¬Ğ¡ÊıÎ»£¬µ¥Î»lx£©
-uint32_t LightData_Hex;//¹âÕÕÇ¿¶È£¨ÕûÊı£¬µ¥Î»lx£©
+uint8_t DataBuff[2];//å­˜å‚¨æ•°ç»„
+float LightData;//å…‰ç…§å¼ºåº¦ï¼ˆå«å°æ•°ä½ï¼Œå•ä½lxï¼‰
+uint32_t LightData_Hex;//å…‰ç…§å¼ºåº¦ï¼ˆæ•´æ•°ï¼Œå•ä½lxï¼‰
 
 void BH1750_Get_Data(void)
 {
     BH170_WriteReg(0x01);// power on
     BH170_WriteReg(0x10);//H- resolution mode
-    delay_1ms(180);//µÈ´ı180ms
-    BH170_ReadData(DataBuff);//¶ÁÈ¡Êı¾İ
-    LightData=((DataBuff[0]<<8)+DataBuff[1])/1.2f;//Êı¾İ×ª»»³É¹âÇ¿¶È£¬µ¥Î»lx
-    LightData_Hex=LightData;//float×ª»»³ÉÕûÊı
+    delay_1ms(180);//ç­‰å¾…180ms
+    BH170_ReadData(DataBuff);//è¯»å–æ•°æ®
+    LightData=((DataBuff[0]<<8)+DataBuff[1])/1.2f;//æ•°æ®è½¬æ¢æˆå…‰å¼ºåº¦ï¼Œå•ä½lx
+    LightData_Hex=LightData;//floatè½¬æ¢æˆæ•´æ•°
 }
 
 

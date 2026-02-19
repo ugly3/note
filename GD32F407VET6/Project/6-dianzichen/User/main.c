@@ -1,8 +1,8 @@
 /********************************************************************************
-  * ÎÄ ¼ş Ãû: main.c
-  * ¹¦ÄÜ½éÉÜ:          
+  * æ–‡ ä»¶ å: main.c
+  * åŠŸèƒ½ä»‹ç»:          
   ******************************************************************************
-  * ×¢ÒâÊÂÏî:
+  * æ³¨æ„äº‹é¡¹:
 *********************************************************************************/
 
 #include "gd32f4xx.h"
@@ -22,7 +22,7 @@ int main(void)
 {
 		char chdat[50];
 		long  Weight;
-    systick_config();   // µÎ´ğ¶¨Ê±Æ÷³õÊ¼»¯
+    systick_config();   // æ»´ç­”å®šæ—¶å™¨åˆå§‹åŒ–
 	  USART0_init(115200);
 		LED_config();
 		Btn_config();
@@ -35,7 +35,7 @@ int main(void)
 		OLED_Refresh();
     while(1) {
 			Weight= Get_Weight();
-			printf("ÖØÁ¿:%ld\r\n",Weight);
+			printf("é‡é‡:%ld\r\n",Weight);
 			OLED_Clear();
 			sprintf(chdat,"Weight=%ld",Weight);
 			OLED_PrintString(0,0,chdat,1);

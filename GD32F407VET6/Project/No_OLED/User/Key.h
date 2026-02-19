@@ -8,7 +8,7 @@
 #define COL_PORT GPIOE
 #define NO_KEY 0xFF
 
-// ¶¨Òå¼üÅÌĞĞºÍÁĞµÄGPIO¶Ë¿ÚºÍÒı½Å
+// å®šä¹‰é”®ç›˜è¡Œå’Œåˆ—çš„GPIOç«¯å£å’Œå¼•è„š
 #define ROW1_PIN GPIO_PIN_8
 #define ROW2_PIN GPIO_PIN_9
 #define ROW3_PIN GPIO_PIN_10
@@ -21,20 +21,20 @@
 
 
 
-//Èı¸ö¶ÀÁ¢°´¼ü
+//ä¸‰ä¸ªç‹¬ç«‹æŒ‰é”®
 #define KEY_tree_RCU_GPIOX     RCU_GPIOE
 #define KEY_tree_PORT          GPIOE
 #define KEY_tree_PIN1          GPIO_PIN_11    
 #define KEY_tree_PIN2          GPIO_PIN_12 
 #define KEY_tree_PIN3          GPIO_PIN_13
 
-//Èı¸ö¶ÀÁ¢°´¼ü
+//ä¸‰ä¸ªç‹¬ç«‹æŒ‰é”®
 void key_tree_init(void);
 uint8_t key_tree_scanf(void);
 void Key_tree_Manage(void);
 
 
-//8Òı½Å4*4¾ØÕó¼üÅÌ
+//8å¼•è„š4*4çŸ©é˜µé”®ç›˜
 //uint8_t keyscanf(void);
 //void COL_Di_and_ROW_Gao(void);
 //void COL_Gao_and_ROW_Di(void);
@@ -43,7 +43,7 @@ void Key_tree_Manage(void);
 void OLED_view(void);    
     
     
-//extern unsigned char KeyCode[];   //8Òı½Å4*4¾ØÕó¼üÅÌ
+//extern unsigned char KeyCode[];   //8å¼•è„š4*4çŸ©é˜µé”®ç›˜
 
 
 

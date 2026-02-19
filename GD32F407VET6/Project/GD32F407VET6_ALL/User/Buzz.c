@@ -3,10 +3,10 @@
 
 void Buzze_Init(void)
 {
-    rcu_periph_clock_enable(Buzze_RCU_GPIOX);//Ê¹ÄÜGPIOBÊ±ÖÓ
-    gpio_mode_set(Buzze_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, Buzze_PIN);//Êä³ö
-    gpio_output_options_set(Buzze_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, Buzze_PIN);//ÍÆÍìÊä³ö£¬50MËÙ¶È
-    gpio_bit_reset(Buzze_PORT, Buzze_PIN);//Êä³öµÍµçÆ½£¨²»½Ð£©
+    rcu_periph_clock_enable(Buzze_RCU_GPIOX);//ä½¿èƒ½GPIOBæ—¶é’Ÿ
+    gpio_mode_set(Buzze_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, Buzze_PIN);//è¾“å‡º
+    gpio_output_options_set(Buzze_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, Buzze_PIN);//æŽ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
+    gpio_bit_reset(Buzze_PORT, Buzze_PIN);//è¾“å‡ºä½Žç”µå¹³ï¼ˆä¸å«ï¼‰
 }
 
 

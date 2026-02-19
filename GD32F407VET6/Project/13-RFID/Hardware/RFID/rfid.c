@@ -4,40 +4,40 @@
 
 
 void SPI_GPIO_Init(void) {
-    // Ê¹ÄÜ GPIOB Ê±ÖÓ
+    // ä½¿èƒ½ GPIOB æ—¶é’Ÿ
     rcu_periph_clock_enable(RCU_GPIOB);
 	
 
-    // ÅäÖÃ PB13 (SCK), PB14 (MISO), PB15 (MOSI) Îª¸´ÓÃ¹¦ÄÜ
-    gpio_af_set(GPIOB, GPIO_AF_5, GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15);  // AF5 ÊÇ SPI1 µÄ¸´ÓÃ¹¦ÄÜ
+    // é…ç½® PB13 (SCK), PB14 (MISO), PB15 (MOSI) ä¸ºå¤ç”¨åŠŸèƒ½
+    gpio_af_set(GPIOB, GPIO_AF_5, GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15);  // AF5 æ˜¯ SPI1 çš„å¤ç”¨åŠŸèƒ½
     gpio_mode_set(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15);
     gpio_output_options_set(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15);
 		
 		rcu_periph_clock_enable(rfid_cs_RTC);
-    // ÅäÖÃ PD1 (CS) ÎªÍÆÍìÊä³ö
+    // é…ç½® PD1 (CS) ä¸ºæ¨æŒ½è¾“å‡º
     gpio_mode_set(rfid_cs_Port, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, rfid_cs_Pin);
     gpio_output_options_set(rfid_cs_Port, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, rfid_cs_Pin);
 }
 
 void SPI1_Init(void) {
-    // Ê¹ÄÜ SPI1 Ê±ÖÓ
+    // ä½¿èƒ½ SPI1 æ—¶é’Ÿ
     rcu_periph_clock_enable(RCU_SPI1);
 
-    // ÅäÖÃ SPI1
+    // é…ç½® SPI1
     spi_parameter_struct spi_init_params;
     spi_struct_para_init(&spi_init_params);
 
-    spi_init_params.trans_mode           = SPI_TRANSMODE_FULLDUPLEX;  // È«Ë«¹¤Ä£Ê½
-    spi_init_params.device_mode          = SPI_MASTER;               // Ö÷Ä£Ê½
-    spi_init_params.frame_size           = SPI_FRAMESIZE_8BIT;       // 8 Î»Êı¾İÖ¡
-    spi_init_params.clock_polarity_phase = SPI_CK_PL_LOW_PH_1EDGE;   // CPOL=0, CPHA=0£¨Ä£Ê½ 0£©
-    spi_init_params.nss                  = SPI_NSS_SOFT;             // Èí¼ş¿ØÖÆ NSS£¨Æ¬Ñ¡£©
-    spi_init_params.prescale             = SPI_PSC_8;                // Ê±ÖÓÔ¤·ÖÆµ£¨84MHz / 8 = 10.5MHz£©
-    spi_init_params.endian               = SPI_ENDIAN_MSB;           // ¸ßÎ»ÔÚÇ°
+    spi_init_params.trans_mode           = SPI_TRANSMODE_FULLDUPLEX;  // å…¨åŒå·¥æ¨¡å¼
+    spi_init_params.device_mode          = SPI_MASTER;               // ä¸»æ¨¡å¼
+    spi_init_params.frame_size           = SPI_FRAMESIZE_8BIT;       // 8 ä½æ•°æ®å¸§
+    spi_init_params.clock_polarity_phase = SPI_CK_PL_LOW_PH_1EDGE;   // CPOL=0, CPHA=0ï¼ˆæ¨¡å¼ 0ï¼‰
+    spi_init_params.nss                  = SPI_NSS_SOFT;             // è½¯ä»¶æ§åˆ¶ NSSï¼ˆç‰‡é€‰ï¼‰
+    spi_init_params.prescale             = SPI_PSC_8;                // æ—¶é’Ÿé¢„åˆ†é¢‘ï¼ˆ84MHz / 8 = 10.5MHzï¼‰
+    spi_init_params.endian               = SPI_ENDIAN_MSB;           // é«˜ä½åœ¨å‰
 
     spi_init(SPI1, &spi_init_params);
 
-    // Ê¹ÄÜ SPI1
+    // ä½¿èƒ½ SPI1
     spi_enable(SPI1);
 }
 
@@ -61,9 +61,9 @@ short Readcard_daivce_Init(void)
 	uint16_t n;
 	SPI_GPIO_Init();
 	SPI1_Init();
-	//RC522_Uart_init(9600);	// ´®¿Ú³õÊ¼»¯Îª9600
+	//RC522_Uart_init(9600);	// ä¸²å£åˆå§‹åŒ–ä¸º9600
 	delay_1ms(500);
-	if(InitRc522()!= MI_OK)return MI_ERR;			//¶Á¿¨Æ÷³õÊ¼»¯
+	if(InitRc522()!= MI_OK)return MI_ERR;			//è¯»å¡å™¨åˆå§‹åŒ–
 	WriteRawRC(SerialSpeedReg,0x74);
 	WriteRawRC(SerialSpeedReg,0x5a);
 
@@ -82,17 +82,17 @@ short Readcard_daivce_Init(void)
 
 
 /////////////////////////////////////////////////////////////////////
-//¹¦    ÄÜ£ºÑ°¿¨
-//²ÎÊıËµÃ÷: req_code[IN]:Ñ°¿¨·½Ê½
-//                0x52 = Ñ°¸ĞÓ¦ÇøÄÚËùÓĞ·ûºÏ14443A±ê×¼µÄ¿¨
-//                0x26 = Ñ°Î´½øÈëĞİÃß×´Ì¬µÄ¿¨
-//          	  pTagType[OUT]£º¿¨Æ¬ÀàĞÍ´úÂë
+//åŠŸ    èƒ½ï¼šå¯»å¡
+//å‚æ•°è¯´æ˜: req_code[IN]:å¯»å¡æ–¹å¼
+//                0x52 = å¯»æ„Ÿåº”åŒºå†…æ‰€æœ‰ç¬¦åˆ14443Aæ ‡å‡†çš„å¡
+//                0x26 = å¯»æœªè¿›å…¥ä¼‘çœ çŠ¶æ€çš„å¡
+//          	  pTagType[OUT]ï¼šå¡ç‰‡ç±»å‹ä»£ç 
 //                0x4400 = Mifare_UltraLight
 //                0x0400 = Mifare_One(S50)
 //                0x0200 = Mifare_One(S70)
 //                0x0800 = Mifare_Pro(X)
 //                0x4403 = Mifare_DESFire
-//·µ    »Ø: ³É¹¦·µ»ØMI_OK
+//è¿”    å›: æˆåŠŸè¿”å›MI_OK
 /////////////////////////////////////////////////////////////////////
 short PcdRequest(unsigned char req_code,unsigned char *pTagType)
 {
@@ -131,9 +131,9 @@ short PcdRequest(unsigned char req_code,unsigned char *pTagType)
 }
 
 /////////////////////////////////////////////////////////////////////
-//¹¦    ÄÜ£º·À³å×²
-//²ÎÊıËµÃ÷: pSnr[OUT]:¿¨Æ¬ĞòÁĞºÅ£¬4×Ö½Ú
-//·µ    »Ø: ³É¹¦·µ»ØMI_OK
+//åŠŸ    èƒ½ï¼šé˜²å†²æ’
+//å‚æ•°è¯´æ˜: pSnr[OUT]:å¡ç‰‡åºåˆ—å·ï¼Œ4å­—èŠ‚
+//è¿”    å›: æˆåŠŸè¿”å›MI_OK
 /////////////////////////////////////////////////////////////////////  
 short PcdAnticoll(unsigned char *pSnr)
 {
@@ -168,9 +168,9 @@ short PcdAnticoll(unsigned char *pSnr)
 }
 
 /////////////////////////////////////////////////////////////////////
-//¹¦    ÄÜ£ºÑ¡¶¨¿¨Æ¬
-//²ÎÊıËµÃ÷: pSnr[IN]:¿¨Æ¬ĞòÁĞºÅ£¬4×Ö½Ú
-//·µ    »Ø: ³É¹¦·µ»ØMI_OK
+//åŠŸ    èƒ½ï¼šé€‰å®šå¡ç‰‡
+//å‚æ•°è¯´æ˜: pSnr[IN]:å¡ç‰‡åºåˆ—å·ï¼Œ4å­—èŠ‚
+//è¿”    å›: æˆåŠŸè¿”å›MI_OK
 /////////////////////////////////////////////////////////////////////
 short PcdSelect(unsigned char *pSnr)
 {
@@ -202,14 +202,14 @@ short PcdSelect(unsigned char *pSnr)
 }
 
 /////////////////////////////////////////////////////////////////////
-//¹¦    ÄÜ£ºÑéÖ¤¿¨Æ¬ÃÜÂë
-//²ÎÊıËµÃ÷: auth_mode[IN]: ÃÜÂëÑéÖ¤Ä£Ê½
-//                 0x60 = ÑéÖ¤AÃÜÔ¿
-//                 0x61 = ÑéÖ¤BÃÜÔ¿ 
-//          addr[IN]£º¿éµØÖ·
-//          pKey[IN]£ºÃÜÂë
-//          pSnr[IN]£º¿¨Æ¬ĞòÁĞºÅ£¬4×Ö½Ú
-//·µ    »Ø: ³É¹¦·µ»ØMI_OK
+//åŠŸ    èƒ½ï¼šéªŒè¯å¡ç‰‡å¯†ç 
+//å‚æ•°è¯´æ˜: auth_mode[IN]: å¯†ç éªŒè¯æ¨¡å¼
+//                 0x60 = éªŒè¯Aå¯†é’¥
+//                 0x61 = éªŒè¯Bå¯†é’¥ 
+//          addr[IN]ï¼šå—åœ°å€
+//          pKey[IN]ï¼šå¯†ç 
+//          pSnr[IN]ï¼šå¡ç‰‡åºåˆ—å·ï¼Œ4å­—èŠ‚
+//è¿”    å›: æˆåŠŸè¿”å›MI_OK
 /////////////////////////////////////////////////////////////////////               
 short PcdAuthState(unsigned char auth_mode,unsigned char addr,unsigned char *pKey,unsigned char *pSnr)
 {
@@ -234,10 +234,10 @@ short PcdAuthState(unsigned char auth_mode,unsigned char addr,unsigned char *pKe
 }
 
 /////////////////////////////////////////////////////////////////////
-//¹¦    ÄÜ£º¶ÁÈ¡M1¿¨Ò»¿éÊı¾İ
-//²ÎÊıËµÃ÷: addr[IN]£º¿éµØÖ·
-//          pData[OUT]£º¶Á³öµÄÊı¾İ£¬16×Ö½Ú
-//·µ    »Ø: ³É¹¦·µ»ØMI_OK
+//åŠŸ    èƒ½ï¼šè¯»å–M1å¡ä¸€å—æ•°æ®
+//å‚æ•°è¯´æ˜: addr[IN]ï¼šå—åœ°å€
+//          pData[OUT]ï¼šè¯»å‡ºçš„æ•°æ®ï¼Œ16å­—èŠ‚
+//è¿”    å›: æˆåŠŸè¿”å›MI_OK
 ///////////////////////////////////////////////////////////////////// 
 short PcdRead(unsigned char addr,unsigned char *pData)
 {
@@ -263,10 +263,10 @@ short PcdRead(unsigned char addr,unsigned char *pData)
 }
 
 /////////////////////////////////////////////////////////////////////
-//¹¦    ÄÜ£ºĞ´Êı¾İµ½M1¿¨Ò»¿é
-//²ÎÊıËµÃ÷: addr[IN]£º¿éµØÖ·
-//          pData[IN]£ºĞ´ÈëµÄÊı¾İ£¬16×Ö½Ú
-//·µ    »Ø: ³É¹¦·µ»ØMI_OK
+//åŠŸ    èƒ½ï¼šå†™æ•°æ®åˆ°M1å¡ä¸€å—
+//å‚æ•°è¯´æ˜: addr[IN]ï¼šå—åœ°å€
+//          pData[IN]ï¼šå†™å…¥çš„æ•°æ®ï¼Œ16å­—èŠ‚
+//è¿”    å›: æˆåŠŸè¿”å›MI_OK
 /////////////////////////////////////////////////////////////////////                  
 short PcdWrite(unsigned char addr,unsigned char *pData)
 {
@@ -301,8 +301,8 @@ short PcdWrite(unsigned char addr,unsigned char *pData)
 
 
 /////////////////////////////////////////////////////////////////////
-//¹¦    ÄÜ£ºÃüÁî¿¨Æ¬½øÈëĞİÃß×´Ì¬
-//·µ    »Ø: ³É¹¦·µ»ØMI_OK
+//åŠŸ    èƒ½ï¼šå‘½ä»¤å¡ç‰‡è¿›å…¥ä¼‘çœ çŠ¶æ€
+//è¿”    å›: æˆåŠŸè¿”å›MI_OK
 /////////////////////////////////////////////////////////////////////
 short PcdHalt(void)
 {
@@ -322,7 +322,7 @@ short PcdHalt(void)
 
 
 /////////////////////////////////////////////////////////////////////
-//ÓÃMF522¼ÆËãCRC16º¯Êı
+//ç”¨MF522è®¡ç®—CRC16å‡½æ•°
 /////////////////////////////////////////////////////////////////////
 short CalulateCRC(unsigned char *pIndata,unsigned char len,unsigned char *pOutData)
 {
@@ -351,15 +351,15 @@ short CalulateCRC(unsigned char *pIndata,unsigned char len,unsigned char *pOutDa
 }
 
 /////////////////////////////////////////////////////////////////////
-//¹¦    ÄÜ£º¸´Î»RC522
-//·µ    »Ø: ³É¹¦·µ»ØMI_OK
+//åŠŸ    èƒ½ï¼šå¤ä½RC522
+//è¿”    å›: æˆåŠŸè¿”å›MI_OK
 /////////////////////////////////////////////////////////////////////
 short PcdReset(void)
 {
     WriteRawRC(CommandReg,PCD_RESETPHASE);
 	  delay_100ns(30);
 
-    WriteRawRC(ModeReg,0x3D);            //ºÍMifare¿¨Í¨Ñ¶£¬CRC³õÊ¼Öµ0x6363
+    WriteRawRC(ModeReg,0x3D);            //å’ŒMifareå¡é€šè®¯ï¼ŒCRCåˆå§‹å€¼0x6363
     WriteRawRC(TReloadRegL,30);           
     WriteRawRC(TReloadRegH,0);
     WriteRawRC(TModeReg,0x8D);
@@ -374,7 +374,7 @@ short PcdReset(void)
 }
 
 //////////////////////////////////////////////////////////////////////
-//ÉèÖÃRC522µÄ¹¤×÷·½Ê½ 
+//è®¾ç½®RC522çš„å·¥ä½œæ–¹å¼ 
 //////////////////////////////////////////////////////////////////////
 short M500PcdConfigISOType(unsigned char type)
 {
@@ -418,9 +418,9 @@ short M500PcdConfigISOType(unsigned char type)
 
 //    return ucReturn;
 /////////////////////////////////////////////////////////////////////
-//¹¦    ÄÜ£º¶ÁRC632¼Ä´æÆ÷
-//²ÎÊıËµÃ÷£ºAddress[IN]:¼Ä´æÆ÷µØÖ·
-//·µ    »Ø£º¶Á³öµÄÖµ
+//åŠŸ    èƒ½ï¼šè¯»RC632å¯„å­˜å™¨
+//å‚æ•°è¯´æ˜ï¼šAddress[IN]:å¯„å­˜å™¨åœ°å€
+//è¿”    å›ï¼šè¯»å‡ºçš„å€¼
 /////////////////////////////////////////////////////////////////////
 unsigned char ReadRawRC(unsigned char Address)
 {
@@ -483,9 +483,9 @@ short WriteRawRC(unsigned char Address, unsigned char value)
 
 
 /////////////////////////////////////////////////////////////////////
-//¹¦    ÄÜ£ºÖÃRC522¼Ä´æÆ÷Î»
-//²ÎÊıËµÃ÷£ºreg[IN]:¼Ä´æÆ÷µØÖ·
-//          mask[IN]:ÖÃÎ»Öµ
+//åŠŸ    èƒ½ï¼šç½®RC522å¯„å­˜å™¨ä½
+//å‚æ•°è¯´æ˜ï¼šreg[IN]:å¯„å­˜å™¨åœ°å€
+//          mask[IN]:ç½®ä½å€¼
 /////////////////////////////////////////////////////////////////////
 short SetBitMask(unsigned char reg,unsigned char mask)  
 {
@@ -497,9 +497,9 @@ short SetBitMask(unsigned char reg,unsigned char mask)
 
 
 /////////////////////////////////////////////////////////////////////
-//¹¦    ÄÜ£ºÇåRC522¼Ä´æÆ÷Î»
-//²ÎÊıËµÃ÷£ºreg[IN]:¼Ä´æÆ÷µØÖ·
-//          mask[IN]:ÇåÎ»Öµ
+//åŠŸ    èƒ½ï¼šæ¸…RC522å¯„å­˜å™¨ä½
+//å‚æ•°è¯´æ˜ï¼šreg[IN]:å¯„å­˜å™¨åœ°å€
+//          mask[IN]:æ¸…ä½å€¼
 /////////////////////////////////////////////////////////////////////
 short ClearBitMask(unsigned char reg,unsigned char mask)  
 {
@@ -512,12 +512,12 @@ short ClearBitMask(unsigned char reg,unsigned char mask)
 
 
 /////////////////////////////////////////////////////////////////////
-//¹¦    ÄÜ£ºÍ¨¹ıRC522ºÍISO14443¿¨Í¨Ñ¶
-//²ÎÊıËµÃ÷£ºCommand[IN]:RC522ÃüÁî×Ö
-//          pInData[IN]:Í¨¹ıRC522·¢ËÍµ½¿¨Æ¬µÄÊı¾İ
-//          InLenByte[IN]:·¢ËÍÊı¾İµÄ×Ö½Ú³¤¶È
-//          pOutData[OUT]:½ÓÊÕµ½µÄ¿¨Æ¬·µ»ØÊı¾İ
-//          *pOutLenBit[OUT]:·µ»ØÊı¾İµÄÎ»³¤¶È
+//åŠŸ    èƒ½ï¼šé€šè¿‡RC522å’ŒISO14443å¡é€šè®¯
+//å‚æ•°è¯´æ˜ï¼šCommand[IN]:RC522å‘½ä»¤å­—
+//          pInData[IN]:é€šè¿‡RC522å‘é€åˆ°å¡ç‰‡çš„æ•°æ®
+//          InLenByte[IN]:å‘é€æ•°æ®çš„å­—èŠ‚é•¿åº¦
+//          pOutData[OUT]:æ¥æ”¶åˆ°çš„å¡ç‰‡è¿”å›æ•°æ®
+//          *pOutLenBit[OUT]:è¿”å›æ•°æ®çš„ä½é•¿åº¦
 /////////////////////////////////////////////////////////////////////
 
 
@@ -562,7 +562,7 @@ short PcdComMF522(unsigned char Command,
     if (Command == PCD_TRANSCEIVE)
     {    SetBitMask(BitFramingReg,0x80);  }
     
-    i = 600;//¸ù¾İÊ±ÖÓÆµÂÊµ÷Õû£¬²Ù×÷M1¿¨×î´óµÈ´ıÊ±¼ä25ms
+    i = 600;//æ ¹æ®æ—¶é’Ÿé¢‘ç‡è°ƒæ•´ï¼Œæ“ä½œM1å¡æœ€å¤§ç­‰å¾…æ—¶é—´25ms
     do 
     {
          n = ReadRawRC(ComIrqReg);
@@ -607,8 +607,8 @@ short PcdComMF522(unsigned char Command,
 
 
 /////////////////////////////////////////////////////////////////////
-//¿ªÆôÌìÏß  
-//Ã¿´ÎÆô¶¯»ò¹Ø±ÕÌìÏÕ·¢ÉäÖ®¼äÓ¦ÖÁÉÙÓĞ1msµÄ¼ä¸ô
+//å¼€å¯å¤©çº¿  
+//æ¯æ¬¡å¯åŠ¨æˆ–å…³é—­å¤©é™©å‘å°„ä¹‹é—´åº”è‡³å°‘æœ‰1msçš„é—´éš”
 /////////////////////////////////////////////////////////////////////
 void PcdAntennaOn(void)
 {
@@ -622,14 +622,14 @@ void PcdAntennaOn(void)
 
 
 /////////////////////////////////////////////////////////////////////
-//¹Ø±ÕÌìÏß
+//å…³é—­å¤©çº¿
 /////////////////////////////////////////////////////////////////////
 void PcdAntennaOff(void)
 {
     ClearBitMask(TxControlReg, 0x03);
 }
 
-//µÈ´ı¿¨Àë¿ª
+//ç­‰å¾…å¡ç¦»å¼€
 void WaitCardOff(void)
 {
 	unsigned char status, TagType[2];
@@ -655,18 +655,18 @@ void WaitCardOff(void)
 
 uint8_t buf[64][16];
 
-uint8_t read_RFID_all(void){  //¶Á³ö¿¨ÄÚµÄËùÓĞÊı¾İ
+uint8_t read_RFID_all(void){  //è¯»å‡ºå¡å†…çš„æ‰€æœ‰æ•°æ®
 		uint8_t CT[2];	
 	uint8_t SN[4];
 	 uint8_t i,j;
-	uint8_t KEY[6]={0xff,0xff,0xff,0xff,0xff,0xff}; //ÃÜÔ¿
-  if(PcdRequest(PICC_REQALL,CT)!=MI_OK)return 0; 				//Ñ°¿¨
+	uint8_t KEY[6]={0xff,0xff,0xff,0xff,0xff,0xff}; //å¯†é’¥
+  if(PcdRequest(PICC_REQALL,CT)!=MI_OK)return 0; 				//å¯»å¡
 	printf("ok");
-	if(PcdAnticoll(SN)!=MI_OK)return 0;            //»ñÈ¡¿¨ID
-	if(PcdSelect(SN)!=MI_OK)return 0;				       //Ñ¡¶¨´Ë¿¨
+	if(PcdAnticoll(SN)!=MI_OK)return 0;            //è·å–å¡ID
+	if(PcdSelect(SN)!=MI_OK)return 0;				       //é€‰å®šæ­¤å¡
 	for(i=0;i<16;i++){
 		
-	 if(PcdAuthState(0x60,4*i+3,KEY,SN)!=MI_OK)continue ;	//ÑéÖ¤ÃÜÔ¿
+	 if(PcdAuthState(0x60,4*i+3,KEY,SN)!=MI_OK)continue ;	//éªŒè¯å¯†é’¥
 		for(j=0;j<4;j++){
 			if(PcdRead(i*4+j,buf[i*4+j])!=MI_OK){
 				continue;
@@ -691,45 +691,45 @@ void Read_Card(void)
 	char str[50];
 	uint8_t status;
 	uint8_t s=0x00;
-	//¿¨ÀàĞÍ
+	//å¡ç±»å‹
 	unsigned char CT[2];
-	//¿¨ºÅ
+	//å¡å·
 	unsigned char SN[4];
-	//´æ·ÅRFID 
+	//å­˜æ”¾RFID 
 	unsigned char RFID[16];			
 	uint8_t KEY[6]={0xff,0xff,0xff,0xff,0xff,0xff};
-	/*Œ¤¿¨*/
+	/*å°‹å¡*/
 	status = PcdRequest(PICC_REQALL,CT);
-	//Œ¤¿¨³É¹¦
+	//å°‹å¡æˆåŠŸ
 	if(status==MI_OK)
 	{            
 			//delay_1ms(200);
 			status=MI_ERR;
-			/*·À³å×²*/
+			/*é˜²å†²æ’*/
 			status = PcdAnticoll(SN);
 	}
-	//·ÀĞn×²³É¹¦
+	//é˜²è¡æ’æˆåŠŸ
 	if (status==MI_OK)
 	{   
 			status=MI_ERR;	
 			status =PcdSelect(SN);
 
 	}
-	//Ñ¡¿¨³É¹¦
+	//é€‰å¡æˆåŠŸ
 	if(status==MI_OK)
 	{
 		status=MI_ERR;
 		status =PcdAuthState(0x60,s,KEY,SN);
-		//ÑéÖ¤³É¹¦
+		//éªŒè¯æˆåŠŸ
 		if(status==MI_OK)		
 		{
 			status=MI_ERR;
-			//¶Á¿¨
+			//è¯»å¡
 			status=	PcdRead(s,RFID);
-			//¶Á¿¨¿¨³É¹¦
+			//è¯»å¡å¡æˆåŠŸ
 			if(status==MI_OK)
 			{
-				printf("¶Á¿¨³É¹¦\r\n");
+				printf("è¯»å¡æˆåŠŸ\r\n");
 				printf("ID:");
 				OLED_Clear();
 				OLED_PrintString(0, 0, "succeed",1);
@@ -748,7 +748,7 @@ void Read_Card(void)
 			}
 		}
 
-		printf("µÈ´ıÊ¶±ğ\r\n");
+		printf("ç­‰å¾…è¯†åˆ«\r\n");
 	}
 		
 	

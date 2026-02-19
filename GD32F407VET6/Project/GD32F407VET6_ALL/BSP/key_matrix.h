@@ -6,7 +6,7 @@
 #define u8 uint8_t
 
 /*****************************************************************************
- ** ÉùÃ÷ È«¾Ö±äÁ¿
+ ** å£°æ˜ å…¨å±€å˜é‡
 ****************************************************************************/
 typedef struct {
 //    uint32_t GPIOx;
@@ -15,26 +15,26 @@ typedef struct {
 //    uint32_t Pinx
     uint32_t GPIOx;
     uint32_t Pinx;
-//	uint32_t 	GPIOx;	//ËùÓÃµÄGPIO¶Ë¿Ú
-//	uint32_t 	Pinx;	//ËùÓÃµÄPinÒı½Å	
+//	uint32_t 	GPIOx;	//æ‰€ç”¨çš„GPIOç«¯å£
+//	uint32_t 	Pinx;	//æ‰€ç”¨çš„Pinå¼•è„š	
 }GPIO_GROUP;
 
 typedef struct 
 {
-	uint8_t 	res_flag;			// ¼ì²â½á¹û  0£ºÃ»ÓĞ°´ÏÂ	1£ºÓĞ°´ÏÂ
-	uint8_t 	res_row;			// µÚ¼¸ĞĞ
-	uint8_t		res_col;			// µÚ¼¸ÁĞ
-	uint8_t		res;				// 1-16 	´Ó×óµ½ÓÒ´ÓÉÏµ½ÏÂ
+	uint8_t 	res_flag;			// æ£€æµ‹ç»“æœ  0ï¼šæ²¡æœ‰æŒ‰ä¸‹	1ï¼šæœ‰æŒ‰ä¸‹
+	uint8_t 	res_row;			// ç¬¬å‡ è¡Œ
+	uint8_t		res_col;			// ç¬¬å‡ åˆ—
+	uint8_t		res;				// 1-16 	ä»å·¦åˆ°å³ä»ä¸Šåˆ°ä¸‹
 }xKEY_MATRIX_TypeDef;
 
 
 extern xKEY_MATRIX_TypeDef xKEY_MATRIX;
 
 /*****************************************************************************
- ** ÉùÃ÷  È«¾Öº¯Êı
+ ** å£°æ˜  å…¨å±€å‡½æ•°
 ****************************************************************************/
-void KEY_MATRIX_Init(void);	// °´¼ü¾ØÕó³õÊ¼»¯º¯Êı
+void KEY_MATRIX_Init(void);	// æŒ‰é”®çŸ©é˜µåˆå§‹åŒ–å‡½æ•°
 
-void KEY_MATRIX_Scan(void);	// °´¼ü¾ØÕóÉ¨Ãèº¯Êı
+void KEY_MATRIX_Scan(void);	// æŒ‰é”®çŸ©é˜µæ‰«æå‡½æ•°
 
 #endif

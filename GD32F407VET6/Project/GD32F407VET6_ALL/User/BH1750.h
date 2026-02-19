@@ -20,7 +20,7 @@ void BH1750_Get_Data(void);
 
 
 
-extern uint32_t LightData_Hex;//¹âÕÕÇ¿¶È£¨ÕûÊı£¬µ¥Î»lx£©
+extern uint32_t LightData_Hex;//å…‰ç…§å¼ºåº¦ï¼ˆæ•´æ•°ï¼Œå•ä½lxï¼‰
 
 
 

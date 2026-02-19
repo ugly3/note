@@ -5,33 +5,33 @@
 #include "systick.h"
 #include "iic.h"
 
-// ¶ÁÈ¡°´¼ü´úÂëÃüÁî
-#define CH455_GET_KEY	0x0700					// »ñÈ¡°´¼ü,·µ»Ø°´¼ü´úÂë
+// è¯»å–æŒ‰é”®ä»£ç å‘½ä»¤
+#define CH455_GET_KEY	0x0700					// èŽ·å–æŒ‰é”®,è¿”å›žæŒ‰é”®ä»£ç 
 
-#define CH455_BIT_ENABLE	0x01		// ¿ªÆô/¹Ø±ÕÎ»
-#define CH455_BIT_SLEEP		0x04		// Ë¯Ãß¿ØÖÆÎ»
-#define CH455_BIT_7SEG		0x08		// 7¶Î¿ØÖÆÎ»
-#define CH455_BIT_INTENS1	0x10		// 1¼¶ÁÁ¶È
-#define CH455_BIT_INTENS2	0x20		// 2¼¶ÁÁ¶È
-#define CH455_BIT_INTENS3	0x30		// 3¼¶ÁÁ¶È
-#define CH455_BIT_INTENS4	0x40		// 4¼¶ÁÁ¶È
-#define CH455_BIT_INTENS5	0x50		// 5¼¶ÁÁ¶È
-#define CH455_BIT_INTENS6	0x60		// 6¼¶ÁÁ¶È
-#define CH455_BIT_INTENS7	0x70		// 7¼¶ÁÁ¶È
-#define CH455_BIT_INTENS8	0x00		// 8¼¶ÁÁ¶È
+#define CH455_BIT_ENABLE	0x01		// å¼€å¯/å…³é—­ä½
+#define CH455_BIT_SLEEP		0x04		// ç¡çœ æŽ§åˆ¶ä½
+#define CH455_BIT_7SEG		0x08		// 7æ®µæŽ§åˆ¶ä½
+#define CH455_BIT_INTENS1	0x10		// 1çº§äº®åº¦
+#define CH455_BIT_INTENS2	0x20		// 2çº§äº®åº¦
+#define CH455_BIT_INTENS3	0x30		// 3çº§äº®åº¦
+#define CH455_BIT_INTENS4	0x40		// 4çº§äº®åº¦
+#define CH455_BIT_INTENS5	0x50		// 5çº§äº®åº¦
+#define CH455_BIT_INTENS6	0x60		// 6çº§äº®åº¦
+#define CH455_BIT_INTENS7	0x70		// 7çº§äº®åº¦
+#define CH455_BIT_INTENS8	0x00		// 8çº§äº®åº¦
 
-#define CH455_SYSOFF	0x0400			// ¹Ø±ÕÏÔÊ¾¡¢¹Ø±Õ¼üÅÌ
-#define CH455_SYSON		( CH455_SYSOFF | CH455_BIT_ENABLE )	// ¿ªÆôÏÔÊ¾¡¢¼üÅÌ
-#define CH455_SLEEPOFF	CH455_SYSOFF	// ¹Ø±ÕË¯Ãß
-#define CH455_SLEEPON	( CH455_SYSOFF | CH455_BIT_SLEEP )	// ¿ªÆôË¯Ãß
-#define CH455_7SEG_ON	( CH455_SYSON | CH455_BIT_7SEG )	// ¿ªÆôÆß¶ÎÄ£Ê½
-#define CH455_8SEG_ON	( CH455_SYSON | 0x00 )	// ¿ªÆô°Ë¶ÎÄ£Ê½
-#define CH455_SYSON_4	( CH455_SYSON | CH455_BIT_INTENS4 )	// ¿ªÆôÏÔÊ¾¡¢¼üÅÌ¡¢4¼¶ÁÁ¶È
-#define CH455_SYSON_8	( CH455_SYSON | CH455_BIT_INTENS8 )	// ¿ªÆôÏÔÊ¾¡¢¼üÅÌ¡¢8¼¶ÁÁ¶È
+#define CH455_SYSOFF	0x0400			// å…³é—­æ˜¾ç¤ºã€å…³é—­é”®ç›˜
+#define CH455_SYSON		( CH455_SYSOFF | CH455_BIT_ENABLE )	// å¼€å¯æ˜¾ç¤ºã€é”®ç›˜
+#define CH455_SLEEPOFF	CH455_SYSOFF	// å…³é—­ç¡çœ 
+#define CH455_SLEEPON	( CH455_SYSOFF | CH455_BIT_SLEEP )	// å¼€å¯ç¡çœ 
+#define CH455_7SEG_ON	( CH455_SYSON | CH455_BIT_7SEG )	// å¼€å¯ä¸ƒæ®µæ¨¡å¼
+#define CH455_8SEG_ON	( CH455_SYSON | 0x00 )	// å¼€å¯å…«æ®µæ¨¡å¼
+#define CH455_SYSON_4	( CH455_SYSON | CH455_BIT_INTENS4 )	// å¼€å¯æ˜¾ç¤ºã€é”®ç›˜ã€4çº§äº®åº¦
+#define CH455_SYSON_8	( CH455_SYSON | CH455_BIT_INTENS8 )	// å¼€å¯æ˜¾ç¤ºã€é”®ç›˜ã€8çº§äº®åº¦
 
-// CH455½Ó¿Ú¶¨Òå
-#define		CH455_I2C_ADDR		0x40			// CH455µÄµØÖ·
-#define		CH455_I2C_MASK		0x3E			// CH455µÄ¸ß×Ö½ÚÃüÁîÑÚÂë
+// CH455æŽ¥å£å®šä¹‰
+#define		CH455_I2C_ADDR		0x40			// CH455çš„åœ°å€
+#define		CH455_I2C_MASK		0x3E			// CH455çš„é«˜å­—èŠ‚å‘½ä»¤æŽ©ç 
 
 
 void CH455G_Init(iic_bus_typ *hi2c);

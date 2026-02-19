@@ -18,37 +18,37 @@
 #define OLED_RERST_GPIO_Port GPIOE
 #define OLED_RERST_Pin GPIO_PIN_15
 
-// OLED ³õÊ¼»¯
+// OLED åˆå§‹åŒ–
 void OLED_Init(iic_bus_typ *hi2c);
 
-// ÇåÆÁ
+// æ¸…å±
 void OLED_Clear(void);
 
-// Ë¢ĞÂÆÁÄ»£¨½«»º³åÇøÄÚÈİĞ´Èë OLED£©
+// åˆ·æ–°å±å¹•ï¼ˆå°†ç¼“å†²åŒºå†…å®¹å†™å…¥ OLEDï¼‰
 void OLED_Refresh(void);
 
-// »æÖÆµã
+// ç»˜åˆ¶ç‚¹
 void OLED_DrawPixel(uint8_t x, uint8_t y, bool color);
 
-// »æÖÆÏß
+// ç»˜åˆ¶çº¿
 void OLED_DrawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, bool color);
 
-// »æÖÆ¾ØĞÎ
+// ç»˜åˆ¶çŸ©å½¢
 void OLED_DrawRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, bool color);
 
-// »æÖÆÔ²
+// ç»˜åˆ¶åœ†
 void OLED_DrawCircle(uint8_t x0, uint8_t y0, uint8_t radius, bool color);
 
-// ÏÔÊ¾×Ö·û
+// æ˜¾ç¤ºå­—ç¬¦
 void OLED_PrintChar(uint8_t x, uint8_t y, char ch, bool color);
 
-// ÏÔÊ¾×Ö·û´®
+// æ˜¾ç¤ºå­—ç¬¦ä¸²
 void OLED_PrintString(uint8_t x, uint8_t y, const char *str, bool color);
 
-// ÏÔÊ¾Êı×Ö
+// æ˜¾ç¤ºæ•°å­—
 void OLED_PrintNumber(uint8_t x, uint8_t y, int32_t num, bool color);
 
-// ÏÔÊ¾Î»Í¼
+// æ˜¾ç¤ºä½å›¾
 void OLED_DrawBitmap(uint8_t x, uint8_t y, const uint8_t *bitmap, uint8_t width, uint8_t height, bool color);
 
 #endif

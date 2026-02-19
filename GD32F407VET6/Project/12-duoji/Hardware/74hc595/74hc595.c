@@ -28,45 +28,45 @@ void hc595_init(void ){
 
 void hc595_WriteByte(uint8_t data) {
     for (int i = 0; i < 8; i++) {
-        // ÉèÖÃ SER Òý½Å£¨·¢ËÍÊý¾ÝµÄµ±Ç°Î»£©
+        // è®¾ç½® SER å¼•è„šï¼ˆå‘é€æ•°æ®çš„å½“å‰ä½ï¼‰
         if ((data & 0x80) == 0X80) {
             gpio_bit_write(SI_Port,SI_PIN,SET);
         } else {
             gpio_bit_write(SI_Port,SI_PIN,RESET);
         }
 				data <<=1;
-        // ²úÉú SRCLK ÉÏÉýÑØ£¬½«Êý¾ÝÒÆÈëÒÆÎ»¼Ä´æÆ÷
+        // äº§ç”Ÿ SRCLK ä¸Šå‡æ²¿ï¼Œå°†æ•°æ®ç§»å…¥ç§»ä½å¯„å­˜å™¨
         gpio_bit_write(SCK_Port, SCK_PIN,SET);
-        delay_us(10);  // ¶ÌÔÝÑÓÊ±
+        delay_us(10);  // çŸ­æš‚å»¶æ—¶
         gpio_bit_write(SCK_Port, SCK_PIN,RESET);
 				delay_us(10);
     }
 
-    // ²úÉú RCLK ÉÏÉýÑØ£¬½«Êý¾ÝÊä³öµ½²¢ÐÐ¶Ë¿Ú
+    // äº§ç”Ÿ RCLK ä¸Šå‡æ²¿ï¼Œå°†æ•°æ®è¾“å‡ºåˆ°å¹¶è¡Œç«¯å£
     gpio_bit_write(RCK_Port, RCK_PIN,SET);
-    delay_us(10);  // ¶ÌÔÝÑÓÊ±
+    delay_us(10);  // çŸ­æš‚å»¶æ—¶
     gpio_bit_write(RCK_Port, RCK_PIN,RESET);
 }
 
 void hc595_WriteByte16(uint16_t data) {
     for (int i = 0; i < 16; i++) {
-        // ÉèÖÃ SER Òý½Å£¨·¢ËÍÊý¾ÝµÄµ±Ç°Î»£©
+        // è®¾ç½® SER å¼•è„šï¼ˆå‘é€æ•°æ®çš„å½“å‰ä½ï¼‰
         if ((data & 0x8000) == 0X8000) {
             gpio_bit_write(SI_Port, SI_PIN,SET);
         } else {
             gpio_bit_write(SI_Port, SI_PIN,RESET);
         }
 				data <<=1;
-        // ²úÉú SRCLK ÉÏÉýÑØ£¬½«Êý¾ÝÒÆÈëÒÆÎ»¼Ä´æÆ÷
+        // äº§ç”Ÿ SRCLK ä¸Šå‡æ²¿ï¼Œå°†æ•°æ®ç§»å…¥ç§»ä½å¯„å­˜å™¨
         gpio_bit_write(SCK_Port, SCK_PIN,SET);
-        delay_us(10);  // ¶ÌÔÝÑÓÊ±
+        delay_us(10);  // çŸ­æš‚å»¶æ—¶
         gpio_bit_write(SCK_Port, SCK_PIN,RESET);
 				delay_us(10);
     }
 
-    // ²úÉú RCLK ÉÏÉýÑØ£¬½«Êý¾ÝÊä³öµ½²¢ÐÐ¶Ë¿Ú
+    // äº§ç”Ÿ RCLK ä¸Šå‡æ²¿ï¼Œå°†æ•°æ®è¾“å‡ºåˆ°å¹¶è¡Œç«¯å£
     gpio_bit_write(RCK_Port, RCK_PIN,SET);
-    delay_us(10);  // ¶ÌÔÝÑÓÊ±
+    delay_us(10);  // çŸ­æš‚å»¶æ—¶
     gpio_bit_write(RCK_Port, RCK_PIN,RESET);
 }
 

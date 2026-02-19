@@ -2,14 +2,14 @@
 
 
 
-//²½½øµç»ú×ª¶¯µÄËÙ¶È0~100
+//æ­¥è¿›ç”µæœºè½¬åŠ¨çš„é€Ÿåº¦0~100
 uint8_t speed = 100;		
 
 
 
 uint8_t step_pulse[8]={0x12,0x02,0x06,0x04,0x0c,0x08,0x18,0x20};
 
-//·´×ª
+//åè½¬
 void Reverse(void)
 {
 	for(int i=7;i>=0;i--){
@@ -18,7 +18,7 @@ void Reverse(void)
 	}
 }
 
-//Õý×ª
+//æ­£è½¬
 void Corotation(void)
 {	
 	for(int i=0;i<8;i++){
@@ -27,7 +27,7 @@ void Corotation(void)
 	}
 	
 	
-	//AC×é
+	//ACç»„
 
 }
 

@@ -4,7 +4,7 @@
 #include "Key.h"   
 
 
-//USART1³õÊ¼»¯£¬Ê¹ÓÃPD5(TX),PD6(RX)½Å£¬9600²¨ÌØÂÊ£¬ÎŞĞ£Ñé£¬8Î»Êı¾İ£¬1Î»Í£Ö¹
+//USART1åˆå§‹åŒ–ï¼Œä½¿ç”¨PD5(TX),PD6(RX)è„šï¼Œ9600æ³¢ç‰¹ç‡ï¼Œæ— æ ¡éªŒï¼Œ8ä½æ•°æ®ï¼Œ1ä½åœæ­¢
 void USART_Init(void)
 {
 	/* enable GPIO clock */
@@ -39,13 +39,13 @@ void USART_Init(void)
     usart_hardware_flow_cts_config(USART1, USART_CTS_DISABLE);
     usart_transmit_config(USART1, USART_TRANSMIT_ENABLE);
     usart_receive_config(USART1, USART_RECEIVE_ENABLE);
-    usart_enable(USART1);//Ê¹ÄÜUSART1
+    usart_enable(USART1);//ä½¿èƒ½USART1
 	
 	/* USART IRQn configure */
-	nvic_irq_enable(USART1_IRQn,5,0);								//ÅäÖÃÖĞ¶Ï
-	usart_interrupt_enable(USARTx,USART_INT_RBNE);					//Ê¹ÄÜÖĞ¶Ï	
-	usart_data_first_config(USARTx,USART_MSBF_LSB);					//´ó¶ËĞ¡¶ËÓëMSBºÍLSB
-    usart_enable(USARTx);  											// Ê¹ÄÜ´®¿Ú
+	nvic_irq_enable(USART1_IRQn,5,0);								//é…ç½®ä¸­æ–­
+	usart_interrupt_enable(USARTx,USART_INT_RBNE);					//ä½¿èƒ½ä¸­æ–­	
+	usart_data_first_config(USARTx,USART_MSBF_LSB);					//å¤§ç«¯å°ç«¯ä¸MSBå’ŒLSB
+    usart_enable(USARTx);  											// ä½¿èƒ½ä¸²å£
 		
 }
 
@@ -71,10 +71,10 @@ void Send_TO_Screen(uint8_t *data)
 {
 	static const uint32_t USART_ID = USARTx;
     static const uint8_t test[3] = {0xFF, 0xFF, 0xFF};
-    uint32_t len = strlen((const char *)data); // ¶¯Ì¬¼ÆËãdataµÄ³¤¶È
+    uint32_t len = strlen((const char *)data); // åŠ¨æ€è®¡ç®—dataçš„é•¿åº¦
     uint32_t i = 0;
 
-    // ·¢ËÍÊı¾İ
+    // å‘é€æ•°æ®
     while(len--)
     {
         USART_Send_Byte(USART_ID, data[i]);
@@ -82,7 +82,7 @@ void Send_TO_Screen(uint8_t *data)
         i++;
     }
 
-    // ·¢ËÍ°üÎ²
+    // å‘é€åŒ…å°¾
     for (i = 0; i < sizeof(test); i++)
     {
         USART_Send_Byte(USART_ID, test[i]);
@@ -99,7 +99,7 @@ volatile uint8_t pRxPacket = 0;
 
 void USART1_IRQHandler(void)
 {
-	static uint8_t RxState = 0; // ½ÓÊÕ×´Ì¬»ú
+	static uint8_t RxState = 0; // æ¥æ”¶çŠ¶æ€æœº
 
 	if((RESET != usart_interrupt_flag_get(USARTx, USART_INT_FLAG_RBNE)) && (RESET != usart_flag_get(USARTx, USART_FLAG_RBNE)))
 	{
@@ -107,30 +107,30 @@ void USART1_IRQHandler(void)
 		
 		switch (RxState)
 		{
-			case 0: // µÈ´ı°üÍ·
+			case 0: // ç­‰å¾…åŒ…å¤´
 				if (RxData == 0x55)
 				{
-					pRxPacket = 0; // ÖØÖÃ°üË÷Òı
-					RxState = 1; // ½øÈëÏÂÒ»×´Ì¬
+					pRxPacket = 0; // é‡ç½®åŒ…ç´¢å¼•
+					RxState = 1; // è¿›å…¥ä¸‹ä¸€çŠ¶æ€
 				}
 				break;
-			case 1: // ½ÓÊÕÊı¾İÖ±µ½°üÎ²
-				if (RxData == 0xBB) // ¼ì²âµ½°üÎ²
+			case 1: // æ¥æ”¶æ•°æ®ç›´åˆ°åŒ…å°¾
+				if (RxData == 0xBB) // æ£€æµ‹åˆ°åŒ…å°¾
 				{
-					Serial_RxPacket[pRxPacket] = '\0'; // Ìí¼Ó×Ö·û´®½áÊø·û
-					Serial_RxFlag = 1; // ÉèÖÃ½ÓÊÕÍê³É±êÖ¾
-					RxState = 0; // ÖØÖÃ×´Ì¬»ú
+					Serial_RxPacket[pRxPacket] = '\0'; // æ·»åŠ å­—ç¬¦ä¸²ç»“æŸç¬¦
+					Serial_RxFlag = 1; // è®¾ç½®æ¥æ”¶å®Œæˆæ ‡å¿—
+					RxState = 0; // é‡ç½®çŠ¶æ€æœº
 				}
 				else
 				{
-					if (pRxPacket < RX_PACKET_SIZE - 1) // ·ÀÖ¹»º³åÇøÒç³ö
+					if (pRxPacket < RX_PACKET_SIZE - 1) // é˜²æ­¢ç¼“å†²åŒºæº¢å‡º
 					{
-						Serial_RxPacket[pRxPacket++] = RxData; // ´æ´¢½ÓÊÕµ½µÄÊı¾İ
+						Serial_RxPacket[pRxPacket++] = RxData; // å­˜å‚¨æ¥æ”¶åˆ°çš„æ•°æ®
 					}
 				}
 				break;
 			default:
-				RxState = 0; // ³öÏÖÎ´Öª×´Ì¬£¬ÖØÖÃ×´Ì¬»ú
+				RxState = 0; // å‡ºç°æœªçŸ¥çŠ¶æ€ï¼Œé‡ç½®çŠ¶æ€æœº
 				break;
 		}
 		
@@ -158,13 +158,13 @@ void Usart_Send_and_Receive_Data(void)
 {
     if(Serial_RxFlag==1)
     {
-        if(Serial_RxPacket[0]==0x01)//ÎÂ¶ÈãĞÖµ
+        if(Serial_RxPacket[0]==0x01)//æ¸©åº¦é˜ˆå€¼
             temp_yuzhi = Serial_RxPacket[1];
-        else if(Serial_RxPacket[0]==0x02)//Êª¶ÈãĞÖµ
+        else if(Serial_RxPacket[0]==0x02)//æ¹¿åº¦é˜ˆå€¼
             humi_yuzhi = Serial_RxPacket[1];
-        else if(Serial_RxPacket[0]==0x03)//ÑÌÎíãĞÖµ
+        else if(Serial_RxPacket[0]==0x03)//çƒŸé›¾é˜ˆå€¼
             MQ2_yuzhi= Serial_RxPacket[1];
-        else if(Serial_RxPacket[0]==0x04)//´°Á±¿ª¹Ø
+        else if(Serial_RxPacket[0]==0x04)//çª—å¸˜å¼€å…³
         {
             if(Serial_RxPacket[1]==0x01)
             {

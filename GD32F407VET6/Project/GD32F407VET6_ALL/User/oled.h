@@ -17,7 +17,7 @@ typedef unsigned long u32;
 #define Y_WIDTH 	64	    
 
 
-//-----------------OLED¶Ë¿Ú¶¨Òå----------------  					   
+//-----------------OLEDç«¯å£å®šä¹‰----------------  					   
 //RES->C8
 
 #define OLED_SCLK_Clr() gpio_bit_write(GPIOA, GPIO_PIN_8, RESET)//CLK 
@@ -32,11 +32,11 @@ typedef unsigned long u32;
 #define OLED_CS_Clr()  gpio_bit_write(GPIOD, GPIO_PIN_10, RESET)//CS
 #define OLED_CS_Set()  gpio_bit_write(GPIOD, GPIO_PIN_10, SET)
 
-#define OLED_CMD  0	//Ğ´ÃüÁî
-#define OLED_DATA 1	//Ğ´Êı¾İ
+#define OLED_CMD  0	//å†™å‘½ä»¤
+#define OLED_DATA 1	//å†™æ•°æ®
 
 
-//OLED¿ØÖÆÓÃº¯Êı
+//OLEDæ§åˆ¶ç”¨å‡½æ•°
 void OLED_WR_Byte(u8 dat,u8 cmd);	    
 void OLED_Display_On(void);
 void OLED_Display_Off(void);	   							   		    

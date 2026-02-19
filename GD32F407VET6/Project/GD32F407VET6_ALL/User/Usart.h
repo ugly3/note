@@ -6,7 +6,7 @@
 #include "stdlib.h"
 #include "string.h"
 
-#define RX_PACKET_SIZE 100 // ¶¨Òå½ÓÊÕ»º³åÇø´óĞ¡
+#define RX_PACKET_SIZE 100 // å®šä¹‰æ¥æ”¶ç¼“å†²åŒºå¤§å°
 
 // PD5(TX),PD6(RX)
 #define USART_TX_RTC 		RCU_GPIOD

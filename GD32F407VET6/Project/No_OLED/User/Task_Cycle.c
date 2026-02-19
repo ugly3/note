@@ -7,16 +7,16 @@ void Task_cycle(void)
     {
         if(index_50ms_flag==1) 
         {  
-            HC_Get_Data(HC_status);           //»ñÈ¡³¬Éù²¨²â¾à
+            HC_Get_Data(HC_status);           //è·å–è¶…å£°æ³¢æµ‹è·
             index_50ms_flag=0;
         }
         if(index_200ms_flag==1) 
         {
-            set_led(led_status);                   //µÆ
-            Door_Servo_SetAngle(door_status);      //´óÃÅ
+            set_led(led_status);                   //ç¯
+            Door_Servo_SetAngle(door_status);      //å¤§é—¨
             Fan_ZD(Fan_ZD_status);
-            Fan_motor_duty(Fan_status);            //·çÉÈ
-            Set_Walkmotor(Walkmotor_status);          //Îª1Ë³Ê±Õë1È¦£¬Îª0ÄæÊ±Õë
+            Fan_motor_duty(Fan_status);            //é£æ‰‡
+            Set_Walkmotor(Walkmotor_status);          //ä¸º1é¡ºæ—¶é’ˆ1åœˆï¼Œä¸º0é€†æ—¶é’ˆ
             
             index_200ms_flag=0;
         }
@@ -24,13 +24,13 @@ void Task_cycle(void)
         
         if(index_800ms_flag==1)
         {
-//            BH1750_Get_Data();                          //»ñÈ¡¹âÕÕÇ¿¶È (±ØĞë½ÓÉÏ£¬·ñÔò×¢ÊÍ)
-//            DHT11_Read_Data(&temp_value,&humi_value);   //»ñÈ¡ÎÂÊª¶È (±ØĞë½ÓÉÏ£¬·ñÔò×¢ÊÍ)
+//            BH1750_Get_Data();                          //è·å–å…‰ç…§å¼ºåº¦ (å¿…é¡»æ¥ä¸Šï¼Œå¦åˆ™æ³¨é‡Š)
+//            DHT11_Read_Data(&temp_value,&humi_value);   //è·å–æ¸©æ¹¿åº¦ (å¿…é¡»æ¥ä¸Šï¼Œå¦åˆ™æ³¨é‡Š)
             index_800ms_flag=0;
         }
         if(index_1000ms_flag==1)
         {
-            if(RFID_Stop==0)                        //¼ì²âRFID¿¨  
+            if(RFID_Stop==0)                        //æ£€æµ‹RFIDå¡  
                 RFID_Check();
             
            
@@ -51,11 +51,11 @@ void Task_cycle(void)
     
     if(index_500ms_flag==1) 
     {
-        Body_Hw_ZD(Body_Hw_ZD_status);           //ÈËÌåºìÍâ¼ì²â£¬µÆÁÁÃğ
-        Get_Weight(Weight_status);               //³ÆÖØ
-        RTC_Show_Time();                         //»ñÈ¡Ê±¼ä
+        Body_Hw_ZD(Body_Hw_ZD_status);           //äººä½“çº¢å¤–æ£€æµ‹ï¼Œç¯äº®ç­
+        Get_Weight(Weight_status);               //ç§°é‡
+        RTC_Show_Time();                         //è·å–æ—¶é—´
         
-            if(adc_value[0]>MQ2_yuzhi || adc_value[1]>Huoyan_yuzhi)              //ÑÌÎíÅ¨¶È±¨¾¯ãĞÖµÎ´¿Éµ÷************»ğÑæ´«¸ĞÆ÷ãĞÖµÎ´¿Éµ÷
+            if(adc_value[0]>MQ2_yuzhi || adc_value[1]>Huoyan_yuzhi)              //çƒŸé›¾æµ“åº¦æŠ¥è­¦é˜ˆå€¼æœªå¯è°ƒ************ç«ç„°ä¼ æ„Ÿå™¨é˜ˆå€¼æœªå¯è°ƒ
                 Set_Buzze(1);
             else
                 Set_Buzze(0);
@@ -67,13 +67,13 @@ void Task_cycle(void)
     if(index_1300ms_flag ==1)  
     {
         sprintf((char*)Buf,"temp=%d",temp_value);
-        Send_TO_Screen((uint8_t *)Buf); // ÉèÖÃÎÂ¶È
+        Send_TO_Screen((uint8_t *)Buf); // è®¾ç½®æ¸©åº¦
         
         sprintf((char*)Buf,"smokescope=%d",adc_value[0]);
-        Send_TO_Screen((uint8_t *)Buf); // ÉèÖÃÑÌÎí
+        Send_TO_Screen((uint8_t *)Buf); // è®¾ç½®çƒŸé›¾
         
         sprintf((char*)Buf,"humidity=%d",humi_value);
-        Send_TO_Screen((uint8_t *)Buf); // ÉèÖÃÊª¶È
+        Send_TO_Screen((uint8_t *)Buf); // è®¾ç½®æ¹¿åº¦
         
         
         index_1300ms_flag=0;

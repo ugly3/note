@@ -1,15 +1,15 @@
 #include "ALL.h"
 
 uint8_t Walkmotor_last_status = 0;
-uint8_t phasecw[4] ={GPIO_PIN_5,GPIO_PIN_4,GPIO_PIN_3,GPIO_PIN_2};//ÄæÊ±Õë×ªµç»úµ¼Í¨ÏàĞòD-C-B-A
-uint8_t phaseccw[4]={GPIO_PIN_2,GPIO_PIN_3,GPIO_PIN_4,GPIO_PIN_5};//Ë³Ê±Õë×ªµç»úµ¼Í¨ÏàĞòA-B-C-D
+uint8_t phasecw[4] ={GPIO_PIN_5,GPIO_PIN_4,GPIO_PIN_3,GPIO_PIN_2};//é€†æ—¶é’ˆè½¬ç”µæœºå¯¼é€šç›¸åºD-C-B-A
+uint8_t phaseccw[4]={GPIO_PIN_2,GPIO_PIN_3,GPIO_PIN_4,GPIO_PIN_5};//é¡ºæ—¶é’ˆè½¬ç”µæœºå¯¼é€šç›¸åºA-B-C-D
 
 
 void Walk_Motor_Init(void)
 {
-    rcu_periph_clock_enable(Motor_RCU_GPIOX);//Ê¹ÄÜGPIOEÊ±ÖÓ
-    gpio_mode_set(Motor_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, Motor_PIN);//PE2,PE3,PE4,PE5ÅäÖÃ³ÉÊä³ö
-    gpio_output_options_set(Motor_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, Motor_PIN);//ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È
+    rcu_periph_clock_enable(Motor_RCU_GPIOX);//ä½¿èƒ½GPIOEæ—¶é’Ÿ
+    gpio_mode_set(Motor_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, Motor_PIN);//PE2,PE3,PE4,PE5é…ç½®æˆè¾“å‡º
+    gpio_output_options_set(Motor_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, Motor_PIN);//é…ç½®æˆæ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
 }
 
 
@@ -19,32 +19,32 @@ void Set_Walkmotor(uint8_t status)
     uint16_t i;
     if(status==1)
     {
-        if(Walkmotor_last_status==0)//ÉÏÒ»¸ö×´Ì¬Îª0,²ÅÖ´ĞĞ£¬·ÀÖ¹ÖØ¸´Ö´ĞĞ
+        if(Walkmotor_last_status==0)//ä¸Šä¸€ä¸ªçŠ¶æ€ä¸º0,æ‰æ‰§è¡Œï¼Œé˜²æ­¢é‡å¤æ‰§è¡Œ
         {
             Walkmotor_last_status=1;
-            for(i=0; i<255*2+1; i++)//Ë³Ê±Õë×ª¶¯Ò»È¦
+            for(i=0; i<255*2+1; i++)//é¡ºæ—¶é’ˆè½¬åŠ¨ä¸€åœˆ
             {
                 for(j=0;j<4;j++)
                 {
-                    gpio_bit_write(Motor_PORT,phaseccw[j],SET);//Êä³ö¸ß
-                     delay_1ms(5);//µÈ´ı5ms
-                    gpio_bit_write(Motor_PORT,phaseccw[j],RESET);//Êä³öµÍ
+                    gpio_bit_write(Motor_PORT,phaseccw[j],SET);//è¾“å‡ºé«˜
+                     delay_1ms(5);//ç­‰å¾…5ms
+                    gpio_bit_write(Motor_PORT,phaseccw[j],RESET);//è¾“å‡ºä½
                 }
             }
         }
     }
     else if(status==0)
     {
-        if(Walkmotor_last_status==1)//ÉÏÒ»¸ö×´Ì¬Îª1,²ÅÖ´ĞĞ£¬·ÀÖ¹ÖØ¸´Ö´ĞĞ
+        if(Walkmotor_last_status==1)//ä¸Šä¸€ä¸ªçŠ¶æ€ä¸º1,æ‰æ‰§è¡Œï¼Œé˜²æ­¢é‡å¤æ‰§è¡Œ
         {
             Walkmotor_last_status=0;
-            for(i=0; i<255*2+1; i++)//ÄæÊ±Õë×ª¶¯Ò»È¦
+            for(i=0; i<255*2+1; i++)//é€†æ—¶é’ˆè½¬åŠ¨ä¸€åœˆ
             {
                 for(j=0;j<4;j++)
                 {
-                    gpio_bit_write(Motor_PORT,phasecw[j],SET);//Êä³ö¸ß
-                    delay_1ms(5);//µÈ´ı5ms
-                    gpio_bit_write(Motor_PORT,phasecw[j],RESET);//Êä³öµÍ
+                    gpio_bit_write(Motor_PORT,phasecw[j],SET);//è¾“å‡ºé«˜
+                    delay_1ms(5);//ç­‰å¾…5ms
+                    gpio_bit_write(Motor_PORT,phasecw[j],RESET);//è¾“å‡ºä½
                 }
             }
         }

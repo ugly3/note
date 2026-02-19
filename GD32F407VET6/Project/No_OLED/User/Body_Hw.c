@@ -3,8 +3,8 @@
 
 void Body_Hw_Init(void)
 {
-    rcu_periph_clock_enable(Body_Hw_GPIOX);//Ê¹ÄÜGPIOBÊ±ÖÓ
-    gpio_mode_set(Body_Hw_PORT, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, Body_Hw_PIN);//ÅäÖÃ³ÉÏÂÀ­ÊäÈë
+    rcu_periph_clock_enable(Body_Hw_GPIOX);//ä½¿èƒ½GPIOBæ—¶é’Ÿ
+    gpio_mode_set(Body_Hw_PORT, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, Body_Hw_PIN);//é…ç½®æˆä¸‹æ‹‰è¾“å…¥
 }
 
 void Body_Hw_ZD(uint8_t status)
@@ -14,12 +14,12 @@ void Body_Hw_ZD(uint8_t status)
         if(gpio_input_bit_get(Body_Hw_PORT,Body_Hw_PIN)==1)
         {
                 task1_is_start=1;
-                led_status=1;//¿ªµÆ
+                led_status=1;//å¼€ç¯
         }    
         else
         {
                 task1_is_start=0;
-                led_status=0;//¹ØµÆ
+                led_status=0;//å…³ç¯
         }
 
      }

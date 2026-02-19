@@ -6,17 +6,17 @@ uint32_t Distance;
 
 void HC_Init(void)
 {
-    rcu_periph_clock_enable(HC_RCU_GPIOX);//Ê¹ÄÜGPIOAÊ±ÖÓ	
-    gpio_mode_set(HC_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, HC_PIN_Trig);//PA0ÅäÖÃ³ÉÊä³ö
-    gpio_output_options_set(HC_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, HC_PIN_Trig);//ÅäÖÃ³ÉÍÆÍìÊä³ö£¬50MËÙ¶È
-    gpio_mode_set(HC_PORT, GPIO_MODE_INPUT, GPIO_PUPD_NONE, HC_PIN_Echo);//PA1ÅäÖÃ³ÉÊäÈë
+    rcu_periph_clock_enable(HC_RCU_GPIOX);//ä½¿èƒ½GPIOAæ—¶é’Ÿ	
+    gpio_mode_set(HC_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, HC_PIN_Trig);//PA0é…ç½®æˆè¾“å‡º
+    gpio_output_options_set(HC_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, HC_PIN_Trig);//é…ç½®æˆæŽ¨æŒ½è¾“å‡ºï¼Œ50Mé€Ÿåº¦
+    gpio_mode_set(HC_PORT, GPIO_MODE_INPUT, GPIO_PUPD_NONE, HC_PIN_Echo);//PA1é…ç½®æˆè¾“å…¥
     TIMER1_config();
 }
 
-uint32_t Distance_Calculate(uint32_t count)//´«ÈëÊ±¼äµ¥Î»100us
+uint32_t Distance_Calculate(uint32_t count)//ä¼ å…¥æ—¶é—´å•ä½100us
 {
     uint32_t Distance = 0;
-    Distance = (uint32_t)(((float)count *17)/10);//¾àÀëµ¥Î»cm,ÉùËÙ340M/S£¬Ê±¼ä*ËÙ¶È/2=¾àÀë
+    Distance = (uint32_t)(((float)count *17)/10);//è·ç¦»å•ä½cm,å£°é€Ÿ340M/Sï¼Œæ—¶é—´*é€Ÿåº¦/2=è·ç¦»
     return Distance;
 }
 
@@ -25,21 +25,21 @@ void HC_Get_Data(uint8_t status)
 {
     if(status)
     {
-        gpio_bit_write(HC_PORT, GPIO_PIN_0,RESET);//Ô¤ÏÈÀ­µÍTrigÒý½Å
+        gpio_bit_write(HC_PORT, GPIO_PIN_0,RESET);//é¢„å…ˆæ‹‰ä½ŽTrigå¼•è„š
 		delay_1ms(5);
-		gpio_bit_write(HC_PORT, GPIO_PIN_0,SET);//À­¸ßTrigÒý½Å
+		gpio_bit_write(HC_PORT, GPIO_PIN_0,SET);//æ‹‰é«˜Trigå¼•è„š
 		delay_1us(20);
-		gpio_bit_write(HC_PORT, GPIO_PIN_0,RESET);//À­µÍTrigÒý½Å
+		gpio_bit_write(HC_PORT, GPIO_PIN_0,RESET);//æ‹‰ä½ŽTrigå¼•è„š
 		delay_1us(20);
-		while(gpio_input_bit_get(HC_PORT, HC_PIN_Echo) == 0);//Èç¹ûÊÇµÍµçÆ½£¬Ò»Ö±µÈ
+		while(gpio_input_bit_get(HC_PORT, HC_PIN_Echo) == 0);//å¦‚æžœæ˜¯ä½Žç”µå¹³ï¼Œä¸€ç›´ç­‰
 		HalTime1= TimeCounter;
-		while(gpio_input_bit_get(HC_PORT, HC_PIN_Echo) == 1);//Èç¹ûÊÇ¸ßµçÆ½Ò»Ö±µÈ
+		while(gpio_input_bit_get(HC_PORT, HC_PIN_Echo) == 1);//å¦‚æžœæ˜¯é«˜ç”µå¹³ä¸€ç›´ç­‰
 		if(TimeCounter>HalTime1)
 		{
             HalTime2 = TimeCounter-HalTime1;
             if(HalTime2<0x300)
             {
-                Distance = Distance_Calculate(HalTime2);//¼ÆËã¾àÀëÖµ
+                Distance = Distance_Calculate(HalTime2);//è®¡ç®—è·ç¦»å€¼
                 if(Distance<30)
                     door_status=1;
                 else
