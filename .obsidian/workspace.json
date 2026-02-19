@@ -11,14 +11,12 @@
             "id": "563ea56ab508b5c9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "code-space-view",
               "state": {
-                "file": "GD32F407VET6/GD32F407VET6.md",
-                "mode": "source",
-                "source": false
+                "file": "Project/8-duoji/Hardware/beep/beep.c"
               },
               "icon": "lucide-file",
-              "title": "GD32F407VET6"
+              "title": "beep.c"
             }
           }
         ]
@@ -199,20 +197,20 @@
   },
   "active": "563ea56ab508b5c9",
   "lastOpenFiles": [
-    "GD32F407VET6/Project/17-hongwaichuangan",
-    "GD32F407VET6/Project/16-smog",
-    "GD32F407VET6/Project/15-fire",
-    "GD32F407VET6/Project/14-fengshan",
-    "GD32F407VET6/Project/13-RFID",
-    "GD32F407VET6/Project/12-duoji",
-    "GD32F407VET6/Project/11-dianzhen",
-    "GD32F407VET6/Project/10-shumaguan",
-    "GD32F407VET6/Project/9-LCD",
-    "GD32F407VET6/Project/8-duoji",
-    "GD32F407VET6/Project/7-chaoshengbo",
-    "GD32F407VET6/红外检测.md",
-    "GD32F407VET6/Project/17-hongwaichuangan/API_REFERENCE.md",
+    "Project/0-jichubanzai/Firmware/CMSIS/core_cm4.h",
+    "Project/2-OLED/Firmware/GD32F4xx_standard_peripheral/Include/gd32f4xx_adc.h",
     "GD32F407VET6/GD32F407VET6.md",
+    "Project/17-hongwaichuangan",
+    "Project/16-smog",
+    "Project/15-fire",
+    "Project/14-fengshan",
+    "Project/13-RFID",
+    "Project/12-duoji",
+    "Project/11-dianzhen",
+    "Project/10-shumaguan",
+    "Project/9-LCD",
+    "GD32F407VET6/红外检测.md",
+    "Project/17-hongwaichuangan/API_REFERENCE.md",
     "Arch日常使用.md",
     "GD32F407VET6/assets/GD32F407VET6/file-20260216003615469.png",
     "未命名.canvas",
