@@ -3,7 +3,7 @@
 ..\output\two_code.o: ..\MODULE\all_module\all_module.h
 ..\output\two_code.o: ..\CMSIS\stm32f4xx.h
 ..\output\two_code.o: ..\CMSIS\core_cm4.h
-..\output\two_code.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\two_code.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\two_code.o: ..\CMSIS\core_cmInstr.h
 ..\output\two_code.o: ..\CMSIS\core_cmFunc.h
 ..\output\two_code.o: ..\CMSIS\core_cmSimd.h
@@ -36,11 +36,11 @@
 ..\output\two_code.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\two_code.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\two_code.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\two_code.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-..\output\two_code.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-..\output\two_code.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\two_code.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\two_code.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+..\output\two_code.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\output\two_code.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\two_code.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\two_code.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\two_code.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 ..\output\two_code.o: ..\SYSTEM\sys\sys.h
 ..\output\two_code.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\two_code.o: ..\HARDWARE\Core_Board\cba.h

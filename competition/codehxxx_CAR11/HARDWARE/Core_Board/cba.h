@@ -14,7 +14,7 @@
 #define LED3 PHout(14)
 #define LED4 PHout(15)
 
-#define MP_SPK PHout(5)		//·äÃùÆ÷ 
+#define MP_SPK PHout(5)		//èœ‚é¸£å™¨ 
 void Cba_Init(void);
 
 #endif

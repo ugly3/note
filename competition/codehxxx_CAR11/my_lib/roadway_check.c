@@ -2,36 +2,36 @@
 #include "roadway_check.h"
 
 
-uint8_t wheel_L_Flag =0;                //×ó×ª±êÖ¾Î»
-uint8_t wheel_R_Flag = 0;               //ÓÒ×ª±êÖ¾Î»
-uint8_t wheel_Nav_Flag = 0;             //ÂëÅÌÐý×ª±êÖ¾Î»
-uint8_t Go_Flag = 0;                    //Ç°½ø±êÖ¾Î»
-uint8_t Back_Flag = 0;                  //ºóÍË±êÖ¾Î»
-uint8_t Track_Flag = 0;                 //Ñ­¼£±êÖ¾Î»
-uint8_t Stop_Flag = 0;                  //Í£Ö¹±êÖ¾Î»
-uint8_t Line_Flag = 0;                  //ÔÝÊ±Ã»ÓÃ
-uint16_t count = 0;                     //¼ÆÊ±£¬¾ßÌå»¹Î´Öª
+uint8_t wheel_L_Flag =0;                //å·¦è½¬æ ‡å¿—ä½
+uint8_t wheel_R_Flag = 0;               //å³è½¬æ ‡å¿—ä½
+uint8_t wheel_Nav_Flag = 0;             //ç ç›˜æ—‹è½¬æ ‡å¿—ä½
+uint8_t Go_Flag = 0;                    //å‰è¿›æ ‡å¿—ä½
+uint8_t Back_Flag = 0;                  //åŽé€€æ ‡å¿—ä½
+uint8_t Track_Flag = 0;                 //å¾ªè¿¹æ ‡å¿—ä½
+uint8_t Stop_Flag = 0;                  //åœæ­¢æ ‡å¿—ä½
+uint8_t Line_Flag = 0;                  //æš‚æ—¶æ²¡ç”¨
+uint16_t count = 0;                     //è®¡æ—¶ï¼Œå…·ä½“è¿˜æœªçŸ¥
 
-extern uint8_t RFID_Flag;              //RFID¼ì²â±êÖ¾Î»
-int LSpeed = 0;                        //×óÂÖËÙ¶È
-int RSpeed = 0;                        //ÓÒÂÖËÙ¶È
-int Car_Spend = 0;                     //³µËÙ¶ÈµÄÁÙÊ±±äÁ¿
-uint16_t temp_MP = 0;                  //ÂëÅÌÖµÁÙÊ±±äÁ¿
-uint16_t temp_Nav = 0;                 //ÂëÅÌÐý×ªÖµÁÙÊ±±äÁ¿
+extern uint8_t RFID_Flag;              //RFIDæ£€æµ‹æ ‡å¿—ä½
+int LSpeed = 0;                        //å·¦è½®é€Ÿåº¦
+int RSpeed = 0;                        //å³è½®é€Ÿåº¦
+int Car_Spend = 0;                     //è½¦é€Ÿåº¦çš„ä¸´æ—¶å˜é‡
+uint16_t temp_MP = 0;                  //ç ç›˜å€¼ä¸´æ—¶å˜é‡
+uint16_t temp_Nav = 0;                 //ç ç›˜æ—‹è½¬å€¼ä¸´æ—¶å˜é‡
 
-uint32_t Wheel_flag = 0;               //×ªÍä¼ÆÊýÖµ
+uint32_t Wheel_flag = 0;               //è½¬å¼¯è®¡æ•°å€¼
 
 void Track_Correct(uint8_t gd);
 void Back_Track(uint8_t gd);
 
 
-uint16_t Count_ms = 0;//Óöµ½ÌØÊâ±êÖ¾Îï»òÊ®×ÖÂ·¿ÚÊ±µÄÊ±¼ä£¬¸ù¾ÝÊ±¼ä³¤¶Ì£¬´Ó¶øÅÐ¶Ï³öÌØÊâ±êÖ¾ÎïÔÚÄÄ¸ö×ø±êµã
+uint16_t Count_ms = 0;//é‡åˆ°ç‰¹æ®Šæ ‡å¿—ç‰©æˆ–åå­—è·¯å£æ—¶çš„æ—¶é—´ï¼Œæ ¹æ®æ—¶é—´é•¿çŸ­ï¼Œä»Žè€Œåˆ¤æ–­å‡ºç‰¹æ®Šæ ‡å¿—ç‰©åœ¨å“ªä¸ªåæ ‡ç‚¹
 //_________________________________________________________
-int16_t Roadway_cmp;                    //×îÖÕÂëÅÌÖµ
-extern int16_t CanHost_Mp;             //ÂëÅÌÁÙÊ±±äÁ¿Öµ
+int16_t Roadway_cmp;                    //æœ€ç»ˆç ç›˜å€¼
+extern int16_t CanHost_Mp;             //ç ç›˜ä¸´æ—¶å˜é‡å€¼
 
 /*
-	ÂëÅÌÍ¬²½
+	ç ç›˜åŒæ­¥
 **/
 void Roadway_mp_syn(void)
 {
@@ -39,7 +39,7 @@ void Roadway_mp_syn(void)
 }
 
 /*
-	ÂëÅÌ»ñÈ¡
+	ç ç›˜èŽ·å–
 **/
 uint16_t Roadway_mp_Get(void)
 {
@@ -57,7 +57,7 @@ uint16_t Roadway_Navig;
 extern uint16_t CanHost_Navig;
 
 /*
-	½Ç¶ÈÍ¬²½
+	è§’åº¦åŒæ­¥
 **/
 void Roadway_nav_syn(void)
 {
@@ -65,7 +65,7 @@ void Roadway_nav_syn(void)
 }
 
 /*
-	»ñÈ¡½Ç¶È²îÖµ
+	èŽ·å–è§’åº¦å·®å€¼
 **/
 uint16_t Roadway_nav_Get(void)
 {
@@ -81,7 +81,7 @@ uint16_t Roadway_nav_Get(void)
 
 //_______________________________________________________________
 
-//Çå³ýÐ¡³µËùÓÐ±êÖ¾Î»
+//æ¸…é™¤å°è½¦æ‰€æœ‰æ ‡å¿—ä½
 void Roadway_Flag_clean(void)
 {
 	wheel_L_Flag =0;
@@ -97,7 +97,7 @@ void Roadway_Flag_clean(void)
 }
 
 /**
-	Ç°½ø¼à²â
+	å‰è¿›ç›‘æµ‹
 **/
 void Go_and_Back_Check(void)
 {	
@@ -107,7 +107,7 @@ void Go_and_Back_Check(void)
 		{
 			Go_Flag = 0;
 			Stop_Flag = 3;
-			Send_UpMotor(0,0);		// Í£Ö¹
+			Send_UpMotor(0,0);		// åœæ­¢
 		}
 	} 
 	else if(Back_Flag == 1)
@@ -121,7 +121,7 @@ void Go_and_Back_Check(void)
 	}
 }
 
-//×Ô¼º¼ÓµÄ
+//è‡ªå·±åŠ çš„
 void Check_diatace(void)
 {
 //    Send_InfoData_To_Fifo("%d\n",RFID_Read_Flag);
@@ -141,7 +141,7 @@ uint8_t Roadway_GoBack_Check(void)
 }
 
 /**
-	ÂëÅÌ×ªÍä
+	ç ç›˜è½¬å¼¯
 */
 void wheel_Nav_check(void)
 { 	
@@ -161,7 +161,7 @@ void wheel_Nav_check(void)
 
 
 /**
-	¸ù¾ÝÑ­¼£Ïß×ªÍä
+	æ ¹æ®å¾ªè¿¹çº¿è½¬å¼¯
 */
 uint32_t Mp_Value = 0;
 void wheel_Track_check(void)
@@ -171,7 +171,7 @@ void wheel_Track_check(void)
 	if(wheel_L_Flag == 1)
 	{
 		Track_Value = Get_Host_UpTrack(TRACK_H8);
-		if(!(Track_Value & 0X10))		// ÕÒµ½Ñ­¼£Ïß£¬Í£Ö¹
+		if(!(Track_Value & 0X10))		// æ‰¾åˆ°å¾ªè¿¹çº¿ï¼Œåœæ­¢
 		{	
 			if(Wheel_flag > 50)
 			{
@@ -181,7 +181,7 @@ void wheel_Track_check(void)
 				Send_UpMotor(0,0);
 			}
 		}
-		else if(Track_Value == 0Xff)	// Ñ­¼£µÆÈ«ÁÁ
+		else if(Track_Value == 0Xff)	// å¾ªè¿¹ç¯å…¨äº®
 		{			
 			Wheel_flag++;
 		}
@@ -190,7 +190,7 @@ void wheel_Track_check(void)
 	{
 		Track_Value = Get_Host_UpTrack(TRACK_H8);
 
-		 if(!(Track_Value &0X08)) //ÕÒµ½Ñ­¼£Ïß£¬Í£Ö¹
+		 if(!(Track_Value &0X08)) //æ‰¾åˆ°å¾ªè¿¹çº¿ï¼Œåœæ­¢
 			{	
 				if(Wheel_flag > 50)
 				{
@@ -209,54 +209,54 @@ void wheel_Track_check(void)
 
 
 /**
-	Ñ­¼£¼à²â
+	å¾ªè¿¹ç›‘æµ‹
 */
 void Track_Check()
 {	
 	if(Track_Flag == 1)
 	{
-		Track_Correct(Get_Host_UpTrack(TRACK_H8));        //´¦Àíºó°ËÎ»Ñ­¼£Êý¾Ý
+		Track_Correct(Get_Host_UpTrack(TRACK_H8));        //å¤„ç†åŽå…«ä½å¾ªè¿¹æ•°æ®
 	}
 	if(Motor_Data.Track_White_Flag)
 	{
-		Motor_Data.xCAR_Track_Correct_White(Get_Host_UpTrack(TRACK_H8));       //Ñ­¼£°×Ïß£¬ÌØÊâµØÐÎ£¬µ½°×ÏßºóÍ£Ö¹
+		Motor_Data.xCAR_Track_Correct_White(Get_Host_UpTrack(TRACK_H8));       //å¾ªè¿¹ç™½çº¿ï¼Œç‰¹æ®Šåœ°å½¢ï¼Œåˆ°ç™½çº¿åŽåœæ­¢
 	}
 }
 
 void Roadway_Check(void)
 {
-	Go_and_Back_Check();         //Ç°½øºóÍË¼ì²â
-	wheel_Track_check();         //Ñ­¼£Ïß×ªÍä¼ì²â
-	wheel_Nav_check();           // ÂëÅÌ×ªÍä¼ì²â
-	Track_Check();	             //Ñ­¼£¼ì²â
-//    Check_diatace();           //³¬³ö¾àÀë¼ì²â******************************ÓÐÎÊÌâ£¬¿ªÆôºó³ÌÐò²»ÄÜÓÃÁË
+	Go_and_Back_Check();         //å‰è¿›åŽé€€æ£€æµ‹
+	wheel_Track_check();         //å¾ªè¿¹çº¿è½¬å¼¯æ£€æµ‹
+	wheel_Nav_check();           // ç ç›˜è½¬å¼¯æ£€æµ‹
+	Track_Check();	             //å¾ªè¿¹æ£€æµ‹
+//    Check_diatace();           //è¶…å‡ºè·ç¦»æ£€æµ‹******************************æœ‰é—®é¢˜ï¼Œå¼€å¯åŽç¨‹åºä¸èƒ½ç”¨äº†
     
 }
 	
 
 /***************************************************************
-** ¹¦ÄÜ£º     µç»ú¿ØÖÆº¯Êý
-** ²ÎÊý£º	  L_Spend£ºµç»ú×óÂÖËÙ¶È
-**            R_Spend£ºµç»úÓÒÂÖËÙ¶È
-** ·µ»ØÖµ£º   ÎÞ	  
+** åŠŸèƒ½ï¼š     ç”µæœºæŽ§åˆ¶å‡½æ•°
+** å‚æ•°ï¼š	  L_Spendï¼šç”µæœºå·¦è½®é€Ÿåº¦
+**            R_Spendï¼šç”µæœºå³è½®é€Ÿåº¦
+** è¿”å›žå€¼ï¼š   æ— 	  
 ****************************************************************/
 void Control(int L_Spend,int R_Spend)
 {
 	if(L_Spend>=0)
 	{	
-		if(L_Spend>100)L_Spend=100;if(L_Spend<5)L_Spend=5;		//ÏÞÖÆËÙ¶È²ÎÊý
+		if(L_Spend>100)L_Spend=100;if(L_Spend<5)L_Spend=5;		//é™åˆ¶é€Ÿåº¦å‚æ•°
 	}
 	else 
 	{
-		if(L_Spend<-100)L_Spend= -100;if(L_Spend>-5)L_Spend= -5;     //ÏÞÖÆËÙ¶È²ÎÊý
+		if(L_Spend<-100)L_Spend= -100;if(L_Spend>-5)L_Spend= -5;     //é™åˆ¶é€Ÿåº¦å‚æ•°
 	}	
 	if(R_Spend>=0)
 	{	
-		if(R_Spend>100)R_Spend=100;if(R_Spend<5)R_Spend=5;		//ÏÞÖÆËÙ¶È²ÎÊý
+		if(R_Spend>100)R_Spend=100;if(R_Spend<5)R_Spend=5;		//é™åˆ¶é€Ÿåº¦å‚æ•°
 	}
 	else
 	{	
-		if(R_Spend<-100)R_Spend= -100;if(R_Spend>-5)R_Spend= -5;		//ÏÞÖÆËÙ¶È²ÎÊý		
+		if(R_Spend<-100)R_Spend= -100;if(R_Spend>-5)R_Spend= -5;		//é™åˆ¶é€Ÿåº¦å‚æ•°		
 	}
 	Send_UpMotor(L_Spend ,R_Spend);	
 }
@@ -264,38 +264,38 @@ void Control(int L_Spend,int R_Spend)
 extern uint8_t RFID_Flag;
 extern uint8_t Terrain_Flag;
 /***************************************************************
-** ¹¦ÄÜ£º     Ñ­¼£º¯Êý
-** ²ÎÊý£º	  ÎÞ²ÎÊý
-** ·µ»ØÖµ£º   ÎÞ
+** åŠŸèƒ½ï¼š     å¾ªè¿¹å‡½æ•°
+** å‚æ•°ï¼š	  æ— å‚æ•°
+** è¿”å›žå€¼ï¼š   æ— 
 ****************************************************************/
-// º¯Êý£º½«Ò»¸ö×Ö½ÚµÄÊ®Áù½øÖÆÊý×ª»»Îª°ËÎ»¶þ½øÖÆ×Ö·û´®
+// å‡½æ•°ï¼šå°†ä¸€ä¸ªå­—èŠ‚çš„åå…­è¿›åˆ¶æ•°è½¬æ¢ä¸ºå…«ä½äºŒè¿›åˆ¶å­—ç¬¦ä¸²
 void hexToBin(unsigned char hex, char* binStr) {
     for (int i = 7; i >= 0; i--) {
-        binStr[7 - i] = (hex & (1 << i)) ? '1' : '0'; // ¼ì²éµ±Ç°Î»ÊÇ·ñÎª1
+        binStr[7 - i] = (hex & (1 << i)) ? '1' : '0'; // æ£€æŸ¥å½“å‰ä½æ˜¯å¦ä¸º1
     }
-    binStr[8] = '\0'; // Ìí¼Ó×Ö·û´®½áÊø·û
+    binStr[8] = '\0'; // æ·»åŠ å­—ç¬¦ä¸²ç»“æŸç¬¦
 }
-// º¯Êý£ºÅÐ¶Ï¶þ½øÖÆ×Ö·û´®ÖÐÊÇ·ñ°üº¬ËÄ¸ö»òËÄ¸öÒÔÉÏÁ¬ÐøµÄ0
+// å‡½æ•°ï¼šåˆ¤æ–­äºŒè¿›åˆ¶å­—ç¬¦ä¸²ä¸­æ˜¯å¦åŒ…å«å››ä¸ªæˆ–å››ä¸ªä»¥ä¸Šè¿žç»­çš„0
 int hasFourConsecutiveZeros(const char* binStr) {
-    int zeroCount = 0; // ÓÃÓÚÍ³¼ÆÁ¬Ðø0µÄÊýÁ¿
-    for (int i = 0; i < 8; i++) { // ±éÀú°ËÎ»¶þ½øÖÆ×Ö·û´®
+    int zeroCount = 0; // ç”¨äºŽç»Ÿè®¡è¿žç»­0çš„æ•°é‡
+    for (int i = 0; i < 8; i++) { // éåŽ†å…«ä½äºŒè¿›åˆ¶å­—ç¬¦ä¸²
         if (binStr[i] == '0') {
-            zeroCount++; // Èç¹ûÊÇ0£¬¼ÆÊý¼Ó1
-            if (zeroCount >= 4) return 1; // Èç¹ûÁ¬Ðø0µÄÊýÁ¿´ïµ½4£¬·µ»Ø1
+            zeroCount++; // å¦‚æžœæ˜¯0ï¼Œè®¡æ•°åŠ 1
+            if (zeroCount >= 4) return 1; // å¦‚æžœè¿žç»­0çš„æ•°é‡è¾¾åˆ°4ï¼Œè¿”å›ž1
         } else {
-            zeroCount = 0; // Èç¹ûÓöµ½1£¬ÖØÖÃ¼ÆÊý
+            zeroCount = 0; // å¦‚æžœé‡åˆ°1ï¼Œé‡ç½®è®¡æ•°
         }
     }
-    return 0; // Èç¹û±éÀúÍêÃ»ÓÐÕÒµ½ËÄ¸öÁ¬ÐøµÄ0£¬·µ»Ø0
+    return 0; // å¦‚æžœéåŽ†å®Œæ²¡æœ‰æ‰¾åˆ°å››ä¸ªè¿žç»­çš„0ï¼Œè¿”å›ž0
 }
 
 void Track_Correct(uint8_t gd)
 {
 	  uint8_t Buf[30];
 
-    char binStr[9]; // ÓÃÓÚ´æ´¢°ËÎ»¶þ½øÖÆ×Ö·û´®
-    hexToBin(gd, binStr);// ½«Ê®Áù½øÖÆÊý×ª»»Îª°ËÎ»¶þ½øÖÆ×Ö·û´®
-    if (hasFourConsecutiveZeros(binStr))//µÆ³öÏÖËÄ¸ö»òÒÔÉÏÏ¨ÃðÔòÅÐ¶¨ÎªÊ®×ÖÂ·¿Ú»ò¿¨Æ¬ÔÚÊ®×ÖÂ·¿Ú
+    char binStr[9]; // ç”¨äºŽå­˜å‚¨å…«ä½äºŒè¿›åˆ¶å­—ç¬¦ä¸²
+    hexToBin(gd, binStr);// å°†åå…­è¿›åˆ¶æ•°è½¬æ¢ä¸ºå…«ä½äºŒè¿›åˆ¶å­—ç¬¦ä¸²
+    if (hasFourConsecutiveZeros(binStr))//ç¯å‡ºçŽ°å››ä¸ªæˆ–ä»¥ä¸Šç†„ç­åˆ™åˆ¤å®šä¸ºåå­—è·¯å£æˆ–å¡ç‰‡åœ¨åå­—è·¯å£
     {
         Track_Flag = 0;
         Stop_Flag = 1;
@@ -309,53 +309,53 @@ void Track_Correct(uint8_t gd)
     Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));
     }
  
-	else if(gd==0xE7)                             //E7---1110 0111  ³µÔÚÖÐ¼ä£¬Õý³£ÐÐÊ»
+	else if(gd==0xE7)                             //E7---1110 0111  è½¦åœ¨ä¸­é—´ï¼Œæ­£å¸¸è¡Œé©¶
 	{
 		LSpeed = Car_Spend;
 		RSpeed = Car_Spend;
 	} 
-	else if((gd == 0xF7) || (gd == 0XF3))           //F7---1111 0111   F3---1111 0011  ³µÆ«×ó
+	else if((gd == 0xF7) || (gd == 0XF3))           //F7---1111 0111   F3---1111 0011  è½¦åå·¦
 	{
 		LSpeed=Car_Spend+20;
 		RSpeed=Car_Spend-40;
 	} 
-	else if((gd == 0XFB) || (gd == 0XF9))           //FB---1111 1011    F9---1111 1001 ³µÆ«×ó+
+	else if((gd == 0XFB) || (gd == 0XF9))           //FB---1111 1011    F9---1111 1001 è½¦åå·¦+
 	{
 		LSpeed=Car_Spend+40;
 		RSpeed=Car_Spend-60;
 	} 
-	else if((gd == 0XFD) || (gd == 0XFC))           //FD---1111 1101    FC---1111 1100  ³µÆ«×ó++
+	else if((gd == 0XFD) || (gd == 0XFC))           //FD---1111 1101    FC---1111 1100  è½¦åå·¦++
 	{
 		LSpeed=Car_Spend+60;
 		RSpeed=Car_Spend-90;
 	} 
-	else if(gd == 0XFE)                           //FE---1111 1110    ³µÆ«×ó£¨FULL£©
+	else if(gd == 0XFE)                           //FE---1111 1110    è½¦åå·¦ï¼ˆFULLï¼‰
 	{
 		LSpeed = Car_Spend+80;
 		RSpeed = Car_Spend-120;
 	} 
-	else if((gd == 0XEF) || (gd == 0XCF))           //EF---1110 1111      CF---1100 1111  ³µÆ«ÓÒ
+	else if((gd == 0XEF) || (gd == 0XCF))           //EF---1110 1111      CF---1100 1111  è½¦åå³
 	{
 		RSpeed = Car_Spend+20;
 		LSpeed = Car_Spend-40;
 	} 
-	else if((gd == 0XDF) || (gd == 0X9F))          //DF---1101 1111       9F---1001 1111  ³µÆ«ÓÒ+
+	else if((gd == 0XDF) || (gd == 0X9F))          //DF---1101 1111       9F---1001 1111  è½¦åå³+
 	{
 		RSpeed = Car_Spend+40;
 		LSpeed = Car_Spend-60;
 	}
-	else if((gd == 0XBF) || (gd == 0X3F))          //BF---1011 1111       3F---0011 1111   ³µÆ«ÓÒ++
+	else if((gd == 0XBF) || (gd == 0X3F))          //BF---1011 1111       3F---0011 1111   è½¦åå³++
 	{
 		RSpeed = Car_Spend+60;
 		LSpeed = Car_Spend-90;
 	} 
-	else if(gd == 0X7F)                          //7F---0111 1111        ³µÆ«ÓÒ£¨FULL£©
+	else if(gd == 0X7F)                          //7F---0111 1111        è½¦åå³ï¼ˆFULLï¼‰
 	{
 		RSpeed = Car_Spend+80;
 		LSpeed = Car_Spend-120;
 	}  
 	
-    else if((((gd&0x18)==0x18)&&(((gd&0x80)==0x00)||((gd&0x01)==0x00)))|| gd==0xF8 || gd==0x1F || gd==0XF0 || gd==0x0F || gd==0x07 || gd==0xC0 || gd==0x03 || gd==0x80 || gd==0x01)  //RFIDÔÚÊ®×ÖÂ·¿Ú
+    else if((((gd&0x18)==0x18)&&(((gd&0x80)==0x00)||((gd&0x01)==0x00)))|| gd==0xF8 || gd==0x1F || gd==0XF0 || gd==0x0F || gd==0x07 || gd==0xC0 || gd==0x03 || gd==0x80 || gd==0x01)  //RFIDåœ¨åå­—è·¯å£
     {
         Track_Flag = 0;
         Stop_Flag = 1;
@@ -367,13 +367,13 @@ void Track_Correct(uint8_t gd)
 			sprintf((char*)Buf,"%d\r\n",Count_ms);  
       Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));
     } 
-    else    //Õý³£ÐÐÊ»
+    else    //æ­£å¸¸è¡Œé©¶
 	{
 		LSpeed = Car_Spend;
 		RSpeed = Car_Spend;
 	}      
 
-	if(gd==0xFF)   //Ñ­¼£µÆÈ«ÁÁ
+	if(gd==0xFF)   //å¾ªè¿¹ç¯å…¨äº®
 	{
 		LSpeed = Car_Spend;
 		RSpeed = Car_Spend;
@@ -400,14 +400,14 @@ void Track_Correct(uint8_t gd)
 }
 
 ///***************************************************************
-//** ¹¦ÄÜ£º     Ñ­¼£º¯Êý
-//** ²ÎÊý£º	  ÎÞ²ÎÊý
-//** ·µ»ØÖµ£º   ÎÞ
+//** åŠŸèƒ½ï¼š     å¾ªè¿¹å‡½æ•°
+//** å‚æ•°ï¼š	  æ— å‚æ•°
+//** è¿”å›žå€¼ï¼š   æ— 
 //****************************************************************/
 //extern bool RFID_Track_Flag;
 //void Track_Roadway(uint8_t gd)
 //{
-//	if(gd == 0x00)	// Ñ­¼£µÆÈ«Ãð Í£Ö¹
+//	if(gd == 0x00)	// å¾ªè¿¹ç¯å…¨ç­ åœæ­¢
 //	{
 //		if(RFID_Track_Flag)
 //		{
@@ -469,7 +469,7 @@ void Track_Correct(uint8_t gd)
 //		RSpeed=Car_Spend;
 //	}
 //	
-//	if(gd==0xFF)   //Ñ­¼£µÆÈ«ÁÁ
+//	if(gd==0xFF)   //å¾ªè¿¹ç¯å…¨äº®
 //	{
 //		if(count > 1000)
 //		{
@@ -532,7 +532,7 @@ void TIM1_BRK_TIM9_IRQHandler(void)
 {
 	if(TIM_GetITStatus(TIM9,TIM_IT_Update) == SET)
 	{
-		Roadway_Check();		// Â·¿ö¼ì²â
+		Roadway_Check();		// è·¯å†µæ£€æµ‹
         RFID_Track_Time();
 	}
 	TIM_ClearITPendingBit(TIM9,TIM_IT_Update);

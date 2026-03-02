@@ -2,7 +2,7 @@
 ..\output\hard_can.o: ..\MODULE\all_module\all_module.h
 ..\output\hard_can.o: ..\CMSIS\stm32f4xx.h
 ..\output\hard_can.o: ..\CMSIS\core_cm4.h
-..\output\hard_can.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\hard_can.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\hard_can.o: ..\CMSIS\core_cmInstr.h
 ..\output\hard_can.o: ..\CMSIS\core_cmFunc.h
 ..\output\hard_can.o: ..\CMSIS\core_cmSimd.h
@@ -35,11 +35,11 @@
 ..\output\hard_can.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\hard_can.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\hard_can.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\hard_can.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-..\output\hard_can.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-..\output\hard_can.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\hard_can.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\hard_can.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+..\output\hard_can.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\output\hard_can.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\hard_can.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\hard_can.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\hard_can.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 ..\output\hard_can.o: ..\SYSTEM\sys\sys.h
 ..\output\hard_can.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\hard_can.o: ..\HARDWARE\Core_Board\cba.h

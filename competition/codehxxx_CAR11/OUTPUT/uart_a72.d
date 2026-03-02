@@ -1,7 +1,7 @@
 ..\output\uart_a72.o: ..\HARDWARE\Core_Board\uart_a72.c
 ..\output\uart_a72.o: ..\CMSIS\stm32f4xx.h
 ..\output\uart_a72.o: ..\CMSIS\core_cm4.h
-..\output\uart_a72.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\uart_a72.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\uart_a72.o: ..\CMSIS\core_cmInstr.h
 ..\output\uart_a72.o: ..\CMSIS\core_cmFunc.h
 ..\output\uart_a72.o: ..\CMSIS\core_cmSimd.h
@@ -38,5 +38,5 @@
 ..\output\uart_a72.o: ..\HARDWARE\CAN\can_user.h
 ..\output\uart_a72.o: ..\my_lib\data_channel.h
 ..\output\uart_a72.o: ..\SYSTEM\timer\Timer.h
-..\output\uart_a72.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
+..\output\uart_a72.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
 ..\output\uart_a72.o: ..\HARDWARE\Core_Board\uart_a72.h

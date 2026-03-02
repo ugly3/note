@@ -1,7 +1,7 @@
 ..\output\timer.o: ..\SYSTEM\timer\Timer.c
 ..\output\timer.o: ..\CMSIS\stm32f4xx.h
 ..\output\timer.o: ..\CMSIS\core_cm4.h
-..\output\timer.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\timer.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\timer.o: ..\CMSIS\core_cmInstr.h
 ..\output\timer.o: ..\CMSIS\core_cmFunc.h
 ..\output\timer.o: ..\CMSIS\core_cmSimd.h

@@ -1,26 +1,26 @@
 /**
 ************************************************************************
- *    ÎÄ¼şÃû£ºcommunication£¨Í¨ĞÅ²¿·Ö£©
- *      ËµÃ÷£º wifi½ÓÊÕ£¬ºìÍâ·¢Éä£¬ZigBeeµÄ·¢ËÍÓë½ÓÊÕ
- *  Ïà¹Øº¯Êı£º
-Èı¸ö·¢ËÍÊı¾İµÄº¯Êı
-1.·¢ËÍÊı¾İµ½DeBug
-Send_InfoData_To_Fifo(*p,16);                //Èı¸öº¯ÊıµÄ²ÎÊı¶¼Ò»Ñù£¬  ²ÎÊı£º1.ĞèÒª·¢ËÍµÄÊı¾İ£»  2.·¢ËÍÊı¾İµÄ³¤¶È
+ *    æ–‡ä»¶åï¼šcommunicationï¼ˆé€šä¿¡éƒ¨åˆ†ï¼‰
+ *      è¯´æ˜ï¼š wifiæ¥æ”¶ï¼Œçº¢å¤–å‘å°„ï¼ŒZigBeeçš„å‘é€ä¸æ¥æ”¶
+ *  ç›¸å…³å‡½æ•°ï¼š
+ä¸‰ä¸ªå‘é€æ•°æ®çš„å‡½æ•°
+1.å‘é€æ•°æ®åˆ°DeBug
+Send_InfoData_To_Fifo(*p,16);                //ä¸‰ä¸ªå‡½æ•°çš„å‚æ•°éƒ½ä¸€æ ·ï¼Œ  å‚æ•°ï¼š1.éœ€è¦å‘é€çš„æ•°æ®ï¼›  2.å‘é€æ•°æ®çš„é•¿åº¦
 
-2.Í¨¹ıZigBee·¢ËÍÊı¾İ
+2.é€šè¿‡ZigBeeå‘é€æ•°æ®
 Send_ZigbeeData_To_Fifo(AGV_Thread1,8);
 
-3.Í¨¹ıWIFI·¢ËÍÊı¾İ
+3.é€šè¿‡WIFIå‘é€æ•°æ®
 Send_WifiData_To_Fifo(Principal_Tab,13);
 
-ºìÍâ·¢ËÍÊı¾İ
-Infrared_Send(uint8_t *s,int n)            //²ÎÊı: *s£ºÖ¸ÏòÒª·¢ËÍµÄÊı¾İ   n£ºÊı¾İ³¤¶È
+çº¢å¤–å‘é€æ•°æ®
+Infrared_Send(uint8_t *s,int n)            //å‚æ•°: *sï¼šæŒ‡å‘è¦å‘é€çš„æ•°æ®   nï¼šæ•°æ®é•¿åº¦
 
-½ÓÊÕ°²×¿¶ËÏÂ·¢µÄÊı¾İ
-Can_WifiRx_Check();                             // Wifi½»»¥Êı¾İ´¦Àí
+æ¥æ”¶å®‰å“ç«¯ä¸‹å‘çš„æ•°æ®
+Can_WifiRx_Check();                             // Wifiäº¤äº’æ•°æ®å¤„ç†
 
-½ÓÊÕzigbeeÊı¾İ£º±êÖ¾Îï£¬´Ó³µ
-Can_ZigBeeRx_Check();                           // Zigbee½»»¥Êı¾İ´¦Àí
+æ¥æ”¶zigbeeæ•°æ®ï¼šæ ‡å¿—ç‰©ï¼Œä»è½¦
+Can_ZigBeeRx_Check();                           // Zigbeeäº¤äº’æ•°æ®å¤„ç†
 
 ************************************************************************
 **/
@@ -28,22 +28,22 @@ Can_ZigBeeRx_Check();                           // Zigbee½»»¥Êı¾İ´¦Àí
 
 Communication_Typedef Communication_Data = 
 {
-	.Voice_Report_Rx_State = 0,   //ÓïÒô²¥±¨»Ø´«×´Ì¬£¨1±íÊ¾»Ø´«RTCÈÕÆÚ£¬2±íÊ¾»Ø´«RTCÊ±¼ä£¬3±íÊ¾»Ø´«ÌìÆøÊı¾İÓëÎÂ¶ÈÊı¾İ£©
-	.Smart_Traffic_A_Recognition_State = 0,  //ÖÇÄÜ½»Í¨µÆAÊ¶±ğ  £¨1´ú±íÊ¶±ğÄ£Ê½³É¹¦£©
-	.Smart_Traffic_B_Recognition_State = 0,  //ÖÇÄÜ½»Í¨µÆAÊ¶±ğ  £¨1´ú±íÊ¶±ğÄ£Ê½³É¹¦£©
-	.ETC_Open_Flag = 0,   //ETC±êÖ¾Îï¿ªÆô±êÖ¾Î»
-	.Special_LandForm_Back_State = 0,  //ÌØÊâµØĞÎ»Ø´«×´Ì¬
-	.CarPort_Back_B_Infrared = 0,  //³µ¿âB»Ø´«Ç°ºó´¥·¢×´Ì¬
-	.CarPort_Back_A_Infrared = 0,  //³µ¿âA»Ø´«Ç°ºó´¥·¢×´Ì¬	
-	.CarPort_Back_B_Level = 0,  //³µ¿âB»Ø´«²ãÊı
-	.CarPort_Back_A_Level = 0,  //³µ¿âA»Ø´«²ãÊı
-	.Barrier_Open_Flag = 0,     //µÀÕ¢¿ªÆô±êÖ¾Î»
+	.Voice_Report_Rx_State = 0,   //è¯­éŸ³æ’­æŠ¥å›ä¼ çŠ¶æ€ï¼ˆ1è¡¨ç¤ºå›ä¼ RTCæ—¥æœŸï¼Œ2è¡¨ç¤ºå›ä¼ RTCæ—¶é—´ï¼Œ3è¡¨ç¤ºå›ä¼ å¤©æ°”æ•°æ®ä¸æ¸©åº¦æ•°æ®ï¼‰
+	.Smart_Traffic_A_Recognition_State = 0,  //æ™ºèƒ½äº¤é€šç¯Aè¯†åˆ«  ï¼ˆ1ä»£è¡¨è¯†åˆ«æ¨¡å¼æˆåŠŸï¼‰
+	.Smart_Traffic_B_Recognition_State = 0,  //æ™ºèƒ½äº¤é€šç¯Aè¯†åˆ«  ï¼ˆ1ä»£è¡¨è¯†åˆ«æ¨¡å¼æˆåŠŸï¼‰
+	.ETC_Open_Flag = 0,   //ETCæ ‡å¿—ç‰©å¼€å¯æ ‡å¿—ä½
+	.Special_LandForm_Back_State = 0,  //ç‰¹æ®Šåœ°å½¢å›ä¼ çŠ¶æ€
+	.CarPort_Back_B_Infrared = 0,  //è½¦åº“Bå›ä¼ å‰åè§¦å‘çŠ¶æ€
+	.CarPort_Back_A_Infrared = 0,  //è½¦åº“Aå›ä¼ å‰åè§¦å‘çŠ¶æ€	
+	.CarPort_Back_B_Level = 0,  //è½¦åº“Bå›ä¼ å±‚æ•°
+	.CarPort_Back_A_Level = 0,  //è½¦åº“Aå›ä¼ å±‚æ•°
+	.Barrier_Open_Flag = 0,     //é“é—¸å¼€å¯æ ‡å¿—ä½
 };
 
 /*
-ZigbeesÊı¾İ½»»¥
-±êÖ¾Îï£¬´Ó³µ£¬°²×¿µÄ»Ø´«ÃüÁî
-Ô­º¯ÊıÔÚcan_user.cÎÄ¼şÀï
+Zigbeesæ•°æ®äº¤äº’
+æ ‡å¿—ç‰©ï¼Œä»è½¦ï¼Œå®‰å“çš„å›ä¼ å‘½ä»¤
+åŸå‡½æ•°åœ¨can_user.cæ–‡ä»¶é‡Œ
 */
 void Can_ZigBeeRx_Check(void)
 {
@@ -51,43 +51,43 @@ void Can_ZigBeeRx_Check(void)
 	{
         if(gt_get_sub(canu_zibe_rxtime) == 0)
         {
-            if(Zigb_Rx_Buf[1] == 0x03)  //********************µÀÕ¢±êÖ¾Îï
+            if(Zigb_Rx_Buf[1] == 0x03)  //********************é“é—¸æ ‡å¿—ç‰©
             {
-                if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[4] == 0x05))  //Èç¹û½øÈë£¬Ôò´ú±í»Ø´«µ½Ö¸Áî£¬µÀÕ¢´¦ÓÚ¿ªÆô×´Ì¬
+                if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[4] == 0x05))  //å¦‚æœè¿›å…¥ï¼Œåˆ™ä»£è¡¨å›ä¼ åˆ°æŒ‡ä»¤ï¼Œé“é—¸å¤„äºå¼€å¯çŠ¶æ€
                 {
                     Communication_Data.Barrier_Open_Flag = 1; 				
                 }
             }
-            if((Zigb_Rx_Buf[1] == CarPort_Data.Device_A || Zigb_Rx_Buf[1] == CarPort_Data.Device_B))   //**********************Á¢Ìå³µ¿â±êÖ¾Îï
+            if((Zigb_Rx_Buf[1] == CarPort_Data.Device_A || Zigb_Rx_Buf[1] == CarPort_Data.Device_B))   //**********************ç«‹ä½“è½¦åº“æ ‡å¿—ç‰©
             {
-                if((Zigb_Rx_Buf[2] == 0x03) && (Zigb_Rx_Buf[3] == 0x01))         //·µ»Ø³µ¿âÎ»ÓÚµÚ¼¸²ãµÄÊı¾İ
+                if((Zigb_Rx_Buf[2] == 0x03) && (Zigb_Rx_Buf[3] == 0x01))         //è¿”å›è½¦åº“ä½äºç¬¬å‡ å±‚çš„æ•°æ®
                 {
-                    if(Zigb_Rx_Buf[1] == CarPort_Data.Device_A)       //ÅĞ¶ÏÎªAÉè±¸
+                    if(Zigb_Rx_Buf[1] == CarPort_Data.Device_A)       //åˆ¤æ–­ä¸ºAè®¾å¤‡
                     {
-                        Communication_Data.CarPort_Back_A_Level = Zigb_Rx_Buf[4];   //·µ»Øµ±Ç°³µ¿âÎ»ÓÚµÚ¼¸²ãÊı¾İ
+                        Communication_Data.CarPort_Back_A_Level = Zigb_Rx_Buf[4];   //è¿”å›å½“å‰è½¦åº“ä½äºç¬¬å‡ å±‚æ•°æ®
                     }
-                    else if(Zigb_Rx_Buf[1] == CarPort_Data.Device_B)        //ÅĞ¶ÏÎªBÉè±¸
+                    else if(Zigb_Rx_Buf[1] == CarPort_Data.Device_B)        //åˆ¤æ–­ä¸ºBè®¾å¤‡
                     {
-                        Communication_Data.CarPort_Back_B_Level = Zigb_Rx_Buf[4];   //·µ»Øµ±Ç°³µ¿âÎ»ÓÚµÚ¼¸²ãÊı¾İ
+                        Communication_Data.CarPort_Back_B_Level = Zigb_Rx_Buf[4];   //è¿”å›å½“å‰è½¦åº“ä½äºç¬¬å‡ å±‚æ•°æ®
                     }
                 }
-                else if((Zigb_Rx_Buf[2] == 0x03) && (Zigb_Rx_Buf[3] == 0x02))      //·µ»ØÇ°/ºó²àºìÍâ×´Ì¬
+                else if((Zigb_Rx_Buf[2] == 0x03) && (Zigb_Rx_Buf[3] == 0x02))      //è¿”å›å‰/åä¾§çº¢å¤–çŠ¶æ€
                 {
-                    if(Zigb_Rx_Buf[1] == CarPort_Data.Device_A)         //ÅĞ¶ÏÎªAÉè±¸
+                    if(Zigb_Rx_Buf[1] == CarPort_Data.Device_A)         //åˆ¤æ–­ä¸ºAè®¾å¤‡
                     {
-                        if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x01))  //Ç°ºó²à¶¼±»´¥·¢  £¨¹¤×÷ÊÒ£ºÇ°ºó²à¶¼Î´´¥·¢£©
+                        if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x01))  //å‰åä¾§éƒ½è¢«è§¦å‘  ï¼ˆå·¥ä½œå®¤ï¼šå‰åä¾§éƒ½æœªè§¦å‘ï¼‰
                         {
                             Communication_Data.CarPort_Back_A_Infrared = 1;
                         }
-                        else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x02)) //Ç°ºó²àÎ´´¥·¢  £¨¹¤×÷ÊÒ£ºÇ°ºó²à¶¼±»´¥·¢£©
+                        else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x02)) //å‰åä¾§æœªè§¦å‘  ï¼ˆå·¥ä½œå®¤ï¼šå‰åä¾§éƒ½è¢«è§¦å‘ï¼‰
                         {
                             Communication_Data.CarPort_Back_A_Infrared = 2;
                         }
-                        else if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x02))  //Ç°²à´¥·¢£¬ºó²àÎ´´¥·¢£¨¹¤×÷ÊÒ£ºÇ°²àÎ´´¥·¢£¬ºó²à´¥·¢£©
+                        else if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x02))  //å‰ä¾§è§¦å‘ï¼Œåä¾§æœªè§¦å‘ï¼ˆå·¥ä½œå®¤ï¼šå‰ä¾§æœªè§¦å‘ï¼Œåä¾§è§¦å‘ï¼‰
                         {
                             Communication_Data.CarPort_Back_A_Infrared = 3;
                         }
-                        else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x01))  //Ç°²àÎ´´¥·¢£¬ºó²à´¥·¢£¨¹¤×÷ÊÒ£ºÇ°²àÎ´´¥·¢£¬ºó²à´¥·¢£©
+                        else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x01))  //å‰ä¾§æœªè§¦å‘ï¼Œåä¾§è§¦å‘ï¼ˆå·¥ä½œå®¤ï¼šå‰ä¾§æœªè§¦å‘ï¼Œåä¾§è§¦å‘ï¼‰
                         {
                             Communication_Data.CarPort_Back_A_Infrared = 4;
                         }
@@ -95,21 +95,21 @@ void Can_ZigBeeRx_Check(void)
                         {
                         }
                     }
-                    else if(Zigb_Rx_Buf[1] == CarPort_Data.Device_B )          //ÅĞ¶ÏÎªBÉè±¸
+                    else if(Zigb_Rx_Buf[1] == CarPort_Data.Device_B )          //åˆ¤æ–­ä¸ºBè®¾å¤‡
                     {
-                        if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x01))  //Ç°ºó²à¶¼±»´¥·¢
+                        if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x01))  //å‰åä¾§éƒ½è¢«è§¦å‘
                         {
                             Communication_Data.CarPort_Back_B_Infrared = 1;
                         }
-                        else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x02)) //Ç°ºó²àÎ´´¥·¢
+                        else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x02)) //å‰åä¾§æœªè§¦å‘
                         {
                             Communication_Data.CarPort_Back_B_Infrared = 2;
                         }
-                        else if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x02))  //Ç°²à´¥·¢£¬ºó²àÎ´´¥·¢
+                        else if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x02))  //å‰ä¾§è§¦å‘ï¼Œåä¾§æœªè§¦å‘
                         {
                             Communication_Data.CarPort_Back_B_Infrared = 3;
                         }
-                        else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x01))  //Ç°²àÎ´´¥·¢£¬ºó²à´¥·¢
+                        else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x01))  //å‰ä¾§æœªè§¦å‘ï¼Œåä¾§è§¦å‘
                         {
                             Communication_Data.CarPort_Back_B_Infrared = 4;
                         }
@@ -121,21 +121,21 @@ void Can_ZigBeeRx_Check(void)
                 }
             }
             
-            if(Zigb_Rx_Buf[1] == 0x10)    //*****************************ÌØÊâµØĞÎ±êÖ¾Îï
+            if(Zigb_Rx_Buf[1] == 0x10)    //*****************************ç‰¹æ®Šåœ°å½¢æ ‡å¿—ç‰©
             {
                 if((Zigb_Rx_Buf[2] == 0x10) == (Zigb_Rx_Buf[3] == 0x01))
                 {
                     if(Zigb_Rx_Buf[4] == 0x31)    
                     {
-                        Communication_Data.Special_LandForm_Back_State = 1;      //³µÁ¾Ë³ÀûÍ¨¹ı£¬Í¨ĞĞ·½Ïò£¨A->B£©
+                        Communication_Data.Special_LandForm_Back_State = 1;      //è½¦è¾†é¡ºåˆ©é€šè¿‡ï¼Œé€šè¡Œæ–¹å‘ï¼ˆA->Bï¼‰
                     }
                     else if(Zigb_Rx_Buf[4] == 0x32) 
                     {
-                        Communication_Data.Special_LandForm_Back_State = 2;     //³µÁ¾Ë³ÀûÍ¨¹ı£¬Í¨ĞĞ·½Ïò£¨A->B£©
+                        Communication_Data.Special_LandForm_Back_State = 2;     //è½¦è¾†é¡ºåˆ©é€šè¿‡ï¼Œé€šè¡Œæ–¹å‘ï¼ˆA->Bï¼‰
                     }
                     else if(Zigb_Rx_Buf[4] == 0x33) 
                     {
-                        Communication_Data.Special_LandForm_Back_State = 3;     //³µÁ¾Î´Ë³ÀûÍ¨¹ı
+                        Communication_Data.Special_LandForm_Back_State = 3;     //è½¦è¾†æœªé¡ºåˆ©é€šè¿‡
                     }
                     else 
                     {
@@ -144,39 +144,39 @@ void Can_ZigBeeRx_Check(void)
                 }
             }
             
-            if(Zigb_Rx_Buf[1] == 0x0C)   //**************************ETCÏµÍ³±êÖ¾Îï
+            if(Zigb_Rx_Buf[1] == 0x0C)   //**************************ETCç³»ç»Ÿæ ‡å¿—ç‰©
             {
                 if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[3] == 0x01) && (Zigb_Rx_Buf[4] == 0x06) && (Zigb_Rx_Buf[5] == 0x00)&& ETC_Data.ETC_Car_Start==1)   
                 {
-                    Communication_Data.ETC_Open_Flag = 1;        //Õ¢ÃÅ¿ªÆô×´Ì¬
+                    Communication_Data.ETC_Open_Flag = 1;        //é—¸é—¨å¼€å¯çŠ¶æ€
                 }
             }
             
-         if((Zigb_Rx_Buf[1] == 0x0E) || (Zigb_Rx_Buf[1] == 0x0F))    //*******************ÖÇÄÜ½»Í¨µÆ±êÖ¾Îï
+         if((Zigb_Rx_Buf[1] == 0x0E) || (Zigb_Rx_Buf[1] == 0x0F))    //*******************æ™ºèƒ½äº¤é€šç¯æ ‡å¿—ç‰©
             {
-                if(Zigb_Rx_Buf[1] == 0x0E)   //Éè±¸A
+                if(Zigb_Rx_Buf[1] == 0x0E)   //è®¾å¤‡A
                 {
                     if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[3] == 0x01) && (Zigb_Rx_Buf[5] == 0x00))
                     {
-                        if(Zigb_Rx_Buf[4] == 0x07)        //½øÈëÊ¶±ğÄ£Ê½³É¹¦
+                        if(Zigb_Rx_Buf[4] == 0x07)        //è¿›å…¥è¯†åˆ«æ¨¡å¼æˆåŠŸ
                         {
                             Communication_Data.Smart_Traffic_A_Recognition_State = 1;
                         }
-                        else if(Zigb_Rx_Buf[4] == 0x08)  //½øÈëÊ¶±ğÄ£Ê½Ê§°Ü
+                        else if(Zigb_Rx_Buf[4] == 0x08)  //è¿›å…¥è¯†åˆ«æ¨¡å¼å¤±è´¥
                         {
                             Communication_Data.Smart_Traffic_A_Recognition_State = 0;
                         }
                     }
                 }
-                else if(Zigb_Rx_Buf[1] == 0x0F)   //Éè±¸B
+                else if(Zigb_Rx_Buf[1] == 0x0F)   //è®¾å¤‡B
                 {
                     if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[3] == 0x01) && (Zigb_Rx_Buf[5] == 0x00))
                     {
-                        if(Zigb_Rx_Buf[4] == 0x07)   //½øÈëÊ¶±ğÄ£Ê½³É¹¦
+                        if(Zigb_Rx_Buf[4] == 0x07)   //è¿›å…¥è¯†åˆ«æ¨¡å¼æˆåŠŸ
                         {
                             Communication_Data.Smart_Traffic_B_Recognition_State = 1;
                         }
-                        else if(Zigb_Rx_Buf[4] == 0x08)  //½øÈëÊ¶±ğÄ£Ê½Ê§°Ü
+                        else if(Zigb_Rx_Buf[4] == 0x08)  //è¿›å…¥è¯†åˆ«æ¨¡å¼å¤±è´¥
                         {
                             Communication_Data.Smart_Traffic_B_Recognition_State = 0;
                         }					
@@ -184,27 +184,27 @@ void Can_ZigBeeRx_Check(void)
                 }
             }
             
-         if(0x06 == Zigb_Rx_Buf[1])                   //**************************ÓïÒô²¥±¨±êÖ¾Îï
+         if(0x06 == Zigb_Rx_Buf[1])                   //**************************è¯­éŸ³æ’­æŠ¥æ ‡å¿—ç‰©
             {
-                if(0x02 == Zigb_Rx_Buf[2])  //ÓïÒô²¥±¨»Ø´«RTCÈÕÆÚ
+                if(0x02 == Zigb_Rx_Buf[2])  //è¯­éŸ³æ’­æŠ¥å›ä¼ RTCæ—¥æœŸ
                 {
-                    Voice_Report_Data.xVoice_Report_Rx_RTC_Date[0] = Zigb_Rx_Buf[3];  //»Ø´«RTCÄê·İ
-                    Voice_Report_Data.xVoice_Report_Rx_RTC_Date[1] = Zigb_Rx_Buf[4];  //»Ø´«RTCÔÂ·İ
-                    Voice_Report_Data.xVoice_Report_Rx_RTC_Date[2] = Zigb_Rx_Buf[5];  //»Ø´«RTCÈÕ
-                    Communication_Data.Voice_Report_Rx_State = 1;  //»Ø´«RTCÈÕÆÚ×´Ì¬
+                    Voice_Report_Data.xVoice_Report_Rx_RTC_Date[0] = Zigb_Rx_Buf[3];  //å›ä¼ RTCå¹´ä»½
+                    Voice_Report_Data.xVoice_Report_Rx_RTC_Date[1] = Zigb_Rx_Buf[4];  //å›ä¼ RTCæœˆä»½
+                    Voice_Report_Data.xVoice_Report_Rx_RTC_Date[2] = Zigb_Rx_Buf[5];  //å›ä¼ RTCæ—¥
+                    Communication_Data.Voice_Report_Rx_State = 1;  //å›ä¼ RTCæ—¥æœŸçŠ¶æ€
                 }
-                else if(0x03 == Zigb_Rx_Buf[2])  //ÓïÒô²¥±¨»Ø´«RTCÊ±¼ä
+                else if(0x03 == Zigb_Rx_Buf[2])  //è¯­éŸ³æ’­æŠ¥å›ä¼ RTCæ—¶é—´
                 {
-                    Voice_Report_Data.xVoice_Report_Rx_RTC_Time[0] = Zigb_Rx_Buf[3];  //»Ø´«RTCÊ±
-                    Voice_Report_Data.xVoice_Report_Rx_RTC_Time[1] = Zigb_Rx_Buf[4];  //»Ø´«RTC·Ö
-                    Voice_Report_Data.xVoice_Report_Rx_RTC_Time[2] = Zigb_Rx_Buf[5];  //»Ø´«RTCÃë
-                    Communication_Data.Voice_Report_Rx_State = 2;  //»Ø´«RTCÊ±¼ä×´Ì¬
+                    Voice_Report_Data.xVoice_Report_Rx_RTC_Time[0] = Zigb_Rx_Buf[3];  //å›ä¼ RTCæ—¶
+                    Voice_Report_Data.xVoice_Report_Rx_RTC_Time[1] = Zigb_Rx_Buf[4];  //å›ä¼ RTCåˆ†
+                    Voice_Report_Data.xVoice_Report_Rx_RTC_Time[2] = Zigb_Rx_Buf[5];  //å›ä¼ RTCç§’
+                    Communication_Data.Voice_Report_Rx_State = 2;  //å›ä¼ RTCæ—¶é—´çŠ¶æ€
                 }
-                else if(0x04 == Zigb_Rx_Buf[2])  //ÓïÒô²¥±¨»Ø´«ÌìÆøÊı¾İÓëÎÂ¶ÈÊı¾İ£¨16½øÖÆ£¬µ¥Î»¶È£©
+                else if(0x04 == Zigb_Rx_Buf[2])  //è¯­éŸ³æ’­æŠ¥å›ä¼ å¤©æ°”æ•°æ®ä¸æ¸©åº¦æ•°æ®ï¼ˆ16è¿›åˆ¶ï¼Œå•ä½åº¦ï¼‰
                 {
-                    Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0] = Zigb_Rx_Buf[3];  //»Ø´«ÌìÆøÊı¾İ
-                    Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[1] = Zigb_Rx_Buf[4];  //»Ø´«ÎÂ¶ÈÊı¾İ
-                    Communication_Data.Voice_Report_Rx_State = 3;  //»Ø´«ÌìÆøÊı¾İÓëÎÂ¶ÈÊı¾İ×´Ì¬
+                    Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0] = Zigb_Rx_Buf[3];  //å›ä¼ å¤©æ°”æ•°æ®
+                    Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[1] = Zigb_Rx_Buf[4];  //å›ä¼ æ¸©åº¦æ•°æ®
+                    Communication_Data.Voice_Report_Rx_State = 3;  //å›ä¼ å¤©æ°”æ•°æ®ä¸æ¸©åº¦æ•°æ®çŠ¶æ€
                 }
                 else
                 {
@@ -212,21 +212,21 @@ void Can_ZigBeeRx_Check(void)
                 }
             }
 
-            if(0x01 == Zigb_Rx_Buf[1])    //*****************½ÓÊÕ´Ó³µ·¢¹ıÀ´µÄÊı¾İ
+            if(0x01 == Zigb_Rx_Buf[1])    //*****************æ¥æ”¶ä»è½¦å‘è¿‡æ¥çš„æ•°æ®
             {
                 if(0xA0 == Zigb_Rx_Buf[2]) 
                 {
-                    FollowCar_Data.FollowCar_Stat_Flag  = 1;   //Èç¹û´Ó³µÆô¶¯ÁË£¬±êÖ¾Î»ÖÃ1
+                    FollowCar_Data.FollowCar_Stat_Flag  = 1;   //å¦‚æœä»è½¦å¯åŠ¨äº†ï¼Œæ ‡å¿—ä½ç½®1
                 }
-                else if(0xAA == Zigb_Rx_Buf[2])    // ´Ó³µÍê³ÉÈÎÎñ
+                else if(0xAA == Zigb_Rx_Buf[2])    // ä»è½¦å®Œæˆä»»åŠ¡
                 {
                     FollowCar_Data.FollowCar_Finish_Flag = 1;
                 }
-                else if(0xA2 == Zigb_Rx_Buf[2])    // ´Ó³µµ½´ï³µ¿â
+                else if(0xA2 == Zigb_Rx_Buf[2])    // ä»è½¦åˆ°è¾¾è½¦åº“
                 {
                     FollowCar_Data.FollowCar_Arrive_CarPort = 1;
                 }
-          else if(0xA3 == Zigb_Rx_Buf[2])    //´Ó³µ´«À´µÄ³µÅÆĞÅÏ¢
+          else if(0xA3 == Zigb_Rx_Buf[2])    //ä»è½¦ä¼ æ¥çš„è½¦ç‰Œä¿¡æ¯
                 {
                     FollowCar_Data.Follow_Send_Licence_Data_Flag = 1;
                     Follow_Send_Licence_Data_Store[0] = Zigb_Rx_Buf[3];
@@ -236,7 +236,7 @@ void Can_ZigBeeRx_Check(void)
                     Follow_Send_Licence_Data_Store[4] = Zigb_Rx_Buf[3];
                     Follow_Send_Licence_Data_Store[5] = Zigb_Rx_Buf[3];
                 }
-                else if(0xA4 == Zigb_Rx_Buf[2])    //´Ó³µ´«À´µÄ³µÅÆĞÅÏ¢
+                else if(0xA4 == Zigb_Rx_Buf[2])    //ä»è½¦ä¼ æ¥çš„è½¦ç‰Œä¿¡æ¯
                 {
                     FollowCar_Data.Follow_temperature_Finish_Flag=1;  
                 }
@@ -247,8 +247,8 @@ void Can_ZigBeeRx_Check(void)
             
     //		if(Zigb_Rx_Buf[7] == 0xBB)
     //		{
-    //			memset(Zigb_Rx_Buf,0,sizeof(Zigb_Rx_Buf));  //¶Ôzigbee½ÓÊÕ»º´æÇåÁã	
-    //			Zigbee_Rx_flag = 0; //½ÓÊÕÍê³É±êÖ¾Î»ÖÃÎª1		
+    //			memset(Zigb_Rx_Buf,0,sizeof(Zigb_Rx_Buf));  //å¯¹zigbeeæ¥æ”¶ç¼“å­˜æ¸…é›¶	
+    //			Zigbee_Rx_flag = 0; //æ¥æ”¶å®Œæˆæ ‡å¿—ä½ç½®ä¸º1		
     //		} 
             
             //memset(Zigb_Rx_Buf,0,sizeof(Zigb_Rx_Buf));
@@ -263,12 +263,12 @@ void Can_ZigBeeRx_Check(void)
 
 
 uint8_t App_Rx_Flag;
-void Normal_data(void)	  // Õı³£½ÓÊÕ11×Ö½Ú¿ØÖÆÖ¸Áî
+void Normal_data(void)	  // æ­£å¸¸æ¥æ”¶11å­—èŠ‚æ§åˆ¶æŒ‡ä»¤
 {
 	static uint16_t sum=0;
 								  
-    //Ö÷Ö¸ÁîÓëÈıÎ»¸±Ö¸Áî×óÇóºÍĞ£Ñé
-    //×¢Òâ£ºÔÚÇóºÍÒç³öÊ±Ó¦¸Ã¶ÔºÍ×ö256È¡Óà¡£
+    //ä¸»æŒ‡ä»¤ä¸ä¸‰ä½å‰¯æŒ‡ä»¤å·¦æ±‚å’Œæ ¡éªŒ
+    //æ³¨æ„ï¼šåœ¨æ±‚å’Œæº¢å‡ºæ—¶åº”è¯¥å¯¹å’Œåš256å–ä½™ã€‚
     sum = (Wifi_Rx_Buf[2]+Wifi_Rx_Buf[3]+Wifi_Rx_Buf[4]+Wifi_Rx_Buf[5]+Wifi_Rx_Buf[6]+Wifi_Rx_Buf[7]+Wifi_Rx_Buf[8])%256;
     if(sum == Wifi_Rx_Buf[9])
     {
@@ -278,11 +278,11 @@ void Normal_data(void)	  // Õı³£½ÓÊÕ11×Ö½Ú¿ØÖÆÖ¸Áî
         App_Rx_Flag =0;
 }
 
-void Abnormal_data(void)	  //Êı¾İÒì³£´¦Àí
+void Abnormal_data(void)	  //æ•°æ®å¼‚å¸¸å¤„ç†
 {
 	uint8_t i,j;
 	uint8_t sum = 0;
-	if(Wifi_Rx_num < 11)			// Òì³£Êı¾İ×Ö½ÚÊıĞ¡ÓÚ11×Ö½Ú²»×ö´¦Àí
+	if(Wifi_Rx_num < 11)			// å¼‚å¸¸æ•°æ®å­—èŠ‚æ•°å°äº11å­—èŠ‚ä¸åšå¤„ç†
 	{
 	   App_Rx_Flag = 0;
 	}
@@ -290,18 +290,18 @@ void Abnormal_data(void)	  //Êı¾İÒì³£´¦Àí
 	{
 		for(i=0;i<=(Wifi_Rx_num - 10);i++)  
 		{
-			if(Wifi_Rx_Buf[i] == 0x55)	   // Ñ°ÕÒ°üÍ·
+			if(Wifi_Rx_Buf[i] == 0x55)	   // å¯»æ‰¾åŒ…å¤´
 			{
                 if(Wifi_Rx_Buf[i+1] == 0xEE)        
                 {
-                   if(Wifi_Rx_Buf[i+10] == 0xBB)	// ÅĞ¶Ï°üÎ²
+                   if(Wifi_Rx_Buf[i+10] == 0xBB)	// åˆ¤æ–­åŒ…å°¾
                    {
                             sum=(Wifi_Rx_Buf[i+2]+Wifi_Rx_Buf[i+3]+Wifi_Rx_Buf[i+4]+Wifi_Rx_Buf[i+5]+Wifi_Rx_Buf[i+6]+Wifi_Rx_Buf[i+7]+Wifi_Rx_Buf[i+8])%256;
-                         if(sum == Wifi_Rx_Buf[i+9])	 // ÅĞ¶ÏÇóºÍ
+                         if(sum == Wifi_Rx_Buf[i+9])	 // åˆ¤æ–­æ±‚å’Œ
                             {
                                  for(j=0;j<11;j++)
                                  {
-                                        Wifi_Rx_Buf[j]=Wifi_Rx_Buf[j+i];	 // Êı¾İ°áÒÆ
+                                        Wifi_Rx_Buf[j]=Wifi_Rx_Buf[j+i];	 // æ•°æ®æ¬ç§»
                                  }
                                 App_Rx_Flag =1;
                             }
@@ -317,14 +317,14 @@ void Abnormal_data(void)	  //Êı¾İÒì³£´¦Àí
 /* ????(0x0A)?????? 55 EE type len data[] checksum BB??????=type+len+????data */
 /*
  * @brief
- * @note // ¹¹½¨ÍêÕû°ü£º°üÍ·2 + type1 + len1 + index1 + data[N] + checksum1 + °üÎ²1
+ * @note // æ„å»ºå®Œæ•´åŒ…ï¼šåŒ…å¤´2 + type1 + len1 + index1 + data[N] + checksum1 + åŒ…å°¾1
 
  * 0: 0x55
  * 1: 0xEE
  * 2: type (0x0A)
- * 3: len = 1 + ÄÚÈİ×Ö½ÚÊı£¨Õâ 1 ¸ö×Ö½ÚÊÇ index£¬µÚ¼¸¸ö¶şÎ¬Âë£©
- * 4: index£¨µÚ¼¸¸ö¶şÎ¬Âë£¬1/2/...£©
- * 5 .. 5 + (len - 1) - 1: Êµ¼Ê¶şÎ¬ÂëÄÚÈİ
+ * 3: len = 1 + å†…å®¹å­—èŠ‚æ•°ï¼ˆè¿™ 1 ä¸ªå­—èŠ‚æ˜¯ indexï¼Œç¬¬å‡ ä¸ªäºŒç»´ç ï¼‰
+ * 4: indexï¼ˆç¬¬å‡ ä¸ªäºŒç»´ç ï¼Œ1/2/...ï¼‰
+ * 5 .. 5 + (len - 1) - 1: å®é™…äºŒç»´ç å†…å®¹
  * 4 + len: checksum
  * 4 + len + 1: 0xBB
  */
@@ -336,30 +336,30 @@ static uint8_t Check_VariableLen_Packet(void)
     uint16_t sum = 0;
     uint8_t i;
 
-    // ÖÁÉÙÒªÓĞ 4 ×Ö½Ú: 55 EE type len 
+    // è‡³å°‘è¦æœ‰ 4 å­—èŠ‚: 55 EE type len 
     if (Wifi_Rx_num < 4)
         return 0;
 
-    payload_len = Wifi_Rx_Buf[3]; // = 1(Ë÷Òı) + ÄÚÈİ³¤¶È
+    payload_len = Wifi_Rx_Buf[3]; // = 1(ç´¢å¼•) + å†…å®¹é•¿åº¦
     if (payload_len == 0)
-        return 0; // ÖÁÉÙÒªÓĞ index ÕâÒ»×Ö½Ú
+        return 0; // è‡³å°‘è¦æœ‰ index è¿™ä¸€å­—èŠ‚
     if (payload_len > (WIFI_MAX_NUM - 6))
-        return 0; // ·ÀÖ¹Ô½½ç: Í·4 + payload + Ğ£Ñé + Î²
+        return 0; // é˜²æ­¢è¶Šç•Œ: å¤´4 + payload + æ ¡éªŒ + å°¾
 
-    // °´Ğ­Òé×Ü³¤: 4(Í·) + payload_len + 1(checksum) + 1(Î²) = 6 + payload_len
+    // æŒ‰åè®®æ€»é•¿: 4(å¤´) + payload_len + 1(checksum) + 1(å°¾) = 6 + payload_len
     expected_total = 6 + payload_len;
     if ((uint16_t)(Wifi_Rx_num + 1) < expected_total)
-        return 0; // »¹Ã»ÊÕÆëÕû°ü
+        return 0; // è¿˜æ²¡æ”¶é½æ•´åŒ…
 
-    // Ğ£Ñé°üÎ²ÊÇ·ñÎª 0xBB
+    // æ ¡éªŒåŒ…å°¾æ˜¯å¦ä¸º 0xBB
     if (Wifi_Rx_Buf[4 + payload_len + 1] != 0xBB)
         return 0;
 
-    // ¼ÆËãĞ£ÑéºÍ: type + len + index + ËùÓĞÄÚÈİ×Ö½Ú
+    // è®¡ç®—æ ¡éªŒå’Œ: type + len + index + æ‰€æœ‰å†…å®¹å­—èŠ‚
     sum = (Wifi_Rx_Buf[2] & 0xFF) + (payload_len & 0xFF);
     for (i = 0; i < payload_len; i++)
     {
-        sum += (Wifi_Rx_Buf[4 + i] & 0xFF); // [4] ÊÇ index£¬ºóÃæÊÇÄÚÈİ
+        sum += (Wifi_Rx_Buf[4 + i] & 0xFF); // [4] æ˜¯ indexï¼Œåé¢æ˜¯å†…å®¹
     }
 
     if ((sum & 0xFF) != (Wifi_Rx_Buf[4 + payload_len] & 0xFF))
@@ -371,20 +371,20 @@ volatile uint8_t Rx_count = 0;
 void PrintAndroidData_Array(void)
 {
     uint8_t i;
-    // ´òÓ¡½ÓÊÕµ½µÄÊı¾İÊıÁ¿
+    // æ‰“å°æ¥æ”¶åˆ°çš„æ•°æ®æ•°é‡
     printf("Android Rx:[%d]", (int)((uint16_t)Wifi_Rx_num + 1));
 
 #if TY2_2026 
-    // TODO: ÔÚÕâÀï½âÎö±¾Ö¡ÒµÎñ£º
+    // TODO: åœ¨è¿™é‡Œè§£ææœ¬å¸§ä¸šåŠ¡ï¼š
     uint8_t *content = (uint8_t *)&Wifi_Rx_Buf[4];
     uint8_t content_len = Wifi_Rx_Buf[3];
 #else
-    // TODO: ÔÚÕâÀï½âÎö±¾Ö¡ÒµÎñ£º
+    // TODO: åœ¨è¿™é‡Œè§£ææœ¬å¸§ä¸šåŠ¡ï¼š
     uint8_t *content = (uint8_t *)&Wifi_Rx_Buf[5];
     uint8_t content_len = Wifi_Rx_Buf[3]-1;
 #endif
     
-    // ´òÓ¡ASCII¸ñÊ½£¨Èç¹ûÊı¾İÊÇ¿É´òÓ¡×Ö·û£©
+    // æ‰“å°ASCIIæ ¼å¼ï¼ˆå¦‚æœæ•°æ®æ˜¯å¯æ‰“å°å­—ç¬¦ï¼‰
     // printf("ASCII Data: ");
     for (i = 0; i < content_len; i++)
     {
@@ -398,7 +398,7 @@ void PrintAndroidData_Array(void)
     if(Rx_count >= Two_Code_Count)
     {
         printf("bbb  ");
-        Android_Data.Two_Code_State = 1; //¶şÎ¬ÂëÊ¶±ğ²¢´¢´æ³É¹¦
+        Android_Data.Two_Code_State = 1; //äºŒç»´ç è¯†åˆ«å¹¶å‚¨å­˜æˆåŠŸ
     }
 }
 
@@ -406,18 +406,18 @@ void PrintAndroidData_Array(void)
 //uint8_t jixun=0;
 uint8_t YT5_Carport=0;
 
-/* WIFI Êı¾İ½ÓÊÕ £¨°²×¿ÓëÖ÷³µÍ¨ĞÅ£©*/
+/* WIFI æ•°æ®æ¥æ”¶ ï¼ˆå®‰å“ä¸ä¸»è½¦é€šä¿¡ï¼‰*/
 void Can_WifiRx_Check(void)
 {
     uint8_t Buf1[100];
     
     if(Wifi_Rx_flag)
     {	
-        if(gt_get_sub(canu_wifi_rxtime) == 0)    //Wifi_Rx_flagÎª1Ö®ºóµÈ´ı10msÔÙ¼ìÑé
+        if(gt_get_sub(canu_wifi_rxtime) == 0)    //Wifi_Rx_flagä¸º1ä¹‹åç­‰å¾…10mså†æ£€éªŒ
         {     
             for (int i = 0; i < Wifi_Rx_num; i++) 
             {
-                //printf("%02X ", Wifi_Rx_Buf[i]);  // ´óĞ´Ê®Áù½øÖÆ
+                //printf("%02X ", Wifi_Rx_Buf[i]);  // å¤§å†™åå…­è¿›åˆ¶
                     sprintf((char*)Buf1,"%02x ",Wifi_Rx_Buf[i]);  
                     Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
                 
@@ -425,16 +425,16 @@ void Can_WifiRx_Check(void)
             }
             
             
-            /* ±ä³¤°ü(0x0A)£º55 EE 0x0A len data[] checksum BB */
+            /* å˜é•¿åŒ…(0x0A)ï¼š55 EE 0x0A len data[] checksum BB */
             if (Wifi_Rx_Buf[0] == 0x55 && Wifi_Rx_Buf[1] == 0xEE && Wifi_Rx_Buf[2] == 0x0A && Wifi_Rx_Buf[Wifi_Rx_num] == 0xBB)
             {
-                /* ÖÁÉÙÒªÓĞ 4 ×Ö½Ú²ÅÄÜÄÃµ½ len */
+                /* è‡³å°‘è¦æœ‰ 4 å­—èŠ‚æ‰èƒ½æ‹¿åˆ° len */
                 if (Wifi_Rx_num >= 3)
                 {
                     uint8_t len = Wifi_Rx_Buf[3];
                     uint16_t expected_total = 6 + len; /* 4 + len + 2 */
 
-                    /* Ö»ÓĞÔÚÊı¾İÊÕÆëºó²ÅĞ£Ñé²¢ÖÃ App_Rx_Flag */
+                    /* åªæœ‰åœ¨æ•°æ®æ”¶é½åæ‰æ ¡éªŒå¹¶ç½® App_Rx_Flag */
                     if ((uint16_t)(Wifi_Rx_num + 1) >= expected_total)
                     {
                         if (Check_VariableLen_Packet())
@@ -446,23 +446,23 @@ void Can_WifiRx_Check(void)
                             printf("Error: Check_VariableLen_Packet failed\r\n");
                             App_Rx_Flag = 0;
                         }
-                        /* ÎŞÂÛĞ£Ñé³É¹¦Óë·ñ£¬ÕâÒ»Ö¡¶¼´¦ÀíÍêÁË£¬Çå±êÖ¾µÈ´ıÏÂÒ»Ö¡ */
+                        /* æ— è®ºæ ¡éªŒæˆåŠŸä¸å¦ï¼Œè¿™ä¸€å¸§éƒ½å¤„ç†å®Œäº†ï¼Œæ¸…æ ‡å¿—ç­‰å¾…ä¸‹ä¸€å¸§ */
                         // PrintAndroidData_Array();
                         Wifi_Rx_flag = 0;
                     }
-                    /* ·ñÔòÊı¾İ»¹Ã»ÊÕÍê£¬±£³Ö Wifi_Rx_flag=1£¬µÈ´ıÏÂ´Îµ÷ÓÃ */
+                    /* å¦åˆ™æ•°æ®è¿˜æ²¡æ”¶å®Œï¼Œä¿æŒ Wifi_Rx_flag=1ï¼Œç­‰å¾…ä¸‹æ¬¡è°ƒç”¨ */
                 }
             }
             else if(Wifi_Rx_Buf[0] == 0x55 && Wifi_Rx_Buf[1] == 0xEE && Wifi_Rx_Buf[10] == 0xBB)   
             {
-                Normal_data();    //Ğ£Ñé
-                Wifi_Rx_flag = 0;//ÖØĞÂ½ÓÊÕÊı¾İ
+                Normal_data();    //æ ¡éªŒ
+                Wifi_Rx_flag = 0;//é‡æ–°æ¥æ”¶æ•°æ®
             }
             else
             {
-                Abnormal_data();   //Êı¾İÒì³£   
+                Abnormal_data();   //æ•°æ®å¼‚å¸¸   
                 if(App_Rx_Flag==0)
-                Wifi_Rx_flag = 0;//ÖØĞÂ½ÓÊÕÊı¾İ
+                Wifi_Rx_flag = 0;//é‡æ–°æ¥æ”¶æ•°æ®
             } 	
             if (App_Rx_Flag == 0 && Wifi_Rx_Buf[2] != 0x0A)
                 Wifi_Rx_flag = 0;
@@ -470,33 +470,33 @@ void Can_WifiRx_Check(void)
         
     }
 
-	if(App_Rx_Flag)    //´¦Àí°²×¿ÖÕ¶Ë·¢¹ıÀ´µÄÊı¾İ
+	if(App_Rx_Flag)    //å¤„ç†å®‰å“ç»ˆç«¯å‘è¿‡æ¥çš„æ•°æ®
 	{
-		if(Wifi_Rx_Buf[1] == 0xEE)     //°²×¿ÖÕ¶Ë·¢ËÍ¸øÖ÷³µÃüÁî
+		if(Wifi_Rx_Buf[1] == 0xEE)     //å®‰å“ç»ˆç«¯å‘é€ç»™ä¸»è½¦å‘½ä»¤
 		{
-			switch(Wifi_Rx_Buf[2])    //ÅĞ¶ÏÖ÷Ö¸Áî
+			switch(Wifi_Rx_Buf[2])    //åˆ¤æ–­ä¸»æŒ‡ä»¤
 			{
-				case 0xA0:    //Ö÷³µÆô¶¯ 
+				case 0xA0:    //ä¸»è½¦å¯åŠ¨ 
 				{
 					Android_Data.Android_Main_Car_Start_Flag = 1;
 					break;
 				}
-                case 0x0A:  //Ê¶±ğ¶şÎ¬Âë³É¹¦
+                case 0x0A:  //è¯†åˆ«äºŒç»´ç æˆåŠŸ
                 {
                     PrintAndroidData_Array();
                     break;
                 }
-				case 0x01:    //ºìÂÌµÆÊ¶±ğ³É¹¦
+				case 0x01:    //çº¢ç»¿ç¯è¯†åˆ«æˆåŠŸ
 				{
-					if(Wifi_Rx_Buf[3] == 0x01)   //Ê¶±ğÎªºìµÆ
+					if(Wifi_Rx_Buf[3] == 0x01)   //è¯†åˆ«ä¸ºçº¢ç¯
 					{
 						Android_Data.Red_State = 1;
 					}
-					else if(Wifi_Rx_Buf[3] == 0x02)   //Ê¶±ğÎª»ÆµÆ
+					else if(Wifi_Rx_Buf[3] == 0x02)   //è¯†åˆ«ä¸ºé»„ç¯
 					{
 						Android_Data.Yellow_State = 1;
 					}
-					else if(Wifi_Rx_Buf[3] == 0x03)   //Ê¶±ğÎªÂÌµÆ
+					else if(Wifi_Rx_Buf[3] == 0x03)   //è¯†åˆ«ä¸ºç»¿ç¯
 					{
 						Android_Data.Green_State = 1;
 					}
@@ -508,7 +508,7 @@ void Can_WifiRx_Check(void)
                    		
 					break;
 				}
-				case 0x03:    //Ê¶±ğ TFT ³µÅÆ³É¹¦
+				case 0x03:    //è¯†åˆ« TFT è½¦ç‰ŒæˆåŠŸ
 				{
                     if(!(Wifi_Rx_Buf[3]==0x00))
                     {
@@ -529,7 +529,7 @@ void Can_WifiRx_Check(void)
 					TFT_License_Data_Store[5] = Wifi_Rx_Buf[8];	
 					break;				
 				}
-				case 0x04:     //Ê¶±ğ TFT ½»Í¨±êÖ¾Îï³É¹¦
+				case 0x04:     //è¯†åˆ« TFT äº¤é€šæ ‡å¿—ç‰©æˆåŠŸ
 				{
 					Android_Data.TFT_Traffic_Flag = 1;
 					TFT_Traffic_Data_Store[0] = Wifi_Rx_Buf[3];
@@ -541,11 +541,11 @@ void Can_WifiRx_Check(void)
 					TFT_Traffic_Data_Store[6] = Wifi_Rx_Buf[9];
 					break;
 				}
-				case 0x05:   // °²×¿»Ø´«¸øÖ÷³µ£¬Ö÷³µ¿ØÖÆTFTÏòÏÂ·­Ò³
+				case 0x05:   // å®‰å“å›ä¼ ç»™ä¸»è½¦ï¼Œä¸»è½¦æ§åˆ¶TFTå‘ä¸‹ç¿»é¡µ
 				{
 					Android_Data.Control_TFT_Paging = 1;
 					if(Wifi_Rx_Buf[3]==0x01)
-									Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // ÏòÏÂ·­Ò³
+									Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // å‘ä¸‹ç¿»é¡µ
 					else if(Wifi_Rx_Buf[3]==0x02)
 									Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_B,2);
 					else if(Wifi_Rx_Buf[3]==0x03)
@@ -554,7 +554,7 @@ void Can_WifiRx_Check(void)
 //                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
 					break;
 				}
-				case 0x06:    //TFTÍ¼ĞÎÊıÁ¿Ê¶±ğ³É¹¦
+				case 0x06:    //TFTå›¾å½¢æ•°é‡è¯†åˆ«æˆåŠŸ
 				{
 					Android_Data.TFT_GraphCount_Flag = 1;
 					TFT_GraphCount_Data_Store[0] = Wifi_Rx_Buf[3];
@@ -566,7 +566,7 @@ void Can_WifiRx_Check(void)
 					TFT_GraphCount_Data_Store[6] = Wifi_Rx_Buf[9];
 					break;
 				}
-				case 0x07:    //TFTÍ¼ĞÎÑÕÉ«Ê¶±ğ³É¹¦ 
+				case 0x07:    //TFTå›¾å½¢é¢œè‰²è¯†åˆ«æˆåŠŸ 
 				{
 					Android_Data.TFT_GraphColour_Flag = 1;
 					TFT_GraphColour_Data_Store[0] = Wifi_Rx_Buf[3];
@@ -578,7 +578,7 @@ void Can_WifiRx_Check(void)
 					TFT_GraphColour_Data_Store[6] = Wifi_Rx_Buf[9];
 					break;
 				}
-				case 0x08: //TFTÍ¼ĞÎÊ¶±ğ³É¹¦ £¨ÊıÁ¿+ÑÕÉ«£©
+				case 0x08: //TFTå›¾å½¢è¯†åˆ«æˆåŠŸ ï¼ˆæ•°é‡+é¢œè‰²ï¼‰
 				{
 					Android_Data.TFT_Graph_CountAndColour_Flag = 1;
                     if(Wifi_Rx_Buf[3]==0x01)
@@ -598,7 +598,7 @@ void Can_WifiRx_Check(void)
                     
 					break;
 				}
-			    case 0x09:  //TFT¿ÚÕÖÊıÁ¿Ê¶±ğ³É¹¦  
+			    case 0x09:  //TFTå£ç½©æ•°é‡è¯†åˆ«æˆåŠŸ  
 				{
 					Android_Data.TFT_Mask_Flag = 1;
 					TFT_Mask_Data_Store[0] = Wifi_Rx_Buf[3];
@@ -616,7 +616,7 @@ void Can_WifiRx_Check(void)
 //					}
 					break;
 				}
-				case 0x10: //TFTÎÄ×ÖÊ¶±ğ³É¹¦
+				case 0x10: //TFTæ–‡å­—è¯†åˆ«æˆåŠŸ
 				{
 					Android_Data.TFT_Words_Flag = 1;
 					TFT_Words_Data_Store[0] = Wifi_Rx_Buf[3];
@@ -656,21 +656,21 @@ void Can_WifiRx_Check(void)
 			}
             Wifi_Rx_flag = 0;
 		}
-//		else   //°²×¿·¢ËÍ¸øÖ÷³µµÄÊı¾İÖ±½Ó·¢ËÍ¸øÏà¹ØµÄ±êÖ¾Îï£¨ÀıÈçÊ¶±ğµ½ºìÂÌµÆºóÖ±½ÓÍ¨¹ıÖ÷³µµÄZigbee·¢ËÍ¸øºìÂÌµÆ£©
+//		else   //å®‰å“å‘é€ç»™ä¸»è½¦çš„æ•°æ®ç›´æ¥å‘é€ç»™ç›¸å…³çš„æ ‡å¿—ç‰©ï¼ˆä¾‹å¦‚è¯†åˆ«åˆ°çº¢ç»¿ç¯åç›´æ¥é€šè¿‡ä¸»è½¦çš„Zigbeeå‘é€ç»™çº¢ç»¿ç¯ï¼‰
 //		{
 //			Send_ZigbeeData_To_Fifo(Wifi_Rx_Buf,8); 
 //		}
 		App_Rx_Flag = 0;
 	}
     
-	//memset(Wifi_Rx_Buf, 0, sizeof(Wifi_Rx_Buf));   //½«½ÓÊÕµ½µÄÊı¾İÇåÁã
+	//memset(Wifi_Rx_Buf, 0, sizeof(Wifi_Rx_Buf));   //å°†æ¥æ”¶åˆ°çš„æ•°æ®æ¸…é›¶
 }
 
 
 //uint8_t App_Rx_Flag ;
 
 
-///* WIFI Êı¾İ½ÓÊÕ £¨°²×¿ÓëÖ÷³µÍ¨ĞÅ£©*/
+///* WIFI æ•°æ®æ¥æ”¶ ï¼ˆå®‰å“ä¸ä¸»è½¦é€šä¿¡ï¼‰*/
 //void Can_WifiRx_Check(void)
 //{
 //	if(Wifi_Rx_flag)
@@ -681,21 +681,21 @@ void Can_WifiRx_Check(void)
 //			App_Rx_Flag = 0;
 //	}
 //	
-//	if(App_Rx_Flag)    //´¦Àí°²×¿ÖÕ¶Ë·¢¹ıÀ´µÄÊı¾İ
+//	if(App_Rx_Flag)    //å¤„ç†å®‰å“ç»ˆç«¯å‘è¿‡æ¥çš„æ•°æ®
 //	{
 //			switch(Wifi_Rx_Buf[1])   
 //			{
-//				case 0x01:    //Ö÷³µÆô¶¯ 
+//				case 0x01:    //ä¸»è½¦å¯åŠ¨ 
 //				{
 //					Android_Data.Android_Main_Car_Start_Flag = 1;
 //					break;
 //				}
-//				case 0x02:    //ºìÂÌµÆÊ¶±ğ³É¹¦
+//				case 0x02:    //çº¢ç»¿ç¯è¯†åˆ«æˆåŠŸ
 //				{
 //					Android_Data.Android_Traffic_Light_Flag = 1;
 //					break;
 //				}
-//				case 0x03:    //Ê¶±ğ TFT ³µÅÆ³É¹¦
+//				case 0x03:    //è¯†åˆ« TFT è½¦ç‰ŒæˆåŠŸ
 //				{
 //					char temp[15];
 //					Android_Data.Android_TFT_Licence_Flag = 1;
@@ -709,7 +709,7 @@ void Can_WifiRx_Check(void)
 //								
 //					Barrier_Data.xBarrier_Licence_Tx(Android_TFT_License_Data_Arr);
 //					uint8_t Buf[50];
-//					sprintf((char*)Buf,"License:%s\r\n",Android_TFT_License_Data_Arr);  //½«´íÎóÖ¸Áî´òÓ¡µ½Debug
+//					sprintf((char*)Buf,"License:%s\r\n",Android_TFT_License_Data_Arr);  //å°†é”™è¯¯æŒ‡ä»¤æ‰“å°åˆ°Debug
 //					Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf)); 
 //					break;
 //				}
@@ -717,14 +717,14 @@ void Can_WifiRx_Check(void)
 //				{
 //					
 //				}
-//				case 0x05:  //°²×¿·¢ËÍ¸øÖ÷³µµÄÊı¾İÖ±½Ó·¢ËÍ¸øÏà¹ØµÄ±êÖ¾Îï£¨ÀıÈçÊ¶±ğµ½ºìÂÌµÆºóÖ±½ÓÍ¨¹ıÖ÷³µµÄZigbee·¢ËÍ¸øºìÂÌµÆ£©
+//				case 0x05:  //å®‰å“å‘é€ç»™ä¸»è½¦çš„æ•°æ®ç›´æ¥å‘é€ç»™ç›¸å…³çš„æ ‡å¿—ç‰©ï¼ˆä¾‹å¦‚è¯†åˆ«åˆ°çº¢ç»¿ç¯åç›´æ¥é€šè¿‡ä¸»è½¦çš„Zigbeeå‘é€ç»™çº¢ç»¿ç¯ï¼‰
 //				{
 //					Send_ZigbeeData_To_Fifo(Wifi_Rx_Buf,8); 
 //				}
 //			}
 //		App_Rx_Flag = 0;
 //	}
-//	memset(Wifi_Rx_Buf, 0, sizeof(Wifi_Rx_Buf));   //½«½ÓÊÕµ½µÄÊı¾İÇåÁã
+//	memset(Wifi_Rx_Buf, 0, sizeof(Wifi_Rx_Buf));   //å°†æ¥æ”¶åˆ°çš„æ•°æ®æ¸…é›¶
 //}
 
 

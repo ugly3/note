@@ -1,11 +1,11 @@
 /**
 ************************************************************************
- *    ÎÄ¼şÃû£ºmotor_drive£¨Ö÷³µµç»úÇı¶¯Ïà¹Øº¯Êı£©
- *      ËµÃ÷£ºÖ÷³µµÄÑ­¼££¬Ç°½øºóÍË£¬×óÓÒ90¶È×ª£¬×óÓÒ50¶È×ª£¬
+ *    æ–‡ä»¶åï¼šmotor_driveï¼ˆä¸»è½¦ç”µæœºé©±åŠ¨ç›¸å…³å‡½æ•°ï¼‰
+ *      è¯´æ˜ï¼šä¸»è½¦çš„å¾ªè¿¹ï¼Œå‰è¿›åé€€ï¼Œå·¦å³90åº¦è½¬ï¼Œå·¦å³50åº¦è½¬ï¼Œ
 ************************************************************************
 **/
 #include "motor_drive.h"
-#include "roadway_check.h"   //µÀÂ·¼ì²â
+#include "roadway_check.h"   //é“è·¯æ£€æµ‹
 
 
 Motor_Typedef Motor_Data =
@@ -33,75 +33,75 @@ Motor_Typedef Motor_Data =
 
 
 #if CAR_CODE
-void Car_Go(uint8_t speed, uint16_t temp)   // Ö÷³µÇ°½ø ²ÎÊı£ºËÙ¶È/ÂëÅÌ
+void Car_Go(uint8_t speed, uint16_t temp)   // ä¸»è½¦å‰è¿› å‚æ•°ï¼šé€Ÿåº¦/ç ç›˜
 {
-    Roadway_mp_syn();       // ÂëÅÌÍ¬²½
-    Stop_Flag = 0;          // ÔËĞĞ×´Ì¬±êÖ¾Î»
-    Go_Flag = 1;            // Ç°½ø±êÖ¾Î»
-    wheel_L_Flag = 0;       // ×ó×ª±êÖ¾Î»
-    wheel_R_Flag = 0;       // ÓÒ×ª±êÖ¾Î»
-    wheel_Nav_Flag = 0;     // ÂëÅÌĞı×ª±êÖ¾Î»
-    Back_Flag = 0;          // ºóÍË±êÖ¾Î»
-    Track_Flag = 0;         // Ñ­¼£±êÖ¾Î»
-    temp_MP = temp;         // ÂëÅÌÖµ
-    Car_Spend = speed;      // ËÙ¶ÈÖµ
-    Control(Car_Spend, Car_Spend);  // µç»úÇı¶¯º¯Êı
-    while(Stop_Flag != 0x03);       // µÈ´ıÇ°½øÍê³É     //Ê¹ÓÃÂëÅÌÅĞ¶ÏµÄÊ±ºò Stop_Flag Îª3
+    Roadway_mp_syn();       // ç ç›˜åŒæ­¥
+    Stop_Flag = 0;          // è¿è¡ŒçŠ¶æ€æ ‡å¿—ä½
+    Go_Flag = 1;            // å‰è¿›æ ‡å¿—ä½
+    wheel_L_Flag = 0;       // å·¦è½¬æ ‡å¿—ä½
+    wheel_R_Flag = 0;       // å³è½¬æ ‡å¿—ä½
+    wheel_Nav_Flag = 0;     // ç ç›˜æ—‹è½¬æ ‡å¿—ä½
+    Back_Flag = 0;          // åé€€æ ‡å¿—ä½
+    Track_Flag = 0;         // å¾ªè¿¹æ ‡å¿—ä½
+    temp_MP = temp;         // ç ç›˜å€¼
+    Car_Spend = speed;      // é€Ÿåº¦å€¼
+    Control(Car_Spend, Car_Spend);  // ç”µæœºé©±åŠ¨å‡½æ•°
+    while(Stop_Flag != 0x03);       // ç­‰å¾…å‰è¿›å®Œæˆ     //ä½¿ç”¨ç ç›˜åˆ¤æ–­çš„æ—¶å€™ Stop_Flag ä¸º3
 }
 
-void Car_Back(uint8_t speed, uint16_t temp) // Ö÷³µºóÍË ²ÎÊı£ºËÙ¶È/ÂëÅÌ
+void Car_Back(uint8_t speed, uint16_t temp) // ä¸»è½¦åé€€ å‚æ•°ï¼šé€Ÿåº¦/ç ç›˜
 {
-    Roadway_mp_syn();       // ÂëÅÌÍ¬²½
-    Stop_Flag = 0;          // ÔËĞĞ×´Ì¬±êÖ¾Î»
-    Go_Flag = 0;            // Ç°½ø±êÖ¾Î»
-    wheel_L_Flag = 0;       // ×ó×ª±êÖ¾Î»
-    wheel_R_Flag = 0;       // ÓÒ×ª±êÖ¾Î»
-    wheel_Nav_Flag = 0;     // ÂëÅÌĞı×ª±êÖ¾Î»
-    Back_Flag = 1;          // ºóÍË±êÖ¾Î»
-    Track_Flag = 0;         // Ñ­¼£±êÖ¾Î»
-    temp_MP = temp;         // ÂëÅÌÖµ
-    Car_Spend = speed;      // ËÙ¶ÈÖµ
-    Control(-Car_Spend, -Car_Spend); // µç»úÇı¶¯º¯Êı   Car_Spend ÕıÖµÏòÇ°×ß£¬¸ºÖµÏòºó×ß
-    while(Stop_Flag != 0x03);       // µÈ´ıºóÍËÍê³É
+    Roadway_mp_syn();       // ç ç›˜åŒæ­¥
+    Stop_Flag = 0;          // è¿è¡ŒçŠ¶æ€æ ‡å¿—ä½
+    Go_Flag = 0;            // å‰è¿›æ ‡å¿—ä½
+    wheel_L_Flag = 0;       // å·¦è½¬æ ‡å¿—ä½
+    wheel_R_Flag = 0;       // å³è½¬æ ‡å¿—ä½
+    wheel_Nav_Flag = 0;     // ç ç›˜æ—‹è½¬æ ‡å¿—ä½
+    Back_Flag = 1;          // åé€€æ ‡å¿—ä½
+    Track_Flag = 0;         // å¾ªè¿¹æ ‡å¿—ä½
+    temp_MP = temp;         // ç ç›˜å€¼
+    Car_Spend = speed;      // é€Ÿåº¦å€¼
+    Control(-Car_Spend, -Car_Spend); // ç”µæœºé©±åŠ¨å‡½æ•°   Car_Spend æ­£å€¼å‘å‰èµ°ï¼Œè´Ÿå€¼å‘åèµ°
+    while(Stop_Flag != 0x03);       // ç­‰å¾…åé€€å®Œæˆ
 }
 #endif
 
-/**************************Ö÷³µµç»úÔËĞĞ******************************************/
+/**************************ä¸»è½¦ç”µæœºè¿è¡Œ******************************************/
 
 /*
-Ö÷³µÑ­¼£
-²ÎÊı1£ºËÙ¶È
+ä¸»è½¦å¾ªè¿¹
+å‚æ•°1ï¼šé€Ÿåº¦
 */
 void xCAR_Track(uint8_t speed)
 {
-    Stop_Flag = 0;          // ÔËĞĞ×´Ì¬±êÖ¾Î»
-    Go_Flag = 0;            // Ç°½ø±êÖ¾Î»
-    wheel_L_Flag = 0;       // ×ó×ª±êÖ¾Î»
-    wheel_R_Flag = 0;       // ÓÒ×ª±êÖ¾Î»
-    wheel_Nav_Flag = 0;     // ÂëÅÌĞı×ª±êÖ¾Î»
-    Back_Flag = 0;          // ºóÍË±êÖ¾Î»
-    Track_Flag = 1;         // Ñ­¼£±êÖ¾Î»
-    Car_Spend = speed;      // ËÙ¶ÈÖµ
-    Control(Car_Spend, Car_Spend);  // µç»úÇı¶¯º¯Êı 
-    while(Stop_Flag != 0x01);       // µÈ´ıÑ­¼£Íê³É	
+    Stop_Flag = 0;          // è¿è¡ŒçŠ¶æ€æ ‡å¿—ä½
+    Go_Flag = 0;            // å‰è¿›æ ‡å¿—ä½
+    wheel_L_Flag = 0;       // å·¦è½¬æ ‡å¿—ä½
+    wheel_R_Flag = 0;       // å³è½¬æ ‡å¿—ä½
+    wheel_Nav_Flag = 0;     // ç ç›˜æ—‹è½¬æ ‡å¿—ä½
+    Back_Flag = 0;          // åé€€æ ‡å¿—ä½
+    Track_Flag = 1;         // å¾ªè¿¹æ ‡å¿—ä½
+    Car_Spend = speed;      // é€Ÿåº¦å€¼
+    Control(Car_Spend, Car_Spend);  // ç”µæœºé©±åŠ¨å‡½æ•° 
+    while(Stop_Flag != 0x01);       // ç­‰å¾…å¾ªè¿¹å®Œæˆ	
 }
 
 /*
-Ö÷³µÊ±¼äÑ­¼££¨Ñ­¼£Ö¸¶¨Ê±¼ä£©
-²ÎÊı1£º
-²ÎÊı2£º
+ä¸»è½¦æ—¶é—´å¾ªè¿¹ï¼ˆå¾ªè¿¹æŒ‡å®šæ—¶é—´ï¼‰
+å‚æ•°1ï¼š
+å‚æ•°2ï¼š
 */
 void xCAR_Track_Time(uint8_t speed,uint16_t time)
 {
-    Stop_Flag = 0;          // ÔËĞĞ×´Ì¬±êÖ¾Î»
-    Go_Flag = 0;            // Ç°½ø±êÖ¾Î»
-    wheel_L_Flag = 0;       // ×ó×ª±êÖ¾Î»
-    wheel_R_Flag = 0;       // ÓÒ×ª±êÖ¾Î»
-    wheel_Nav_Flag = 0;     // ÂëÅÌĞı×ª±êÖ¾Î»
-    Back_Flag = 0;          // ºóÍË±êÖ¾Î»
-    Track_Flag = 1;         // Ñ­¼£±êÖ¾Î»
-    Car_Spend = speed;      // ËÙ¶ÈÖµ
-    Control(Car_Spend, Car_Spend);  // µç»úÇı¶¯º¯Êı
+    Stop_Flag = 0;          // è¿è¡ŒçŠ¶æ€æ ‡å¿—ä½
+    Go_Flag = 0;            // å‰è¿›æ ‡å¿—ä½
+    wheel_L_Flag = 0;       // å·¦è½¬æ ‡å¿—ä½
+    wheel_R_Flag = 0;       // å³è½¬æ ‡å¿—ä½
+    wheel_Nav_Flag = 0;     // ç ç›˜æ—‹è½¬æ ‡å¿—ä½
+    Back_Flag = 0;          // åé€€æ ‡å¿—ä½
+    Track_Flag = 1;         // å¾ªè¿¹æ ‡å¿—ä½
+    Car_Spend = speed;      // é€Ÿåº¦å€¼
+    Control(Car_Spend, Car_Spend);  // ç”µæœºé©±åŠ¨å‡½æ•°
 	
 	  while(time >= 700)
 		{
@@ -116,30 +116,30 @@ void xCAR_Track_Time(uint8_t speed,uint16_t time)
 
 
 /*
-Ö÷³µÇ°½ø
-²ÎÊı1: ËÙ¶È
-²ÎÊı2£ºÂëÅÌÖµ
+ä¸»è½¦å‰è¿›
+å‚æ•°1: é€Ÿåº¦
+å‚æ•°2ï¼šç ç›˜å€¼
 */
 //void xCAR_Go(uint8_t speed,uint8_t temp)
 //{
-//    Roadway_mp_syn();       // ÂëÅÌÍ¬²½
-//    Stop_Flag = 0;          // ÔËĞĞ×´Ì¬±êÖ¾Î»
-//    Go_Flag = 1;            // Ç°½ø±êÖ¾Î»
-//    wheel_L_Flag = 0;       // ×ó×ª±êÖ¾Î»
-//    wheel_R_Flag = 0;       // ÓÒ×ª±êÖ¾Î»
-//    wheel_Nav_Flag = 0;     // ÂëÅÌĞı×ª±êÖ¾Î»
-//    Back_Flag = 0;          // ºóÍË±êÖ¾Î»
-//    Track_Flag = 0;         // Ñ­¼£±êÖ¾Î»
-//    temp_MP = temp;         // ÂëÅÌÖµ
-//    Car_Spend = speed;      // ËÙ¶ÈÖµ
-//    Control(Car_Spend, Car_Spend);  // µç»úÇı¶¯º¯Êı
-//    while(Stop_Flag != 0x03);       // µÈ´ıÇ°½øÍê³É     //Ê¹ÓÃÂëÅÌÅĞ¶ÏµÄÊ±ºò Stop_Flag Îª3	
+//    Roadway_mp_syn();       // ç ç›˜åŒæ­¥
+//    Stop_Flag = 0;          // è¿è¡ŒçŠ¶æ€æ ‡å¿—ä½
+//    Go_Flag = 1;            // å‰è¿›æ ‡å¿—ä½
+//    wheel_L_Flag = 0;       // å·¦è½¬æ ‡å¿—ä½
+//    wheel_R_Flag = 0;       // å³è½¬æ ‡å¿—ä½
+//    wheel_Nav_Flag = 0;     // ç ç›˜æ—‹è½¬æ ‡å¿—ä½
+//    Back_Flag = 0;          // åé€€æ ‡å¿—ä½
+//    Track_Flag = 0;         // å¾ªè¿¹æ ‡å¿—ä½
+//    temp_MP = temp;         // ç ç›˜å€¼
+//    Car_Spend = speed;      // é€Ÿåº¦å€¼
+//    Control(Car_Spend, Car_Spend);  // ç”µæœºé©±åŠ¨å‡½æ•°
+//    while(Stop_Flag != 0x03);       // ç­‰å¾…å‰è¿›å®Œæˆ     //ä½¿ç”¨ç ç›˜åˆ¤æ–­çš„æ—¶å€™ Stop_Flag ä¸º3	
 //}
 
 /*
-Ö÷³µÇ°½ø
-²ÎÊı1: ËÙ¶È
-²ÎÊı2£ºÊ±¼ä£¨µç»úÔËĞĞÊ±¼ä£©
+ä¸»è½¦å‰è¿›
+å‚æ•°1: é€Ÿåº¦
+å‚æ•°2ï¼šæ—¶é—´ï¼ˆç”µæœºè¿è¡Œæ—¶é—´ï¼‰
 */
 void xCAR_Go(uint8_t speed,uint16_t time)
 {
@@ -147,14 +147,14 @@ void xCAR_Go(uint8_t speed,uint16_t time)
 	Car_Spend = speed;
 	Control(Car_Spend,Car_Spend);
 	delay_ms(time);
-	Send_UpMotor(0,0);     //Í£³µ
+	Send_UpMotor(0,0);     //åœè½¦
 //	delay_ms(100);
 }
 
 /*
-Ö÷³µºóÍË
-²ÎÊı1: ËÙ¶È
-²ÎÊı2£ºÊ±¼ä£¨µç»úÔËĞĞÊ±¼ä£©
+ä¸»è½¦åé€€
+å‚æ•°1: é€Ÿåº¦
+å‚æ•°2ï¼šæ—¶é—´ï¼ˆç”µæœºè¿è¡Œæ—¶é—´ï¼‰
 */
 void xCAR_Back(uint8_t speed,uint16_t time)
 {
@@ -167,151 +167,151 @@ void xCAR_Back(uint8_t speed,uint16_t time)
 		time -= 700;
 	}
 	delay_ms(time);
-	Send_UpMotor(0,0);     //Í£³µ
+	Send_UpMotor(0,0);     //åœè½¦
 //	delay_ms(100);
 }
 
 
 
 /*
-Ö÷³µÑ­¼£Íê³ÉºóÔÙÍùÇ°×ßÒ»¶Î¾àÀë
-²ÎÊı£ºÎŞ
+ä¸»è½¦å¾ªè¿¹å®Œæˆåå†å¾€å‰èµ°ä¸€æ®µè·ç¦»
+å‚æ•°ï¼šæ— 
 */
 void xCAR_Track_Go(void)
 {
 	delay_ms(100);
-	Motor_Data.xCAR_Track(Motor_Data.Go_speed);   //Ñ­¼£
+	Motor_Data.xCAR_Track(Motor_Data.Go_speed);   //å¾ªè¿¹
 	delay_ms(100);
-	Motor_Data.xCAR_Go(30,400);   //Ç°½ø
+	Motor_Data.xCAR_Go(30,400);   //å‰è¿›
 	delay_ms(100);
 }
 
 /*
-Ö÷³µ×ó×ª90¶È
-²ÎÊı1£ºËÙ¶È
-²ÎÊı2£ºÑÓÊ±Ê±¼ä£¨ÓÃÀ´×÷½Ç¶È£©
+ä¸»è½¦å·¦è½¬90åº¦
+å‚æ•°1ï¼šé€Ÿåº¦
+å‚æ•°2ï¼šå»¶æ—¶æ—¶é—´ï¼ˆç”¨æ¥ä½œè§’åº¦ï¼‰
 */
 void xCAR_L90(uint8_t speed,uint16_t time)
 {
 	delay_ms(100);
 	Car_Spend = speed;
-	Control(-Car_Spend,Car_Spend);		// µç»úÇı¶¯º¯Êı
-	delay_ms(time);			    // ÑÓÊ±×÷½Ç¶È
-	Send_UpMotor(0,0);			// Í£³µ
+	Control(-Car_Spend,Car_Spend);		// ç”µæœºé©±åŠ¨å‡½æ•°
+	delay_ms(time);			    // å»¶æ—¶ä½œè§’åº¦
+	Send_UpMotor(0,0);			// åœè½¦
 	delay_ms(100);
 }
 
 /*
-Ö÷³µÓÒ×ª90¶È
-²ÎÊı1£ºËÙ¶È
-²ÎÊı2£ºÑÓÊ±Ê±¼ä£¨ÓÃÀ´×÷½Ç¶È£©
+ä¸»è½¦å³è½¬90åº¦
+å‚æ•°1ï¼šé€Ÿåº¦
+å‚æ•°2ï¼šå»¶æ—¶æ—¶é—´ï¼ˆç”¨æ¥ä½œè§’åº¦ï¼‰
 */
 void xCAR_R90(uint8_t speed,uint16_t time)
 {
 	delay_ms(100);
 	Car_Spend = speed;
-	Control(Car_Spend,-Car_Spend);		// µç»úÇı¶¯º¯Êı
-	delay_ms(time);			    // ÑÓÊ±×÷½Ç¶È
-	Send_UpMotor(0,0);			// Í£³µ
+	Control(Car_Spend,-Car_Spend);		// ç”µæœºé©±åŠ¨å‡½æ•°
+	delay_ms(time);			    // å»¶æ—¶ä½œè§’åº¦
+	Send_UpMotor(0,0);			// åœè½¦
 	delay_ms(100);
 }
 
 
 
 /*
-Ö÷³µ×ó×ª45¶È
-²ÎÊı1£ºËÙ¶È
-²ÎÊı2£ºÑÓÊ±Ê±¼ä£¨ÓÃÀ´×÷½Ç¶È£©
+ä¸»è½¦å·¦è½¬45åº¦
+å‚æ•°1ï¼šé€Ÿåº¦
+å‚æ•°2ï¼šå»¶æ—¶æ—¶é—´ï¼ˆç”¨æ¥ä½œè§’åº¦ï¼‰
 */
 void xCAR_L45(uint8_t speed,uint16_t time)
 {
 	delay_ms(100);
 	Car_Spend = speed;
-	Control(-Car_Spend,Car_Spend);		// µç»úÇı¶¯º¯Êı
-	delay_ms(time);			    // ÑÓÊ±×÷½Ç¶È
-	Send_UpMotor(0,0);			// Í£³µ
+	Control(-Car_Spend,Car_Spend);		// ç”µæœºé©±åŠ¨å‡½æ•°
+	delay_ms(time);			    // å»¶æ—¶ä½œè§’åº¦
+	Send_UpMotor(0,0);			// åœè½¦
 	delay_ms(100);	
 }
 
 /*
-Ö÷³µÓÒ×ª45¶È
-²ÎÊı1£ºËÙ¶È
-²ÎÊı2£ºÑÓÊ±Ê±¼ä£¨ÓÃÀ´×÷½Ç¶È£©
+ä¸»è½¦å³è½¬45åº¦
+å‚æ•°1ï¼šé€Ÿåº¦
+å‚æ•°2ï¼šå»¶æ—¶æ—¶é—´ï¼ˆç”¨æ¥ä½œè§’åº¦ï¼‰
 */
 void xCAR_R45(uint8_t speed,uint16_t time)
 {
 	delay_ms(100);
 	Car_Spend = speed;
-	Control(Car_Spend,-Car_Spend);		// µç»úÇı¶¯º¯Êı
-	delay_ms(time);			    // ÑÓÊ±×÷½Ç¶È
-	Send_UpMotor(0,0);			// Í£³µ
+	Control(Car_Spend,-Car_Spend);		// ç”µæœºé©±åŠ¨å‡½æ•°
+	delay_ms(time);			    // å»¶æ—¶ä½œè§’åº¦
+	Send_UpMotor(0,0);			// åœè½¦
 	delay_ms(100);	
 }
 
 
 
 /*
-Ö÷³µÌØÊâµØĞÎÑ­¼£ÅĞ¶Ï£¨Óöµ½°×ÏßÍ£³µ£©  £¨Î´Ğ´Íê£©
+ä¸»è½¦ç‰¹æ®Šåœ°å½¢å¾ªè¿¹åˆ¤æ–­ï¼ˆé‡åˆ°ç™½çº¿åœè½¦ï¼‰  ï¼ˆæœªå†™å®Œï¼‰
 */
 void xCAR_Track_Correct_White(uint8_t gd)
 {
-	if(gd == 0xFF)	// Ñ­¼£µÆÈ«ÁÁ Í£Ö¹           1ÎªÁÁ£¬0ÎªÃğ   1Îª°×Ïß£¬0ÎªºÚÏß
+	if(gd == 0xFF)	// å¾ªè¿¹ç¯å…¨äº® åœæ­¢           1ä¸ºäº®ï¼Œ0ä¸ºç­   1ä¸ºç™½çº¿ï¼Œ0ä¸ºé»‘çº¿
 	{
         Motor_Data.Track_White_Flag = 0;
 		Stop_Flag = 1;
 		Send_UpMotor(0,0); 	
 	}
-	else if(gd == 0xE7)                             //E7---1110 0111  ³µÔÚÖĞ¼ä£¬Õı³£ĞĞÊ»
+	else if(gd == 0xE7)                             //E7---1110 0111  è½¦åœ¨ä¸­é—´ï¼Œæ­£å¸¸è¡Œé©¶
 	{
 		LSpeed = Car_Spend;
 		RSpeed = Car_Spend;
 	} 
-	else if((gd == 0xF7) || (gd == 0XF3))           //F7---1111 0111   F3---1111 0011  ³µÆ«×ó
+	else if((gd == 0xF7) || (gd == 0XF3))           //F7---1111 0111   F3---1111 0011  è½¦åå·¦
 	{
 		LSpeed = Car_Spend + 20;
 		RSpeed=Car_Spend - 40;
 	} 
-	else if((gd == 0XFB) || (gd == 0XF9))           //FB---1111 1011    F9---1111 1001 ³µÆ«×ó+
+	else if((gd == 0XFB) || (gd == 0XF9))           //FB---1111 1011    F9---1111 1001 è½¦åå·¦+
 	{
 		LSpeed = Car_Spend + 40;
 		RSpeed = Car_Spend - 60;
 	} 
-	else if((gd == 0XFD) || (gd == 0XFC))           //FD---1111 1101    FC---1111 1100  ³µÆ«×ó++
+	else if((gd == 0XFD) || (gd == 0XFC))           //FD---1111 1101    FC---1111 1100  è½¦åå·¦++
 	{
 		LSpeed = Car_Spend + 60;
 		RSpeed = Car_Spend - 90;
-	} else if(gd == 0XFE)                           //FE---1111 1110    ³µÆ«×ó£¨FULL£©
+	} else if(gd == 0XFE)                           //FE---1111 1110    è½¦åå·¦ï¼ˆFULLï¼‰
 	{
 		LSpeed = Car_Spend + 80;
 		RSpeed = Car_Spend - 120;
 	} 
-	else if((gd == 0XEF) || (gd == 0XCF))           //EF---1110 1111      CF---1100 1111  ³µÆ«ÓÒ
+	else if((gd == 0XEF) || (gd == 0XCF))           //EF---1110 1111      CF---1100 1111  è½¦åå³
 	{
 		RSpeed = Car_Spend + 20;
 		LSpeed = Car_Spend - 40;
 	} 
-	else if((gd == 0XDF) || (gd == 0X9F))          //DF---1101 1111       9F---1001 1111  ³µÆ«ÓÒ+
+	else if((gd == 0XDF) || (gd == 0X9F))          //DF---1101 1111       9F---1001 1111  è½¦åå³+
 	{
 		RSpeed = Car_Spend + 40;
 		LSpeed = Car_Spend - 60;
 	} 
-	else if((gd == 0XBF) || (gd == 0X3F))          //BF---1011 1111       3F---0011 1111   ³µÆ«ÓÒ++
+	else if((gd == 0XBF) || (gd == 0X3F))          //BF---1011 1111       3F---0011 1111   è½¦åå³++
 	{
 		RSpeed = Car_Spend + 60;
 		LSpeed = Car_Spend - 90;
 	} 
-	else if(gd == 0X7F)                          //7F---0111 1111        ³µÆ«ÓÒ£¨FULL£©
+	else if(gd == 0X7F)                          //7F---0111 1111        è½¦åå³ï¼ˆFULLï¼‰
 	{
 		RSpeed = Car_Spend + 80;
 		LSpeed = Car_Spend - 120;
 	}  
-	else    //Õı³£ĞĞÊ»
+	else    //æ­£å¸¸è¡Œé©¶
 	{
 		LSpeed = Car_Spend;
 		RSpeed = Car_Spend;
 	}
-// Òª¼ÓÈëÒ»ÏÂ´úÂë£¬²ÅÄÜÊµÏÖÑ­¼£µ÷ÕûÖ÷³µÎ»ÖÃ!!!	
-	if(gd==0xFF)   //Ñ­¼£µÆÈ«ÁÁ     
+// è¦åŠ å…¥ä¸€ä¸‹ä»£ç ï¼Œæ‰èƒ½å®ç°å¾ªè¿¹è°ƒæ•´ä¸»è½¦ä½ç½®!!!	
+	if(gd==0xFF)   //å¾ªè¿¹ç¯å…¨äº®     
 	{
 		LSpeed = Car_Spend;
 		RSpeed = Car_Spend;
@@ -337,8 +337,8 @@ void xCAR_Track_Correct_White(uint8_t gd)
 }
 
 /*
-Ñ­¼£ÌØÊâµØĞÎ±êÖ¾Îï£¨Ñ­¼£µ½°×ÏßÍ£³µ£©
-²ÎÊı£º
+å¾ªè¿¹ç‰¹æ®Šåœ°å½¢æ ‡å¿—ç‰©ï¼ˆå¾ªè¿¹åˆ°ç™½çº¿åœè½¦ï¼‰
+å‚æ•°ï¼š
 */
 void xCAR_Track_White(uint8_t speed)
 {
@@ -346,6 +346,6 @@ void xCAR_Track_White(uint8_t speed)
 	Motor_Data.Track_White_Flag = 1;
 	Car_Spend = speed;
 	Control(Car_Spend,Car_Spend);
-	while(Stop_Flag != 0x01);       // µÈ´ıÑ­¼£Íê³É	
+	while(Stop_Flag != 0x01);       // ç­‰å¾…å¾ªè¿¹å®Œæˆ	
 }
 

@@ -1,7 +1,7 @@
 ..\output\usart.o: ..\HARDWARE\Core_Board\usart.c
 ..\output\usart.o: ..\CMSIS\stm32f4xx.h
 ..\output\usart.o: ..\CMSIS\core_cm4.h
-..\output\usart.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\usart.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\usart.o: ..\CMSIS\core_cmInstr.h
 ..\output\usart.o: ..\CMSIS\core_cmFunc.h
 ..\output\usart.o: ..\CMSIS\core_cmSimd.h

@@ -3,7 +3,7 @@
 ..\output\smart_tft_display.o: ..\MODULE\all_module\all_module.h
 ..\output\smart_tft_display.o: ..\CMSIS\stm32f4xx.h
 ..\output\smart_tft_display.o: ..\CMSIS\core_cm4.h
-..\output\smart_tft_display.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\smart_tft_display.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\smart_tft_display.o: ..\CMSIS\core_cmInstr.h
 ..\output\smart_tft_display.o: ..\CMSIS\core_cmFunc.h
 ..\output\smart_tft_display.o: ..\CMSIS\core_cmSimd.h
@@ -36,11 +36,11 @@
 ..\output\smart_tft_display.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\smart_tft_display.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\smart_tft_display.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\smart_tft_display.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-..\output\smart_tft_display.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-..\output\smart_tft_display.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\smart_tft_display.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\smart_tft_display.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+..\output\smart_tft_display.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\output\smart_tft_display.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\smart_tft_display.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\smart_tft_display.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\smart_tft_display.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 ..\output\smart_tft_display.o: ..\SYSTEM\sys\sys.h
 ..\output\smart_tft_display.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\smart_tft_display.o: ..\HARDWARE\Core_Board\cba.h

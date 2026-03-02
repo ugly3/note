@@ -2,7 +2,7 @@
 ..\output\main.o: ..\MODULE\all_module\all_module.h
 ..\output\main.o: ..\CMSIS\stm32f4xx.h
 ..\output\main.o: ..\CMSIS\core_cm4.h
-..\output\main.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\main.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\main.o: ..\CMSIS\core_cmInstr.h
 ..\output\main.o: ..\CMSIS\core_cmFunc.h
 ..\output\main.o: ..\CMSIS\core_cmSimd.h
@@ -35,11 +35,11 @@
 ..\output\main.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\main.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\main.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\main.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-..\output\main.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-..\output\main.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\main.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\main.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+..\output\main.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\output\main.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\main.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\main.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\main.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 ..\output\main.o: ..\SYSTEM\sys\sys.h
 ..\output\main.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\main.o: ..\HARDWARE\Core_Board\cba.h

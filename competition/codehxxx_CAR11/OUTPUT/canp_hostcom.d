@@ -1,6 +1,6 @@
 ..\output\canp_hostcom.o: ..\HARDWARE\CAN\CanP_HostCom.c
-..\output\canp_hostcom.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
-..\output\canp_hostcom.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
+..\output\canp_hostcom.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\canp_hostcom.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
 ..\output\canp_hostcom.o: ..\CMSIS\stm32f4xx.h
 ..\output\canp_hostcom.o: ..\CMSIS\core_cm4.h
 ..\output\canp_hostcom.o: ..\CMSIS\core_cmInstr.h

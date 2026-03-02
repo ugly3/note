@@ -19,28 +19,28 @@ u8 	rxd1_timer4_1ms,rxd1_timer4_flag;
 
 
 /***************************************************************
-** ¹¦ÄÜ£º     ¶¨Ê±Æ÷4ÖĞ¶Ï·şÎñº¯Êı
-** ²ÎÊı£º	  ÎŞ²ÎÊı
-** ·µ»ØÖµ£º    ÎŞ
+** åŠŸèƒ½ï¼š     å®šæ—¶å™¨4ä¸­æ–­æœåŠ¡å‡½æ•°
+** å‚æ•°ï¼š	  æ— å‚æ•°
+** è¿”å›å€¼ï¼š    æ— 
 ****************************************************************/
 void TIM4_IRQHandler(void)
 { 	    		  			    
-/*	if(TIM4->SR&0X0001)         // Òç³öÖĞ¶Ï
+/*	if(TIM4->SR&0X0001)         // æº¢å‡ºä¸­æ–­
 	{	 
 		 rxd1_timer4_1ms++;
-		 if(rxd1_timer4_1ms>5)	   // 5msÊ±¼äÒÑµ½£¬Êı¾İÖ¡½ÓÊÕÍê³É
+		 if(rxd1_timer4_1ms>5)	   // 5msæ—¶é—´å·²åˆ°ï¼Œæ•°æ®å¸§æ¥æ”¶å®Œæˆ
 		 {
 		 	  rxd1_timer4_flag=1;
-			  TIM4->CR1&=~(0x01);       // ¹ØÊ¹ÄÜ¶¨Ê±Æ÷4
+			  TIM4->CR1&=~(0x01);       // å…³ä½¿èƒ½å®šæ—¶å™¨4
 		     Wifi_Rx_flag =1;
 		 }
     }	 					   
-	TIM4->SR&=~(1<<0);          // Çå³ıÖĞ¶Ï±êÖ¾Î» 	    */
+	TIM4->SR&=~(1<<0);          // æ¸…é™¤ä¸­æ–­æ ‡å¿—ä½ 	    */
 	
 	if(TIM_GetITStatus(TIM4,TIM_FLAG_Update) == SET)
 	{
 		rxd1_timer4_1ms++;
-		 if(rxd1_timer4_1ms>5)	   // 5msÊ±¼äÒÑµ½£¬Êı¾İÖ¡½ÓÊÕÍê³É
+		 if(rxd1_timer4_1ms>5)	   // 5msæ—¶é—´å·²åˆ°ï¼Œæ•°æ®å¸§æ¥æ”¶å®Œæˆ
 		 {
 		 	  rxd1_timer4_flag=1;
 			 TIM_Cmd(TIM4,ENABLE);
@@ -51,10 +51,10 @@ void TIM4_IRQHandler(void)
 }
 
 /***************************************************************
-** ¹¦ÄÜ£º     ¶¨Ê±Æ÷4ÖĞ¶Ï³õÊ¼»¯
-** ²ÎÊı£º	  arr£º×Ô¶¯ÖØ×°Öµ
-**			  psc£ºÊ±ÖÓÔ¤·ÖÆµÊı
-** ·µ»ØÖµ£º    ÎŞ
+** åŠŸèƒ½ï¼š     å®šæ—¶å™¨4ä¸­æ–­åˆå§‹åŒ–
+** å‚æ•°ï¼š	  arrï¼šè‡ªåŠ¨é‡è£…å€¼
+**			  pscï¼šæ—¶é’Ÿé¢„åˆ†é¢‘æ•°
+** è¿”å›å€¼ï¼š    æ— 
 ****************************************************************/
 void Timer4_Init(u16 arr,u16 psc)
 {
@@ -62,53 +62,53 @@ void Timer4_Init(u16 arr,u16 psc)
 	NVIC_InitTypeDef NVIC_InitStructure;
 
 	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE); //Ê±ÖÓÊ¹ÄÜ
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE); //æ—¶é’Ÿä½¿èƒ½
 	
-	//¶¨Ê±Æ÷TIM4³õÊ¼»¯
-	TIM_TimeBaseStructure.TIM_Period = arr; //ÉèÖÃÔÚÏÂÒ»¸ö¸üĞÂÊÂ¼ş×°Èë»î¶¯µÄ×Ô¶¯ÖØ×°ÔØ¼Ä´æÆ÷ÖÜÆÚµÄÖµ	
-	TIM_TimeBaseStructure.TIM_Prescaler =psc; //ÉèÖÃÓÃÀ´×÷ÎªTIMxÊ±ÖÓÆµÂÊ³ıÊıµÄÔ¤·ÖÆµÖµ
-	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; //ÉèÖÃÊ±ÖÓ·Ö¸î:TDTS = Tck_tim
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  //TIMÏòÉÏ¼ÆÊıÄ£Ê½
-	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure); //¸ù¾İÖ¸¶¨µÄ²ÎÊı³õÊ¼»¯TIMxµÄÊ±¼ä»ùÊıµ¥Î»
+	//å®šæ—¶å™¨TIM4åˆå§‹åŒ–
+	TIM_TimeBaseStructure.TIM_Period = arr; //è®¾ç½®åœ¨ä¸‹ä¸€ä¸ªæ›´æ–°äº‹ä»¶è£…å…¥æ´»åŠ¨çš„è‡ªåŠ¨é‡è£…è½½å¯„å­˜å™¨å‘¨æœŸçš„å€¼	
+	TIM_TimeBaseStructure.TIM_Prescaler =psc; //è®¾ç½®ç”¨æ¥ä½œä¸ºTIMxæ—¶é’Ÿé¢‘ç‡é™¤æ•°çš„é¢„åˆ†é¢‘å€¼
+	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1; //è®¾ç½®æ—¶é’Ÿåˆ†å‰²:TDTS = Tck_tim
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  //TIMå‘ä¸Šè®¡æ•°æ¨¡å¼
+	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure); //æ ¹æ®æŒ‡å®šçš„å‚æ•°åˆå§‹åŒ–TIMxçš„æ—¶é—´åŸºæ•°å•ä½
  
-	TIM_ITConfig(TIM4,TIM_IT_Update,ENABLE ); //Ê¹ÄÜÖ¸¶¨µÄTIM4ÖĞ¶Ï,ÔÊĞí¸üĞÂÖĞ¶Ï
+	TIM_ITConfig(TIM4,TIM_IT_Update,ENABLE ); //ä½¿èƒ½æŒ‡å®šçš„TIM4ä¸­æ–­,å…è®¸æ›´æ–°ä¸­æ–­
 
-	//ÖĞ¶ÏÓÅÏÈ¼¶NVICÉèÖÃ
+	//ä¸­æ–­ä¼˜å…ˆçº§NVICè®¾ç½®
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-	NVIC_InitStructure.NVIC_IRQChannel = TIM4_IRQn;  //TIM4ÖĞ¶Ï
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;  //ÏÈÕ¼ÓÅÏÈ¼¶0¼¶
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;  //´ÓÓÅÏÈ¼¶3¼¶
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQÍ¨µÀ±»Ê¹ÄÜ
-	NVIC_Init(&NVIC_InitStructure);  //³õÊ¼»¯NVIC¼Ä´æÆ÷
+	NVIC_InitStructure.NVIC_IRQChannel = TIM4_IRQn;  //TIM4ä¸­æ–­
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;  //å…ˆå ä¼˜å…ˆçº§0çº§
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;  //ä»ä¼˜å…ˆçº§3çº§
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQé€šé“è¢«ä½¿èƒ½
+	NVIC_Init(&NVIC_InitStructure);  //åˆå§‹åŒ–NVICå¯„å­˜å™¨
 
-	TIM_Cmd(TIM4, ENABLE);  //Ê¹ÄÜTIMx		
+	TIM_Cmd(TIM4, ENABLE);  //ä½¿èƒ½TIMx		
 }
 
-void Wifi_data_Receive( u8 res)  // wifi Êı¾İ½ÓÊÕ´¦Àí 
+void Wifi_data_Receive( u8 res)  // wifi æ•°æ®æ¥æ”¶å¤„ç† 
 {
 	
 	rxd1_timer4_1ms=0;
 	
-	if(rxd1_timer4_flag==1) //  5msÊ±¼ä Êı¾İÖ¡ÖØĞÂ¿ªÊ¼
+	if(rxd1_timer4_flag==1) //  5msæ—¶é—´ æ•°æ®å¸§é‡æ–°å¼€å§‹
 	{
 		 rxd1_timer4_flag=0;
-		 TIM4->CR1|=0x01;     //Ê¹ÄÜ¶¨Ê±Æ÷4
+		 TIM4->CR1|=0x01;     //ä½¿èƒ½å®šæ—¶å™¨4
 		 Wifi_Rx_num =0;
 		 Wifi_Rx_Buf[Wifi_Rx_num]=res;
 	}
 	else if(Wifi_Rx_num < WIFI_MAX_NUM )	
 	{
-		  Wifi_Rx_Buf[++Wifi_Rx_num]=res;	 // ½ÓÊÕÊı¾İÖ¡
+		  Wifi_Rx_Buf[++Wifi_Rx_num]=res;	 // æ¥æ”¶æ•°æ®å¸§
 	}
 
-	else   // Êı¾İ³¬³ö×î´ó½ÓÊÕÊı¾İ³¤¶ÈÊ±£¬ÉáÈ¥²»Òª
+	else   // æ•°æ®è¶…å‡ºæœ€å¤§æ¥æ”¶æ•°æ®é•¿åº¦æ—¶ï¼Œèˆå»ä¸è¦
 	{
 			;
 	}
 
 }
 
-void Zigbee_data_Receive( u8 res)  // zigbee Êı¾İ½ÓÊÕ´¦Àí
+void Zigbee_data_Receive( u8 res)  // zigbee æ•°æ®æ¥æ”¶å¤„ç†
 {
     u8 sum;
 
@@ -117,7 +117,7 @@ void Zigbee_data_Receive( u8 res)  // zigbee Êı¾İ½ÓÊÕ´¦Àí
 	   Zigb_Rx_Buf[Zigbee_Rx_num]=res;
 	   Zigbee_Rx_num++;
 	}
-	else if (res==0x55)		// Ñ°ÕÒ°üÍ·
+	else if (res==0x55)		// å¯»æ‰¾åŒ…å¤´
 	{
 		
 	   Zigb_Rx_Buf[0]=res;
@@ -128,16 +128,16 @@ void Zigbee_data_Receive( u8 res)  // zigbee Êı¾İ½ÓÊÕ´¦Àí
    if(Zigbee_Rx_num >= Zigbee_Rx_Max)
 	{
 
-		if((Zigb_Rx_Buf[Zigbee_Rx_Max -1]==0xbb)&&(Zigbee_RxZt_flag ==0)&&(Zigb_Rx_Buf[1]!=0xfd))	 // ÅĞ¶Ï°üÎ²	//change by ygm
+		if((Zigb_Rx_Buf[Zigbee_Rx_Max -1]==0xbb)&&(Zigbee_RxZt_flag ==0)&&(Zigb_Rx_Buf[1]!=0xfd))	 // åˆ¤æ–­åŒ…å°¾	//change by ygm
 		{									  
-		    //Ö÷Ö¸ÁîÓëÈıÎ»¸±Ö¸Áî×óÇóºÍĞ£Ñé
-			//×¢Òâ£ºÔÚÇóºÍÒç³öÊ±Ó¦¸Ã¶ÔºÍ×ö256È¡Óà¡£
-			Zigbee_Rx_num=0;	  // ¼ÆÊıÇåÁã
-			Zigbee_RxZt_flag =0;  // ½ÓÊÕ×´Ì¬ÇåÁã
+		    //ä¸»æŒ‡ä»¤ä¸ä¸‰ä½å‰¯æŒ‡ä»¤å·¦æ±‚å’Œæ ¡éªŒ
+			//æ³¨æ„ï¼šåœ¨æ±‚å’Œæº¢å‡ºæ—¶åº”è¯¥å¯¹å’Œåš256å–ä½™ã€‚
+			Zigbee_Rx_num=0;	  // è®¡æ•°æ¸…é›¶
+			Zigbee_RxZt_flag =0;  // æ¥æ”¶çŠ¶æ€æ¸…é›¶
 			 sum=(Zigb_Rx_Buf[2]+Zigb_Rx_Buf[3]+Zigb_Rx_Buf[4]+Zigb_Rx_Buf[5])%256;
 			if(sum==Zigb_Rx_Buf[6])
 			{
-					Zigbee_Rx_flag =1;	//   Ö¸ÁîÑéÖ¤ÕıÈ·£¬±êÖ¾Î»ÖÃ1
+					Zigbee_Rx_flag =1;	//   æŒ‡ä»¤éªŒè¯æ­£ç¡®ï¼Œæ ‡å¿—ä½ç½®1
 			}
 			else {Zigbee_Rx_flag =0;}
 		}
@@ -146,14 +146,14 @@ void Zigbee_data_Receive( u8 res)  // zigbee Êı¾İ½ÓÊÕ´¦Àí
 			if(Zigb_Rx_Buf[2]>8)	
 			{ 
 			   Zigbee_Rx_Max = Zigb_Rx_Buf[2];
-			   Zigbee_RxZt_flag =1;  // ½ÓÊÕ×´Ì¬1  ½Ó×Å½ÓÊÕÊı¾İ
+			   Zigbee_RxZt_flag =1;  // æ¥æ”¶çŠ¶æ€1  æ¥ç€æ¥æ”¶æ•°æ®
 			 }
 			 else 			 
 			{		 
-			   Zigbee_Rx_num=0;		// ¼ÆÊıÇåÁã
+			   Zigbee_Rx_num=0;		// è®¡æ•°æ¸…é›¶
 				if(Zigb_Rx_Buf[Zigbee_Rx_Max-1]==0xbb)
 				 {
-				   Zigbee_RxZt_flag =0;  // ½ÓÊÕ×´Ì¬ÇåÁã
+				   Zigbee_RxZt_flag =0;  // æ¥æ”¶çŠ¶æ€æ¸…é›¶
 				 //  send_Flag=1;			//change by ygm
 			       Zigbee_Rx_Max =8;
 
@@ -164,15 +164,15 @@ void Zigbee_data_Receive( u8 res)  // zigbee Êı¾İ½ÓÊÕ´¦Àí
 		  }
 		else if((Zigbee_RxZt_flag ==1)&&(Zigb_Rx_Buf[Zigbee_Rx_Max -1]==0xbb))
 		{
-			Zigbee_Rx_num=0;	  // ¼ÆÊıÇåÁã
-			Zigbee_RxZt_flag =0;  // ½ÓÊÕ×´Ì¬ÇåÁã
+			Zigbee_Rx_num=0;	  // è®¡æ•°æ¸…é›¶
+			Zigbee_RxZt_flag =0;  // æ¥æ”¶çŠ¶æ€æ¸…é›¶
 		//	send_Flag=1;
 			Zigbee_Rx_Max =8;
 		    
 		}
 		
 		
-		else {Zigbee_Rx_flag =0; Zigbee_Rx_num =0;}		 //½ÓÊÕ´íÎóÖ¸Áî£¬´ò¿ª·äÃùÆ÷
+		else {Zigbee_Rx_flag =0; Zigbee_Rx_num =0;}		 //æ¥æ”¶é”™è¯¯æŒ‡ä»¤ï¼Œæ‰“å¼€èœ‚é¸£å™¨
 	}
 
 }

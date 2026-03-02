@@ -3,7 +3,7 @@
 ..\output\drive.o: ..\SYSTEM\sys\sys.h
 ..\output\drive.o: ..\CMSIS\stm32f4xx.h
 ..\output\drive.o: ..\CMSIS\core_cm4.h
-..\output\drive.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\drive.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\drive.o: ..\CMSIS\core_cmInstr.h
 ..\output\drive.o: ..\CMSIS\core_cmFunc.h
 ..\output\drive.o: ..\CMSIS\core_cmSimd.h
@@ -36,7 +36,7 @@
 ..\output\drive.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\drive.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\drive.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\drive.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
+..\output\drive.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
 ..\output\drive.o: ..\SYSTEM\delay\delay.h
 ..\output\drive.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\drive.o: ..\HARDWARE\Core_Board\cba.h
@@ -51,10 +51,10 @@
 ..\output\drive.o: ..\my_lib\roadway_check.h
 ..\output\drive.o: ..\HARDWARE\Task_Board\tba.h
 ..\output\drive.o: ..\MODULE\all_module\all_module.h
-..\output\drive.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-..\output\drive.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\drive.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\drive.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+..\output\drive.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\drive.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\drive.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\drive.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 ..\output\drive.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\drive.o: ..\HARDWARE\Task_Board\ultrasonic.h
 ..\output\drive.o: ..\HARDWARE\CAN\canp_hostcom.h

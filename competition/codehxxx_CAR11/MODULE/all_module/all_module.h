@@ -14,25 +14,25 @@
 #include "sys.h"
 
 /*Original HeadFile*/
-#include "infrared.h"  //ºìÍâ·¢Éä
-#include "cba.h"      //ºËĞÄ°å
-#include "ultrasonic.h"   //³¬Éù²¨
-#include "canp_hostcom.h" //CANÊı¾İ½»»¥
-#include "hard_can.h"     //CAN³õÊ¼»¯Óë¼ì²â
-#include "bh1750.h"       //¹âÕÕ¶È´«¸ĞÆ÷
-#include "power_check.h"  //µçÁ¿²É¼¯
-#include "can_user.h"     //CANÓÃ»§Êı¾İ¼àÊÓ£¨ºËĞÄ£©
-#include "data_base.h"    //¸÷±êÖ¾ÎïÃüÁî¼¯
-#include "roadway_check.h"  // Ö÷³µÑ­¼£ÓëÂ·¿ö¼ì²â
-#include "tba.h"           //ÈÎÎñ°å
+#include "infrared.h"  //çº¢å¤–å‘å°„
+#include "cba.h"      //æ ¸å¿ƒæ¿
+#include "ultrasonic.h"   //è¶…å£°æ³¢
+#include "canp_hostcom.h" //CANæ•°æ®äº¤äº’
+#include "hard_can.h"     //CANåˆå§‹åŒ–ä¸æ£€æµ‹
+#include "bh1750.h"       //å…‰ç…§åº¦ä¼ æ„Ÿå™¨
+#include "power_check.h"  //ç”µé‡é‡‡é›†
+#include "can_user.h"     //CANç”¨æˆ·æ•°æ®ç›‘è§†ï¼ˆæ ¸å¿ƒï¼‰
+#include "data_base.h"    //å„æ ‡å¿—ç‰©å‘½ä»¤é›†
+#include "roadway_check.h"  // ä¸»è½¦å¾ªè¿¹ä¸è·¯å†µæ£€æµ‹
+#include "tba.h"           //ä»»åŠ¡æ¿
 #include "swopt_drv.h"
-#include "uart_a72.h"      //ÖÕ¶Ë£¨Ö÷³µÎŞ£©
-#include "Can_check.h"     //CAN×ÜÏß¼ì²â
-#include "delay.h"         //ÑÓÊ±º¯Êı
-#include "Timer.h"         //¶¨Ê±Æ÷10Ê±¼äÆ¬ÂÖÑ¯
+#include "uart_a72.h"      //ç»ˆç«¯ï¼ˆä¸»è½¦æ— ï¼‰
+#include "Can_check.h"     //CANæ€»çº¿æ£€æµ‹
+#include "delay.h"         //å»¶æ—¶å‡½æ•°
+#include "Timer.h"         //å®šæ—¶å™¨10æ—¶é—´ç‰‡è½®è¯¢
 #include "Rc522.h"         //RFID
-#include "bkrc_voice.h"    //Ğ¡´´
-#include "drive.h"         //Ö÷³µµç»úÇı¶¯
+#include "bkrc_voice.h"    //å°åˆ›
+#include "drive.h"         //ä¸»è½¦ç”µæœºé©±åŠ¨
 
 
 /*My HeadFile*/
@@ -63,22 +63,22 @@ void Car_Thread(void);
 
 extern void xAuto_Run_Function(void);
 
-/**********************************************roadway_check.cµÄÈ«¾Ö±äÁ¿**********************************************/
-extern uint8_t Go_Flag;                    //Ç°½ø±êÖ¾Î»
-extern uint8_t Back_Flag;                  //ºóÍË±êÖ¾Î»
-extern uint8_t Track_Flag;                 //Ñ­¼£±êÖ¾Î»
-extern uint8_t Stop_Flag;                  //Í£Ö¹±êÖ¾Î»
-extern int LSpeed;                        //×óÂÖËÙ¶È
-extern int RSpeed;                        //ÓÒÂÖËÙ¶È
-extern int Car_Spend;                     //³µËÙ¶ÈµÄÁÙÊ±±äÁ¿
+/**********************************************roadway_check.cçš„å…¨å±€å˜é‡**********************************************/
+extern uint8_t Go_Flag;                    //å‰è¿›æ ‡å¿—ä½
+extern uint8_t Back_Flag;                  //åé€€æ ‡å¿—ä½
+extern uint8_t Track_Flag;                 //å¾ªè¿¹æ ‡å¿—ä½
+extern uint8_t Stop_Flag;                  //åœæ­¢æ ‡å¿—ä½
+extern int LSpeed;                        //å·¦è½®é€Ÿåº¦
+extern int RSpeed;                        //å³è½®é€Ÿåº¦
+extern int Car_Spend;                     //è½¦é€Ÿåº¦çš„ä¸´æ—¶å˜é‡
 extern uint16_t count;
 /*********************************************************************************************************************/
 
 
 
-/*********************************************³£ÓÃÈ«¾Öº¯Êı*********************************************************/
-extern void USART6_Send_Byte(uint8_t byte);  //´®¿Ú6·¢ËÍÒ»¸ö×Ö½Ú£¨·¢ËÍ¸øĞ¡´´Ò»¸ö×Ö½ÚÃüÁîÀ´²¥·ÅÖ¸¶¨´Ê¾ä£©
-extern void USART6_Send_Length(uint8_t *buf,uint8_t length); //´®¿Ú6·¢ËÍÒ»¸öÊı×é
+/*********************************************å¸¸ç”¨å…¨å±€å‡½æ•°*********************************************************/
+extern void USART6_Send_Byte(uint8_t byte);  //ä¸²å£6å‘é€ä¸€ä¸ªå­—èŠ‚ï¼ˆå‘é€ç»™å°åˆ›ä¸€ä¸ªå­—èŠ‚å‘½ä»¤æ¥æ’­æ”¾æŒ‡å®šè¯å¥ï¼‰
+extern void USART6_Send_Length(uint8_t *buf,uint8_t length); //ä¸²å£6å‘é€ä¸€ä¸ªæ•°ç»„
 
 
 

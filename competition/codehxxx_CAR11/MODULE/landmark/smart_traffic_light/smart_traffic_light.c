@@ -1,8 +1,8 @@
 /**
 ************************************************************************
- *    ÎÄ¼şÃû£ºsmart_traffic_light
- *      ËµÃ÷£ºÖÇÄÜ½»Í¨Â·µÆ±êÖ¾Îï
- *  Í¨ĞÅ·½Ê½£ºZigbeeÎŞÏßÍ¨ĞÅ
+ *    æ–‡ä»¶åï¼šsmart_traffic_light
+ *      è¯´æ˜ï¼šæ™ºèƒ½äº¤é€šè·¯ç¯æ ‡å¿—ç‰©
+ *  é€šä¿¡æ–¹å¼ï¼šZigbeeæ— çº¿é€šä¿¡
 ************************************************************************
 **/
 #include "smart_traffic_light.h"
@@ -19,20 +19,20 @@ Smart_Traffic_Typedef Smart_Traffic_Data =
 };
 
 /*
-ÖÇÄÜ½»Í¨µÆ±êÖ¾Îï¹Ì¶¨Ö¸Áî·¢ËÍ Ö¡Í·1,Ö¡Î²
+æ™ºèƒ½äº¤é€šç¯æ ‡å¿—ç‰©å›ºå®šæŒ‡ä»¤å‘é€ å¸§å¤´1,å¸§å°¾
 */
 uint8_t Smart_Traffic_Buf[8] = {0x55,0x00,0x00,0x00,0x00,0x00,0x00,0xBB};    
 
 
 /*
- ***************************ÇëÇó½øÈëÊ¶±ğÄ£Ê½************************************
- * Ö¡Í·1---> 0x55   * Ö¡Í·2--0x0E£¨Éè±¸A£©--0x0FÉè±¸B    * Ö¡Î²---> 0xBB
+ ***************************è¯·æ±‚è¿›å…¥è¯†åˆ«æ¨¡å¼************************************
+ * å¸§å¤´1---> 0x55   * å¸§å¤´2--0x0Eï¼ˆè®¾å¤‡Aï¼‰--0x0Fè®¾å¤‡B    * å¸§å°¾---> 0xBB
 -----------------------------------------------------------------------------------
-   Ö÷Ö¸Áî | ¸±Ö¸Áî1|  ¸±Ö¸Áî2|  ¸±Ö¸Áî3  | ËµÃ÷
-   0x01   |  0x00  |   0x00  |    0x00   | ÇëÇó½øÈëÊ¶±ğÄ£Ê½
+   ä¸»æŒ‡ä»¤ | å‰¯æŒ‡ä»¤1|  å‰¯æŒ‡ä»¤2|  å‰¯æŒ‡ä»¤3  | è¯´æ˜
+   0x01   |  0x00  |   0x00  |    0x00   | è¯·æ±‚è¿›å…¥è¯†åˆ«æ¨¡å¼
 ************************************************************************************
-²ÎÊı£ºÑ¡ÔñÉè±¸£¨A»òÕßB£©
-·µ»ØÖµ£ºÎŞ
+å‚æ•°ï¼šé€‰æ‹©è®¾å¤‡ï¼ˆAæˆ–è€…Bï¼‰
+è¿”å›å€¼ï¼šæ— 
 */
 
 void xSmart_Traffic_Ask_State(uint8_t device)
@@ -41,47 +41,47 @@ void xSmart_Traffic_Ask_State(uint8_t device)
 	uint8_t Temp[8] = {0};
 	uint8_t TimeOut = 0;
 	memcpy(Temp,Smart_Traffic_Buf,sizeof(Smart_Traffic_Buf));
-	if(device == 1)  //Éè±¸A
+	if(device == 1)  //è®¾å¤‡A
 	{
 		Temp[1] = 0x0E;
 	}
-	else if(device == 2)  //Éè±¸B
+	else if(device == 2)  //è®¾å¤‡B
 	{
 		Temp[1] = 0x0F;
 	}
 	Temp[2] = 0x01;
-	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //Ğ£ÑéºÍ
+	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //æ ¡éªŒå’Œ
 	Temp[6] = CheckSum;
-	if(device == 1)  //Éè±¸A
+	if(device == 1)  //è®¾å¤‡A
 	{
-		while(Communication_Data.Smart_Traffic_A_Recognition_State == 0)  //Èç¹ûÎ´½øÈëÊ¶±ğÄ£Ê½
+		while(Communication_Data.Smart_Traffic_A_Recognition_State == 0)  //å¦‚æœæœªè¿›å…¥è¯†åˆ«æ¨¡å¼
 		{
-			Send_ZigbeeData_To_Fifo(Temp,8);   //·¢ËÍÇëÇóÊ¶±ğÄ£Ê½
+			Send_ZigbeeData_To_Fifo(Temp,8);   //å‘é€è¯·æ±‚è¯†åˆ«æ¨¡å¼
 			delay_ms(200);
 			TimeOut++;
 			if(TimeOut > 15)
 			{
 				Communication_Data.Smart_Traffic_A_Recognition_State = 0;
-				break;    //³¬Ê±3s£¬½øÈëÊ¶±ğÄ£Ê½Ê§°Ü
+				break;    //è¶…æ—¶3sï¼Œè¿›å…¥è¯†åˆ«æ¨¡å¼å¤±è´¥
 			}
 		}
 	}
-	else if(device == 2)  //Éè±¸B
+	else if(device == 2)  //è®¾å¤‡B
 	{
-		while(Communication_Data.Smart_Traffic_B_Recognition_State == 0)  //Èç¹ûÎ´½øÈëÊ¶±ğÄ£Ê½
+		while(Communication_Data.Smart_Traffic_B_Recognition_State == 0)  //å¦‚æœæœªè¿›å…¥è¯†åˆ«æ¨¡å¼
 		{
-			Send_ZigbeeData_To_Fifo(Temp,8);   //·¢ËÍÇëÇóÊ¶±ğÄ£Ê½
+			Send_ZigbeeData_To_Fifo(Temp,8);   //å‘é€è¯·æ±‚è¯†åˆ«æ¨¡å¼
 			delay_ms(200);
 			TimeOut++;
 			if(TimeOut > 15)
 			{
 				Communication_Data.Smart_Traffic_B_Recognition_State = 0;
-				break;//³¬Ê±3s£¬½øÈëÊ¶±ğÄ£Ê½Ê§°Ü
+				break;//è¶…æ—¶3sï¼Œè¿›å…¥è¯†åˆ«æ¨¡å¼å¤±è´¥
 			}
 		}   		
 	}
-    Communication_Data.Smart_Traffic_A_Recognition_State = 0;   //Éè±¸AÊ¶±ğ±êÖ¾Î»ÇåÁã
-	Communication_Data.Smart_Traffic_B_Recognition_State = 0;	//Éè±¸BÊ¶±ğ±êÖ¾Î»ÇåÁã
+    Communication_Data.Smart_Traffic_A_Recognition_State = 0;   //è®¾å¤‡Aè¯†åˆ«æ ‡å¿—ä½æ¸…é›¶
+	Communication_Data.Smart_Traffic_B_Recognition_State = 0;	//è®¾å¤‡Bè¯†åˆ«æ ‡å¿—ä½æ¸…é›¶
 	delay_ms(500);
 	delay_ms(500);
 	Android_Data.xMainCar_Send_Android(Identify_Traffic_Light);
@@ -89,44 +89,44 @@ void xSmart_Traffic_Ask_State(uint8_t device)
 
 
 /*
- ***************************£¨ºìÉ«£¬ÂÌÉ«£¬»ÆÉ«£©Ê¶±ğ½á¹ûÇëÇóÈ·ÈÏ*******************
- * Ö¡Í·1---> 0x55   * Ö¡Í·2--0x0E£¨Éè±¸A£©--0x0FÉè±¸B    * Ö¡Î²---> 0xBB
+ ***************************ï¼ˆçº¢è‰²ï¼Œç»¿è‰²ï¼Œé»„è‰²ï¼‰è¯†åˆ«ç»“æœè¯·æ±‚ç¡®è®¤*******************
+ * å¸§å¤´1---> 0x55   * å¸§å¤´2--0x0Eï¼ˆè®¾å¤‡Aï¼‰--0x0Fè®¾å¤‡B    * å¸§å°¾---> 0xBB
 -----------------------------------------------------------------------------------
-   Ö÷Ö¸Áî | ¸±Ö¸Áî1|  ¸±Ö¸Áî2|  ¸±Ö¸Áî3  | ËµÃ÷
-   0x02   |  0x01  |   0x00  |    0x00   | ¡°ºìÉ«¡±Ê¶±ğ½á¹ûÇëÇóÈ·ÈÏ
-   0x02   |  0x02  |   0x00  |    0x00   | ¡°ÂÌÉ«¡±Ê¶±ğ½á¹ûÇëÇóÈ·ÈÏ
-   0x02   |  0x03  |   0x00  |    0x00   | ¡°»ÆÉ«¡±Ê¶±ğ½á¹ûÇëÇóÈ·ÈÏ
+   ä¸»æŒ‡ä»¤ | å‰¯æŒ‡ä»¤1|  å‰¯æŒ‡ä»¤2|  å‰¯æŒ‡ä»¤3  | è¯´æ˜
+   0x02   |  0x01  |   0x00  |    0x00   | â€œçº¢è‰²â€è¯†åˆ«ç»“æœè¯·æ±‚ç¡®è®¤
+   0x02   |  0x02  |   0x00  |    0x00   | â€œç»¿è‰²â€è¯†åˆ«ç»“æœè¯·æ±‚ç¡®è®¤
+   0x02   |  0x03  |   0x00  |    0x00   | â€œé»„è‰²â€è¯†åˆ«ç»“æœè¯·æ±‚ç¡®è®¤
 ************************************************************************************
-²ÎÊı£º
-·µ»ØÖµ£º
+å‚æ•°ï¼š
+è¿”å›å€¼ï¼š
 */
 void xSmart_Traffic_Colour_Recognition(uint8_t device,uint8_t color)
 {
 	uint8_t CheckSum;
 	uint8_t Temp[8];
 	memcpy(Temp,Smart_Traffic_Buf,sizeof(Smart_Traffic_Buf));
-	if(device == 1) //Éè±¸A
+	if(device == 1) //è®¾å¤‡A
 	{
 		Temp[1] = 0x0E;
 	}
-	else if(device == 2)  //Éè±¸B
+	else if(device == 2)  //è®¾å¤‡B
 	{
 		Temp[1] = 0x0F;
 	}
-	Temp[2] = 0x02;  //Ö÷Ö¸Áî
+	Temp[2] = 0x02;  //ä¸»æŒ‡ä»¤
 	switch(color)
 	{
-		case 1:   //ºìÉ«
+		case 1:   //çº¢è‰²
 		{
 			Temp[3] = 0x01;
 			break;
 		}
-		case 2:   //ÂÌÉ«
+		case 2:   //ç»¿è‰²
 		{
 			Temp[3] = 0x02;
 			break;
 		}
-		case 3:   //»ÆÉ«
+		case 3:   //é»„è‰²
 		{
 			Temp[3] = 0x03;
 			break;
@@ -137,20 +137,20 @@ void xSmart_Traffic_Colour_Recognition(uint8_t device,uint8_t color)
 	Temp[6] = CheckSum;
 	for(uint8_t i=0;i<3;i++)
 	{
-		Send_ZigbeeData_To_Fifo(Temp,8);   //·¢Èı´ÎÊı¾İ
+		Send_ZigbeeData_To_Fifo(Temp,8);   //å‘ä¸‰æ¬¡æ•°æ®
 		delay_ms(60);
 	}
 	
 }
 
-//   ºìµÄĞ£ÑéºÍ£º0x03
-//   ÂÌµÄĞ£ÑéºÍ£º0x04
-//   »ÆµÄĞ£ÑéºÍ£º0x05
+//   çº¢çš„æ ¡éªŒå’Œï¼š0x03
+//   ç»¿çš„æ ¡éªŒå’Œï¼š0x04
+//   é»„çš„æ ¡éªŒå’Œï¼š0x05
 
 
-// 0x05,0x0E,0x02,0x01,0x00,0x00,0x03,0xBB  ºì
-// 0x05,0x0E,0x02,0x01,0x00,0x00,0x04,0xBB  ÂÌ
-// 0x05,0x0E,0x02,0x01,0x00,0x00,0x05,0xBB  »Æ
+// 0x05,0x0E,0x02,0x01,0x00,0x00,0x03,0xBB  çº¢
+// 0x05,0x0E,0x02,0x01,0x00,0x00,0x04,0xBB  ç»¿
+// 0x05,0x0E,0x02,0x01,0x00,0x00,0x05,0xBB  é»„
 
 
 
