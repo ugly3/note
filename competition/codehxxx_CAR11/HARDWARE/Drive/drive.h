@@ -2,37 +2,37 @@
 #define __DRIVE_H_
 #include "sys.h"
 
-void Gate_Open_Zigbee(void);			// é“é—¸é—¸é—¨å¼€å¯
-void Gate_Show_Zigbee(char *Licence);	// é“é—¸ç³»ç»Ÿæ ‡å¿—ç‰©æ˜¾ç¤ºè½¦ç‰Œ
-void LED_Date_Zigbee(uint8_t One, uint8_t Two, uint8_t Three, uint8_t rank);	// LEDæ˜¾ç¤ºæ ‡å¿—ç‰©æ˜¾ç¤ºæ•°æ®
-void LED_Dis_Zigbee(uint16_t dis);		// LEDæ˜¾ç¤ºæ ‡å¿—ç‰©æ˜¾ç¤ºæµ‹è·ä¿¡æ¯
-void Rotate_show_Inf(char* src, char x, char y);	// ç«‹ä½“æ˜¾ç¤ºæ ‡å¿—ç‰©æ˜¾ç¤ºè½¦ç‰Œæ•°æ®
-void Rotate_Dis_Inf(uint16_t dis);      // ç«‹ä½“æ˜¾ç¤ºæ ‡å¿—ç‰©æ˜¾ç¤ºè·ç¦»ä¿¡æ¯
-void YY_Play_Zigbee(char *p);			// è¯­éŸ³æ’­æŠ¥æ ‡å¿—ç‰©æ’­æŠ¥æŒ‡å®šæ–‡æœ¬ä¿¡æ¯
-void YY_Comm_Zigbee(uint8_t Primary, uint8_t Secondary); // æ§åˆ¶è¯­éŸ³æ’­æŠ¥æ ‡å¿—ç‰©æ’­æŠ¥è¯­éŸ³æ§åˆ¶å‘½ä»¤
-void TFT_Test_Zigbee(char Device,uint8_t Pri,uint8_t Sec1,uint8_t Sec2,uint8_t Sec3);	// TFTæ˜¾ç¤ºæ ‡å¿—ç‰©æ§åˆ¶æŒ‡ä»¤
-void TFT_Dis_Zigbee(char Device,uint16_t dis);		// æ™ºèƒ½TFTæ˜¾ç¤ºå™¨æ˜¾ç¤ºè·ç¦»ä¿¡æ¯
-void TFT_Show_Zigbee(char Device,char *Licence);	// TFTæ˜¾ç¤ºå™¨æ˜¾ç¤ºè½¦ç‰Œ
-void Garage_Test_Zigbee(char Device,uint8_t Pri,uint8_t Sec1);		// ç«‹ä½“è½¦åº“æ ‡å¿—ç‰©æ§åˆ¶å‡½æ•°
-void Garage_Cont_Zigbee(char Device,uint8_t Floor);		// ç«‹ä½“è½¦åº“åˆ°è¾¾æŒ‡å®šè½¦åº“
-void RegtLight_Inf(uint8_t gear);		// è‡ªåŠ¨è°ƒèŠ‚å…‰ç…§å¼ºåº¦å‡½æ•°
-uint8_t Light_Inf(uint8_t gear);		// è‡ªåŠ¨è°ƒèŠ‚å…‰ç…§å¼ºåº¦å‡½æ•°
-void ETC_Get_Zigbee(void);				// ETCç³»ç»Ÿæ£€æµ‹
+void Gate_Open_Zigbee(void);			// µÀÕ¢Õ¢ÃÅ¿ªÆô
+void Gate_Show_Zigbee(char *Licence);	// µÀÕ¢ÏµÍ³±êÖ¾ÎïÏÔÊ¾³µÅÆ
+void LED_Date_Zigbee(uint8_t One, uint8_t Two, uint8_t Three, uint8_t rank);	// LEDÏÔÊ¾±êÖ¾ÎïÏÔÊ¾Êı¾İ
+void LED_Dis_Zigbee(uint16_t dis);		// LEDÏÔÊ¾±êÖ¾ÎïÏÔÊ¾²â¾àĞÅÏ¢
+void Rotate_show_Inf(char* src, char x, char y);	// Á¢ÌåÏÔÊ¾±êÖ¾ÎïÏÔÊ¾³µÅÆÊı¾İ
+void Rotate_Dis_Inf(uint16_t dis);      // Á¢ÌåÏÔÊ¾±êÖ¾ÎïÏÔÊ¾¾àÀëĞÅÏ¢
+void YY_Play_Zigbee(char *p);			// ÓïÒô²¥±¨±êÖ¾Îï²¥±¨Ö¸¶¨ÎÄ±¾ĞÅÏ¢
+void YY_Comm_Zigbee(uint8_t Primary, uint8_t Secondary); // ¿ØÖÆÓïÒô²¥±¨±êÖ¾Îï²¥±¨ÓïÒô¿ØÖÆÃüÁî
+void TFT_Test_Zigbee(char Device,uint8_t Pri,uint8_t Sec1,uint8_t Sec2,uint8_t Sec3);	// TFTÏÔÊ¾±êÖ¾Îï¿ØÖÆÖ¸Áî
+void TFT_Dis_Zigbee(char Device,uint16_t dis);		// ÖÇÄÜTFTÏÔÊ¾Æ÷ÏÔÊ¾¾àÀëĞÅÏ¢
+void TFT_Show_Zigbee(char Device,char *Licence);	// TFTÏÔÊ¾Æ÷ÏÔÊ¾³µÅÆ
+void Garage_Test_Zigbee(char Device,uint8_t Pri,uint8_t Sec1);		// Á¢Ìå³µ¿â±êÖ¾Îï¿ØÖÆº¯Êı
+void Garage_Cont_Zigbee(char Device,uint8_t Floor);		// Á¢Ìå³µ¿âµ½´ïÖ¸¶¨³µ¿â
+void RegtLight_Inf(uint8_t gear);		// ×Ô¶¯µ÷½Ú¹âÕÕÇ¿¶Èº¯Êı
+uint8_t Light_Inf(uint8_t gear);		// ×Ô¶¯µ÷½Ú¹âÕÕÇ¿¶Èº¯Êı
+void ETC_Get_Zigbee(void);				// ETCÏµÍ³¼ì²â
 void Test_Zigbee(uint8_t Head,uint8_t Pri,uint8_t Sec1,uint8_t Sec2,uint8_t Sec3);
 void Send_Android(uint8_t Pri,uint8_t Sec);
 
-void Car_Go(uint8_t speed, uint16_t temp);   // ä¸»è½¦å‰è¿› å‚æ•°ï¼šé€Ÿåº¦/ç ç›˜
-void Car_Back(uint8_t speed, uint16_t temp); // ä¸»è½¦åé€€ å‚æ•°ï¼šé€Ÿåº¦/ç ç›˜
-void Car_L45(int8_t speed, uint16_t times);		// å·¦æ—‹è½¬ å‚æ•°ï¼šæ—‹è½¬æ—¶é—´
-void Car_Left(uint8_t speed);       // ä¸»è½¦å·¦è½¬ å‚æ•°ï¼šé€Ÿåº¦
-void Car_R45(int8_t speed, uint16_t tims);		// å³æ—‹è½¬ å‚æ•°ï¼šæ—‹è½¬æ—¶é—´
-void Car_Right(uint8_t speed);       // ä¸»è½¦å³è½¬ å‚æ•°ï¼šé€Ÿåº¦
-void Car_Time_Track(uint8_t speed, uint16_t tims);		// å°è½¦å¾ªè¿¹ å‚æ•°ï¼šé€Ÿåº¦ï¼Œæ—¶é—´
-void Car_Track(uint8_t speed);   // ä¸»è½¦å¾ªè¿¹ å‚æ•°ï¼šé€Ÿåº¦
-void CarThread_Go(uint8_t speed, uint16_t temp);   // ä¸»è½¦å‰è¿› å‚æ•°ï¼šé€Ÿåº¦/ç ç›˜
-void CarThread_Track(uint8_t speed);   // ä¸»è½¦å¾ªè¿¹ å‚æ•°ï¼šé€Ÿåº¦
-void AGV_Thread(uint8_t mode);		// AGVè‡ªåŠ¨é©¾é©¶
-void AGV_GetThread(uint8_t mode);		// AGVå…¨è‡ªåŠ¨å®Œæˆæ ‡å¿—è·å–
+void Car_Go(uint8_t speed, uint16_t temp);   // Ö÷³µÇ°½ø ²ÎÊı£ºËÙ¶È/ÂëÅÌ
+void Car_Back(uint8_t speed, uint16_t temp); // Ö÷³µºóÍË ²ÎÊı£ºËÙ¶È/ÂëÅÌ
+void Car_L45(int8_t speed, uint16_t times);		// ×óĞı×ª ²ÎÊı£ºĞı×ªÊ±¼ä
+void Car_Left(uint8_t speed);       // Ö÷³µ×ó×ª ²ÎÊı£ºËÙ¶È
+void Car_R45(int8_t speed, uint16_t tims);		// ÓÒĞı×ª ²ÎÊı£ºĞı×ªÊ±¼ä
+void Car_Right(uint8_t speed);       // Ö÷³µÓÒ×ª ²ÎÊı£ºËÙ¶È
+void Car_Time_Track(uint8_t speed, uint16_t tims);		// Ğ¡³µÑ­¼£ ²ÎÊı£ºËÙ¶È£¬Ê±¼ä
+void Car_Track(uint8_t speed);   // Ö÷³µÑ­¼£ ²ÎÊı£ºËÙ¶È
+void CarThread_Go(uint8_t speed, uint16_t temp);   // Ö÷³µÇ°½ø ²ÎÊı£ºËÙ¶È/ÂëÅÌ
+void CarThread_Track(uint8_t speed);   // Ö÷³µÑ­¼£ ²ÎÊı£ºËÙ¶È
+void AGV_Thread(uint8_t mode);		// AGV×Ô¶¯¼İÊ»
+void AGV_GetThread(uint8_t mode);		// AGVÈ«×Ô¶¯Íê³É±êÖ¾»ñÈ¡
 void Track_duo_RFID(uint8_t speed,uint8_t card);
 
 

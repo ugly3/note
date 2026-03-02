@@ -11,8 +11,8 @@ typedef struct
 
 extern Wireless_Charge_Typedef Wireless_Charge_Data;
 
-#define Wireless_Charge_OPEN  1  //æ— çº¿å……ç”µå¼€å¯
-#define Wireless_Charge_CLOSE 2  //æ— çº¿å……ç”µå…³é—­
+#define Wireless_Charge_OPEN  1  //ÎŞÏß³äµç¿ªÆô
+#define Wireless_Charge_CLOSE 2  //ÎŞÏß³äµç¹Ø±Õ
 
 
 void xWireless_Charge_Open_Close(uint8_t mode);

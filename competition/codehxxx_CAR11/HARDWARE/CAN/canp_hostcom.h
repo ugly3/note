@@ -9,9 +9,9 @@
 #define GLOBAL extern
 #endif
 
-#define   TRACK_Q7    7   // å‰7ä½å¯»è¿¹æ•°æ®
-#define   TRACK_H8    8   // å8ä½å¯»è¿¹æ•°æ®
-#define   TRACK_ALL   0   // æ‰€æœ‰å¯»è¿¹æ•°æ®
+#define   TRACK_Q7    7   // Ç°7Î»Ñ°¼£Êı¾İ
+#define   TRACK_H8    8   // ºó8Î»Ñ°¼£Êı¾İ
+#define   TRACK_ALL   0   // ËùÓĞÑ°¼£Êı¾İ
 
 GLOBAL void CanP_Init(void);
 GLOBAL void CanP_FifoInit(void);

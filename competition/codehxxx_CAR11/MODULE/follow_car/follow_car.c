@@ -1,21 +1,21 @@
 /**
 ************************************************************************
- *    æ–‡ä»¶åï¼š follow_carï¼ˆä»è½¦éƒ¨åˆ†ï¼‰
- *      è¯´æ˜ï¼š ä¸»è½¦ä¸ä»è½¦ä¹‹é—´çš„é€šä¿¡
+ *    ÎÄ¼şÃû£º follow_car£¨´Ó³µ²¿·Ö£©
+ *      ËµÃ÷£º Ö÷³µÓë´Ó³µÖ®¼äµÄÍ¨ĞÅ
 ************************************************************************
 **/
 #include "follow_car.h"
 
 FollowCar_Typedef FollowCar_Data = 
 {
-	.FollowCar_Arrive_CarPort = 0,  //ä»è½¦åˆ°è¾¾è½¦åº“
-	.FollowCar_Need_Barrier_Gate = 0,    //ä»è½¦éœ€è¦æ‰“å¼€é“é—¸
-	.FollowCar_Stat_Flag = 0,    //ä»è½¦å¯åŠ¨æ ‡å¿—ä½ï¼Œç½®1å¯åŠ¨
-	.FollowCar_Finish_Flag = 0,   //ä»è½¦å®Œæˆä»»åŠ¡
-    .Follow_Send_Licence_Data_Flag = 0,//ä»è½¦å®Œæˆå‘é€è½¦ç‰Œç»™ä¸»è½¦æ ‡å¿—ä½
-    .Follow_temperature_Finish_Flag = 0,//ä»è½¦æˆåŠŸæ¥æ”¶åˆ°ä¸»è½¦å‘è¿‡å»çš„æ¸©åº¦
-	.xSend_Command_TO_FollowCar = xSend_Command_TO_FollowCar,   //ä¸ç”¨
-	.xStart_Command_To_FollowCar = &xStart_Command_To_FollowCar, //å‘é€å¯åŠ¨å‘½ä»¤ç»™ä»è½¦
+	.FollowCar_Arrive_CarPort = 0,  //´Ó³µµ½´ï³µ¿â
+	.FollowCar_Need_Barrier_Gate = 0,    //´Ó³µĞèÒª´ò¿ªµÀÕ¢
+	.FollowCar_Stat_Flag = 0,    //´Ó³µÆô¶¯±êÖ¾Î»£¬ÖÃ1Æô¶¯
+	.FollowCar_Finish_Flag = 0,   //´Ó³µÍê³ÉÈÎÎñ
+    .Follow_Send_Licence_Data_Flag = 0,//´Ó³µÍê³É·¢ËÍ³µÅÆ¸øÖ÷³µ±êÖ¾Î»
+    .Follow_temperature_Finish_Flag = 0,//´Ó³µ³É¹¦½ÓÊÕµ½Ö÷³µ·¢¹ıÈ¥µÄÎÂ¶È
+	.xSend_Command_TO_FollowCar = xSend_Command_TO_FollowCar,   //²»ÓÃ
+	.xStart_Command_To_FollowCar = &xStart_Command_To_FollowCar, //·¢ËÍÆô¶¯ÃüÁî¸ø´Ó³µ
     .XSend_temperature_To_fromcar = &XSend_temperature_To_fromcar,
     .XSend_dis_To_fromcar = &XSend_dis_To_fromcar,
 	.XSend_Licence_To_fromcar = &XSend_Licence_To_fromcar,
@@ -24,74 +24,74 @@ FollowCar_Typedef FollowCar_Data =
 };
 uint8_t Follow_Send_Licence_Data_Store[6] = {0};
 
-uint8_t fromcar_start1[8] = {0x55,0x02,0xA0,0xA0,0x00,0x00,0x00,0xBB};// ä»è½¦ç¬¬ä¸€æ¬¡å¯åŠ¨    A0
-//uint8_t fromcar_sta8rt2[8] = {0x55,0x02,0xA0,0xA1,0x00,0x00,0x00,0xBB};// ä»è½¦ç¬¬äºŒæ¬¡å¯åŠ¨
-uint8_t Send_temperature_To_fromcar[8] = {0x55,0x02,0xA0,0xA2,0x00,0x00,0x00,0xBB};//å‘é€æ¸©åº¦æ•°æ®ç»™ä»è½¦    A2     
-uint8_t Send_dis_To_fromcar[8] = {0x55,0x02,0xA0,0xA3,0x00,0x00,0x00,0xBB};//å‘é€è·ç¦»æ•°æ®ç»™ä»è½¦         A3    
-uint8_t Send_Licence_To_fromcar[8] = {0x55,0x02,0xA1,0x00,0x00,0x00,0x00,0xBB};//å‘é€å‰ä¸‰ä½è½¦ç‰Œç»™ä»è½¦      0xB8,0x54,0x2D
-uint8_t Send_Licence_To_fromcar1[8] = {0x55,0x02,0xA2,0x00,0x00,0x00,0x00,0xBB};//å‘é€åä¸‰ä½è½¦ç‰Œç»™ä»è½¦ 
-uint8_t Send_Text_To_fromcar[8] = {0x55,0x02,0xA3,0x00,0x00,0x00,0x00,0xBB};  //å‘é€æ–‡å­—æ•°æ®ç»™ä»è½¦
+uint8_t fromcar_start1[8] = {0x55,0x02,0xA0,0xA0,0x00,0x00,0x00,0xBB};// ´Ó³µµÚÒ»´ÎÆô¶¯    A0
+//uint8_t fromcar_sta8rt2[8] = {0x55,0x02,0xA0,0xA1,0x00,0x00,0x00,0xBB};// ´Ó³µµÚ¶ş´ÎÆô¶¯
+uint8_t Send_temperature_To_fromcar[8] = {0x55,0x02,0xA0,0xA2,0x00,0x00,0x00,0xBB};//·¢ËÍÎÂ¶ÈÊı¾İ¸ø´Ó³µ    A2     
+uint8_t Send_dis_To_fromcar[8] = {0x55,0x02,0xA0,0xA3,0x00,0x00,0x00,0xBB};//·¢ËÍ¾àÀëÊı¾İ¸ø´Ó³µ         A3    
+uint8_t Send_Licence_To_fromcar[8] = {0x55,0x02,0xA1,0x00,0x00,0x00,0x00,0xBB};//·¢ËÍÇ°ÈıÎ»³µÅÆ¸ø´Ó³µ      0xB8,0x54,0x2D
+uint8_t Send_Licence_To_fromcar1[8] = {0x55,0x02,0xA2,0x00,0x00,0x00,0x00,0xBB};//·¢ËÍºóÈıÎ»³µÅÆ¸ø´Ó³µ 
+uint8_t Send_Text_To_fromcar[8] = {0x55,0x02,0xA3,0x00,0x00,0x00,0x00,0xBB};  //·¢ËÍÎÄ×ÖÊı¾İ¸ø´Ó³µ
 
 
-#define MAX_LICENCE_LENGTH 8  // å‡è®¾è½¦ç‰Œé•¿åº¦ä¸è¶…è¿‡ 8 ä¸ªå­—ç¬¦
-#define MAX_TEXT_LENGTH 20  // å‡è®¾æ–‡å­—ä¿¡æ¯çš„æœ€å¤§é•¿åº¦ä¸º 20 ä¸ªå­—ç¬¦
+#define MAX_LICENCE_LENGTH 8  // ¼ÙÉè³µÅÆ³¤¶È²»³¬¹ı 8 ¸ö×Ö·û
+#define MAX_TEXT_LENGTH 20  // ¼ÙÉèÎÄ×ÖĞÅÏ¢µÄ×î´ó³¤¶ÈÎª 20 ¸ö×Ö·û
 
 
-/* ã€ä¸»è½¦å‘é€ç»™ä»è½¦çš„æ ¼å¼ã€‘
-å¸§å¤´ç¬¬ä¸€ä½--0x55 å¸§å¤´ç¬¬äºŒä½--0x02 
-ä¸»æŒ‡ä»¤--0xA0~0xA9 0xB0~0xB9 å‰¯æŒ‡ä»¤1--0xXX å‰¯æŒ‡ä»¤2--0xXX å‰¯æŒ‡ä»¤3--0xXX 
-æ ¡éªŒå’Œ 
-å¸§å°¾--0xBB
+/* ¡¾Ö÷³µ·¢ËÍ¸ø´Ó³µµÄ¸ñÊ½¡¿
+Ö¡Í·µÚÒ»Î»--0x55 Ö¡Í·µÚ¶şÎ»--0x02 
+Ö÷Ö¸Áî--0xA0~0xA9 0xB0~0xB9 ¸±Ö¸Áî1--0xXX ¸±Ö¸Áî2--0xXX ¸±Ö¸Áî3--0xXX 
+Ğ£ÑéºÍ 
+Ö¡Î²--0xBB
 */
 
-/* ã€ä¸»è½¦æ¥æ”¶ä»è½¦çš„æ ¼å¼(å³ä»è½¦å‘é€ç»™ä¸»è½¦çš„æ ¼å¼)ã€‘
-å¸§å¤´ç¬¬ä¸€ä½--0x55 å¸§å¤´ç¬¬äºŒä½--0x01 
-ä¸»æŒ‡ä»¤--0xA0~0xA9 0xB0~0xB9 å‰¯æŒ‡ä»¤1--0xXX å‰¯æŒ‡ä»¤2--0xXX å‰¯æŒ‡ä»¤3--0xXX 
-æ ¡éªŒå’Œ 
-å¸§å°¾--0xBB
+/* ¡¾Ö÷³µ½ÓÊÕ´Ó³µµÄ¸ñÊ½(¼´´Ó³µ·¢ËÍ¸øÖ÷³µµÄ¸ñÊ½)¡¿
+Ö¡Í·µÚÒ»Î»--0x55 Ö¡Í·µÚ¶şÎ»--0x01 
+Ö÷Ö¸Áî--0xA0~0xA9 0xB0~0xB9 ¸±Ö¸Áî1--0xXX ¸±Ö¸Áî2--0xXX ¸±Ö¸Áî3--0xXX 
+Ğ£ÑéºÍ 
+Ö¡Î²--0xBB
 */
 
 /*
-é™„å½•1ï¼š
-å¸§å¤´ç¬¬ä¸€ä½--0x55,å¸§å¤´ç¬¬äºŒä½--0x02(ä»è½¦)ï¼Œå¸§å°¾--0xBB  ï¼ˆä¸»è½¦å‘é€ç»™ä»è½¦ï¼Œä»è½¦æ¥æ”¶ä¸»è½¦å‘é€çš„æŒ‡ä»¤ï¼‰
+¸½Â¼1£º
+Ö¡Í·µÚÒ»Î»--0x55,Ö¡Í·µÚ¶şÎ»--0x02(´Ó³µ)£¬Ö¡Î²--0xBB  £¨Ö÷³µ·¢ËÍ¸ø´Ó³µ£¬´Ó³µ½ÓÊÕÖ÷³µ·¢ËÍµÄÖ¸Áî£©
 --------------------------------------------------------------------------------
-| ä¸»æŒ‡ä»¤ | å‰¯æŒ‡ä»¤[1] | å‰¯æŒ‡ä»¤[2] | å‰¯æŒ‡ä»¤[3] |			è¯´æ˜
+| Ö÷Ö¸Áî | ¸±Ö¸Áî[1] | ¸±Ö¸Áî[2] | ¸±Ö¸Áî[3] |			ËµÃ÷
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xA0   |	0x00     |   0x00    | 0x00      |å‘é€ä»è½¦ç¬¬ä¸€æ¬¡å¯åŠ¨å‘½ä»¤
+| 0xA0   |	0x00     |   0x00    | 0x00      |·¢ËÍ´Ó³µµÚÒ»´ÎÆô¶¯ÃüÁî
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xA0   |	0xA1     |   0x00    | 0x00      |å‘é€ä»è½¦ç¬¬äºŒæ¬¡å¯åŠ¨å‘½ä»¤
+| 0xA0   |	0xA1     |   0x00    | 0x00      |·¢ËÍ´Ó³µµÚ¶ş´ÎÆô¶¯ÃüÁî
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xA1   |	0xB8     |   0x54    | 0x2D      |å‘é€è½¦ç‰Œç»™ä»è½¦
+| 0xA1   |	0xB8     |   0x54    | 0x2D      |·¢ËÍ³µÅÆ¸ø´Ó³µ
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xA0   |	0xA2     |   0xXX    | 0xXX      |å¤‡ç”¨----å‘é€æ¸©åº¦æ•°æ®ç»™ä»è½¦
+| 0xA0   |	0xA2     |   0xXX    | 0xXX      |±¸ÓÃ----·¢ËÍÎÂ¶ÈÊı¾İ¸ø´Ó³µ
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xA0   |	0xA3     |   0xXX    | 0xXX      |å¤‡ç”¨----å‘é€è·ç¦»æ•°æ®ç»™ä»è½¦
+| 0xA0   |	0xA3     |   0xXX    | 0xXX      |±¸ÓÃ----·¢ËÍ¾àÀëÊı¾İ¸ø´Ó³µ
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xA3   |	0xXX     |   0xXX    | 0xXX      |å¤‡ç”¨----å‘é€æ–‡å­—æ•°æ®ç»™ä»è½¦
+| 0xA3   |	0xXX     |   0xXX    | 0xXX      |±¸ÓÃ----·¢ËÍÎÄ×ÖÊı¾İ¸ø´Ó³µ
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xA5   |	0xXX     |   0xXX    | 0xXX      |å¤‡ç”¨
+| 0xA5   |	0xXX     |   0xXX    | 0xXX      |±¸ÓÃ
 |--------|-----------|-----------|-----------|-----------------------------------
 --------------------------------------------------------------------------------
 */
 
 
 /*
-é™„å½•2ï¼š
-å¸§å¤´ç¬¬ä¸€ä½--0x55,å¸§å¤´ç¬¬äºŒä½--0x01(ä»è½¦)ï¼Œå¸§å°¾--0xBB   ï¼ˆä»è½¦å‘ç»™ä¸»è½¦ï¼Œä¸»è½¦æ¥æ”¶ä»è½¦å‘è¿‡æ¥çš„æŒ‡ä»¤ï¼‰
+¸½Â¼2£º
+Ö¡Í·µÚÒ»Î»--0x55,Ö¡Í·µÚ¶şÎ»--0x01(´Ó³µ)£¬Ö¡Î²--0xBB   £¨´Ó³µ·¢¸øÖ÷³µ£¬Ö÷³µ½ÓÊÕ´Ó³µ·¢¹ıÀ´µÄÖ¸Áî£©
 --------------------------------------------------------------------------------
-| ä¸»æŒ‡ä»¤ | å‰¯æŒ‡ä»¤[1] | å‰¯æŒ‡ä»¤[2] | å‰¯æŒ‡ä»¤[3] |			è¯´æ˜
+| Ö÷Ö¸Áî | ¸±Ö¸Áî[1] | ¸±Ö¸Áî[2] | ¸±Ö¸Áî[3] |			ËµÃ÷
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xA0   |	0x00     |   0x00    | 0x00      |ä»è½¦å·²ç»å¯åŠ¨
+| 0xA0   |	0x00     |   0x00    | 0x00      |´Ó³µÒÑ¾­Æô¶¯
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xAA   |	0xXX     |   0xXX    | 0xXX      |ä»è½¦å®Œæˆä»»åŠ¡
+| 0xAA   |	0xXX     |   0xXX    | 0xXX      |´Ó³µÍê³ÉÈÎÎñ
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xA2   |	0xXX     |   0xXX    | 0xXX      |ä»è½¦åˆ°è¾¾è½¦åº“åï¼Œä¸»è½¦æ§åˆ¶è½¦åº“åˆ°è¾¾æŒ‡å®šä½ç½®
+| 0xA2   |	0xXX     |   0xXX    | 0xXX      |´Ó³µµ½´ï³µ¿âºó£¬Ö÷³µ¿ØÖÆ³µ¿âµ½´ïÖ¸¶¨Î»ÖÃ
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xA3   |	0xXX     |   0xXX    | 0xXX      |å¤‡ç”¨
+| 0xA3   |	0xXX     |   0xXX    | 0xXX      |±¸ÓÃ
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xA4   |	0xXX     |   0xXX    | 0xXX      |å¤‡ç”¨
+| 0xA4   |	0xXX     |   0xXX    | 0xXX      |±¸ÓÃ
 |--------|-----------|-----------|-----------|-----------------------------------
-| 0xA5   |	0xXX     |   0xXX    | 0xXX      |å¤‡ç”¨
+| 0xA5   |	0xXX     |   0xXX    | 0xXX      |±¸ÓÃ
 |--------|-----------|-----------|-----------|-----------------------------------
 --------------------------------------------------------------------------------
 */
@@ -108,16 +108,16 @@ void xSend_Command_TO_FollowCar(uint8_t* Cmd)
 
 
 
-//å‘é€å¯åŠ¨å‘½ä»¤ç»™ä»è½¦
+//·¢ËÍÆô¶¯ÃüÁî¸ø´Ó³µ
 void xStart_Command_To_FollowCar(uint8_t* str)
 {
     uint8_t Temp[8] = {0};
-	uint8_t CheckSum;   //æ ¡éªŒå’Œ
+	uint8_t CheckSum;   //Ğ£ÑéºÍ
 	uint8_t TimeOut = 0;
     memcpy(Temp,fromcar_start1,sizeof(Send_temperature_To_fromcar));
-	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);   //è®¡ç®—æ ¡éªŒå’Œ
+	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);   //¼ÆËãĞ£ÑéºÍ
 	Temp[6] = CheckSum;
-	while(!FollowCar_Data.FollowCar_Stat_Flag)     //ä»è½¦æ²¡æœ‰å¯åŠ¨ï¼Œæ‰§è¡Œæ­¤å¾ªç¯
+	while(!FollowCar_Data.FollowCar_Stat_Flag)     //´Ó³µÃ»ÓĞÆô¶¯£¬Ö´ĞĞ´ËÑ­»·
 	{
 		FollowCar_Data.xSend_Command_TO_FollowCar(Temp);
 		TimeOut++;
@@ -133,14 +133,14 @@ void xStart_Command_To_FollowCar(uint8_t* str)
 void XSend_temperature_To_fromcar(void)
 {
     uint8_t Temp[8] = {0};
-    uint8_t CheckSum;   //æ ¡éªŒå’Œ
+    uint8_t CheckSum;   //Ğ£ÑéºÍ
 		uint8_t TimeOut = 0;
     memcpy(Temp,Send_temperature_To_fromcar,sizeof(Send_temperature_To_fromcar));
     Temp[4] = Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[1];
-	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);   //è®¡ç®—æ ¡éªŒå’Œ
+	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);   //¼ÆËãĞ£ÑéºÍ
 	Temp[6] = CheckSum;
     
-	while(!FollowCar_Data.Follow_temperature_Finish_Flag)     //ä»è½¦æ²¡æœ‰å¯åŠ¨ï¼Œæ‰§è¡Œæ­¤å¾ªç¯
+	while(!FollowCar_Data.Follow_temperature_Finish_Flag)     //´Ó³µÃ»ÓĞÆô¶¯£¬Ö´ĞĞ´ËÑ­»·
 	{
 		FollowCar_Data.xSend_Command_TO_FollowCar(Temp);
 		TimeOut++;
@@ -157,13 +157,13 @@ void XSend_temperature_To_fromcar(void)
 void XSend_dis_To_fromcar(void)
 {
 	uint8_t Temp[8] = {0};
-	uint8_t CheckSum;   //æ ¡éªŒå’Œ
+	uint8_t CheckSum;   //Ğ£ÑéºÍ
 	uint8_t TimeOut = 0;
 	memcpy(Temp,Send_dis_To_fromcar,sizeof(Send_dis_To_fromcar));
-	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);   //è®¡ç®—æ ¡éªŒå’Œ
+	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);   //¼ÆËãĞ£ÑéºÍ
 	Temp[6] = CheckSum;
     
-	while(!FollowCar_Data.Follow_dis_Finish_Flag)     //ä»è½¦æ²¡æœ‰å¯åŠ¨ï¼Œæ‰§è¡Œæ­¤å¾ªç¯
+	while(!FollowCar_Data.Follow_dis_Finish_Flag)     //´Ó³µÃ»ÓĞÆô¶¯£¬Ö´ĞĞ´ËÑ­»·
 	{
 		FollowCar_Data.xSend_Command_TO_FollowCar(Temp);
 		TimeOut++;
@@ -182,13 +182,13 @@ void XSend_Licence_To_fromcar(char*str)
 	uint8_t CheckSum;
 	uint8_t TimeOut = 0;
 	memcpy(Temp,Send_Licence_To_fromcar,sizeof(Send_Licence_To_fromcar));
-		Temp[2] = 0xA1;    //å…ˆå‘é€å‰ä¸‰ä½
+		Temp[2] = 0xA1;    //ÏÈ·¢ËÍÇ°ÈıÎ»
 		Temp[3] = TFT_License_Data_Store[0];	
 		Temp[4] = TFT_License_Data_Store[1];
 		Temp[5] = TFT_License_Data_Store[2];
-		CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //è®¡ç®—æ ¡éªŒå’Œ
+		CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //¼ÆËãĞ£ÑéºÍ
 		Temp[6] = CheckSum;
-		while(!FollowCar_Data.Follow_License_Finish_Flag)     //ä»è½¦æ²¡æœ‰å¯åŠ¨ï¼Œæ‰§è¡Œæ­¤å¾ªç¯
+		while(!FollowCar_Data.Follow_License_Finish_Flag)     //´Ó³µÃ»ÓĞÆô¶¯£¬Ö´ĞĞ´ËÑ­»·
 		{
 			FollowCar_Data.xSend_Command_TO_FollowCar(Temp);
 			TimeOut++;
@@ -198,7 +198,7 @@ void XSend_Licence_To_fromcar(char*str)
 				break;
 			}
 		}
-	FollowCar_Data.Follow_License_Finish_Flag = 0;  // é‡ç½®æ ‡å¿—ä½
+	FollowCar_Data.Follow_License_Finish_Flag = 0;  // ÖØÖÃ±êÖ¾Î»
 }
 	
 void XSend_Licence_To_fromcar1(char*str)
@@ -208,13 +208,13 @@ void XSend_Licence_To_fromcar1(char*str)
 	uint8_t TimeOut = 0;
     memcpy(Temp,Send_Licence_To_fromcar1,sizeof(Send_Licence_To_fromcar1));
 		
-		Temp[2] = 0xA2;    //å†å‘é€åä¸‰ä½
+		Temp[2] = 0xA2;    //ÔÙ·¢ËÍºóÈıÎ»
 		Temp[3] = TFT_License_Data_Store[3];
 		Temp[4] = TFT_License_Data_Store[4];
 		Temp[5] = TFT_License_Data_Store[5];
-		CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //è®¡ç®—æ ¡éªŒå’Œ
+		CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //¼ÆËãĞ£ÑéºÍ
 		Temp[6] = CheckSum;
-		while(!FollowCar_Data.Follow_License_Finish_Flag)     //ä»è½¦æ²¡æœ‰å¯åŠ¨ï¼Œæ‰§è¡Œæ­¤å¾ªç¯
+		while(!FollowCar_Data.Follow_License_Finish_Flag)     //´Ó³µÃ»ÓĞÆô¶¯£¬Ö´ĞĞ´ËÑ­»·
 		{
 			FollowCar_Data.xSend_Command_TO_FollowCar(Temp);
 			TimeOut++;
@@ -224,27 +224,27 @@ void XSend_Licence_To_fromcar1(char*str)
 				break;
 			}
 		}
-	FollowCar_Data.Follow_License_Finish_Flag = 0;  // é‡ç½®æ ‡å¿—ä½
+	FollowCar_Data.Follow_License_Finish_Flag = 0;  // ÖØÖÃ±êÖ¾Î»
 }	
 
 
 void XSend_Text_To_fromcar(const char* text)
 {
-	uint8_t Temp[30] = {0};   // ç¼“å†²åŒºï¼Œå‡è®¾åè®®å¤´å°¾åŠ ä¸Šæ–‡å­—ä¿¡æ¯ä¸è¶…è¿‡ 30 å­—èŠ‚
-	uint8_t CheckSum;   //æ ¡éªŒå’Œ
+	uint8_t Temp[30] = {0};   // »º³åÇø£¬¼ÙÉèĞ­ÒéÍ·Î²¼ÓÉÏÎÄ×ÖĞÅÏ¢²»³¬¹ı 30 ×Ö½Ú
+	uint8_t CheckSum;   //Ğ£ÑéºÍ
 	uint8_t TimeOut = 0;
-	Temp[0] = 0x55;  // å¸§å¤´1
-	Temp[1] = 0x02;  // å¸§å¤´2
+	Temp[0] = 0x55;  // Ö¡Í·1
+	Temp[1] = 0x02;  // Ö¡Í·2
 	size_t length = strlen(text);
 	if (length > MAX_TEXT_LENGTH)
 	{
-			length = MAX_TEXT_LENGTH;  // é™åˆ¶æœ€å¤§é•¿åº¦
+			length = MAX_TEXT_LENGTH;  // ÏŞÖÆ×î´ó³¤¶È
 	}
-  memcpy(Temp + 2, text, length);  // å°†æ–‡å­—ä¿¡æ¯å­˜å‚¨åœ¨ Temp[2] å¼€å§‹çš„ä½ç½®
-	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);   //è®¡ç®—æ ¡éªŒå’Œ
-	Temp[2 + length] = CheckSum;  // æ ¡éªŒå’Œå­˜å‚¨åœ¨è½¦ç‰Œä¿¡æ¯ä¹‹å
-	Temp[2 + length + 1] = 0xBB;  // å¸§å°¾
-	while(!FollowCar_Data.Follow_Text_Finish_Flag)     //ä»è½¦æ²¡æœ‰å¯åŠ¨ï¼Œæ‰§è¡Œæ­¤å¾ªç¯
+  memcpy(Temp + 2, text, length);  // ½«ÎÄ×ÖĞÅÏ¢´æ´¢ÔÚ Temp[2] ¿ªÊ¼µÄÎ»ÖÃ
+	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);   //¼ÆËãĞ£ÑéºÍ
+	Temp[2 + length] = CheckSum;  // Ğ£ÑéºÍ´æ´¢ÔÚ³µÅÆĞÅÏ¢Ö®ºó
+	Temp[2 + length + 1] = 0xBB;  // Ö¡Î²
+	while(!FollowCar_Data.Follow_Text_Finish_Flag)     //´Ó³µÃ»ÓĞÆô¶¯£¬Ö´ĞĞ´ËÑ­»·
 	{
 		FollowCar_Data.xSend_Command_TO_FollowCar(Temp);
 		TimeOut++;

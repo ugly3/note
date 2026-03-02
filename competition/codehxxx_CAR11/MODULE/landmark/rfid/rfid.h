@@ -2,7 +2,7 @@
 #define __RFID_H
 #include "all_module.h"
 
-#define RFID_Debug 0   //æ•°æ®æ˜¾ç¤ºåˆ°Debugæ˜¾ç¤ºå±
+#define RFID_Debug 0   //Êı¾İÏÔÊ¾µ½DebugÏÔÊ¾ÆÁ
 
 typedef struct
 {
@@ -17,12 +17,12 @@ typedef struct
 extern RFID_Typedef RFID_Data;
 extern uint8_t RFID_Angle_or_shizilukou_Flag;
 extern bool RFID_Track_Flag;
-extern int card2_sector_block;  //å¡2çš„åœ°å€
-extern char card2_position[3];      //å¡2åœ¨åœ°å›¾ä¸Šçš„åæ ‡
+extern int card2_sector_block;  //¿¨2µÄµØÖ·
+extern char card2_position[3];      //¿¨2ÔÚµØÍ¼ÉÏµÄ×ø±ê
 
 
 
-//è¿˜æœªå®Œæˆ
+//»¹Î´Íê³É
 extern bool RFID_Read_Flag;
 extern uint16_t Distance;
 extern bool Check_Distance;

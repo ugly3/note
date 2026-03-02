@@ -1,56 +1,56 @@
 #include "delay.h"
 #include "stm32f4xx.h"
 
-static uint8_t  fac_us=0;							//uså»¶æ—¶å€ä¹˜æ•°			   
-static uint16_t fac_ms=0;							//mså»¶æ—¶å€ä¹˜æ•°,åœ¨osä¸‹,ä»£è¡¨æ¯ä¸ªèŠ‚æ‹çš„msæ•°
+static uint8_t  fac_us=0;							//usÑÓÊ±±¶³ËÊý			   
+static uint16_t fac_ms=0;							//msÑÓÊ±±¶³ËÊý,ÔÚosÏÂ,´ú±íÃ¿¸ö½ÚÅÄµÄmsÊý
 			   
-//åˆå§‹åŒ–å»¶è¿Ÿå‡½æ•°
-//å½“ä½¿ç”¨OSçš„æ—¶å€™,æ­¤å‡½æ•°ä¼šåˆå§‹åŒ–OSçš„æ—¶é’ŸèŠ‚æ‹
-//SYSTICKçš„æ—¶é’Ÿå›ºå®šä¸ºAHBæ—¶é’Ÿçš„1/8
-//SYSCLK:ç³»ç»Ÿæ—¶é’Ÿé¢‘çŽ‡
+//³õÊ¼»¯ÑÓ³Ùº¯Êý
+//µ±Ê¹ÓÃOSµÄÊ±ºò,´Ëº¯Êý»á³õÊ¼»¯OSµÄÊ±ÖÓ½ÚÅÄ
+//SYSTICKµÄÊ±ÖÓ¹Ì¶¨ÎªAHBÊ±ÖÓµÄ1/8
+//SYSCLK:ÏµÍ³Ê±ÖÓÆµÂÊ
 void delay_init(uint8_t SYSCLK)
 {
  	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); 
-	fac_us=SYSCLK/8;						//ä¸è®ºæ˜¯å¦ä½¿ç”¨OS,fac_uséƒ½éœ€è¦ä½¿ç”¨
-	fac_ms=(uint16_t)fac_us*1000;				//éžOSä¸‹,ä»£è¡¨æ¯ä¸ªmséœ€è¦çš„systickæ—¶é’Ÿæ•°   
+	fac_us=SYSCLK/8;						//²»ÂÛÊÇ·ñÊ¹ÓÃOS,fac_us¶¼ÐèÒªÊ¹ÓÃ
+	fac_ms=(uint16_t)fac_us*1000;				//·ÇOSÏÂ,´ú±íÃ¿¸ömsÐèÒªµÄsystickÊ±ÖÓÊý   
 }								    
 
-//å»¶æ—¶nus
-//nusä¸ºè¦å»¶æ—¶çš„usæ•°.	
-//æ³¨æ„:nusçš„å€¼,ä¸è¦å¤§äºŽ798915us(æœ€å¤§å€¼å³2^24/fac_us@fac_us=21)
+//ÑÓÊ±nus
+//nusÎªÒªÑÓÊ±µÄusÊý.	
+//×¢Òâ:nusµÄÖµ,²»Òª´óÓÚ798915us(×î´óÖµ¼´2^24/fac_us@fac_us=21)
 void delay_us(u32 nus)
 {		
 	u32 temp;	    	 
-	SysTick->LOAD=nus*fac_us; 				//æ—¶é—´åŠ è½½	  		 
-	SysTick->VAL=0x00;        				//æ¸…ç©ºè®¡æ•°å™¨
-	SysTick->CTRL|=SysTick_CTRL_ENABLE_Msk ; //å¼€å§‹å€’æ•° 	 
+	SysTick->LOAD=nus*fac_us; 				//Ê±¼ä¼ÓÔØ	  		 
+	SysTick->VAL=0x00;        				//Çå¿Õ¼ÆÊýÆ÷
+	SysTick->CTRL|=SysTick_CTRL_ENABLE_Msk ; //¿ªÊ¼µ¹Êý 	 
 	do
 	{
 		temp=SysTick->CTRL;
-	}while((temp&0x01)&&!(temp&(1<<16)));	//ç­‰å¾…æ—¶é—´åˆ°è¾¾   
-	SysTick->CTRL&=~SysTick_CTRL_ENABLE_Msk; //å…³é—­è®¡æ•°å™¨
-	SysTick->VAL =0X00;       				//æ¸…ç©ºè®¡æ•°å™¨ 
+	}while((temp&0x01)&&!(temp&(1<<16)));	//µÈ´ýÊ±¼äµ½´ï   
+	SysTick->CTRL&=~SysTick_CTRL_ENABLE_Msk; //¹Ø±Õ¼ÆÊýÆ÷
+	SysTick->VAL =0X00;       				//Çå¿Õ¼ÆÊýÆ÷ 
 }
-//å»¶æ—¶nms
-//æ³¨æ„nmsçš„èŒƒå›´
-//SysTick->LOADä¸º24ä½å¯„å­˜å™¨,æ‰€ä»¥,æœ€å¤§å»¶æ—¶ä¸º:
+//ÑÓÊ±nms
+//×¢ÒânmsµÄ·¶Î§
+//SysTick->LOADÎª24Î»¼Ä´æÆ÷,ËùÒÔ,×î´óÑÓÊ±Îª:
 //nms<=0xffffff*8*1000/SYSCLK
-//SYSCLKå•ä½ä¸ºHz,nmså•ä½ä¸ºms
-//å¯¹168Mæ¡ä»¶ä¸‹,nms<=798ms 
+//SYSCLKµ¥Î»ÎªHz,nmsµ¥Î»Îªms
+//¶Ô168MÌõ¼þÏÂ,nms<=798ms 
 void delay_ms(uint16_t nms)
 {	 
 	if(nms == 0)
 		return;
 	uint32_t temp;		   
-	SysTick->LOAD=(uint32_t)nms*fac_ms;						//æ—¶é—´åŠ è½½(SysTick->LOADä¸º24bit)
-	SysTick->VAL =0x00;           						//æ¸…ç©ºè®¡æ•°å™¨
-	SysTick->CTRL|=SysTick_CTRL_ENABLE_Msk ;  //å¼€å§‹å€’æ•° 
+	SysTick->LOAD=(uint32_t)nms*fac_ms;						//Ê±¼ä¼ÓÔØ(SysTick->LOADÎª24bit)
+	SysTick->VAL =0x00;           						//Çå¿Õ¼ÆÊýÆ÷
+	SysTick->CTRL|=SysTick_CTRL_ENABLE_Msk ;  //¿ªÊ¼µ¹Êý 
 	do
 	{
 		temp=SysTick->CTRL;
-	}while((temp&0x01)&&!(temp&(1<<16)));			//ç­‰å¾…æ—¶é—´åˆ°è¾¾   
-	SysTick->CTRL&=~SysTick_CTRL_ENABLE_Msk;  //å…³é—­è®¡æ•°å™¨
-	SysTick->VAL =0X00;     		  						//æ¸…ç©ºè®¡æ•°å™¨	  	    
+	}while((temp&0x01)&&!(temp&(1<<16)));			//µÈ´ýÊ±¼äµ½´ï   
+	SysTick->CTRL&=~SysTick_CTRL_ENABLE_Msk;  //¹Ø±Õ¼ÆÊýÆ÷
+	SysTick->VAL =0X00;     		  						//Çå¿Õ¼ÆÊýÆ÷	  	    
 } 
 
 

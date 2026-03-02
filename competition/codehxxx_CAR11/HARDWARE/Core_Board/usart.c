@@ -20,19 +20,19 @@ void USART1_Configure(uint32_t  baudrate)
 	
 	//PA9-Tx
 	GPIO_TypeDefStructure.GPIO_Pin = GPIO_Pin_9|GPIO_Pin_10;
-	GPIO_TypeDefStructure.GPIO_Mode = GPIO_Mode_AF;		//å¤ç”¨åŠŸèƒ½
-	GPIO_TypeDefStructure.GPIO_OType = GPIO_OType_PP; //æ¨æŒ½è¾“å‡º
-	GPIO_TypeDefStructure.GPIO_PuPd = GPIO_PuPd_UP;   //ä¸Šæ‹‰
+	GPIO_TypeDefStructure.GPIO_Mode = GPIO_Mode_AF;		//¸´ÓÃ¹¦ÄÜ
+	GPIO_TypeDefStructure.GPIO_OType = GPIO_OType_PP; //ÍÆÍìÊä³ö
+	GPIO_TypeDefStructure.GPIO_PuPd = GPIO_PuPd_UP;   //ÉÏÀ­
 	GPIO_TypeDefStructure.GPIO_Speed = GPIO_Speed_100MHz;
 	GPIO_Init(GPIOA,&GPIO_TypeDefStructure);
 	
-	USART_TypeDefStructure.USART_BaudRate = baudrate;					       //æ³¢ç‰¹ç‡
-	USART_TypeDefStructure.USART_HardwareFlowControl = 				       //æ— ç¡¬ä»¶æ§åˆ¶æµ
+	USART_TypeDefStructure.USART_BaudRate = baudrate;					       //²¨ÌØÂÊ
+	USART_TypeDefStructure.USART_HardwareFlowControl = 				       //ÎŞÓ²¼ş¿ØÖÆÁ÷
 												 USART_HardwareFlowControl_None;  
-	USART_TypeDefStructure.USART_Mode = USART_Mode_Tx|USART_Mode_Rx; //æ¥æ”¶ä¸å‘é€æ¨¡å¼
-	USART_TypeDefStructure.USART_Parity = USART_Parity_No; 		       //æ— æ ¡éªŒä½
-	USART_TypeDefStructure.USART_StopBits = USART_StopBits_1;        //åœæ­¢ä½1
-	USART_TypeDefStructure.USART_WordLength = USART_WordLength_8b;   //æ•°æ®ä½8ä½
+	USART_TypeDefStructure.USART_Mode = USART_Mode_Tx|USART_Mode_Rx; //½ÓÊÕÓë·¢ËÍÄ£Ê½
+	USART_TypeDefStructure.USART_Parity = USART_Parity_No; 		       //ÎŞĞ£ÑéÎ»
+	USART_TypeDefStructure.USART_StopBits = USART_StopBits_1;        //Í£Ö¹Î»1
+	USART_TypeDefStructure.USART_WordLength = USART_WordLength_8b;   //Êı¾İÎ»8Î»
 	USART_Init(USART1,&USART_TypeDefStructure);
 	
 	NVIC_TypeDefStructure.NVIC_IRQChannel = USART1_IRQn;
@@ -59,19 +59,19 @@ void UART4_Configure(uint32_t  baudrate)
 	
 	//PA9-Tx
 	GPIO_TypeDefStructure.GPIO_Pin = GPIO_Pin_9|GPIO_Pin_10;
-	GPIO_TypeDefStructure.GPIO_Mode = GPIO_Mode_AF;		//å¤ç”¨åŠŸèƒ½
-	GPIO_TypeDefStructure.GPIO_OType = GPIO_OType_PP; //æ¨æŒ½è¾“å‡º
-	GPIO_TypeDefStructure.GPIO_PuPd = GPIO_PuPd_UP;   //ä¸Šæ‹‰
+	GPIO_TypeDefStructure.GPIO_Mode = GPIO_Mode_AF;		//¸´ÓÃ¹¦ÄÜ
+	GPIO_TypeDefStructure.GPIO_OType = GPIO_OType_PP; //ÍÆÍìÊä³ö
+	GPIO_TypeDefStructure.GPIO_PuPd = GPIO_PuPd_UP;   //ÉÏÀ­
 	GPIO_TypeDefStructure.GPIO_Speed = GPIO_Speed_100MHz;
 	GPIO_Init(GPIOA,&GPIO_TypeDefStructure);
 	
-	USART_TypeDefStructure.USART_BaudRate = baudrate;					       //æ³¢ç‰¹ç‡
-	USART_TypeDefStructure.USART_HardwareFlowControl = 				       //æ— ç¡¬ä»¶æ§åˆ¶æµ
+	USART_TypeDefStructure.USART_BaudRate = baudrate;					       //²¨ÌØÂÊ
+	USART_TypeDefStructure.USART_HardwareFlowControl = 				       //ÎŞÓ²¼ş¿ØÖÆÁ÷
 												 USART_HardwareFlowControl_None;  
-	USART_TypeDefStructure.USART_Mode = USART_Mode_Tx|USART_Mode_Rx; //æ¥æ”¶ä¸å‘é€æ¨¡å¼
-	USART_TypeDefStructure.USART_Parity = USART_Parity_No; 		       //æ— æ ¡éªŒä½
-	USART_TypeDefStructure.USART_StopBits = USART_StopBits_1;        //åœæ­¢ä½1
-	USART_TypeDefStructure.USART_WordLength = USART_WordLength_8b;   //æ•°æ®ä½8ä½
+	USART_TypeDefStructure.USART_Mode = USART_Mode_Tx|USART_Mode_Rx; //½ÓÊÕÓë·¢ËÍÄ£Ê½
+	USART_TypeDefStructure.USART_Parity = USART_Parity_No; 		       //ÎŞĞ£ÑéÎ»
+	USART_TypeDefStructure.USART_StopBits = USART_StopBits_1;        //Í£Ö¹Î»1
+	USART_TypeDefStructure.USART_WordLength = USART_WordLength_8b;   //Êı¾İÎ»8Î»
 	USART_Init(USART1,&USART_TypeDefStructure);
 	
 	NVIC_TypeDefStructure.NVIC_IRQChannel = USART1_IRQn;

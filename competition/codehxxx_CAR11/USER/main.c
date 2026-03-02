@@ -1,63 +1,63 @@
 #include "all_module.h"
 
 /*USER CODE BEGIN*/
-#define Shield_A72 1	//A72å±è”½é€‰æ‹©
-#define Debug_USART1 0	//ç”µè„‘ä¸²å£è°ƒè¯•é€‰æ‹©
-#define WIFI_Data_UpLoad 0	//WIFIä¸Šä¼ æ•°æ®é€‰æ‹©
+#define Shield_A72 1	//A72ÆÁ±ÎÑ¡Ôñ
+#define Debug_USART1 0	//µçÄÔ´®¿Úµ÷ÊÔÑ¡Ôñ
+#define WIFI_Data_UpLoad 0	//WIFIÉÏ´«Êı¾İÑ¡Ôñ
 /*USER CODE END*/
 
 
-/*****************å…¨å±€é™æ€å˜é‡**********************/
-static uint32_t Power_check_times;          // ç”µé‡æ£€æµ‹å‘¨æœŸ
-static uint32_t RFID_Init_Check_times;      // RFIDåˆå§‹åŒ–æ£€æµ‹æ—¶é—´å‘¨æœŸ
+/*****************È«¾Ö¾²Ì¬±äÁ¿**********************/
+static uint32_t Power_check_times;          // µçÁ¿¼ì²âÖÜÆÚ
+static uint32_t RFID_Init_Check_times;      // RFID³õÊ¼»¯¼ì²âÊ±¼äÖÜÆÚ
 #if WIFI_Data_UpLoad
-static uint32_t WIFI_Upload_data_times;     // é€šè¿‡Wifiä¸Šä¼ æ•°æ®å‘¨æœŸ
+static uint32_t WIFI_Upload_data_times;     // Í¨¹ıWifiÉÏ´«Êı¾İÖÜÆÚ
 #endif
 
-/*****************å…¨å±€å˜é‡**************************/
-uint8_t RFID_Flag = 0;          	           // RFIDæ£€æµ‹æ ‡å¿—ä½
-uint8_t coordinate;                         // éšæœºåæ ‡ç‚¹
-uint8_t run_state = 0;  //ä»»åŠ¡è¿è¡Œ
+/*****************È«¾Ö±äÁ¿**************************/
+uint8_t RFID_Flag = 0;          	           // RFID¼ì²â±êÖ¾Î»
+uint8_t coordinate;                         // Ëæ»ú×ø±êµã
+uint8_t run_state = 0;  //ÈÎÎñÔËĞĞ
 
-/****************å…¨å±€é™æ€å‡½æ•°************************/
-static void Hardware_Init(void);            // ç¡¬ä»¶åˆå§‹åŒ–å‡½æ•°
+/****************È«¾Ö¾²Ì¬º¯Êı************************/
+static void Hardware_Init(void);            // Ó²¼ş³õÊ¼»¯º¯Êı
 
 
 int main(void)
 {
-    Hardware_Init();                        // ç¡¬ä»¶åˆå§‹åŒ–
-#if WIFI_Data_UpLoad     //å°†wifiä¸Šä¼ æ•°æ®å…ˆæš‚æ—¶å±è”½    
+    Hardware_Init();                        // Ó²¼ş³õÊ¼»¯
+#if WIFI_Data_UpLoad     //½«wifiÉÏ´«Êı¾İÏÈÔİÊ±ÆÁ±Î    
     WIFI_Upload_data_times = gt_get() + 200;
-    uint16_t Light_Value = 0;               // å…‰å¼ºåº¦å€¼
-    uint16_t CodedDisk_Value = 0;           // ç ç›˜å€¼   
-    Principal_Tab[0] = 0x55;                // ä¸»è½¦æ•°æ®ä¸Šä¼ æŒ‡ä»¤åŒ…å¤´
+    uint16_t Light_Value = 0;               // ¹âÇ¿¶ÈÖµ
+    uint16_t CodedDisk_Value = 0;           // ÂëÅÌÖµ   
+    Principal_Tab[0] = 0x55;                // Ö÷³µÊı¾İÉÏ´«Ö¸Áî°üÍ·
     Principal_Tab[1] = 0xAA;
-    Follower_Tab[0] = 0x55;                 // æ™ºèƒ½è¿è¾“è½¦æ•°æ®ä¸Šä¼ æŒ‡ä»¤åŒ…å¤´
+    Follower_Tab[0] = 0x55;                 // ÖÇÄÜÔËÊä³µÊı¾İÉÏ´«Ö¸Áî°üÍ·
     Follower_Tab[1] = 0x02;
 #endif	
-	Power_check_times = gt_get() + 200;        //ç”µé‡æ£€æµ‹å‘¨æœŸ
-	RFID_Init_Check_times = gt_get() + 200;    //RFIDæ£€æµ‹åˆå§‹åŒ–å‘¨æœŸ
+	Power_check_times = gt_get() + 200;        //µçÁ¿¼ì²âÖÜÆÚ
+	RFID_Init_Check_times = gt_get() + 200;    //RFID¼ì²â³õÊ¼»¯ÖÜÆÚ
     Send_UpMotor(0, 0);
 	 
     while(1)
     {
-			Mixture_Data.xCAR_KeyRun_Function();            //æŒ‰é”®è¿è¡Œå°è½¦
+			Mixture_Data.xCAR_KeyRun_Function();            //°´¼üÔËĞĞĞ¡³µ
 			xAuto_Run_Function();			
-        if(gt_get_sub(Power_check_times) == 0)          // ç”µæ± ç”µé‡æ£€æµ‹
+        if(gt_get_sub(Power_check_times) == 0)          // µç³ØµçÁ¿¼ì²â
         {
             Power_check_times = gt_get() + 200;
             Power_Check();
         }
 #if 1
-        if(gt_get_sub(RFID_Init_Check_times) == 0)      // RFIDåˆå§‹åŒ–æ£€æµ‹
+        if(gt_get_sub(RFID_Init_Check_times) == 0)      // RFID³õÊ¼»¯¼ì²â
         {
             RFID_Init_Check_times =  gt_get() + 200;
-            if(Rc522_GetLinkFlag() == 0)             //æœªèƒ½åˆå§‹åŒ–ï¼Œæ ¸å¿ƒæ¿çš„èœ‚é¸£å™¨é—´æ–­é¸£å“
+            if(Rc522_GetLinkFlag() == 0)             //Î´ÄÜ³õÊ¼»¯£¬ºËĞÄ°åµÄ·äÃùÆ÷¼ä¶ÏÃùÏì
             {
                 Readcard_daivce_Init();
                 MP_SPK = !MP_SPK;
             }
-            else                                     //RFIDåˆå§‹åŒ–é€šè¿‡ï¼Œèœ‚é¸£å™¨å…³é—­ï¼ŒLED1é—ªçƒ
+            else                                     //RFID³õÊ¼»¯Í¨¹ı£¬·äÃùÆ÷¹Ø±Õ£¬LED1ÉÁË¸
             {
 				MP_SPK = 0;   
 				LED1 = !LED1;
@@ -65,31 +65,31 @@ int main(void)
             }
         }
 #endif
-#if WIFI_Data_UpLoad    //wifiä¸Šä¼ æ•°æ®å±è”½
-        if(gt_get_sub(WIFI_Upload_data_times) == 0)         // æ•°æ®ä¸Šä¼ 
+#if WIFI_Data_UpLoad    //wifiÉÏ´«Êı¾İÆÁ±Î
+        if(gt_get_sub(WIFI_Upload_data_times) == 0)         // Êı¾İÉÏ´«
         {
             WIFI_Upload_data_times =  gt_get() + 500;
-            if(Host_AGV_Return_Flag == RESET)               // ä¸»è½¦æ•°æ®ä¸Šä¼ 
+            if(Host_AGV_Return_Flag == RESET)               // Ö÷³µÊı¾İÉÏ´«
             {
-                Principal_Tab[2] = Stop_Flag;               // è¿è¡ŒçŠ¶æ€
-                Principal_Tab[3] = Get_tba_phsis_value();   // å…‰æ•çŠ¶æ€
+                Principal_Tab[2] = Stop_Flag;               // ÔËĞĞ×´Ì¬
+                Principal_Tab[3] = Get_tba_phsis_value();   // ¹âÃô×´Ì¬
 
-                Ultrasonic_Ranging();                       // è¶…å£°æ³¢æ•°æ®é‡‡é›†
-                Principal_Tab[4] = dis % 256;               // è¶…å£°æ³¢æ•°æ®ä½å…«ä½
-                Principal_Tab[5] = dis / 256;               // è¶…å£°æ³¢æ•°æ®é«˜å…«ä½
+                Ultrasonic_Ranging();                       // ³¬Éù²¨Êı¾İ²É¼¯
+                Principal_Tab[4] = dis % 256;               // ³¬Éù²¨Êı¾İµÍ°ËÎ»
+                Principal_Tab[5] = dis / 256;               // ³¬Éù²¨Êı¾İ¸ß°ËÎ»
 
-                Light_Value = Get_Bh_Value();               // å…‰å¼ºåº¦ä¼ æ„Ÿå™¨æ•°æ®é‡‡é›†
-                Principal_Tab[6] = Light_Value % 256;       // å…‰å¼ºåº¦æ•°æ®ä½å…«ä½
-                Principal_Tab[7] = Light_Value / 256;       // å…‰å¼ºåº¦æ•°æ®é«˜å…«ä½
+                Light_Value = Get_Bh_Value();               // ¹âÇ¿¶È´«¸ĞÆ÷Êı¾İ²É¼¯
+                Principal_Tab[6] = Light_Value % 256;       // ¹âÇ¿¶ÈÊı¾İµÍ°ËÎ»
+                Principal_Tab[7] = Light_Value / 256;       // ¹âÇ¿¶ÈÊı¾İ¸ß°ËÎ»
 
-                CodedDisk_Value = CanHost_Mp;               // ç ç›˜å€¼
+                CodedDisk_Value = CanHost_Mp;               // ÂëÅÌÖµ
                 Principal_Tab[8] = CodedDisk_Value % 256;
                 Principal_Tab[9] = CodedDisk_Value / 256;
 
-                Principal_Tab[10] = coordinate;             //è¿”å›éšæœºæ•‘æ´åæ ‡ç‚¹
-//              Send_WifiData_To_Fifo(Principal_Tab, 13);   // é€šè¿‡Wifiä¸Šä¼ ä¸»è½¦æ•°æ®
+                Principal_Tab[10] = coordinate;             //·µ»ØËæ»ú¾ÈÔ®×ø±êµã
+//              Send_WifiData_To_Fifo(Principal_Tab, 13);   // Í¨¹ıWifiÉÏ´«Ö÷³µÊı¾İ
                 UartA72_TxClear();
-                UartA72_TxAddStr(Principal_Tab, 13);        // é€šè¿‡ä¸²å£ä¸Šä¼ ä¸»è½¦æ•°æ®
+                UartA72_TxAddStr(Principal_Tab, 13);        // Í¨¹ı´®¿ÚÉÏ´«Ö÷³µÊı¾İ
                 UartA72_TxStart();
 				coordinate = 0 ;
             }
@@ -97,9 +97,9 @@ int main(void)
             {
 
                 UartA72_TxClear();
-                UartA72_TxAddStr(Follower_Tab, 50);         // é€šè¿‡ä¸²å£ä¸Šä¼ ä»è½¦æ•°æ®
+                UartA72_TxAddStr(Follower_Tab, 50);         // Í¨¹ı´®¿ÚÉÏ´«´Ó³µÊı¾İ
                 UartA72_TxStart();
-                Send_WifiData_To_Fifo(Follower_Tab, 50);    // é€šè¿‡Wifiä¸Šä¼ ä»è½¦æ•°æ®
+                Send_WifiData_To_Fifo(Follower_Tab, 50);    // Í¨¹ıWifiÉÏ´«´Ó³µÊı¾İ
                 AGV_data_Falg = 0;
             }
         }
@@ -107,38 +107,38 @@ int main(void)
     }
 }
 
-/* ç¡¬ä»¶åˆå§‹åŒ–å‡½æ•° */
-//ä¸éœ€è¦ç”¨åˆ°
+/* Ó²¼ş³õÊ¼»¯º¯Êı */
+//²»ĞèÒªÓÃµ½
 void Hardware_Init(void)
 {
-	uint8_t test_buf[8]={0};                            // åˆå§‹åŒ–å‘é€æ•°æ®
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);     // ä¸­æ–­åˆ†ç»„
-    delay_init(168);                                    // å»¶æ—¶åˆå§‹åŒ–
-    Tba_Init();                                         // ä»»åŠ¡æ¿åˆå§‹åŒ–
-    Infrared_Init();                                    // çº¢å¤–åˆå§‹åŒ–
-    Cba_Init();                                         // æ ¸å¿ƒæ¿åˆå§‹åŒ–
-    Ultrasonic_Init();                                  // è¶…å£°æ³¢åˆå§‹åŒ–
-    Hard_Can_Init();                                    // CANæ€»çº¿åˆå§‹åŒ–
-    BH1750_Configure();                                 // BH1750åˆå§‹åŒ–é…ç½®
-    BKRC_Voice_Init();									// å°åˆ›è¯­éŸ³æ¨¡å—åˆå§‹åŒ–
-    Electricity_Init();                                 // ç”µé‡æ£€æµ‹åˆå§‹åŒ–
+	uint8_t test_buf[8]={0};                            // ³õÊ¼»¯·¢ËÍÊı¾İ
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);     // ÖĞ¶Ï·Ö×é
+    delay_init(168);                                    // ÑÓÊ±³õÊ¼»¯
+    Tba_Init();                                         // ÈÎÎñ°å³õÊ¼»¯
+    Infrared_Init();                                    // ºìÍâ³õÊ¼»¯
+    Cba_Init();                                         // ºËĞÄ°å³õÊ¼»¯
+    Ultrasonic_Init();                                  // ³¬Éù²¨³õÊ¼»¯
+    Hard_Can_Init();                                    // CAN×ÜÏß³õÊ¼»¯
+    BH1750_Configure();                                 // BH1750³õÊ¼»¯ÅäÖÃ
+    BKRC_Voice_Init();									// Ğ¡´´ÓïÒôÄ£¿é³õÊ¼»¯
+    Electricity_Init();                                 // µçÁ¿¼ì²â³õÊ¼»¯
 	
-#if Shield_A72    //A72ç»ˆç«¯å±è”½
-    UartA72_Init();                                     // A72ç¡¬ä»¶ä¸²å£é€šè®¯åˆå§‹åŒ–
+#if Shield_A72    //A72ÖÕ¶ËÆÁ±Î
+    UartA72_Init();                                     // A72Ó²¼ş´®¿ÚÍ¨Ñ¶³õÊ¼»¯
 #endif
 	
-    Can_check_Init(7, 83);                              // CANæ€»çº¿ å®šæ—¶å™¨7åˆå§‹åŒ–
-    roadway_check_TimInit(999, 167);                   	// è·¯å†µæ£€æµ‹ å®šæ—¶å™¨9åˆå§‹åŒ–
-    Timer_Init(999, 167);                               // ä¸²è¡Œæ•°æ®é€šè®¯æ—¶é—´å¸§ å®šæ—¶å™¨10åˆå§‹åŒ–(1ms)
-    Readcard_daivce_Init();                         	// RFIDåˆå§‹åŒ–
+    Can_check_Init(7, 83);                              // CAN×ÜÏß ¶¨Ê±Æ÷7³õÊ¼»¯
+    roadway_check_TimInit(999, 167);                   	// Â·¿ö¼ì²â ¶¨Ê±Æ÷9³õÊ¼»¯
+    Timer_Init(999, 167);                               // ´®ĞĞÊı¾İÍ¨Ñ¶Ê±¼äÖ¡ ¶¨Ê±Æ÷10³õÊ¼»¯(1ms)
+    Readcard_daivce_Init();                         	// RFID³õÊ¼»¯
 	
 	/* Mycode BEGIN */
-    Mixture_Data.xTIM2_Init();                          // å®šæ—¶å™¨2åˆå§‹åŒ–ï¼ˆæ‰«ææŒ‰é”®ï¼‰
-	Mixture_Data.xTIM3_Init();							// å®šæ—¶å™¨3åˆå§‹åŒ–(Zigbeeã€Wifiäº¤äº’æ•°æ®å¤„ç†)
-	Ultrasonic_Ranging();                               // å…ˆè·å–ä¸€æ¬¡è¶…å£°æ³¢ï¼ˆä¿è¯åé¢çš„å‡†ç¡®åº¦ï¼‰
-	Infrared_Send(test_buf,8);                          // çº¢å¤–å‘é€æ•°æ®0
-	Send_ZigbeeData_To_Fifo(test_buf,8);                // ZigBeeå‘é€æ•°æ®0
-	Send_WifiData_To_Fifo(test_buf,8);                  // WIFIå‘é€æ•°æ®0
+    Mixture_Data.xTIM2_Init();                          // ¶¨Ê±Æ÷2³õÊ¼»¯£¨É¨Ãè°´¼ü£©
+	Mixture_Data.xTIM3_Init();							// ¶¨Ê±Æ÷3³õÊ¼»¯(Zigbee¡¢Wifi½»»¥Êı¾İ´¦Àí)
+	Ultrasonic_Ranging();                               // ÏÈ»ñÈ¡Ò»´Î³¬Éù²¨£¨±£Ö¤ºóÃæµÄ×¼È·¶È£©
+	Infrared_Send(test_buf,8);                          // ºìÍâ·¢ËÍÊı¾İ0
+	Send_ZigbeeData_To_Fifo(test_buf,8);                // ZigBee·¢ËÍÊı¾İ0
+	Send_WifiData_To_Fifo(test_buf,8);                  // WIFI·¢ËÍÊı¾İ0
 	/* Mycode END*/
 }
 

@@ -14,7 +14,7 @@ uint8_t Get_tba_phsis_value(void);
 void Set_tba_Beep(uint8_t swch);
 void Set_tba_WheelLED(uint8_t LorR,uint8_t swch);
 
-extern void Set_tba_Beep(uint8_t swch);  //浠诲姟鐗堣渹楦ｅ櫒
-extern void Set_tba_WheelLED(uint8_t LorR,uint8_t swch);   //浠诲姟鐗堣浆鍚戠伅
+extern void Set_tba_Beep(uint8_t swch);  //任务版蜂鸣器
+extern void Set_tba_WheelLED(uint8_t LorR,uint8_t swch);   //任务版转向灯
 #endif
 

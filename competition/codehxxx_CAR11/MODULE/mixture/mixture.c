@@ -1,94 +1,100 @@
 /**
 ************************************************************************
-*    æ–‡ä»¶åï¼šmixture
-*      è¯´æ˜ï¼šæ··åˆæ¨¡å—ï¼Œä¾‹å¦‚ï¼šæŒ‰é”®----è‡ªå·±åˆ›å»ºçš„å‡½æ•°
+ *    ÎÄ¼şÃû£ºmixture   
+ *      ËµÃ÷£º»ìºÏÄ£¿é£¬ÀıÈç£º°´¼ü----×Ô¼º´´½¨µÄº¯Êı
 ************************************************************************
 **/
 #include "mixture.h"
 
-// åˆå§‹åŒ–å‡½æ•°
+
+//³õÊ¼»¯º¯Êı
 Mixture_Typedef Mixture_Data =
-	{
-		.xGet_CheckSum = &xGet_CheckSum,
-		.xKey_Read = &xKey_Read,
-		.xTIM2_Init = &xTIM2_Init,
-		.xTIM3_Init = &xTIM3_Init,
-		.xCAR_KeyRun_Function = &xCAR_KeyRun_Function,
-		.xMixture_Zigbe_RecceiveError_Handler = &xMixture_Zigbe_RecceiveError_Handler,
-		.xMixture_Debug_Data = &xMixture_Debug_Data,
-		.xBubble_Sort = &xBubble_Sort,
-		.xTba_Both_Led = &xTba_Both_Led,
+{
+	.xGet_CheckSum = &xGet_CheckSum,
+	.xKey_Read = &xKey_Read,
+	.xTIM2_Init = &xTIM2_Init,
+	.xTIM3_Init = &xTIM3_Init,
+	.xCAR_KeyRun_Function = &xCAR_KeyRun_Function,
+	.xMixture_Zigbe_RecceiveError_Handler = &xMixture_Zigbe_RecceiveError_Handler,
+	.xMixture_Debug_Data = &xMixture_Debug_Data,
+	.xBubble_Sort = &xBubble_Sort,
+	.xTba_Both_Led = &xTba_Both_Led,
 };
 
-Key_Typedef KeyData =
-	{
-		.S1_value = 0x01,
-		.S2_value = 0x02,
-		.S3_value = 0x04,
-		.S4_value = 0x08,
-		.S1_Flag = 0,
-		.S2_Flag = 0,
-		.S3_Flag = 0,
-		.S4_Flag = 0,
-		.Trg = 0x00, // çŸ­æŒ‰
-		.Cont = 0x00 // é•¿æŒ‰ï¼ˆä¸€èˆ¬ä¸ç”¨ï¼‰
+
+
+Key_Typedef KeyData = 
+{
+	.S1_value = 0x01,   
+	.S2_value = 0x02,
+	.S3_value = 0x04,
+	.S4_value = 0x08,
+	.S1_Flag = 0,
+	.S2_Flag = 0,
+	.S3_Flag = 0,
+	.S4_Flag = 0,
+	.Trg = 0x00,      //¶Ì°´
+	.Cont = 0x00      //³¤°´£¨Ò»°ã²»ÓÃ£©
 };
 
-/* è®¡ç®—æ ¡éªŒå’Œ---ä¸»æŒ‡ä»¤---å‰¯æŒ‡ä»¤1---å‰¯æŒ‡ä»¤2--å‰¯æŒ‡ä»¤3 -
-å‚æ•°1ï¼šä¸»æŒ‡ä»¤
-å‚æ•°2ï¼šå‰¯æŒ‡ä»¤1
-å‚æ•°3ï¼šå‰¯æŒ‡ä»¤2
-å‚æ•°4ï¼šå‰¯æŒ‡ä»¤3
+/* ¼ÆËãĞ£ÑéºÍ---Ö÷Ö¸Áî---¸±Ö¸Áî1---¸±Ö¸Áî2--¸±Ö¸Áî3 -
+²ÎÊı1£ºÖ÷Ö¸Áî 
+²ÎÊı2£º¸±Ö¸Áî1
+²ÎÊı3£º¸±Ö¸Áî2
+²ÎÊı4£º¸±Ö¸Áî3 
 */
-uint8_t xGet_CheckSum(uint8_t main_com, uint8_t sub_com1, uint8_t sub_com2, uint8_t sub_com3)
+uint8_t xGet_CheckSum(uint8_t main_com,uint8_t sub_com1,uint8_t sub_com2,uint8_t sub_com3)
 {
 	uint8_t SUM;
-	SUM = (main_com + sub_com1 + sub_com2 + sub_com3) % 256;
+	SUM = (main_com + sub_com1 + sub_com2 + sub_com3) % 256;  
 	return SUM;
 }
 
-/* ä¸‰è¡ŒæŒ‰é”®æ³• */
-#define KEYPORT (S1) | (S2 << 1) | (S3 << 2) | (S4 << 3) | 0xF0 // æŒ‰é”®ç›¸å…³
+
+
+/* ÈıĞĞ°´¼ü·¨ */
+#define KEYPORT (S1)|(S2<<1)|(S3<<2)|(S4<<3)|0xF0   //°´¼üÏà¹Ø
 void xKey_Read(void)
 {
-	uint8_t ReadDate = (KEYPORT) ^ 0xFF; // å–å
-	KeyData.Trg = ReadDate & (ReadDate ^ KeyData.Cont);
-	KeyData.Cont = ReadDate;
-
-	/* æŒ‰é”®æ ‡å¿—ä½*/
-	if (KeyData.Trg & KeyData.S1_value) // æŒ‰é”®1
-	{
-		KeyData.S1_Flag = 1;
-	}
-	if (KeyData.Trg & KeyData.S2_value) // æŒ‰é”®2
-	{
-		KeyData.S2_Flag = 1;
-	}
-	if (KeyData.Trg & KeyData.S3_value) // æŒ‰é”®3
-	{
-		KeyData.S3_Flag = 1;
-	}
-	if (KeyData.Trg & KeyData.S4_value) // æŒ‰é”®4
-	{
-		KeyData.S4_Flag = 1;
-	}
+	uint8_t ReadDate = (KEYPORT) ^ 0xFF;  //È¡·´
+	KeyData.Trg=ReadDate & (ReadDate ^ KeyData.Cont);
+	KeyData.Cont=ReadDate;
+	
+/* °´¼ü±êÖ¾Î»*/
+	 if(KeyData.Trg & KeyData.S1_value)   //°´¼ü1
+	 {	  
+			KeyData.S1_Flag = 1;		 
+	 }
+	 if(KeyData.Trg & KeyData.S2_value)   //°´¼ü2
+	 {		 
+		 KeyData.S2_Flag = 1; 
+	 }
+	 if(KeyData.Trg & KeyData.S3_value)   //°´¼ü3
+	 {		 
+		 KeyData.S3_Flag = 1;
+	 }
+	 if(KeyData.Trg & KeyData.S4_value)   //°´¼ü4
+	 {		 
+		 KeyData.S4_Flag = 1;
+	 }	
 }
 
-/* TIM2 æ¯1msè¿›å…¥ä¸€æ¬¡ */
+
+/* TIM2 Ã¿1ms½øÈëÒ»´Î */
 void xTIM2_Init(void)
 {
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE); // å¼€å¯å®šæ—¶å™¨2çš„æ—¶é’Ÿ
-	TIM_InternalClockConfig(TIM2);						 // é€‰æ‹©å†…éƒ¨æ—¶é’Ÿ
-
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2,ENABLE);    //¿ªÆô¶¨Ê±Æ÷2µÄÊ±ÖÓ
+	TIM_InternalClockConfig(TIM2);                         //Ñ¡ÔñÄÚ²¿Ê±ÖÓ
+	
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct;
 	TIM_TimeBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_TimeBaseInitStruct.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBaseInitStruct.TIM_Period = 1000 - 1;
-	TIM_TimeBaseInitStruct.TIM_Prescaler = 168 - 1;
+	TIM_TimeBaseInitStruct.TIM_Period = 1000-1;
+	TIM_TimeBaseInitStruct.TIM_Prescaler = 168-1;
 	TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0;
-	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStruct);
-	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE); // ä½¿èƒ½æ›´æ–°ä¸­æ–­
-
+    TIM_TimeBaseInit(TIM2,&TIM_TimeBaseInitStruct);	
+	TIM_ITConfig(TIM2,TIM_IT_Update,ENABLE);      //Ê¹ÄÜ¸üĞÂÖĞ¶Ï
+	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	NVIC_InitTypeDef NVIC_InitStruct;
 	NVIC_InitStruct.NVIC_IRQChannel = TIM2_IRQn;
@@ -96,24 +102,24 @@ void xTIM2_Init(void)
 	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 2;
 	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
 	NVIC_Init(&NVIC_InitStruct);
-	TIM_Cmd(TIM2, ENABLE); // å¼€å¯å®šæ—¶å™¨2
+	TIM_Cmd(TIM2,ENABLE);           //¿ªÆô¶¨Ê±Æ÷2
 }
 
-/* TIM3 æ¯1msè¿›å…¥ä¸€æ¬¡ */
+/* TIM3 Ã¿1ms½øÈëÒ»´Î */
 void xTIM3_Init(void)
 {
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); // å¼€å¯å®šæ—¶å™¨2çš„æ—¶é’Ÿ
-	TIM_InternalClockConfig(TIM3);						 // é€‰æ‹©å†…éƒ¨æ—¶é’Ÿ
-
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);    //¿ªÆô¶¨Ê±Æ÷2µÄÊ±ÖÓ
+	TIM_InternalClockConfig(TIM3);                         //Ñ¡ÔñÄÚ²¿Ê±ÖÓ
+	
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct;
 	TIM_TimeBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;
 	TIM_TimeBaseInitStruct.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBaseInitStruct.TIM_Period = 1000 - 1;
-	TIM_TimeBaseInitStruct.TIM_Prescaler = 168 - 1;
+	TIM_TimeBaseInitStruct.TIM_Period = 1000-1;
+	TIM_TimeBaseInitStruct.TIM_Prescaler = 168-1;
 	TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0;
-	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseInitStruct);
-	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE); // ä½¿èƒ½æ›´æ–°ä¸­æ–­
-
+    TIM_TimeBaseInit(TIM3,&TIM_TimeBaseInitStruct);	
+	TIM_ITConfig(TIM3,TIM_IT_Update,ENABLE);      //Ê¹ÄÜ¸üĞÂÖĞ¶Ï
+	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	NVIC_InitTypeDef NVIC_InitStruct;
 	NVIC_InitStruct.NVIC_IRQChannel = TIM3_IRQn;
@@ -121,301 +127,328 @@ void xTIM3_Init(void)
 	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 1;
 	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 1;
 	NVIC_Init(&NVIC_InitStruct);
-	TIM_Cmd(TIM3, ENABLE); // å¼€å¯å®šæ—¶å™¨2
+	TIM_Cmd(TIM3,ENABLE);           //¿ªÆô¶¨Ê±Æ÷2
 }
 
-/*å®šæ—¶å™¨3çš„ä¸­æ–­æœåŠ¡å‡½æ•°  æ¯1msè¿›å…¥ä¸€æ¬¡*/
+/*¶¨Ê±Æ÷3µÄÖĞ¶Ï·şÎñº¯Êı  Ã¿1ms½øÈëÒ»´Î*/
 void TIM3_IRQHandler(void)
 {
 	static uint8_t zigbee_cnt2ms = 0;
 	static uint8_t wifi_cnt3ms = 0;
-	if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET)
+	if(TIM_GetITStatus(TIM3,TIM_IT_Update) == SET)
 	{
 		zigbee_cnt2ms++;
 		wifi_cnt3ms++;
-
-		if (zigbee_cnt2ms >= 2)
+        
+        if(zigbee_cnt2ms >= 2)
 		{
 			zigbee_cnt2ms = 0;
-			Can_ZigBeeRx_Check(); // Zigbeeäº¤äº’æ•°æ®å¤„ç†
+            Can_ZigBeeRx_Check();   // Zigbee½»»¥Êı¾İ´¦Àí				                            				
 		}
-
-		if (wifi_cnt3ms >= 3)
+        
+		if(wifi_cnt3ms >= 3)
 		{
 			wifi_cnt3ms = 0;
-			Can_WifiRx_Check(); // Wifiäº¤äº’æ•°æ®å¤„ç† (å®‰å“ä¸ä¸»è½¦)
+			Can_WifiRx_Check();  // Wifi½»»¥Êı¾İ´¦Àí (°²×¿ÓëÖ÷³µ)
 		}
+
 	}
-	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);
 }
 
-// ä»»åŠ¡æ¿åŒå‘ç¯æ ‡å¿—ä½
+
+//ÈÎÎñ°åË«ÏòµÆ±êÖ¾Î»
 volatile bool Tab_Both_Led_Flag = 0;
 
-/*å®šæ—¶å™¨2çš„ä¸­æ–­æœåŠ¡å‡½æ•°  æ¯1msè¿›å…¥ä¸€æ¬¡*/
+/*¶¨Ê±Æ÷2µÄÖĞ¶Ï·şÎñº¯Êı  Ã¿1ms½øÈëÒ»´Î*/
 void TIM2_IRQHandler(void)
 {
 	static uint8_t Key_cnt10ms = 0;
 	static uint8_t Led_cnt250ms = 0;
 	static uint8_t XiaoChuang_cnt50ms = 0;
-
-	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET)
+	
+	if(TIM_GetITStatus(TIM2,TIM_IT_Update) == SET)
 	{
 		Key_cnt10ms++;
-		Led_cnt250ms++;
+		Led_cnt250ms++;	
 		XiaoChuang_cnt50ms++;
 
-		if (XiaoChuang_cnt50ms >= 50)
+		if(XiaoChuang_cnt50ms >= 50)
 		{
 			XiaoChuang_cnt50ms = 0;
 			XiaoChuang_Data.xXiaoChuang_Analyze_Rx_Command();
 		}
 
-		if (Key_cnt10ms >= 10) // æŒ‰é”®æ£€æµ‹10ms
+		if(Key_cnt10ms >= 10)                           //°´¼ü¼ì²â10ms 
 		{
-			Key_cnt10ms = 0;
+			Key_cnt10ms=0;
 			Mixture_Data.xKey_Read();
 		}
-		if (Led_cnt250ms >= 250) // ledé—ªçƒ
+		if(Led_cnt250ms >= 250)                         //ledÉÁË¸
 		{
 			Led_cnt250ms = 0;
-			LED4 = !LED4;
-			if (Tab_Both_Led_Flag)
+			LED4=!LED4;
+			if(Tab_Both_Led_Flag)
 			{
-				GPIO_ToggleBits(GPIOH, GPIO_Pin_10);
-				GPIO_ToggleBits(GPIOH, GPIO_Pin_11);
+				GPIO_ToggleBits(GPIOH,GPIO_Pin_10);	
+				GPIO_ToggleBits(GPIOH,GPIO_Pin_11);	
 			}
 			else
 			{
-				GPIO_SetBits(GPIOH, GPIO_Pin_10);
-				GPIO_SetBits(GPIOH, GPIO_Pin_11);
+				GPIO_SetBits(GPIOH,GPIO_Pin_10);
+				GPIO_SetBits(GPIOH,GPIO_Pin_11);
 			}
 		}
 	}
-	TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+	TIM_ClearITPendingBit(TIM2,TIM_IT_Update);
 }
 
-// extern uint8_t  wheel_Speed;                  // å…¨å±€è½¬å¼¯é€Ÿåº¦å€¼
-// extern uint16_t wheel_Time;                  // å…¨å±€è½¬45Â°æ—¶é—´
+//extern uint8_t  wheel_Speed;                  // È«¾Ö×ªÍäËÙ¶ÈÖµ
+//extern uint16_t wheel_Time;                  // È«¾Ö×ª45¡ãÊ±¼ä
 extern uint8_t MODE1;
 extern uint8_t MODE2;
 extern uint8_t MODE3;
 extern uint8_t MODE4;
 
-char test[13] = {"å¯Œå¼ºæ°‘ä¸»"};
 
-extern uint8_t Run_State; // è¿è¡Œä½ç½®çŠ¶æ€
+char test[10] = {"¸»Ç¿ÃñÖ÷"};
+
+extern uint8_t Run_State; //ÔËĞĞÎ»ÖÃ×´Ì¬
 void xCAR_KeyRun_Function(void)
 {
-	if (KeyData.S1_Flag) // æŒ‰é”®1
+	if(KeyData.S1_Flag)        //°´¼ü1
 	{
-		KeyData.S1_Flag = 0; // ç¦æ­¢å±è”½
+		KeyData.S1_Flag = 0;   //½ûÖ¹ÆÁ±Î
 		Android_Data.xMainCar_Send_Android(Identify_TFT_Mask_Arr);
-		//		else//è’™ä¸€ä¸ª
-		//		{
-		//				Android_Data.Green_State = 0;
-		//				Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,2);
-		//				delay_ms(500);
-		//		}
+//		else//ÃÉÒ»¸ö
+//		{
+//				Android_Data.Green_State = 0;
+//				Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,2);
+//				delay_ms(500);
+//		}
+		
 	}
-	if (KeyData.S2_Flag) // æŒ‰é”®2
+	if(KeyData.S2_Flag)        //°´¼ü2
 	{
-		KeyData.S2_Flag = 0; // ç¦æ­¢å±è”½
+		KeyData.S2_Flag = 0;    //½ûÖ¹ÆÁ±Î
 		Run_State = 1;
+        
+//		unsigned int Kai_Qi_Ma[3]={0xA1,0x23,0xB4};
+//		Wireless_Charge_Data.xWireless_Charge_KaiQiMa_XiuGai(Kai_Qi_Ma);
+//		Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma);//ĞèĞŞ¸Ä¿ªÆôÂë
+			
+			//°²×¿Ê¶±ğÎÄ×ÖÍ¼Æ¬ÓëÍ¼ĞÎÑÕÉ«Í¼Æ¬
+//			Android_Data.xMainCar_Send_Android(Identify_TFT_Words_Arr);//ÎÄ×Ö
+//			Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//Í¼ĞÎ¼ÓÑÕÉ«µÄÊıÁ¿
+//			if(Android_Data.Control_TFT_Paging == 1)   //·­µ½Í¼ĞÎ
+//			{
+//				Android_Data.Control_TFT_Paging = 0;
+//				Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // ÏòÏÂ·­Ò³
+//			}			  
+//				for(uint8_t i=0;i<6;i++)
+//				{
+//					Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // ÏòÏÂ·­Ò³
+//				}
+//			if(Android_Data.TFT_Graph_CountAndColour_Flag == 1)  //Í¼ĞÎÑÕÉ«+ÊıÁ¿Ê¶±ğ³É¹¦ºó
+//			{
+//				Android_Data.TFT_Graph_CountAndColour_Flag = 0;
+//				Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(Smart_TFT_Data.Device_A,(char*)TFT_GraphAndColour_Data_Store);
+//				delay_ms(500);
+//			}
+		
+//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//³µÅÆ                                                               
+//		for(uint8_t i=0;i<8;i++)//µÈ´ı°ËÃë
+//		{
+//				delay_ms(500);
+//				delay_ms(500);
+//		}
+//		Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(2,"FF0105");//¶à¹¦ÄÜĞÅÏ¢ÏÔÊ¾±êÖ¾ÎïBÏÔÊ¾FF0105
+		
+//		Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//Í¼ĞÎ¼ÓÑÕÉ«µÄÊıÁ¿
+		
+//				Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // ÏòÏÂ·­Ò³
+//				Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,1);  // ÏòÉÏ·­Ò³
+//				Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,3);  // ×Ô¶¯·­Ò³
+//		Voice_Report_Data.xVoice_Report_Inquire_Weather_Temperatur();  //²éÑ¯ÌìÆøÎÂ¶È
+//		Voice_Report_Data.xVoice_Report_Speak_temperature();//²¥±¨ÎÂ¶È
+//		Voice_Report_Data.xVoice_Report_Speak_Weather();//²¥±¨ÌìÆø×´¿ö
+//		if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x00)
+//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("´ó·ç");
+//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x01)
+//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("¶àÔÆ");
+//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x02)
+//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("Çç");
+//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x03)
+//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("Ğ¡Ñ©");
+//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x04)
+//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("Ğ¡Óê");
+//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x05)
+//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("ÒõÌì");
+//			Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
+//			delay_ms(200);
+//			Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
+//			delay_ms(200);
+//			Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
+//			delay_ms(200);
+////			Motor_Data.xCAR_Back(25,700);
+//			Motor_Data.xCAR_Track_Time(20,800);
 
-		//		unsigned int Kai_Qi_Ma[3]={0xA1,0x23,0xB4};
-		//		Wireless_Charge_Data.xWireless_Charge_KaiQiMa_XiuGai(Kai_Qi_Ma);
-		//		Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma);//éœ€ä¿®æ”¹å¼€å¯ç 
+//			Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //·¢ËÍÇëÇóÊ¶±ğºìÂÌµÆ
+//		for(uint8_t i=0;i<3;i++) //µÈ´ı°²×¿»Ø´«
+//		{
+//			delay_ms(500);
+//			delay_ms(500);
+//		}
+//		if(Communication_Data.Smart_Traffic_A_Recognition_State == 1){
+//		if(Android_Data.Red_State == 1)
+//		{
+//				Android_Data.Red_State = 0;
+//				Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,1);//·¢ËÍ¸ø½»Í¨µÆ±êÖ¾ÎïÇëÇóÈ·ÈÏ
+//				delay_ms(500);
+//		}
+//		else if(Android_Data.Yellow_State == 1)
+//		{
+//				Android_Data.Yellow_State = 0;
+//				Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,3);
+//				delay_ms(500);
+//		}
+//		else if(Android_Data.Green_State == 1)
+//		{
+//				Android_Data.Green_State = 0;
+//				Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,2);
+//				delay_ms(500);
+//		}
+//	}
 
-		// å®‰å“è¯†åˆ«æ–‡å­—å›¾ç‰‡ä¸å›¾å½¢é¢œè‰²å›¾ç‰‡
-		//			Android_Data.xMainCar_Send_Android(Identify_TFT_Words_Arr);//æ–‡å­—
-		//			Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//å›¾å½¢åŠ é¢œè‰²çš„æ•°é‡
-		//			if(Android_Data.Control_TFT_Paging == 1)   //ç¿»åˆ°å›¾å½¢
-		//			{
-		//				Android_Data.Control_TFT_Paging = 0;
-		//				Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // å‘ä¸‹ç¿»é¡µ
-		//			}
-		//				for(uint8_t i=0;i<6;i++)
-		//				{
-		//					Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // å‘ä¸‹ç¿»é¡µ
-		//				}
-		//			if(Android_Data.TFT_Graph_CountAndColour_Flag == 1)  //å›¾å½¢é¢œè‰²+æ•°é‡è¯†åˆ«æˆåŠŸå
-		//			{
-		//				Android_Data.TFT_Graph_CountAndColour_Flag = 0;
-		//				Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(Smart_TFT_Data.Device_A,(char*)TFT_GraphAndColour_Data_Store);
-		//				delay_ms(500);
-		//			}
 
-		//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//è½¦ç‰Œ
-		//		for(uint8_t i=0;i<8;i++)//ç­‰å¾…å…«ç§’
-		//		{
-		//				delay_ms(500);
-		//				delay_ms(500);
-		//		}
-		//		Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(2,"FF0105");//å¤šåŠŸèƒ½ä¿¡æ¯æ˜¾ç¤ºæ ‡å¿—ç‰©Bæ˜¾ç¤ºFF0105
 
-		//		Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//å›¾å½¢åŠ é¢œè‰²çš„æ•°é‡
 
-		//				Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // å‘ä¸‹ç¿»é¡µ
-		//				Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,1);  // å‘ä¸Šç¿»é¡µ
-		//				Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,3);  // è‡ªåŠ¨ç¿»é¡µ
-		//		Voice_Report_Data.xVoice_Report_Inquire_Weather_Temperatur();  //æŸ¥è¯¢å¤©æ°”æ¸©åº¦
-		//		Voice_Report_Data.xVoice_Report_Speak_temperature();//æ’­æŠ¥æ¸©åº¦
-		//		Voice_Report_Data.xVoice_Report_Speak_Weather();//æ’­æŠ¥å¤©æ°”çŠ¶å†µ
-		//		if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x00)
-		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("å¤§é£");
-		//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x01)
-		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("å¤šäº‘");
-		//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x02)
-		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("æ™´");
-		//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x03)
-		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("å°é›ª");
-		//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x04)
-		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("å°é›¨");
-		//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x05)
-		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("é˜´å¤©");
-		//			Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-		//			delay_ms(200);
-		//			Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
-		//			delay_ms(200);
-		//			Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
-		//			delay_ms(200);
-		////			Motor_Data.xCAR_Back(25,700);
-		//			Motor_Data.xCAR_Track_Time(20,800);
-
-		//			Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //å‘é€è¯·æ±‚è¯†åˆ«çº¢ç»¿ç¯
-		//		for(uint8_t i=0;i<3;i++) //ç­‰å¾…å®‰å“å›ä¼ 
-		//		{
-		//			delay_ms(500);
-		//			delay_ms(500);
-		//		}
-		//		if(Communication_Data.Smart_Traffic_A_Recognition_State == 1){
-		//		if(Android_Data.Red_State == 1)
-		//		{
-		//				Android_Data.Red_State = 0;
-		//				Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,1);//å‘é€ç»™äº¤é€šç¯æ ‡å¿—ç‰©è¯·æ±‚ç¡®è®¤
-		//				delay_ms(500);
-		//		}
-		//		else if(Android_Data.Yellow_State == 1)
-		//		{
-		//				Android_Data.Yellow_State = 0;
-		//				Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,3);
-		//				delay_ms(500);
-		//		}
-		//		else if(Android_Data.Green_State == 1)
-		//		{
-		//				Android_Data.Green_State = 0;
-		//				Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,2);
-		//				delay_ms(500);
-		//		}
-		//	}
 	}
-	if (KeyData.S3_Flag) // æŒ‰é”®3
+	if(KeyData.S3_Flag)        //°´¼ü3
 	{
-		Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A, 2); // å‘ä¸‹ç¿»é¡µ
+        Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // ÏòÏÂ·­Ò³
+        
+//        Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);
+		KeyData.S3_Flag = 0;   //½ûÖ¹ÆÁ±Î
+//		Android_Data.xMainCar_Send_Android(Identify_TFT_Mask_Arr);//Ö÷³µ·¢¸ø°²×¿ÇëÇóÊ¶±ğTFT¿ÚÕÖĞĞÈË
+//		Run_State = 8;
 
-		//        Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);
-		KeyData.S3_Flag = 0; // ç¦æ­¢å±è”½
-							 //		Android_Data.xMainCar_Send_Android(Identify_TFT_Mask_Arr);//ä¸»è½¦å‘ç»™å®‰å“è¯·æ±‚è¯†åˆ«TFTå£ç½©è¡Œäºº
-							 //		Run_State = 8;
-
-		//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//è½¦ç‰Œ
-		//		Smart_TFT_Data.xSmart_TFT_Licence_Display(1,"F222F2");//å¤šåŠŸèƒ½ä¿¡æ¯æ˜¾ç¤ºæ ‡å¿—ç‰©Bæ˜¾ç¤º
-
-		//		 unsigned int Kai_Qi_Ma[3]={0xA1,0x23,0xB4};
-		//		Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//å›¾å½¢åŠ é¢œè‰²çš„æ•°é‡
-		//		for(uint8_t i=0;i<8;i++)//ç­‰å¾…å…«ç§’
-		//		{
-		//				delay_ms(500);
-		//				delay_ms(500);
-		//		}
-		//		Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,"A1D2E3");//å¤šåŠŸèƒ½ä¿¡æ¯æ˜¾ç¤ºæ ‡å¿—ç‰©Aæ˜¾ç¤ºA1D2E3ï¼ˆè¿˜ä¸è¡Œï¼‰
-		//		LED_Display_Data.xLED_Display_Data(0xF3,0xF5,0xF1,2);//LEDæ˜¾ç¤ºæ ‡å¿—ç‰©ç¬¬äºŒæ’æ˜¾ç¤ºF3F5F1
+//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//³µÅÆ 
+//		Smart_TFT_Data.xSmart_TFT_Licence_Display(1,"F222F2");//¶à¹¦ÄÜĞÅÏ¢ÏÔÊ¾±êÖ¾ÎïBÏÔÊ¾
+		
+//		 unsigned int Kai_Qi_Ma[3]={0xA1,0x23,0xB4};
+//		Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//Í¼ĞÎ¼ÓÑÕÉ«µÄÊıÁ¿
+//		for(uint8_t i=0;i<8;i++)//µÈ´ı°ËÃë
+//		{
+//				delay_ms(500);
+//				delay_ms(500);
+//		}
+//		Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,"A1D2E3");//¶à¹¦ÄÜĞÅÏ¢ÏÔÊ¾±êÖ¾ÎïAÏÔÊ¾A1D2E3£¨»¹²»ĞĞ£©
+//		LED_Display_Data.xLED_Display_Data(0xF3,0xF5,0xF1,2);//LEDÏÔÊ¾±êÖ¾ÎïµÚ¶şÅÅÏÔÊ¾F3F5F1
 	}
-	if (KeyData.S4_Flag) // æŒ‰é”®4
-	{
+	if(KeyData.S4_Flag)        //°´¼ü4
+	{	
 		KeyData.S4_Flag = 0;
-		// Three_Dim_Display_Data.xThree_Dim_Display_licence_coord("ABS123",'A',1);
-		// Three_Dim_Display_Data.xThree_Dim_Display_Distance(16);
-		//        Three_Dim_Display_Data.xThree_Dim_Display_Graph(0X01);
-		//        delay_ms(500);
-		//		delay_ms(500);
-		//        delay_ms(500);
-		//		delay_ms(500);
-		//        Three_Dim_Display_Data.xThree_Dim_Display_Colour(0X01);
-		//        delay_ms(500);
-		//		delay_ms(500);
-		//        delay_ms(500);
-		//		delay_ms(500);
-		Three_Dim_Display_Data.xThree_Dim_Display_Traffic_Caution(0X01);
+        //Three_Dim_Display_Data.xThree_Dim_Display_licence_coord("ABS123",'A',1);
+       //Three_Dim_Display_Data.xThree_Dim_Display_Distance(16);
+//        Three_Dim_Display_Data.xThree_Dim_Display_Graph(0X01);
+//        delay_ms(500);
+//		delay_ms(500);
+//        delay_ms(500);
+//		delay_ms(500);
+//        Three_Dim_Display_Data.xThree_Dim_Display_Colour(0X01);
+//        delay_ms(500);
+//		delay_ms(500);
+//        delay_ms(500);
+//		delay_ms(500);
+        Three_Dim_Display_Data.xThree_Dim_Display_Traffic_Caution(0X01);
+        delay_ms(500);
 		delay_ms(500);
+        Three_Dim_Display_Data.xThree_Dim_Display_RGB_Colour(0xff,0x00,0x00);
+        delay_ms(500);
 		delay_ms(500);
-		Three_Dim_Display_Data.xThree_Dim_Display_RGB_Colour(0xff, 0x00, 0x00);
-		delay_ms(500);
-		delay_ms(500);
-		uint8_t str[] = "ä½ å¥½";
-		Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add(str);
-		//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//è¯†åˆ«è“è‰²è½¦ç‰Œå’Œè½¦å‹
+        uint8_t str[] = "ÄãºÃ";
+        Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add(str);
+//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//Ê¶±ğÀ¶É«³µÅÆºÍ³µĞÍ
 	}
 }
 
-// å¼€å¯ / å…³é—­ä»»åŠ¡æ¿ä¸­çš„åŒå‘ç¯
+//¿ªÆô / ¹Ø±ÕÈÎÎñ°åÖĞµÄË«ÏòµÆ
 void xTba_Both_Led(uint8_t swch)
 {
-	switch (swch)
+	switch(swch)
 	{
-	case SET:
-		Tab_Both_Led_Flag = 1;
-		break;
-	case RESET:
-		Tab_Both_Led_Flag = 0;
-		break;
-	default:
-		break;
+		case SET: Tab_Both_Led_Flag = 1;break;
+		case RESET: Tab_Both_Led_Flag = 0;break;
+		default:break;
 	}
 }
 
-// æ¥æ”¶åˆ°Zigbeeçš„é”™è¯¯æŒ‡ä»¤å°±å°†é”™è¯¯æŒ‡ä»¤å‘åˆ°DebugåŒº
-void xMixture_Zigbe_RecceiveError_Handler(uint8_t Cmd1, uint8_t Cmd2)
+//½ÓÊÕµ½ZigbeeµÄ´íÎóÖ¸Áî¾Í½«´íÎóÖ¸Áî·¢µ½DebugÇø
+void xMixture_Zigbe_RecceiveError_Handler(uint8_t Cmd1,uint8_t Cmd2)
 {
 	uint8_t Buf[50];
-	sprintf((char *)Buf, "CMD2-3: %#x-%#x", Cmd1, Cmd2); // å°†é”™è¯¯æŒ‡ä»¤æ‰“å°åˆ°Debug
-	Send_InfoData_To_Fifo((char *)Buf, strlen((char *)Buf));
+	sprintf((char*)Buf,"CMD2-3: %#x-%#x",Cmd1,Cmd2);  //½«´íÎóÖ¸Áî´òÓ¡µ½Debug
+	Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));  
 }
+	
 
-// å°†æ•°æ®æ‰“å°åˆ°Debugï¼Œåˆ¤æ–­æ•°æ®
+//½«Êı¾İ´òÓ¡µ½Debug£¬ÅĞ¶ÏÊı¾İ
 void xMixture_Debug_Data(uint8_t num)
 {
 	uint8_t buf[50];
-	Send_InfoData_To_Fifo((char *)buf, strlen((char *)buf));
+	Send_InfoData_To_Fifo((char*)buf,strlen((char*)buf));	
 }
 
-// å†’æ³¡æ’åº ï¼ˆä»å°åˆ°å¤§ï¼‰
-void xBubble_Sort(uint16_t *arr, uint8_t len)
+
+//Ã°ÅİÅÅĞò £¨´ÓĞ¡µ½´ó£©
+void xBubble_Sort(uint16_t*arr,uint8_t len)
 {
-	uint8_t i, j;
+	uint8_t i,j;
 	uint16_t Temp;
-	for (i = 0; i < len - 1; i++)
+	for(i=0;i<len-1;i++)
 	{
-		for (j = 0; j < len - 1 - i; j++)
+		for(j=0;j<len-1-i;j++)
 		{
-			if (arr[j] > arr[j + 1])
+			if(arr[j]>arr[j+1])
 			{
 				Temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = Temp;
+				arr[j] = arr[j+1];
+				arr[j+1] = Temp;
 			}
 		}
 	}
 }
 
-// å°†åå…­è¿›åˆ¶è½¬ä¸ºåè¿›åˆ¶
-uint16_t HEX_DEC(uint8_t *buf, uint16_t value)
+// ½«Ê®Áù½øÖÆ×ªÎªÊ®½øÖÆ
+uint16_t HEX_DEC(uint8_t *buf,uint16_t value)
 {
 	value = 0;
-	for (uint16_t i = 0; i < sizeof(buf); i++)
+	for(uint16_t i = 0; i< sizeof(buf); i++)
 	{
 		value = (value << 8) | buf[i];
 	}
 	return value;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

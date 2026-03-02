@@ -1,36 +1,36 @@
 /**
 ************************************************************************
- *    æ–‡ä»¶åï¼šäºŒç»´ç æ•°æ®å¤„ç†
- *      è¯´æ˜ï¼š
- *  é€šä¿¡æ–¹å¼ï¼šWifié€šä¿¡
+ *    ÎÄ¼şÃû£º¶şÎ¬ÂëÊı¾İ´¦Àí
+ *      ËµÃ÷£º
+ *  Í¨ĞÅ·½Ê½£ºWifiÍ¨ĞÅ
 ************************************************************************
 **/
 #include "two_code.h"
 
 
 /*
- * 2026æ ·é¢˜1è§£æäºŒç»´ç æ•°æ®
+ * 2026ÑùÌâ1½âÎö¶şÎ¬ÂëÊı¾İ
  */
 void YT1_parse_two_codes(void) 
 {
     char current_data[200];
-    // ç¬¬ä¸€æ­¥ï¼šè¯†åˆ«A3ï¼ˆæ‰¾åŒ…å«<>çš„äºŒç»´ç ï¼‰
+    // µÚÒ»²½£ºÊ¶±ğA3£¨ÕÒ°üº¬<>µÄ¶şÎ¬Âë£©
     for (int i = 0; i < Two_Code_Count; i++) 
     {
         char *data = (char *)Two_Code_Init_Data_Store[i];
         char *output = NULL;
-        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//æ— æ•°æ®ç›´æ¥è·³è¿‡
+        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//ÎŞÊı¾İÖ±½ÓÌø¹ı
             continue;
-        // æŸ¥æ‰¾<>ä½ç½®
+        // ²éÕÒ<>Î»ÖÃ
         char *start = strchr(data, '<');
         char *end = strchr(data, '>');
         
         if ((start && end) && (end > start))
         {
-            // æ‰¾åˆ°<>ï¼Œæå–ä¸­é—´çš„ä¸¤ä¸ªå­—ç¬¦
+            // ÕÒµ½<>£¬ÌáÈ¡ÖĞ¼äµÄÁ½¸ö×Ö·û
             int len = end - start - 1;
             if (len == 2) 
-            {  // æ­£å¥½ä¸¤ä¸ªå­—ç¬¦
+            {  // ÕıºÃÁ½¸ö×Ö·û
                 Two_Code_Data_parsed_Store3[0] = start[1];
                 Two_Code_Data_parsed_Store3[1] = start[2];
                 Two_Code_Data_parsed_Store3[2] = '\0';
@@ -49,7 +49,7 @@ void YT1_parse_two_codes(void)
                 output = Two_Code_Data_parsed_Store2;;
             int out_pos = 0;
 
-            // æå–æ‰€æœ‰å¤§å†™å­—æ¯
+            // ÌáÈ¡ËùÓĞ´óĞ´×ÖÄ¸
             for (int j = 0; data[j] != '\0' && out_pos < 49; j++) 
             {
                 if (data[j] >= 'A' && data[j] <= 'Z') {
@@ -64,7 +64,7 @@ void YT1_parse_two_codes(void)
 }
 
 /*
- * 2026æ ·é¢˜2è§£æäºŒç»´ç æ•°æ®
+ * 2026ÑùÌâ2½âÎö¶şÎ¬ÂëÊı¾İ
  */
 void YT2_parse_two_codes(void) 
 {
@@ -79,7 +79,7 @@ void YT2_parse_two_codes(void)
         else if(Two_Code_Init_Data_Store[i][0] == 0x03)
             output = Two_Code_Data_parsed_Store3;
         else
-            continue;  // æ— æ•ˆçš„IDï¼Œè·³è¿‡
+            continue;  // ÎŞĞ§µÄID£¬Ìø¹ı
         
         char *start = strchr(data, '<');
         char *end = strchr(data, '>');
@@ -88,13 +88,13 @@ void YT2_parse_two_codes(void)
             int len = end - start - 1;
             for (int j = 0; j < len; j++) 
             {
-                output[j] = start[j + 1];  // start[0]æ˜¯'<'ï¼Œæ‰€ä»¥ä»start[1]å¼€å§‹
+                output[j] = start[j + 1];  // start[0]ÊÇ'<'£¬ËùÒÔ´Óstart[1]¿ªÊ¼
             }
-            output[len] = '\0';  // æ·»åŠ å­—ç¬¦ä¸²ç»“æŸç¬¦ 
+            output[len] = '\0';  // Ìí¼Ó×Ö·û´®½áÊø·û 
         }
         else
         {
-            output[0] = '\0';  // å¦‚æœæ²¡æœ‰<>ï¼Œè®¾ä¸ºç©ºå­—ç¬¦ä¸²
+            output[0] = '\0';  // Èç¹ûÃ»ÓĞ<>£¬ÉèÎª¿Õ×Ö·û´®
         }
         
     }
@@ -102,7 +102,7 @@ void YT2_parse_two_codes(void)
 
 
 /*
- * 2026æ ·é¢˜3è§£æäºŒç»´ç æ•°æ®
+ * 2026ÑùÌâ3½âÎö¶şÎ¬ÂëÊı¾İ
  */
 void YT3_parse_two_codes(void) 
 {
@@ -124,13 +124,13 @@ void YT3_parse_two_codes(void)
             int len = end - start - 1;
             for (int j = 0; j < len; j++) 
             {
-                output[j] = start[j + 1];  // start[0]æ˜¯'<'ï¼Œæ‰€ä»¥ä»start[1]å¼€å§‹
+                output[j] = start[j + 1];  // start[0]ÊÇ'<'£¬ËùÒÔ´Óstart[1]¿ªÊ¼
             }
-            output[len] = '\0';  // æ·»åŠ å­—ç¬¦ä¸²ç»“æŸç¬¦ 
+            output[len] = '\0';  // Ìí¼Ó×Ö·û´®½áÊø·û 
         }
         else
         {
-            output[0] = '\0';  // å¦‚æœæ²¡æœ‰<>ï¼Œè®¾ä¸ºç©ºå­—ç¬¦ä¸²
+            output[0] = '\0';  // Èç¹ûÃ»ÓĞ<>£¬ÉèÎª¿Õ×Ö·û´®
         }
     }
     

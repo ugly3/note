@@ -2,11 +2,11 @@
 #define __THREE_DIM_CARPORT_H
 #include "all_module.h"
   
-//å›žåˆ°ç¬¬1å±‚çš„æ—¶é—´
-//æŒ‡å®šç¬¬å‡ å±‚çš„æ—¶é—´     
-#define Differ_1_Delay 6	//ç›¸å·®1å±‚
-#define Differ_2_Delay 10	//ç›¸å·®2å±‚  11
-#define Differ_3_Delay 14	//ç›¸å·®3å±‚  17
+//»Øµ½µÚ1²ãµÄÊ±¼ä
+//Ö¸¶¨µÚ¼¸²ãµÄÊ±¼ä     
+#define Differ_1_Delay 6	//Ïà²î1²ã
+#define Differ_2_Delay 10	//Ïà²î2²ã  11
+#define Differ_3_Delay 14	//Ïà²î3²ã  17
 
 
 typedef struct

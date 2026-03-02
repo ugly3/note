@@ -32,7 +32,7 @@ void TIM7_IRQHandler(void)
 {
 	if(TIM_GetITStatus(TIM7,TIM_IT_Update) == SET)
 	{
-		Hard_Can_While();								//CANæ€»çº¿æ£€æµ‹
+		Hard_Can_While();								//CAN×ÜÏß¼ì²â
 	}
 	TIM_ClearITPendingBit(TIM7,TIM_IT_Update);
 }

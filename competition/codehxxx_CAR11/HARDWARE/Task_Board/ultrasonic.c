@@ -4,7 +4,7 @@
 #include "cba.h"
 
 float Ultrasonic_Value = 0;
-uint32_t Ultrasonic_Num = 0;						// è®¡æ•°å€¼
+uint32_t Ultrasonic_Num = 0;						// ¼ÆÊıÖµ
 uint16_t dis = 0;
 
 void Ultrasonic_Port(void)
@@ -17,16 +17,16 @@ void Ultrasonic_Port(void)
 	
 	//GPIOA15---INC--RX
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;  //é€šç”¨è¾“å‡º
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //æ¨æŒ½è¾“å‡º 
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;   //ä¸Šæ‹‰
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;  //Í¨ÓÃÊä³ö
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //ÍÆÍìÊä³ö 
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;   //ÉÏÀ­
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz; 
 	GPIO_Init(GPIOA,&GPIO_InitStructure);
 	
 	//GPIOB4---INT0--TX
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;   //æµ®ç©º 
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;   //¸¡¿Õ 
 	GPIO_Init(GPIOB,&GPIO_InitStructure);
 }
 
@@ -40,7 +40,7 @@ void Ultrasonic_TIM(uint16_t arr,uint16_t psc)
 	TIM_InitStructure.TIM_Period = arr;
 	TIM_InitStructure.TIM_Prescaler = psc;
 	TIM_InitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	// æ­¤å‚æ•°å¯¹åŸºæœ¬å®šæ—¶å™¨æ— æ•ˆ
+	// ´Ë²ÎÊı¶Ô»ù±¾¶¨Ê±Æ÷ÎŞĞ§
 	// TIM_InitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	// TIM_InitStructure.TIM_RepetitionCounter = 0;
 	TIM_TimeBaseInit(TIM6,&TIM_InitStructure);
@@ -79,12 +79,12 @@ void Ultrasonic_EXTI()
 
 void Ultrasonic_Init(void)
 {
-	Ultrasonic_Port();			// è¶…å£°æ³¢ç¡¬ä»¶ç«¯å£åˆå§‹åŒ–
-	Ultrasonic_TIM(9,83);		// è¶…å£°æ³¢è®¡æ•°å®šæ—¶å™¨åˆå§‹åŒ–
-	Ultrasonic_EXTI();			// è¶…å£°æ³¢æ¥æ”¶å¼•è„šä¸­æ–­åˆå§‹åŒ–
+	Ultrasonic_Port();			// ³¬Éù²¨Ó²¼ş¶Ë¿Ú³õÊ¼»¯
+	Ultrasonic_TIM(9,83);		// ³¬Éù²¨¼ÆÊı¶¨Ê±Æ÷³õÊ¼»¯
+	Ultrasonic_EXTI();			// ³¬Éù²¨½ÓÊÕÒı½ÅÖĞ¶Ï³õÊ¼»¯
 }
 
-//è¶…å£°æ³¢æµ‹è·
+//³¬Éù²¨²â¾à
 void Ultrasonic_Ranging()
 {
   INC = 1;            
@@ -94,8 +94,8 @@ void Ultrasonic_Ranging()
 	TIM_Cmd(TIM6,ENABLE);	
 	TIM_ClearITPendingBit(TIM6,TIM_IT_Update);
 	
-  Ultrasonic_Num  = 0;		// å®šæ—¶å™¨æ¸…é›¶
-	delay_ms(30);				// ç­‰å¾…ä¸€æ®µæ—¶é—´ï¼Œç­‰å¾…å‘é€è¶…å£°æ³¢æ§åˆ¶ä¿¡å·
+  Ultrasonic_Num  = 0;		// ¶¨Ê±Æ÷ÇåÁã
+	delay_ms(30);				// µÈ´ıÒ»¶ÎÊ±¼ä£¬µÈ´ı·¢ËÍ³¬Éù²¨¿ØÖÆĞÅºÅ
 	INC = 1;
 	delay_ms(5);
 	TIM_Cmd(TIM6,DISABLE);
@@ -118,9 +118,9 @@ void EXTI4_IRQHandler(void)
 		if(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_4) == RESET)
 		{
 			TIM_Cmd(TIM6,DISABLE);
-			Ultrasonic_Value = (float)Ultrasonic_Num;                      // å°†è¶…å£°æ³¢è®¡æ•°å€¼è½¬æ¢ä¸ºæµ®ç‚¹æ•°
-			Ultrasonic_Value = (float)Ultrasonic_Value*1.72f - 20.0f;       // è®¡ç®—è·ç¦»å®šæ—¶10usï¼ŒS=Vt/2ï¼ˆå‡2æ˜¯è¯¯å·®è¡¥å°ï¼‰
-			dis = (uint16_t) Ultrasonic_Value;             // å°†è®¡ç®—ç»“æœè½¬æ¢ä¸ºæ•´æ•°
+			Ultrasonic_Value = (float)Ultrasonic_Num;                      // ½«³¬Éù²¨¼ÆÊıÖµ×ª»»Îª¸¡µãÊı
+			Ultrasonic_Value = (float)Ultrasonic_Value*1.72f - 20.0f;       // ¼ÆËã¾àÀë¶¨Ê±10us£¬S=Vt/2£¨¼õ2ÊÇÎó²î²¹³¢£©
+			dis = (uint16_t) Ultrasonic_Value;             // ½«¼ÆËã½á¹û×ª»»ÎªÕûÊı
 		}
 		EXTI_ClearITPendingBit(EXTI_Line4);
 	}

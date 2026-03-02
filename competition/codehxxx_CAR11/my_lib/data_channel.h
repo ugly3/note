@@ -17,9 +17,9 @@ GLOBAL volatile uint8_t Zigb_Rx_Buf[ ZIGB_RX_MAX ];
 
 
 GLOBAL volatile uint8_t Wifi_Rx_num ;
-GLOBAL volatile uint8_t Wifi_Rx_flag ;  //æ¥æ”¶å®Œæˆæ ‡å¿—ä½
+GLOBAL volatile uint8_t Wifi_Rx_flag ;  //½ÓÊÕÍê³É±êÖ¾Î»
 GLOBAL volatile uint8_t Zigbee_Rx_num ;
-GLOBAL volatile uint8_t Zigbee_Rx_flag ;  //æ¥æ”¶å®Œæˆæ ‡å¿—ä½
+GLOBAL volatile uint8_t Zigbee_Rx_flag ;  //½ÓÊÕÍê³É±êÖ¾Î»
 
 GLOBAL void Wifi_data_Receive( uint8_t res);
 GLOBAL void Zigbee_data_Receive( uint8_t res);

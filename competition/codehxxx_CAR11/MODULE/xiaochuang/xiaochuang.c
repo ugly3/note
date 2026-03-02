@@ -1,8 +1,8 @@
 /**
 ************************************************************************
- *    文件名：xiaochuang
- *      说明：小创语音模块
- *     源代码在 bkrc_voice.c 文件中
+ *    �ļ�����xiaochuang
+ *      ˵����С������ģ��
+ *     Դ������ bkrc_voice.c �ļ���
 ************************************************************************
 **/
 #include "xiaochuang.h"
@@ -15,12 +15,12 @@ XiaoChuang_Typedef XiaoChuang_Data =
 	.xZiDongPingFen_Upload_VoiceCode = &xZiDongPingFen_Upload_VoiceCode, 
 };
 
-uint8_t XiaoChuang_be_Awakened_Arr[5] = {0xFA,0xFA,0xFA,0xFA,0xA1};   //小创被唤醒指令
-uint8_t XiaoChuang_Rx_Byte = 0x00;  // 小创识别后，传回来的一个字节数据
+uint8_t XiaoChuang_be_Awakened_Arr[5] = {0xFA,0xFA,0xFA,0xFA,0xA1};   //С��������ָ��
+uint8_t XiaoChuang_Rx_Byte = 0x00;  // С��ʶ��󣬴�������һ���ֽ�����
 
 
 
-//给小创发送唤醒词，唤醒小创，在识别前需要先发送这个函数
+//��С�����ͻ��Ѵʣ�����С������ʶ��ǰ��Ҫ�ȷ����������
 void xSend_To_XiaoChuang_Rouse(void)
 {
 	USART6_Send_Length(XiaoChuang_be_Awakened_Arr, 5);
@@ -28,25 +28,25 @@ void xSend_To_XiaoChuang_Rouse(void)
 
 
 /******************************************
-功  能：发送指令让小创播报指定词句
-参数   语音词条ID  词条内容
-              0x01 -> 技能成才  55030100
-			  0x02 -> 匠心筑梦  55030200
-			  0x03 -> 筑梦扬威  55030300
-			  0x04 -> 技行天下  55030400
-			  0x05 -> 展行业百技 55030500
-			  0x06 -> 树人才新规	 55030600
+��  �ܣ�����ָ����С������ָ���ʾ�
+����   ��������ID  ��������
+              0x01 -> ���ܳɲ�  55030100
+			  0x02 -> ��������  55030200
+			  0x03 -> ��������  55030300
+			  0x04 -> ��������  55030400
+			  0x05 -> չ��ҵ�ټ� 55030500
+			  0x06 -> ���˲��¹�	 55030600
 *******************************************/
 void xSend_Command_To_XiaoChuang(uint8_t Cmd)
 {
 	USART6_Send_Byte(Cmd);
 }
 
-//嵌入式智能车开发单元（A/B）向自动评分系统上传语音编号控制指
+//Ƕ��ʽ���ܳ�������Ԫ��A/B�����Զ�����ϵͳ�ϴ�������ſ���ָ
 void xZiDongPingFen_Upload_VoiceCode(uint8_t data)  
 {
 	uint8_t Temp[8] = {0};
-//	uint8_t CheckSum;    //校验和
+//	uint8_t CheckSum;    //У���
 	Temp[0] = 0xAF;
 	Temp[1] = 0x06;
 	Temp[2] = data; 
@@ -66,13 +66,13 @@ void xZiDongPingFen_Upload_VoiceCode(uint8_t data)
 
 
 
-//小创识别语音，或者通过串口发给小创时，小创回传的命令
-//通过串口发给小创命令时，小创回传的前两个字节为 0x55 0x03
-//小创通过语音识别，识别后回传的前两个字节为 0x55 0x02
-// 0x55 0x01 指令为（初始化完成， 进入识别模式， 退出识别模式， 进入休眠模式， 打开播放， 关闭播放）
+//С��ʶ������������ͨ�����ڷ���С��ʱ��С���ش�������
+//ͨ�����ڷ���С������ʱ��С���ش���ǰ�����ֽ�Ϊ 0x55 0x03
+//С��ͨ������ʶ��ʶ���ش���ǰ�����ֽ�Ϊ 0x55 0x02
+// 0x55 0x01 ָ��Ϊ����ʼ����ɣ� ����ʶ��ģʽ�� �˳�ʶ��ģʽ�� ��������ģʽ�� �򿪲��ţ� �رղ��ţ�
 
 
-// 注意！： 识别成功后，回传指令，在执行任务中最少需要等待 5s及以上才可以得到数据，然后再通过zigbee发送出去
+// ע�⣡�� ʶ��ɹ��󣬻ش�ָ���ִ��������������Ҫ�ȴ� 5s�����ϲſ��Եõ����ݣ�Ȼ����ͨ��zigbee���ͳ�ȥ
 
 /*
 	for(uint8_t i = 0; i < 5; i++)
@@ -83,33 +83,33 @@ void xZiDongPingFen_Upload_VoiceCode(uint8_t data)
 */
 void xXiaoChuang_Analyze_Rx_Command(void)
 {
-	 if((voice_falg == 0x01) && (UART6_RxData[0] == 0x55))			// 自定义数据帧接收完毕
+	 if((voice_falg == 0x01) && (UART6_RxData[0] == 0x55))			// �Զ�������֡�������
 	 {
-		 if(UART6_RxData[1] == 0x01)    //源文件是config-开发板.ini里面
+		 if(UART6_RxData[1] == 0x01)    //Դ�ļ���config-������.ini����
 		 {
 			 switch(UART6_RxData[2])
 			 {
-				 case 0x01:    //   welcome（初始化完成 ）
+				 case 0x01:    //   welcome����ʼ����� ��
 				 {
 					 break;
 				 }
-				 case 0x02:    //  wakeword （进入识别模式）  被唤醒
+				 case 0x02:    //  wakeword ������ʶ��ģʽ��  ������
 				 {
 					 break;
 				 }
-				 case 0x03:    //  bakeoff （退出识别模式）   
+				 case 0x03:    //  bakeoff ���˳�ʶ��ģʽ��   
 				 {
 					 break;
 				 }
-				 case 0x04:    //  exitWake （,唤醒时长结束， 进入休眠模式）
+				 case 0x04:    //  exitWake ��,����ʱ�������� ��������ģʽ��
 				 {
 					 break;
 				 }
-				 case 0x07:    //  打开播放
+				 case 0x07:    //  �򿪲���
 				 {
 					 break;
 				 }
-				 case 0x08:     //  关闭播放
+				 case 0x08:     //  �رղ���
 				 {
 					 break;
 				 }
@@ -117,41 +117,41 @@ void xXiaoChuang_Analyze_Rx_Command(void)
 			 }
 		 }
 		 
-		 else if(UART6_RxData[1] == 0x02)     // //源文件是asrWordlist.txt 里面，小创识别后回传的命令
+		 else if(UART6_RxData[1] == 0x02)     // //Դ�ļ���asrWordlist.txt ���棬С��ʶ���ش�������
 		 {
 			 switch(UART6_RxData[2])
 			 {
-				 case 0x01:      //识别    
+				 case 0x01:      //ʶ��    
 				 { 
 					 XiaoChuang_Rx_Byte = 0x01;
 					 xZiDongPingFen_Upload_VoiceCode(0x01);
 					 break;
 				 }
-				 case 0x02:     //识别   
+				 case 0x02:     //ʶ��   
 				 {
 					 XiaoChuang_Rx_Byte = 0x02;
 					 xZiDongPingFen_Upload_VoiceCode(0x02);
 					 break;
 				 }
-				 case 0x03:     //识别  
+				 case 0x03:     //ʶ��  
 				 {
 					 XiaoChuang_Rx_Byte = 0x03;
 					 xZiDongPingFen_Upload_VoiceCode(0x03);
 					 break;
 				 }
-				 case 0x04:      //识别  
+				 case 0x04:      //ʶ��  
 				 {
 					 XiaoChuang_Rx_Byte = 0x04;
 					 xZiDongPingFen_Upload_VoiceCode(0x04);
 					 break;
 				 }
-				 case 0x05:     //识别  
+				 case 0x05:     //ʶ��  
 				 {
 					 XiaoChuang_Rx_Byte = 0x05;
 					 xZiDongPingFen_Upload_VoiceCode(0x5);
 					 break;
 				 }
-				 case 0x06:     //识别  
+				 case 0x06:     //ʶ��  
 				 {
 					 XiaoChuang_Rx_Byte = 0x06;
 					 xZiDongPingFen_Upload_VoiceCode(0x06);
@@ -167,7 +167,7 @@ void xXiaoChuang_Analyze_Rx_Command(void)
 			 }
 		 }
 		 
-		 else if(UART6_RxData[1] == 0x03)     // //源文件是serialTTS.txt里面，通过发送指令让小创播报，然后回传命令
+		 else if(UART6_RxData[1] == 0x03)     // //Դ�ļ���serialTTS.txt���棬ͨ������ָ����С��������Ȼ��ش�����
 		 {
 			 switch(UART6_RxData[2])
 			 {
