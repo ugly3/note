@@ -1,7 +1,7 @@
 ..\output\data_filtering.o: ..\my_lib\data_filtering.c
 ..\output\data_filtering.o: ..\CMSIS\stm32f4xx.h
 ..\output\data_filtering.o: ..\CMSIS\core_cm4.h
-..\output\data_filtering.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\data_filtering.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\data_filtering.o: ..\CMSIS\core_cmInstr.h
 ..\output\data_filtering.o: ..\CMSIS\core_cmFunc.h
 ..\output\data_filtering.o: ..\CMSIS\core_cmSimd.h

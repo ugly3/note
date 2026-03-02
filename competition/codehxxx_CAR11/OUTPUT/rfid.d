@@ -3,7 +3,7 @@
 ..\output\rfid.o: ..\MODULE\all_module\all_module.h
 ..\output\rfid.o: ..\CMSIS\stm32f4xx.h
 ..\output\rfid.o: ..\CMSIS\core_cm4.h
-..\output\rfid.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\rfid.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\rfid.o: ..\CMSIS\core_cmInstr.h
 ..\output\rfid.o: ..\CMSIS\core_cmFunc.h
 ..\output\rfid.o: ..\CMSIS\core_cmSimd.h
@@ -36,11 +36,11 @@
 ..\output\rfid.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\rfid.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\rfid.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\rfid.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
-..\output\rfid.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
-..\output\rfid.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
-..\output\rfid.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
-..\output\rfid.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
+..\output\rfid.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
+..\output\rfid.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
+..\output\rfid.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
+..\output\rfid.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
+..\output\rfid.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
 ..\output\rfid.o: ..\SYSTEM\sys\sys.h
 ..\output\rfid.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\rfid.o: ..\HARDWARE\Core_Board\cba.h
@@ -81,4 +81,5 @@
 ..\output\rfid.o: ..\MODULE\landmark\wireless_charge\wireless_charge.h
 ..\output\rfid.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\rfid.o: ..\MODULE\xiaochuang\xiaochuang.h
-..\output\rfid.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\ctype.h
+..\output\rfid.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\rfid.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\ctype.h

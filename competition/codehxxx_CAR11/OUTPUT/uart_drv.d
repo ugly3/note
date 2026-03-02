@@ -1,6 +1,6 @@
 ..\output\uart_drv.o: ..\HARDWARE\Core_Board\uart_drv.c
-..\output\uart_drv.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
-..\output\uart_drv.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\uart_drv.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\uart_drv.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
 ..\output\uart_drv.o: ..\USER\stm32lib.h
 ..\output\uart_drv.o: ..\CMSIS\stm32f4xx.h
 ..\output\uart_drv.o: ..\CMSIS\core_cm4.h

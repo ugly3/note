@@ -91,7 +91,7 @@ void Hard_Can_SpeedMode(uint8_t f)
 
 
 /**
-函数功能：CAN设备循环检测
+函数功能：CAN设备定时检测
 */
 void Hard_Can_While(void)
 {

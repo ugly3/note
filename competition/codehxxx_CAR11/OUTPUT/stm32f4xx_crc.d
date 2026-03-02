@@ -2,7 +2,7 @@
 ..\output\stm32f4xx_crc.o: ..\FWLIB\inc\stm32f4xx_crc.h
 ..\output\stm32f4xx_crc.o: ..\CMSIS\stm32f4xx.h
 ..\output\stm32f4xx_crc.o: ..\CMSIS\core_cm4.h
-..\output\stm32f4xx_crc.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\stm32f4xx_crc.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\stm32f4xx_crc.o: ..\CMSIS\core_cmInstr.h
 ..\output\stm32f4xx_crc.o: ..\CMSIS\core_cmFunc.h
 ..\output\stm32f4xx_crc.o: ..\CMSIS\core_cmSimd.h

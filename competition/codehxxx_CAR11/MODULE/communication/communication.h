@@ -19,6 +19,7 @@ typedef struct
 extern Communication_Typedef Communication_Data;
 extern uint8_t jixun;
 extern uint8_t YT5_Carport;
+extern volatile uint8_t Rx_count;
 
 void Can_ZigBeeRx_Check(void);
 

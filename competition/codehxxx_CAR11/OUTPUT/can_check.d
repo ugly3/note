@@ -1,7 +1,7 @@
 ..\output\can_check.o: ..\HARDWARE\CAN\Can_check.c
 ..\output\can_check.o: ..\CMSIS\stm32f4xx.h
 ..\output\can_check.o: ..\CMSIS\core_cm4.h
-..\output\can_check.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\can_check.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\can_check.o: ..\CMSIS\core_cmInstr.h
 ..\output\can_check.o: ..\CMSIS\core_cmFunc.h
 ..\output\can_check.o: ..\CMSIS\core_cmSimd.h

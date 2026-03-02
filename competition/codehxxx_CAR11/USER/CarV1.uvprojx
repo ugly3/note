@@ -10,13 +10,13 @@
       <TargetName>Car_Demo</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::.\ARMCC</pCCUsed>
+      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARM_Compiler_5.06u7</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F407IG</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.3.1.1</PackID>
+          <PackID>Keil.STM32F4xx_DFP.3.0.0</PackID>
           <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x20000) IRAM2(0x10000000,0x10000) IROM(0x08000000,0x100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>..\OUTPUT\</OutputDirectory>
-          <OutputName>CarV1</OutputName>
+          <OutputName>CarV1.7</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -186,6 +186,7 @@
             <RvdsVP>2</RvdsVP>
             <RvdsMve>0</RvdsMve>
             <RvdsCdeCp>0</RvdsCdeCp>
+            <nBranchProt>0</nBranchProt>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -339,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F40_41xxx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CMSIS;..\FWLIB\inc;..\USER;..\HARDWARE\Task_Board;..\SYSTEM\delay;..\SYSTEM\sys;..\HARDWARE\Core_Board;..\HARDWARE\CAN;..\my_lib;..\SYSTEM\timer;..\HARDWARE\Drive;..\MODULE\all_module;..\MODULE\android;..\MODULE\communication;..\MODULE\follow_car;..\MODULE\landmark;..\MODULE\mixture;..\MODULE\motor_drive;..\MODULE\xiaochuang;..\MODULE\landmark\barrier_gate;..\MODULE\landmark\etc;..\MODULE\landmark\led_display;..\MODULE\landmark\rfid;..\MODULE\landmark\smart_street_light;..\MODULE\landmark\smart_tft_display;..\MODULE\landmark\smart_traffic_light;..\MODULE\landmark\smoke_tower;..\MODULE\landmark\special_landform;..\MODULE\landmark\three_dim_carport;..\MODULE\landmark\three_dim_display;..\MODULE\landmark\voice_report;..\MODULE\landmark\wireless_charge</IncludePath>
+              <IncludePath>..\CMSIS;..\FWLIB\inc;..\USER;..\HARDWARE\Task_Board;..\SYSTEM\delay;..\SYSTEM\sys;..\HARDWARE\Core_Board;..\HARDWARE\CAN;..\my_lib;..\SYSTEM\timer;..\HARDWARE\Drive;..\MODULE\all_module;..\MODULE\android;..\MODULE\communication;..\MODULE\follow_car;..\MODULE\landmark;..\MODULE\mixture;..\MODULE\motor_drive;..\MODULE\xiaochuang;..\MODULE\landmark\barrier_gate;..\MODULE\landmark\etc;..\MODULE\landmark\led_display;..\MODULE\landmark\rfid;..\MODULE\landmark\smart_street_light;..\MODULE\landmark\smart_tft_display;..\MODULE\landmark\smart_traffic_light;..\MODULE\landmark\smoke_tower;..\MODULE\landmark\special_landform;..\MODULE\landmark\three_dim_carport;..\MODULE\landmark\three_dim_display;..\MODULE\landmark\voice_report;..\MODULE\landmark\wireless_charge;..\MODULE\landmark\two_code</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -504,14 +505,9 @@
               <FilePath>..\MODULE\xiaochuang\xiaochuang.c</FilePath>
             </File>
             <File>
-              <FileName>car2.c</FileName>
+              <FileName>two_code.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\MODULE\car2\car2.c</FilePath>
-            </File>
-            <File>
-              <FileName>car2.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\MODULE\car2\car2.h</FilePath>
+              <FilePath>..\MODULE\landmark\two_code\two_code.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -904,12 +900,6 @@
     <Layers>
       <Layer>
         <LayName>CarV1</LayName>
-        <LayDesc></LayDesc>
-        <LayUrl></LayUrl>
-        <LayKeys></LayKeys>
-        <LayCat></LayCat>
-        <LayLic></LayLic>
-        <LayTarg>0</LayTarg>
         <LayPrjMark>1</LayPrjMark>
       </Layer>
     </Layers>

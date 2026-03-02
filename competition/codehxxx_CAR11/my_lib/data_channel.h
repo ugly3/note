@@ -12,14 +12,14 @@
 #define  ZIGB_RX_MAX    200
 #define  WIFI_MAX_NUM   200
 
-GLOBAL uint8_t Wifi_Rx_Buf[ WIFI_MAX_NUM ];
-GLOBAL uint8_t Zigb_Rx_Buf[ ZIGB_RX_MAX ];
+GLOBAL volatile uint8_t Wifi_Rx_Buf[ WIFI_MAX_NUM ];
+GLOBAL volatile uint8_t Zigb_Rx_Buf[ ZIGB_RX_MAX ];
 
 
-GLOBAL uint8_t Wifi_Rx_num ;
-GLOBAL uint8_t Wifi_Rx_flag ;  //接收完成标志位
-GLOBAL uint8_t Zigbee_Rx_num ;
-GLOBAL uint8_t Zigbee_Rx_flag ;  //接收完成标志位
+GLOBAL volatile uint8_t Wifi_Rx_num ;
+GLOBAL volatile uint8_t Wifi_Rx_flag ;  //接收完成标志位
+GLOBAL volatile uint8_t Zigbee_Rx_num ;
+GLOBAL volatile uint8_t Zigbee_Rx_flag ;  //接收完成标志位
 
 GLOBAL void Wifi_data_Receive( uint8_t res);
 GLOBAL void Zigbee_data_Receive( uint8_t res);

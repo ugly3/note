@@ -1,7 +1,7 @@
 ..\output\bh1750.o: ..\HARDWARE\Task_Board\bh1750.c
 ..\output\bh1750.o: ..\CMSIS\stm32f4xx.h
 ..\output\bh1750.o: ..\CMSIS\core_cm4.h
-..\output\bh1750.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\bh1750.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\bh1750.o: ..\CMSIS\core_cmInstr.h
 ..\output\bh1750.o: ..\CMSIS\core_cmFunc.h
 ..\output\bh1750.o: ..\CMSIS\core_cmSimd.h

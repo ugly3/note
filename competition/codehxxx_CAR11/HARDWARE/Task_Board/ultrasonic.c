@@ -46,8 +46,8 @@ void Ultrasonic_TIM(uint16_t arr,uint16_t psc)
 	TIM_TimeBaseInit(TIM6,&TIM_InitStructure);
 
 	NVIC_InitStructure.NVIC_IRQChannel = TIM6_DAC_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 8;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 
@@ -60,8 +60,6 @@ void Ultrasonic_EXTI()
 	EXTI_InitTypeDef EXTI_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
 	
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-	
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
 	
 	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB,EXTI_PinSource4);
@@ -73,8 +71,8 @@ void Ultrasonic_EXTI()
 	EXTI_Init(&EXTI_InitStructure);
 	
 	NVIC_InitStructure.NVIC_IRQChannel = EXTI4_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 7;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 }

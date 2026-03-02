@@ -1,7 +1,7 @@
 #include "all_module.h"
 
 /*USER CODE BEGIN*/
-#define Shield_A72 0	//A72屏蔽选择
+#define Shield_A72 1	//A72屏蔽选择
 #define Debug_USART1 0	//电脑串口调试选择
 #define WIFI_Data_UpLoad 0	//WIFI上传数据选择
 /*USER CODE END*/
@@ -38,7 +38,7 @@ int main(void)
 	Power_check_times = gt_get() + 200;        //电量检测周期
 	RFID_Init_Check_times = gt_get() + 200;    //RFID检测初始化周期
     Send_UpMotor(0, 0);
-	
+	 
     while(1)
     {
 			Mixture_Data.xCAR_KeyRun_Function();            //按键运行小车
@@ -112,7 +112,7 @@ int main(void)
 void Hardware_Init(void)
 {
 	uint8_t test_buf[8]={0};                            // 初始化发送数据
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);     // 中断分组
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);     // 中断分组
     delay_init(168);                                    // 延时初始化
     Tba_Init();                                         // 任务板初始化
     Infrared_Init();                                    // 红外初始化
@@ -127,14 +127,14 @@ void Hardware_Init(void)
     UartA72_Init();                                     // A72硬件串口通讯初始化
 #endif
 	
-    Can_check_Init(7, 83);                              // CAN总线定时器初始化
-    roadway_check_TimInit(999, 167);                   	// 路况检测
-    Timer_Init(999, 167);                               // 串行数据通讯时间帧
+    Can_check_Init(7, 83);                              // CAN总线 定时器7初始化
+    roadway_check_TimInit(999, 167);                   	// 路况检测 定时器9初始化
+    Timer_Init(999, 167);                               // 串行数据通讯时间帧 定时器10初始化(1ms)
     Readcard_daivce_Init();                         	// RFID初始化
 	
 	/* Mycode BEGIN */
-	Mixture_Data.xTIM3_Init();							// 定时器3初始化
-	Mixture_Data.xTIM2_Init();                          // 定时器2初始化
+    Mixture_Data.xTIM2_Init();                          // 定时器2初始化（扫描按键）
+	Mixture_Data.xTIM3_Init();							// 定时器3初始化(Zigbee、Wifi交互数据处理)
 	Ultrasonic_Ranging();                               // 先获取一次超声波（保证后面的准确度）
 	Infrared_Send(test_buf,8);                          // 红外发送数据0
 	Send_ZigbeeData_To_Fifo(test_buf,8);                // ZigBee发送数据0

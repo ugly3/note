@@ -162,7 +162,7 @@ void xThree_Dim_Display_Graph(uint8_t type)
    0x13   |   0x07   |   0x00   |   0x00   |   0x00   |     黑色
    0x13   |   0x08   |   0x00   |   0x00   |   0x00   |     白色
 **********************************************************************************
-参数1： 要显示的图形
+参数1： 要显示的文字
 返回值：无
 */
 void xThree_Dim_Display_Colour(uint8_t type)
@@ -406,43 +406,80 @@ void xThree_Dim_Display_RGB_Colour(uint8_t R,uint8_t G,uint8_t B)
 参数：输入要写入的文字
 返回值：无
 */
-void xThree_Dim_Display_Custom_Add(uint8_t*str) 
+//void xThree_Dim_Display_Custom_Add(uint8_t*str) 
+//{
+//	uint8_t Temp[8] = {0};
+//	memcpy(Temp,Three_Dim_Display_Buf,sizeof(Three_Dim_Display_Buf));
+//	
+//	while(*str)
+//	{
+//		if(*str < 0x80)
+//		{
+//			Temp[1] = 0x31;
+//			Temp[2] = *str;	//数据1【文本信息】
+//			Temp[3] = 0x00;	//数据2【文本信息】
+//			Temp[4] = 0x00;	//数据3【文字结束】
+//			Temp[5] = 0x00;	//数据4
+//			Infrared_Send(Temp, 6);	//发送命令
+//			str++;
+//		}
+//		else
+//		{
+//			Temp[1] = 0x31;
+//			Temp[2] = *str;	//数据1【文本信息】
+//			Temp[3] = *(str+1);	//数据2【文本信息】
+//			Temp[4] = 0x00;	//数据3【文字结束】
+//			Temp[5] = 0x00;	//数据4
+//			Infrared_Send(Temp, 6);	//发送命令
+//			str+=2;
+//		}
+//			Temp[1] = 0x31;	//主指令
+//			Temp[2] = 0x00;	//数据1【文本信息】
+//			Temp[3] = 0x00;	//数据2【文本信息】
+//			Temp[4] = 0x55;	//数据3【文字结束】
+//			Temp[5] = 0x00;	//数据4
+//			Infrared_Send(Temp, 6);	//发送命令		
+//	}		
+//}
+
+void xThree_Dim_Display_Custom_Add(uint8_t* str) 
 {
-	uint8_t Temp[8] = {0};
-	memcpy(Temp,Three_Dim_Display_Buf,sizeof(Three_Dim_Display_Buf));
-	
-	while(*str)
-	{
-		if(*str < 0x80)
-		{
-			Temp[1] = 0x31;
-			Temp[2] = *str;	//数据1【文本信息】
-			Temp[3] = 0x00;	//数据2【文本信息】
-			Temp[4] = 0x00;	//数据3【文字结束】
-			Temp[5] = 0x00;	//数据4
-			Infrared_Send(Temp, 6);	//发送命令
-			str++;
-		}
-		else
-		{
-			Temp[1] = 0x31;
-			Temp[2] = *str;	//数据1【文本信息】
-			Temp[3] = *(str+1);	//数据2【文本信息】
-			Temp[4] = 0x00;	//数据3【文字结束】
-			Temp[5] = 0x00;	//数据4
-			Infrared_Send(Temp, 6);	//发送命令
-			str+=2;
-		}
-			Temp[1] = 0x31;	//主指令
-			Temp[2] = 0x00;	//数据1【文本信息】
-			Temp[3] = 0x00;	//数据2【文本信息】
-			Temp[4] = 0x55;	//数据3【文字结束】
-			Temp[5] = 0x00;	//数据4
-			Infrared_Send(Temp, 6);	//发送命令		
-	}		
+    uint8_t Temp[8] = {0};
+    memcpy(Temp, Three_Dim_Display_Buf, sizeof(Three_Dim_Display_Buf));
+    
+    // 发送文本内容
+    while(*str)
+    {
+        if(*str < 0x80)  // ASCII
+        {
+            Temp[1] = 0x31;
+            Temp[2] = *str;
+            Temp[3] = 0x00;
+            Temp[4] = 0x00;  // 非结束标志
+            Temp[5] = 0x00;
+            Infrared_Send(Temp, 6);
+            str++;
+        }
+        else  // 中文
+        {
+            Temp[1] = 0x31;
+            Temp[2] = *str;
+            Temp[3] = *(str+1);
+            Temp[4] = 0x00;  // 非结束标志
+            Temp[5] = 0x00;
+            Infrared_Send(Temp, 6);
+            str += 2;
+        }
+    }
+    
+    // 最后发送结束命令
+    Temp[1] = 0x31;
+    Temp[2] = 0x00;
+    Temp[3] = 0x00;
+    Temp[4] = 0x55;  // 结束标志
+    Temp[5] = 0x00;
+    Infrared_Send(Temp, 6);
 }
-
-
 /*
  *************************************自定义文本清空显示********************************
                            * 帧头---> 0xFF  

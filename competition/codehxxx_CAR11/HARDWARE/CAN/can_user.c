@@ -14,19 +14,19 @@
 #include <string.h>
 #include "Timer.h"
 
-uint8_t Wifi_Rx_Buf[ WIFI_MAX_NUM ];
-uint8_t Zigb_Rx_Buf[ ZIGB_RX_MAX ];
-uint8_t Wifi_Rx_num ;
-uint8_t Wifi_Rx_flag ;  //接收完成标志位
-uint8_t Zigbee_Rx_num ;
-uint8_t Zigbee_Rx_flag ;  //接收完成标志位
+volatile uint8_t Wifi_Rx_Buf[ WIFI_MAX_NUM ];
+volatile uint8_t Zigb_Rx_Buf[ ZIGB_RX_MAX ];
+volatile uint8_t Wifi_Rx_num ;
+volatile uint8_t Wifi_Rx_flag ;  //接收到数据标志位
+volatile uint8_t Zigbee_Rx_num ;
+volatile uint8_t Zigbee_Rx_flag ;  //接收完成标志位
 
 
 uint8_t Host_AGV_Return_Flag = RESET;
 uint8_t AGV_data_Falg = RESET;
 
-uint32_t canu_wifi_rxtime = 0;
-uint32_t canu_zibe_rxtime = 0;
+volatile uint32_t canu_wifi_rxtime = 0;
+volatile uint32_t canu_zibe_rxtime = 0;
 
 uint8_t GateStr[6];
 
@@ -268,7 +268,7 @@ void Can_ZigBeeRx_Save(uint8_t res)
 {
 	if(Zigbee_Rx_flag == 0)
 	{
-		//canu_zibe_rxtime = gt_get()+10;
+		canu_zibe_rxtime = gt_get()+10;
 		Zigbee_Rx_num =0;
 		Zigb_Rx_Buf[Zigbee_Rx_num]=res;
 		Zigbee_Rx_flag = 1;
@@ -365,7 +365,7 @@ __weak void Can_ZigBeeRx_Check(void)
              }
 			else if((Zigb_Rx_Buf[0] == 0x55)&&(Zigb_Rx_Buf[1] == 0x02))		//返回从车数据
 			{		
-					memcpy(Follower_Tab,Zigb_Rx_Buf,50);
+					//memcpy(Follower_Tab,Zigb_Rx_Buf,50);
 					AGV_data_Falg = SET;
 			}
 			else if(Zigb_Rx_Buf[1]==0x06)	 //语音播报返回

@@ -20,7 +20,7 @@ void Timer_Init(uint16_t arr,uint16_t psc)
 
 	NVIC_InitStructure.NVIC_IRQChannel = TIM1_UP_TIM10_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 6;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 
@@ -45,8 +45,8 @@ uint32_t gt_get(void)
 
 uint32_t gt_get_sub(uint32_t c)
 {
-	if(c > global_times)
-		c -= global_times;
+	if(c > gt_get())
+		c -= gt_get();
 	else
 		c = 0;
 	return c;

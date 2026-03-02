@@ -117,11 +117,7 @@ void xSmart_TFT_Image_Up_Dowm_Auto(uint8_t device,uint8_t mode)
 	}
 	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);
 	Temp[6] = CheckSum;
-//	for(uint8_t i=0;i<3;i++)
-//	{
-		Send_ZigbeeData_To_Fifo(Temp,8);  //发送三次数据
-//		delay_ms(60);
-//	}
+	Send_ZigbeeData_To_Fifo(Temp,8);  
 }
 
 /*

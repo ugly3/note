@@ -100,7 +100,7 @@ void xTIM2_Init(void)
 	NVIC_InitStruct.NVIC_IRQChannel = TIM2_IRQn;
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 2;
-	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 1;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
 	NVIC_Init(&NVIC_InitStruct);
 	TIM_Cmd(TIM2,ENABLE);           //开启定时器2
 }
@@ -133,22 +133,22 @@ void xTIM3_Init(void)
 /*定时器3的中断服务函数  每1ms进入一次*/
 void TIM3_IRQHandler(void)
 {
-	static uint8_t zigbee_cnt3ms = 0;
-	static uint8_t wifi_cnt5ms = 0;
+	static uint8_t zigbee_cnt2ms = 0;
+	static uint8_t wifi_cnt3ms = 0;
 	if(TIM_GetITStatus(TIM3,TIM_IT_Update) == SET)
 	{
-		zigbee_cnt3ms++;
-		wifi_cnt5ms++;
+		zigbee_cnt2ms++;
+		wifi_cnt3ms++;
         
-        if(zigbee_cnt3ms >= 3)
+        if(zigbee_cnt2ms >= 2)
 		{
-			zigbee_cnt3ms = 0;
+			zigbee_cnt2ms = 0;
             Can_ZigBeeRx_Check();   // Zigbee交互数据处理				                            				
 		}
         
-		if(wifi_cnt5ms >= 5)
+		if(wifi_cnt3ms >= 3)
 		{
-			wifi_cnt5ms = 0;
+			wifi_cnt3ms = 0;
 			Can_WifiRx_Check();  // Wifi交互数据处理 (安卓与主车)
 		}
 
@@ -158,7 +158,7 @@ void TIM3_IRQHandler(void)
 
 
 //任务板双向灯标志位
-bool Tab_Both_Led_Flag = 0;
+volatile bool Tab_Both_Led_Flag = 0;
 
 /*定时器2的中断服务函数  每1ms进入一次*/
 void TIM2_IRQHandler(void)
@@ -184,7 +184,7 @@ void TIM2_IRQHandler(void)
 			Key_cnt10ms=0;
 			Mixture_Data.xKey_Read();
 		}
-		if(Led_cnt250ms >= 250)                         //LED4闪烁，表示主车正在运行
+		if(Led_cnt250ms >= 250)                         //led闪烁
 		{
 			Led_cnt250ms = 0;
 			LED4=!LED4;
@@ -219,14 +219,13 @@ void xCAR_KeyRun_Function(void)
 	if(KeyData.S1_Flag)        //按键1
 	{
 		KeyData.S1_Flag = 0;   //禁止屏蔽
-		
+		Android_Data.xMainCar_Send_Android(Identify_TFT_Mask_Arr);
 //		else//蒙一个
 //		{
 //				Android_Data.Green_State = 0;
 //				Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,2);
 //				delay_ms(500);
 //		}
-//		Run_State = 4;
 		
 	}
 	if(KeyData.S2_Flag)        //按键2
@@ -327,7 +326,9 @@ void xCAR_KeyRun_Function(void)
 	}
 	if(KeyData.S3_Flag)        //按键3
 	{
-        Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);
+        Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // 向下翻页
+        
+//        Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);
 		KeyData.S3_Flag = 0;   //禁止屏蔽
 //		Android_Data.xMainCar_Send_Android(Identify_TFT_Mask_Arr);//主车发给安卓请求识别TFT口罩行人
 //		Run_State = 8;
@@ -348,8 +349,27 @@ void xCAR_KeyRun_Function(void)
 	if(KeyData.S4_Flag)        //按键4
 	{	
 		KeyData.S4_Flag = 0;
+        //Three_Dim_Display_Data.xThree_Dim_Display_licence_coord("ABS123",'A',1);
+       //Three_Dim_Display_Data.xThree_Dim_Display_Distance(16);
+//        Three_Dim_Display_Data.xThree_Dim_Display_Graph(0X01);
+//        delay_ms(500);
+//		delay_ms(500);
+//        delay_ms(500);
+//		delay_ms(500);
+//        Three_Dim_Display_Data.xThree_Dim_Display_Colour(0X01);
+//        delay_ms(500);
+//		delay_ms(500);
+//        delay_ms(500);
+//		delay_ms(500);
+        Three_Dim_Display_Data.xThree_Dim_Display_Traffic_Caution(0X01);
+        delay_ms(500);
+		delay_ms(500);
+        Three_Dim_Display_Data.xThree_Dim_Display_RGB_Colour(0xff,0x00,0x00);
+        delay_ms(500);
+		delay_ms(500);
+        uint8_t str[] = "你好";
+        Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add(str);
 //		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//识别蓝色车牌和车型
-//		Run_State = 4;
 	}
 }
 

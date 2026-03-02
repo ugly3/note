@@ -519,8 +519,8 @@ void roadway_check_TimInit(uint16_t arr,uint16_t psc)
 	TIM_TimeBaseInit(TIM9,&TIM_InitStructure);
 
 	NVIC_InitStructure.NVIC_IRQChannel = TIM1_BRK_TIM9_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 5;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 

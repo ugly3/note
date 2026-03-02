@@ -2,7 +2,7 @@
 ..\output\delay.o: ..\SYSTEM\delay\delay.h
 ..\output\delay.o: ..\CMSIS\stm32f4xx.h
 ..\output\delay.o: ..\CMSIS\core_cm4.h
-..\output\delay.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\delay.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\delay.o: ..\CMSIS\core_cmInstr.h
 ..\output\delay.o: ..\CMSIS\core_cmFunc.h
 ..\output\delay.o: ..\CMSIS\core_cmSimd.h

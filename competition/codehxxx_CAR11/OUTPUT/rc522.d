@@ -2,7 +2,7 @@
 ..\output\rc522.o: ..\MODULE\all_module\all_module.h
 ..\output\rc522.o: ..\CMSIS\stm32f4xx.h
 ..\output\rc522.o: ..\CMSIS\core_cm4.h
-..\output\rc522.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\rc522.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\rc522.o: ..\CMSIS\core_cmInstr.h
 ..\output\rc522.o: ..\CMSIS\core_cmFunc.h
 ..\output\rc522.o: ..\CMSIS\core_cmSimd.h
@@ -35,11 +35,11 @@
 ..\output\rc522.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\rc522.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\rc522.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\rc522.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
-..\output\rc522.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
-..\output\rc522.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
-..\output\rc522.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
-..\output\rc522.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
+..\output\rc522.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
+..\output\rc522.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
+..\output\rc522.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
+..\output\rc522.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
+..\output\rc522.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
 ..\output\rc522.o: ..\SYSTEM\sys\sys.h
 ..\output\rc522.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\rc522.o: ..\HARDWARE\Core_Board\cba.h
@@ -80,3 +80,4 @@
 ..\output\rc522.o: ..\MODULE\landmark\wireless_charge\wireless_charge.h
 ..\output\rc522.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\rc522.o: ..\MODULE\xiaochuang\xiaochuang.h
+..\output\rc522.o: ..\MODULE\landmark\two_code\two_code.h

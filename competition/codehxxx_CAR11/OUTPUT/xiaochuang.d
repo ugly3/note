@@ -3,7 +3,7 @@
 ..\output\xiaochuang.o: ..\MODULE\all_module\all_module.h
 ..\output\xiaochuang.o: ..\CMSIS\stm32f4xx.h
 ..\output\xiaochuang.o: ..\CMSIS\core_cm4.h
-..\output\xiaochuang.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\xiaochuang.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\xiaochuang.o: ..\CMSIS\core_cmInstr.h
 ..\output\xiaochuang.o: ..\CMSIS\core_cmFunc.h
 ..\output\xiaochuang.o: ..\CMSIS\core_cmSimd.h
@@ -36,11 +36,11 @@
 ..\output\xiaochuang.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\xiaochuang.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\xiaochuang.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\xiaochuang.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
-..\output\xiaochuang.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
-..\output\xiaochuang.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
-..\output\xiaochuang.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
-..\output\xiaochuang.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
+..\output\xiaochuang.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
+..\output\xiaochuang.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
+..\output\xiaochuang.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
+..\output\xiaochuang.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
+..\output\xiaochuang.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
 ..\output\xiaochuang.o: ..\SYSTEM\sys\sys.h
 ..\output\xiaochuang.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\xiaochuang.o: ..\HARDWARE\Core_Board\cba.h
@@ -81,3 +81,4 @@
 ..\output\xiaochuang.o: ..\MODULE\landmark\wireless_charge\wireless_charge.h
 ..\output\xiaochuang.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\xiaochuang.o: ..\MODULE\xiaochuang\xiaochuang.h
+..\output\xiaochuang.o: ..\MODULE\landmark\two_code\two_code.h

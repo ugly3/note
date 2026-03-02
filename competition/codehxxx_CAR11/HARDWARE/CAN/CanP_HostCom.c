@@ -34,7 +34,7 @@ uint16_t CanHost_Navig;
 9	WIFI+ZIGBEE+显示
 */
 
-
+// CAN过滤器配置 - 定义不同模块的消息ID
 Can_Filter_Struct Fileter_Tab[]=
 {
 	/*
@@ -180,10 +180,10 @@ void CanP_CanRx_Irq(void)
 		FifoDrv_BufWrite(&Fifo_Info,crm.Data,crm.DLC);	 //向Fifo_Info中写入消息
 		break;
 	case 1:			//wifi rx
-		FifoDrv_BufWrite(&Fifo_WifiRx,crm.Data,crm.DLC); //向Fifo_WifiRx中写入消息
+		FifoDrv_BufWrite(&Fifo_WifiRx,crm.Data,crm.DLC); // 将Wifi数据写入Fifo_WifiRx缓冲区
 		break;
 	case 2:			//zigbee rx
-		FifoDrv_BufWrite(&Fifo_ZigbRx,crm.Data,crm.DLC); //向Fifo_ZigbRx中写入消息
+		FifoDrv_BufWrite(&Fifo_ZigbRx,crm.Data,crm.DLC); //将zigbee数据写入Fifo_ZigbRx缓冲区
 		break;
 	default:
 		if((crm.FMI >= 3)&&(crm.FMI <= 6))				 //判断邮箱索引
@@ -608,7 +608,7 @@ void Host_Set_UpTrack( u8 time)  // 设置循迹数据上传时间间隔
 */
 void Send_ZigbeeData_To_Fifo( u8 *p ,u8 len)   
 {
-		FifoDrv_BufWrite( &Fifo_ZigbTx , p , len);
+	FifoDrv_BufWrite( &Fifo_ZigbTx , p , len);
 }
 
 /**

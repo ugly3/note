@@ -29,7 +29,13 @@ typedef struct
 extern Typedef_Android Android_Data;
 
 
-extern uint8_t Two_Code_Data_Store[7];   //存储识别二维码后得到的数据
+
+#define Two_Code_Count 3
+extern uint8_t Two_Code_Init_Data_Store[Two_Code_Count][200];   //存储识别二维码初始数据
+extern char Two_Code_Data_parsed_Store1[50];       // 存储二维码1解析结果
+extern char Two_Code_Data_parsed_Store2[50];       // 存储二维码2解析结果
+extern char Two_Code_Data_parsed_Store3[50];       // 存储二维码3解析结果
+
 extern uint8_t TFT_License_Data_Store[6];   //TFT车牌数据存储
 extern uint8_t TFT_Traffic_Data_Store[7];   //TFT交通标志数据存储
 extern uint8_t TFT_GraphCount_Data_Store[7]; //TFT图形数量数据存储 

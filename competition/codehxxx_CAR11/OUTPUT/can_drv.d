@@ -1,8 +1,8 @@
 ..\output\can_drv.o: ..\HARDWARE\CAN\can_drv.c
-..\output\can_drv.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\can_drv.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
 ..\output\can_drv.o: ..\CMSIS\stm32f4xx.h
 ..\output\can_drv.o: ..\CMSIS\core_cm4.h
-..\output\can_drv.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\can_drv.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\can_drv.o: ..\CMSIS\core_cmInstr.h
 ..\output\can_drv.o: ..\CMSIS\core_cmFunc.h
 ..\output\can_drv.o: ..\CMSIS\core_cmSimd.h

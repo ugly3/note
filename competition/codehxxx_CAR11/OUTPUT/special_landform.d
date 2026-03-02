@@ -3,7 +3,7 @@
 ..\output\special_landform.o: ..\MODULE\all_module\all_module.h
 ..\output\special_landform.o: ..\CMSIS\stm32f4xx.h
 ..\output\special_landform.o: ..\CMSIS\core_cm4.h
-..\output\special_landform.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\special_landform.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\special_landform.o: ..\CMSIS\core_cmInstr.h
 ..\output\special_landform.o: ..\CMSIS\core_cmFunc.h
 ..\output\special_landform.o: ..\CMSIS\core_cmSimd.h
@@ -36,11 +36,11 @@
 ..\output\special_landform.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\special_landform.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\special_landform.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\special_landform.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
-..\output\special_landform.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
-..\output\special_landform.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
-..\output\special_landform.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
-..\output\special_landform.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
+..\output\special_landform.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
+..\output\special_landform.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
+..\output\special_landform.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
+..\output\special_landform.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
+..\output\special_landform.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
 ..\output\special_landform.o: ..\SYSTEM\sys\sys.h
 ..\output\special_landform.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\special_landform.o: ..\HARDWARE\Core_Board\cba.h
@@ -81,3 +81,4 @@
 ..\output\special_landform.o: ..\MODULE\landmark\wireless_charge\wireless_charge.h
 ..\output\special_landform.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\special_landform.o: ..\MODULE\xiaochuang\xiaochuang.h
+..\output\special_landform.o: ..\MODULE\landmark\two_code\two_code.h

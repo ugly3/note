@@ -22,6 +22,7 @@
 "..\output\wireless_charge.o"
 "..\output\smoke_tower.o"
 "..\output\xiaochuang.o"
+"..\output\two_code.o"
 "..\output\infrared.o"
 "..\output\ultrasonic.o"
 "..\output\cba.o"
@@ -94,4 +95,4 @@
 --library_type=microlib --strict --scatter "..\OUTPUT\CarV1.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
---list ".\Listings\CarV1.map" -o ..\OUTPUT\CarV1.axf
+--list ".\Listings\CarV1.map" -o ..\OUTPUT\CarV1.7

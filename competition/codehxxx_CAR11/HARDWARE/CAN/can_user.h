@@ -11,17 +11,17 @@
 #define  ZIGB_RX_MAX    200
 #define  WIFI_MAX_NUM   200
 
-extern uint8_t Wifi_Rx_Buf[ WIFI_MAX_NUM ];
-extern uint8_t Zigb_Rx_Buf[ ZIGB_RX_MAX ];
-extern uint8_t Wifi_Rx_num;
-extern uint8_t Wifi_Rx_flag;  //接收完成标志位
-extern uint8_t Zigbee_Rx_num;
-extern uint8_t Zigbee_Rx_flag;  //接收完成标志位
+extern volatile uint8_t Wifi_Rx_Buf[ WIFI_MAX_NUM ];
+extern volatile uint8_t Zigb_Rx_Buf[ ZIGB_RX_MAX ];
+extern volatile uint8_t Wifi_Rx_num;
+extern volatile uint8_t Wifi_Rx_flag;  //接收完成标志位
+extern volatile uint8_t Zigbee_Rx_num;
+extern volatile uint8_t Zigbee_Rx_flag;  //接收完成标志位
 
 extern uint8_t Host_AGV_Return_Flag;
 extern uint8_t AGV_data_Falg;
-extern uint32_t canu_wifi_rxtime;
-extern uint32_t canu_zibe_rxtime;
+extern volatile uint32_t canu_wifi_rxtime;
+extern volatile uint32_t canu_zibe_rxtime;
 
 GLOBAL void Canuser_Init(void);
 GLOBAL void Canuser_main(void);

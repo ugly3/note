@@ -1,9 +1,9 @@
 ..\output\bkrc_voice.o: ..\HARDWARE\Task_Board\bkrc_voice.c
-..\output\bkrc_voice.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
-..\output\bkrc_voice.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\bkrc_voice.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
+..\output\bkrc_voice.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
 ..\output\bkrc_voice.o: ..\CMSIS\stm32f4xx.h
 ..\output\bkrc_voice.o: ..\CMSIS\core_cm4.h
-..\output\bkrc_voice.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\bkrc_voice.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\bkrc_voice.o: ..\CMSIS\core_cmInstr.h
 ..\output\bkrc_voice.o: ..\CMSIS\core_cmFunc.h
 ..\output\bkrc_voice.o: ..\CMSIS\core_cmSimd.h

@@ -3,7 +3,7 @@
 ..\output\led_display.o: ..\MODULE\all_module\all_module.h
 ..\output\led_display.o: ..\CMSIS\stm32f4xx.h
 ..\output\led_display.o: ..\CMSIS\core_cm4.h
-..\output\led_display.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\led_display.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\led_display.o: ..\CMSIS\core_cmInstr.h
 ..\output\led_display.o: ..\CMSIS\core_cmFunc.h
 ..\output\led_display.o: ..\CMSIS\core_cmSimd.h
@@ -36,11 +36,11 @@
 ..\output\led_display.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\led_display.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\led_display.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\led_display.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
-..\output\led_display.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
-..\output\led_display.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
-..\output\led_display.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
-..\output\led_display.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
+..\output\led_display.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
+..\output\led_display.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
+..\output\led_display.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
+..\output\led_display.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
+..\output\led_display.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
 ..\output\led_display.o: ..\SYSTEM\sys\sys.h
 ..\output\led_display.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\led_display.o: ..\HARDWARE\Core_Board\cba.h
@@ -81,3 +81,4 @@
 ..\output\led_display.o: ..\MODULE\landmark\wireless_charge\wireless_charge.h
 ..\output\led_display.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\led_display.o: ..\MODULE\xiaochuang\xiaochuang.h
+..\output\led_display.o: ..\MODULE\landmark\two_code\two_code.h

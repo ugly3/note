@@ -111,7 +111,7 @@ void RFID_Track(uint8_t speed)
 ²ÎÊı1£ºÇ°½øÊ±¼ä
 ²ÎÊı3£ºÒª¶ÁÈ¡¿¨µÄÊı¾İ¿é
 */
-void xRFID_Track_Read_L(uint8_t speed,uint16_t time,uint8_t card)
+void xRFID_Track_Read_L(uint8_t speed,uint16_t time,uint8_t card_block)
 {
     track_time_Start=0;
     track_time_Start=1;//¿ªÊ¼¼ÆÊ±
@@ -137,7 +137,7 @@ void xRFID_Track_Read_L(uint8_t speed,uint16_t time,uint8_t card)
 			Track_Flag = 0;         //Í£Ö¹Ñ­¼£
             Stop_Flag=1;
               delay_ms(500);              //ÑÓÊ±500msºóÈÃ³µ¸üÎÈ¶¨
-              RC522(card,RFID_Read);      //¶Á¿¨  
+              RC522(card_block,RFID_Read);      //¶Á¿¨  
             
               if(RFID_Num == 1)  
               { 
@@ -390,6 +390,11 @@ void xRFID_Read(uint8_t add)
     }
 }
 
+
+
+/*
+¹¦ÄÜ£º2025ÄêÑùÌâ5¿¨µÄÊı¾İ´¦Àí
+*/
 void YT5_parseCard1(const char* card1Data, char* formula, char* position)    //½âÎö¿¨1Êı¾İ£¬ÌáÈ¡¹«Ê½ºÍ×ø±ê
 {
 	const char* p = card1Data;
@@ -417,7 +422,6 @@ void YT5_parseCard1(const char* card1Data, char* formula, char* position)    //½
         }
     }
 }
-
 // ¼òµ¥µÄ±í´ïÊ½½âÎöÆ÷£¨Ö§³Ö +, -, *, /£©
 double eval(const char* expr) {
     int result = 0;
@@ -450,8 +454,6 @@ double eval(const char* expr) {
     }
 		 return result;
 }
-
-
 // ¼ÆËã¹«Ê½½á¹û
 double calculateFormula(const char* formula, int a, int b, int c, int d) 
 {
@@ -553,7 +555,7 @@ void YT5_Handle_Card1_Data(char *data)
 
 
 /*
-¹¦ÄÜ£ºÑùÌâ1¿¨1µÄÊı¾İ´¦Àí
+¹¦ÄÜ£º2025ÄêÑùÌâ1¿¨1µÄÊı¾İ´¦Àí
 */
 void parseCard1(const char* card1Data, int* sector_block,  char* position) // º¯Êı£º½âÎö¿¨1Êı¾İ
 {
@@ -609,7 +611,7 @@ void YT1_Handle_Card1_Data(char *data)
 
 
 /*
-¹¦ÄÜ£ºÑùÌâ2¿¨1µÄÊı¾İ´¦Àí
+¹¦ÄÜ£º2025ÄêÑùÌâ2¿¨1µÄÊı¾İ´¦Àí
         ÌáÈ¡¹«Ê½ºÍ×ø±ê
 */
 
@@ -725,10 +727,7 @@ void extractFormulaAndCoord(const char *input, char *formula, char *coord)
     coord[2] = '\0'; // ½áÊø×ø±ê×Ö·û´®
     formula[k] = '\0'; // ½áÊø¹«Ê½×Ö·û´®
 }
-
-
-
-//ÑùÌâ2¿¨µÄ´¦Àí
+//2025ÄêÑùÌâ2¿¨µÄ´¦Àí
 void YT2_Handle_Card1_Data(char *data)
 {
     uint8_t Buf[30];
@@ -759,7 +758,7 @@ void YT2_Handle_Card1_Data(char *data)
 
 
 /*
-¹¦ÄÜ£ºÑùÌâ3¿¨µÄÊı¾İ´¦Àí
+¹¦ÄÜ£º2025ÄêÑùÌâ3¿¨µÄÊı¾İ´¦Àí
         ÌáÈ¡ÎŞÏß³äµçÕ¾µÄ¿ªÆôÂë
 */
 
@@ -828,8 +827,6 @@ void convert_to_hex_codes(char* values, int count, unsigned int* hex_codes) {
         }
     }
 }
-
-
 // ´¦Àí¿¨Êı¾İ 
 void process_card_data(const char* card_data, unsigned int* hex_codes) {
     char temp_values[MAX_HEX_VALUES];
@@ -845,7 +842,6 @@ void process_card_data(const char* card_data, unsigned int* hex_codes) {
             }
         }
     }
-
     // È¥³ıÖØ¸´×Ö·û
     remove_duplicates(temp_values, &count);
 
@@ -855,7 +851,6 @@ void process_card_data(const char* card_data, unsigned int* hex_codes) {
     // ×ª»»ÎªÊ®Áù½øÖÆÂë
     convert_to_hex_codes(temp_values, count, hex_codes);
 }
-
 void YT3_Handle_Card1_Data(void)
 {
     uint8_t Buf[30];
@@ -887,6 +882,7 @@ void YT3_Handle_Card1_Data(void)
 
 
 
+/*2026ÄêÑùÌâ1¿¨´¦ÀíÊı¾İ*/
 
 
 

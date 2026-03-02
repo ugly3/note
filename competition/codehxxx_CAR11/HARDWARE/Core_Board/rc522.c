@@ -37,7 +37,7 @@ uint8_t ADDR_Str[14]={"RFID_ADDR:01\n"};
 ********************************************************/
 void RC522(uint8_t card_addr,uint8_t mode)
 {
-	uint8_t card_key = (card_addr/4)*4+3;
+	uint8_t card_key = (card_addr/4)*4+3;   //º∆À„RFIDø®∆¨÷–√‹‘øøÈ£®KEYøÈ£©µÿ÷∑
 	
 	LED1 = 0;
 	LED2 = 0;

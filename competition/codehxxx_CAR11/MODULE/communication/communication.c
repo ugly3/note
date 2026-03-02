@@ -49,208 +49,211 @@ void Can_ZigBeeRx_Check(void)
 {
 	if(Zigbee_Rx_flag)
 	{
-		if(Zigb_Rx_Buf[1] == 0x03)  //********************道闸标志物
-		{
-			if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[4] == 0x05))  //如果进入，则代表回传到指令，道闸处于开启状态
-			{
-				Communication_Data.Barrier_Open_Flag = 1; 				
-			}
-		}
-		if((Zigb_Rx_Buf[1] == CarPort_Data.Device_A || Zigb_Rx_Buf[1] == CarPort_Data.Device_B))   //**********************立体车库标志物
-		{
-			if((Zigb_Rx_Buf[2] == 0x03) && (Zigb_Rx_Buf[3] == 0x01))         //返回车库位于第几层的数据
-			{
-				if(Zigb_Rx_Buf[1] == CarPort_Data.Device_A)       //判断为A设备
-				{
-					Communication_Data.CarPort_Back_A_Level = Zigb_Rx_Buf[4];   //返回当前车库位于第几层数据
-				}
-				else if(Zigb_Rx_Buf[1] == CarPort_Data.Device_B)        //判断为B设备
-				{
-					Communication_Data.CarPort_Back_B_Level = Zigb_Rx_Buf[4];   //返回当前车库位于第几层数据
-				}
-			}
-			else if((Zigb_Rx_Buf[2] == 0x03) && (Zigb_Rx_Buf[3] == 0x02))      //返回前/后侧红外状态
-			{
-				if(Zigb_Rx_Buf[1] == CarPort_Data.Device_A)         //判断为A设备
-				{
-					if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x01))  //前后侧都被触发  （工作室：前后侧都未触发）
-					{
-						Communication_Data.CarPort_Back_A_Infrared = 1;
-					}
-					else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x02)) //前后侧未触发  （工作室：前后侧都被触发）
-					{
-						Communication_Data.CarPort_Back_A_Infrared = 2;
-					}
-					else if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x02))  //前侧触发，后侧未触发（工作室：前侧未触发，后侧触发）
-					{
-						Communication_Data.CarPort_Back_A_Infrared = 3;
-					}
-					else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x01))  //前侧未触发，后侧触发（工作室：前侧未触发，后侧触发）
-					{
-						Communication_Data.CarPort_Back_A_Infrared = 4;
-					}
-					else
-					{
-					}
-				}
-				else if(Zigb_Rx_Buf[1] == CarPort_Data.Device_B )          //判断为B设备
-				{
-					if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x01))  //前后侧都被触发
-					{
-						Communication_Data.CarPort_Back_B_Infrared = 1;
-					}
-					else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x02)) //前后侧未触发
-					{
-						Communication_Data.CarPort_Back_B_Infrared = 2;
-					}
-					else if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x02))  //前侧触发，后侧未触发
-					{
-						Communication_Data.CarPort_Back_B_Infrared = 3;
-					}
-					else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x01))  //前侧未触发，后侧触发
-					{
-						Communication_Data.CarPort_Back_B_Infrared = 4;
-					}
-					else
-					{
-						
-					}					
-				}
-			}
-		}
-		
-		if(Zigb_Rx_Buf[1] == 0x10)    //*****************************特殊地形标志物
-		{
-			if((Zigb_Rx_Buf[2] == 0x10) == (Zigb_Rx_Buf[3] == 0x01))
-			{
-				if(Zigb_Rx_Buf[4] == 0x31)    
-				{
-					Communication_Data.Special_LandForm_Back_State = 1;      //车辆顺利通过，通行方向（A->B）
-				}
-				else if(Zigb_Rx_Buf[4] == 0x32) 
-				{
-					Communication_Data.Special_LandForm_Back_State = 2;     //车辆顺利通过，通行方向（A->B）
-				}
-				else if(Zigb_Rx_Buf[4] == 0x33) 
-				{
-					Communication_Data.Special_LandForm_Back_State = 3;     //车辆未顺利通过
-				}
-				else 
-				{
-					
-				}
-			}
-		}
-		
-		if(Zigb_Rx_Buf[1] == 0x0C)   //**************************ETC系统标志物
-		{
-			if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[3] == 0x01) && (Zigb_Rx_Buf[4] == 0x06) && (Zigb_Rx_Buf[5] == 0x00)&& ETC_Data.ETC_Car_Start==1)   
-			{
-				Communication_Data.ETC_Open_Flag = 1;        //闸门开启状态
-			}
-		}
-		
-     if((Zigb_Rx_Buf[1] == 0x0E) || (Zigb_Rx_Buf[1] == 0x0F))    //*******************智能交通灯标志物
-		{
-			if(Zigb_Rx_Buf[1] == 0x0E)   //设备A
-			{
-				if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[3] == 0x01) && (Zigb_Rx_Buf[5] == 0x00))
-				{
-					if(Zigb_Rx_Buf[4] == 0x07)        //进入识别模式成功
-					{
-						Communication_Data.Smart_Traffic_A_Recognition_State = 1;
-					}
-					else if(Zigb_Rx_Buf[4] == 0x08)  //进入识别模式失败
-					{
-						Communication_Data.Smart_Traffic_A_Recognition_State = 0;
-					}
-				}
-			}
-			else if(Zigb_Rx_Buf[1] == 0x0F)   //设备B
-			{
-				if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[3] == 0x01) && (Zigb_Rx_Buf[5] == 0x00))
-				{
-					if(Zigb_Rx_Buf[4] == 0x07)   //进入识别模式成功
-					{
-						Communication_Data.Smart_Traffic_B_Recognition_State = 1;
-					}
-					else if(Zigb_Rx_Buf[4] == 0x08)  //进入识别模式失败
-					{
-						Communication_Data.Smart_Traffic_B_Recognition_State = 0;
-					}					
-				}				
-			}
-		}
-		
-     if(0x06 == Zigb_Rx_Buf[1])                   //**************************语音播报标志物
-		{
-			if(0x02 == Zigb_Rx_Buf[2])  //语音播报回传RTC日期
-			{
-				Voice_Report_Data.xVoice_Report_Rx_RTC_Date[0] = Zigb_Rx_Buf[3];  //回传RTC年份
-				Voice_Report_Data.xVoice_Report_Rx_RTC_Date[1] = Zigb_Rx_Buf[4];  //回传RTC月份
-				Voice_Report_Data.xVoice_Report_Rx_RTC_Date[2] = Zigb_Rx_Buf[5];  //回传RTC日
-				Communication_Data.Voice_Report_Rx_State = 1;  //回传RTC日期状态
-			}
-			else if(0x03 == Zigb_Rx_Buf[2])  //语音播报回传RTC时间
-			{
-				Voice_Report_Data.xVoice_Report_Rx_RTC_Time[0] = Zigb_Rx_Buf[3];  //回传RTC时
-				Voice_Report_Data.xVoice_Report_Rx_RTC_Time[1] = Zigb_Rx_Buf[4];  //回传RTC分
-				Voice_Report_Data.xVoice_Report_Rx_RTC_Time[2] = Zigb_Rx_Buf[5];  //回传RTC秒
-				Communication_Data.Voice_Report_Rx_State = 2;  //回传RTC时间状态
-			}
-			else if(0x04 == Zigb_Rx_Buf[2])  //语音播报回传天气数据与温度数据（16进制，单位度）
-			{
-				Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0] = Zigb_Rx_Buf[3];  //回传天气数据
-				Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[1] = Zigb_Rx_Buf[4];  //回传温度数据
-				Communication_Data.Voice_Report_Rx_State = 3;  //回传天气数据与温度数据状态
-			}
-			else
-			{
-				
-			}
-		}
-
-		if(0x01 == Zigb_Rx_Buf[1])    //*****************接收从车发过来的数据
-		{
-			if(0xA0 == Zigb_Rx_Buf[2]) 
-			{
-				FollowCar_Data.FollowCar_Stat_Flag  = 1;   //如果从车启动了，标志位置1
-			}
-			else if(0xAA == Zigb_Rx_Buf[2])    // 从车完成任务
-			{
-				FollowCar_Data.FollowCar_Finish_Flag = 1;
-			}
-			else if(0xA2 == Zigb_Rx_Buf[2])    // 从车到达车库
-			{
-				FollowCar_Data.FollowCar_Arrive_CarPort = 1;
-			}
-      else if(0xA3 == Zigb_Rx_Buf[2])    //从车传来的车牌信息
-			{
-				FollowCar_Data.Follow_Send_Licence_Data_Flag = 1;
-                Follow_Send_Licence_Data_Store[0] = Zigb_Rx_Buf[3];
-                Follow_Send_Licence_Data_Store[1] = Zigb_Rx_Buf[3];
-                Follow_Send_Licence_Data_Store[2] = Zigb_Rx_Buf[3];
-                Follow_Send_Licence_Data_Store[3] = Zigb_Rx_Buf[3];
-                Follow_Send_Licence_Data_Store[4] = Zigb_Rx_Buf[3];
-                Follow_Send_Licence_Data_Store[5] = Zigb_Rx_Buf[3];
-			}
-            else if(0xA4 == Zigb_Rx_Buf[2])    //从车传来的车牌信息
+        if(gt_get_sub(canu_zibe_rxtime) == 0)
+        {
+            if(Zigb_Rx_Buf[1] == 0x03)  //********************道闸标志物
             {
-                FollowCar_Data.Follow_temperature_Finish_Flag=1;  
+                if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[4] == 0x05))  //如果进入，则代表回传到指令，道闸处于开启状态
+                {
+                    Communication_Data.Barrier_Open_Flag = 1; 				
+                }
             }
-		}
-//		uint8_t Buf[50];
-//		sprintf((char*)Buf,"data is : %x-%x-%x \r\n",Zigb_Rx_Buf[1],Zigb_Rx_Buf[2],Zigb_Rx_Buf[7]);  
-//		Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));  
-		
-//		if(Zigb_Rx_Buf[7] == 0xBB)
-//		{
-//			memset(Zigb_Rx_Buf,0,sizeof(Zigb_Rx_Buf));  //对zigbee接收缓存清零	
-//			Zigbee_Rx_flag = 0; //接收完成标志位置为1		
-//		} 
-		
-		memset(Zigb_Rx_Buf,0,sizeof(Zigb_Rx_Buf));
-        Zigbee_Rx_flag = 0;    
+            if((Zigb_Rx_Buf[1] == CarPort_Data.Device_A || Zigb_Rx_Buf[1] == CarPort_Data.Device_B))   //**********************立体车库标志物
+            {
+                if((Zigb_Rx_Buf[2] == 0x03) && (Zigb_Rx_Buf[3] == 0x01))         //返回车库位于第几层的数据
+                {
+                    if(Zigb_Rx_Buf[1] == CarPort_Data.Device_A)       //判断为A设备
+                    {
+                        Communication_Data.CarPort_Back_A_Level = Zigb_Rx_Buf[4];   //返回当前车库位于第几层数据
+                    }
+                    else if(Zigb_Rx_Buf[1] == CarPort_Data.Device_B)        //判断为B设备
+                    {
+                        Communication_Data.CarPort_Back_B_Level = Zigb_Rx_Buf[4];   //返回当前车库位于第几层数据
+                    }
+                }
+                else if((Zigb_Rx_Buf[2] == 0x03) && (Zigb_Rx_Buf[3] == 0x02))      //返回前/后侧红外状态
+                {
+                    if(Zigb_Rx_Buf[1] == CarPort_Data.Device_A)         //判断为A设备
+                    {
+                        if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x01))  //前后侧都被触发  （工作室：前后侧都未触发）
+                        {
+                            Communication_Data.CarPort_Back_A_Infrared = 1;
+                        }
+                        else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x02)) //前后侧未触发  （工作室：前后侧都被触发）
+                        {
+                            Communication_Data.CarPort_Back_A_Infrared = 2;
+                        }
+                        else if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x02))  //前侧触发，后侧未触发（工作室：前侧未触发，后侧触发）
+                        {
+                            Communication_Data.CarPort_Back_A_Infrared = 3;
+                        }
+                        else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x01))  //前侧未触发，后侧触发（工作室：前侧未触发，后侧触发）
+                        {
+                            Communication_Data.CarPort_Back_A_Infrared = 4;
+                        }
+                        else
+                        {
+                        }
+                    }
+                    else if(Zigb_Rx_Buf[1] == CarPort_Data.Device_B )          //判断为B设备
+                    {
+                        if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x01))  //前后侧都被触发
+                        {
+                            Communication_Data.CarPort_Back_B_Infrared = 1;
+                        }
+                        else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x02)) //前后侧未触发
+                        {
+                            Communication_Data.CarPort_Back_B_Infrared = 2;
+                        }
+                        else if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x02))  //前侧触发，后侧未触发
+                        {
+                            Communication_Data.CarPort_Back_B_Infrared = 3;
+                        }
+                        else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x01))  //前侧未触发，后侧触发
+                        {
+                            Communication_Data.CarPort_Back_B_Infrared = 4;
+                        }
+                        else
+                        {
+                            
+                        }					
+                    }
+                }
+            }
+            
+            if(Zigb_Rx_Buf[1] == 0x10)    //*****************************特殊地形标志物
+            {
+                if((Zigb_Rx_Buf[2] == 0x10) == (Zigb_Rx_Buf[3] == 0x01))
+                {
+                    if(Zigb_Rx_Buf[4] == 0x31)    
+                    {
+                        Communication_Data.Special_LandForm_Back_State = 1;      //车辆顺利通过，通行方向（A->B）
+                    }
+                    else if(Zigb_Rx_Buf[4] == 0x32) 
+                    {
+                        Communication_Data.Special_LandForm_Back_State = 2;     //车辆顺利通过，通行方向（A->B）
+                    }
+                    else if(Zigb_Rx_Buf[4] == 0x33) 
+                    {
+                        Communication_Data.Special_LandForm_Back_State = 3;     //车辆未顺利通过
+                    }
+                    else 
+                    {
+                        
+                    }
+                }
+            }
+            
+            if(Zigb_Rx_Buf[1] == 0x0C)   //**************************ETC系统标志物
+            {
+                if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[3] == 0x01) && (Zigb_Rx_Buf[4] == 0x06) && (Zigb_Rx_Buf[5] == 0x00)&& ETC_Data.ETC_Car_Start==1)   
+                {
+                    Communication_Data.ETC_Open_Flag = 1;        //闸门开启状态
+                }
+            }
+            
+         if((Zigb_Rx_Buf[1] == 0x0E) || (Zigb_Rx_Buf[1] == 0x0F))    //*******************智能交通灯标志物
+            {
+                if(Zigb_Rx_Buf[1] == 0x0E)   //设备A
+                {
+                    if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[3] == 0x01) && (Zigb_Rx_Buf[5] == 0x00))
+                    {
+                        if(Zigb_Rx_Buf[4] == 0x07)        //进入识别模式成功
+                        {
+                            Communication_Data.Smart_Traffic_A_Recognition_State = 1;
+                        }
+                        else if(Zigb_Rx_Buf[4] == 0x08)  //进入识别模式失败
+                        {
+                            Communication_Data.Smart_Traffic_A_Recognition_State = 0;
+                        }
+                    }
+                }
+                else if(Zigb_Rx_Buf[1] == 0x0F)   //设备B
+                {
+                    if((Zigb_Rx_Buf[2] == 0x01) && (Zigb_Rx_Buf[3] == 0x01) && (Zigb_Rx_Buf[5] == 0x00))
+                    {
+                        if(Zigb_Rx_Buf[4] == 0x07)   //进入识别模式成功
+                        {
+                            Communication_Data.Smart_Traffic_B_Recognition_State = 1;
+                        }
+                        else if(Zigb_Rx_Buf[4] == 0x08)  //进入识别模式失败
+                        {
+                            Communication_Data.Smart_Traffic_B_Recognition_State = 0;
+                        }					
+                    }				
+                }
+            }
+            
+         if(0x06 == Zigb_Rx_Buf[1])                   //**************************语音播报标志物
+            {
+                if(0x02 == Zigb_Rx_Buf[2])  //语音播报回传RTC日期
+                {
+                    Voice_Report_Data.xVoice_Report_Rx_RTC_Date[0] = Zigb_Rx_Buf[3];  //回传RTC年份
+                    Voice_Report_Data.xVoice_Report_Rx_RTC_Date[1] = Zigb_Rx_Buf[4];  //回传RTC月份
+                    Voice_Report_Data.xVoice_Report_Rx_RTC_Date[2] = Zigb_Rx_Buf[5];  //回传RTC日
+                    Communication_Data.Voice_Report_Rx_State = 1;  //回传RTC日期状态
+                }
+                else if(0x03 == Zigb_Rx_Buf[2])  //语音播报回传RTC时间
+                {
+                    Voice_Report_Data.xVoice_Report_Rx_RTC_Time[0] = Zigb_Rx_Buf[3];  //回传RTC时
+                    Voice_Report_Data.xVoice_Report_Rx_RTC_Time[1] = Zigb_Rx_Buf[4];  //回传RTC分
+                    Voice_Report_Data.xVoice_Report_Rx_RTC_Time[2] = Zigb_Rx_Buf[5];  //回传RTC秒
+                    Communication_Data.Voice_Report_Rx_State = 2;  //回传RTC时间状态
+                }
+                else if(0x04 == Zigb_Rx_Buf[2])  //语音播报回传天气数据与温度数据（16进制，单位度）
+                {
+                    Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0] = Zigb_Rx_Buf[3];  //回传天气数据
+                    Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[1] = Zigb_Rx_Buf[4];  //回传温度数据
+                    Communication_Data.Voice_Report_Rx_State = 3;  //回传天气数据与温度数据状态
+                }
+                else
+                {
+                    
+                }
+            }
+
+            if(0x01 == Zigb_Rx_Buf[1])    //*****************接收从车发过来的数据
+            {
+                if(0xA0 == Zigb_Rx_Buf[2]) 
+                {
+                    FollowCar_Data.FollowCar_Stat_Flag  = 1;   //如果从车启动了，标志位置1
+                }
+                else if(0xAA == Zigb_Rx_Buf[2])    // 从车完成任务
+                {
+                    FollowCar_Data.FollowCar_Finish_Flag = 1;
+                }
+                else if(0xA2 == Zigb_Rx_Buf[2])    // 从车到达车库
+                {
+                    FollowCar_Data.FollowCar_Arrive_CarPort = 1;
+                }
+          else if(0xA3 == Zigb_Rx_Buf[2])    //从车传来的车牌信息
+                {
+                    FollowCar_Data.Follow_Send_Licence_Data_Flag = 1;
+                    Follow_Send_Licence_Data_Store[0] = Zigb_Rx_Buf[3];
+                    Follow_Send_Licence_Data_Store[1] = Zigb_Rx_Buf[3];
+                    Follow_Send_Licence_Data_Store[2] = Zigb_Rx_Buf[3];
+                    Follow_Send_Licence_Data_Store[3] = Zigb_Rx_Buf[3];
+                    Follow_Send_Licence_Data_Store[4] = Zigb_Rx_Buf[3];
+                    Follow_Send_Licence_Data_Store[5] = Zigb_Rx_Buf[3];
+                }
+                else if(0xA4 == Zigb_Rx_Buf[2])    //从车传来的车牌信息
+                {
+                    FollowCar_Data.Follow_temperature_Finish_Flag=1;  
+                }
+            }
+    //		uint8_t Buf[50];
+    //		sprintf((char*)Buf,"data is : %x-%x-%x \r\n",Zigb_Rx_Buf[1],Zigb_Rx_Buf[2],Zigb_Rx_Buf[7]);  
+    //		Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));  
+            
+    //		if(Zigb_Rx_Buf[7] == 0xBB)
+    //		{
+    //			memset(Zigb_Rx_Buf,0,sizeof(Zigb_Rx_Buf));  //对zigbee接收缓存清零	
+    //			Zigbee_Rx_flag = 0; //接收完成标志位置为1		
+    //		} 
+            
+            //memset(Zigb_Rx_Buf,0,sizeof(Zigb_Rx_Buf));
+            Zigbee_Rx_flag = 0;    
+        }
 	}
 }
 
@@ -262,39 +265,23 @@ void Can_ZigBeeRx_Check(void)
 uint8_t App_Rx_Flag;
 void Normal_data(void)	  // 正常接收11字节控制指令
 {
-	uint8_t sum=0;
-
-	if(Wifi_Rx_Buf[10] == 0xBB)	 // 判断包尾
-	{									  
-		//主指令与三位副指令左求和校验
-		//注意：在求和溢出时应该对和做256取余。
-        sum = (Wifi_Rx_Buf[2]+Wifi_Rx_Buf[3]+Wifi_Rx_Buf[4]+Wifi_Rx_Buf[5]+Wifi_Rx_Buf[6]+Wifi_Rx_Buf[7]+Wifi_Rx_Buf[8])%256;
-		if(sum == Wifi_Rx_Buf[9])
-		{
-			App_Rx_Flag =1;
-		}
-		else 
-			App_Rx_Flag =0;
-		
-//		App_Rx_Flag =1;
-	}
-	else
-	{
-		
-		App_Rx_Flag = 0;
-	}
-//	else if(Wifi_Rx_Buf[7] == 0xBB)
-//	{
-//		App_Rx_Flag =1;
-//	}
-
+	static uint16_t sum=0;
+								  
+    //主指令与三位副指令左求和校验
+    //注意：在求和溢出时应该对和做256取余。
+    sum = (Wifi_Rx_Buf[2]+Wifi_Rx_Buf[3]+Wifi_Rx_Buf[4]+Wifi_Rx_Buf[5]+Wifi_Rx_Buf[6]+Wifi_Rx_Buf[7]+Wifi_Rx_Buf[8])%256;
+    if(sum == Wifi_Rx_Buf[9])
+    {
+        App_Rx_Flag =1;
+    }
+    else 
+        App_Rx_Flag =0;
 }
 
 void Abnormal_data(void)	  //数据异常处理
 {
 	uint8_t i,j;
 	uint8_t sum = 0;
-	
 	if(Wifi_Rx_num < 11)			// 异常数据字节数小于11字节不做处理
 	{
 	   App_Rx_Flag = 0;
@@ -305,46 +292,184 @@ void Abnormal_data(void)	  //数据异常处理
 		{
 			if(Wifi_Rx_Buf[i] == 0x55)	   // 寻找包头
 			{
-			   if(Wifi_Rx_Buf[i+10] == 0xBB)	// 判断包尾
-			   {
-						sum=(Wifi_Rx_Buf[i+2]+Wifi_Rx_Buf[i+3]+Wifi_Rx_Buf[i+4]+Wifi_Rx_Buf[i+5]+Wifi_Rx_Buf[i+6]+Wifi_Rx_Buf[i+7]+Wifi_Rx_Buf[i+8])%256;
-					 if(sum == Wifi_Rx_Buf[i+9])	 // 判断求和
-						{
-							 for(j=0;j<11;j++)
-							 {
-									Wifi_Rx_Buf[j]=Wifi_Rx_Buf[j+i];	 // 数据搬移
-							 }
-							App_Rx_Flag =1;
-						}
-					 else 
-						 App_Rx_Flag =0;
-		     }
+                if(Wifi_Rx_Buf[i+1] == 0xEE)        
+                {
+                   if(Wifi_Rx_Buf[i+10] == 0xBB)	// 判断包尾
+                   {
+                            sum=(Wifi_Rx_Buf[i+2]+Wifi_Rx_Buf[i+3]+Wifi_Rx_Buf[i+4]+Wifi_Rx_Buf[i+5]+Wifi_Rx_Buf[i+6]+Wifi_Rx_Buf[i+7]+Wifi_Rx_Buf[i+8])%256;
+                         if(sum == Wifi_Rx_Buf[i+9])	 // 判断求和
+                            {
+                                 for(j=0;j<11;j++)
+                                 {
+                                        Wifi_Rx_Buf[j]=Wifi_Rx_Buf[j+i];	 // 数据搬移
+                                 }
+                                App_Rx_Flag =1;
+                            }
+                         else 
+                             App_Rx_Flag =0;
+                    }
+                }  
 		   }
 	   }
 	}
 }
 
-uint8_t jixun=0;
+/* ????(0x0A)?????? 55 EE type len data[] checksum BB??????=type+len+????data */
+/*
+ * @brief
+ * @note // 构建完整包：包头2 + type1 + len1 + index1 + data[N] + checksum1 + 包尾1
+
+ * 0: 0x55
+ * 1: 0xEE
+ * 2: type (0x0A)
+ * 3: len = 1 + 内容字节数（这 1 个字节是 index，第几个二维码）
+ * 4: index（第几个二维码，1/2/...）
+ * 5 .. 5 + (len - 1) - 1: 实际二维码内容
+ * 4 + len: checksum
+ * 4 + len + 1: 0xBB
+ */
+
+static uint8_t Check_VariableLen_Packet(void)
+{
+    uint8_t payload_len; // index(1) + content_len(N)
+    uint16_t expected_total;
+    uint16_t sum = 0;
+    uint8_t i;
+
+    // 至少要有 4 字节: 55 EE type len 
+    if (Wifi_Rx_num < 4)
+        return 0;
+
+    payload_len = Wifi_Rx_Buf[3]; // = 1(索引) + 内容长度
+    if (payload_len == 0)
+        return 0; // 至少要有 index 这一字节
+    if (payload_len > (WIFI_MAX_NUM - 6))
+        return 0; // 防止越界: 头4 + payload + 校验 + 尾
+
+    // 按协议总长: 4(头) + payload_len + 1(checksum) + 1(尾) = 6 + payload_len
+    expected_total = 6 + payload_len;
+    if ((uint16_t)(Wifi_Rx_num + 1) < expected_total)
+        return 0; // 还没收齐整包
+
+    // 校验包尾是否为 0xBB
+    if (Wifi_Rx_Buf[4 + payload_len + 1] != 0xBB)
+        return 0;
+
+    // 计算校验和: type + len + index + 所有内容字节
+    sum = (Wifi_Rx_Buf[2] & 0xFF) + (payload_len & 0xFF);
+    for (i = 0; i < payload_len; i++)
+    {
+        sum += (Wifi_Rx_Buf[4 + i] & 0xFF); // [4] 是 index，后面是内容
+    }
+
+    if ((sum & 0xFF) != (Wifi_Rx_Buf[4 + payload_len] & 0xFF))
+        return 0;
+
+    return 1;
+}
+volatile uint8_t Rx_count = 0;
+void PrintAndroidData_Array(void)
+{
+    uint8_t i;
+    // 打印接收到的数据数量
+    printf("Android Rx:[%d]", (int)((uint16_t)Wifi_Rx_num + 1));
+
+#if TY2_2026 
+    // TODO: 在这里解析本帧业务：
+    uint8_t *content = (uint8_t *)&Wifi_Rx_Buf[4];
+    uint8_t content_len = Wifi_Rx_Buf[3];
+#else
+    // TODO: 在这里解析本帧业务：
+    uint8_t *content = (uint8_t *)&Wifi_Rx_Buf[5];
+    uint8_t content_len = Wifi_Rx_Buf[3]-1;
+#endif
+    
+    // 打印ASCII格式（如果数据是可打印字符）
+    // printf("ASCII Data: ");
+    for (i = 0; i < content_len; i++)
+    {
+        printf("%c", content[i]);
+        Two_Code_Init_Data_Store[Rx_count][i] = content[i];
+    }
+    Two_Code_Init_Data_Store[Rx_count][i] = 0x00;
+    printf("\r\n");
+    
+    Rx_count++;
+    if(Rx_count >= Two_Code_Count)
+    {
+        printf("bbb  ");
+        Android_Data.Two_Code_State = 1; //二维码识别并储存成功
+    }
+}
+
+
+//uint8_t jixun=0;
 uint8_t YT5_Carport=0;
 
 /* WIFI 数据接收 （安卓与主车通信）*/
 void Can_WifiRx_Check(void)
 {
-    uint8_t Buf1[30];
-	if(Wifi_Rx_flag)
-	{	
-			if(Wifi_Rx_Buf[0] == 0x55)   
-			{              
-				Normal_data();    //数据正常11字节
-			}
-			else
-			{
-                jixun=1;
-				Abnormal_data();   //数据异常   
-			} 	
-			Wifi_Rx_flag = 0;
-	}
-	
+    uint8_t Buf1[100];
+    
+    if(Wifi_Rx_flag)
+    {	
+        if(gt_get_sub(canu_wifi_rxtime) == 0)    //Wifi_Rx_flag为1之后等待10ms再检验
+        {     
+            for (int i = 0; i < Wifi_Rx_num; i++) 
+            {
+                //printf("%02X ", Wifi_Rx_Buf[i]);  // 大写十六进制
+                    sprintf((char*)Buf1,"%02x ",Wifi_Rx_Buf[i]);  
+                    Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
+                
+                
+            }
+            
+            
+            /* 变长包(0x0A)：55 EE 0x0A len data[] checksum BB */
+            if (Wifi_Rx_Buf[0] == 0x55 && Wifi_Rx_Buf[1] == 0xEE && Wifi_Rx_Buf[2] == 0x0A && Wifi_Rx_Buf[Wifi_Rx_num] == 0xBB)
+            {
+                /* 至少要有 4 字节才能拿到 len */
+                if (Wifi_Rx_num >= 3)
+                {
+                    uint8_t len = Wifi_Rx_Buf[3];
+                    uint16_t expected_total = 6 + len; /* 4 + len + 2 */
+
+                    /* 只有在数据收齐后才校验并置 App_Rx_Flag */
+                    if ((uint16_t)(Wifi_Rx_num + 1) >= expected_total)
+                    {
+                        if (Check_VariableLen_Packet())
+                        {
+                            App_Rx_Flag = 1;
+                        }
+                        else
+                        {
+                            printf("Error: Check_VariableLen_Packet failed\r\n");
+                            App_Rx_Flag = 0;
+                        }
+                        /* 无论校验成功与否，这一帧都处理完了，清标志等待下一帧 */
+                        // PrintAndroidData_Array();
+                        Wifi_Rx_flag = 0;
+                    }
+                    /* 否则数据还没收完，保持 Wifi_Rx_flag=1，等待下次调用 */
+                }
+            }
+            else if(Wifi_Rx_Buf[0] == 0x55 && Wifi_Rx_Buf[1] == 0xEE && Wifi_Rx_Buf[10] == 0xBB)   
+            {
+                Normal_data();    //校验
+                Wifi_Rx_flag = 0;//重新接收数据
+            }
+            else
+            {
+                Abnormal_data();   //数据异常   
+                if(App_Rx_Flag==0)
+                Wifi_Rx_flag = 0;//重新接收数据
+            } 	
+            if (App_Rx_Flag == 0 && Wifi_Rx_Buf[2] != 0x0A)
+                Wifi_Rx_flag = 0;
+        }
+        
+    }
+
 	if(App_Rx_Flag)    //处理安卓终端发过来的数据
 	{
 		if(Wifi_Rx_Buf[1] == 0xEE)     //安卓终端发送给主车命令
@@ -356,6 +481,11 @@ void Can_WifiRx_Check(void)
 					Android_Data.Android_Main_Car_Start_Flag = 1;
 					break;
 				}
+                case 0x0A:  //识别二维码成功
+                {
+                    PrintAndroidData_Array();
+                    break;
+                }
 				case 0x01:    //红绿灯识别成功
 				{
 					if(Wifi_Rx_Buf[3] == 0x01)   //识别为红灯
@@ -372,16 +502,10 @@ void Can_WifiRx_Check(void)
 					}
 					break;
 				}
-				case 0x02:  //识别二维码成功
+				case 0x02:  
 				{
-					Android_Data.Two_Code_State = 1;
-					Two_Code_Data_Store[0] = Wifi_Rx_Buf[3];
-					Two_Code_Data_Store[1] = Wifi_Rx_Buf[4];
-					Two_Code_Data_Store[2] = Wifi_Rx_Buf[5];
-					Two_Code_Data_Store[3] = Wifi_Rx_Buf[6];
-					Two_Code_Data_Store[4] = Wifi_Rx_Buf[7];
-					Two_Code_Data_Store[5] = Wifi_Rx_Buf[8];
-					Two_Code_Data_Store[6] = Wifi_Rx_Buf[9];			
+					
+                   		
 					break;
 				}
 				case 0x03:    //识别 TFT 车牌成功
@@ -390,8 +514,8 @@ void Can_WifiRx_Check(void)
                     {
                          Android_Data.TFT_ChePai_sucess_flag=1;
                         
-                        sprintf((char*)Buf1,"%x\r\n",Wifi_Rx_Buf[3]);  
-                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
+//                        sprintf((char*)Buf1,"%x\r\n",Wifi_Rx_Buf[3]);  
+//                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
                     }
                     else
                         Android_Data.TFT_ChePai_sucess_flag=0;
@@ -426,6 +550,8 @@ void Can_WifiRx_Check(void)
 									Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_B,2);
 					else if(Wifi_Rx_Buf[3]==0x03)
 									Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_C,2);
+//                    sprintf((char*)Buf1,"%x\r\n",Wifi_Rx_Buf[2]);  
+//                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
 					break;
 				}
 				case 0x06:    //TFT图形数量识别成功
@@ -467,8 +593,8 @@ void Can_WifiRx_Check(void)
                         TFT_GraphAndColour_Data_Store[4] = Wifi_Rx_Buf[8];
                         TFT_GraphAndColour_Data_Store[5] = Wifi_Rx_Buf[9];
                     }
-                     sprintf((char*)Buf1,"%s\r\n",TFT_GraphAndColour_Data_Store);  
-                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
+//                     sprintf((char*)Buf1,"%s\r\n",TFT_GraphAndColour_Data_Store);  
+//                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
                     
 					break;
 				}
@@ -483,11 +609,11 @@ void Can_WifiRx_Check(void)
 					TFT_Mask_Data_Store[5] = Wifi_Rx_Buf[8];
 					TFT_Mask_Data_Store[6] = Wifi_Rx_Buf[9];
 
-					for(uint8_t i=0;i<7;i++)
-					{
-							sprintf((char*)Buf1,"%02x ",TFT_Mask_Data_Store[i]);  
-							Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
-					}
+//					for(uint8_t i=0;i<7;i++)
+//					{
+//							sprintf((char*)Buf1,"%02x ",TFT_Mask_Data_Store[i]);  
+//							Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+//					}
 					break;
 				}
 				case 0x10: //TFT文字识别成功
@@ -515,24 +641,29 @@ void Can_WifiRx_Check(void)
                             YT5_Carport=3;
                         else if(Wifi_Rx_Buf[3]==0x04)
                             YT5_Carport=4;
-                        sprintf((char*)Buf1,"CheXin:%x\r\n",Wifi_Rx_Buf[3]);  
-                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+//                        sprintf((char*)Buf1,"CheXin:%x\r\n",Wifi_Rx_Buf[3]);  
+//                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
                     }
                     else
                     {
                         Android_Data.TFT_CheXin_sucess_flag=0;
 
                     }
+                    break;
                 }
+                default:
+                    break;
 			}
+            Wifi_Rx_flag = 0;
 		}
-		else   //安卓发送给主车的数据直接发送给相关的标志物（例如识别到红绿灯后直接通过主车的Zigbee发送给红绿灯）
-		{
-			Send_ZigbeeData_To_Fifo(Wifi_Rx_Buf,8); 
-		}
+//		else   //安卓发送给主车的数据直接发送给相关的标志物（例如识别到红绿灯后直接通过主车的Zigbee发送给红绿灯）
+//		{
+//			Send_ZigbeeData_To_Fifo(Wifi_Rx_Buf,8); 
+//		}
 		App_Rx_Flag = 0;
 	}
-	memset(Wifi_Rx_Buf, 0, sizeof(Wifi_Rx_Buf));   //将接收到的数据清零
+    
+	//memset(Wifi_Rx_Buf, 0, sizeof(Wifi_Rx_Buf));   //将接收到的数据清零
 }
 
 

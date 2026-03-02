@@ -1,7 +1,7 @@
 ..\output\ultrasonic.o: ..\HARDWARE\Task_Board\ultrasonic.c
 ..\output\ultrasonic.o: ..\CMSIS\stm32f4xx.h
 ..\output\ultrasonic.o: ..\CMSIS\core_cm4.h
-..\output\ultrasonic.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\ultrasonic.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
 ..\output\ultrasonic.o: ..\CMSIS\core_cmInstr.h
 ..\output\ultrasonic.o: ..\CMSIS\core_cmFunc.h
 ..\output\ultrasonic.o: ..\CMSIS\core_cmSimd.h

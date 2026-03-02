@@ -14,25 +14,25 @@
 #include "sys.h"
 
 /*Original HeadFile*/
-#include "infrared.h"  //ï¿½ï¿½ï¿½â·¢ï¿½ï¿½
-#include "cba.h"      //ï¿½ï¿½ï¿½Ä°ï¿½
-#include "ultrasonic.h"   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-#include "canp_hostcom.h" //CANï¿½ï¿½ï¿½İ½ï¿½ï¿½ï¿½
-#include "hard_can.h"     //CANï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-#include "bh1750.h"       //ï¿½ï¿½ï¿½Õ¶È´ï¿½ï¿½ï¿½ï¿½ï¿½
-#include "power_check.h"  //ï¿½ï¿½ï¿½ï¿½ï¿½É¼ï¿½
-#include "can_user.h"     //CANï¿½Ã»ï¿½ï¿½ï¿½ï¿½İ¼ï¿½ï¿½Ó£ï¿½ï¿½ï¿½ï¿½Ä£ï¿½
-#include "data_base.h"    //ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½î¼¯
-#include "roadway_check.h"  // ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½
-#include "tba.h"           //ï¿½ï¿½ï¿½ï¿½ï¿½
+#include "infrared.h"  //ºìÍâ·¢Éä
+#include "cba.h"      //ºËĞÄ°å
+#include "ultrasonic.h"   //³¬Éù²¨
+#include "canp_hostcom.h" //CANÊı¾İ½»»¥
+#include "hard_can.h"     //CAN³õÊ¼»¯Óë¼ì²â
+#include "bh1750.h"       //¹âÕÕ¶È´«¸ĞÆ÷
+#include "power_check.h"  //µçÁ¿²É¼¯
+#include "can_user.h"     //CANÓÃ»§Êı¾İ¼àÊÓ£¨ºËĞÄ£©
+#include "data_base.h"    //¸÷±êÖ¾ÎïÃüÁî¼¯
+#include "roadway_check.h"  // Ö÷³µÑ­¼£ÓëÂ·¿ö¼ì²â
+#include "tba.h"           //ÈÎÎñ°å
 #include "swopt_drv.h"
-#include "uart_a72.h"      //ï¿½Õ¶Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş£ï¿½
-#include "Can_check.h"     //CANï¿½ï¿½ï¿½ß¼ï¿½ï¿½
-#include "delay.h"         //ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
-#include "Timer.h"         //ï¿½ï¿½Ê±ï¿½ï¿½10Ê±ï¿½ï¿½Æ¬ï¿½ï¿½Ñ¯
+#include "uart_a72.h"      //ÖÕ¶Ë£¨Ö÷³µÎŞ£©
+#include "Can_check.h"     //CAN×ÜÏß¼ì²â
+#include "delay.h"         //ÑÓÊ±º¯Êı
+#include "Timer.h"         //¶¨Ê±Æ÷10Ê±¼äÆ¬ÂÖÑ¯
 #include "Rc522.h"         //RFID
-#include "bkrc_voice.h"    //Ğ¡ï¿½ï¿½
-#include "drive.h"         //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#include "bkrc_voice.h"    //Ğ¡´´
+#include "drive.h"         //Ö÷³µµç»úÇı¶¯
 
 
 /*My HeadFile*/
@@ -55,7 +55,7 @@
 #include "wireless_charge.h"
 #include "smoke_tower.h"
 #include "xiaochuang.h"
-//#include "car2.h"              /* è½¦2æ¨¡å— - æ›¿ä»£ä»è½¦åŠŸèƒ½ */
+#include "two_code.h"
 
 #if 0
 void Car_Thread(void);
@@ -63,22 +63,22 @@ void Car_Thread(void);
 
 extern void xAuto_Run_Function(void);
 
-/**********************************************roadway_check.cï¿½ï¿½È«ï¿½Ö±ï¿½ï¿½ï¿½**********************************************/
-extern uint8_t Go_Flag;                    //Ç°ï¿½ï¿½ï¿½ï¿½Ö¾Î»
-extern uint8_t Back_Flag;                  //ï¿½ï¿½ï¿½Ë±ï¿½Ö¾Î»
-extern uint8_t Track_Flag;                 //Ñ­ï¿½ï¿½ï¿½ï¿½Ö¾Î»
-extern uint8_t Stop_Flag;                  //Í£Ö¹ï¿½ï¿½Ö¾Î»
-extern int LSpeed;                        //ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
-extern int RSpeed;                        //ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
-extern int Car_Spend;                     //ï¿½ï¿½ï¿½Ù¶Èµï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
+/**********************************************roadway_check.cµÄÈ«¾Ö±äÁ¿**********************************************/
+extern uint8_t Go_Flag;                    //Ç°½ø±êÖ¾Î»
+extern uint8_t Back_Flag;                  //ºóÍË±êÖ¾Î»
+extern uint8_t Track_Flag;                 //Ñ­¼£±êÖ¾Î»
+extern uint8_t Stop_Flag;                  //Í£Ö¹±êÖ¾Î»
+extern int LSpeed;                        //×óÂÖËÙ¶È
+extern int RSpeed;                        //ÓÒÂÖËÙ¶È
+extern int Car_Spend;                     //³µËÙ¶ÈµÄÁÙÊ±±äÁ¿
 extern uint16_t count;
 /*********************************************************************************************************************/
 
 
 
-/*********************************************ï¿½ï¿½ï¿½ï¿½È«ï¿½Öºï¿½ï¿½ï¿½*********************************************************/
-extern void USART6_Send_Byte(uint8_t byte);  //ï¿½ï¿½ï¿½ï¿½6ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö½Ú£ï¿½ï¿½ï¿½ï¿½Í¸ï¿½Ğ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ê¾ä£©
-extern void USART6_Send_Length(uint8_t *buf,uint8_t length); //ï¿½ï¿½ï¿½ï¿½6ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+/*********************************************³£ÓÃÈ«¾Öº¯Êı*********************************************************/
+extern void USART6_Send_Byte(uint8_t byte);  //´®¿Ú6·¢ËÍÒ»¸ö×Ö½Ú£¨·¢ËÍ¸øĞ¡´´Ò»¸ö×Ö½ÚÃüÁîÀ´²¥·ÅÖ¸¶¨´Ê¾ä£©
+extern void USART6_Send_Length(uint8_t *buf,uint8_t length); //´®¿Ú6·¢ËÍÒ»¸öÊı×é
 
 
 
