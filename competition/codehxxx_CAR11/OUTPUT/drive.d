@@ -86,4 +86,3 @@
 ..\output\drive.o: ..\MODULE\landmark\wireless_charge\wireless_charge.h
 ..\output\drive.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\drive.o: ..\MODULE\xiaochuang\xiaochuang.h
-..\output\drive.o: ..\HARDWARE\CAN\can_user.h

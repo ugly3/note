@@ -84,4 +84,3 @@
 ..\output\can_user.o: ..\MODULE\landmark\wireless_charge\wireless_charge.h
 ..\output\can_user.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\can_user.o: ..\MODULE\xiaochuang\xiaochuang.h
-..\output\can_user.o: ..\HARDWARE\Task_Board\infrared.h
