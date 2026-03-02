@@ -82,3 +82,4 @@
 ..\output\special_landform.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\special_landform.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\special_landform.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\special_landform.o: ..\MODULE\all_module\car2.h

@@ -81,3 +81,4 @@
 ..\output\roadway_check.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\roadway_check.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\roadway_check.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\roadway_check.o: ..\MODULE\all_module\car2.h

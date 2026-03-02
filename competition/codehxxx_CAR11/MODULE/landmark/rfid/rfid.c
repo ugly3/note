@@ -1,51 +1,51 @@
 /**
 ************************************************************************
- *    ÎÄ¼þÃû£ºrfid
- *      ËµÃ÷£ºRFID
+ *    æ–‡ä»¶åï¼šrfid
+ *      è¯´æ˜Žï¼šRFID
 ************************************************************************
 **/
 #include "rfid.h"
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>   //isdigit(*p)ÅÐ¶Ï*pÊÇ·ñÎª0~9£¬ÊÇµÄ»°·µ»Ø1
-#include <stdlib.h>  // °üº¬ atoi ËùÐèµÄÍ·ÎÄ¼þ
+#include <ctype.h>   //isdigit(*p)åˆ¤æ–­*pæ˜¯å¦ä¸º0~9ï¼Œæ˜¯çš„è¯è¿”å›ž1
+#include <stdlib.h>  // åŒ…å« atoi æ‰€éœ€çš„å¤´æ–‡ä»¶
 #include <math.h>
 
 
 /*
-×¢Òâ£º  Êý¾Ý¿éÓÐ16¸öÉÈÇø£¬Ò»¸öÉÈÇøÓÐ4¸öÊý¾Ý¿é£¬ÇÒÊý¾Ý¿éÊÇ´Ó0¿ªÊ¼ËãÆð£º
-ÄÇÃ´µÚÒ»ÉÈÇøµÄÊý¾Ý¿éÎª 0£¬1£¬2£¬3£»   µÚ¶þÉÈÇøµÄÊý¾Ý¿éÎª 4£¬5£¬6£¬7 £»Èý8£¬9£¬ 10£¬11£» ËÄ12£¬13£¬14£¬15£»Îå16£¬17£¬18£¬19£»Áù20,21,22,23; 
-²¢ÇÒÃ¿¸öÉÈÇøµÄ×îºóÒ»¸öÊý¾Ý¿é²»ÄÜ¶ÁÐ´£¬ÒòÎª´ËÊý¾Ý¿éÊÇÃÜÔ¿¿é
+æ³¨æ„ï¼š  æ•°æ®å—æœ‰16ä¸ªæ‰‡åŒºï¼Œä¸€ä¸ªæ‰‡åŒºæœ‰4ä¸ªæ•°æ®å—ï¼Œä¸”æ•°æ®å—æ˜¯ä»Ž0å¼€å§‹ç®—èµ·ï¼š
+é‚£ä¹ˆç¬¬ä¸€æ‰‡åŒºçš„æ•°æ®å—ä¸º 0ï¼Œ1ï¼Œ2ï¼Œ3ï¼›   ç¬¬äºŒæ‰‡åŒºçš„æ•°æ®å—ä¸º 4ï¼Œ5ï¼Œ6ï¼Œ7 ï¼›ä¸‰8ï¼Œ9ï¼Œ 10ï¼Œ11ï¼› å››12ï¼Œ13ï¼Œ14ï¼Œ15ï¼›äº”16ï¼Œ17ï¼Œ18ï¼Œ19ï¼›å…­20,21,22,23; 
+å¹¶ä¸”æ¯ä¸ªæ‰‡åŒºçš„æœ€åŽä¸€ä¸ªæ•°æ®å—ä¸èƒ½è¯»å†™ï¼Œå› ä¸ºæ­¤æ•°æ®å—æ˜¯å¯†é’¥å—
 
-ÀýÈç2023¹ã¶«Ê¡ÈüÇøÌâÄ¿ÐèÒª¶ÁµÚÎåÉÈÇøµÄµÚ2¸öÊý¾Ý¿é£¬ÄÇÃ´ÐèÒªÐ´Èë £¨4*£¨5-1£©+2£©=18   £»5´ú±íÉÈÇø£¬3´ú±íÊý¾Ý¿é
+ä¾‹å¦‚2023å¹¿ä¸œçœèµ›åŒºé¢˜ç›®éœ€è¦è¯»ç¬¬äº”æ‰‡åŒºçš„ç¬¬2ä¸ªæ•°æ®å—ï¼Œé‚£ä¹ˆéœ€è¦å†™å…¥ ï¼ˆ4*ï¼ˆ5-1ï¼‰+2ï¼‰=18   ï¼›5ä»£è¡¨æ‰‡åŒºï¼Œ3ä»£è¡¨æ•°æ®å—
                                                                         
 */
 
 
-extern char READ_RFID[16];		// ´æ·ÅRFID¶ÁÈ¡µÄÊý¾Ý
-extern uint8_t WRITE_RFID[16];	//´æ·ÅRFIDÐ´ÈëµÄÊý¾Ý (Ä¬ÈÏ"0123456789ABCDEF")
-extern uint8_t KEY_A[6];   // AÃÜÔ¿(Ä¬ÈÏ 0xff,0xff,0xff,0xff,0xff,0xff)
-extern uint8_t KEY_B[6];	// BÃÜÔ¿(Ä¬ÈÏ 0xff,0xff,0xff,0xff,0xff,0xff)
+extern char READ_RFID[16];		// å­˜æ”¾RFIDè¯»å–çš„æ•°æ®
+extern uint8_t WRITE_RFID[16];	//å­˜æ”¾RFIDå†™å…¥çš„æ•°æ® (é»˜è®¤"0123456789ABCDEF")
+extern uint8_t KEY_A[6];   // Aå¯†é’¥(é»˜è®¤ 0xff,0xff,0xff,0xff,0xff,0xff)
+extern uint8_t KEY_B[6];	// Bå¯†é’¥(é»˜è®¤ 0xff,0xff,0xff,0xff,0xff,0xff)
 
 
-int card2_sector_block;      //¿¨2µÄµØÖ·
-char card2_position[3];      //¿¨2ÔÚµØÍ¼ÉÏµÄ×ø±ê
+int card2_sector_block;      //å¡2çš„åœ°å€
+char card2_position[3];      //å¡2åœ¨åœ°å›¾ä¸Šçš„åæ ‡
 
-uint8_t RFID_Angle_or_shizilukou_Flag = 0;//Îª1Ê±Ñ°¼£Ê¶±ðµ½Î»ÓÚÊ®×ÖÂ·¿Ú»òÊ®×ÖÂ·¿ÚµÄRFID¿¨
+uint8_t RFID_Angle_or_shizilukou_Flag = 0;//ä¸º1æ—¶å¯»è¿¹è¯†åˆ«åˆ°ä½äºŽåå­—è·¯å£æˆ–åå­—è·¯å£çš„RFIDå¡
 
 
-//»¹Î´Íê³É
-uint16_t Distance = 200;//ÂëÅÌÇ°½øÉè¶¨¾àÀë
-bool Check_Distance = 0;//Îª1Ê±¿ªÊ¼¼ì²â¾àÀë£¬Îª0Ê±²»¼ì²â
-bool RFID_Read_Flag = 0; //Îª1Ê±²»ÄÜ¶ÁÈ¡RFID¿¨£¬³¬³öÂëÅÌÉè¶¨µÄ¾àÀë²ÅÄÜÖÃÎª0
+//è¿˜æœªå®Œæˆ
+uint16_t Distance = 200;//ç ç›˜å‰è¿›è®¾å®šè·ç¦»
+bool Check_Distance = 0;//ä¸º1æ—¶å¼€å§‹æ£€æµ‹è·ç¦»ï¼Œä¸º0æ—¶ä¸æ£€æµ‹
+bool RFID_Read_Flag = 0; //ä¸º1æ—¶ä¸èƒ½è¯»å–RFIDå¡ï¼Œè¶…å‡ºç ç›˜è®¾å®šçš„è·ç¦»æ‰èƒ½ç½®ä¸º0
 uint8_t RFID_Num=1;
 
-/*Ïà¹ØÃüÁî¼¯ÔÚrc522.hÎÄ¼þ*/
+/*ç›¸å…³å‘½ä»¤é›†åœ¨rc522.hæ–‡ä»¶*/
 
 
-//¿¨½âÃÜÏà¹Ø±äÁ¿
-int pos = 0; // ÖØÖÃ½âÎöÎ»ÖÃ
-unsigned int hex_codes[3] = {0x00,0x00,0x00};//ÎÞÏß³äµçÕ¾¿ªÆôÂë
+//å¡è§£å¯†ç›¸å…³å˜é‡
+int pos = 0; // é‡ç½®è§£æžä½ç½®
+unsigned int hex_codes[3] = {0x00,0x00,0x00};//æ— çº¿å……ç”µç«™å¼€å¯ç 
 
 
 RFID_Typedef RFID_Data = 
@@ -59,69 +59,69 @@ RFID_Typedef RFID_Data =
 
 
 /*
-±£´æ¶ÁÈ¡RFIDÌáÈ¡µÄÊý×Ö
-×¢Òâ£ºÕâ¸ö¿¨Ò»¹² `16`¸öÉÈÇø£¬Ò»¸öÉÈÇø `4`¸öµØÖ·¿é£¬Ò»¹² `0~63`¸öµØÖ·¿é
+ä¿å­˜è¯»å–RFIDæå–çš„æ•°å­—
+æ³¨æ„ï¼šè¿™ä¸ªå¡ä¸€å…± `16`ä¸ªæ‰‡åŒºï¼Œä¸€ä¸ªæ‰‡åŒº `4`ä¸ªåœ°å€å—ï¼Œä¸€å…± `0~63`ä¸ªåœ°å€å—
 */
 
 
 /*
-RFIDÑ­¼£
-²ÎÊý£ºËÙ¶È
+RFIDå¾ªè¿¹
+å‚æ•°ï¼šé€Ÿåº¦
 */
 void RFID_Track(uint8_t speed)
 {
-    Stop_Flag = 0;          // ÔËÐÐ×´Ì¬±êÖ¾Î»
-    Go_Flag = 0;            // Ç°½ø±êÖ¾Î»
-    wheel_L_Flag = 0;       // ×ó×ª±êÖ¾Î»
-    wheel_R_Flag = 0;       // ÓÒ×ª±êÖ¾Î»
-    wheel_Nav_Flag = 0;     // ÂëÅÌÐý×ª±êÖ¾Î»
-    Back_Flag = 0;          // ºóÍË±êÖ¾Î»
-    Track_Flag = 1;         // Ñ­¼£±êÖ¾Î»
-    Car_Spend = speed;      // ËÙ¶ÈÖµ
-	Control(Car_Spend, Car_Spend);  // µç»úÇý¶¯º¯Êý
-//    while(Stop_Flag != 0x01);         //Ñ­¼£Íê³ÉµÄÊ±ºò Stop_Flag Îª1         //²»ÐèÒªµÈ´ýÑ­¼£Íê³É	 
+    Stop_Flag = 0;          // è¿è¡ŒçŠ¶æ€æ ‡å¿—ä½
+    Go_Flag = 0;            // å‰è¿›æ ‡å¿—ä½
+    wheel_L_Flag = 0;       // å·¦è½¬æ ‡å¿—ä½
+    wheel_R_Flag = 0;       // å³è½¬æ ‡å¿—ä½
+    wheel_Nav_Flag = 0;     // ç ç›˜æ—‹è½¬æ ‡å¿—ä½
+    Back_Flag = 0;          // åŽé€€æ ‡å¿—ä½
+    Track_Flag = 1;         // å¾ªè¿¹æ ‡å¿—ä½
+    Car_Spend = speed;      // é€Ÿåº¦å€¼
+	Control(Car_Spend, Car_Spend);  // ç”µæœºé©±åŠ¨å‡½æ•°
+//    while(Stop_Flag != 0x01);         //å¾ªè¿¹å®Œæˆçš„æ—¶å€™ Stop_Flag ä¸º1         //ä¸éœ€è¦ç­‰å¾…å¾ªè¿¹å®Œæˆ	 
 }
 
 /*
-×¢Òâ£º
-ÐèÒª×¢ÒâÑ°¿¨Ñ°¼£ÓÐÊ±ºò»áÑ°µ½¿¨·äÃùÆ÷Ò²Ïìµ«ÊÇÃ»¶ÁÈ¡³É¹¦¡¾¼´debugÆÁÄ»Ã»ÏÔÊ¾¶ÁÈ¡µ½µÄÊý¾Ý»òÕß¿´LED2,3ÓÐÃ»ÓÐÁÁ¡¿£¬
-Õâ¸öÊôÓÚ¼Ù¶ÁÈ¡£¬Ô­ÒòÊÇÒòÎªÄã¶ÁÈ¡µ½¿¨Ê±RFID¿¨ÒÑ¾­´í¹ýµ×²¿¸ÐÓ¦Çø£¬
-ËùÒÔ´ËÊ±¶ÁÊÇ¶Á²»µ½¶«Î÷¡¾½â¾ö·½·¨ÊÇ¼õÂýÑ°¿¨Ñ°¼£µÄËÙ¶È»òÕßÑ°µ½¿¨ºóºóÍËÒ»µã¾àÀë¡¿
+æ³¨æ„ï¼š
+éœ€è¦æ³¨æ„å¯»å¡å¯»è¿¹æœ‰æ—¶å€™ä¼šå¯»åˆ°å¡èœ‚é¸£å™¨ä¹Ÿå“ä½†æ˜¯æ²¡è¯»å–æˆåŠŸã€å³debugå±å¹•æ²¡æ˜¾ç¤ºè¯»å–åˆ°çš„æ•°æ®æˆ–è€…çœ‹LED2,3æœ‰æ²¡æœ‰äº®ã€‘ï¼Œ
+è¿™ä¸ªå±žäºŽå‡è¯»å–ï¼ŒåŽŸå› æ˜¯å› ä¸ºä½ è¯»å–åˆ°å¡æ—¶RFIDå¡å·²ç»é”™è¿‡åº•éƒ¨æ„Ÿåº”åŒºï¼Œ
+æ‰€ä»¥æ­¤æ—¶è¯»æ˜¯è¯»ä¸åˆ°ä¸œè¥¿ã€è§£å†³æ–¹æ³•æ˜¯å‡æ…¢å¯»å¡å¯»è¿¹çš„é€Ÿåº¦æˆ–è€…å¯»åˆ°å¡åŽåŽé€€ä¸€ç‚¹è·ç¦»ã€‘
 
-µ±Ç°ÎÈ¶¨µÄ½â¾ö·½°¸ÊÇÑ°¿¨Ñ°¼£ËÙ¶ÈÉèÖÃÎª15¡¾20¶¼¾­³£¶ÁÈ¡²»µ½¡¿ 
+å½“å‰ç¨³å®šçš„è§£å†³æ–¹æ¡ˆæ˜¯å¯»å¡å¯»è¿¹é€Ÿåº¦è®¾ç½®ä¸º15ã€20éƒ½ç»å¸¸è¯»å–ä¸åˆ°ã€‘ 
 */
 
 /* 
-×¢£º¿éµØÖ·£¨·¶Î§£º0~63£©Ò»¹²16¸öÉÈÇø£¬Ò»¹² 16*4=64Êý¾Ý¿é
-Ã¿Ò»¿éµØÖ·µÄ×îºóÒ»Î»¶¼²»ÄÜÐ´£¬ÀýÈç0~3£¬3µØÖ·²»ÄÜÐ´£» 4~7£¬7µØÖ·²»¿ÉÒÔ£» ·ñÔò»á¶ÁÐ´²»½øÈ¥£»
+æ³¨ï¼šå—åœ°å€ï¼ˆèŒƒå›´ï¼š0~63ï¼‰ä¸€å…±16ä¸ªæ‰‡åŒºï¼Œä¸€å…± 16*4=64æ•°æ®å—
+æ¯ä¸€å—åœ°å€çš„æœ€åŽä¸€ä½éƒ½ä¸èƒ½å†™ï¼Œä¾‹å¦‚0~3ï¼Œ3åœ°å€ä¸èƒ½å†™ï¼› 4~7ï¼Œ7åœ°å€ä¸å¯ä»¥ï¼› å¦åˆ™ä¼šè¯»å†™ä¸è¿›åŽ»ï¼›
 
-ÉÈÇøÊý¾Ý¿é¼ÆËã¹«Ê½£¬  ÀýÈçµÚ1ÉÈÇøµÚ0Êý¾Ý¿é£º  £¨(1-1)*4£©+ 0 = 0£»
- µÚ2ÉÈÇøµÚ1Êý¾Ý¿é£º  ((2-1)*4) + 1 = 5;
- µÚ3ÉÈÇøµÚ2Êý¾Ý¿é£º  ((3-1)*4) + 2 = 10;
- µÚ5ÉÈÇøµÚ3Êý¾Ý¿é£º  ((5-1)*4) + 3 = 19;ÎÞÐ§¿é
- µÚ6ÉÈÇøµÚ0Êý¾Ý¿é£º (£¨6-1£©*4) + 0 = 20;
- 16ÉÈÇøµÚ3Êý¾Ý¿é£º  ((16-1)*4) + 3 = 63;
+æ‰‡åŒºæ•°æ®å—è®¡ç®—å…¬å¼ï¼Œ  ä¾‹å¦‚ç¬¬1æ‰‡åŒºç¬¬0æ•°æ®å—ï¼š  ï¼ˆ(1-1)*4ï¼‰+ 0 = 0ï¼›
+ ç¬¬2æ‰‡åŒºç¬¬1æ•°æ®å—ï¼š  ((2-1)*4) + 1 = 5;
+ ç¬¬3æ‰‡åŒºç¬¬2æ•°æ®å—ï¼š  ((3-1)*4) + 2 = 10;
+ ç¬¬5æ‰‡åŒºç¬¬3æ•°æ®å—ï¼š  ((5-1)*4) + 3 = 19;æ— æ•ˆå—
+ ç¬¬6æ‰‡åŒºç¬¬0æ•°æ®å—ï¼š (ï¼ˆ6-1ï¼‰*4) + 0 = 20;
+ 16æ‰‡åŒºç¬¬3æ•°æ®å—ï¼š  ((16-1)*4) + 3 = 63;
  
-Êý¾Ý¿é·Ö±ðÎª 0,1,2,3×Ü¹²ËÄ¸ö£¬Ò»¸öÉÈÇø4¸öÊý¾Ý¿é
+æ•°æ®å—åˆ†åˆ«ä¸º 0,1,2,3æ€»å…±å››ä¸ªï¼Œä¸€ä¸ªæ‰‡åŒº4ä¸ªæ•°æ®å—
 */
 
 /*
-Ê®×ÖÂ·¿Ú¿ªÊ¼Ñ°Ò»¶Î¿¨£¨Ò»Õû¶Î²»ÄÜÓÃ£©
-²ÎÊý1£ºËÙ¶È
-²ÎÊý1£ºÇ°½øÊ±¼ä
-²ÎÊý3£ºÒª¶ÁÈ¡¿¨µÄÊý¾Ý¿é
+åå­—è·¯å£å¼€å§‹å¯»ä¸€æ®µå¡ï¼ˆä¸€æ•´æ®µä¸èƒ½ç”¨ï¼‰
+å‚æ•°1ï¼šé€Ÿåº¦
+å‚æ•°1ï¼šå‰è¿›æ—¶é—´
+å‚æ•°3ï¼šè¦è¯»å–å¡çš„æ•°æ®å—
 */
 void xRFID_Track_Read_L(uint8_t speed,uint16_t time,uint8_t card_block)
 {
     track_time_Start=0;
-    track_time_Start=1;//¿ªÊ¼¼ÆÊ±
+    track_time_Start=1;//å¼€å§‹è®¡æ—¶
     RFID_Track(speed);   
     Stop_Flag = 0;   
 	while(Stop_Flag != 1)        
 	{
         if(track_time_ms>=time)
         {
-            Send_UpMotor(0,0);      //Ñ°¿¨³É¹¦ºóÍ£³µ
+            Send_UpMotor(0,0);      //å¯»å¡æˆåŠŸåŽåœè½¦
             track_time_ms=0;
             track_time_Start=0;
             Stop_Flag=1;
@@ -129,39 +129,39 @@ void xRFID_Track_Read_L(uint8_t speed,uint16_t time,uint8_t card_block)
             break;
         }
         
-		if(PcdRequest(PICC_REQALL,CT) == MI_OK)  //µ÷ÓÃÑ°¿¨º¯ÊýÑ°¿¨   ²ÎÊý£º1.0x52£¨Ñ°ÌìÏßÄÚÈ«²¿¿¨£©  2. ½«µÃµ½µÄ¿¨Æ¬ÀàÐÍ´úÂë¸³Öµµ½CTÊý×é
+		if(PcdRequest(PICC_REQALL,CT) == MI_OK)  //è°ƒç”¨å¯»å¡å‡½æ•°å¯»å¡   å‚æ•°ï¼š1.0x52ï¼ˆå¯»å¤©çº¿å†…å…¨éƒ¨å¡ï¼‰  2. å°†å¾—åˆ°çš„å¡ç‰‡ç±»åž‹ä»£ç èµ‹å€¼åˆ°CTæ•°ç»„
 		{
-			Send_UpMotor(0,0);      //Ñ°¿¨³É¹¦ºóÍ£³µ
+			Send_UpMotor(0,0);      //å¯»å¡æˆåŠŸåŽåœè½¦
             track_time_ms=0;
             track_time_Start=0;
-			Track_Flag = 0;         //Í£Ö¹Ñ­¼£
+			Track_Flag = 0;         //åœæ­¢å¾ªè¿¹
             Stop_Flag=1;
-              delay_ms(500);              //ÑÓÊ±500msºóÈÃ³µ¸üÎÈ¶¨
-              RC522(card_block,RFID_Read);      //¶Á¿¨  
+              delay_ms(500);              //å»¶æ—¶500msåŽè®©è½¦æ›´ç¨³å®š
+              RC522(card_block,RFID_Read);      //è¯»å¡  
             
               if(RFID_Num == 1)  
               { 
                   RFID_Num++;
-                  memcpy(READ_RFID1, READ_RFID, sizeof(READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øREAD_RFID1
-                  memcpy(Judge_READ_RFID1, Judge_READ_RFID, sizeof(Judge_READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øJudge_READ_RFID1
+                  memcpy(READ_RFID1, READ_RFID, sizeof(READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™READ_RFID1
+                  memcpy(Judge_READ_RFID1, Judge_READ_RFID, sizeof(Judge_READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™Judge_READ_RFID1
                   Send_InfoData_To_Fifo("ADDR1\n",7);
               }
                else if(RFID_Num == 2)   
               {
                   RFID_Num++;
-                  memcpy(READ_RFID2, READ_RFID, sizeof(READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øµÚ¶þÕÅ¿¨
-                  memcpy(Judge_READ_RFID2, Judge_READ_RFID, sizeof(Judge_READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øJudge_READ_RFID2
+                  memcpy(READ_RFID2, READ_RFID, sizeof(READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™ç¬¬äºŒå¼ å¡
+                  memcpy(Judge_READ_RFID2, Judge_READ_RFID, sizeof(Judge_READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™Judge_READ_RFID2
                   Send_InfoData_To_Fifo("ADDR2\n",7);
               }
               else 
               {
-                  memcpy(READ_RFID3, READ_RFID, sizeof(READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øµÚÈýÕÅ¿¨
+                  memcpy(READ_RFID3, READ_RFID, sizeof(READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™ç¬¬ä¸‰å¼ å¡
                   Send_InfoData_To_Fifo("ADDR3\n",7);   
               }
               delay_ms(300);
               break;
 		}
-	}//whileÒÔÍâ
+	}//whileä»¥å¤–
     delay_ms(500);
     Roadway_Flag_clean();
     
@@ -169,25 +169,25 @@ void xRFID_Track_Read_L(uint8_t speed,uint16_t time,uint8_t card_block)
 
 
 /*
-¹¦ÄÜ£ºµ¥Ò»¶ÎºÚÏß£¬×î¶àÁ¬ÐøÑ°2ÕÅ¿¨
-²ÎÊý1£ºËÙ¶È
-²ÎÊý2£º¿¨1µÄÊý¾Ý¿é
-²ÎÊý3£º¿¨2µÄÊý¾Ý¿é
-²ÎÊý4£º¿¨3µÄÊý¾Ý¿é
+åŠŸèƒ½ï¼šå•ä¸€æ®µé»‘çº¿ï¼Œæœ€å¤šè¿žç»­å¯»2å¼ å¡
+å‚æ•°1ï¼šé€Ÿåº¦
+å‚æ•°2ï¼šå¡1çš„æ•°æ®å—
+å‚æ•°3ï¼šå¡2çš„æ•°æ®å—
+å‚æ•°4ï¼šå¡3çš„æ•°æ®å—
 */
 void xRFID_Track_Read(uint8_t speed,uint8_t card1,uint8_t card2,uint8_t card3)
 {
-    Roadway_Flag_clean();//Çå³ýËùÓÐ±êÖ¾Î»
-    uint8_t youka = 0;   //Ñ­¼£Ê±¿¨ÐòºÅµÄÇé¿ö£¬0´ú±íÎÞ¿¨
-    Roadway_Flag_clean();//Çå³ýËùÓÐ±êÖ¾Î»
+    Roadway_Flag_clean();//æ¸…é™¤æ‰€æœ‰æ ‡å¿—ä½
+    uint8_t youka = 0;   //å¾ªè¿¹æ—¶å¡åºå·çš„æƒ…å†µï¼Œ0ä»£è¡¨æ— å¡
+    Roadway_Flag_clean();//æ¸…é™¤æ‰€æœ‰æ ‡å¿—ä½
     
-    if(0 == RFID_Angle_or_shizilukou_Flag)//Ñ°¼£Ã»ÓÐÊ¶±ðµ½Ê®×ÖÂ·¿Ú»òRFID¿¨·ÅÔÚÊ®×ÖÂ·¿ÚµÄÇé¿ö
+    if(0 == RFID_Angle_or_shizilukou_Flag)//å¯»è¿¹æ²¡æœ‰è¯†åˆ«åˆ°åå­—è·¯å£æˆ–RFIDå¡æ”¾åœ¨åå­—è·¯å£çš„æƒ…å†µ
     {
-        RFID_Track(speed);  //RFIDÑ­¼£  
+        RFID_Track(speed);  //RFIDå¾ªè¿¹  
     }
-    while(Stop_Flag != 1)        //ÔÚÑ­¼£ÖÐÑ°¿¨£¬ÈôÑ°¼£Ê¶±ðµ½Ê®×ÖÂ·¿Ú»òRFID¿¨·ÅÔÚÊ®×ÖÂ·¿ÚµÄÇé¿öÔòÌø³öwhile
+    while(Stop_Flag != 1)        //åœ¨å¾ªè¿¹ä¸­å¯»å¡ï¼Œè‹¥å¯»è¿¹è¯†åˆ«åˆ°åå­—è·¯å£æˆ–RFIDå¡æ”¾åœ¨åå­—è·¯å£çš„æƒ…å†µåˆ™è·³å‡ºwhile
     {
-        if(1 == RFID_Angle_or_shizilukou_Flag)//Ñ°¼£Ê¶±ðµ½RFID¿¨·ÅÔÚÊ®×ÖÂ·¿ÚµÄÇé¿ö
+        if(1 == RFID_Angle_or_shizilukou_Flag)//å¯»è¿¹è¯†åˆ«åˆ°RFIDå¡æ”¾åœ¨åå­—è·¯å£çš„æƒ…å†µ
         {
             Stop_Flag = 1;
             Send_UpMotor(0,0);
@@ -195,32 +195,32 @@ void xRFID_Track_Read(uint8_t speed,uint8_t card1,uint8_t card2,uint8_t card3)
             break;
         }
         
-        if(PcdRequest(PICC_REQALL,CT) == MI_OK)  //µ÷ÓÃÑ°¿¨º¯ÊýÑ°¿¨   ²ÎÊý£º1.0x52£¨Ñ°ÌìÏßÄÚÈ«²¿¿¨£©  2. ½«µÃµ½µÄ¿¨Æ¬ÀàÐÍ´úÂë¸³Öµµ½CTÊý×é
+        if(PcdRequest(PICC_REQALL,CT) == MI_OK)  //è°ƒç”¨å¯»å¡å‡½æ•°å¯»å¡   å‚æ•°ï¼š1.0x52ï¼ˆå¯»å¤©çº¿å†…å…¨éƒ¨å¡ï¼‰  2. å°†å¾—åˆ°çš„å¡ç‰‡ç±»åž‹ä»£ç èµ‹å€¼åˆ°CTæ•°ç»„
         {
-            Send_UpMotor(0,0);      //Ñ°¿¨³É¹¦ºóÍ£³µ
+            Send_UpMotor(0,0);      //å¯»å¡æˆåŠŸåŽåœè½¦
             Track_Flag = 0;
-              delay_ms(500);              //ÑÓÊ±500msºóÈÃ³µ¸üÎÈ¶¨
+              delay_ms(500);              //å»¶æ—¶500msåŽè®©è½¦æ›´ç¨³å®š
             
               if(RFID_Num == 1)   
               { 
                   RC522(card1,RFID_Read);
                   RFID_Num++;
-                  memcpy(READ_RFID1, READ_RFID, sizeof(READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øµÚÒ»ÕÅ¿¨ 
-                  memcpy(Judge_READ_RFID1, Judge_READ_RFID, sizeof(Judge_READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øJudge_READ_RFID1
+                  memcpy(READ_RFID1, READ_RFID, sizeof(READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™ç¬¬ä¸€å¼ å¡ 
+                  memcpy(Judge_READ_RFID1, Judge_READ_RFID, sizeof(Judge_READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™Judge_READ_RFID1
                   Send_InfoData_To_Fifo("ADDR1\n",7);
               }
               else if(RFID_Num == 2)   
               {
                   RC522(card2,RFID_Read);
                   RFID_Num++;
-                  memcpy(READ_RFID2, READ_RFID, sizeof(READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øµÚ¶þÕÅ¿¨ 
-                  memcpy(Judge_READ_RFID2, Judge_READ_RFID, sizeof(Judge_READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øJudge_READ_RFID2
+                  memcpy(READ_RFID2, READ_RFID, sizeof(READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™ç¬¬äºŒå¼ å¡ 
+                  memcpy(Judge_READ_RFID2, Judge_READ_RFID, sizeof(Judge_READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™Judge_READ_RFID2
                   Send_InfoData_To_Fifo("ADDR2\n",7);
               }
               else 
               {
                   RC522(card3,RFID_Read);
-                  memcpy(READ_RFID3, READ_RFID, sizeof(READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øµÚÈýÕÅ¿¨
+                  memcpy(READ_RFID3, READ_RFID, sizeof(READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™ç¬¬ä¸‰å¼ å¡
                   Send_InfoData_To_Fifo("ADDR3\n",7);   
               }
               youka=1;
@@ -230,11 +230,11 @@ void xRFID_Track_Read(uint8_t speed,uint8_t card1,uint8_t card2,uint8_t card3)
      
       if(youka==1)
       {
-        RFID_Track(speed);      //Ñ­¿¨2
-        delay_ms(500);          //ÈÃ³µÔÚ500msÄÚÏÈ²»Ñ°¿¨£¬±Ü¿ª¿¨1
-        while(Stop_Flag != 1)        //ÔÚÑ­¼£ÖÐÑ°¿¨£¬ÈôÑ°¼£Ê¶±ðµ½Ê®×ÖÂ·¿Ú»òRFID¿¨·ÅÔÚÊ®×ÖÂ·¿ÚµÄÇé¿öÔòÌø³öwhile
+        RFID_Track(speed);      //å¾ªå¡2
+        delay_ms(500);          //è®©è½¦åœ¨500mså†…å…ˆä¸å¯»å¡ï¼Œé¿å¼€å¡1
+        while(Stop_Flag != 1)        //åœ¨å¾ªè¿¹ä¸­å¯»å¡ï¼Œè‹¥å¯»è¿¹è¯†åˆ«åˆ°åå­—è·¯å£æˆ–RFIDå¡æ”¾åœ¨åå­—è·¯å£çš„æƒ…å†µåˆ™è·³å‡ºwhile
         {
-            if(1 == RFID_Angle_or_shizilukou_Flag)//Ñ°¼£Ê¶±ðµ½RFID¿¨·ÅÔÚÊ®×ÖÂ·¿ÚµÄÇé¿ö
+            if(1 == RFID_Angle_or_shizilukou_Flag)//å¯»è¿¹è¯†åˆ«åˆ°RFIDå¡æ”¾åœ¨åå­—è·¯å£çš„æƒ…å†µ
             {
                 Stop_Flag = 1;
                 Send_UpMotor(0,0);
@@ -242,23 +242,23 @@ void xRFID_Track_Read(uint8_t speed,uint8_t card1,uint8_t card2,uint8_t card3)
                 break;
             }
             
-            if(PcdRequest(PICC_REQALL,CT) == MI_OK)  //µ÷ÓÃÑ°¿¨º¯ÊýÑ°¿¨   ²ÎÊý£º1.0x52£¨Ñ°ÌìÏßÄÚÈ«²¿¿¨£©  2. ½«µÃµ½µÄ¿¨Æ¬ÀàÐÍ´úÂë¸³Öµµ½CTÊý×é
+            if(PcdRequest(PICC_REQALL,CT) == MI_OK)  //è°ƒç”¨å¯»å¡å‡½æ•°å¯»å¡   å‚æ•°ï¼š1.0x52ï¼ˆå¯»å¤©çº¿å†…å…¨éƒ¨å¡ï¼‰  2. å°†å¾—åˆ°çš„å¡ç‰‡ç±»åž‹ä»£ç èµ‹å€¼åˆ°CTæ•°ç»„
             {
-                Send_UpMotor(0,0);      //Ñ°¿¨³É¹¦ºóÍ£³µ
+                Send_UpMotor(0,0);      //å¯»å¡æˆåŠŸåŽåœè½¦
                 Track_Flag = 0;
-                  delay_ms(500);        //ÑÓÊ±500msºóÈÃ³µ¸üÎÈ¶¨     
+                  delay_ms(500);        //å»¶æ—¶500msåŽè®©è½¦æ›´ç¨³å®š     
                      
-                  if(RFID_Num == 2)   //¶ÁÈ¡µÚ¶þÕÅ¿¨£¬½«Êý¾Ý¸øµÚ¶þÕÅ¿¨
+                  if(RFID_Num == 2)   //è¯»å–ç¬¬äºŒå¼ å¡ï¼Œå°†æ•°æ®ç»™ç¬¬äºŒå¼ å¡
                   {
                       RFID_Num++;
                       RC522(card2,RFID_Read); 
-                      memcpy(READ_RFID2, READ_RFID, sizeof(READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øµÚ¶þÕÅ¿¨ 
+                      memcpy(READ_RFID2, READ_RFID, sizeof(READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™ç¬¬äºŒå¼ å¡ 
                       Send_InfoData_To_Fifo("ADDR2\n",7);
                   }
                   else 
                   {     
                       RC522(card3,RFID_Read); 
-                      memcpy(READ_RFID3, READ_RFID, sizeof(READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øµÚÈýÕÅ¿¨
+                      memcpy(READ_RFID3, READ_RFID, sizeof(READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™ç¬¬ä¸‰å¼ å¡
                       Send_InfoData_To_Fifo("ADDR3\n",7);   
                   }
                   Roadway_Flag_clean();
@@ -268,7 +268,7 @@ void xRFID_Track_Read(uint8_t speed,uint8_t card1,uint8_t card2,uint8_t card3)
           }  
         if(youka==2)
         {
-            Motor_Data.xCAR_Track_Go();//¿¨2Óë¿¨1ÔÚÍ¬Ò»¶Î±»¼ì²âµ½£¬µ«¿¨2²»ÔÚÊ®×ÖÂ·¿Ú¸½½ü£¬ÔòÖ±½ÓÆÕÍ¨Ñ­¼£µ½Â·¿Ú
+            Motor_Data.xCAR_Track_Go();//å¡2ä¸Žå¡1åœ¨åŒä¸€æ®µè¢«æ£€æµ‹åˆ°ï¼Œä½†å¡2ä¸åœ¨åå­—è·¯å£é™„è¿‘ï¼Œåˆ™ç›´æŽ¥æ™®é€šå¾ªè¿¹åˆ°è·¯å£
         }
       }
       
@@ -308,32 +308,32 @@ void xRFID_Track_Read(uint8_t speed,uint8_t card1,uint8_t card2,uint8_t card3)
 
 
 /*
-RFIDÑ°¿¨+Ð´¿¨
-²ÎÊý1£ºÑ­¼£ËÙ¶È
-²ÎÊý2£ºÐèÒªÐ´µÄÊý¾Ý¿é
+RFIDå¯»å¡+å†™å¡
+å‚æ•°1ï¼šå¾ªè¿¹é€Ÿåº¦
+å‚æ•°2ï¼šéœ€è¦å†™çš„æ•°æ®å—
 */
 void xRFID_Track_Write(uint8_t speed,uint8_t card)
 {
 	RFID_Track(speed);
-	while(Stop_Flag != 0x01)        //ÔÚÑ­¼£ÖÐÑ°¿¨£¬ÈôÑ­¼£Íê³ÉÔòÌø³öwhile
+	while(Stop_Flag != 0x01)        //åœ¨å¾ªè¿¹ä¸­å¯»å¡ï¼Œè‹¥å¾ªè¿¹å®Œæˆåˆ™è·³å‡ºwhile
 	{
-		if(PcdRequest(PICC_REQALL,CT) == MI_OK)     //Ñ°¿¨³É¹¦
+		if(PcdRequest(PICC_REQALL,CT) == MI_OK)     //å¯»å¡æˆåŠŸ
 		{
-			Send_UpMotor(0,0);      //Ñ°¿¨³É¹¦ºóÍ£³µ
+			Send_UpMotor(0,0);      //å¯»å¡æˆåŠŸåŽåœè½¦
 			Track_Flag = 0;
-			for(char i=0;i<10;i++)     //Í£³µºó±¨¾¯10´Î
+			for(char i=0;i<10;i++)     //åœè½¦åŽæŠ¥è­¦10æ¬¡
            {			
-               MP_SPK = 1;             //´ò¿ª·äÃùÆ÷
+               MP_SPK = 1;             //æ‰“å¼€èœ‚é¸£å™¨
                delay_ms(100); 
-			   MP_SPK = 0;             //¹Ø±Õ·äÃùÆ÷
+			   MP_SPK = 0;             //å…³é—­èœ‚é¸£å™¨
 			   delay_ms(100);
 		   }
-           RC522(card,RFID_Write);     //Ð´¿¨
+           RC522(card,RFID_Write);     //å†™å¡
 		   
-           delay_ms(500);              //ÑÓÊ±500msºóÈÃ³µ¸üÎÈ¶¨
+           delay_ms(500);              //å»¶æ—¶500msåŽè®©è½¦æ›´ç¨³å®š
 #if RFID_CARD_2
            delay_ms(500);
-		   RFID_Track(speed);   //Èç¹ûÓÐÁ½ÕÅRFID¿¨£¬Ôò¼ÌÐøÑ­¼£
+		   RFID_Track(speed);   //å¦‚æžœæœ‰ä¸¤å¼ RFIDå¡ï¼Œåˆ™ç»§ç»­å¾ªè¿¹
 #endif      
            break;		   
         } 			
@@ -341,19 +341,19 @@ void xRFID_Track_Write(uint8_t speed,uint8_t card)
 }
 
 /*
-¶¨µãÐ´¿¨
-²ÎÊý£ºµØÖ·¿é£¨0~63£©
+å®šç‚¹å†™å¡
+å‚æ•°ï¼šåœ°å€å—ï¼ˆ0~63ï¼‰
 */
 void xRFID_Write(uint8_t add)
 {
-	PcdRequest(PICC_REQALL,CT);        //ÏÈÑ°¿¨£¬ÔÙÐ´¿¨
+	PcdRequest(PICC_REQALL,CT);        //å…ˆå¯»å¡ï¼Œå†å†™å¡
 	RC522(add,RFID_Write);
 }
 
 
 /*
-¹¦ÄÜ£º¶¨µã¶Á¿¨
-²ÎÊý£ºµØÖ·¿é£¨0~63£©
+åŠŸèƒ½ï¼šå®šç‚¹è¯»å¡
+å‚æ•°ï¼šåœ°å€å—ï¼ˆ0~63ï¼‰
 */
 void xRFID_Read(uint8_t add)
 {
@@ -364,7 +364,7 @@ void xRFID_Read(uint8_t add)
         if(RFID_Num == 1)   
         { 
             RFID_Num++;
-            memcpy(READ_RFID1, READ_RFID, sizeof(READ_RFID)); //½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øµÚÒ»ÕÅ¿¨
+            memcpy(READ_RFID1, READ_RFID, sizeof(READ_RFID)); //å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™ç¬¬ä¸€å¼ å¡
             sprintf((char*)Buf,"%s \r\n",READ_RFID1);  
             Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));
           
@@ -373,7 +373,7 @@ void xRFID_Read(uint8_t add)
         else if(RFID_Num == 2)   
         {
             RFID_Num++;
-            memcpy(READ_RFID2, READ_RFID, sizeof(READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øµÚ¶þÕÅ¿¨ 
+            memcpy(READ_RFID2, READ_RFID, sizeof(READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™ç¬¬äºŒå¼ å¡ 
             sprintf((char*)Buf,"%s \r\n",READ_RFID2);  
             Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));
             
@@ -381,7 +381,7 @@ void xRFID_Read(uint8_t add)
         }
         else    
         {
-            memcpy(READ_RFID3, READ_RFID, sizeof(READ_RFID));//½«¶ÁÈ¡µ½µÄÊý¾Ý´«¸øµÚÈýÕÅ¿¨
+            memcpy(READ_RFID3, READ_RFID, sizeof(READ_RFID));//å°†è¯»å–åˆ°çš„æ•°æ®ä¼ ç»™ç¬¬ä¸‰å¼ å¡
             sprintf((char*)Buf,"%s \r\n",READ_RFID3);  
             Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));
             
@@ -393,14 +393,14 @@ void xRFID_Read(uint8_t add)
 
 
 /*
-¹¦ÄÜ£º2025ÄêÑùÌâ5¿¨µÄÊý¾Ý´¦Àí
+åŠŸèƒ½ï¼š2025å¹´æ ·é¢˜5å¡çš„æ•°æ®å¤„ç†
 */
-void YT5_parseCard1(const char* card1Data, char* formula, char* position)    //½âÎö¿¨1Êý¾Ý£¬ÌáÈ¡¹«Ê½ºÍ×ø±ê
+void YT5_parseCard1(const char* card1Data, char* formula, char* position)    //è§£æžå¡1æ•°æ®ï¼Œæå–å…¬å¼å’Œåæ ‡
 {
 	const char* p = card1Data;
-	char temp[128] = {0}; // ÁÙÊ±´æ´¢¹ýÂËºóµÄ×Ö·û´®
+	char temp[128] = {0}; // ä¸´æ—¶å­˜å‚¨è¿‡æ»¤åŽçš„å­—ç¬¦ä¸²
 	int index = 0;
-	// ¹ýÂË¸ÉÈÅ×Ö·û
+	// è¿‡æ»¤å¹²æ‰°å­—ç¬¦
 	while (*p) 
 	{
 			if (isalnum(*p) || strchr("()+-*/^%CD", *p)) 
@@ -410,19 +410,19 @@ void YT5_parseCard1(const char* card1Data, char* formula, char* position)    //½
 			p++;
 	}
 	 temp[index] = '\0';
-	 // Çø·Ö¹«Ê½ºÍ×ø±ê
+	 // åŒºåˆ†å…¬å¼å’Œåæ ‡
     char* token = strtok(temp, "()");
     if (token) 
 		{
-        strcpy(position, token); // ×øÐòµã
+        strcpy(position, token); // ååºç‚¹
         token = strtok(NULL, "");
         if (token) 
 				{
-            strcpy(formula, token); // ¹«Ê½
+            strcpy(formula, token); // å…¬å¼
         }
     }
 }
-// ¼òµ¥µÄ±í´ïÊ½½âÎöÆ÷£¨Ö§³Ö +, -, *, /£©
+// ç®€å•çš„è¡¨è¾¾å¼è§£æžå™¨ï¼ˆæ”¯æŒ +, -, *, /ï¼‰
 double eval(const char* expr) {
     int result = 0;
     int currentNumber = 0;
@@ -445,7 +445,7 @@ double eval(const char* expr) {
         i++;
     }
 
-    // ´¦Àí×îºóÒ»¸öÊý×Ö
+    // å¤„ç†æœ€åŽä¸€ä¸ªæ•°å­—
     switch (currentOp) {
         case '+': result += currentNumber; break;
         case '-': result -= currentNumber; break;
@@ -454,15 +454,15 @@ double eval(const char* expr) {
     }
 		 return result;
 }
-// ¼ÆËã¹«Ê½½á¹û
+// è®¡ç®—å…¬å¼ç»“æžœ
 double calculateFormula(const char* formula, int a, int b, int c, int d) 
 {
-    // Ê¹ÓÃµÝ¹é½âÎöºÍ¼ÆËã¹«Ê½
-    // ÕâÀï¼ÙÉè¹«Ê½¸ñÊ½ÕýÈ·£¬²»°üº¬Ç¶Ì×À¨ºÅ
+    // ä½¿ç”¨é€’å½’è§£æžå’Œè®¡ç®—å…¬å¼
+    // è¿™é‡Œå‡è®¾å…¬å¼æ ¼å¼æ­£ç¡®ï¼Œä¸åŒ…å«åµŒå¥—æ‹¬å·
     int result = 0;
     char temp[128];
     strcpy(temp, formula);
-		// Ìæ»»±äÁ¿ÎªÊµ¼ÊÖµ
+		// æ›¿æ¢å˜é‡ä¸ºå®žé™…å€¼
     char* token = strstr(temp, "a");
     while (token) {
         *token = '3'; // a = 3
@@ -487,11 +487,11 @@ double calculateFormula(const char* formula, int a, int b, int c, int d)
         token = strstr(token + 1, "d");
     }
 
-    // ¼ÆËã¹«Ê½½á¹û
-    result = eval(temp); // ¼ÙÉè eval º¯Êý¿ÉÒÔ½âÎö²¢¼ÆËã¹«Ê½
+    // è®¡ç®—å…¬å¼ç»“æžœ
+    result = eval(temp); // å‡è®¾ eval å‡½æ•°å¯ä»¥è§£æžå¹¶è®¡ç®—å…¬å¼
     return result;
 }
-// È·¶¨¿¨2µÄÎ»ÖÃ
+// ç¡®å®šå¡2çš„ä½ç½®
 void determineCard2Position(const char* position, char* sortedPosition) 
 {
     char temp[3];
@@ -499,34 +499,34 @@ void determineCard2Position(const char* position, char* sortedPosition)
     sortedPosition[0] = temp[0];
     sortedPosition[2] = '\0';
 }
-// ¶ÁÈ¡¿¨2Êý¾Ý£¨¼ÙÉèº¯Êý£©
+// è¯»å–å¡2æ•°æ®ï¼ˆå‡è®¾å‡½æ•°ï¼‰
 void readCard2Data(int sector, char* data) 
 {
-    // Ä£Äâ¶ÁÈ¡¿¨2Êý¾Ý
-    // Êµ¼ÊÓ¦ÓÃÖÐÐèÒª¸ù¾ÝÓ²¼þ½Ó¿ÚÊµÏÖ
-    static const char* mockData = "0123456789ABCDEF"; // Ê¾ÀýÊý¾Ý
+    // æ¨¡æ‹Ÿè¯»å–å¡2æ•°æ®
+    // å®žé™…åº”ç”¨ä¸­éœ€è¦æ ¹æ®ç¡¬ä»¶æŽ¥å£å®žçŽ°
+    static const char* mockData = "0123456789ABCDEF"; // ç¤ºä¾‹æ•°æ®
     strcpy(data, mockData);
 }
 void YT5_Handle_Card1_Data(char *data)
 {
-	const char* card1Data = "£¡(d*$c^4(a+b)C)";
+	const char* card1Data = "ï¼(d*$c^4(a+b)C)";
     char formula[128] = {0};
     char position[3] = {0};
     char sortedPosition[3] = {0};
     char card2Data[17] = {0};
 
-    // ½âÎö¿¨1Êý¾Ý
+    // è§£æžå¡1æ•°æ®
     YT5_parseCard1(card1Data, formula, position);
 
-    // È·¶¨¿¨2µÄÎ»ÖÃ
+    // ç¡®å®šå¡2çš„ä½ç½®
     determineCard2Position(position, sortedPosition);
 
-    // ¼ÆËã¹«Ê½½á¹û
+    // è®¡ç®—å…¬å¼ç»“æžœ
     double M = calculateFormula(formula, 3, 1, 2, 5); // a=3, b=1, c=2, d=5
-		// ¶ÁÈ¡¿¨2Êý¾Ý
+		// è¯»å–å¡2æ•°æ®
     readCard2Data(M, card2Data);
 		
-    // ´òÓ¡½á¹û
+    // æ‰“å°ç»“æžœ
 //    printf("Formula: %s\n", formula);
 //    printf("Position: %s\n", position);
 //    printf("Sorted Position: %s\n", sortedPosition);
@@ -555,43 +555,43 @@ void YT5_Handle_Card1_Data(char *data)
 
 
 /*
-¹¦ÄÜ£º2025ÄêÑùÌâ1¿¨1µÄÊý¾Ý´¦Àí
+åŠŸèƒ½ï¼š2025å¹´æ ·é¢˜1å¡1çš„æ•°æ®å¤„ç†
 */
-void parseCard1(const char* card1Data, int* sector_block,  char* position) // º¯Êý£º½âÎö¿¨1Êý¾Ý
+void parseCard1(const char* card1Data, int* sector_block,  char* position) // å‡½æ•°ï¼šè§£æžå¡1æ•°æ®
 {
-    // ÌáÈ¡ÓÐÐ§Êý¾Ý£¨Èç¡°62¡±£©
+    // æå–æœ‰æ•ˆæ•°æ®ï¼ˆå¦‚â€œ62â€ï¼‰
     const char *p = card1Data;
-     char numStr[3]; // ¼ÙÉè×î¶àÁ½Î»Êý×Ö¼ÓÉÏÒ»¸öÖÕÖ¹·û
+     char numStr[3]; // å‡è®¾æœ€å¤šä¸¤ä½æ•°å­—åŠ ä¸Šä¸€ä¸ªç»ˆæ­¢ç¬¦
      size_t i = 0;
 
     while(*p!='<')
     {
-       while (isdigit(*p) && i < 2) { // ¶ÁÈ¡×î¶àÁ½Î»Êý×Ö
+       while (isdigit(*p) && i < 2) { // è¯»å–æœ€å¤šä¸¤ä½æ•°å­—
         numStr[i++] = *p++;
         }  
          p++;   
     }
-    numStr[i] = '\0'; // ×Ö·û´®½áÊø·û
+    numStr[i] = '\0'; // å­—ç¬¦ä¸²ç»“æŸç¬¦
     
     
-    *sector_block = atoi(numStr); // ½«×Ö·û´®×ª»»ÎªÕûÊý
+    *sector_block = atoi(numStr); // å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºæ•´æ•°
     *sector_block = (*sector_block/10 - 1) * 4 + (*sector_block%10)+1;
 
-    // ÌáÈ¡Î»ÖÃÐÅÏ¢£¨Èç¡°D3¡±£©
+    // æå–ä½ç½®ä¿¡æ¯ï¼ˆå¦‚â€œD3â€ï¼‰
     if (sscanf(card1Data,"%*[^<]<%[^>]>%*s", position) != 1) 
     {
         Send_InfoData_To_Fifo("Failed position\r\n",17);
-        position[0] = '\0'; // ÉèÖÃÎª¿Õ×Ö·û´®
+        position[0] = '\0'; // è®¾ç½®ä¸ºç©ºå­—ç¬¦ä¸²
         return;
     }
     
-    // char tempChar; // ÁÙÊ±±äÁ¿ÓÃÓÚ´æ´¢%cÆ¥ÅäµÄ×Ö·û
+    // char tempChar; // ä¸´æ—¶å˜é‡ç”¨äºŽå­˜å‚¨%cåŒ¹é…çš„å­—ç¬¦
     // if (sscanf(position,"%c%d", &tempChar, block) != 2 ) {
     //     printf("Failed to extract block number or invalid block number\n");
-    //     *block = -1; // ÉèÖÃÎªÎÞÐ§Öµ
+    //     *block = -1; // è®¾ç½®ä¸ºæ— æ•ˆå€¼
     //     return;
     // }
-    // printf("Extracted block: %d\n", *block); // µ÷ÊÔÊä³ö
+    // printf("Extracted block: %d\n", *block); // è°ƒè¯•è¾“å‡º
 
 }
 void YT1_Handle_Card1_Data(char *data)
@@ -611,13 +611,13 @@ void YT1_Handle_Card1_Data(char *data)
 
 
 /*
-¹¦ÄÜ£º2025ÄêÑùÌâ2¿¨1µÄÊý¾Ý´¦Àí
-        ÌáÈ¡¹«Ê½ºÍ×ø±ê
+åŠŸèƒ½ï¼š2025å¹´æ ·é¢˜2å¡1çš„æ•°æ®å¤„ç†
+        æå–å…¬å¼å’Œåæ ‡
 */
 
 double parseExpression(const char *expr, double values[26]);
 
-// ½âÎöÊý×Ö
+// è§£æžæ•°å­—
 double parseNumber(const char *expr) {
     double result = 0.0;
     while (isdigit(expr[pos])) {
@@ -626,40 +626,40 @@ double parseNumber(const char *expr) {
     return result;
 }
 
-// ½âÎöÒò×Ó£¨Êý×Ö¡¢±äÁ¿»òÀ¨ºÅ±í´ïÊ½£©
+// è§£æžå› å­ï¼ˆæ•°å­—ã€å˜é‡æˆ–æ‹¬å·è¡¨è¾¾å¼ï¼‰
 double parseFactor(const char *expr, double values[26]) {
     double result = 0.0;
     if (isdigit(expr[pos])) {
         result = parseNumber(expr);
     } else if (expr[pos] == '(') {
-        pos++; // Ìø¹ý×óÀ¨ºÅ
+        pos++; // è·³è¿‡å·¦æ‹¬å·
         result = parseExpression(expr, values);
         if (expr[pos] != ')') {
 //            printf("Error: Missing closing parenthesis\n");
-            return -1; // ·µ»Ø´íÎó×´Ì¬
+            return -1; // è¿”å›žé”™è¯¯çŠ¶æ€
         }
-        pos++; // Ìø¹ýÓÒÀ¨ºÅ
+        pos++; // è·³è¿‡å³æ‹¬å·
     } else if (islower(expr[pos])) {
         char var = expr[pos++];
         result = values[var - 'a'];
     } else {
 //        printf("Error: Invalid character at position %d\n", pos);
-        return -1; // ·µ»Ø´íÎó×´Ì¬
+        return -1; // è¿”å›žé”™è¯¯çŠ¶æ€
     }
     return result;
 }
 
-// ½âÎöÖ¸ÊýÔËËã
+// è§£æžæŒ‡æ•°è¿ç®—
 double parseExponent(const char *expr, double values[26]) {
     double result = parseFactor(expr, values);
     while (expr[pos] == '^') {
-        pos++; // Ìø¹ý '^'
+        pos++; // è·³è¿‡ '^'
         double right = parseFactor(expr, values);
         result = pow(result, right);
     }
     return result;
 }
-// ½âÎöÏî£¨³Ë·¨ºÍ³ý·¨£©
+// è§£æžé¡¹ï¼ˆä¹˜æ³•å’Œé™¤æ³•ï¼‰
 double parseTerm(const char *expr, double values[26]) {
     double result = parseExponent(expr, values);
     while (expr[pos] == '*' || expr[pos] == '/') {
@@ -677,7 +677,7 @@ double parseTerm(const char *expr, double values[26]) {
     return result;
 }
 
-// ½âÎö±í´ïÊ½£¨¼Ó·¨ºÍ¼õ·¨£©
+// è§£æžè¡¨è¾¾å¼ï¼ˆåŠ æ³•å’Œå‡æ³•ï¼‰
 double parseExpression(const char *expr, double values[26]) {
     double result = parseTerm(expr, values);
     while (expr[pos] == '+' || expr[pos] == '-') {
@@ -692,13 +692,13 @@ double parseExpression(const char *expr, double values[26]) {
     }
     return result;
 }
-// ÅÐ¶ÏÊÇ·ñÊÇÓÐÐ§×Ö·û
+// åˆ¤æ–­æ˜¯å¦æ˜¯æœ‰æ•ˆå­—ç¬¦
 int isValidChar(char c)
 {
     return ((c >= 'a' && c <= 'e') || (c >= '0' && c <= '9') || c == 'C' || c == 'D' || c == 'E' ||
             c == '+' || c == '-' || c == '*' || c == '/' || c == '^' || c == '(' || c == ')');
 }
-// ÅÐ¶ÏÊÇ·ñÊÇ×ø±ê×Ö·û£¨´óÐ´×ÖÄ¸»òÊý×Ö£©
+// åˆ¤æ–­æ˜¯å¦æ˜¯åæ ‡å­—ç¬¦ï¼ˆå¤§å†™å­—æ¯æˆ–æ•°å­—ï¼‰
 int isCoordChar(char c) 
 {
     return (c == 'C' || c == 'D' || c == 'E' || (c >= '0' && c <= '9'));
@@ -707,9 +707,9 @@ void extractFormulaAndCoord(const char *input, char *formula, char *coord)
 {
     int i = 0,  k = 0;
     while (input[i] != '\0') {
-        if (isValidChar(input[i])) //ÓÐÐ§Êý¾Ý
+        if (isValidChar(input[i])) //æœ‰æ•ˆæ•°æ®
         {
-            if (isCoordChar(input[i])) //Î»ÖÃÐÅÏ¢
+            if (isCoordChar(input[i])) //ä½ç½®ä¿¡æ¯
             {
                 if(input[i]>= '0' && input[i] <= '9'){
                     coord[1] = input[i];          
@@ -717,28 +717,28 @@ void extractFormulaAndCoord(const char *input, char *formula, char *coord)
                     coord[0] = input[i];
                 }
             } 
-            else//¹«Ê½
+            else//å…¬å¼
             {
                 formula[k++] = input[i];
             }
         }
         i++;
     }
-    coord[2] = '\0'; // ½áÊø×ø±ê×Ö·û´®
-    formula[k] = '\0'; // ½áÊø¹«Ê½×Ö·û´®
+    coord[2] = '\0'; // ç»“æŸåæ ‡å­—ç¬¦ä¸²
+    formula[k] = '\0'; // ç»“æŸå…¬å¼å­—ç¬¦ä¸²
 }
-//2025ÄêÑùÌâ2¿¨µÄ´¦Àí
+//2025å¹´æ ·é¢˜2å¡çš„å¤„ç†
 void YT2_Handle_Card1_Data(char *data)
 {
     uint8_t Buf[30];
     char formula[20];
     
-    double anzuo_send_tuxing[26]={2,2,3,1};//°²×¿·¢À´µÄÊý¾Ý(ÒªÇó°´×ÖÄ¸µÄË³Ðò·¢¹ýÀ´),a,b,c,d
+    double anzuo_send_tuxing[26]={2,2,3,1};//å®‰å“å‘æ¥çš„æ•°æ®(è¦æ±‚æŒ‰å­—æ¯çš„é¡ºåºå‘è¿‡æ¥),a,b,c,d
 
-    // ÌáÈ¡¹«Ê½ºÍ×ø±ê
+    // æå–å…¬å¼å’Œåæ ‡
     extractFormulaAndCoord(data, formula, card2_position);
 
-    double result = parseExpression(formula, anzuo_send_tuxing);//½á¹ûÕâ¸öÊýÓÐÓÃ
+    double result = parseExpression(formula, anzuo_send_tuxing);//ç»“æžœè¿™ä¸ªæ•°æœ‰ç”¨
 //    if (result == -1) {
 //        Send_InfoData_To_Fifo("erro\r\n",4); 
 //    }
@@ -758,34 +758,34 @@ void YT2_Handle_Card1_Data(char *data)
 
 
 /*
-¹¦ÄÜ£º2025ÄêÑùÌâ3¿¨µÄÊý¾Ý´¦Àí
-        ÌáÈ¡ÎÞÏß³äµçÕ¾µÄ¿ªÆôÂë
+åŠŸèƒ½ï¼š2025å¹´æ ·é¢˜3å¡çš„æ•°æ®å¤„ç†
+        æå–æ— çº¿å……ç”µç«™çš„å¼€å¯ç 
 */
 
 #define MAX_DATA_LENGTH 16
 #define MAX_HEX_VALUES 16
-#define NUM_HEX_CODES 3  // ÆÚÍûÉú³ÉµÄÊ®Áù½øÖÆÂëÊýÁ¿
+#define NUM_HEX_CODES 3  // æœŸæœ›ç”Ÿæˆçš„åå…­è¿›åˆ¶ç æ•°é‡
 
-// ¼ì²éÊÇ·ñÎªÓÐÐ§¿¨
+// æ£€æŸ¥æ˜¯å¦ä¸ºæœ‰æ•ˆå¡
 int is_valid_card(const char* card_data) 
 {
     return strcmp(card_data, "CARD01") == 0;
 }
-// È¥³ýÖØ¸´×Ö·û£¨ÖØ¸´µÄ×Ö·ûÍêÈ«ÒÆ³ý£©
+// åŽ»é™¤é‡å¤å­—ç¬¦ï¼ˆé‡å¤çš„å­—ç¬¦å®Œå…¨ç§»é™¤ï¼‰
 void remove_duplicates(char* values, int* count) 
 {
-    int seen[MAX_HEX_VALUES] = {0};  // ±ê¼Ç×Ö·û³öÏÖ´ÎÊý
-    char result[MAX_HEX_VALUES];     // ´æ´¢×îÖÕ½á¹û
+    int seen[MAX_HEX_VALUES] = {0};  // æ ‡è®°å­—ç¬¦å‡ºçŽ°æ¬¡æ•°
+    char result[MAX_HEX_VALUES];     // å­˜å‚¨æœ€ç»ˆç»“æžœ
     int result_count = 0;
 
-    // Í³¼ÆÃ¿¸ö×Ö·ûµÄ³öÏÖ´ÎÊý
+    // ç»Ÿè®¡æ¯ä¸ªå­—ç¬¦çš„å‡ºçŽ°æ¬¡æ•°
     for (int i = 0; i < *count; i++) {
         char c = values[i];
         int index = (c >= '0' && c <= '9') ? c - '0' : c - 'A' + 10;
         seen[index]++;
     }
 
-    // ±£ÁôÖ»³öÏÖÒ»´ÎµÄ×Ö·û
+    // ä¿ç•™åªå‡ºçŽ°ä¸€æ¬¡çš„å­—ç¬¦
     for (int i = 0; i < *count; i++) {
         char c = values[i];
         int index = (c >= '0' && c <= '9') ? c - '0' : c - 'A' + 10;
@@ -794,14 +794,14 @@ void remove_duplicates(char* values, int* count)
         }
     }
 
-    // ½«½á¹û¸´ÖÆ»ØÔ­Êý×é
+    // å°†ç»“æžœå¤åˆ¶å›žåŽŸæ•°ç»„
     for (int i = 0; i < result_count; i++) {
         values[i] = result[i];
     }
-    values[result_count] = '\0';  // È·±£×Ö·û´®ÒÔ '\0' ½áÎ²
-    *count = result_count;  // ¸üÐÂ×Ö·ûÊýÁ¿
+    values[result_count] = '\0';  // ç¡®ä¿å­—ç¬¦ä¸²ä»¥ '\0' ç»“å°¾
+    *count = result_count;  // æ›´æ–°å­—ç¬¦æ•°é‡
 }
-// ÅÅÐò£ºÊý×ÖÔÚÇ°£¬×ÖÄ¸ÔÚºó
+// æŽ’åºï¼šæ•°å­—åœ¨å‰ï¼Œå­—æ¯åœ¨åŽ
 void sort_values(char* values, int count) {
     for (int i = 0; i < count - 1; i++) {
         for (int j = 0; j < count - i - 1; j++) {
@@ -813,42 +813,42 @@ void sort_values(char* values, int count) {
         }
     }
 }
-// ×ª»»ÎªÊ®Áù½øÖÆÂë
+// è½¬æ¢ä¸ºåå…­è¿›åˆ¶ç 
 void convert_to_hex_codes(char* values, int count, unsigned int* hex_codes) {
-    int index = 0;  // µ±Ç°´¦ÀíµÄÊ®Áù½øÖÆÂëË÷Òý
-    int hex_value = 0;  // µ±Ç°Ê®Áù½øÖÆÖµ
+    int index = 0;  // å½“å‰å¤„ç†çš„åå…­è¿›åˆ¶ç ç´¢å¼•
+    int hex_value = 0;  // å½“å‰åå…­è¿›åˆ¶å€¼
 
     for (int i = 0; i < count; i++) {
         hex_value = hex_value * 16 + (values[i] >= '0' && values[i] <= '9' ? values[i] - '0' :
                                       values[i] >= 'A' && values[i] <= 'F' ? values[i] - 'A' + 10 : 0);
-        if ((i + 1) % 2 == 0 || i == count - 1) {  // Ã¿Á½¸ö×Ö·û»ò×îºóÒ»¸ö×Ö·û
+        if ((i + 1) % 2 == 0 || i == count - 1) {  // æ¯ä¸¤ä¸ªå­—ç¬¦æˆ–æœ€åŽä¸€ä¸ªå­—ç¬¦
             hex_codes[index++] = hex_value;
             hex_value = 0;
         }
     }
 }
-// ´¦Àí¿¨Êý¾Ý 
+// å¤„ç†å¡æ•°æ® 
 void process_card_data(const char* card_data, unsigned int* hex_codes) {
     char temp_values[MAX_HEX_VALUES];
     int count = 0;
 
-    // Ê¹ÓÃ sscanf ÌáÈ¡ {} ÄÚµÄÊý¾Ý
+    // ä½¿ç”¨ sscanf æå– {} å†…çš„æ•°æ®
     char extracted_data[MAX_DATA_LENGTH];
     if (sscanf(card_data, "%*[^{]{%[^}]", extracted_data) == 1) {
-        // ÌáÈ¡ÓÐÐ§Êý¾Ý
+        // æå–æœ‰æ•ˆæ•°æ®
         for (int i = 0; extracted_data[i] != '\0'; i++) {
             if (isxdigit(extracted_data[i])) {
                 temp_values[count++] = extracted_data[i];
             }
         }
     }
-    // È¥³ýÖØ¸´×Ö·û
+    // åŽ»é™¤é‡å¤å­—ç¬¦
     remove_duplicates(temp_values, &count);
 
-    // ÅÅÐò
+    // æŽ’åº
     sort_values(temp_values, count);
 
-    // ×ª»»ÎªÊ®Áù½øÖÆÂë
+    // è½¬æ¢ä¸ºåå…­è¿›åˆ¶ç 
     convert_to_hex_codes(temp_values, count, hex_codes);
 }
 void YT3_Handle_Card1_Data(void)
@@ -856,7 +856,7 @@ void YT3_Handle_Card1_Data(void)
     uint8_t Buf[30];
     
 
-    // ¼ì²é¿¨1ÊÇ·ñÓÐÐ§
+    // æ£€æŸ¥å¡1æ˜¯å¦æœ‰æ•ˆ
     if (is_valid_card(Judge_READ_RFID1)) {
         process_card_data(READ_RFID1, hex_codes);
       
@@ -867,7 +867,7 @@ void YT3_Handle_Card1_Data(void)
         Send_InfoData_To_Fifo("\r\n",2);
     }
 
-    // ¼ì²é¿¨2ÊÇ·ñÓÐÐ§
+    // æ£€æŸ¥å¡2æ˜¯å¦æœ‰æ•ˆ
     if (is_valid_card(Judge_READ_RFID2)) {
         process_card_data(READ_RFID2, hex_codes);
         
@@ -882,7 +882,7 @@ void YT3_Handle_Card1_Data(void)
 
 
 
-/*2026ÄêÑùÌâ1¿¨´¦ÀíÊý¾Ý*/
+/*2026å¹´æ ·é¢˜1å¡å¤„ç†æ•°æ®*/
 
 
 

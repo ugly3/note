@@ -82,3 +82,4 @@
 ..\output\smoke_tower.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\smoke_tower.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\smoke_tower.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\smoke_tower.o: ..\MODULE\all_module\car2.h

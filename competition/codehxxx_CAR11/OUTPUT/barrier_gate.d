@@ -82,3 +82,4 @@
 ..\output\barrier_gate.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\barrier_gate.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\barrier_gate.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\barrier_gate.o: ..\MODULE\all_module\car2.h

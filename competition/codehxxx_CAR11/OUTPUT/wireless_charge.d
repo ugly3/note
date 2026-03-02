@@ -82,3 +82,4 @@
 ..\output\wireless_charge.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\wireless_charge.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\wireless_charge.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\wireless_charge.o: ..\MODULE\all_module\car2.h

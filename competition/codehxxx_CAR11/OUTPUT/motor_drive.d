@@ -82,3 +82,4 @@
 ..\output\motor_drive.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\motor_drive.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\motor_drive.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\motor_drive.o: ..\MODULE\all_module\car2.h

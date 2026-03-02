@@ -1,8 +1,8 @@
 /**
 ************************************************************************
- *    ÎÄ¼şÃû£ºetc£¨ETC±êÖ¾Îï£©
- *      ËµÃ÷£º
- *  Í¨ĞÅ·½Ê½£ºZigbeeÍ¨ĞÅ
+ *    æ–‡ä»¶åï¼šetcï¼ˆETCæ ‡å¿—ç‰©ï¼‰
+ *      è¯´æ˜ï¼š
+ *  é€šä¿¡æ–¹å¼ï¼šZigbeeé€šä¿¡
 ************************************************************************
 **/
 #include "etc.h"
@@ -23,25 +23,25 @@ ETC_Typedef ETC_Data =
 
 
 /*
-ETC±êÖ¾Îï¹Ì¶¨Ö¸Áî·¢ËÍ Ö¡Í·1£¬Ö¡Í·2£¬Ö¡Î²
+ETCæ ‡å¿—ç‰©å›ºå®šæŒ‡ä»¤å‘é€ å¸§å¤´1ï¼Œå¸§å¤´2ï¼Œå¸§å°¾
 */
 uint8_t ETC_Buf[8] = {0x55,0x0C,0x00,0x00,0x00,0x00,0x00,0xBB};
 
 
 
 /*
- ***************************³õÊ¼»¯ETC×ó²àºÍÓÒ²àÕ¢ÃÅÉÏÉıºÍÏÂ½µ*****************************************
- * Ö¡Í·1---> 0x55   * Ö¡Í·2---> 0x0C    Ö¡Î²---> 0xBB
+ ***************************åˆå§‹åŒ–ETCå·¦ä¾§å’Œå³ä¾§é—¸é—¨ä¸Šå‡å’Œä¸‹é™*****************************************
+ * å¸§å¤´1---> 0x55   * å¸§å¤´2---> 0x0C    å¸§å°¾---> 0xBB
 ----------------------------------------------------------------------------------------------------
-   Ö÷Ö¸Áî |         ¸±Ö¸Áî1         |         ¸±Ö¸Áî2        |   ¸±Ö¸Áî3 | ËµÃ÷
-   0x08   |    0x01£¨×ó²àÕ¢ÃÅÉÏÉı£© |   0x01£¨ÓÒ²àÕ¢ÃÅÉÏÉı£© |    0x00   | ETCÏµÍ³Õ¢ÃÅ³õÊ¼»¯½Ç¶Èµ÷½Ú
-   0x08	  |    0x02£¨×ó²àÕ¢ÃÅÏÂ½µ£© |   0x02£¨ÓÒ²àÕ¢ÃÅÏÂ½µ£© |    0x00   | ETCÏµÍ³Õ¢ÃÅ³õÊ¼»¯½Ç¶Èµ÷½Ú
+   ä¸»æŒ‡ä»¤ |         å‰¯æŒ‡ä»¤1         |         å‰¯æŒ‡ä»¤2        |   å‰¯æŒ‡ä»¤3 | è¯´æ˜
+   0x08   |    0x01ï¼ˆå·¦ä¾§é—¸é—¨ä¸Šå‡ï¼‰ |   0x01ï¼ˆå³ä¾§é—¸é—¨ä¸Šå‡ï¼‰ |    0x00   | ETCç³»ç»Ÿé—¸é—¨åˆå§‹åŒ–è§’åº¦è°ƒèŠ‚
+   0x08	  |    0x02ï¼ˆå·¦ä¾§é—¸é—¨ä¸‹é™ï¼‰ |   0x02ï¼ˆå³ä¾§é—¸é—¨ä¸‹é™ï¼‰ |    0x00   | ETCç³»ç»Ÿé—¸é—¨åˆå§‹åŒ–è§’åº¦è°ƒèŠ‚
 ****************************************************************************************************
-×¢Òâ£ºETCÏµÍ³Õ¢ÃÅ³õÊ¼»¯½Ç¶Èµ÷½ÚµÄÄ¿µÄÊÇ¿ØÖÆETCÏµÍ³´¦ÓÚ¹Ø±Õ×´Ì¬Ê±£¬×óÓÒÁ½²àÕ¢ÃÅ´¦ÓÚË®Æ½×´Ì¬¡£
-£¨¸ÃÖ¸ÁîÎ´¸¨Öú¹¦ÄÜ£¬Éè±¸¹Ì¼ş¸üĞÂºó½öĞèÒªÉèÖÃÒ»´Î£¬µôµç²»¶ªÊ§£©
-²ÎÊı£ºLeft_Gate_Up£¨×óÉÏ£©--Right_Gate_Up£¨ÓÒÉÏ£©-- Left_Gate_Dowm£¨×óÏÂ£©--Right_Gate_Dowm£¨ÓÒÏÂ£©
-·µ»ØÖµ£ºÎŞ
-³õÊ¼»¯½Ç¶Èµ÷½ÚÖ»ÓĞÔÚETC´¦ÓÚ¹Ø±Õ×´Ì¬²Å¿ÉÒÔµ÷½Ú
+æ³¨æ„ï¼šETCç³»ç»Ÿé—¸é—¨åˆå§‹åŒ–è§’åº¦è°ƒèŠ‚çš„ç›®çš„æ˜¯æ§åˆ¶ETCç³»ç»Ÿå¤„äºå…³é—­çŠ¶æ€æ—¶ï¼Œå·¦å³ä¸¤ä¾§é—¸é—¨å¤„äºæ°´å¹³çŠ¶æ€ã€‚
+ï¼ˆè¯¥æŒ‡ä»¤æœªè¾…åŠ©åŠŸèƒ½ï¼Œè®¾å¤‡å›ºä»¶æ›´æ–°åä»…éœ€è¦è®¾ç½®ä¸€æ¬¡ï¼Œæ‰ç”µä¸ä¸¢å¤±ï¼‰
+å‚æ•°ï¼šLeft_Gate_Upï¼ˆå·¦ä¸Šï¼‰--Right_Gate_Upï¼ˆå³ä¸Šï¼‰-- Left_Gate_Dowmï¼ˆå·¦ä¸‹ï¼‰--Right_Gate_Dowmï¼ˆå³ä¸‹ï¼‰
+è¿”å›å€¼ï¼šæ— 
+åˆå§‹åŒ–è§’åº¦è°ƒèŠ‚åªæœ‰åœ¨ETCå¤„äºå…³é—­çŠ¶æ€æ‰å¯ä»¥è°ƒèŠ‚
 */
 void xETC_Init_Angle_Adjust(uint8_t AngleAdjust)
 {
@@ -49,19 +49,19 @@ void xETC_Init_Angle_Adjust(uint8_t AngleAdjust)
 	uint8_t Temp[8] = {0};
 	memcpy(Temp,ETC_Buf,sizeof(ETC_Buf));
 	Temp[2] = 0x08;
-	if(AngleAdjust == 1)   //×ó²àÕ¢ÃÅÉÏÉı
+	if(AngleAdjust == 1)   //å·¦ä¾§é—¸é—¨ä¸Šå‡
 	{
 		Temp[3] = 0x01;
 	}
-	else if(AngleAdjust == 2)  //ÓÒ²àÕ¢ÃÅÉÏÉı
+	else if(AngleAdjust == 2)  //å³ä¾§é—¸é—¨ä¸Šå‡
 	{
 		Temp[4] = 0x01;
 	}
-	else if(AngleAdjust == 3)  //×ó²àÕ¢ÃÅÏÂ½µ
+	else if(AngleAdjust == 3)  //å·¦ä¾§é—¸é—¨ä¸‹é™
 	{
 		Temp[3] = 0x02;
 	}
-	else if(AngleAdjust == 4)  //ÓÒ²àÕ¢ÃÅÏÂ½µ
+	else if(AngleAdjust == 4)  //å³ä¾§é—¸é—¨ä¸‹é™
 	{
 		Temp[4] = 0x02;
 	}
@@ -74,15 +74,15 @@ void xETC_Init_Angle_Adjust(uint8_t AngleAdjust)
 
 extern Communication_Typedef Communication_Data;
 /*
-Í¨¹ıETCÃ»ÓĞÑ°¿¨
+é€šè¿‡ETCæ²¡æœ‰å¯»å¡
 */
 void xETC_Pass(void)
 {
     ETC_Data.ETC_Car_Start=1;
-	while(Communication_Data.ETC_Open_Flag == 0)    //ETCÊÇ¹Ø±Õ×´Ì¬
+	while(Communication_Data.ETC_Open_Flag == 0)    //ETCæ˜¯å…³é—­çŠ¶æ€
 	{	
-#if ETC_Cross    //ETC ·ÅÖÃÔÚÊ®×ÖÂ·¿Ú
-        if(Communication_Data.ETC_Open_Flag == 1)   //ETC´ò¿ª
+#if ETC_Cross    //ETC æ”¾ç½®åœ¨åå­—è·¯å£
+        if(Communication_Data.ETC_Open_Flag == 1)   //ETCæ‰“å¼€
 		{
             delay_ms(200);
             Communication_Data.ETC_Open_Flag = 0;
@@ -94,10 +94,10 @@ void xETC_Pass(void)
         }
         else   
 		{
-			Motor_Data.xCAR_Back(15,350);//ÍùºóÒ»µã
+			Motor_Data.xCAR_Back(15,350);//å¾€åä¸€ç‚¹
 		}
         delay_ms(200);
-        if(Communication_Data.ETC_Open_Flag == 1)   //ETC´ò¿ª
+        if(Communication_Data.ETC_Open_Flag == 1)   //ETCæ‰“å¼€
 		{
             delay_ms(200);
             Communication_Data.ETC_Open_Flag = 0;
@@ -109,14 +109,14 @@ void xETC_Pass(void)
         }
         else   
 		{
-            Motor_Data.xCAR_Go(18,400);//ÍùÇ°Ò»µã
+            Motor_Data.xCAR_Go(18,400);//å¾€å‰ä¸€ç‚¹
 		}
         
 #endif
 			
-#if ETC_Middle   //ETC ·ÅÖÃÔÚÂ·ÖĞ¼ä
+#if ETC_Middle   //ETC æ”¾ç½®åœ¨è·¯ä¸­é—´
 
-		if(Communication_Data.ETC_Open_Flag == 1)   //ETC´ò¿ª
+		if(Communication_Data.ETC_Open_Flag == 1)   //ETCæ‰“å¼€
 		{
 			delay_ms(200);
             Communication_Data.ETC_Open_Flag = 0;
@@ -127,11 +127,11 @@ void xETC_Pass(void)
 		}
 		else   
 		{
-			Motor_Data.xCAR_Back(15,350);//ÍùºóÒ»µã
+			Motor_Data.xCAR_Back(15,350);//å¾€åä¸€ç‚¹
 		}
         
 		delay_ms(200);
-		if(Communication_Data.ETC_Open_Flag == 1)     //ETC´ò¿ª
+		if(Communication_Data.ETC_Open_Flag == 1)     //ETCæ‰“å¼€
 		{
 			delay_ms(250);
             Communication_Data.ETC_Open_Flag = 0;
@@ -143,13 +143,13 @@ void xETC_Pass(void)
 		}
 		else
 		{
-            Motor_Data.xCAR_Go(18,400);//ÍùÇ°Ò»µã
+            Motor_Data.xCAR_Go(18,400);//å¾€å‰ä¸€ç‚¹
 		}
 #endif		
 	}
 
-#if ETC_Cross    //ETC ·ÅÖÃÔÚÊ®×ÖÂ·¿Ú
-    if(Communication_Data.ETC_Open_Flag == 1)   //ETC´ò¿ª
+#if ETC_Cross    //ETC æ”¾ç½®åœ¨åå­—è·¯å£
+    if(Communication_Data.ETC_Open_Flag == 1)   //ETCæ‰“å¼€
     {
         delay_ms(200);
         Communication_Data.ETC_Open_Flag = 0;
@@ -161,8 +161,8 @@ void xETC_Pass(void)
    
 #endif    
     
-#if ETC_Middle   //ETC ·ÅÖÃÔÚÂ·ÖĞ¼ä	
-	if(Communication_Data.ETC_Open_Flag == 1)   // Ò»¿ªÊ¼¾ÍÊÇ´ò¿ª×´Ì¬
+#if ETC_Middle   //ETC æ”¾ç½®åœ¨è·¯ä¸­é—´	
+	if(Communication_Data.ETC_Open_Flag == 1)   // ä¸€å¼€å§‹å°±æ˜¯æ‰“å¼€çŠ¶æ€
 	{
 		delay_ms(250);
         Communication_Data.ETC_Open_Flag = 0;
@@ -175,74 +175,74 @@ void xETC_Pass(void)
 }
 
 /*
-¹ıETCÍ¬Ê±Ñ°¿¨
+è¿‡ETCåŒæ—¶å¯»å¡
 */
 void xETC_Pass_RFID(uint8_t card1,uint8_t card2,uint8_t card3)
 {
     ETC_Data.ETC_Car_Start=1;
-	while(Communication_Data.ETC_Open_Flag == 0)    //ETCÊÇ¹Ø±Õ×´Ì¬
+	while(Communication_Data.ETC_Open_Flag == 0)    //ETCæ˜¯å…³é—­çŠ¶æ€
 	{	
-#if ETC_Cross    //ETC ·ÅÖÃÔÚÊ®×ÖÂ·¿Ú
-        if(Communication_Data.ETC_Open_Flag == 1)   //ETC´ò¿ª
+#if ETC_Cross    //ETC æ”¾ç½®åœ¨åå­—è·¯å£
+        if(Communication_Data.ETC_Open_Flag == 1)   //ETCæ‰“å¼€
 				{
             delay_ms(200);
             Communication_Data.ETC_Open_Flag = 0;
             ETC_Data.ETC_Car_Start = 0;
             Motor_Data.xCAR_Track_Go();		
-            RFID_Data.xRFID_Track_Read(25,card1,card2,card3);  //Ñ°¿¨
+            RFID_Data.xRFID_Track_Read(25,card1,card2,card3);  //å¯»å¡
             delay_ms(200);
             break;
         }
         else   
 				{
-						Motor_Data.xCAR_Back(15,350);//ÍùºóÒ»µã
+						Motor_Data.xCAR_Back(15,350);//å¾€åä¸€ç‚¹
 				}
         delay_ms(200);
-        if(Communication_Data.ETC_Open_Flag == 1)   //ETC´ò¿ª
+        if(Communication_Data.ETC_Open_Flag == 1)   //ETCæ‰“å¼€
 				{
             delay_ms(200);
             Communication_Data.ETC_Open_Flag = 0;
             ETC_Data.ETC_Car_Start = 0;
             Motor_Data.xCAR_Track_Go();
-            RFID_Data.xRFID_Track_Read(25,card1,card2,card3);  //Ñ°¿¨
+            RFID_Data.xRFID_Track_Read(25,card1,card2,card3);  //å¯»å¡
             delay_ms(200);
             break;
         }
         else   				
 				{
 //						Motor_Data.xCAR_Back(15,350);
-            Motor_Data.xCAR_Go(20,400);//ÍùÇ°Ò»µã  
+            Motor_Data.xCAR_Go(20,400);//å¾€å‰ä¸€ç‚¹  
 				}
         
 #endif
 			
-#if ETC_Middle   //ETC ·ÅÖÃÔÚÂ·ÖĞ¼ä
+#if ETC_Middle   //ETC æ”¾ç½®åœ¨è·¯ä¸­é—´
 
-		if(Communication_Data.ETC_Open_Flag == 1)   //ETC´ò¿ª
+		if(Communication_Data.ETC_Open_Flag == 1)   //ETCæ‰“å¼€
 		{
 			delay_ms(200);
             Communication_Data.ETC_Open_Flag = 0;
             ETC_Data.ETC_Car_Start = 0;
 						
-            Motor_Data.xCAR_Go(40,180);//ÏòÇ°Ò»µã£¬·ÀÖ¹¿ÉÄÜÖØ¶Á
-            RFID_Data.xRFID_Track_Read(25,card1,card2,card3);  //Ñ°¿¨
+            Motor_Data.xCAR_Go(40,180);//å‘å‰ä¸€ç‚¹ï¼Œé˜²æ­¢å¯èƒ½é‡è¯»
+            RFID_Data.xRFID_Track_Read(25,card1,card2,card3);  //å¯»å¡
             delay_ms(200);  
 			break;
 		}
 		else   
 		{
-			Motor_Data.xCAR_Back(15,350);//ÍùºóÒ»µã
+			Motor_Data.xCAR_Back(15,350);//å¾€åä¸€ç‚¹
 		}
         
 		delay_ms(200);
-		if(Communication_Data.ETC_Open_Flag == 1)     //ETC´ò¿ª
+		if(Communication_Data.ETC_Open_Flag == 1)     //ETCæ‰“å¼€
 		{
 			delay_ms(250);
             Communication_Data.ETC_Open_Flag = 0;
             ETC_Data.ETC_Car_Start = 0; 
 						
-            Motor_Data.xCAR_Go(40,180);//ÏòÇ°Ò»µã£¬·ÀÖ¹¿ÉÄÜÖØ¶Á
-            RFID_Data.xRFID_Track_Read(25,card1,card2,card3); //Ñ°¿¨
+            Motor_Data.xCAR_Go(40,180);//å‘å‰ä¸€ç‚¹ï¼Œé˜²æ­¢å¯èƒ½é‡è¯»
+            RFID_Data.xRFID_Track_Read(25,card1,card2,card3); //å¯»å¡
             delay_ms(200);  
 
 			break;
@@ -250,32 +250,32 @@ void xETC_Pass_RFID(uint8_t card1,uint8_t card2,uint8_t card3)
 		else
 		{
 //						Motor_Data.xCAR_Back(40,180);
-            Motor_Data.xCAR_Go(18,400);//ÍùÇ°Ò»µã
+            Motor_Data.xCAR_Go(18,400);//å¾€å‰ä¸€ç‚¹
 		}
 #endif		
 	}
 
-#if ETC_Cross    //ETC ·ÅÖÃÔÚÊ®×ÖÂ·¿Ú
-    if(Communication_Data.ETC_Open_Flag == 1)   //ETC´ò¿ª
+#if ETC_Cross    //ETC æ”¾ç½®åœ¨åå­—è·¯å£
+    if(Communication_Data.ETC_Open_Flag == 1)   //ETCæ‰“å¼€
     {
         delay_ms(200);
         Communication_Data.ETC_Open_Flag = 0;
         ETC_Data.ETC_Car_Start = 0;
         Motor_Data.xCAR_Track_Go();
-        RFID_Data.xRFID_Track_Read(25,card1,card2,card3);  //Ñ°¿¨
+        RFID_Data.xRFID_Track_Read(25,card1,card2,card3);  //å¯»å¡
         delay_ms(200);
     }
    
 #endif    
     
-#if ETC_Middle   //ETC ·ÅÖÃÔÚÂ·ÖĞ¼ä	
-	if(Communication_Data.ETC_Open_Flag == 1)   // Ò»¿ªÊ¼¾ÍÊÇ´ò¿ª×´Ì¬
+#if ETC_Middle   //ETC æ”¾ç½®åœ¨è·¯ä¸­é—´	
+	if(Communication_Data.ETC_Open_Flag == 1)   // ä¸€å¼€å§‹å°±æ˜¯æ‰“å¼€çŠ¶æ€
 	{
 		delay_ms(250);
         Communication_Data.ETC_Open_Flag = 0;
         ETC_Data.ETC_Car_Start = 0;
 				
-        Motor_Data.xCAR_Go(40,180);//ÏòÇ°Ò»µã£¬·ÀÖ¹¿ÉÄÜÖØ¶Á
+        Motor_Data.xCAR_Go(40,180);//å‘å‰ä¸€ç‚¹ï¼Œé˜²æ­¢å¯èƒ½é‡è¯»
         RFID_Data.xRFID_Track_Read(25,card1,card2,card3);
         delay_ms(200);  
 	}    

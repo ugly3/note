@@ -82,3 +82,4 @@
 ..\output\smart_street_light.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\smart_street_light.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\smart_street_light.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\smart_street_light.o: ..\MODULE\all_module\car2.h

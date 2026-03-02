@@ -82,3 +82,4 @@
 ..\output\android.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\android.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\android.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\android.o: ..\MODULE\all_module\car2.h

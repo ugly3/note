@@ -85,4 +85,5 @@
 ..\output\can_user.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\can_user.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\can_user.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\can_user.o: ..\MODULE\all_module\car2.h
 ..\output\can_user.o: ..\HARDWARE\Task_Board\infrared.h

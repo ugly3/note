@@ -17,9 +17,9 @@
 volatile uint8_t Wifi_Rx_Buf[ WIFI_MAX_NUM ];
 volatile uint8_t Zigb_Rx_Buf[ ZIGB_RX_MAX ];
 volatile uint8_t Wifi_Rx_num ;
-volatile uint8_t Wifi_Rx_flag ;  //½ÓÊÕµ½Êı¾İ±êÖ¾Î»
+volatile uint8_t Wifi_Rx_flag ;  //æ¥æ”¶åˆ°æ•°æ®æ ‡å¿—ä½
 volatile uint8_t Zigbee_Rx_num ;
-volatile uint8_t Zigbee_Rx_flag ;  //½ÓÊÕÍê³É±êÖ¾Î»
+volatile uint8_t Zigbee_Rx_flag ;  //æ¥æ”¶å®Œæˆæ ‡å¿—ä½
 
 
 uint8_t Host_AGV_Return_Flag = RESET;
@@ -48,14 +48,14 @@ __weak void Can_WifiRx_Save(uint8_t res)
 
 uint8_t Rx_Flag ;
 
-__weak void Normal_data(void)	  // Õı³£½ÓÊÕ8×Ö½Ú¿ØÖÆÖ¸Áî
+__weak void Normal_data(void)	  // æ­£å¸¸æ¥æ”¶8å­—èŠ‚æ§åˆ¶æŒ‡ä»¤
 {
 	uint8_t sum=0;
 
-	if(Wifi_Rx_Buf[7]==0xbb)	 // ÅĞ¶Ï°üÎ²
+	if(Wifi_Rx_Buf[7]==0xbb)	 // åˆ¤æ–­åŒ…å°¾
 	{									  
-		//Ö÷Ö¸ÁîÓëÈıÎ»¸±Ö¸Áî×óÇóºÍĞ£Ñé
-		//×¢Òâ£ºÔÚÇóºÍÒç³öÊ±Ó¦¸Ã¶ÔºÍ×ö256È¡Óà¡£
+		//ä¸»æŒ‡ä»¤ä¸ä¸‰ä½å‰¯æŒ‡ä»¤å·¦æ±‚å’Œæ ¡éªŒ
+		//æ³¨æ„ï¼šåœ¨æ±‚å’Œæº¢å‡ºæ—¶åº”è¯¥å¯¹å’Œåš256å–ä½™ã€‚
 		 sum=(Wifi_Rx_Buf[2]+Wifi_Rx_Buf[3]+Wifi_Rx_Buf[4]+Wifi_Rx_Buf[5])%256;
 		if(sum == Wifi_Rx_Buf[6])
 		{
@@ -65,29 +65,29 @@ __weak void Normal_data(void)	  // Õı³£½ÓÊÕ8×Ö½Ú¿ØÖÆÖ¸Áî
 	}
 }
 
-__weak void Abnormal_data(void)	  //Êı¾İÒì³£´¦Àí
+__weak void Abnormal_data(void)	  //æ•°æ®å¼‚å¸¸å¤„ç†
 {
 	uint8_t i,j;
 	uint8_t sum=0;
 	
-	if(Wifi_Rx_num <8)			// Òì³£Êı¾İ×Ö½ÚÊıĞ¡ÓÚ8×Ö½Ú²»×ö´¦Àí
+	if(Wifi_Rx_num <8)			// å¼‚å¸¸æ•°æ®å­—èŠ‚æ•°å°äº8å­—èŠ‚ä¸åšå¤„ç†
 	{
 	   Rx_Flag =0;
 	}
 	else {
 		for(i=0;i<=(Wifi_Rx_num -7);i++)  
 		{
-			if(Wifi_Rx_Buf[i]==0x55)	   // Ñ°ÕÒ°üÍ·
+			if(Wifi_Rx_Buf[i]==0x55)	   // å¯»æ‰¾åŒ…å¤´
 			{
-			   if(Wifi_Rx_Buf[i+7]==0xbb)	// ÅĞ¶Ï°üÎ²
+			   if(Wifi_Rx_Buf[i+7]==0xbb)	// åˆ¤æ–­åŒ…å°¾
 			   {
 			   	    sum=(Wifi_Rx_Buf[i+2]+Wifi_Rx_Buf[i+3]+Wifi_Rx_Buf[i+4]+Wifi_Rx_Buf[i+5])%256;
 
-		           if(sum==Wifi_Rx_Buf[i+6])	 // ÅĞ¶ÏÇóºÍ
+		           if(sum==Wifi_Rx_Buf[i+6])	 // åˆ¤æ–­æ±‚å’Œ
 	              {
                      for(j=0;j<8;j++)
                      {
-                        Wifi_Rx_Buf[j]=Wifi_Rx_Buf[j+i];	 // Êı¾İ°áÒÆ
+                        Wifi_Rx_Buf[j]=Wifi_Rx_Buf[j+i];	 // æ•°æ®æ¬ç§»
                      }
 					      Rx_Flag =1;
 		          }
@@ -101,14 +101,14 @@ __weak void Abnormal_data(void)	  //Êı¾İÒì³£´¦Àí
 
 
 
-/* WIFIÊı¾İ½ÓÊÕ */
-//uint8_t Infrared_Tab[6];			//ºìÍâÊı¾İ´æ·ÅÊı×é
+/* WIFIæ•°æ®æ¥æ”¶ */
+//uint8_t Infrared_Tab[6];			//çº¢å¤–æ•°æ®å­˜æ”¾æ•°ç»„
 //extern uint8_t make;
 __weak void Can_WifiRx_Check(void)
 {
 //	if(Wifi_Rx_flag)
 //	{	
-//		if(gt_get_sub(canu_wifi_rxtime) == 0)    //Ã¿10msÖ´ĞĞÒ»´Î
+//		if(gt_get_sub(canu_wifi_rxtime) == 0)    //æ¯10msæ‰§è¡Œä¸€æ¬¡
 //		{
 //			if(Wifi_Rx_Buf[0]==0xFD)  
 //			{			
@@ -116,11 +116,11 @@ __weak void Can_WifiRx_Check(void)
 //			}
 //			else if(Wifi_Rx_Buf[0]==0x55)   
 //			{              
-//				Normal_data();    //Êı¾İÕı³£°Ë×Ö½Ú
+//				Normal_data();    //æ•°æ®æ­£å¸¸å…«å­—èŠ‚
 //			}
 //			else
 //			{
-//				Abnormal_data();   //Êı¾İÒì³£   
+//				Abnormal_data();   //æ•°æ®å¼‚å¸¸   
 //			} 	
 //			Wifi_Rx_flag = 0;
 //		}
@@ -131,12 +131,12 @@ __weak void Can_WifiRx_Check(void)
 //		{	
 //			switch(Wifi_Rx_Buf[2])
 //			{
-//			case 0x01:              	//Í£Ö¹
+//			case 0x01:              	//åœæ­¢
 //				Send_UpMotor(0 ,0);
-//				Roadway_Flag_clean();	//Çå³ı±êÖ¾Î»×´Ì¬	
+//				Roadway_Flag_clean();	//æ¸…é™¤æ ‡å¿—ä½çŠ¶æ€	
 //				break;
-//			case 0x02:              //Ç°½ø
-//				Roadway_mp_syn();	//ÂëÅÌÍ¬²½
+//			case 0x02:              //å‰è¿›
+//				Roadway_mp_syn();	//ç ç›˜åŒæ­¥
 //				Stop_Flag = 0; Go_Flag = 1; wheel_L_Flag = 0;wheel_R_Flag = 0;wheel_Nav_Flag = 0;
 //				Back_Flag = 0; Track_Flag = 0;
 //				temp_MP = Wifi_Rx_Buf[5];
@@ -146,8 +146,8 @@ __weak void Can_WifiRx_Check(void)
 //				//set_Test_Times();
 //				Control(Car_Spend ,Car_Spend);
 //				break;
-//			case 0x03:              //ºóÍË
-//				Roadway_mp_syn();	//ÂëÅÌÍ¬²½
+//			case 0x03:              //åé€€
+//				Roadway_mp_syn();	//ç ç›˜åŒæ­¥
 //				Stop_Flag = 0; Go_Flag = 0; wheel_L_Flag = 0;wheel_R_Flag = 0;wheel_Nav_Flag = 0;
 //				Back_Flag = 1; Track_Flag = 0;
 //				temp_MP = Wifi_Rx_Buf[5];
@@ -156,30 +156,30 @@ __weak void Can_WifiRx_Check(void)
 //				Car_Spend = Wifi_Rx_Buf[3];
 //				Control(-Car_Spend ,-Car_Spend);					
 //				break;
-//			case 0x04:              //×ó×ª
+//			case 0x04:              //å·¦è½¬
 //				Stop_Flag = 0; Go_Flag = 0; wheel_L_Flag = 1;wheel_R_Flag = 0;wheel_Nav_Flag = 0;
 //				Back_Flag = 0; Track_Flag = 0;
 //				Car_Spend = Wifi_Rx_Buf[3];				
 //				Control(-Car_Spend ,Car_Spend);
 //				break;
-//			case 0x05:              //ÓÒ×ª
+//			case 0x05:              //å³è½¬
 //				Stop_Flag = 0; Go_Flag = 0; wheel_L_Flag = 0;wheel_R_Flag = 1;wheel_Nav_Flag = 0;
 //				Back_Flag = 0; Track_Flag = 0;
 //				Car_Spend = Wifi_Rx_Buf[3];
 //				Control(Car_Spend,-Car_Spend);
 //				break;
-//			case 0x06:              //Ñ­¼£
+//			case 0x06:              //å¾ªè¿¹
 //				Stop_Flag = 0; Go_Flag = 0; wheel_L_Flag = 0;wheel_R_Flag = 0;wheel_Nav_Flag = 0;
 //				Back_Flag = 0; Track_Flag = 1;
 //				Car_Spend = Wifi_Rx_Buf[3];
 //				//set_Test_Times();
 //				break;
-//			case 0x07:				//ÂëÅÌÇåÁã
+//			case 0x07:				//ç ç›˜æ¸…é›¶
 //				
 //				break;
-//			case 0x08:				//×ó×ªÍä--½Ç¶È											
-//				Roadway_nav_syn();	//½Ç¶ÈÍ¬²½
-//				Roadway_mp_syn();	//ÂëÅÌÍ¬²½
+//			case 0x08:				//å·¦è½¬å¼¯--è§’åº¦											
+//				Roadway_nav_syn();	//è§’åº¦åŒæ­¥
+//				Roadway_mp_syn();	//ç ç›˜åŒæ­¥
 //				Stop_Flag = 0; Go_Flag = 0; wheel_L_Flag = 0;wheel_R_Flag = 0;wheel_Nav_Flag = 1;
 //				Back_Flag = 0; Track_Flag = 0;
 //				temp_Nav = Wifi_Rx_Buf[5];
@@ -188,9 +188,9 @@ __weak void Can_WifiRx_Check(void)
 //				Car_Spend = Wifi_Rx_Buf[3];				
 //				Send_UpMotor(-Car_Spend ,Car_Spend);					
 //				break;
-//			case 0x09:				//ÓÒ×ªÍä--½Ç¶È			
-//				Roadway_nav_syn();	//½Ç¶ÈÍ¬²½
-//				Roadway_mp_syn();	//ÂëÅÌÍ¬²½
+//			case 0x09:				//å³è½¬å¼¯--è§’åº¦			
+//				Roadway_nav_syn();	//è§’åº¦åŒæ­¥
+//				Roadway_mp_syn();	//ç ç›˜åŒæ­¥
 //				Stop_Flag = 0; Go_Flag = 0; wheel_L_Flag = 0;wheel_R_Flag = 0;wheel_Nav_Flag = 1;
 //				Back_Flag = 0; Track_Flag = 0;
 //				temp_Nav = Wifi_Rx_Buf[5];
@@ -199,49 +199,49 @@ __weak void Can_WifiRx_Check(void)
 //				Car_Spend = Wifi_Rx_Buf[3];
 //				Send_UpMotor(Car_Spend,-Car_Spend);
 //				break;
-//			case 0x10:										//ºìÍâÇ°ÈıÎ»Êı¾İ
+//			case 0x10:										//çº¢å¤–å‰ä¸‰ä½æ•°æ®
 //				Infrared_Tab[0]=Wifi_Rx_Buf[3];
 //				Infrared_Tab[1]=Wifi_Rx_Buf[4];
 //				Infrared_Tab[2]=Wifi_Rx_Buf[5];
 //				break;
-//			case 0x11:										//ºìÍâºóÈıÎ»Êı¾İ
-//				Infrared_Tab[3]=Wifi_Rx_Buf[3];//Êı¾İµÚËÄÎ»
-//				Infrared_Tab[4]=Wifi_Rx_Buf[4];//µÍÎ»Ğ£ÑéÂë
-//				Infrared_Tab[5]=Wifi_Rx_Buf[5];//¸ßÎ»Ğ£ÑéÂë
+//			case 0x11:										//çº¢å¤–åä¸‰ä½æ•°æ®
+//				Infrared_Tab[3]=Wifi_Rx_Buf[3];//æ•°æ®ç¬¬å››ä½
+//				Infrared_Tab[4]=Wifi_Rx_Buf[4];//ä½ä½æ ¡éªŒç 
+//				Infrared_Tab[5]=Wifi_Rx_Buf[5];//é«˜ä½æ ¡éªŒç 
 //				break;
-//			case 0x12:										//Í¨ÖªĞ¡³µµ¥Æ¬»ú·¢ËÍºìÍâÏß
+//			case 0x12:										//é€šçŸ¥å°è½¦å•ç‰‡æœºå‘é€çº¢å¤–çº¿
 //				Infrared_Send(Infrared_Tab,6);
 //				
 //				break;									
-//			case 0x20:	//×ªÏòµÆ¿ØÖÆ
+//			case 0x20:	//è½¬å‘ç¯æ§åˆ¶
 //				Set_tba_WheelLED(L_LED,Wifi_Rx_Buf[3]);
 //				Set_tba_WheelLED(R_LED,Wifi_Rx_Buf[4]);
 //				break;					
 //			case 0x30:
-//				Set_tba_Beep(Wifi_Rx_Buf[3]);				//·äÃùÆ÷
+//				Set_tba_Beep(Wifi_Rx_Buf[3]);				//èœ‚é¸£å™¨
 //				break;
-//			case 0x40:										//ÔİÎ´Ê¹ÓÃ
+//			case 0x40:										//æš‚æœªä½¿ç”¨
 //				
 //				break;
-//				case 0x50:  				//ºìÍâ·¢Éä¿ØÖÆÏàÆ¬ÉÏ·­ 
+//				case 0x50:  				//çº¢å¤–å‘å°„æ§åˆ¶ç›¸ç‰‡ä¸Šç¿» 
 //				Infrared_Send(TFT_PageUp,4);
 //				break;
-//			case 0x51:    					//ºìÍâ·¢Éä¿ØÖÆÏàÆ¬ÏÂ·­ 
+//			case 0x51:    					//çº¢å¤–å‘å°„æ§åˆ¶ç›¸ç‰‡ä¸‹ç¿» 
 //				Infrared_Send(TFT_PageDown,4);
 //				break;
-//			case 0x61:    					//ºìÍâ·¢Éä¿ØÖÆ¹âÔ´Ç¿¶ÈµµÎ»¼Ó1 
+//			case 0x61:    					//çº¢å¤–å‘å°„æ§åˆ¶å…‰æºå¼ºåº¦æ¡£ä½åŠ 1 
 //				Infrared_Send(Light_plus1,4);				
 //				break;
-//			case 0x62:   	 				//ºìÍâ·¢Éä¿ØÖÆ¹âÔ´Ç¿¶ÈµµÎ»¼Ó2 
+//			case 0x62:   	 				//çº¢å¤–å‘å°„æ§åˆ¶å…‰æºå¼ºåº¦æ¡£ä½åŠ 2 
 //				Infrared_Send(Light_plus2,4);
 //				break;
-//			case 0x63:    					//ºìÍâ·¢Éä¿ØÖÆ¹âÔ´Ç¿¶ÈµµÎ»¼Ó3 
+//			case 0x63:    					//çº¢å¤–å‘å°„æ§åˆ¶å…‰æºå¼ºåº¦æ¡£ä½åŠ 3 
 //				Infrared_Send(Light_plus3,4);
 //				break;
-//		   case 0x80:						//ÔË¶¯±êÖ¾ÎïÊı¾İ·µ»ØÔÊĞíÎ»
-//			    Host_AGV_Return_Flag = Wifi_Rx_Buf[3];   //SET ÔÊĞí / RESET ½ûÖ¹
+//		   case 0x80:						//è¿åŠ¨æ ‡å¿—ç‰©æ•°æ®è¿”å›å…è®¸ä½
+//			    Host_AGV_Return_Flag = Wifi_Rx_Buf[3];   //SET å…è®¸ / RESET ç¦æ­¢
 //				break;
-////       case 0xA0:						//×Ô¶¯¼İÊ»
+////       case 0xA0:						//è‡ªåŠ¨é©¾é©¶
 ////            make = 0x01;
 ////            break;
 //		   default:
@@ -260,9 +260,9 @@ __weak void Can_WifiRx_Check(void)
 
 
 /**
-º¯Êı¹¦ÄÜ£º±£´æZigBeeÊı¾İ
-²Î    Êı: ÎŞ
-·µ »Ø Öµ£ºÎŞ
+å‡½æ•°åŠŸèƒ½ï¼šä¿å­˜ZigBeeæ•°æ®
+å‚    æ•°: æ— 
+è¿” å› å€¼ï¼šæ— 
 */
 void Can_ZigBeeRx_Save(uint8_t res)
 {
@@ -280,11 +280,11 @@ void Can_ZigBeeRx_Save(uint8_t res)
 		
 }
 
-extern uint8_t coordinate;              //Ëæ»ú×ø±êµã
+extern uint8_t coordinate;              //éšæœºåæ ‡ç‚¹
 /**
-º¯Êı¹¦ÄÜ£ºZigBeeÊı¾İ¼à²â
-²Î    Êı£ºÎŞ
-·µ »Ø Öµ£ºÎŞ
+å‡½æ•°åŠŸèƒ½ï¼šZigBeeæ•°æ®ç›‘æµ‹
+å‚    æ•°ï¼šæ— 
+è¿” å› å€¼ï¼šæ— 
 */
 __weak void Can_ZigBeeRx_Check(void)  
 {
@@ -292,7 +292,7 @@ __weak void Can_ZigBeeRx_Check(void)
 	{
 		if(gt_get_sub(canu_zibe_rxtime) == 0)
 		{
-			if(Zigb_Rx_Buf[1] == 0x03) 			// µÀÕ¢ 
+			if(Zigb_Rx_Buf[1] == 0x03) 			// é“é—¸ 
 			{
 			   if(Zigb_Rx_Buf[2]==0x01)
 			    {				
@@ -309,70 +309,70 @@ __weak void Can_ZigBeeRx_Check(void)
 					}							
 			    }		
 			}
-			else if((Zigb_Rx_Buf[1]==0x0E)&&(Zigb_Rx_Buf[2]==0x01))	//½»Í¨µÆ±êÖ¾Îï					
+			else if((Zigb_Rx_Buf[1]==0x0E)&&(Zigb_Rx_Buf[2]==0x01))	//äº¤é€šç¯æ ‡å¿—ç‰©					
 			{
-				Stop_Flag = Zigb_Rx_Buf[4] ;	  						// 0x07½øÈëÊ¶±ğÄ£Ê½ 0x08 Î´½øÈëÊ¶±ğÄ£Ê½
+				Stop_Flag = Zigb_Rx_Buf[4] ;	  						// 0x07è¿›å…¥è¯†åˆ«æ¨¡å¼ 0x08 æœªè¿›å…¥è¯†åˆ«æ¨¡å¼
 			} 
-			else if((Zigb_Rx_Buf[1]==0x10) && (Zigb_Rx_Buf[2]==0x10)) //ÌØÊâµØĞÎ±êÖ¾Îï
+			else if((Zigb_Rx_Buf[1]==0x10) && (Zigb_Rx_Buf[2]==0x10)) //ç‰¹æ®Šåœ°å½¢æ ‡å¿—ç‰©
 			{
 				if(Zigb_Rx_Buf[3]==0x01)
 				{
 					Stop_Flag = Zigb_Rx_Buf[4];
 				}
 			}
-			else if((Zigb_Rx_Buf[1]==0x0D)&&(Zigb_Rx_Buf[2]==0x03)) //Á¢Ìå³µ¿â±êÖ¾Îï
+			else if((Zigb_Rx_Buf[1]==0x0D)&&(Zigb_Rx_Buf[2]==0x03)) //ç«‹ä½“è½¦åº“æ ‡å¿—ç‰©
 			{
-				if(Zigb_Rx_Buf[3] == 0x01)							//»ñÈ¡Á¢Ìå³µ¿âµ±Ç°²ãÊı
+				if(Zigb_Rx_Buf[3] == 0x01)							//è·å–ç«‹ä½“è½¦åº“å½“å‰å±‚æ•°
 				{
 					switch(Zigb_Rx_Buf[4])							
 					{
 						case 1:
-							Stop_Flag = 0x09;						//µÚÒ»²ã
+							Stop_Flag = 0x09;						//ç¬¬ä¸€å±‚
 							break;
 						case 2:
-							Stop_Flag = 0x0A;						//µÚ¶ş²ã
+							Stop_Flag = 0x0A;						//ç¬¬äºŒå±‚
 							break;
 						case 3:
-							Stop_Flag = 0x0B;						//µÚÈı²ã
+							Stop_Flag = 0x0B;						//ç¬¬ä¸‰å±‚
 							break;
 						case 4:
-							Stop_Flag = 0x0C;						//µÚËÄ²ã
+							Stop_Flag = 0x0C;						//ç¬¬å››å±‚
 							break;
 					}
 				} 
-				else if(Zigb_Rx_Buf[3] == 0x02) 					//»ñÈ¡Á¢Ìå³µ¿âµ±Ç°ºìÍâ×´Ì¬
+				else if(Zigb_Rx_Buf[3] == 0x02) 					//è·å–ç«‹ä½“è½¦åº“å½“å‰çº¢å¤–çŠ¶æ€
 				{
 					if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x01))
 					{
-						Stop_Flag = 0x11;							//Ç°²àºìÍâ´¥·¢¡¢ºó²àºìÍâ´¥·¢
+						Stop_Flag = 0x11;							//å‰ä¾§çº¢å¤–è§¦å‘ã€åä¾§çº¢å¤–è§¦å‘
 					} 
 					else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x02))
 					{
-						Stop_Flag = 0x22;							//Ç°²àºìÍâÎ´´¥·¢¡¢ºó²àºìÍâÎ´´¥·¢
+						Stop_Flag = 0x22;							//å‰ä¾§çº¢å¤–æœªè§¦å‘ã€åä¾§çº¢å¤–æœªè§¦å‘
 					}
 					else if((Zigb_Rx_Buf[4] == 0x01) && (Zigb_Rx_Buf[5] == 0x02))
 					{
-						Stop_Flag = 0x12;							//Ç°²àºìÍâ´¥·¢¡¢ºó²àºìÍâÎ´´¥·¢
+						Stop_Flag = 0x12;							//å‰ä¾§çº¢å¤–è§¦å‘ã€åä¾§çº¢å¤–æœªè§¦å‘
 					}
 					else if((Zigb_Rx_Buf[4] == 0x02) && (Zigb_Rx_Buf[5] == 0x01))
 					{
-						Stop_Flag = 0x21;							//Ç°²àºìÍâÎ´´¥·¢¡¢ºó²àºìÍâ´¥·¢
+						Stop_Flag = 0x21;							//å‰ä¾§çº¢å¤–æœªè§¦å‘ã€åä¾§çº¢å¤–è§¦å‘
 					}
 				}
-			}else if((Zigb_Rx_Buf[1]==0x07)&&(Zigb_Rx_Buf[2]==0x01)) //±¨¾¯Ì¨±êÖ¾ÎïËæ»ú·µ»Ø×ø±êµã
+			}else if((Zigb_Rx_Buf[1]==0x07)&&(Zigb_Rx_Buf[2]==0x01)) //æŠ¥è­¦å°æ ‡å¿—ç‰©éšæœºè¿”å›åæ ‡ç‚¹
              {         
                     coordinate = Zigb_Rx_Buf[3];             
              }
-			else if((Zigb_Rx_Buf[0] == 0x55)&&(Zigb_Rx_Buf[1] == 0x02))		//·µ»Ø´Ó³µÊı¾İ
+			else if((Zigb_Rx_Buf[0] == 0x55)&&(Zigb_Rx_Buf[1] == 0x02))		//è¿”å›ä»è½¦æ•°æ®
 			{		
 					//memcpy(Follower_Tab,Zigb_Rx_Buf,50);
 					AGV_data_Falg = SET;
 			}
-			else if(Zigb_Rx_Buf[1]==0x06)	 //ÓïÒô²¥±¨·µ»Ø
+			else if(Zigb_Rx_Buf[1]==0x06)	 //è¯­éŸ³æ’­æŠ¥è¿”å›
 			{
 				if(Zigb_Rx_Buf[2]==0x01)
 				{
-						Stop_Flag=Zigb_Rx_Buf[3] ;	  // ÓïÒôĞ¾Æ¬×´Ì¬·µ»Ø
+						Stop_Flag=Zigb_Rx_Buf[3] ;	  // è¯­éŸ³èŠ¯ç‰‡çŠ¶æ€è¿”å›
 				}			
 			}
 			Zigbee_Rx_flag = 0;
@@ -381,10 +381,10 @@ __weak void Can_ZigBeeRx_Check(void)
 }
 
 
-/** ÔİÎ´Ê¹ÓÃ
-º¯Êı¹¦ÄÜ£ºÉèÖÃÑ­¼£ÉÏ´«¸üĞÂÊ±¼ä
-²Î    Êı£ºÎŞ
-·µ »Ø Öµ£ºÎŞ
+/** æš‚æœªä½¿ç”¨
+å‡½æ•°åŠŸèƒ½ï¼šè®¾ç½®å¾ªè¿¹ä¸Šä¼ æ›´æ–°æ—¶é—´
+å‚    æ•°ï¼šæ— 
+è¿” å› å€¼ï¼šæ— 
 */
 void Canuser_upTrackTime(void)
 {
@@ -402,14 +402,14 @@ void Canuser_upTrackTime(void)
 #define UART_or_CAN    0   //  0---UART  1---CAN
 
 /**
-º¯Êı¹¦ÄÜ£ºCAN²éÑ¯¡¢·¢ËÍ½ÓÊÕ¼ì²â
-²Î    Êı£ºÎŞ
-·µ »Ø Öµ£ºÎŞ
+å‡½æ•°åŠŸèƒ½ï¼šCANæŸ¥è¯¢ã€å‘é€æ¥æ”¶æ£€æµ‹
+å‚    æ•°ï¼šæ— 
+è¿” å› å€¼ï¼šæ— 
 */
 void Canuser_main(void)
 {
 	CanP_Host_Main();
-	//CanP_CanTx_Check();				//CAN×ÜÏß·¢ËÍÊı¾İ¼à²â
+	//CanP_CanTx_Check();				//CANæ€»çº¿å‘é€æ•°æ®ç›‘æµ‹
 	CanP_CanTx_Check_fIrq();
 }
 

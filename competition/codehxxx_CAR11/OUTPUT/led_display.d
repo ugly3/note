@@ -82,3 +82,4 @@
 ..\output\led_display.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\led_display.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\led_display.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\led_display.o: ..\MODULE\all_module\car2.h

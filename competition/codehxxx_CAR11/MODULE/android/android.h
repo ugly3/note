@@ -5,19 +5,19 @@
 
 typedef struct
 {
-	bool Android_Main_Car_Start_Flag;   //Ö÷³µ¿ªÊ¼Æô¶¯±êÖ¾Î»
-	bool Red_State;         // Ê¶±ğÎªºìµÆ
-	bool Yellow_State;      // Ê¶±ğÎª»ÆµÆ         
-	bool Green_State;      // Ê¶±ğÎªÂÌµÆ
-	bool Two_Code_State;   // Ê¶±ğ¶şÎ¬Âë
-	bool TFT_Licence_Flag;    // TFT³µÅÆÊ¶±ğ
-	bool TFT_Traffic_Flag;    // TFT½»Í¨±êÖ¾
-	bool Control_TFT_Paging;        //°²×¿»Ø´«¿ØÖÆTFTÏòÏÂ·­Ò³
-	bool TFT_GraphCount_Flag; //TFTÍ¼ĞÎÊıÁ¿Ê¶±ğ
-	bool TFT_GraphColour_Flag; //TFTÍ¼ĞÎÑÕÉ«Ê¶±ğ
-    bool TFT_Graph_CountAndColour_Flag; //TFTÍ¼ĞÎÊ¶±ğ(ÊıÁ¿+ÑÕÉ«)
-	bool TFT_Mask_Flag;  //TFT¿ÚÕÖÊ¶±ğ    
-	bool TFT_Words_Flag; //TFTÎÄ×ÖÊ¶±ğ  
+	bool Android_Main_Car_Start_Flag;   //ä¸»è½¦å¼€å§‹å¯åŠ¨æ ‡å¿—ä½
+	bool Red_State;         // è¯†åˆ«ä¸ºçº¢ç¯
+	bool Yellow_State;      // è¯†åˆ«ä¸ºé»„ç¯         
+	bool Green_State;      // è¯†åˆ«ä¸ºç»¿ç¯
+	bool Two_Code_State;   // è¯†åˆ«äºŒç»´ç 
+	bool TFT_Licence_Flag;    // TFTè½¦ç‰Œè¯†åˆ«
+	bool TFT_Traffic_Flag;    // TFTäº¤é€šæ ‡å¿—
+	bool Control_TFT_Paging;        //å®‰å“å›ä¼ æ§åˆ¶TFTå‘ä¸‹ç¿»é¡µ
+	bool TFT_GraphCount_Flag; //TFTå›¾å½¢æ•°é‡è¯†åˆ«
+	bool TFT_GraphColour_Flag; //TFTå›¾å½¢é¢œè‰²è¯†åˆ«
+    bool TFT_Graph_CountAndColour_Flag; //TFTå›¾å½¢è¯†åˆ«(æ•°é‡+é¢œè‰²)
+	bool TFT_Mask_Flag;  //TFTå£ç½©è¯†åˆ«    
+	bool TFT_Words_Flag; //TFTæ–‡å­—è¯†åˆ«  
     
     bool TFT_CheXin_erro_Flag;
     bool TFT_CheXin_sucess_flag;
@@ -31,28 +31,28 @@ extern Typedef_Android Android_Data;
 
 
 #define Two_Code_Count 3
-extern uint8_t Two_Code_Init_Data_Store[Two_Code_Count][200];   //´æ´¢Ê¶±ğ¶şÎ¬Âë³õÊ¼Êı¾İ
-extern char Two_Code_Data_parsed_Store1[50];       // ´æ´¢¶şÎ¬Âë1½âÎö½á¹û
-extern char Two_Code_Data_parsed_Store2[50];       // ´æ´¢¶şÎ¬Âë2½âÎö½á¹û
-extern char Two_Code_Data_parsed_Store3[50];       // ´æ´¢¶şÎ¬Âë3½âÎö½á¹û
+extern uint8_t Two_Code_Init_Data_Store[Two_Code_Count][200];   //å­˜å‚¨è¯†åˆ«äºŒç»´ç åˆå§‹æ•°æ®
+extern char Two_Code_Data_parsed_Store1[50];       // å­˜å‚¨äºŒç»´ç 1è§£æç»“æœ
+extern char Two_Code_Data_parsed_Store2[50];       // å­˜å‚¨äºŒç»´ç 2è§£æç»“æœ
+extern char Two_Code_Data_parsed_Store3[50];       // å­˜å‚¨äºŒç»´ç 3è§£æç»“æœ
 
-extern uint8_t TFT_License_Data_Store[6];   //TFT³µÅÆÊı¾İ´æ´¢
-extern uint8_t TFT_Traffic_Data_Store[7];   //TFT½»Í¨±êÖ¾Êı¾İ´æ´¢
-extern uint8_t TFT_GraphCount_Data_Store[7]; //TFTÍ¼ĞÎÊıÁ¿Êı¾İ´æ´¢ 
-extern uint8_t TFT_GraphColour_Data_Store[7]; //TFTÍ¼ĞÎÑÕÉ«Êı¾İ´æ´¢
-extern uint8_t TFT_GraphAndColour_Data_Store[7]; //TFTÍ¼ĞÎ(ÊıÁ¿+ÑÕÉ«)Êı¾İ´æ´¢
-extern uint8_t TFT_Mask_Data_Store[7]; //TFT¿ÚÕÖĞĞÈËÊıÁ¿
-extern uint8_t TFT_Words_Data_Store[7]; //TFTÎÄ×ÖÊ¶±ğ´æ´¢Êı¾İ
+extern uint8_t TFT_License_Data_Store[6];   //TFTè½¦ç‰Œæ•°æ®å­˜å‚¨
+extern uint8_t TFT_Traffic_Data_Store[7];   //TFTäº¤é€šæ ‡å¿—æ•°æ®å­˜å‚¨
+extern uint8_t TFT_GraphCount_Data_Store[7]; //TFTå›¾å½¢æ•°é‡æ•°æ®å­˜å‚¨ 
+extern uint8_t TFT_GraphColour_Data_Store[7]; //TFTå›¾å½¢é¢œè‰²æ•°æ®å­˜å‚¨
+extern uint8_t TFT_GraphAndColour_Data_Store[7]; //TFTå›¾å½¢(æ•°é‡+é¢œè‰²)æ•°æ®å­˜å‚¨
+extern uint8_t TFT_Mask_Data_Store[7]; //TFTå£ç½©è¡Œäººæ•°é‡
+extern uint8_t TFT_Words_Data_Store[7]; //TFTæ–‡å­—è¯†åˆ«å­˜å‚¨æ•°æ®
 
 extern uint8_t Identify_Traffic_Light[8];
-extern uint8_t Identify_Two_Code_Arr[8];//Ö÷³µ·¢¸ø°²×¿ÇëÇóÊ¶±ğ½»Í¨µÆ
-extern uint8_t Identify_TFT_License_Arr[8];//Ö÷³µ·¢¸ø°²×¿ÇëÇóÊ¶±ğTFT³µÅÆ
-extern uint8_t Identify_TFT_Traffic_Arr[8];//Ö÷³µ·¢¸ø°²×¿ÇëÇóÊ¶±ğTFT½»Í¨±êÖ¾
-extern uint8_t Identify_TFT_GraphCount_Arr[8];//Ö÷³µ·¢¸ø°²×¿ÇëÇóÊ¶±ğTFTÍ¼ĞÎ
-extern uint8_t Identify_TFT_GraphColour_Arr[8];//Ö÷³µ·¢¸ø°²×¿ÇëÇóÊ¶±ğTFTÍ¼ĞÎÑÕÉ«
-extern uint8_t Identify_TFT_Graph_CountAndColour_Arr[8];//Ö÷³µ·¢¸ø°²×¿ÇëÇóÊ¶±ğTFTÍ¼ĞÎ£¨ÊıÁ¿+ÑÕÉ«£©
-extern uint8_t Identify_TFT_Mask_Arr[8];//Ö÷³µ·¢¸ø°²×¿ÇëÇóÊ¶±ğTFT¿ÚÕÖĞĞÈË
-extern uint8_t Identify_TFT_Words_Arr[8];//Ö÷³µ·¢¸ø°²×¿ÇëÇóÊ¶±ğTFTÎÄ×ÖÊ¶±ğ
+extern uint8_t Identify_Two_Code_Arr[8];//ä¸»è½¦å‘ç»™å®‰å“è¯·æ±‚è¯†åˆ«äº¤é€šç¯
+extern uint8_t Identify_TFT_License_Arr[8];//ä¸»è½¦å‘ç»™å®‰å“è¯·æ±‚è¯†åˆ«TFTè½¦ç‰Œ
+extern uint8_t Identify_TFT_Traffic_Arr[8];//ä¸»è½¦å‘ç»™å®‰å“è¯·æ±‚è¯†åˆ«TFTäº¤é€šæ ‡å¿—
+extern uint8_t Identify_TFT_GraphCount_Arr[8];//ä¸»è½¦å‘ç»™å®‰å“è¯·æ±‚è¯†åˆ«TFTå›¾å½¢
+extern uint8_t Identify_TFT_GraphColour_Arr[8];//ä¸»è½¦å‘ç»™å®‰å“è¯·æ±‚è¯†åˆ«TFTå›¾å½¢é¢œè‰²
+extern uint8_t Identify_TFT_Graph_CountAndColour_Arr[8];//ä¸»è½¦å‘ç»™å®‰å“è¯·æ±‚è¯†åˆ«TFTå›¾å½¢ï¼ˆæ•°é‡+é¢œè‰²ï¼‰
+extern uint8_t Identify_TFT_Mask_Arr[8];//ä¸»è½¦å‘ç»™å®‰å“è¯·æ±‚è¯†åˆ«TFTå£ç½©è¡Œäºº
+extern uint8_t Identify_TFT_Words_Arr[8];//ä¸»è½¦å‘ç»™å®‰å“è¯·æ±‚è¯†åˆ«TFTæ–‡å­—è¯†åˆ«
 
 
 extern uint8_t Identify_TFT_CheXin_Arr[8];

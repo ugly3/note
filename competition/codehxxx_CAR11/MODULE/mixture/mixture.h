@@ -6,7 +6,7 @@
 
 
 
-//º¯ÊıÖ¸Õë£¬Ö÷ÒªÓÃÓÚº¯Êı
+//å‡½æ•°æŒ‡é’ˆï¼Œä¸»è¦ç”¨äºå‡½æ•°
 typedef struct
 {
 	uint8_t (*xGet_CheckSum)(uint8_t,uint8_t,uint8_t,uint8_t);
@@ -22,7 +22,7 @@ typedef struct
 
 
 
-/*°´¼ü*/
+/*æŒ‰é”®*/
 typedef struct
 {
 	uint8_t Trg;    

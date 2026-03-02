@@ -82,3 +82,4 @@
 ..\output\voice_report.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\voice_report.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\voice_report.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\voice_report.o: ..\MODULE\all_module\car2.h

@@ -82,3 +82,4 @@
 ..\output\three_dim_carport.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\three_dim_carport.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\three_dim_carport.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\three_dim_carport.o: ..\MODULE\all_module\car2.h

@@ -87,4 +87,5 @@
 ..\output\drive.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\drive.o: ..\MODULE\xiaochuang\xiaochuang.h
 ..\output\drive.o: ..\MODULE\landmark\two_code\two_code.h
+..\output\drive.o: ..\MODULE\all_module\car2.h
 ..\output\drive.o: ..\HARDWARE\CAN\can_user.h

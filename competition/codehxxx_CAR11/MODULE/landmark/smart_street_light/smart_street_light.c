@@ -1,8 +1,8 @@
 /**
 ************************************************************************
- *    ÎÄ¼şÃû£ºsmart_street_light 
- *      ËµÃ÷£ºÖÇÄÜÂ·µÆ±êÖ¾Îï
- *  Í¨ĞÅ·½Ê½£ººìÍâÎŞÏßÍ¨ĞÅ
+ *    æ–‡ä»¶åï¼šsmart_street_light 
+ *      è¯´æ˜ï¼šæ™ºèƒ½è·¯ç¯æ ‡å¿—ç‰©
+ *  é€šä¿¡æ–¹å¼ï¼šçº¢å¤–æ— çº¿é€šä¿¡
 ************************************************************************
 **/
 #include "smart_street_light.h"
@@ -18,25 +18,25 @@ Smart_Light_Typedef Smart_Light_Data =
 
 
 /*
-ÖÇÄÜÂ·µÆ±êÖ¾Îï¹Ì¶¨Ö¸Áî·¢ËÍ Ö¡Í·1£¬Ö¡Í·2£¬ÎŞÖ¡Î²
+æ™ºèƒ½è·¯ç¯æ ‡å¿—ç‰©å›ºå®šæŒ‡ä»¤å‘é€ å¸§å¤´1ï¼Œå¸§å¤´2ï¼Œæ— å¸§å°¾
 */
 uint8_t Smart_Light_Buf[4] = {0x00,0xFF,0x00,0x00}; 
 
-//±£´æ»ñÈ¡µÄËÄ¸ö¹â¶ÈÖµ
-uint16_t Smart_Light_Temp[4] = {0};   //±£´æ¹â¶ÈÖµÒ»¶¨ÒªÓÃuint16_t
+//ä¿å­˜è·å–çš„å››ä¸ªå…‰åº¦å€¼
+uint16_t Smart_Light_Temp[4] = {0};   //ä¿å­˜å…‰åº¦å€¼ä¸€å®šè¦ç”¨uint16_t
 
 
 /*
- **********************************¹âÔ´µ±Îª¿ØÖÆ*****************************
- * Ö¡Í·1---> 0x00  * Ö¡Í·2---> 0xFF    
+ **********************************å…‰æºå½“ä¸ºæ§åˆ¶*****************************
+ * å¸§å¤´1---> 0x00  * å¸§å¤´2---> 0xFF    
 ----------------------------------------------------------------------------------------------------
-  Êı¾İ |Êı¾İ·´Âë| ËµÃ÷
-  0x0C |   0xF3 | ¹âÔ´µ²Î»¼ÓÒ»µ²
-  0x18 |   0xE7 | ¹âÔ´µ²Î»¼Ó¶şµ²
-  0x5E |   0xA1 | ¹âÔ´µ²Î»¼ÓÈıµ²
+  æ•°æ® |æ•°æ®åç | è¯´æ˜
+  0x0C |   0xF3 | å…‰æºæŒ¡ä½åŠ ä¸€æŒ¡
+  0x18 |   0xE7 | å…‰æºæŒ¡ä½åŠ äºŒæŒ¡
+  0x5E |   0xA1 | å…‰æºæŒ¡ä½åŠ ä¸‰æŒ¡
 ****************************************************************************************************
-²ÎÊı£º
-·µ»ØÖµ£ºÎŞ
+å‚æ•°ï¼š
+è¿”å›å€¼ï¼šæ— 
 */
 void xSmart_Light_Add_Level(uint8_t grade)
 {
@@ -45,35 +45,35 @@ void xSmart_Light_Add_Level(uint8_t grade)
 	
 	switch(grade)
 	{
-		case 1:   //¹âÔ´µ²Î»+1
+		case 1:   //å…‰æºæŒ¡ä½+1
 		{
-			Temp[2] = 0x0C;  //Êı¾İ
-			Temp[3] = 0xF3;  //Êı¾İ·´Âë
+			Temp[2] = 0x0C;  //æ•°æ®
+			Temp[3] = 0xF3;  //æ•°æ®åç 
 			break;
 		}
-		case 2:   //¹âÔ´µ²Î»+2
+		case 2:   //å…‰æºæŒ¡ä½+2
 		{
-			Temp[2] = 0x18;  //Êı¾İ
-			Temp[3] = 0xE7;  //Êı¾İ·´Âë
+			Temp[2] = 0x18;  //æ•°æ®
+			Temp[3] = 0xE7;  //æ•°æ®åç 
             break;			
 		}
-		case 3:  //¹âÔ´µ²Î»+3
+		case 3:  //å…‰æºæŒ¡ä½+3
 		{
-			Temp[2] = 0x5E; //Êı¾İ
-			Temp[3] = 0xA1;	//Êı¾İ·´Âë		
+			Temp[2] = 0x5E; //æ•°æ®
+			Temp[3] = 0xA1;	//æ•°æ®åç 		
 			break;
 		}
 		default:
 			break;	
 	}
-	Infrared_Send(Temp,4);  //·¢ËÍºìÍâÊı¾İ
+	Infrared_Send(Temp,4);  //å‘é€çº¢å¤–æ•°æ®
 	delay_ms(200);
 }
 
 /*
-¹¦ÄÜ£ºÅĞ¶Ïµ±Ç°µ²Î»£¬µ÷½Úµ½Ö¸¶¨µÄµ²Î»
-²ÎÊı£º
-·µ»ØÖµ£º
+åŠŸèƒ½ï¼šåˆ¤æ–­å½“å‰æŒ¡ä½ï¼Œè°ƒèŠ‚åˆ°æŒ‡å®šçš„æŒ¡ä½
+å‚æ•°ï¼š
+è¿”å›å€¼ï¼š
 */
 void xSmart_Light_Appoint_Level(uint8_t appoint_grade)
 {
@@ -84,33 +84,33 @@ void xSmart_Light_Appoint_Level(uint8_t appoint_grade)
 	for(uint8_t i=0;i<4;i++)
 	{
 		Smart_Light_Temp[i]=Get_Bh_Value();
-		Smart_Light_Data.xSmart_Light_Add_Level(1);  //+1µ²Î»
+		Smart_Light_Data.xSmart_Light_Add_Level(1);  //+1æŒ¡ä½
 		delay_ms(500);
-		delay_ms(500);   //ÑÓÊ±1Ãë
+		delay_ms(500);   //å»¶æ—¶1ç§’
 	}
-	Temp = Smart_Light_Temp[0];   //±£´æµÚÒ»´Î¶ÁÈ¡µ½µÄÖµ
+	Temp = Smart_Light_Temp[0];   //ä¿å­˜ç¬¬ä¸€æ¬¡è¯»å–åˆ°çš„å€¼
 //	sprintf((char*)Buf,"%d %d %d %d \n",Smart_Light_Temp[0],Smart_Light_Temp[1],Smart_Light_Temp[2],Smart_Light_Temp[3]);
 //	Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));
-	Mixture_Data.xBubble_Sort(Smart_Light_Temp,4);   //Ã°ÅİÅÅĞò´ÓĞ¡µ½´ó
-	for(uint8_t i=0;i<4;i++)   //È·ÈÏ×î³õµ²Î»Öµ
+	Mixture_Data.xBubble_Sort(Smart_Light_Temp,4);   //å†’æ³¡æ’åºä»å°åˆ°å¤§
+	for(uint8_t i=0;i<4;i++)   //ç¡®è®¤æœ€åˆæŒ¡ä½å€¼
 	{
-		if(Smart_Light_Temp[i] == Temp)   //ÅĞ¶ÏÄÄ¸ö¹â¶ÁÖµÓëµÚÒ»´Î±£´æµÄ¹â¶ÈÖµÏàµÈ
+		if(Smart_Light_Temp[i] == Temp)   //åˆ¤æ–­å“ªä¸ªå…‰è¯»å€¼ä¸ç¬¬ä¸€æ¬¡ä¿å­˜çš„å…‰åº¦å€¼ç›¸ç­‰
 		{
-			Begin_val = i+1;    //µÃ³ö³õÊ¼µ²Î»Öµ
+			Begin_val = i+1;    //å¾—å‡ºåˆå§‹æŒ¡ä½å€¼
 			break;
 		}
 	}
 	switch(appoint_grade)  
 	{
-		case 1:   // ½«µ²Î»µ÷µ½1µ²
+		case 1:   // å°†æŒ¡ä½è°ƒåˆ°1æŒ¡
 		{
-			if(Begin_val == 1)  //Èç¹û³õÊ¼ÖµÎª1µ²£¬ÔòÖ±½ÓÍË³ö
+			if(Begin_val == 1)  //å¦‚æœåˆå§‹å€¼ä¸º1æŒ¡ï¼Œåˆ™ç›´æ¥é€€å‡º
 			{
 				break;
 			}
 			else if(Begin_val == 2)
 			{
-				Smart_Light_Data.xSmart_Light_Add_Level(3);  //Èç¹û³õÊ¼ÖµÎª2µ²£¬Ôò¼ÓÈıµµ»Øµ½1µ²				
+				Smart_Light_Data.xSmart_Light_Add_Level(3);  //å¦‚æœåˆå§‹å€¼ä¸º2æŒ¡ï¼Œåˆ™åŠ ä¸‰æ¡£å›åˆ°1æŒ¡				
 			}
 			else if(Begin_val == 3)
 			{
@@ -122,7 +122,7 @@ void xSmart_Light_Appoint_Level(uint8_t appoint_grade)
 			}
 			break;
 		}
-		case 2:   // ½«µ²Î»µ÷µ½2µ²
+		case 2:   // å°†æŒ¡ä½è°ƒåˆ°2æŒ¡
 		{
 			if(Begin_val == 1)  
 			{
@@ -142,7 +142,7 @@ void xSmart_Light_Appoint_Level(uint8_t appoint_grade)
 			}
 			break;
 		}
-		case 3:   // ½«µ²Î»µ÷µ½3µ²
+		case 3:   // å°†æŒ¡ä½è°ƒåˆ°3æŒ¡
 		{
 			if(Begin_val == 1) 
 			{
@@ -162,7 +162,7 @@ void xSmart_Light_Appoint_Level(uint8_t appoint_grade)
 			}
 			break;
 		}
-		case 4:   // ½«µ²Î»µ÷µ½4µ²
+		case 4:   // å°†æŒ¡ä½è°ƒåˆ°4æŒ¡
 		{
 			if(Begin_val == 1) 
 			{
@@ -189,22 +189,22 @@ void xSmart_Light_Appoint_Level(uint8_t appoint_grade)
 
 
 /*
-»ñÈ¡³õÊ¼µ²Î»
-·µ»ØÖµ£º³õÊ¼µ²Î»
+è·å–åˆå§‹æŒ¡ä½
+è¿”å›å€¼ï¼šåˆå§‹æŒ¡ä½
 */
 uint8_t xSmart_Light_Get_Init_Level(void)
 {
-	uint16_t Temp_val[4] = {0};  //±£´æÖÇÄÜÂ·µÆ4¸öµ²Î»µÄÖµ     
+	uint16_t Temp_val[4] = {0};  //ä¿å­˜æ™ºèƒ½è·¯ç¯4ä¸ªæŒ¡ä½çš„å€¼     
 	uint16_t Temp_Begin_val;
 	uint8_t back_Init_val;
-	for(uint8_t i=0;i<4;i++)   //Ã¿1s¶ÁÈ¡Ò»¸öµ²Î»
+	for(uint8_t i=0;i<4;i++)   //æ¯1sè¯»å–ä¸€ä¸ªæŒ¡ä½
 	{
 		Temp_val[i] = Get_Bh_Value();
-		Smart_Light_Data.xSmart_Light_Add_Level(1);	//+1µµ
+		Smart_Light_Data.xSmart_Light_Add_Level(1);	//+1æ¡£
 		delay_ms(500);
 		delay_ms(500);						
 	}
-	Temp_Begin_val = Temp_val[0];   //»ñÈ¡³õÊ¼µ²Î»
+	Temp_Begin_val = Temp_val[0];   //è·å–åˆå§‹æŒ¡ä½
 	for(uint8_t i=0;i<4;i++)
 	{
 		if(Temp_val[i] == Temp_Begin_val)
