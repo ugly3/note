@@ -55,7 +55,7 @@
 #include "wireless_charge.h"
 #include "smoke_tower.h"
 #include "xiaochuang.h"
-#include "car2.h"              /* 车2模块 - 替代从车功能 */
+//#include "car2.h"              /* 车2模块 - 替代从车功能 */
 
 #if 0
 void Car_Thread(void);

@@ -81,3 +81,4 @@
 ..\output\rfid.o: ..\MODULE\landmark\wireless_charge\wireless_charge.h
 ..\output\rfid.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\rfid.o: ..\MODULE\xiaochuang\xiaochuang.h
+..\output\rfid.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\ctype.h

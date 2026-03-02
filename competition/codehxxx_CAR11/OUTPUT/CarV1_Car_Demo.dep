@@ -1,7 +1,7 @@
 Dependencies for Project 'CarV1', Target 'Car_Demo': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::.\ARMCC
 F (.\main.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\main.o --omf_browse ..\output\main.crf --depend ..\output\main.d)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -81,7 +81,7 @@ I (..\MODULE\landmark\wireless_charge\wireless_charge.h)(0x69A5922C)
 I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (.\Auto.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\auto.o --omf_browse ..\output\auto.crf --depend ..\output\auto.d)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -161,7 +161,7 @@ I (..\MODULE\landmark\wireless_charge\wireless_charge.h)(0x69A5922C)
 I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\all_module\all_module.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\all_module.o --omf_browse ..\output\all_module.crf --depend ..\output\all_module.d)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -242,7 +242,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\mixture\mixture.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\mixture.o --omf_browse ..\output\mixture.crf --depend ..\output\mixture.d)
 I (..\MODULE\mixture\mixture.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -322,7 +322,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\follow_car\follow_car.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\follow_car.o --omf_browse ..\output\follow_car.crf --depend ..\output\follow_car.d)
 I (..\MODULE\follow_car\follow_car.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -402,7 +402,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\android\android.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\android.o --omf_browse ..\output\android.crf --depend ..\output\android.d)
 I (..\MODULE\android\android.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -482,7 +482,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\communication\communication.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\communication.o --omf_browse ..\output\communication.crf --depend ..\output\communication.d)
 I (..\MODULE\communication\communication.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -562,7 +562,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\motor_drive\motor_drive.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\motor_drive.o --omf_browse ..\output\motor_drive.crf --depend ..\output\motor_drive.d)
 I (..\MODULE\motor_drive\motor_drive.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -642,7 +642,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\landmark\barrier_gate\barrier_gate.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\barrier_gate.o --omf_browse ..\output\barrier_gate.crf --depend ..\output\barrier_gate.d)
 I (..\MODULE\landmark\barrier_gate\barrier_gate.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -722,7 +722,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\landmark\etc\etc.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\etc.o --omf_browse ..\output\etc.crf --depend ..\output\etc.d)
 I (..\MODULE\landmark\etc\etc.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -802,7 +802,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\landmark\led_display\led_display.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\led_display.o --omf_browse ..\output\led_display.crf --depend ..\output\led_display.d)
 I (..\MODULE\landmark\led_display\led_display.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -882,7 +882,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\landmark\rfid\rfid.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\rfid.o --omf_browse ..\output\rfid.crf --depend ..\output\rfid.d)
 I (..\MODULE\landmark\rfid\rfid.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -960,9 +960,10 @@ I (..\MODULE\landmark\voice_report\voice_report.h)(0x69A5922C)
 I (..\MODULE\landmark\wireless_charge\wireless_charge.h)(0x69A5922C)
 I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
+I (C:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x5EC77604)
 F (..\MODULE\landmark\smart_street_light\smart_street_light.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\smart_street_light.o --omf_browse ..\output\smart_street_light.crf --depend ..\output\smart_street_light.d)
 I (..\MODULE\landmark\smart_street_light\smart_street_light.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -1042,7 +1043,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\landmark\smart_tft_display\smart_tft_display.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\smart_tft_display.o --omf_browse ..\output\smart_tft_display.crf --depend ..\output\smart_tft_display.d)
 I (..\MODULE\landmark\smart_tft_display\smart_tft_display.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -1122,7 +1123,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\landmark\smart_traffic_light\smart_traffic_light.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\smart_traffic_light.o --omf_browse ..\output\smart_traffic_light.crf --depend ..\output\smart_traffic_light.d)
 I (..\MODULE\landmark\smart_traffic_light\smart_traffic_light.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -1202,7 +1203,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\landmark\special_landform\special_landform.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\special_landform.o --omf_browse ..\output\special_landform.crf --depend ..\output\special_landform.d)
 I (..\MODULE\landmark\special_landform\special_landform.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -1282,7 +1283,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\landmark\three_dim_carport\three_dim_carport.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\three_dim_carport.o --omf_browse ..\output\three_dim_carport.crf --depend ..\output\three_dim_carport.d)
 I (..\MODULE\landmark\three_dim_carport\three_dim_carport.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -1362,7 +1363,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\landmark\three_dim_display\three_dim_display.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\three_dim_display.o --omf_browse ..\output\three_dim_display.crf --depend ..\output\three_dim_display.d)
 I (..\MODULE\landmark\three_dim_display\three_dim_display.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -1477,7 +1478,7 @@ I (..\FWLIB\inc\stm32f4xx_can.h)(0x69A5922C)
 I (..\FWLIB\inc\stm32f4xx_dac.h)(0x69A5922C)
 I (..\FWLIB\inc\stm32f4xx_dcmi.h)(0x69A5922C)
 I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5EC775FC)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5EC77604)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5EC775FC)
@@ -1522,7 +1523,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\landmark\voice_report\voice_report.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\voice_report.o --omf_browse ..\output\voice_report.crf --depend ..\output\voice_report.d)
 I (..\MODULE\landmark\voice_report\voice_report.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -1602,7 +1603,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\landmark\wireless_charge\wireless_charge.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\wireless_charge.o --omf_browse ..\output\wireless_charge.crf --depend ..\output\wireless_charge.d)
 I (..\MODULE\landmark\wireless_charge\wireless_charge.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -1682,7 +1683,7 @@ I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\landmark\smoke_tower\smoke_tower.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\smoke_tower.o --omf_browse ..\output\smoke_tower.crf --depend ..\output\smoke_tower.d)
 I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -1762,7 +1763,7 @@ I (..\MODULE\landmark\wireless_charge\wireless_charge.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
 F (..\MODULE\xiaochuang\xiaochuang.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\xiaochuang.o --omf_browse ..\output\xiaochuang.crf --depend ..\output\xiaochuang.d)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -1842,7 +1843,7 @@ I (..\MODULE\landmark\wireless_charge\wireless_charge.h)(0x69A5922C)
 I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 F (..\MODULE\car2\car2.c)(0x69A593FA)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\car2.o --omf_browse ..\output\car2.crf --depend ..\output\car2.d)
 I (..\MODULE\car2\car2.h)(0x69A593CA)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -1921,6 +1922,7 @@ I (..\MODULE\landmark\voice_report\voice_report.h)(0x69A5922C)
 I (..\MODULE\landmark\wireless_charge\wireless_charge.h)(0x69A5922C)
 I (..\MODULE\landmark\smoke_tower\smoke_tower.h)(0x69A5922C)
 I (..\MODULE\xiaochuang\xiaochuang.h)(0x69A5922C)
+I (..\my_lib\data_channel.h)(0x69A5922C)
 F (..\MODULE\car2\car2.h)(0x69A593CA)()
 F (..\HARDWARE\Task_Board\infrared.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\infrared.o --omf_browse ..\output\infrared.crf --depend ..\output\infrared.d)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
@@ -2236,7 +2238,7 @@ I (..\SYSTEM\sys\sys.h)(0x69A5922C)
 I (..\SYSTEM\timer\Timer.h)(0x69A5922C)
 I (..\HARDWARE\Core_Board\uart_drv.h)(0x69A5922C)
 F (..\HARDWARE\Core_Board\rc522.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\rc522.o --omf_browse ..\output\rc522.crf --depend ..\output\rc522.d)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -2406,7 +2408,7 @@ I (..\HARDWARE\CAN\can_user.h)(0x69A5922C)
 I (..\my_lib\data_base.h)(0x69A5922C)
 I (..\my_lib\roadway_check.h)(0x69A5922C)
 I (..\HARDWARE\Task_Board\tba.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5EC77604)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5EC775FC)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5EC775F6)
@@ -4104,7 +4106,7 @@ I (..\FWLIB\inc\stm32f4xx_dcmi.h)(0x69A5922C)
 I (..\FWLIB\inc\stm32f4xx_fsmc.h)(0x69A5922C)
 I (..\my_lib\data_base.h)(0x69A5922C)
 F (..\my_lib\roadway_check.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\roadway_check.o --omf_browse ..\output\roadway_check.crf --depend ..\output\roadway_check.d)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -4306,7 +4308,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5EC77604)
 I (..\HARDWARE\CAN\fifo_drv.h)(0x69A5922C)
 F (..\HARDWARE\CAN\Hard_Can.c)(0x69A5922C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CMSIS -I ..\FWLIB\inc -I ..\USER -I ..\HARDWARE\Task_Board -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\HARDWARE\Core_Board -I ..\HARDWARE\CAN -I ..\my_lib -I ..\SYSTEM\timer -I ..\HARDWARE\Drive -I ..\MODULE\all_module -I ..\MODULE\android -I ..\MODULE\communication -I ..\MODULE\follow_car -I ..\MODULE\landmark -I ..\MODULE\mixture -I ..\MODULE\motor_drive -I ..\MODULE\xiaochuang -I ..\MODULE\landmark\barrier_gate -I ..\MODULE\landmark\etc -I ..\MODULE\landmark\led_display -I ..\MODULE\landmark\rfid -I ..\MODULE\landmark\smart_street_light -I ..\MODULE\landmark\smart_tft_display -I ..\MODULE\landmark\smart_traffic_light -I ..\MODULE\landmark\smoke_tower -I ..\MODULE\landmark\special_landform -I ..\MODULE\landmark\three_dim_carport -I ..\MODULE\landmark\three_dim_display -I ..\MODULE\landmark\voice_report -I ..\MODULE\landmark\wireless_charge-IC:\Keil_v5\ARM\CMSIS\Include-IC:\users\steamuser\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\3.1.1\Device\Include-D__UVISION_VERSION="531" -DSTM32F407xx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx-o ..\output\hard_can.o --omf_browse ..\output\hard_can.crf --depend ..\output\hard_can.d)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (..\CMSIS\stm32f4xx.h)(0x69A5922C)
 I (..\CMSIS\core_cm4.h)(0x69A5922C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5EC775FC)
@@ -4427,7 +4429,7 @@ I (..\my_lib\roadway_check.h)(0x69A5922C)
 I (..\HARDWARE\CAN\can_user.h)(0x69A5922C)
 I (..\HARDWARE\Task_Board\tba.h)(0x69A5922C)
 I (..\SYSTEM\sys\sys.h)(0x69A5922C)
-I (..\MODULE\all_module\all_module.h)(0x69A59404)
+I (..\MODULE\all_module\all_module.h)(0x69A5A28A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5EC775FC)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5EC77604)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5EC775FC)

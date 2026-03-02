@@ -81,3 +81,4 @@
 ..\output\car2.o: ..\MODULE\landmark\wireless_charge\wireless_charge.h
 ..\output\car2.o: ..\MODULE\landmark\smoke_tower\smoke_tower.h
 ..\output\car2.o: ..\MODULE\xiaochuang\xiaochuang.h
+..\output\car2.o: ..\my_lib\data_channel.h
