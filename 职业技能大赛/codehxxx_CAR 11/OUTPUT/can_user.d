@@ -1,5 +1,5 @@
 ..\output\can_user.o: ..\HARDWARE\CAN\can_user.c
-..\output\can_user.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\can_user.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\can_user.o: ..\CMSIS\stm32f4xx.h
 ..\output\can_user.o: ..\CMSIS\core_cm4.h
 ..\output\can_user.o: ..\CMSIS\core_cmInstr.h
@@ -42,11 +42,11 @@
 ..\output\can_user.o: ..\HARDWARE\Task_Board\tba.h
 ..\output\can_user.o: ..\SYSTEM\sys\sys.h
 ..\output\can_user.o: ..\MODULE\all_module\all_module.h
-..\output\can_user.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-..\output\can_user.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-..\output\can_user.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\can_user.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\can_user.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+..\output\can_user.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\output\can_user.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\can_user.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\can_user.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\can_user.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 ..\output\can_user.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\can_user.o: ..\HARDWARE\Core_Board\cba.h
 ..\output\can_user.o: ..\HARDWARE\Task_Board\ultrasonic.h

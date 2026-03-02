@@ -3,7 +3,7 @@
 ..\output\voice_report.o: ..\MODULE\all_module\all_module.h
 ..\output\voice_report.o: ..\CMSIS\stm32f4xx.h
 ..\output\voice_report.o: ..\CMSIS\core_cm4.h
-..\output\voice_report.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\voice_report.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\voice_report.o: ..\CMSIS\core_cmInstr.h
 ..\output\voice_report.o: ..\CMSIS\core_cmFunc.h
 ..\output\voice_report.o: ..\CMSIS\core_cmSimd.h
@@ -36,11 +36,11 @@
 ..\output\voice_report.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\voice_report.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\voice_report.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\voice_report.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-..\output\voice_report.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-..\output\voice_report.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\voice_report.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\voice_report.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+..\output\voice_report.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\output\voice_report.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\voice_report.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\voice_report.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\voice_report.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 ..\output\voice_report.o: ..\SYSTEM\sys\sys.h
 ..\output\voice_report.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\voice_report.o: ..\HARDWARE\Core_Board\cba.h

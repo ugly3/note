@@ -1,5 +1,5 @@
 ..\output\my_lib.o: ..\my_lib\my_lib.c
-..\output\my_lib.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\my_lib.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\my_lib.o: ..\CMSIS\stm32f4xx.h
 ..\output\my_lib.o: ..\CMSIS\core_cm4.h
 ..\output\my_lib.o: ..\CMSIS\core_cmInstr.h

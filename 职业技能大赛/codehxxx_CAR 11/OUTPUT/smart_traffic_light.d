@@ -3,7 +3,7 @@
 ..\output\smart_traffic_light.o: ..\MODULE\all_module\all_module.h
 ..\output\smart_traffic_light.o: ..\CMSIS\stm32f4xx.h
 ..\output\smart_traffic_light.o: ..\CMSIS\core_cm4.h
-..\output\smart_traffic_light.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\smart_traffic_light.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\smart_traffic_light.o: ..\CMSIS\core_cmInstr.h
 ..\output\smart_traffic_light.o: ..\CMSIS\core_cmFunc.h
 ..\output\smart_traffic_light.o: ..\CMSIS\core_cmSimd.h
@@ -36,11 +36,11 @@
 ..\output\smart_traffic_light.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\smart_traffic_light.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\smart_traffic_light.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\smart_traffic_light.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-..\output\smart_traffic_light.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-..\output\smart_traffic_light.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\smart_traffic_light.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\smart_traffic_light.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+..\output\smart_traffic_light.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\output\smart_traffic_light.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\smart_traffic_light.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\smart_traffic_light.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\smart_traffic_light.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 ..\output\smart_traffic_light.o: ..\SYSTEM\sys\sys.h
 ..\output\smart_traffic_light.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\smart_traffic_light.o: ..\HARDWARE\Core_Board\cba.h

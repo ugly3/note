@@ -3,7 +3,7 @@
 ..\output\wireless_charge.o: ..\MODULE\all_module\all_module.h
 ..\output\wireless_charge.o: ..\CMSIS\stm32f4xx.h
 ..\output\wireless_charge.o: ..\CMSIS\core_cm4.h
-..\output\wireless_charge.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\wireless_charge.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\wireless_charge.o: ..\CMSIS\core_cmInstr.h
 ..\output\wireless_charge.o: ..\CMSIS\core_cmFunc.h
 ..\output\wireless_charge.o: ..\CMSIS\core_cmSimd.h
@@ -36,11 +36,11 @@
 ..\output\wireless_charge.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\wireless_charge.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\wireless_charge.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\wireless_charge.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-..\output\wireless_charge.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-..\output\wireless_charge.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\wireless_charge.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\wireless_charge.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+..\output\wireless_charge.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\output\wireless_charge.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\wireless_charge.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\wireless_charge.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\wireless_charge.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 ..\output\wireless_charge.o: ..\SYSTEM\sys\sys.h
 ..\output\wireless_charge.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\wireless_charge.o: ..\HARDWARE\Core_Board\cba.h

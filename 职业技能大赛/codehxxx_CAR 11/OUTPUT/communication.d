@@ -3,7 +3,7 @@
 ..\output\communication.o: ..\MODULE\all_module\all_module.h
 ..\output\communication.o: ..\CMSIS\stm32f4xx.h
 ..\output\communication.o: ..\CMSIS\core_cm4.h
-..\output\communication.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\communication.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\communication.o: ..\CMSIS\core_cmInstr.h
 ..\output\communication.o: ..\CMSIS\core_cmFunc.h
 ..\output\communication.o: ..\CMSIS\core_cmSimd.h
@@ -36,11 +36,11 @@
 ..\output\communication.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\communication.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\communication.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\communication.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-..\output\communication.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-..\output\communication.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\communication.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\communication.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+..\output\communication.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\output\communication.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\communication.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\communication.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\communication.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 ..\output\communication.o: ..\SYSTEM\sys\sys.h
 ..\output\communication.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\communication.o: ..\HARDWARE\Core_Board\cba.h

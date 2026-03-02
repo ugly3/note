@@ -3,7 +3,7 @@
 ..\output\follow_car.o: ..\MODULE\all_module\all_module.h
 ..\output\follow_car.o: ..\CMSIS\stm32f4xx.h
 ..\output\follow_car.o: ..\CMSIS\core_cm4.h
-..\output\follow_car.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\follow_car.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\follow_car.o: ..\CMSIS\core_cmInstr.h
 ..\output\follow_car.o: ..\CMSIS\core_cmFunc.h
 ..\output\follow_car.o: ..\CMSIS\core_cmSimd.h
@@ -36,11 +36,11 @@
 ..\output\follow_car.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\follow_car.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\follow_car.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\follow_car.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-..\output\follow_car.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-..\output\follow_car.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\follow_car.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\follow_car.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+..\output\follow_car.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\output\follow_car.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\follow_car.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\follow_car.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\follow_car.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 ..\output\follow_car.o: ..\SYSTEM\sys\sys.h
 ..\output\follow_car.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\follow_car.o: ..\HARDWARE\Core_Board\cba.h

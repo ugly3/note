@@ -3,7 +3,7 @@
 ..\output\smoke_tower.o: ..\MODULE\all_module\all_module.h
 ..\output\smoke_tower.o: ..\CMSIS\stm32f4xx.h
 ..\output\smoke_tower.o: ..\CMSIS\core_cm4.h
-..\output\smoke_tower.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\smoke_tower.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\smoke_tower.o: ..\CMSIS\core_cmInstr.h
 ..\output\smoke_tower.o: ..\CMSIS\core_cmFunc.h
 ..\output\smoke_tower.o: ..\CMSIS\core_cmSimd.h
@@ -36,11 +36,11 @@
 ..\output\smoke_tower.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\output\smoke_tower.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\output\smoke_tower.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\output\smoke_tower.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-..\output\smoke_tower.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
-..\output\smoke_tower.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\smoke_tower.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\smoke_tower.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
+..\output\smoke_tower.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\output\smoke_tower.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
+..\output\smoke_tower.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\smoke_tower.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\smoke_tower.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
 ..\output\smoke_tower.o: ..\SYSTEM\sys\sys.h
 ..\output\smoke_tower.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\smoke_tower.o: ..\HARDWARE\Core_Board\cba.h
