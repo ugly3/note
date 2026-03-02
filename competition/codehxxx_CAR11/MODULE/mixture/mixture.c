@@ -211,7 +211,7 @@ extern uint8_t MODE3;
 extern uint8_t MODE4;
 
 
-char test[10] = {"富强民主"};
+char test[13] = {"富强民主"};
 
 extern uint8_t Run_State; //运行位置状态
 void xCAR_KeyRun_Function(void)
