@@ -137,15 +137,18 @@ C
 #include "car2.h"
 #include "car2_cmd.h"
 
-int main(void) {
+int main(void)
+ {
     Hardware_Init(); // 硬件基础初始化
     
     Car2_Motor_Init();
     Car2_Init();
     
-    while(1) {
+    while(1)
+    {
         // 处理通信
-        if (Zigbee_Rx_flag) {
+        if (Zigbee_Rx_flag) 
+        {
             Car2_ParseCommand(Zigb_Rx_Buf);
             Zigbee_Rx_flag = 0;
         }
