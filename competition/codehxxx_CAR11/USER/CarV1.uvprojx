@@ -10,7 +10,7 @@
       <TargetName>Car_Demo</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARM_Compiler_5.06u7</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::.\ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -502,6 +502,16 @@
               <FileName>xiaochuang.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\MODULE\xiaochuang\xiaochuang.c</FilePath>
+            </File>
+            <File>
+              <FileName>car2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MODULE\car2\car2.c</FilePath>
+            </File>
+            <File>
+              <FileName>car2.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\MODULE\car2\car2.h</FilePath>
             </File>
           </Files>
         </Group>
