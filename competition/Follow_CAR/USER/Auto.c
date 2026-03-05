@@ -360,7 +360,9 @@ void xAuto_Run_Function(void)
               Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
               */
     Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("我是僧人");
-    Barrier_Data.Barrier_Gate_OPEN(1);
+    Barrier_Data.xBarrier_Open_Close(1);
+    Barrier_Data.xBarrier_Open_Close(2);
+      Barrier_Data.xBarrier_Up_Dowm();
 
 
     // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
