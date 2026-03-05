@@ -200,7 +200,7 @@ void xAuto_Run_Function(void)
     // B2 安卓识别车牌
     Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr); // 车牌
                                                                   // 车型
-    for (uint8_t i = 0; i < 8; i++) // 等待八秒
+    for (uint8_t i = 0; i < 8; i++)                               // 等待八秒
     {
       delay_ms(500);
       delay_ms(500);
@@ -362,8 +362,8 @@ void xAuto_Run_Function(void)
     Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("我是僧人");
     Barrier_Data.xBarrier_Open_Close(1);
     Barrier_Data.xBarrier_Open_Close(2);
-      Barrier_Data.xBarrier_Up_Dowm(1);
-
+    Barrier_Data.xBarrier_Up_Dowm(1);
+    Barrier_Data.xBarrier_Up_Dowm(2);
 
     // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
     Run_State = 2;
