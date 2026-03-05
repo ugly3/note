@@ -101,7 +101,7 @@ void xETC_Pass(void)
 		}
 		else
 		{
-			Motor_Data.xCAR_Go(18, 400); // 往前一点
+			Motor_Data.xCAR_Go(15, 350); // 往前一点
 		}
 
 #endif
