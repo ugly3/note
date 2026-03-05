@@ -1,7 +1,7 @@
 /**
 ************************************************************************
- *    文件名：all_module 
- *      说明：全自动运行（所用头文件+任务）
+*    文件名：all_module
+*      说明：全自动运行（所用头文件+任务）
 ************************************************************************
 **/
 
@@ -10,458 +10,424 @@
 #define YT3_2025 0
 #define YT1_2026 1
 
+uint8_t Go_Speed = 50;     // 全局行进速度值
+uint8_t wheel_Speed = 90;  // 全局转弯速度值
+uint16_t wheel_Time = 330; // 全局转45°时间
+uint16_t distance = 0;     // 记录超声波数据
+uint8_t gear_init = 0;     // 智能路灯初始档位
 
-uint8_t  Go_Speed  = 50;                    // 全局行进速度值
-uint8_t  wheel_Speed = 90;                  // 全局转弯速度值
-uint16_t wheel_Time = 330;                  // 全局转45°时间
-uint16_t distance = 0;                      // 记录超声波数据
-uint8_t gear_init = 0;                      // 智能路灯初始档位
-
-
-
-
-
-
-
-
-uint8_t Run_State = 0; //运行位置状态
+uint8_t Run_State = 0; // 运行位置状态
 
 #if YT3_2025
 
-#define Card1_Block  17                    //填写卡1地址块
-#define Card2_Block  2                     //****************卡2地址块需修改为0~2其中一个数，具体看安卓的识别结果
-#define Card3_Block  0                     //卡3地址块
+#define Card1_Block 17 // 填写卡1地址块
+#define Card2_Block 2  //****************卡2地址块需修改为0~2其中一个数，具体看安卓的识别结果
+#define Card3_Block 0  // 卡3地址块
 
-#define Card2_Place  card2_position        //卡2的坐标
+#define Card2_Place card2_position // 卡2的坐标
 
-
-uint8_t Get_ChuShi_Num_LuDeng;//路灯初始挡位
-uint8_t Get_MuBiao_Num_LuDeng;//路灯目标挡位
-
+uint8_t Get_ChuShi_Num_LuDeng; // 路灯初始挡位
+uint8_t Get_MuBiao_Num_LuDeng; // 路灯目标挡位
 
 void xAuto_Run_Function(void)
 {
-    switch(Run_State)                         
-	{
-      case 1:
-      {	
-            LED_Display_Data.xLED_Display_Data(0x00,0x00,0x00,2);//LED显示标志物第二排显示000000
-            LED_Display_Data.xLED_Display_Time(LED_Display_Data.TimeStart);   //开始计时
-            delay_ms(300);
-            
-           //G6→F6
-            RFID_Data.xRFID_Track_Read(25,Card1_Block,Card1_Block,0);//寻卡
-            Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
-            Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-          
-          //F6→F4 交通灯识别
-            Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
-            for(uint8_t i=0;i<3;i++) //等待安卓回传
-            {
-              delay_ms(500);
-              delay_ms(500);
-            }
-            if(Android_Data.Red_State == 1)
-            {
-                Android_Data.Red_State = 0;
-                Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,1);//发送给交通灯标志物请求确认
-                delay_ms(500);
-            }
-            else if(Android_Data.Yellow_State == 1)
-            {
-                Android_Data.Yellow_State = 0;
-                Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,3);
-                delay_ms(500);
-            }
-            else if(Android_Data.Green_State == 1)
-            {
-                Android_Data.Green_State = 0;
-                Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,2);
-                delay_ms(500);
-            }
-            else//蒙一个
-            {
-                Android_Data.Green_State = 0;
-                Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,2);
-                delay_ms(500);
-            }
-            Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
-            RFID_Data.xRFID_Track_Read(25,Card1_Block,Card1_Block,0);//寻卡
-            Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
-            Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-            delay_ms(200);
+  switch (Run_State)
+  {
+  case 1:
+  {
+    LED_Display_Data.xLED_Display_Data(0x00, 0x00, 0x00, 2);        // LED显示标志物第二排显示000000
+    LED_Display_Data.xLED_Display_Time(LED_Display_Data.TimeStart); // 开始计时
+    delay_ms(300);
 
-          Run_State=2;
-          break;
-      }
-      case 2:
-      {
-          //公交站随机播报
-            XiaoChuang_Data.xSend_To_XiaoChuang_Rouse(); // 识别前先唤醒小创
-            delay_ms(500);
-            Voice_Report_Data.xVoice_Report_Random_Command();  //播报随机指令
-            for(uint8_t i = 0;i<8;i++)  // 延时8秒等待小创识别并重复播报
-            {
-                delay_ms(500);
-                delay_ms(500);
-            }
-            Voice_Report_Data.xVoice_Report_Inquire_Weather_Temperatur();  //查询天气温度
-            Voice_Report_Data.xVoice_Report_Speak_temperature();//播报温度
-            
-            Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-            Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
-            
-            //F4→F2  ETC
-            ETC_Data.xETC_Pass_RFID(Card1_Block,Card1_Block,0);
-						Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
-//            Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
-            delay_ms(200);
-        Run_State = 3;
-          break;
-      }
-      case 3:
-      {
-				
-            Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-            //安卓识别文字图片与图形颜色图片
-            Android_Data.xMainCar_Send_Android(Identify_TFT_Words_Arr);//文字
-            Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//图形加颜色的数量
-            for(uint8_t i=0;i<8;i++)//等待八秒
-            {
-                delay_ms(500);
-                delay_ms(500);
-            }
-            
-            Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,"A1D2E3");//多功能信息显示标志物A显示A1D2E3（还不行）
-            LED_Display_Data.xLED_Display_Data(0xF3,0xF5,0xF1,2);//LED显示标志物第二排显示F3F5F1
-            delay_ms(500);
-            Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-            
-            //路灯
-            Get_ChuShi_Num_LuDeng = Smart_Light_Data.xSmart_Light_Get_Init_Level();         //获得路灯初始挡
-            Get_MuBiao_Num_LuDeng = (Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[1]%4)+1;  //获得路灯目标挡
-            Smart_Light_Data.xSmart_Light_Appoint_Level(Get_MuBiao_Num_LuDeng);            
-            delay_ms(500);
-            Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-            delay_ms(200);
-          Run_State=4;
-          break;
-      }
-      case 4:
-      {
-            Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
+    // G6→F6
+    RFID_Data.xRFID_Track_Read(25, Card1_Block, Card1_Block, 0); // 寻卡
+    Motor_Data.xCAR_Go(30, 140);                                 // 使车身对准十字路口
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
 
-            //F2→B2
-            track_time_Start=1;//开始计时(1ms)
-            RFID_Data.xRFID_Track_Read(25,Card1_Block,Card1_Block,0);//寻卡
-            delay_ms(400);
-            
-            if(Count_ms<600)//特殊标志物在E2
-            {
-                Count_ms=0;
-                //过特殊标志物
-                Motor_Data.xCAR_Go(25,500);
-                Motor_Data.xCAR_Go(25,300);
-                delay_ms(500);
-                //特殊标志物后一小段进行寻卡
-                RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
-                Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
-                //D2->B2
-                RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
-                Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
-                delay_ms(200); 
-            }
-            else if((1500>Count_ms)&&(Count_ms>=600))//特殊标志物在D2    1450
-            {
-                Count_ms=0;
-                //过特殊标志物
-                Motor_Data.xCAR_Go(25,500);
-                Motor_Data.xCAR_Go(25,300);
-                delay_ms(500);
-                RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
-                Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
-                delay_ms(200); 
-            }
-            else//特殊标志物在C2
-            {
-                Count_ms=0;
-                Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
-                RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
-								delay_ms(200);
-							
-                 //过特殊标志物
-                Motor_Data.xCAR_Go(25,500);
-                Motor_Data.xCAR_Go(25,500);
-								delay_ms(600);
-                
-                RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
-                Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
-                delay_ms(300); 
-            }          
-            Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-            delay_ms(200);
-            Motor_Data.xCAR_L45(wheel_Speed,wheel_Time);
-            
-            
-          Run_State=5;  
-          break;
-      }
-      case 5:
-      {
-          //B2 安卓识别车牌
-            Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//车牌
-                                                                         //车型
-            for(uint8_t i=0;i<8;i++)//等待八秒
-            {
-                delay_ms(500);
-                delay_ms(500);
-            }
-            Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(2,"202501");//多功能信息显示标志物B显示202501（还不行）
-            delay_ms(200);
-            Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-            Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("富强民主");
-            delay_ms(500);
-            delay_ms(500);
-            Motor_Data.xCAR_L45(wheel_Speed,wheel_Time);
-            delay_ms(500);
-              //启动从车
-            for(uint8_t i = 0; i<3; i++)//启动从车
-            {   
-              FollowCar_Data.xStart_Command_To_FollowCar();
-              delay_ms(100);
-            } 
-            for(uint8_t i = 0; i<50; i++)//等待
-            {   
-              delay_ms(500);
-              delay_ms(500);
-            }
-            Run_State=6;  
-          break;
-      }
-      case 6:
-      {
-          //B2->B6
-          Motor_Data.xCAR_Track_Go();    
-          Motor_Data.xCAR_Track_Go();
-          delay_ms(200);
-          Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-          //B6->D6
-          Motor_Data.xCAR_Track_Go();
-          
-          
-          
-          Run_State=7;
-          break;
-      }
-      case 7:
-      {
-           //D6->F6
-           Barrier_Data.xBarrier_Licence_Tx("B8542D");//车牌号
-           delay_ms(500);
-           Motor_Data.xCAR_Track_Go();
-          
-          Run_State=8;
-          break;
-      }
-      case 8:
-      {
-            Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-            //B6->B7(倒车)
-            Motor_Data.xCAR_Go(30,140);//往前一点防止车库降一时压到车尾
-            CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A,0x01);
-            Motor_Data.xCAR_Track_Time(20,1000);
-            delay_ms(300); //延时
-            Motor_Data.xCAR_Back(20,850);//长
-            Motor_Data.xCAR_Back(20,850);//长
-            delay_ms(500); //延时 
-            CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A,Get_ChuShi_Num_LuDeng);
-//            unsigned int Kai_Qi_Ma[3]={0x00,0x00,0x00};
-            YT3_Handle_Card1_Data();
-            Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma);//需修改开启码
-            delay_ms(200);
-            LED_Display_Data.xLED_Display_Time(0x00);//停止计时
-          Run_State=9;
-          break;
-      }
-      case 9:
-      {
+    // F6→F4 交通灯识别
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 请求交通灯进入识别模式，并请求安卓识别红绿灯
+    for (uint8_t i = 0; i < 3; i++)                                           // 等待安卓回传
+    {
+      delay_ms(500);
+      delay_ms(500);
+    }
+    if (Android_Data.Red_State == 1)
+    {
+      Android_Data.Red_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
+      delay_ms(500);
+    }
+    else if (Android_Data.Yellow_State == 1)
+    {
+      Android_Data.Yellow_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
+      delay_ms(500);
+    }
+    else if (Android_Data.Green_State == 1)
+    {
+      Android_Data.Green_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+      delay_ms(500);
+    }
+    else // 蒙一个
+    {
+      Android_Data.Green_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+      delay_ms(500);
+    }
+    Motor_Data.xCAR_Go(25, 250);                                 // 走开十字路口，防止可能重复识别十字路口的卡片
+    RFID_Data.xRFID_Track_Read(25, Card1_Block, Card1_Block, 0); // 寻卡
+    Motor_Data.xCAR_Go(30, 140);                                 // 使车身对准十字路口
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    delay_ms(200);
 
-            
-          Run_State=10;
-          break;
-      }
-      case 10:
-      {
+    Run_State = 2;
+    break;
+  }
+  case 2:
+  {
+    // 公交站随机播报
+    XiaoChuang_Data.xSend_To_XiaoChuang_Rouse(); // 识别前先唤醒小创
+    delay_ms(500);
+    Voice_Report_Data.xVoice_Report_Random_Command(); // 播报随机指令
+    for (uint8_t i = 0; i < 8; i++)                   // 延时8秒等待小创识别并重复播报
+    {
+      delay_ms(500);
+      delay_ms(500);
+    }
+    Voice_Report_Data.xVoice_Report_Inquire_Weather_Temperatur(); // 查询天气温度
+    Voice_Report_Data.xVoice_Report_Speak_temperature();          // 播报温度
 
-            
-          Run_State=11;
-          break;
-      }
-      case 11:
-      {
-//					  track_time_Start=1;//开始计时(1ms)
-//				 //F4→F2  ETC
-//            ETC_Data.xETC_Pass_RFID(Card1_Block,Card1_Block,0);
-//            Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
-//						Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);   
-//            Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-//						Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-//						RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
-//						Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
-//          Run_State=12;
-          break;
-      }
-			case 12:
-			{
-//				for(uint8_t i=0;i<5;i++)//等待八秒
-//        {
-//             Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); 
-//        }
-//				Run_State=13;
-//				break;
-//				XiaoChuang_Data.xSend_Command_To_XiaoChuang(0x02);  //开始测距	
-				Ultrasonic_Ranging();
-				LED_Display_Data.xLED_Display_Distance(dis);
-				FollowCar_Data.XSend_dis_To_fromcar();
-				delay_ms(500);
-				Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr);   //发送请求识别二维码
-				if(Android_Data.Two_Code_State == 1)    //识别二维码成功
-				{
-				Android_Data.Two_Code_State = 0;
-				uint8_t buf[50];
-				sprintf((char*)buf,"two_code data : %s \r\n",Two_Code_Data_Store);  
-				Send_InfoData_To_Fifo((char*)buf,strlen((char*)buf)); 
-				}
-      
-                break;         
-            }
-            default:break;   
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_Go(25, 250); // 走开十字路口，防止可能重复识别十字路口的卡片
+
+    // F4→F2  ETC
+    ETC_Data.xETC_Pass_RFID(Card1_Block, Card1_Block, 0);
+    Motor_Data.xCAR_Go(25, 250); // 走开十字路口，防止可能重复识别十字路口的卡片
+    //            Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
+    delay_ms(200);
+    Run_State = 3;
+    break;
+  }
+  case 3:
+  {
+
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    // 安卓识别文字图片与图形颜色图片
+    Android_Data.xMainCar_Send_Android(Identify_TFT_Words_Arr);                // 文字
+    Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr); // 图形加颜色的数量
+    for (uint8_t i = 0; i < 8; i++)                                            // 等待八秒
+    {
+      delay_ms(500);
+      delay_ms(500);
     }
 
+    Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1, "A1D2E3");      // 多功能信息显示标志物A显示A1D2E3（还不行）
+    LED_Display_Data.xLED_Display_Data(0xF3, 0xF5, 0xF1, 2); // LED显示标志物第二排显示F3F5F1
+    delay_ms(500);
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+
+    // 路灯
+    Get_ChuShi_Num_LuDeng = Smart_Light_Data.xSmart_Light_Get_Init_Level();                     // 获得路灯初始挡
+    Get_MuBiao_Num_LuDeng = (Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[1] % 4) + 1; // 获得路灯目标挡
+    Smart_Light_Data.xSmart_Light_Appoint_Level(Get_MuBiao_Num_LuDeng);
+    delay_ms(500);
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    delay_ms(200);
+    Run_State = 4;
+    break;
+  }
+  case 4:
+  {
+    Motor_Data.xCAR_Go(25, 250); // 走开十字路口，防止可能重复识别十字路口的卡片
+
+    // F2→B2
+    track_time_Start = 1;                                        // 开始计时(1ms)
+    RFID_Data.xRFID_Track_Read(25, Card1_Block, Card1_Block, 0); // 寻卡
+    delay_ms(400);
+
+    if (Count_ms < 600) // 特殊标志物在E2
+    {
+      Count_ms = 0;
+      // 过特殊标志物
+      Motor_Data.xCAR_Go(25, 500);
+      Motor_Data.xCAR_Go(25, 300);
+      delay_ms(500);
+      // 特殊标志物后一小段进行寻卡
+      RFID_Data.xRFID_Track_Read(25, Card1_Block, Card2_Block, Card2_Block); // 寻卡
+      Motor_Data.xCAR_Go(25, 250);                                           // 走开十字路口，防止可能重复识别十字路口的卡片
+      // D2->B2
+      RFID_Data.xRFID_Track_Read(25, Card1_Block, Card2_Block, Card2_Block); // 寻卡
+      Motor_Data.xCAR_Go(30, 140);                                           // 使车身对准十字路口
+      delay_ms(200);
+    }
+    else if ((1500 > Count_ms) && (Count_ms >= 600)) // 特殊标志物在D2    1450
+    {
+      Count_ms = 0;
+      // 过特殊标志物
+      Motor_Data.xCAR_Go(25, 500);
+      Motor_Data.xCAR_Go(25, 300);
+      delay_ms(500);
+      RFID_Data.xRFID_Track_Read(25, Card1_Block, Card2_Block, Card2_Block); // 寻卡
+      Motor_Data.xCAR_Go(30, 140);                                           // 使车身对准十字路口
+      delay_ms(200);
+    }
+    else // 特殊标志物在C2
+    {
+      Count_ms = 0;
+      Motor_Data.xCAR_Go(25, 250);                                           // 走开十字路口，防止可能重复识别十字路口的卡片
+      RFID_Data.xRFID_Track_Read(25, Card1_Block, Card2_Block, Card2_Block); // 寻卡
+      delay_ms(200);
+
+      // 过特殊标志物
+      Motor_Data.xCAR_Go(25, 500);
+      Motor_Data.xCAR_Go(25, 500);
+      delay_ms(600);
+
+      RFID_Data.xRFID_Track_Read(25, Card1_Block, Card2_Block, Card2_Block); // 寻卡
+      Motor_Data.xCAR_Go(30, 140);                                           // 使车身对准十字路口
+      delay_ms(300);
+    }
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    delay_ms(200);
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
+
+    Run_State = 5;
+    break;
+  }
+  case 5:
+  {
+    // B2 安卓识别车牌
+    Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr); // 车牌
+                                                                  // 车型
+    for (uint8_t i = 0; i < 8; i++) // 等待八秒
+    {
+      delay_ms(500);
+      delay_ms(500);
+    }
+    Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(2, "202501"); // 多功能信息显示标志物B显示202501（还不行）
+    delay_ms(200);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("富强民主");
+    delay_ms(500);
+    delay_ms(500);
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
+    delay_ms(500);
+    // 启动从车
+    for (uint8_t i = 0; i < 3; i++) // 启动从车
+    {
+      FollowCar_Data.xStart_Command_To_FollowCar();
+      delay_ms(100);
+    }
+    for (uint8_t i = 0; i < 50; i++) // 等待
+    {
+      delay_ms(500);
+      delay_ms(500);
+    }
+    Run_State = 6;
+    break;
+  }
+  case 6:
+  {
+    // B2->B6
+    Motor_Data.xCAR_Track_Go();
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(200);
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    // B6->D6
+    Motor_Data.xCAR_Track_Go();
+
+    Run_State = 7;
+    break;
+  }
+  case 7:
+  {
+    // D6->F6
+    Barrier_Data.xBarrier_Licence_Tx("B8542D"); // 车牌号
+    delay_ms(500);
+    Motor_Data.xCAR_Track_Go();
+
+    Run_State = 8;
+    break;
+  }
+  case 8:
+  {
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    // B6->B7(倒车)
+    Motor_Data.xCAR_Go(30, 140); // 往前一点防止车库降一时压到车尾
+    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 0x01);
+    Motor_Data.xCAR_Track_Time(20, 1000);
+    delay_ms(300);                 // 延时
+    Motor_Data.xCAR_Back(20, 850); // 长
+    Motor_Data.xCAR_Back(20, 850); // 长
+    delay_ms(500);                 // 延时
+    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, Get_ChuShi_Num_LuDeng);
+    //            unsigned int Kai_Qi_Ma[3]={0x00,0x00,0x00};
+    YT3_Handle_Card1_Data();
+    Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma); // 需修改开启码
+    delay_ms(200);
+    LED_Display_Data.xLED_Display_Time(0x00); // 停止计时
+    Run_State = 9;
+    break;
+  }
+  case 9:
+  {
+
+    Run_State = 10;
+    break;
+  }
+  case 10:
+  {
+
+    Run_State = 11;
+    break;
+  }
+  case 11:
+  {
+    //					  track_time_Start=1;//开始计时(1ms)
+    //				 //F4→F2  ETC
+    //            ETC_Data.xETC_Pass_RFID(Card1_Block,Card1_Block,0);
+    //            Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
+    //						Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
+    //            Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
+    //						Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
+    //						RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
+    //						Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
+    //          Run_State=12;
+    break;
+  }
+  case 12:
+  {
+    //				for(uint8_t i=0;i<5;i++)//等待八秒
+    //        {
+    //             Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);
+    //        }
+    //				Run_State=13;
+    //				break;
+    //				XiaoChuang_Data.xSend_Command_To_XiaoChuang(0x02);  //开始测距
+    Ultrasonic_Ranging();
+    LED_Display_Data.xLED_Display_Distance(dis);
+    FollowCar_Data.XSend_dis_To_fromcar();
+    delay_ms(500);
+    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
+    if (Android_Data.Two_Code_State == 1)                      // 识别二维码成功
+    {
+      Android_Data.Two_Code_State = 0;
+      uint8_t buf[50];
+      sprintf((char *)buf, "two_code data : %s \r\n", Two_Code_Data_Store);
+      Send_InfoData_To_Fifo((char *)buf, strlen((char *)buf));
+    }
+
+    break;
+  }
+  default:
+    break;
+  }
 }
 #endif
 
-
-#if  YT1_2026 
-uint8_t Count =0;
+#if YT1_2026
+uint8_t Count = 0;
 uint8_t Buf1[100];
 void xAuto_Run_Function(void)
 {
-	switch(Run_State)
-	{
-      case 1:   
-      {		
-/*
-          if(Communication_Data.FollowCar_Start_flag == 1)
-          {   
-              Count++;
-              sprintf((char*)Buf1,"%d\r\n ",Count);  
-              Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
-              Communication_Data.FollowCar_Start_flag = 0;
+  switch (Run_State)
+  {
+  case 1:
+  {
+    /*
+              if(Communication_Data.FollowCar_Start_flag == 1)
+              {
+                  Count++;
+                  sprintf((char*)Buf1,"%d\r\n ",Count);
+                  Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+                  Communication_Data.FollowCar_Start_flag = 0;
+                  Motor_Data.xCAR_Track_Go();
+                  Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
+                  Motor_Data.xCAR_Track_Go();
+                  Run_State = 2;
+               }
+    */
+    /*
+              Motor_Data.xCAR_Track_Go();
+              delay_ms(200);
+              Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
               Motor_Data.xCAR_Track_Go();
               Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-              Motor_Data.xCAR_Track_Go();
-              Run_State = 2;	
-           }
-*/   
-/*
-          Motor_Data.xCAR_Track_Go();
-          delay_ms(200);
-          Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-          Motor_Data.xCAR_Track_Go();
-          Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-          delay_ms(200);
-          Motor_Data.xCAR_L45(wheel_Speed,wheel_Time);
-          delay_ms(200);
-          Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
-          */
-         Three_Dim_Display_Data.xThree_Dim_Display_licence_coord("42A162",'A','1');
+              delay_ms(200);
+              Motor_Data.xCAR_L45(wheel_Speed,wheel_Time);
+              delay_ms(200);
+              Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
+              */
+    Three_Dim_Display_Data.xThree_Dim_Display_licence_coord("42A162", 0, 0);
 
-         //mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
-			Run_State = 2;				
-			break;
-      }
-      case 2:  
-      {     
-//          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);  
-//          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+    // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
+    Run_State = 2;
+    break;
+  }
+  case 2:
+  {
+    //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
+    //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
 
-          Run_State = 3;
-				break;
-      }
-      case 3:   
-      {
-          
-          Run_State = 4;
-			 break;
-      }
-      case 4:   
-      {
-           Run_State = 5;
-         break;
-      }
-      case 5:   
-      {  
-           Run_State = 6;
-         break;
-      }
-      case 6:   
-      {
-           Run_State = 7;
-         break;
-      }
-      case 7:   
-      {
-           Run_State = 8;
-         break;
-      }
-      case 8:   
-      {
-           Run_State = 9;
-         break;
-      }
-      case 9:  
-      {
-           Run_State = 10;
-         break;
-      }
-      case 10:  
-      {
-				
-            Run_State = 11;
-				break;
-      }
-      case 11:  
-      {
-				
-			Run_State = 12;
-				break;
-      }
-      case 12:  
-      {
-				
-            Run_State = 13;
-				break;
-      }
-	}
+    Run_State = 3;
+    break;
+  }
+  case 3:
+  {
+
+    Run_State = 4;
+    break;
+  }
+  case 4:
+  {
+    Run_State = 5;
+    break;
+  }
+  case 5:
+  {
+    Run_State = 6;
+    break;
+  }
+  case 6:
+  {
+    Run_State = 7;
+    break;
+  }
+  case 7:
+  {
+    Run_State = 8;
+    break;
+  }
+  case 8:
+  {
+    Run_State = 9;
+    break;
+  }
+  case 9:
+  {
+    Run_State = 10;
+    break;
+  }
+  case 10:
+  {
+
+    Run_State = 11;
+    break;
+  }
+  case 11:
+  {
+
+    Run_State = 12;
+    break;
+  }
+  case 12:
+  {
+
+    Run_State = 13;
+    break;
+  }
+  }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif
-
-
