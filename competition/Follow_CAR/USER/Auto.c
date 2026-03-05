@@ -359,7 +359,7 @@ void xAuto_Run_Function(void)
               delay_ms(200);
               Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
               */
-    Three_Dim_Display_Data.xThree_Dim_Display_licence_coord("42A162", 0, 0);
+    Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("我是僧人");
 
     // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
     Run_State = 2;
