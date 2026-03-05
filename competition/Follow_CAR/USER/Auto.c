@@ -362,19 +362,26 @@ void xAuto_Run_Function(void)
     Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("我是僧人");
     Barrier_Data.xBarrier_Open_Close(1);
 
-    if (Communication_Data.Barrier_Open_Flag == 1)
+    // if (Communication_Data.Barrier_Open_Flag == 1)
+    // {
+    //   Communication_Data.Barrier_Open_Flag = 0;
+    //   Motor_Data.xCAR_Track_Go();
+    //   delay_ms(200);
+    //   Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    //   // Motor_Data.xCAR_Track_Go();
+    // }
+    ETC_Data.xETC_Init_Angle_Adjust(1);
+    ETC_Data.xETC_Init_Angle_Adjust(1);
+    if (Communication_Data.ETC_Open_Flag ==1)
     {
-      Communication_Data.Barrier_Open_Flag = 0;
+      Communication_Data.ETC_Open_Flag = 0;
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
       Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-      // Motor_Data.xCAR_Track_Go();
     }
-ETC_Data.xETC_Init_Angle_Adjust(Left_Gate_Up);
-ETC_Data.xETC_Init_Angle_Adjust(right_Gate_up);
-if
-    // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
-    Run_State = 2;
+        // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
+        Run_State
+      = 2;
     break;
   }
   case 2:
