@@ -361,9 +361,15 @@ void xAuto_Run_Function(void)
               */
     Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("我是僧人");
     Barrier_Data.xBarrier_Open_Close(1);
-    Barrier_Data.xBarrier_Open_Close(2);
-    Barrier_Data.xBarrier_Up_Dowm(1);
-    Barrier_Data.xBarrier_Up_Dowm(2);
+
+    if(Communication_Data.Barrier_Open_Flag == 1)
+    {
+        Communication_Data.Barrier_Open_Flag = 0;
+        Motor_Data.xCAR_Track_Go();
+        delay_ms(200);
+        Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
+        Motor_Data.xCAR_Track_Go();
+    }
 
     // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
     Run_State = 2;
