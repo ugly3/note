@@ -374,6 +374,7 @@ void xAuto_Run_Function(void)
     ETC_Data.xETC_Pass();
     delay_ms(200);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    
   
     // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
     Run_State = 2;
