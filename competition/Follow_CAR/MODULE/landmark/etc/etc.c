@@ -1,33 +1,27 @@
 /**
 ************************************************************************
- *    文件名：etc（ETC标志物）
- *      说明：
- *  通信方式：Zigbee通信
+*    文件名：etc（ETC标志物）
+*      说明：
+*  通信方式：Zigbee通信
 ************************************************************************
 **/
 #include "etc.h"
 
 ETC_Typedef ETC_Data =
-{
-	.Left_Gate_Up = 1,
-	.Right_Gate_Up = 2,	
-	.Left_Gate_Dowm = 3,
-	.Right_Gate_Dowm = 4,
-    .ETC_Car_Start = 0,
-	.xETC_Init_Angle_Adjust = &xETC_Init_Angle_Adjust,
-	.xETC_Pass = &xETC_Pass,
-    .xETC_Pass_RFID = &xETC_Pass_RFID
-};
-
-
-
+	{
+		.Left_Gate_Up = 1,
+		.Right_Gate_Up = 2,
+		.Left_Gate_Dowm = 3,
+		.Right_Gate_Dowm = 4,
+		.ETC_Car_Start = 0,
+		.xETC_Init_Angle_Adjust = &xETC_Init_Angle_Adjust,
+		.xETC_Pass = &xETC_Pass,
+		.xETC_Pass_RFID = &xETC_Pass_RFID};
 
 /*
 ETC标志物固定指令发送 帧头1，帧头2，帧尾
 */
-uint8_t ETC_Buf[8] = {0x55,0x0C,0x00,0x00,0x00,0x00,0x00,0xBB};
-
-
+uint8_t ETC_Buf[8] = {0x55, 0x0C, 0x00, 0x00, 0x00, 0x00, 0x00, 0xBB};
 
 /*
  ***************************初始化ETC左侧和右侧闸门上升和下降*****************************************
@@ -47,30 +41,28 @@ void xETC_Init_Angle_Adjust(uint8_t AngleAdjust)
 {
 	uint8_t CheckSum;
 	uint8_t Temp[8] = {0};
-	memcpy(Temp,ETC_Buf,sizeof(ETC_Buf));
+	memcpy(Temp, ETC_Buf, sizeof(ETC_Buf));
 	Temp[2] = 0x08;
-	if(AngleAdjust == 1)   //左侧闸门上升
+	if (AngleAdjust == 1) // 左侧闸门上升
 	{
 		Temp[3] = 0x01;
 	}
-	else if(AngleAdjust == 2)  //右侧闸门上升
+	else if (AngleAdjust == 2) // 右侧闸门上升
 	{
 		Temp[4] = 0x01;
 	}
-	else if(AngleAdjust == 3)  //左侧闸门下降
+	else if (AngleAdjust == 3) // 左侧闸门下降
 	{
 		Temp[3] = 0x02;
 	}
-	else if(AngleAdjust == 4)  //右侧闸门下降
+	else if (AngleAdjust == 4) // 右侧闸门下降
 	{
 		Temp[4] = 0x02;
 	}
-	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);
+	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);
 	Temp[6] = CheckSum;
-	Send_ZigbeeData_To_Fifo(Temp,8);
+	Send_ZigbeeData_To_Fifo(Temp, 8);
 }
-
-
 
 extern Communication_Typedef Communication_Data;
 /*
@@ -78,212 +70,205 @@ extern Communication_Typedef Communication_Data;
 */
 void xETC_Pass(void)
 {
-    ETC_Data.ETC_Car_Start=1;
-	while(Communication_Data.ETC_Open_Flag == 0)    //ETC是关闭状态
-	{	
-#if ETC_Cross    //ETC 放置在十字路口
-        if(Communication_Data.ETC_Open_Flag == 1)   //ETC打开
-		{
-            delay_ms(200);
-            Communication_Data.ETC_Open_Flag = 0;
-            ETC_Data.ETC_Car_Start = 0;
-            Motor_Data.xCAR_Track_Go();
-            Motor_Data.xCAR_Track_Go();
-            delay_ms(200);
-            break;
-        }
-        else   
-		{
-			Motor_Data.xCAR_Back(15,350);//往后一点
-		}
-        delay_ms(200);
-        if(Communication_Data.ETC_Open_Flag == 1)   //ETC打开
-		{
-            delay_ms(200);
-            Communication_Data.ETC_Open_Flag = 0;
-            ETC_Data.ETC_Car_Start = 0;
-            Motor_Data.xCAR_Track_Go();
-            Motor_Data.xCAR_Track_Go();
-            delay_ms(200);
-            break;
-        }
-        else   
-		{
-            Motor_Data.xCAR_Go(18,400);//往前一点
-		}
-        
-#endif
-			
-#if ETC_Middle   //ETC 放置在路中间
-
-		if(Communication_Data.ETC_Open_Flag == 1)   //ETC打开
+	ETC_Data.ETC_Car_Start = 1;
+	while (Communication_Data.ETC_Open_Flag == 0) // ETC是关闭状态
+	{
+#if ETC_Cross									   // ETC 放置在十字路口
+		if (Communication_Data.ETC_Open_Flag == 1) // ETC打开
 		{
 			delay_ms(200);
-            Communication_Data.ETC_Open_Flag = 0;
-            ETC_Data.ETC_Car_Start = 0;
-			Motor_Data.xCAR_Track_Go(); 
-            delay_ms(200);  
+			Communication_Data.ETC_Open_Flag = 0;
+			ETC_Data.ETC_Car_Start = 0;
+			Motor_Data.xCAR_Track_Go();
+			Motor_Data.xCAR_Track_Go();
+			delay_ms(200);
 			break;
 		}
-		else   
+		else
 		{
-			Motor_Data.xCAR_Back(15,350);//往后一点
+			Motor_Data.xCAR_Back(15, 350); // 往后一点
 		}
-        
 		delay_ms(200);
-		if(Communication_Data.ETC_Open_Flag == 1)     //ETC打开
+		if (Communication_Data.ETC_Open_Flag == 1) // ETC打开
+		{
+			delay_ms(200);
+			Communication_Data.ETC_Open_Flag = 0;
+			ETC_Data.ETC_Car_Start = 0;
+			Motor_Data.xCAR_Track_Go();
+			Motor_Data.xCAR_Track_Go();
+			delay_ms(200);
+			break;
+		}
+		else
+		{
+			Motor_Data.xCAR_Go(18, 400); // 往前一点
+		}
+
+#endif
+
+#if ETC_Middle // ETC 放置在路中间
+
+		if (Communication_Data.ETC_Open_Flag == 1) // ETC打开
+		{
+			delay_ms(200);
+			Communication_Data.ETC_Open_Flag = 0;
+			ETC_Data.ETC_Car_Start = 0;
+			Motor_Data.xCAR_Track_Go();
+			delay_ms(200);
+			break;
+		}
+		else
+		{
+			Motor_Data.xCAR_Back(15, 350); // 往后一点
+		}
+
+		delay_ms(200);
+		if (Communication_Data.ETC_Open_Flag == 1) // ETC打开
 		{
 			delay_ms(250);
-            Communication_Data.ETC_Open_Flag = 0;
-            ETC_Data.ETC_Car_Start = 0; 
+			Communication_Data.ETC_Open_Flag = 0;
+			ETC_Data.ETC_Car_Start = 0;
 			Motor_Data.xCAR_Track_Go();
-            delay_ms(200);  
+			delay_ms(200);
 
 			break;
 		}
 		else
 		{
-            Motor_Data.xCAR_Go(18,400);//往前一点
+			Motor_Data.xCAR_Go(15, 350); // 往前一点
 		}
-#endif		
+#endif
 	}
 
-#if ETC_Cross    //ETC 放置在十字路口
-    if(Communication_Data.ETC_Open_Flag == 1)   //ETC打开
-    {
-        delay_ms(200);
-        Communication_Data.ETC_Open_Flag = 0;
-        ETC_Data.ETC_Car_Start = 0;
-        Motor_Data.xCAR_Track_Go();
-        Motor_Data.xCAR_Track_Go();
-        delay_ms(200);
-    }
-   
-#endif    
-    
-#if ETC_Middle   //ETC 放置在路中间	
-	if(Communication_Data.ETC_Open_Flag == 1)   // 一开始就是打开状态
+#if ETC_Cross								   // ETC 放置在十字路口
+	if (Communication_Data.ETC_Open_Flag == 1) // ETC打开
+	{
+		delay_ms(200);
+		Communication_Data.ETC_Open_Flag = 0;
+		ETC_Data.ETC_Car_Start = 0;
+		Motor_Data.xCAR_Track_Go();
+		Motor_Data.xCAR_Track_Go();
+		delay_ms(200);
+	}
+
+#endif
+
+#if ETC_Middle								   // ETC 放置在路中间
+	if (Communication_Data.ETC_Open_Flag == 1) // 一开始就是打开状态
 	{
 		delay_ms(250);
-        Communication_Data.ETC_Open_Flag = 0;
-        ETC_Data.ETC_Car_Start = 0;
+		Communication_Data.ETC_Open_Flag = 0;
+		ETC_Data.ETC_Car_Start = 0;
 		Motor_Data.xCAR_Track_Go();
-        delay_ms(200);  
-	}    
-#endif	
-  
+		delay_ms(200);
+	}
+#endif
 }
 
 /*
 过ETC同时寻卡
 */
-void xETC_Pass_RFID(uint8_t card1,uint8_t card2,uint8_t card3)
+void xETC_Pass_RFID(uint8_t card1, uint8_t card2, uint8_t card3)
 {
-    ETC_Data.ETC_Car_Start=1;
-	while(Communication_Data.ETC_Open_Flag == 0)    //ETC是关闭状态
-	{	
-#if ETC_Cross    //ETC 放置在十字路口
-        if(Communication_Data.ETC_Open_Flag == 1)   //ETC打开
-				{
-            delay_ms(200);
-            Communication_Data.ETC_Open_Flag = 0;
-            ETC_Data.ETC_Car_Start = 0;
-            Motor_Data.xCAR_Track_Go();		
-            RFID_Data.xRFID_Track_Read(25,card1,card2,card3);  //寻卡
-            delay_ms(200);
-            break;
-        }
-        else   
-				{
-						Motor_Data.xCAR_Back(15,350);//往后一点
-				}
-        delay_ms(200);
-        if(Communication_Data.ETC_Open_Flag == 1)   //ETC打开
-				{
-            delay_ms(200);
-            Communication_Data.ETC_Open_Flag = 0;
-            ETC_Data.ETC_Car_Start = 0;
-            Motor_Data.xCAR_Track_Go();
-            RFID_Data.xRFID_Track_Read(25,card1,card2,card3);  //寻卡
-            delay_ms(200);
-            break;
-        }
-        else   				
-				{
-//						Motor_Data.xCAR_Back(15,350);
-            Motor_Data.xCAR_Go(20,400);//往前一点  
-				}
-        
-#endif
-			
-#if ETC_Middle   //ETC 放置在路中间
-
-		if(Communication_Data.ETC_Open_Flag == 1)   //ETC打开
+	ETC_Data.ETC_Car_Start = 1;
+	while (Communication_Data.ETC_Open_Flag == 0) // ETC是关闭状态
+	{
+#if ETC_Cross									   // ETC 放置在十字路口
+		if (Communication_Data.ETC_Open_Flag == 1) // ETC打开
 		{
 			delay_ms(200);
-            Communication_Data.ETC_Open_Flag = 0;
-            ETC_Data.ETC_Car_Start = 0;
-						
-            Motor_Data.xCAR_Go(40,180);//向前一点，防止可能重读
-            RFID_Data.xRFID_Track_Read(25,card1,card2,card3);  //寻卡
-            delay_ms(200);  
+			Communication_Data.ETC_Open_Flag = 0;
+			ETC_Data.ETC_Car_Start = 0;
+			Motor_Data.xCAR_Track_Go();
+			RFID_Data.xRFID_Track_Read(25, card1, card2, card3); // 寻卡
+			delay_ms(200);
 			break;
 		}
-		else   
+		else
 		{
-			Motor_Data.xCAR_Back(15,350);//往后一点
+			Motor_Data.xCAR_Back(15, 350); // 往后一点
 		}
-        
 		delay_ms(200);
-		if(Communication_Data.ETC_Open_Flag == 1)     //ETC打开
+		if (Communication_Data.ETC_Open_Flag == 1) // ETC打开
+		{
+			delay_ms(200);
+			Communication_Data.ETC_Open_Flag = 0;
+			ETC_Data.ETC_Car_Start = 0;
+			Motor_Data.xCAR_Track_Go();
+			RFID_Data.xRFID_Track_Read(25, card1, card2, card3); // 寻卡
+			delay_ms(200);
+			break;
+		}
+		else
+		{
+			//						Motor_Data.xCAR_Back(15,350);
+			Motor_Data.xCAR_Go(20, 400); // 往前一点
+		}
+
+#endif
+
+#if ETC_Middle // ETC 放置在路中间
+
+		if (Communication_Data.ETC_Open_Flag == 1) // ETC打开
+		{
+			delay_ms(200);
+			Communication_Data.ETC_Open_Flag = 0;
+			ETC_Data.ETC_Car_Start = 0;
+
+			Motor_Data.xCAR_Go(40, 180);						 // 向前一点，防止可能重读
+			RFID_Data.xRFID_Track_Read(25, card1, card2, card3); // 寻卡
+			delay_ms(200);
+			break;
+		}
+		else
+		{
+			Motor_Data.xCAR_Back(15, 350); // 往后一点
+		}
+
+		delay_ms(200);
+		if (Communication_Data.ETC_Open_Flag == 1) // ETC打开
 		{
 			delay_ms(250);
-            Communication_Data.ETC_Open_Flag = 0;
-            ETC_Data.ETC_Car_Start = 0; 
-						
-            Motor_Data.xCAR_Go(40,180);//向前一点，防止可能重读
-            RFID_Data.xRFID_Track_Read(25,card1,card2,card3); //寻卡
-            delay_ms(200);  
+			Communication_Data.ETC_Open_Flag = 0;
+			ETC_Data.ETC_Car_Start = 0;
+
+			Motor_Data.xCAR_Go(40, 180);						 // 向前一点，防止可能重读
+			RFID_Data.xRFID_Track_Read(25, card1, card2, card3); // 寻卡
+			delay_ms(200);
 
 			break;
 		}
 		else
 		{
-//						Motor_Data.xCAR_Back(40,180);
-            Motor_Data.xCAR_Go(18,400);//往前一点
+			//						Motor_Data.xCAR_Back(40,180);
+			Motor_Data.xCAR_Go(18, 400); // 往前一点
 		}
-#endif		
+#endif
 	}
 
-#if ETC_Cross    //ETC 放置在十字路口
-    if(Communication_Data.ETC_Open_Flag == 1)   //ETC打开
-    {
-        delay_ms(200);
-        Communication_Data.ETC_Open_Flag = 0;
-        ETC_Data.ETC_Car_Start = 0;
-        Motor_Data.xCAR_Track_Go();
-        RFID_Data.xRFID_Track_Read(25,card1,card2,card3);  //寻卡
-        delay_ms(200);
-    }
-   
-#endif    
-    
-#if ETC_Middle   //ETC 放置在路中间	
-	if(Communication_Data.ETC_Open_Flag == 1)   // 一开始就是打开状态
+#if ETC_Cross								   // ETC 放置在十字路口
+	if (Communication_Data.ETC_Open_Flag == 1) // ETC打开
+	{
+		delay_ms(200);
+		Communication_Data.ETC_Open_Flag = 0;
+		ETC_Data.ETC_Car_Start = 0;
+		Motor_Data.xCAR_Track_Go();
+		RFID_Data.xRFID_Track_Read(25, card1, card2, card3); // 寻卡
+		delay_ms(200);
+	}
+
+#endif
+
+#if ETC_Middle								   // ETC 放置在路中间
+	if (Communication_Data.ETC_Open_Flag == 1) // 一开始就是打开状态
 	{
 		delay_ms(250);
-        Communication_Data.ETC_Open_Flag = 0;
-        ETC_Data.ETC_Car_Start = 0;
-				
-        Motor_Data.xCAR_Go(40,180);//向前一点，防止可能重读
-        RFID_Data.xRFID_Track_Read(25,card1,card2,card3);
-        delay_ms(200);  
-	}    
-#endif	
-  
+		Communication_Data.ETC_Open_Flag = 0;
+		ETC_Data.ETC_Car_Start = 0;
+
+		Motor_Data.xCAR_Go(40, 180); // 向前一点，防止可能重读
+		RFID_Data.xRFID_Track_Read(25, card1, card2, card3);
+		delay_ms(200);
+	}
+#endif
 }
-
-
-
-
-
