@@ -370,80 +370,78 @@ void xAuto_Run_Function(void)
     //   Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     //   // Motor_Data.xCAR_Track_Go();
     // }
-    Motor_DataxCAR_Track_Time(40,500);
+    Motor_Data.xCAR_Track_Time(40, 300);
     ETC_Data.xETC_Pass();
+    delay_ms(200);
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
   
-      delay_ms(200);
-      Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    }
-        // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
-        Run_State
-      = 2;
+    // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
+    Run_State = 2;
     break;
   }
-  case 2:
-  {
-    //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
-    //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+case 2:
+{
+  //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
+  //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
 
-    Run_State = 3;
-    break;
-  }
-  case 3:
-  {
+  Run_State = 3;
+  break;
+}
+case 3:
+{
 
-    Run_State = 4;
-    break;
-  }
-  case 4:
-  {
-    Run_State = 5;
-    break;
-  }
-  case 5:
-  {
-    Run_State = 6;
-    break;
-  }
-  case 6:
-  {
-    Run_State = 7;
-    break;
-  }
-  case 7:
-  {
-    Run_State = 8;
-    break;
-  }
-  case 8:
-  {
-    Run_State = 9;
-    break;
-  }
-  case 9:
-  {
-    Run_State = 10;
-    break;
-  }
-  case 10:
-  {
+  Run_State = 4;
+  break;
+}
+case 4:
+{
+  Run_State = 5;
+  break;
+}
+case 5:
+{
+  Run_State = 6;
+  break;
+}
+case 6:
+{
+  Run_State = 7;
+  break;
+}
+case 7:
+{
+  Run_State = 8;
+  break;
+}
+case 8:
+{
+  Run_State = 9;
+  break;
+}
+case 9:
+{
+  Run_State = 10;
+  break;
+}
+case 10:
+{
 
-    Run_State = 11;
-    break;
-  }
-  case 11:
-  {
+  Run_State = 11;
+  break;
+}
+case 11:
+{
 
-    Run_State = 12;
-    break;
-  }
-  case 12:
-  {
+  Run_State = 12;
+  break;
+}
+case 12:
+{
 
-    Run_State = 13;
-    break;
-  }
-  }
+  Run_State = 13;
+  break;
+}
+}
 }
 
 #endif
