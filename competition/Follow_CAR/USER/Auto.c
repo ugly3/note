@@ -370,7 +370,8 @@ void xAuto_Run_Function(void)
     //   Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     //   // Motor_Data.xCAR_Track_Go();
     // }
-    ETC_Data.xETC_Init_Angle_Adjust(1);
+    xCAR_Track_Time();
+    ETC_Data.xETC_Pass();
     if (Communication_Data.ETC_Open_Flag ==1)
     {
       Communication_Data.ETC_Open_Flag = 0;
