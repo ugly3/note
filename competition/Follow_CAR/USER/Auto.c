@@ -370,12 +370,9 @@ void xAuto_Run_Function(void)
     //   Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     //   // Motor_Data.xCAR_Track_Go();
     // }
-    xCAR_Track_Time();
+    Motor_DataxCAR_Track_Time(40,500);
     ETC_Data.xETC_Pass();
-    if (Communication_Data.ETC_Open_Flag ==1)
-    {
-      Communication_Data.ETC_Open_Flag = 0;
-      Motor_Data.xCAR_Track_Go();
+  
       delay_ms(200);
       Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     }
