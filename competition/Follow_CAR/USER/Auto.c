@@ -9,6 +9,10 @@
 
 #define YT3_2025 0
 #define YT1_2026 1
+#define YT2_2026 0
+#define YT3_2026 0
+#define YT4_2026 0
+#define YT5_2026 0
 
 uint8_t Go_Speed = 50;     // 全局行进速度值
 uint8_t wheel_Speed = 90;  // 全局转弯速度值
@@ -483,8 +487,11 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // F6
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Track_Go();//D6
-
+    Motor_Data.xCAR_Track_Go(); // D6
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    delay_ms(200);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_Back(20, 500);
     Run_State = 5;
     break;
   }
@@ -535,3 +542,5 @@ void xAuto_Run_Function(void)
 }
 
 #endif
+
+if
