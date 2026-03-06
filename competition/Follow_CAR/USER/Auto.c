@@ -432,26 +432,25 @@ void xAuto_Run_Function(void)
     delay_ms(200); 
      track_time_Start =1;
      Motor_Data.xCAR_Track(Motor_Data.Go_speed);   //循迹
-     if(Count_ms<600)
+     if(Count_ms<600)/B2
      {
        Count_ms=0;
-       Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
-       RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
-       Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
+       Motor_Data.xCAR_Go(25,250);//冲
+       Motor_Data.xCAR_Track_Go();
+       Motor_Data.xCAR_Track_Go();
        delay_ms(200);
      }
-     else if((1500>Count_ms)&&(Count_ms>=600))
+     else if((1500>Count_ms)&&(Count_ms>=600))//D2
      {
        Count_ms=0;
-       Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
-       RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
-       Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
+       Motor_Data.xCAR_Go(25,250);//冲
+       Motor_Data.xCAR_Track_Go();
        delay_ms(200);
      }
-     else
+     else//E2
      {
        Count_ms=0;
-       Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
+       Motor_Data.xCAR_Go(25,250);//使车身对准十字路口
        RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
        delay_ms(200);
        
