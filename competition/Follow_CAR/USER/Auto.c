@@ -543,166 +543,34 @@ void xAuto_Run_Function(void)
 
 #endif
 
-#if YT2_2026
+
+
+#if YT3_2026
 void xAuto_Run_Function(void)
 {
   switch (Run_State)
   {
   case 1:
   {
-    /*
-              if(Communication_Data.FollowCar_Start_flag == 1)
-              {
-                  Count++;
-                  sprintf((char*)Buf1,"%d\r\n ",Count);
-                  Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
-                  Communication_Data.FollowCar_Start_flag = 0;
-                  Motor_Data.xCAR_Track_Go();
-                  Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-                  Motor_Data.xCAR_Track_Go();
-                  Run_State = 2;
-               }
-    */
-    /*
-              Motor_Data.xCAR_Track_Go();
-              delay_ms(200);
-              Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-              Motor_Data.xCAR_Track_Go();
-              Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-              delay_ms(200);
-              Motor_Data.xCAR_L45(wheel_Speed,wheel_Time);
-              delay_ms(200);
-              Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
-              */
-    // Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("我是僧人");
-    // Barrier_Data.xBarrier_Open_Close(1);
 
-    // // if (Communication_Data.Barrier_Open_Flag == 1)
-    // // {
-    // //   Communication_Data.Barrier_Open_Flag = 0;
-    // //   Motor_Data.xCAR_Track_Go();
-    // //   delay_ms(200);
-    // //   Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    // //   // Motor_Data.xCAR_Track_Go();
-    // // }
-    // Motor_Data.xCAR_Track_Time(40, 300);
-    // ETC_Data.xETC_Pass();
-    // delay_ms(200);
-    // Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-
-    Motor_Data.xCAR_Track_Go();
-    delay_ms(200); // B6
-
-    // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
     Run_State = 2;
     break;
   }
   case 2:
   {
-    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Track_Go();
-    delay_ms(200);                                                            // B4
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 请求交通灯进入识别模式，并请求安卓识别红绿灯
-    for (uint8_t i = 0; i < 3; i++)                                           // 等待安卓回传
-    {
-      delay_ms(500);
-      delay_ms(500);
-    }
-    if (Android_Data.Red_State == 1)
-    {
-      Android_Data.Red_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
-      delay_ms(500);
-    }
-    else if (Android_Data.Yellow_State == 1)
-    {
-      Android_Data.Yellow_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
-      delay_ms(500);
-    }
-    else if (Android_Data.Green_State == 1)
-    {
-      Android_Data.Green_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
-      delay_ms(500);
-    }
-    else // 蒙一个
-    {
-      Android_Data.Green_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
-      delay_ms(500);
-    }
-    Motor_Data.xCAR_Track_Go();
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-
-    //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
-    //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
 
     Run_State = 3;
     break;
   }
   case 3:
   {
-    // B2->F2
-    delay_ms(200);
-    track_time_Start = 1;
-    Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
-    sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
-    Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
 
-    if (Count_ms < 600) // B2
-    {
-      Count_ms = 0;
-      delay_ms(500);
-      Motor_Data.xCAR_Go(25, 500); // 冲
-      Motor_Data.xCAR_Go(25, 500);
-      delay_ms(500);
-      Motor_Data.xCAR_Track_Go();
-      Motor_Data.xCAR_Track_Go();
-      delay_ms(200);
-    }
-    else if ((1500 > Count_ms) && (Count_ms >= 600)) // D2
-    {
-      Send_InfoData_To_Fifo("1\r\n", 3);
-      Count_ms = 0;
-      delay_ms(500);
-      Motor_Data.xCAR_Go(25, 500); // 冲
-      Motor_Data.xCAR_Go(25, 500);
-      Motor_Data.xCAR_Track_Go();
-      delay_ms(200);
-    }
-    else // E2
-    {
-      delay_ms(500);
-      Count_ms = 0;
-      Motor_Data.xCAR_Go(25, 100); // 使车身对准十字路口
-      delay_ms(500);
-      Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
-
-      delay_ms(500);
-
-      Motor_Data.xCAR_Go(25, 500);
-      Motor_Data.xCAR_Go(25, 500);
-      delay_ms(500);
-
-      Motor_Data.xCAR_Track_Go();
-      delay_ms(300);
-    }
     Run_State = 4;
     break;
   }
   case 4:
   {
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Track_Go();
-    Motor_Data.xCAR_Track_Go();
-    delay_ms(200); // F6
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Track_Go(); // D6
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    delay_ms(200);
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Back(20, 500);
+
     Run_State = 5;
     break;
   }
