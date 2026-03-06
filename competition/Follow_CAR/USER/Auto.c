@@ -416,11 +416,7 @@ void xAuto_Run_Function(void)
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
       delay_ms(500);
     }
-    Motor_Data.xCAR_Go(25, 250);                                 // 走开十字路口，防止可能重复识别十字路口的卡片
-    RFID_Data.xRFID_Track_Read(25, Card1_Block, Card1_Block, 0); // 寻卡
-    Motor_Data.xCAR_Go(30, 140);                                 // 使车身对准十字路口
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    delay_ms(200);
+   Motor_Data.xCAR_Track_Go();
     //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
     //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
 
