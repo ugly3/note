@@ -386,7 +386,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // B4
-    
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 请求交通灯进入识别模式，并请求安卓识别红绿灯
     //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
     //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
 
