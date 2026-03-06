@@ -426,11 +426,43 @@ void xAuto_Run_Function(void)
   }
   case 3:
   {
-    
+
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(200); 
-    Special_LanForm_Data.xSpecial_LandForm_Pass();
+     track_time_Start =1;
+     Motor_Data.xCAR_Track(Motor_Data.Go_speed);   //循迹
+     if(Count_ms<600)
+     {
+       Count_ms=0;
+       Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
+       RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
+       Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
+       delay_ms(200);
+     }
+     else if((1500>Count_ms)&&(Count_ms>=600))
+     {
+       Count_ms=0;
+       Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
+       RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
+       Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
+       delay_ms(200);
+     }
+     else
+     {
+       Count_ms=0;
+       Motor_Data.xCAR_Go(25,250);//走开十字路口，防止可能重复识别十字路口的卡片
+       RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
+       delay_ms(200);
+       
+       Motor_Data.xCAR_Go(25,500);
+       Motor_Data.xCAR_Go(25,500);
+       delay_ms(600);
+       
+       RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//寻卡
+       Motor_Data.xCAR_Go(30,140);       //使车身对准十字路口
+       delay_ms(300);
+     }
     Run_State = 4;
     break;
   }
