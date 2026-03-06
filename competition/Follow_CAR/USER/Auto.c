@@ -473,11 +473,12 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Track_Go();
       delay_ms(300);
     }
-    Run_State = 100;
+    Run_State = 4;
     break;
   }
   case 4:
   {
+
     Run_State = 5;
     break;
   }
