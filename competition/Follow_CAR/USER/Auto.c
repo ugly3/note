@@ -417,6 +417,8 @@ void xAuto_Run_Function(void)
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
       delay_ms(500);
     }
+    Motor_Data.xCAR_Track_Go();
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
 
     //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
     //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
@@ -426,9 +428,7 @@ void xAuto_Run_Function(void)
   }
   case 3:
   {
-
-    Motor_Data.xCAR_Track_Go();
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    //B2->F2
     delay_ms(200);
     track_time_Start = 1;
     Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
@@ -465,7 +465,7 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Track_Go();
       delay_ms(300);
     }
-    Run_State = 4;
+    Run_State = 100;
     break;
   }
   case 4:

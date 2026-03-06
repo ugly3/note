@@ -225,7 +225,7 @@ void xCAR_KeyRun_Function(void)
 	if(KeyData.S2_Flag)        //°´¼ü2
 	{
 		KeyData.S2_Flag = 0;    //½ûÖ¹ÆÁ±Î
-		Run_State = 1;
+		Run_State = 3;
 //		unsigned int Kai_Qi_Ma[3]={0xA1,0x23,0xB4};
 //		Wireless_Charge_Data.xWireless_Charge_KaiQiMa_XiuGai(Kai_Qi_Ma);
 //		Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma);//ÐèÐÞ¸Ä¿ªÆôÂë
