@@ -374,6 +374,8 @@ void xAuto_Run_Function(void)
     // ETC_Data.xETC_Pass();
     // delay_ms(200);
     // Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    track_time_Start =1;
+    
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // B6
 
