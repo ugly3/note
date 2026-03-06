@@ -432,8 +432,7 @@ void xAuto_Run_Function(void)
     delay_ms(200);
     track_time_Start = 1;
     Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
-    if (Count_ms < 600)
-      / B2
+    if (Count_ms < 600)// B2
       {
         Count_ms = 0;
         Motor_Data.xCAR_Go(25, 500); // ³å
