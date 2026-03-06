@@ -359,21 +359,21 @@ void xAuto_Run_Function(void)
               delay_ms(200);
               Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
               */
-    Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("我是僧人");
-    Barrier_Data.xBarrier_Open_Close(1);
+    // Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("我是僧人");
+    // Barrier_Data.xBarrier_Open_Close(1);
 
-    // if (Communication_Data.Barrier_Open_Flag == 1)
-    // {
-    //   Communication_Data.Barrier_Open_Flag = 0;
-    //   Motor_Data.xCAR_Track_Go();
-    //   delay_ms(200);
-    //   Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    //   // Motor_Data.xCAR_Track_Go();
-    // }
-    Motor_Data.xCAR_Track_Time(40, 300);
-    ETC_Data.xETC_Pass();
-    delay_ms(200);
-    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    // // if (Communication_Data.Barrier_Open_Flag == 1)
+    // // {
+    // //   Communication_Data.Barrier_Open_Flag = 0;
+    // //   Motor_Data.xCAR_Track_Go();
+    // //   delay_ms(200);
+    // //   Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    // //   // Motor_Data.xCAR_Track_Go();
+    // // }
+    // Motor_Data.xCAR_Track_Time(40, 300);
+    // ETC_Data.xETC_Pass();
+    // delay_ms(200);
+    // Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     
   
     // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
