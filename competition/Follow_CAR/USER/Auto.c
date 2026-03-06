@@ -426,6 +426,7 @@ void xAuto_Run_Function(void)
   case 3:
   {
     Motor_Data.xCAR_Track_Go();
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(200); 
     Special_LanForm_Data.xSpecial_LandForm_Pass();
     Run_State = 4;
