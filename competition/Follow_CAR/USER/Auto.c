@@ -478,7 +478,13 @@ void xAuto_Run_Function(void)
   }
   case 4:
   {
-
+Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_Track_Go();
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(200); // F6
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    
+    
     Run_State = 5;
     break;
   }
