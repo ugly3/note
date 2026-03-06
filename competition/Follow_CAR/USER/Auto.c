@@ -451,6 +451,7 @@ void xAuto_Run_Function(void)
     }
     else // E2
     {
+      delay_ms(500);
       Count_ms = 0;
       Motor_Data.xCAR_Go(25, 250);                // 使车身对准十字路口
       Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
