@@ -387,6 +387,40 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // B4
     Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 请求交通灯进入识别模式，并请求安卓识别红绿灯
+    for (uint8_t i = 0; i < 3; i++)                                           // 等待安卓回传
+    {
+      delay_ms(500);
+      delay_ms(500);
+    }
+    if (Android_Data.Red_State == 1)
+    {
+      Android_Data.Red_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
+      delay_ms(500);
+    }
+    else if (Android_Data.Yellow_State == 1)
+    {
+      Android_Data.Yellow_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
+      delay_ms(500);
+    }
+    else if (Android_Data.Green_State == 1)
+    {
+      Android_Data.Green_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+      delay_ms(500);
+    }
+    else // 蒙一个
+    {
+      Android_Data.Green_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+      delay_ms(500);
+    }
+    Motor_Data.xCAR_Go(25, 250);                                 // 走开十字路口，防止可能重复识别十字路口的卡片
+    RFID_Data.xRFID_Track_Read(25, Card1_Block, Card1_Block, 0); // 寻卡
+    Motor_Data.xCAR_Go(30, 140);                                 // 使车身对准十字路口
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    delay_ms(200);
     //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
     //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
 
