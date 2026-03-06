@@ -435,8 +435,10 @@ void xAuto_Run_Function(void)
     if (Count_ms < 600)// B2
       {
         Count_ms = 0;
+        delay_ms(500);
         Motor_Data.xCAR_Go(25, 500); // 冲
         Motor_Data.xCAR_Go(25, 500);
+        delay_ms(500);
         Motor_Data.xCAR_Track_Go();
         Motor_Data.xCAR_Track_Go();
         delay_ms(200);
@@ -444,6 +446,7 @@ void xAuto_Run_Function(void)
     else if ((1500 > Count_ms) && (Count_ms >= 600)) // D2
     {
       Count_ms = 0;
+      delay_ms(500);
       Motor_Data.xCAR_Go(25, 500); // 冲
       Motor_Data.xCAR_Go(25, 500);
       Motor_Data.xCAR_Track_Go();
@@ -454,13 +457,14 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       Count_ms = 0;
       Motor_Data.xCAR_Go(25, 250);                // 使车身对准十字路口
+      delay_ms(500);
       Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
 
-      delay_ms(200);
+      delay_ms(500);
 
       Motor_Data.xCAR_Go(25, 500);
       Motor_Data.xCAR_Go(25, 500);
-      delay_ms(600);
+      delay_ms(500);
 
       Motor_Data.xCAR_Track_Go();
       delay_ms(300);
