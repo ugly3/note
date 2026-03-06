@@ -328,7 +328,7 @@ void xAuto_Run_Function(void)
 
 #if YT1_2026
 uint8_t Count = 0;
-uint8_t Buf1[100];
+uint8_t Buf1[200];
 void xAuto_Run_Function(void)
 {
   switch (Run_State)
