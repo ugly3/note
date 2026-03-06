@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OUTPUT\CarV.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OUTPUT\CarV.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Mar 06 20:34:33 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Mar 06 20:38:06 2026
 <BR><P>
 <H3>Maximum Stack Usage =        236 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1476,8 +1476,8 @@ Global Symbols
 <P><STRONG><a name="[13a]"></a>RC522</STRONG> (Thumb, 272 bytes, Stack size 24 bytes, rc522.o(i.RC522))
 <BR><BR>[Stack]<UL><LI>Max Depth = 204<LI>Call Chain = RC522 &rArr; PcdAuthState &rArr; PcdComMF522 &rArr; SetBitMask &rArr; WriteRawRC &rArr; WriteRawRC_HDL &rArr; Rece_data &rArr; gt_get_sub
 </UL>
-<BR>[Calls]<UL><LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_InfoData_To_Fifo
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_InfoData_To_Fifo
 <LI><a href="#[135]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PcdWrite
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PcdSelect
 <LI><a href="#[132]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PcdRead
@@ -1632,6 +1632,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xMixture_Zigbe_RecceiveError_Handler
 <LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xMixture_Debug_Data
+<LI><a href="#[16c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xAuto_Run_Function
 <LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RC522
 <LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xRFID_Track_Read_L
 <LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xRFID_Track_Read
@@ -2374,10 +2375,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hardware_Init
 </UL>
 
-<P><STRONG><a name="[16c]"></a>xAuto_Run_Function</STRONG> (Thumb, 576 bytes, Stack size 8 bytes, auto.o(i.xAuto_Run_Function))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = xAuto_Run_Function
+<P><STRONG><a name="[16c]"></a>xAuto_Run_Function</STRONG> (Thumb, 584 bytes, Stack size 8 bytes, auto.o(i.xAuto_Run_Function))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = xAuto_Run_Function &rArr; Send_InfoData_To_Fifo &rArr; FifoDrv_BufWrite &rArr; FifoDrv_WriteOne &rArr; FifoDrv_CheckWriteEn
 </UL>
 <BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_InfoData_To_Fifo
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -2518,8 +2520,8 @@ Global Symbols
 <P><STRONG><a name="[29]"></a>xCarPort_Control_Arrive_Level</STRONG> (Thumb, 250 bytes, Stack size 88 bytes, three_dim_carport.o(i.xCarPort_Control_Arrive_Level))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = xCarPort_Control_Arrive_Level &rArr; Send_InfoData_To_Fifo &rArr; FifoDrv_BufWrite &rArr; FifoDrv_WriteOne &rArr; FifoDrv_CheckWriteEn
 </UL>
-<BR>[Calls]<UL><LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_InfoData_To_Fifo
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_InfoData_To_Fifo
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_ZigbeeData_To_Fifo
 <LI><a href="#[162]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
@@ -2596,8 +2598,8 @@ Global Symbols
 <P><STRONG><a name="[19]"></a>xRFID_Track_Read</STRONG> (Thumb, 612 bytes, Stack size 24 bytes, rfid.o(i.xRFID_Track_Read))
 <BR><BR>[Stack]<UL><LI>Max Depth = 228<LI>Call Chain = xRFID_Track_Read &rArr; RC522 &rArr; PcdAuthState &rArr; PcdComMF522 &rArr; SetBitMask &rArr; WriteRawRC &rArr; WriteRawRC_HDL &rArr; Rece_data &rArr; gt_get_sub
 </UL>
-<BR>[Calls]<UL><LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_InfoData_To_Fifo
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_InfoData_To_Fifo
 <LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_UpMotor
 <LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RC522
 <LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PcdRequest
@@ -2610,8 +2612,8 @@ Global Symbols
 <P><STRONG><a name="[1a]"></a>xRFID_Track_Read_L</STRONG> (Thumb, 278 bytes, Stack size 16 bytes, rfid.o(i.xRFID_Track_Read_L))
 <BR><BR>[Stack]<UL><LI>Max Depth = 220<LI>Call Chain = xRFID_Track_Read_L &rArr; RC522 &rArr; PcdAuthState &rArr; PcdComMF522 &rArr; SetBitMask &rArr; WriteRawRC &rArr; WriteRawRC_HDL &rArr; Rece_data &rArr; gt_get_sub
 </UL>
-<BR>[Calls]<UL><LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_InfoData_To_Fifo
-<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<BR>[Calls]<UL><LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_InfoData_To_Fifo
 <LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_UpMotor
 <LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RC522
 <LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PcdRequest
