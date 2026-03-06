@@ -385,7 +385,7 @@ void xAuto_Run_Function(void)
   {
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_Track_Go();
-    delay_ms(200); // B4
+    delay_ms(200);                                                            // B4
     Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 请求交通灯进入识别模式，并请求安卓识别红绿灯
     for (uint8_t i = 0; i < 3; i++)                                           // 等待安卓回传
     {
@@ -416,7 +416,7 @@ void xAuto_Run_Function(void)
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
       delay_ms(500);
     }
-   Motor_Data.xCAR_Track_Go();
+
     //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
     //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
 
@@ -425,7 +425,9 @@ void xAuto_Run_Function(void)
   }
   case 3:
   {
-
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(200); 
+    Special_LanForm_Data.xSpecial_LandForm_Pass();
     Run_State = 4;
     break;
   }
