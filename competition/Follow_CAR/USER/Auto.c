@@ -444,18 +444,19 @@ uint8_t Buf1[200];
 uint8_t Hex_Data_Store1[10];
 void xAuto_Run_Function(void)
 {
-   while (Communication_Data.FollowCar_Start_flag == 0)
-    {
-      delay_ms(500);
-      delay_ms(500);
-      time_out++;
-      if (time_out > 230) // 等待10秒后超时
-      {
-        Run_State=1; // 设置状态为1，进入下一阶段
-        time_out = 0; // 重置超时计数器
-        break;        // 跳出循环，继续执行后续代码
-      }
-    }
+  //  while (Communication_Data.FollowCar_Start_flag == 0)
+  //   {
+  //     delay_ms(500);
+  //     delay_ms(500);
+  //     time_out++;
+  //     if (time_out > 230) // 等待10秒后超时
+  //     {
+  //       Run_State=1; // 设置状态为1，进入下一阶段
+  //       time_out = 0; // 重置超时计数器
+  //       break;        // 跳出循环，继续执行后续代码
+  //     }
+  //   }
+  //   Run_State=1; // 设置状态为1，进入下一阶段
   switch (Run_State)
   {
   case 1:
@@ -463,44 +464,6 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
     delay_ms(200);
-    // Identify_Two_Code_Arr[3] = 0x01;
-    // Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
-    // delay_ms(500);
-    // delay_ms(500);
-    // delay_ms(500);
-    // YT1_parse_two_codes();
-
-    // if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
-    // {
-    //   //            Motor_Data.xCAR_Back(20,150);
-    //   Rx_count = 0;
-    //   Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
-    //   delay_ms(500);
-    //   delay_ms(500);
-    //   delay_ms(500);
-    //   //            Motor_Data.xCAR_Go(20,150);
-    // }
-    // if (Android_Data.Two_Code_State == 0)
-    // {
-    //   Android_Data.Two_Code_State = 1;
-    //   printf("aaa  ");
-    // }
-    // if (Android_Data.Two_Code_State == 1)
-    // {
-    //   Android_Data.Two_Code_State = 0;
-    //   Rx_count = 0;
-    //   YT1_parse_two_codes();
-
-    //   printf("sdv\r\n");
-    //   printf("%s\r\n", Two_Code_Data_parsed_Store1);
-    //   printf("%s\r\n", Two_Code_Data_parsed_Store2);
-    //            printf("%s\r\n",Two_Code_Data_parsed_Store3);
-
-    //  char Vioce_Store[50] = "识别结果为";
-    //  strcat(Vioce_Store,Two_Code_Data_parsed_Store1);
-
-    //  Voice_Report_Data.xVoice_Report_Set_Complex_Command(Vioce_Store);
-    //  Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add(Two_Code_Data_parsed_Store2);
 
     Identify_Two_Code_Arr[3] = 0x01;
     Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
