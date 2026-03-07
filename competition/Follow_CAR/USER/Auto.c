@@ -764,7 +764,7 @@ void xAuto_Run_Function(void)
   {
     Motor_Data.xCAR_Track_Go(); // B2
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
-    delay_ms(200); // B4
+    delay_ms(200); 
     Identify_Two_Code_Arr[3] = 0x01;
     Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
     delay_ms(500);
@@ -799,9 +799,9 @@ void xAuto_Run_Function(void)
         Send_Weizhi_To_MainCar[3] = 0x01;
       else if (strcmp(Two_Code_Data_parsed_Store1, "D7") == 0)
         Send_Weizhi_To_MainCar[3] = 0x02;
-      else if (strcmp(Two_Code_Data_parsed_Store1, "G6") == 0) // G6
+      else if (strcmp(Two_Code_Data_parsed_Store1, "G6") == 0)
         Send_Weizhi_To_MainCar[3] = 0x03;
-      else // G4
+      else // F4
         Send_Weizhi_To_MainCar[3] = 0x04;
 
       MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
