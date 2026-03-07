@@ -454,7 +454,7 @@ void xAuto_Run_Function(void)
     delay_ms(500);
     delay_ms(500);
     delay_ms(500);
-    YT3_parse_two_codes();
+    YT1_parse_two_codes();
 
     if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
     {
@@ -475,18 +475,14 @@ void xAuto_Run_Function(void)
     {
       Android_Data.Two_Code_State = 0;
       Rx_count = 0;
-      YT3_parse_two_codes();
+      YT1_parse_two_codes();
 
       printf("sdv\r\n");
       //            printf("%s\r\n",Two_Code_Data_parsed_Store1);
       //            printf("%s\r\n",Two_Code_Data_parsed_Store2);
       //            printf("%s\r\n",Two_Code_Data_parsed_Store3);
 
-      char Vioce_Store[50] = "识别结果为";
-      strcat(Vioce_Store, Two_Code_Data_parsed_Store1);
-
-      Voice_Report_Data.xVoice_Report_Set_Complex_Command(Vioce_Store);
-      Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add(Two_Code_Data_parsed_Store2);
+      
     }
     // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
     Run_State = 2;
