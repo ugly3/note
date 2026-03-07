@@ -441,7 +441,6 @@ void xAuto_Run_Function(void)
 uint8_t Count = 0;
 uint8_t Buf1[200];
 uint8_t Hex_Data_Store1[10];
-uint8_t Hex_Data_Store2=0;//主车位置信息
 void xAuto_Run_Function(void)
 {
   switch (Run_State)
@@ -546,26 +545,12 @@ void xAuto_Run_Function(void)
       delay_ms(100);
       MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
 
-     Hex_Data_Store2 = (CharToHex(Two_Code_Data_parsed_Store1[0]) << 4) | 
+     Send_Weizhi_To_MainCar[3] = (CharToHex(Two_Code_Data_parsed_Store1[0]) << 4) | 
                      CharToHex(Two_Code_Data_parsed_Store1[1]);
-      Send_Weizhi_To_MainCar[3]= 0x01;
-    
     MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
       delay_ms(100);
       MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
 
-      // 示例2：处理类似 "02,03,05" 的逻辑
-      // 针对样题要求的提取有效数字（0-9），并存入十六进制数组
-      int j = 0;
-      for (int i = 0; i < strlen(Two_Code_Data_parsed_Store2); i++)
-      {
-        char c = Two_Code_Data_parsed_Store2[i];
-        if (c >= '0' && c <= '9')
-        {
-          Hex_Data_Store2[j++] = c - '0'; // 转换为 0x00, 0x01... 格式
-        }
-      }
-      
     }
     Run_State = 2;
     break;
