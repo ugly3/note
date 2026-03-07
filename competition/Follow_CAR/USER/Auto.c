@@ -635,7 +635,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Time(35, 700);
     delay_ms(200);
     Motor_Data.xCAR_Back(35, 600);
-    Motor_Data.xCAR_Back(35, 300);
+    Motor_Data.xCAR_Back(35, 200);
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 2);
 
     Run_State = 5;
