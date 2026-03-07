@@ -445,36 +445,23 @@ uint8_t Hex_Data_Store1[10];
 bool lock_flag = 0; // 锁车标志，0为未锁车，1为已锁车
 void xAuto_Run_Function(void)
 {
-  if(lock_flag==0)
+  if (lock_flag == 0)
   {
-    if(Communication_Data.FollowCar_Start_flag == 1)
+    while (Communication_Data.FollowCar_Start_flag == 0)
     {
-      Count++;
-      sprintf((char*)Buf1,"%d\r\n ",Count);
-      Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
-      Communication_Data.FollowCar_Start_flag = 0;
-      Motor_Data.xCAR_Track_Go();
-      Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-      Motor_Data.xCAR_Track_Go();
-      Run_State = 2;
-      lock_flag=1; // 锁车，防止重复进入
+      delay_ms(500);
+      delay_ms(500);
+      time_out++;
+      if (time_out > 230) // 等待10秒后超时
+      {
+        Run_State = 1; // 设置状态为1，进入下一阶段
+        time_out = 0;  // 重置超时计数器
+        break;         // 跳出循环，继续执行后续代码
+      }
     }
-    sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
-    Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+    Run_State = 1; // 设置状态为1，进入下一阶段
+    lock_flag = 1;
   }
-  //  while (Communication_Data.FollowCar_Start_flag == 0)
-  //   {
-  //     delay_ms(500);
-  //     delay_ms(500);
-  //     time_out++;
-  //     if (time_out > 230) // 等待10秒后超时
-  //     {
-  //       Run_State=1; // 设置状态为1，进入下一阶段
-  //       time_out = 0; // 重置超时计数器
-  //       break;        // 跳出循环，继续执行后续代码
-  //     }
-  //   }
-  //   Run_State=1; // 设置状态为1，进入下一阶段
   switch (Run_State)
   {
   case 1:
@@ -538,15 +525,15 @@ void xAuto_Run_Function(void)
       delay_ms(100);
       MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
 
-      if(strcmpy(Two_Code_Data_parsed_Store1,"D7")==0)
-         Send_Weizhi_To_MainCar[3]=0x01;
-      else if(strcmpy(Two_Code_Data_parsed_Store1,"F7")==0)
-         Send_Weizhi_To_MainCar[3]=0x02;
-      else if(strcmpy(Two_Code_Data_parsed_Store1,"G6")==0)//G6
-          Send_Weizhi_To_MainCar[3]=0x03;
-      else //G4
-          Send_Weizhi_To_MainCar[3]=0x04;
-    
+      if (strcmpy(Two_Code_Data_parsed_Store1, "D7") == 0)
+        Send_Weizhi_To_MainCar[3] = 0x01;
+      else if (strcmpy(Two_Code_Data_parsed_Store1, "F7") == 0)
+        Send_Weizhi_To_MainCar[3] = 0x02;
+      else if (strcmpy(Two_Code_Data_parsed_Store1, "G6") == 0) // G6
+        Send_Weizhi_To_MainCar[3] = 0x03;
+      else // G4
+        Send_Weizhi_To_MainCar[3] = 0x04;
+
       MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
       delay_ms(100);
       MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
