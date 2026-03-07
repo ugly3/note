@@ -251,9 +251,9 @@ void Can_ZigBeeRx_Check(void)
                     MainCar_Send_Licence_Data_Store[4] = Zigb_Rx_Buf[3];
                     MainCar_Send_Licence_Data_Store[5] = Zigb_Rx_Buf[4];
                 }
-                else if()
+                else if(0x01 == Zigb_Rx_Buf[2])    //主车传来的车库层数信息
                 {
-                    MainCar_Send_Cengshu
+                    MainCar_Send_Cengshu = Zigb_Rx_Buf[3];    //主车传来的车库层数信息
                 }
             }
 
