@@ -1,4 +1,3 @@
-#include "stm32f4xx.h"
 #include "Timer.h"
 
 volatile uint32_t global_times = 0;
@@ -35,6 +34,7 @@ void TIM1_UP_TIM10_IRQHandler(void)
 	{
 		global_times++;
 	}
+    RFID_Track_Time();
 	TIM_ClearITPendingBit(TIM10,TIM_IT_Update);
 }
 

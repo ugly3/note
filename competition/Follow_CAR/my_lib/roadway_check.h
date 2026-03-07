@@ -21,7 +21,7 @@ extern volatile uint16_t track_time_ms;
 extern volatile uint8_t track_time_Start;
 extern uint16_t Count_ms;
 void Control(int L_Spend,int R_Spend);
-
+void RFID_Track_Time(void);
 extern uint8_t Roadway_GoBack_Check(void);
 void roadway_check_TimInit(uint16_t arr,uint16_t psc);
 

@@ -43,7 +43,7 @@ Communication_Typedef Communication_Data =
 
 /*
 Zigbees数据交互
-标志物，主车，安卓的回传命令
+标志物，从车，安卓的回传命令
 原函数在can_user.c文件里
 */
 void Can_ZigBeeRx_Check(void)
@@ -212,7 +212,12 @@ void Can_ZigBeeRx_Check(void)
                     
                 }
             }
-
+            if(0x07 == Zigb_Rx_Buf[1])//*****************************************报警台标志物
+            {
+                if(0x01 == Zigb_Rx_Buf[2])//回传随机救援位置坐标点
+                    SmokeTower_Data.SmokeTower_Weizhi[0]=Zigb_Rx_Buf[3];
+            }
+            
             if(0x02 == Zigb_Rx_Buf[1])    //*****************接收主车发过来的数据
             {
                 if(0xA0 == Zigb_Rx_Buf[2])  
@@ -367,7 +372,6 @@ volatile uint8_t Rx_count = 0;
 void PrintAndroidData_Array(void)
 {
     uint8_t i;
-    uint8_t Buf1[100];
     // 打印接收到的数据数量
     printf("Android Rx:[%d]", (int)((uint16_t)Wifi_Rx_num + 1));
 
@@ -385,6 +389,7 @@ void PrintAndroidData_Array(void)
     // printf("ASCII Data: ");
     for (i = 0; i < content_len; i++)
     {
+//        uint8_t Buf1[100];
 //        sprintf((char*)Buf1,"%02x ",content[i]);  
 //        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
         printf("%02x ", content[i]);
@@ -418,9 +423,7 @@ void Can_WifiRx_Check(void)
 //            {
 //                //printf("%02X ", Wifi_Rx_Buf[i]);  // 大写十六进制
 //                    sprintf((char*)Buf1,"%02x ",Wifi_Rx_Buf[i]);  
-//                    Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
-//                
-//                
+//                    Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));  
 //            }
             
             
@@ -480,11 +483,6 @@ void Can_WifiRx_Check(void)
 					Android_Data.Android_Main_Car_Start_Flag = 1;
 					break;
 				}
-                case 0x0A:  //识别二维码成功
-                {
-                    PrintAndroidData_Array();
-                    break;
-                }
 				case 0x01:    //红绿灯识别成功
 				{
 					if(Wifi_Rx_Buf[3] == 0x01)   //识别为红灯
@@ -501,11 +499,10 @@ void Can_WifiRx_Check(void)
 					}
 					break;
 				}
-				case 0x02:  
+				case 0x02:  //识别二维码成功
 				{
-					
-                   		
-					break;
+					 PrintAndroidData_Array();
+                    break;
 				}
 				case 0x03:    //识别 TFT 车牌成功
 				{
@@ -516,9 +513,6 @@ void Can_WifiRx_Check(void)
 //                        sprintf((char*)Buf1,"%x\r\n",Wifi_Rx_Buf[3]);  
 //                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
                     }
-                    else
-                        Android_Data.TFT_ChePai_sucess_flag=0;
-                    
 					Android_Data.TFT_Licence_Flag = 1;
 					TFT_License_Data_Store[0] = Wifi_Rx_Buf[3];
 					TFT_License_Data_Store[1] = Wifi_Rx_Buf[4];
@@ -550,7 +544,7 @@ void Can_WifiRx_Check(void)
 					else if(Wifi_Rx_Buf[3]==0x03)
 									Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_C,2);
 //                    sprintf((char*)Buf1,"%x\r\n",Wifi_Rx_Buf[2]);  
-//                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
+//                    Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
 					break;
 				}
 				case 0x06:    //TFT图形数量识别成功
@@ -593,7 +587,7 @@ void Can_WifiRx_Check(void)
                         TFT_GraphAndColour_Data_Store[5] = Wifi_Rx_Buf[9];
                     }
 //                     sprintf((char*)Buf1,"%s\r\n",TFT_GraphAndColour_Data_Store);  
-//                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
+//                     Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1)); 
                     
 					break;
 				}
@@ -627,27 +621,24 @@ void Can_WifiRx_Check(void)
 					TFT_Words_Data_Store[6] = Wifi_Rx_Buf[9];						
 					break;
 				}
-                case 0x11:
+                case 0x11:  //车型识别
                 {
-                    if(Wifi_Rx_Buf[3]==0x01 || Wifi_Rx_Buf[3]==0x02 || Wifi_Rx_Buf[3]==0x03 || Wifi_Rx_Buf[3]==0x04)
-                    {
-                        Android_Data.TFT_CheXin_sucess_flag=1;
-                        if(Wifi_Rx_Buf[3]==0x01)
-                            YT5_Carport=1;
-                        else if(Wifi_Rx_Buf[3]==0x02)
-                            YT5_Carport=2;
-                        else if(Wifi_Rx_Buf[3]==0x03)
-                            YT5_Carport=3;
-                        else if(Wifi_Rx_Buf[3]==0x04)
-                            YT5_Carport=4;
-//                        sprintf((char*)Buf1,"CheXin:%x\r\n",Wifi_Rx_Buf[3]);  
-//                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
-                    }
-                    else
-                    {
-                        Android_Data.TFT_CheXin_sucess_flag=0;
-
-                    }
+                    Android_Data.TFT_Car_Type_sucess_flag=1;
+                    printf("%02x ", Wifi_Rx_Buf[3]);  // 大写十六进制
+//                    if(Wifi_Rx_Buf[3]==0x01 || Wifi_Rx_Buf[3]==0x02 || Wifi_Rx_Buf[3]==0x03 || Wifi_Rx_Buf[3]==0x04)
+//                    {
+//                        Android_Data.TFT_Car_Type_sucess_flag=1;
+//                        if(Wifi_Rx_Buf[3]==0x01)
+//                            YT5_Carport=1;
+//                        else if(Wifi_Rx_Buf[3]==0x02)
+//                            YT5_Carport=2;
+//                        else if(Wifi_Rx_Buf[3]==0x03)
+//                            YT5_Carport=3;
+//                        else if(Wifi_Rx_Buf[3]==0x04)
+//                            YT5_Carport=4;
+////                        sprintf((char*)Buf1,"CheXin:%x\r\n",Wifi_Rx_Buf[3]);  
+////                        Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+//                    }
                     break;
                 }
                 default:

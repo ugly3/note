@@ -70,7 +70,6 @@
 ..\output\xiaochuang.o: ..\MODULE\landmark\barrier_gate\barrier_gate.h
 ..\output\xiaochuang.o: ..\MODULE\landmark\etc\etc.h
 ..\output\xiaochuang.o: ..\MODULE\landmark\led_display\led_display.h
-..\output\xiaochuang.o: ..\MODULE\landmark\rfid\rfid.h
 ..\output\xiaochuang.o: ..\MODULE\landmark\smart_street_light\smart_street_light.h
 ..\output\xiaochuang.o: ..\MODULE\landmark\smart_traffic_light\smart_traffic_light.h
 ..\output\xiaochuang.o: ..\MODULE\landmark\smart_tft_display\smart_tft_display.h

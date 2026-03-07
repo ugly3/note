@@ -145,7 +145,6 @@ void TIM3_IRQHandler(void)
 			zigbee_cnt2ms = 0;
             Can_ZigBeeRx_Check();   // Zigbee交互数据处理				                            				
 		}
-        
 		if(wifi_cnt3ms >= 3)
 		{
 			wifi_cnt3ms = 0;
@@ -203,15 +202,7 @@ void TIM2_IRQHandler(void)
 	TIM_ClearITPendingBit(TIM2,TIM_IT_Update);
 }
 
-//extern uint8_t  wheel_Speed;                  // 全局转弯速度值
-//extern uint16_t wheel_Time;                  // 全局转45°时间
-extern uint8_t MODE1;
-extern uint8_t MODE2;
-extern uint8_t MODE3;
-extern uint8_t MODE4;
 
-
-char test[10] = {"富强民主"};
 
 extern uint8_t Run_State; //运行位置状态
 void xCAR_KeyRun_Function(void)
@@ -219,49 +210,25 @@ void xCAR_KeyRun_Function(void)
 	if(KeyData.S1_Flag)        //按键1
 	{
 		KeyData.S1_Flag = 0;   //禁止屏蔽
-//        Run_State = 1;
+        Run_State = 0;
 		
 	}
 	if(KeyData.S2_Flag)        //按键2
 	{
 		KeyData.S2_Flag = 0;    //禁止屏蔽
-		Run_State = 3;
+		Run_State = 1;
+/*********************************************************无线充电标志物**************************************/        
 //		unsigned int Kai_Qi_Ma[3]={0xA1,0x23,0xB4};
 //		Wireless_Charge_Data.xWireless_Charge_KaiQiMa_XiuGai(Kai_Qi_Ma);
 //		Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma);//需修改开启码
-			
-			//安卓识别文字图片与图形颜色图片
-//			Android_Data.xMainCar_Send_Android(Identify_TFT_Words_Arr);//文字
-//			Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//图形加颜色的数量
-//			if(Android_Data.Control_TFT_Paging == 1)   //翻到图形
-//			{
-//				Android_Data.Control_TFT_Paging = 0;
-//				Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // 向下翻页
-//			}			  
-//				for(uint8_t i=0;i<6;i++)
-//				{
-//					Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // 向下翻页
-//				}
-//			if(Android_Data.TFT_Graph_CountAndColour_Flag == 1)  //图形颜色+数量识别成功后
-//			{
-//				Android_Data.TFT_Graph_CountAndColour_Flag = 0;
-//				Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(Smart_TFT_Data.Device_A,(char*)TFT_GraphAndColour_Data_Store);
-//				delay_ms(500);
-//			}
 		
-//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//车牌                                                               
-//		for(uint8_t i=0;i<8;i++)//等待八秒
-//		{
-//				delay_ms(500);
-//				delay_ms(500);
-//		}
-//		Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(2,"FF0105");//多功能信息显示标志物B显示FF0105
-		
+//      char Hex_num[3]={0x01,0x20,0x26};
+//      Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,Hex_num);//TFTA十六进制显示模式，显示012026
+//		Smart_TFT_Data.xSmart_TFT_Licence_Display(1,"F222F2");//TFTA车牌显示模式
+//		LED_Display_Data.xLED_Display_Data(0xF3,0xF5,0xF1,2);//LED显示标志物第二排显示F3F5F1
+/*********************************************************安卓识别********************************************/
 //		Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//图形加颜色的数量
-		
-//				Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // 向下翻页
-//				Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,1);  // 向上翻页
-//				Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,3);  // 自动翻页
+/*********************************************************公交站***********************************************/		
 //		Voice_Report_Data.xVoice_Report_Inquire_Weather_Temperatur();  //查询天气温度
 //		Voice_Report_Data.xVoice_Report_Speak_temperature();//播报温度
 //		Voice_Report_Data.xVoice_Report_Speak_Weather();//播报天气状况
@@ -277,16 +244,9 @@ void xCAR_KeyRun_Function(void)
 //				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("小雨");
 //		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x05)
 //				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("阴天");
-//			Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-//			delay_ms(200);
-//			Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
-//			delay_ms(200);
-//			Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
-//			delay_ms(200);
-////			Motor_Data.xCAR_Back(25,700);
-//			Motor_Data.xCAR_Track_Time(20,800);
 
-//			Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //发送请求识别红绿灯
+/*********************************************************交通灯***********************************************/
+//	    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //发送请求识别红绿灯
 //		for(uint8_t i=0;i<3;i++) //等待安卓回传
 //		{
 //			delay_ms(500);
@@ -312,22 +272,25 @@ void xCAR_KeyRun_Function(void)
 //				delay_ms(500);
 //		}
 //	}
-
-
+/*********************************************************立体显示标志物***********************************************/
+//        Three_Dim_Display_Data.xThree_Dim_Display_licence_coord("ABS123",'A',1);
+//        delay_ms(500);
+//        delay_ms(500);
+//        Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("黄东圳");
+//        Three_Dim_Display_Data.xThree_Dim_Display_Distance(16);
+//        Three_Dim_Display_Data.xThree_Dim_Display_Graph(0X01);
+//        Three_Dim_Display_Data.xThree_Dim_Display_Colour(0X01);
+//        Three_Dim_Display_Data.xThree_Dim_Display_Traffic_Caution(0X01);
+//        Three_Dim_Display_Data.xThree_Dim_Display_RGB_Colour(0xff,0x00,0x00);
 
 
 	}
 	if(KeyData.S3_Flag)        //按键3
 	{
-        Smart_TFT_Data.xSmart_TFT_Image_Up_Dowm_Auto(Smart_TFT_Data.Device_A,2);  // 向下翻页
-        
-//        Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);
 		KeyData.S3_Flag = 0;   //禁止屏蔽
-//		Android_Data.xMainCar_Send_Android(Identify_TFT_Mask_Arr);//主车发给安卓请求识别TFT口罩行人
-//		Run_State = 8;
-
+        Run_State = 0;
 //		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//车牌 
-//		Smart_TFT_Data.xSmart_TFT_Licence_Display(1,"F222F2");//多功能信息显示标志物B显示
+
 		
 //		 unsigned int Kai_Qi_Ma[3]={0xA1,0x23,0xB4};
 //		Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//图形加颜色的数量
@@ -336,37 +299,12 @@ void xCAR_KeyRun_Function(void)
 //				delay_ms(500);
 //				delay_ms(500);
 //		}
-//		Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,"A1D2E3");//多功能信息显示标志物A显示A1D2E3（还不行）
-//		LED_Display_Data.xLED_Display_Data(0xF3,0xF5,0xF1,2);//LED显示标志物第二排显示F3F5F1
+
 	}
 	if(KeyData.S4_Flag)        //按键4
 	{	
 		KeyData.S4_Flag = 0;
-        
-//        Three_Dim_Display_Data.xThree_Dim_Display_licence_coord("ABS123",'A',1);
-//        delay_ms(500);
-//        delay_ms(500);
-//        Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("黄东圳");
-//        Three_Dim_Display_Data.xThree_Dim_Display_Distance(16);
-//        Three_Dim_Display_Data.xThree_Dim_Display_Graph(0X01);
-//        delay_ms(500);
-//		delay_ms(500);
-//        delay_ms(500);
-//		delay_ms(500);
-//        Three_Dim_Display_Data.xThree_Dim_Display_Colour(0X01);
-//        delay_ms(500);
-//		delay_ms(500);
-//        delay_ms(500);
-//		delay_ms(500);
-//        Three_Dim_Display_Data.xThree_Dim_Display_Traffic_Caution(0X01);
-//        delay_ms(500);
-//		delay_ms(500);
-//        Three_Dim_Display_Data.xThree_Dim_Display_RGB_Colour(0xff,0x00,0x00);
-//        delay_ms(500);
-//		delay_ms(500);
-//        char str[] = "你好";
-//        Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add(str);
-//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//识别蓝色车牌和车型
+        Run_State = 0;
 	}
 }
 

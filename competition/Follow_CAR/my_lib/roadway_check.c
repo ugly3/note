@@ -90,7 +90,6 @@ void Roadway_Flag_clean(void)
 	Back_Flag = 0;
 	Track_Flag = 0;
 	Stop_Flag = 0;
-    RFID_Angle_or_shizilukou_Flag = 0;
     Send_UpMotor(0,0);
     
 //	temp_MP = 0;
@@ -121,19 +120,7 @@ void Go_and_Back_Check(void)
 	}
 }
 
-//自己加的
-void Check_diatace(void)
-{
-//    Send_InfoData_To_Fifo("%d\n",RFID_Read_Flag);
-    if(1 == Check_Distance)
-    {
-        if(Distance <= Roadway_mp_Get())
-        {
-            RFID_Read_Flag = 0;
-            Check_Distance = 0;            
-        }
-    }
-}
+
 
 uint8_t Roadway_GoBack_Check(void)
 {
@@ -291,7 +278,7 @@ int hasFourConsecutiveZeros(const char* binStr) {
 
 void Track_Correct(uint8_t gd)
 {
-	  uint8_t Buf[30];
+	  
 
     char binStr[9]; // 用于存储八位二进制字符串
     hexToBin(gd, binStr);// 将十六进制数转换为八位二进制字符串
@@ -300,13 +287,12 @@ void Track_Correct(uint8_t gd)
         Track_Flag = 0;
         Stop_Flag = 1;
         Send_UpMotor(0,0);
-        RFID_Angle_or_shizilukou_Flag=1;
         Count_ms = track_time_ms;
         track_time_ms=0;
         track_time_Start=0;
-			 
-//		sprintf((char*)Buf,"%d\r\n",Count_ms);  
-//    Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));
+//        uint8_t Buf[30];		 
+//		  sprintf((char*)Buf,"%d\r\n",Count_ms);  
+//        Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));
     }
  
 	else if(gd==0xE7)                             //E7---1110 0111  车在中间，正常行驶
@@ -360,7 +346,6 @@ void Track_Correct(uint8_t gd)
         Track_Flag = 0;
         Stop_Flag = 1;
         Send_UpMotor(0,0);
-        RFID_Angle_or_shizilukou_Flag=1;
         Count_ms = track_time_ms;
         track_time_ms=0;
         track_time_Start=0;
@@ -440,7 +425,6 @@ void TIM1_BRK_TIM9_IRQHandler(void)
 	if(TIM_GetITStatus(TIM9,TIM_IT_Update) == SET)
 	{
 		Roadway_Check();		// 路况检测
-        RFID_Track_Time();
 	}
 	TIM_ClearITPendingBit(TIM9,TIM_IT_Update);
 }

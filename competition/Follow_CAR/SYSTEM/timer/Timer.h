@@ -1,6 +1,6 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
-
+#include "all_module.h"
 
 extern volatile uint32_t global_times;
 extern volatile uint32_t delay_ms_const;

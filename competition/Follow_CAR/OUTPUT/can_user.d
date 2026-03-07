@@ -61,11 +61,11 @@
 ..\output\can_user.o: ..\HARDWARE\Core_Board\uart_a72.h
 ..\output\can_user.o: ..\HARDWARE\CAN\Can_check.h
 ..\output\can_user.o: ..\SYSTEM\timer\Timer.h
+..\output\can_user.o: ..\MODULE\all_module\all_module.h
 ..\output\can_user.o: ..\HARDWARE\Core_Board\Rc522.h
 ..\output\can_user.o: ..\HARDWARE\Task_Board\bkrc_voice.h
 ..\output\can_user.o: ..\HARDWARE\Drive\drive.h
 ..\output\can_user.o: ..\MODULE\mixture\mixture.h
-..\output\can_user.o: ..\MODULE\all_module\all_module.h
 ..\output\can_user.o: ..\MODULE\follow_car\Main_car.h
 ..\output\can_user.o: ..\MODULE\android\android.h
 ..\output\can_user.o: ..\MODULE\communication\communication.h
@@ -73,7 +73,6 @@
 ..\output\can_user.o: ..\MODULE\landmark\barrier_gate\barrier_gate.h
 ..\output\can_user.o: ..\MODULE\landmark\etc\etc.h
 ..\output\can_user.o: ..\MODULE\landmark\led_display\led_display.h
-..\output\can_user.o: ..\MODULE\landmark\rfid\rfid.h
 ..\output\can_user.o: ..\MODULE\landmark\smart_street_light\smart_street_light.h
 ..\output\can_user.o: ..\MODULE\landmark\smart_traffic_light\smart_traffic_light.h
 ..\output\can_user.o: ..\MODULE\landmark\smart_tft_display\smart_tft_display.h

@@ -18,9 +18,8 @@ typedef struct
     bool TFT_Graph_CountAndColour_Flag; //TFT图形识别(数量+颜色)
 	bool TFT_Mask_Flag;  //TFT口罩识别    
 	bool TFT_Words_Flag; //TFT文字识别  
-    
-    bool TFT_CheXin_erro_Flag;
-    bool TFT_CheXin_sucess_flag;
+
+    bool TFT_Car_Type_sucess_flag;
     bool TFT_ChePai_sucess_flag;
     
 	void (*xMainCar_Send_Android)(uint8_t*);
@@ -32,9 +31,9 @@ extern Typedef_Android Android_Data;
 
 #define Two_Code_Count 3
 extern uint8_t Two_Code_Init_Data_Store[Two_Code_Count][200];   //存储识别二维码初始数据
-extern char Two_Code_Data_parsed_Store1[50];       // 存储二维码1解析结果
-extern char Two_Code_Data_parsed_Store2[50];       // 存储二维码2解析结果
-extern char Two_Code_Data_parsed_Store3[50];       // 存储二维码3解析结果
+extern uint8_t Two_Code_Data_parsed_Store1[50];       // 存储二维码1解析结果
+extern uint8_t Two_Code_Data_parsed_Store2[50];       // 存储二维码2解析结果
+extern uint8_t Two_Code_Data_parsed_Store3[50];       // 存储二维码3解析结果
 
 extern uint8_t TFT_License_Data_Store[6];   //TFT车牌数据存储
 extern uint8_t TFT_Traffic_Data_Store[7];   //TFT交通标志数据存储

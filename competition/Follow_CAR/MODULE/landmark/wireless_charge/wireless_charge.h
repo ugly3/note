@@ -5,8 +5,8 @@
 typedef struct
 {
 	void (*xWireless_Charge_Open_Close)(uint8_t);
-    void (*xWireless_Charge_KaiQiMa_Open)(unsigned int*);    //uint8_t*
-    void (*xWireless_Charge_KaiQiMa_XiuGai)(char*);
+    void (*xWireless_Charge_KaiQiMa_Open)(uint8_t *);  
+    void (*xWireless_Charge_KaiQiMa_XiuGai)(uint8_t*);
 }Wireless_Charge_Typedef;
 
 extern Wireless_Charge_Typedef Wireless_Charge_Data;
@@ -16,7 +16,7 @@ extern Wireless_Charge_Typedef Wireless_Charge_Data;
 
 
 void xWireless_Charge_Open_Close(uint8_t mode);
-void xWireless_Charge_KaiQiMa_Open(unsigned int*str);   //uint8_t*str
-void xWireless_Charge_KaiQiMa_XiuGai(char*str);
+void xWireless_Charge_KaiQiMa_Open(uint8_t *str);   
+void xWireless_Charge_KaiQiMa_XiuGai(uint8_t *str);
 
 #endif

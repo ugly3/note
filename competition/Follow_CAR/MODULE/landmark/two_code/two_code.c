@@ -7,33 +7,33 @@
 #include "two_code.h"
 
 
-
 // 函数：从字符串中提取尖括号内的内容
-void extract_data_1(const uint8_t* qr_info, char* output_buffer) {
+uint8_t extract_data_1(const uint8_t* qr_info, uint8_t* output_buffer) {
     const char* start = strchr((const char*)qr_info, '<');
     const char* end = strchr((const char*)qr_info, '>');
     
     if (start == NULL || end == NULL || end <= start) {
         output_buffer[0] = '\0'; // 无效格式，输出空字符串
-        return;
+        return 0;
     }
     int data_len = end - start - 1;
     // 确保不会超出缓冲区大小
     if (data_len >= 50) {
         data_len = 49; // 保留一个字节给结束符
     }
-    strncpy(output_buffer, start + 1, data_len);
+    strncpy((char *)output_buffer, start + 1, data_len);
     output_buffer[data_len] = '\0';
+    return 1;
 }
 
 // 函数：从字符串中提取大括号内的内容
-void extract_data_2(const uint8_t* qr_info, char* output_buffer) {
+uint8_t extract_data_2(const uint8_t* qr_info, uint8_t* output_buffer) {
     const char* start = strchr((const char*)qr_info, '{');
     const char* end = strchr((const char*)qr_info, '}');
     
     if (start == NULL || end == NULL || end <= start) {
         output_buffer[0] = '\0'; // 无效格式，输出空字符串
-        return;
+        return 0;
     }
     
     int data_len = end - start - 1;
@@ -43,12 +43,13 @@ void extract_data_2(const uint8_t* qr_info, char* output_buffer) {
         data_len = 49; // 保留一个字节给结束符
     }
     
-    strncpy(output_buffer, start + 1, data_len);
+    strncpy((char *)output_buffer, start + 1, data_len);
     output_buffer[data_len] = '\0';
+    return 1;
 }
 
-// 函数：从字符串中提取大写字母
-void extract_data_3(const uint8_t* qr_info, char* output_buffer) 
+// 函数：从字符串中提取大写字母A~Z
+uint8_t extract_data_3(const uint8_t* qr_info, uint8_t* output_buffer) 
 {
      int out_pos = 0;
      for (int j = 0; qr_info[j] != '\0' && out_pos < 49; j++) 
@@ -57,10 +58,14 @@ void extract_data_3(const uint8_t* qr_info, char* output_buffer)
              output_buffer[out_pos++] = qr_info[j];
       }
      output_buffer[out_pos] = '\0';
+      if(out_pos!=0)
+          return 1;
+      else
+          return 0;
 }
 
 // 函数：从字符串中提取字符0~9
-void extract_data_4(const uint8_t* qr_info, char* output_buffer) 
+uint8_t extract_data_4(const uint8_t* qr_info, uint8_t* output_buffer) 
 {
      int out_pos = 0;
      for (int j = 0; qr_info[j] != '\0' && out_pos < 49; j++) 
@@ -69,15 +74,204 @@ void extract_data_4(const uint8_t* qr_info, char* output_buffer)
              output_buffer[out_pos++] = qr_info[j];
       }
      output_buffer[out_pos] = '\0';
+      if(out_pos!=0)
+          return 1;
+      else
+          return 0;
 }
 
-/*************************************************************************************************/
+// 函数：数字0~7、字母A~G提取，然后按照字母在前，数字在后组合起来
+void extract_data_5(const uint8_t* input, uint8_t* output_buffer) 
+{
+    char letters[10] = {0};
+    char numbers[10] = {0};
+    uint8_t letterCount = 0;
+    uint8_t numberCount = 0;
+    // 遍历输入字符串，提取有效字符
+    for (int i = 0; input[i] != '\0'; i++) 
+    {
+        char c = input[i];
+        
+        // 检查是否是字母A-G
+        if (c >= 'A' && c <= 'G') {
+            letters[letterCount++] = c;
+        }
+        // 检查是否是数字0-7
+        else if (c >= '0' && c <= '7') {
+            numbers[numberCount++] = c;
+        }
+    }
+    // 先复制字母，再复制数字到输出
+    int index = 0;
+    for (int i = 0; i < letterCount; i++) {
+        output_buffer[index++] = letters[i];
+    }
+    for (int i = 0; i < numberCount; i++) {
+        output_buffer[index++] = numbers[i];
+    }
+    output_buffer[index] = '\0';
+}
+// 函数：提取出'0' '1'和+-号，循环移位后拆成高八位和低八位，最后转成俩个十进制数
+void extract_data_6(const uint8_t* input, uint8_t* output_buffer) 
+{
+    char xl[17] = {0};
+    int xl_index = 0;
+    char first_special = 0;
+    int special_found = 0;
+    
+    // 提取0和1序列，同时找到第一个特殊字符
+    for (int i = 0; i < 16; i++) {
+        if (input[i] == '0' || input[i] == '1') {
+            xl[xl_index++] = input[i];
+        } else if ((input[i] == '+' || input[i] == '-') && !special_found) {
+            first_special = input[i];
+            special_found = 1;
+        }
+    }
+    xl[xl_index] = '\0';
+    
+//    printf("原始XL: %s\n", xl);  // 调试输出
+
+    // 执行循环移位操作
+    int len = strlen(xl);  // len = 14
+    char shifted[17] = {0};
+    
+    if (first_special == '+') {
+        for (int i = 0; i < len; i++) {
+            shifted[i] = xl[(i + 2) % len];
+        }
+    } else if (first_special == '-') {
+        for (int i = 0; i < len; i++) {
+            shifted[i] = xl[(i - 3 + len) % len];
+        }
+    }
+//    printf("移位后: %s\n", shifted);  // 调试输出
+//    printf("长度: %d\n", len);        // 调试输出
+    
+    // 提取高8位
+    unsigned char DH = 0;
+    for (int i = 0; i < 8; i++) {
+        DH = (DH << 1) | (shifted[i] - '0');// 将字符转换为十进制数字
+    }
+    
+    // 提取低6位（不是低8位！）
+    unsigned char DL = 0;
+    for (int i = 8; i < len; i++) {  // len=14，所以i从8到13，共6位
+        DL = (DL << 1) | (shifted[i] - '0');// 将字符转换为十进制数字
+    }
+    // 低6位不需要左移，直接保存
+    // DL已经是6位的值
+    
+    output_buffer[0] = DH;
+    output_buffer[1] = DL;
+}
+
+
+void extract_data_7(const uint8_t* input, uint8_t* output_buffer) 
+{
+    int i = 0;
+    int letter_index = 0;  // 记录找到的字母位置
+    int digit_index = 0;   // 记录找到的数字位置
+    uint8_t letters[3] = {0};  // 存储3个字母
+    uint8_t digits[3] = {0};   // 存储3个数字
+    
+    // 清空输出缓冲区
+    output_buffer[0] = '\0';
+    
+    // 第一次遍历：收集所有A-F字母和0-9数字
+    int len = strlen((const char*)input);
+    for(i = 0; i < len; i++) {
+        if(input[i] >= 'A' && input[i] <= 'F' && letter_index < 3) {
+            letters[letter_index++] = input[i];
+        }
+        else if(input[i] >= '0' && input[i] <= '9' && digit_index < 3) {
+            digits[digit_index++] = input[i];
+        }
+    }
+    
+    // 如果找到了3个字母和3个数字，按照XYXYXY格式组合
+    if(letter_index == 3 && digit_index == 3) {
+        output_buffer[0] = letters[0];  // X
+        output_buffer[1] = digits[0];   // Y
+        output_buffer[2] = letters[1];  // X
+        output_buffer[3] = digits[1];   // Y
+        output_buffer[4] = letters[2];  // X
+        output_buffer[5] = digits[2];   // Y
+        output_buffer[6] = '\0';
+    }
+}
 
 
 
 
+/*******************************************************从车二维码数据处理**********************************************/
+
+void YT1_parse_two_codes(void) 
+{
+    // 第一步：识别A3（找包含--/的二维码）
+    for (int i = 0; i < Two_Code_Count; i++) 
+    {
+        char *data = (char *)Two_Code_Init_Data_Store[i];
+//        char *output = NULL;
+        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//无数据直接跳过
+            continue;
+        // 找到--/，提取中间的两个字符
+        char *start = strstr(data, "--/");
+        start += 3;
+        char *end = strstr(start, "--/");
+        
+        if ((start && end) && (end > start))
+        {
+            int j=0;
+            for(j = 0;start<end;start++)
+            if ((*start >= '0' && *start <= '9') || (*start >= 'A' && *start <= 'F')) 
+            {
+                Two_Code_Data_parsed_Store2[j++] = *start;
+            }
+             Two_Code_Data_parsed_Store2[j] = '\0';
+        }
+        else    //没有--/括号情况或有--/括号
+        {
+            extract_data_5(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store2);
+        }
+        Two_Code_Init_Data_Store[i][0] = '\0';
+    }
+}
+void YT2_parse_two_codes(void) 
+{
+    for (int i = 0; i < Two_Code_Count; i++) 
+    {
+        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//无数据直接跳过
+            continue;
+        extract_data_5(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);
+        Two_Code_Init_Data_Store[i][0] = '\0';
+    }
+}
+void YT3_parse_two_codes(void) 
+{
+    for (int i = 0; i < Two_Code_Count; i++) 
+    {
+        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//无数据直接跳过
+            continue;
+        else if(strlen((char *)Two_Code_Init_Data_Store[i])==3)
+            memcpy(Two_Code_Data_parsed_Store2, Two_Code_Init_Data_Store[i], sizeof(Two_Code_Init_Data_Store[i]));
+        else
+            extract_data_6(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);
+        Two_Code_Init_Data_Store[i][0] = '\0';
+    }
+}
+void YT4_parse_two_codes(void) 
+{
+    extract_data_7(Two_Code_Init_Data_Store[0], Two_Code_Data_parsed_Store1);
+}
+
+void YT5_parse_two_codes(void) 
+{
+    extract_data_5(Two_Code_Init_Data_Store[0], Two_Code_Data_parsed_Store1);
+}
 
 
+/*******************************************************主车二维码数据处理**********************************************/
 //char current_data[200] ={0};
 ///*
 // * 2026样题1解析二维码数据
@@ -88,7 +282,7 @@ void extract_data_4(const uint8_t* qr_info, char* output_buffer)
 //    for (int i = 0; i < Two_Code_Count; i++) 
 //    {
 //        char *data = (char *)Two_Code_Init_Data_Store[i];
-//        char *output = NULL;
+////        char *output = NULL;
 //        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//无数据直接跳过
 //            continue;
 //        // 找到<>，提取中间的两个字符
@@ -104,9 +298,9 @@ void extract_data_4(const uint8_t* qr_info, char* output_buffer)
 //        }
 //        else    //没有尖括号情况或有尖括号但不是俩个字节
 //        {
-//            if(strlen(Two_Code_Data_parsed_Store1)==0)
+//            if(strlen((char *)Two_Code_Data_parsed_Store1)==0)
 //            {
-//                strcpy(current_data, (char *)Two_Code_Init_Data_Store[i]);
+//                memcpy(current_data, Two_Code_Init_Data_Store[i], sizeof(Two_Code_Init_Data_Store[i]));
 //                extract_data_3(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);
 //            }
 //            else if(strcmp((char *)Two_Code_Init_Data_Store[i],current_data)==0)
@@ -163,8 +357,8 @@ void extract_data_4(const uint8_t* qr_info, char* output_buffer)
 // */
 //void YT4_parse_two_codes(void) 
 //{
-//   char temp_data1[50] = {0};
-//    char temp_data2[50] = {0};
+//    uint8_t temp_data1[50] = {0};
+//    uint8_t temp_data2[50] = {0};
 //    if(strlen((char *)Two_Code_Init_Data_Store[0])!=0 && strlen((char *)Two_Code_Init_Data_Store[1])!=0)//同时扫描到俩个二维码
 //    {
 //        extract_data_1(Two_Code_Init_Data_Store[0], temp_data1);    //提取尖括号内的内容
@@ -173,34 +367,34 @@ void extract_data_4(const uint8_t* qr_info, char* output_buffer)
 //        Two_Code_Init_Data_Store[1][0] = '\0';
 
 //        // 比较数据长度，确定哪个是二维码(1)和二维码(2)
-//        int len1 = strlen(temp_data1);
-//        int len2 = strlen(temp_data2);
+//        int len1 = strlen((char *)temp_data1);
+//        int len2 = strlen((char *)temp_data2);
 
 //         if (len1 >= len2) 
 //         {
-//            strcpy(Two_Code_Data_parsed_Store1, temp_data1);
-//            strcpy(Two_Code_Data_parsed_Store2, temp_data2);
+//            memcpy(Two_Code_Data_parsed_Store1, temp_data1, sizeof(temp_data1));
+//            memcpy(Two_Code_Data_parsed_Store2, temp_data2, sizeof(temp_data2));
 //         } 
 //         else 
 //         {
-//            strcpy(Two_Code_Data_parsed_Store1, temp_data2);
-//            strcpy(Two_Code_Data_parsed_Store2, temp_data1);
+//            memcpy(Two_Code_Data_parsed_Store1, temp_data2, sizeof(temp_data2));
+//            memcpy(Two_Code_Data_parsed_Store2, temp_data1, sizeof(temp_data1));
 //         }
 //    }
 //    else if(strlen((char *)Two_Code_Init_Data_Store[0])!=0 && strlen((char *)Two_Code_Init_Data_Store[1])==0)//扫描到俩个二维码其中一个
 //    {
 //        extract_data_1(Two_Code_Init_Data_Store[0], temp_data1);    //提取尖括号内的内容
 //        Two_Code_Init_Data_Store[0][0] = '\0';
-//        if(strlen(temp_data1)>strlen(Two_Code_Data_parsed_Store1) && strlen(Two_Code_Data_parsed_Store1)!=0)
+//        if(strlen((char *)temp_data1)>strlen((char *)Two_Code_Data_parsed_Store1) && strlen((char *)Two_Code_Data_parsed_Store1)!=0)
 //        {
-//          strcpy(Two_Code_Data_parsed_Store2, Two_Code_Data_parsed_Store1);
-//          strcpy(Two_Code_Data_parsed_Store1, temp_data1);
+//          memcpy(Two_Code_Data_parsed_Store2, Two_Code_Data_parsed_Store1, sizeof(Two_Code_Data_parsed_Store1));
+//          memcpy(Two_Code_Data_parsed_Store1, temp_data1, sizeof(temp_data1));
 //        }
-//        else if(strlen(temp_data1)<strlen(Two_Code_Data_parsed_Store1))
-//          strcpy(Two_Code_Data_parsed_Store2, temp_data1);
+//        else if(strlen((char *)temp_data1)<strlen((char *)Two_Code_Data_parsed_Store1))
+//          memcpy(Two_Code_Data_parsed_Store2, temp_data1, sizeof(temp_data1));
 //        
 //        else
-//            strcpy(Two_Code_Data_parsed_Store1, temp_data1);
+//            memcpy(Two_Code_Data_parsed_Store1, temp_data1, sizeof(temp_data1));
 //    }
 //}
 
@@ -227,9 +421,9 @@ void extract_data_4(const uint8_t* qr_info, char* output_buffer)
 //        
 //        else if(out_pos>=4)  
 //        {
-//            if(strlen(Two_Code_Data_parsed_Store1)==0)
+//            if(strlen((char *)Two_Code_Data_parsed_Store1)==0)
 //            {
-//                strcpy(current_data, (char *)Two_Code_Init_Data_Store[i]);
+//                memcpy(current_data, Two_Code_Init_Data_Store[i], sizeof(Two_Code_Init_Data_Store[i]));
 //                extract_data_4(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);
 //            }
 //            else if(strcmp((char *)Two_Code_Init_Data_Store[i],current_data)==0)
@@ -240,11 +434,3 @@ void extract_data_4(const uint8_t* qr_info, char* output_buffer)
 //        Two_Code_Init_Data_Store[i][0] = '\0';
 //    }
 //}
-
-
-
-
-
-
-
-

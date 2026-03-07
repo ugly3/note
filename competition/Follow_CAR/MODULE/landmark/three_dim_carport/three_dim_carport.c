@@ -15,7 +15,6 @@ CarPort_Tyepdef CarPort_Data =
 	.xCarPort_Control_Arrive_Level = &xCarPort_Control_Arrive_Level,
 	.xCarPort_Ack_State = &xCarPort_Ack_State,
 	.xCarPort_Ack_Infrared_State = &xCarPort_Ack_Infrared_State,
-	.xCarPort_Control_Arrive_Delay = &xCarPort_Control_Arrive_Delay,
 	.xCarPort_CarBack_Into = &xCarPort_CarBack_Into
 };
 
@@ -46,18 +45,9 @@ void xCarPort_Control_Arrive_Level(uint8_t device,uint8_t num)
 {
 	uint8_t Temp[8] = {0};
 	uint8_t CheckSum;
-	uint8_t Get_Num_State;
-	uint8_t Delay_Num;
-   
-    Get_Num_State = CarPort_Data.xCarPort_Ack_State(CarPort_Data.Device_A);	 //一定要先写判断当前层数，再发送指定层数命令
-	Get_Num_State = CarPort_Data.xCarPort_Ack_State(CarPort_Data.Device_A);
-	Get_Num_State = CarPort_Data.xCarPort_Ack_State(CarPort_Data.Device_A);
-	
 	uint8_t Buf[50];
-	sprintf((char*)Buf,"cheku is : %d \r\n",Get_Num_State);  
-	Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf)); 
-	
-  memcpy(Temp,Carport_Buf,sizeof(Carport_Buf));
+
+    memcpy(Temp,Carport_Buf,sizeof(Carport_Buf));
 	
 	if(device == 0x0D)  //设备A
 	{
@@ -78,21 +68,13 @@ void xCarPort_Control_Arrive_Level(uint8_t device,uint8_t num)
 		Send_ZigbeeData_To_Fifo(Temp, 8);	//发送控制命令
 		delay_ms(100);		
 	}
-	if(Get_Num_State == num)   //当前层数和指定的层数相等退出
-	{
-		CarPort_Data.xCarPort_Control_Arrive_Delay(0);
-		return;   //当前层数与指定层数相等直接退出
-    }
-	else if(Get_Num_State < num)  //当前层数小于指定层数
-	{
-		Delay_Num = (num - Get_Num_State);   //得出当前层数和指定层数的相差值
-		CarPort_Data.xCarPort_Control_Arrive_Delay(Delay_Num);
-	}
-	else if(Get_Num_State > num)  //当前层数大于指定层数
-	{
-		Delay_Num=(Get_Num_State - num);    //得出当前层数和指定层数的相差值
-		CarPort_Data.xCarPort_Control_Arrive_Delay(Delay_Num);
-	}
+    CarPort_Data.xCarPort_Ack_State(device);
+    if(device == 0x0D)
+        while(CarPort_Data.xCarPort_Ack_State(device)!=num);
+
+    else if(device == 0x05)
+        while(CarPort_Data.xCarPort_Ack_State(device)!=num);
+    
 }
 
 
@@ -141,7 +123,7 @@ uint8_t xCarPort_Ack_State(uint8_t device)
 			Send_ZigbeeData_To_Fifo(Temp,8);  //若没有返回车库位于第几层数据，则发送请求回传车库位于几层数据
 			delay_ms(100);
 			TimeOut++;
-			if(TimeOut >25)
+			if(TimeOut >3)
 			{
 				break;    //超时2.5s后，退出此循环，防止卡死
 			}
@@ -157,12 +139,12 @@ uint8_t xCarPort_Ack_State(uint8_t device)
 			Send_ZigbeeData_To_Fifo(Temp,8);  //若没有返回车库位于第几层数据，则发送请求回传车库位于几层数据
 			delay_ms(100);
 			TimeOut++;
-			if(TimeOut >25)
+			if(TimeOut >3)
 			{
 				break;    //超时2.5s后，退出此循环，防止卡死
 			}
 		}
-		Receive_B_State = Communication_Data.CarPort_Back_A_Level;
+		Receive_B_State = Communication_Data.CarPort_Back_B_Level;
 		Communication_Data.CarPort_Back_B_Level = 0;     //对设备A的标志位清零
 		return Receive_B_State;
 	}
@@ -255,53 +237,6 @@ uint8_t xCarPort_Ack_Infrared_State(uint8_t device)
 		return Receive_B_State;
 	}
 	return 0;
-}
-
-
-/*
-指定车库到达第几层，同时等车库稳定才可以进行下一步（加延时）
-参数：相差几层（如：当前位于一层，想去三层，则相差两层，则写入2）
-功能：加入延时，保证立体车库稳定后才进入下一步
-*/
-
-void xCarPort_Control_Arrive_Delay(uint8_t delay_num)
-{
-	switch(delay_num)
-	{
-		case 0:    //相差0层
-		{
-			break;  
-		}
-		case 1:   //相差1层
-		{
-			for(uint8_t i=0;i<Differ_1_Delay;i++)
-			{
-				delay_ms(500);
-				delay_ms(500);
-			}
-			break;
-		}
-		case 2:   //相差2层
-		{
-			for(uint8_t i=0;i<Differ_2_Delay;i++)
-			{
-				delay_ms(500);
-				delay_ms(500);
-			}
-			break;
-		}
-		case 3:   //相差3层
-		{
-			for(uint8_t i=0;i<Differ_3_Delay;i++)
-			{
-				delay_ms(500);
-				delay_ms(500);
-			}
-			break;
-		}
-    default: break;
-	}
-	return;
 }
 
 

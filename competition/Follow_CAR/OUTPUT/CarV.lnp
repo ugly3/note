@@ -9,7 +9,6 @@
 "..\output\barrier_gate.o"
 "..\output\etc.o"
 "..\output\led_display.o"
-"..\output\rfid.o"
 "..\output\smart_street_light.o"
 "..\output\smart_tft_display.o"
 "..\output\smart_traffic_light.o"

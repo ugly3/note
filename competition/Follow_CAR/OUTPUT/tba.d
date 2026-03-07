@@ -58,11 +58,11 @@
 ..\output\tba.o: ..\HARDWARE\CAN\Can_check.h
 ..\output\tba.o: ..\SYSTEM\delay\delay.h
 ..\output\tba.o: ..\SYSTEM\timer\Timer.h
+..\output\tba.o: ..\MODULE\all_module\all_module.h
 ..\output\tba.o: ..\HARDWARE\Core_Board\Rc522.h
 ..\output\tba.o: ..\HARDWARE\Task_Board\bkrc_voice.h
 ..\output\tba.o: ..\HARDWARE\Drive\drive.h
 ..\output\tba.o: ..\MODULE\mixture\mixture.h
-..\output\tba.o: ..\MODULE\all_module\all_module.h
 ..\output\tba.o: ..\MODULE\follow_car\Main_car.h
 ..\output\tba.o: ..\MODULE\android\android.h
 ..\output\tba.o: ..\MODULE\communication\communication.h
@@ -70,7 +70,6 @@
 ..\output\tba.o: ..\MODULE\landmark\barrier_gate\barrier_gate.h
 ..\output\tba.o: ..\MODULE\landmark\etc\etc.h
 ..\output\tba.o: ..\MODULE\landmark\led_display\led_display.h
-..\output\tba.o: ..\MODULE\landmark\rfid\rfid.h
 ..\output\tba.o: ..\MODULE\landmark\smart_street_light\smart_street_light.h
 ..\output\tba.o: ..\MODULE\landmark\smart_traffic_light\smart_traffic_light.h
 ..\output\tba.o: ..\MODULE\landmark\smart_tft_display\smart_tft_display.h

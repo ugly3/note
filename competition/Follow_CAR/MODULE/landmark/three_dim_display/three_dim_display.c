@@ -44,10 +44,10 @@ uint8_t Three_Dim_Display_Buf[6] = {0xFF,0x00,0x00,0x00,0x00,0x00};
 void xThree_Dim_Display_licence_coord(char*str,char x,char y)
 {
 	uint8_t Temp[6] = {0};
-	memcpy(Temp,Three_Dim_Display_Buf,sizeof(Three_Dim_Display_Buf));//0xFF,0x00,0x00,0x00,0x00,0x00
+	memcpy(Temp,Three_Dim_Display_Buf,sizeof(Three_Dim_Display_Buf));
 	//先发送车牌前四位
-	Temp[1] = 0x20;	//0xFF,0x20,0x00,0x00,0x00,0x00
-	Temp[2] = *(str+0);   //数据1,0xFF,0x20,0x04,0x02,0x0,0x00
+	Temp[1] = 0x20;
+	Temp[2] = *(str+0);   //数据1
 	Temp[3] = *(str+1);   //数据2
 	Temp[4] = *(str+2);   //数据3
 	Temp[5] = *(str+3);   //数据4

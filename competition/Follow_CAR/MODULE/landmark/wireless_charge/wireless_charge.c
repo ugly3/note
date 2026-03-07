@@ -64,15 +64,15 @@ void xWireless_Charge_Open_Close(uint8_t mode)
    0x02   |  0xXX  |   0xXX  |    0xXX   | 开启码开启无线充电功能
 ******************************************************************************
 */
-void xWireless_Charge_KaiQiMa_Open(unsigned int*str)    
+void xWireless_Charge_KaiQiMa_Open(uint8_t *str)    
 {
     uint8_t CheckSum;
 	uint8_t Temp[8] = {0};
 	memcpy(Temp,Wireless_Charge_Buf,sizeof(Wireless_Charge_Buf));
     Temp[2] = 0x02;  //主指令
-    Temp[3] = 0xA1;
-    Temp[4] = 0X23;
-    Temp[5] = 0XB4;
+    Temp[3] = *(str+0);
+    Temp[4] = *(str+1);
+    Temp[5] = *(str+2);
     CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //计算校验和
     Temp[6] = CheckSum;
     for(uint8_t i=0;i<3;i++)
@@ -92,15 +92,15 @@ void xWireless_Charge_KaiQiMa_Open(unsigned int*str)
    0x03   |  0xXX  |   0xXX  |    0xXX   | 修改开启码
 ******************************************************************************
 */
-void xWireless_Charge_KaiQiMa_XiuGai(char*str)   
+void xWireless_Charge_KaiQiMa_XiuGai(uint8_t *str)   
 {
     uint8_t CheckSum;
 	uint8_t Temp[8] = {0};
 	memcpy(Temp,Wireless_Charge_Buf,sizeof(Wireless_Charge_Buf));
     Temp[2] = 0x03;  //主指令
-    Temp[3] = 0xA1;
-    Temp[4] = 0x23;
-    Temp[5] = 0xB4;
+    Temp[3] = *(str+0);
+    Temp[4] = *(str+1);
+    Temp[5] = *(str+2);
     CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //计算校验和
     Temp[6] = CheckSum;
     for(uint8_t i=0;i<3;i++)

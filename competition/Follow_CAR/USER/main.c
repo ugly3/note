@@ -9,7 +9,6 @@
 
 /*****************全局静态变量**********************/
 static uint32_t Power_check_times;          // 电量检测周期
-static uint32_t RFID_Init_Check_times;      // RFID初始化检测时间周期
 #if WIFI_Data_UpLoad
 static uint32_t WIFI_Upload_data_times;     // 通过Wifi上传数据周期
 #endif
@@ -36,7 +35,6 @@ int main(void)
     Follower_Tab[1] = 0x02;
 #endif	
 	Power_check_times = gt_get() + 200;        //电量检测周期
-	//RFID_Init_Check_times = gt_get() + 200;    //RFID检测初始化周期
     Send_UpMotor(0, 0);
 	 
     while(1)
@@ -48,23 +46,7 @@ int main(void)
             Power_check_times = gt_get() + 200;
             Power_Check();
         }
-#if 0
-        if(gt_get_sub(RFID_Init_Check_times) == 0)      // RFID初始化检测
-        {
-            RFID_Init_Check_times =  gt_get() + 200;
-            if(Rc522_GetLinkFlag() == 0)             //未能初始化，核心板的蜂鸣器间断鸣响
-            {
-                Readcard_daivce_Init();
-                MP_SPK = !MP_SPK;
-            }
-            else                                     //RFID初始化通过，蜂鸣器关闭，LED1闪烁
-            {
-				MP_SPK = 0;   
-				LED1 = !LED1;
-				Rc522_LinkTest();
-            }
-        }
-#endif
+
 #if WIFI_Data_UpLoad    //wifi上传数据屏蔽
         if(gt_get_sub(WIFI_Upload_data_times) == 0)         // 数据上传
         {
@@ -130,7 +112,6 @@ void Hardware_Init(void)
     Can_check_Init(7, 83);                              // CAN总线 定时器7初始化
     roadway_check_TimInit(999, 167);                   	// 路况检测 定时器9初始化
     Timer_Init(999, 167);                               // 串行数据通讯时间帧 定时器10初始化(1ms)
-    //Readcard_daivce_Init();                         	// RFID初始化
 	
 	/* Mycode BEGIN */
     Mixture_Data.xTIM2_Init();                          // 定时器2初始化（扫描按键）

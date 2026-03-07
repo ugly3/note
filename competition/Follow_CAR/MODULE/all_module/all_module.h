@@ -44,7 +44,6 @@
 #include "barrier_gate.h"
 #include "etc.h"
 #include "led_display.h"
-#include "rfid.h"
 #include "smart_street_light.h"
 #include "smart_traffic_light.h"
 #include "smart_tft_display.h"

@@ -64,10 +64,10 @@
 ..\output\drive.o: ..\HARDWARE\Core_Board\uart_a72.h
 ..\output\drive.o: ..\HARDWARE\CAN\Can_check.h
 ..\output\drive.o: ..\SYSTEM\timer\Timer.h
+..\output\drive.o: ..\MODULE\all_module\all_module.h
 ..\output\drive.o: ..\HARDWARE\Core_Board\Rc522.h
 ..\output\drive.o: ..\HARDWARE\Task_Board\bkrc_voice.h
 ..\output\drive.o: ..\MODULE\mixture\mixture.h
-..\output\drive.o: ..\MODULE\all_module\all_module.h
 ..\output\drive.o: ..\MODULE\follow_car\Main_car.h
 ..\output\drive.o: ..\MODULE\android\android.h
 ..\output\drive.o: ..\MODULE\communication\communication.h
@@ -75,7 +75,6 @@
 ..\output\drive.o: ..\MODULE\landmark\barrier_gate\barrier_gate.h
 ..\output\drive.o: ..\MODULE\landmark\etc\etc.h
 ..\output\drive.o: ..\MODULE\landmark\led_display\led_display.h
-..\output\drive.o: ..\MODULE\landmark\rfid\rfid.h
 ..\output\drive.o: ..\MODULE\landmark\smart_street_light\smart_street_light.h
 ..\output\drive.o: ..\MODULE\landmark\smart_traffic_light\smart_traffic_light.h
 ..\output\drive.o: ..\MODULE\landmark\smart_tft_display\smart_tft_display.h

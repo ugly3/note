@@ -44,8 +44,7 @@ void xAuto_Run_Function(void)
     delay_ms(300);
 
     // G6→F6
-    RFID_Data.xRFID_Track_Read(25, Card1_Block, Card1_Block, 0); // 寻卡
-    Motor_Data.xCAR_Go(30, 140);                                 // 使车身对准十字路口
+    Motor_Data.xCAR_Go(30, 140); // 使车身对准十字路口
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
 
     // F6→F4 交通灯识别
@@ -79,9 +78,8 @@ void xAuto_Run_Function(void)
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
       delay_ms(500);
     }
-    Motor_Data.xCAR_Go(25, 250);                                 // 走开十字路口，防止可能重复识别十字路口的卡片
-    RFID_Data.xRFID_Track_Read(25, Card1_Block, Card1_Block, 0); // 寻卡
-    Motor_Data.xCAR_Go(30, 140);                                 // 使车身对准十字路口
+    Motor_Data.xCAR_Go(25, 250); // 走开十字路口，防止可能重复识别十字路口的卡片
+    Motor_Data.xCAR_Go(30, 140); // 使车身对准十字路口
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(200);
 
@@ -126,7 +124,8 @@ void xAuto_Run_Function(void)
       delay_ms(500);
     }
 
-    Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1, "A1D2E3");      // 多功能信息显示标志物A显示A1D2E3（还不行）
+    //        char Hex_num[3]={0x01,0x20,0x26};
+    //        Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,Hex_num);//TFT显示012026
     LED_Display_Data.xLED_Display_Data(0xF3, 0xF5, 0xF1, 2); // LED显示标志物第二排显示F3F5F1
     delay_ms(500);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
@@ -146,8 +145,6 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Go(25, 250); // 走开十字路口，防止可能重复识别十字路口的卡片
 
     // F2→B2
-    track_time_Start = 1;                                        // 开始计时(1ms)
-    RFID_Data.xRFID_Track_Read(25, Card1_Block, Card1_Block, 0); // 寻卡
     delay_ms(400);
 
     if (Count_ms < 600) // 特殊标志物在E2
@@ -157,12 +154,9 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Go(25, 500);
       Motor_Data.xCAR_Go(25, 300);
       delay_ms(500);
-      // 特殊标志物后一小段进行寻卡
-      RFID_Data.xRFID_Track_Read(25, Card1_Block, Card2_Block, Card2_Block); // 寻卡
-      Motor_Data.xCAR_Go(25, 250);                                           // 走开十字路口，防止可能重复识别十字路口的卡片
+      Motor_Data.xCAR_Go(25, 250); // 走开十字路口，防止可能重复识别十字路口的卡片
       // D2->B2
-      RFID_Data.xRFID_Track_Read(25, Card1_Block, Card2_Block, Card2_Block); // 寻卡
-      Motor_Data.xCAR_Go(30, 140);                                           // 使车身对准十字路口
+      Motor_Data.xCAR_Go(30, 140); // 使车身对准十字路口
       delay_ms(200);
     }
     else if ((1500 > Count_ms) && (Count_ms >= 600)) // 特殊标志物在D2    1450
@@ -172,15 +166,13 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Go(25, 500);
       Motor_Data.xCAR_Go(25, 300);
       delay_ms(500);
-      RFID_Data.xRFID_Track_Read(25, Card1_Block, Card2_Block, Card2_Block); // 寻卡
-      Motor_Data.xCAR_Go(30, 140);                                           // 使车身对准十字路口
+      Motor_Data.xCAR_Go(30, 140); // 使车身对准十字路口
       delay_ms(200);
     }
     else // 特殊标志物在C2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(25, 250);                                           // 走开十字路口，防止可能重复识别十字路口的卡片
-      RFID_Data.xRFID_Track_Read(25, Card1_Block, Card2_Block, Card2_Block); // 寻卡
+      Motor_Data.xCAR_Go(25, 250); // 走开十字路口，防止可能重复识别十字路口的卡片
       delay_ms(200);
 
       // 过特殊标志物
@@ -188,8 +180,7 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Go(25, 500);
       delay_ms(600);
 
-      RFID_Data.xRFID_Track_Read(25, Card1_Block, Card2_Block, Card2_Block); // 寻卡
-      Motor_Data.xCAR_Go(30, 140);                                           // 使车身对准十字路口
+      Motor_Data.xCAR_Go(30, 140); // 使车身对准十字路口
       delay_ms(300);
     }
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
@@ -209,10 +200,12 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
     }
-    Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(2, "202501"); // 多功能信息显示标志物B显示202501（还不行）
-    delay_ms(200);
+    uint8_t
+        //        char Hex_num[3]={0x01,0x20,0x26};
+        //        Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,Hex_num);//TFT显示012026
+        delay_ms(200);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("富强民主");
+    Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("富强民主");
     delay_ms(500);
     delay_ms(500);
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
@@ -329,6 +322,119 @@ void xAuto_Run_Function(void)
   }
 }
 #endif
+/*****************************************从车启动*********************************/
+//          if(Communication_Data.FollowCar_Start_flag == 1)
+//          {
+//              Count++;
+//              sprintf((char*)Buf1,"%d\r\n ",Count);
+//              Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+//              Communication_Data.FollowCar_Start_flag = 0;
+//              Motor_Data.xCAR_Track_Go();
+//              Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
+//              Motor_Data.xCAR_Track_Go();
+//              Run_State = 2;
+//           }
+//          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
+//          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+
+/*****************************************二维码识别*********************************/
+//        Identify_Two_Code_Arr[3] = 0x01;
+//        Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr);   //发送请求识别二维码
+//        delay_ms(500);
+//        delay_ms(500);
+//        delay_ms(500);
+//        YT3_parse_two_codes();
+//
+//        if(Android_Data.Two_Code_State == 0)  //如果未进入识别模式
+//		{
+////            Motor_Data.xCAR_Back(20,150);
+//            Rx_count = 0;
+//			Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr);   //发送请求识别二维码
+//			delay_ms(500);
+//            delay_ms(500);
+//            delay_ms(500);
+////            Motor_Data.xCAR_Go(20,150);
+//        }
+//        if(Android_Data.Two_Code_State == 0)
+//        {
+//            Android_Data.Two_Code_State = 1;
+//            printf("aaa  ");
+//        }
+//        if(Android_Data.Two_Code_State == 1)
+//        {
+//            Android_Data.Two_Code_State = 0;
+//            Rx_count = 0;
+//            YT3_parse_two_codes();
+//
+//            printf("sdv\r\n");
+////            printf("%s\r\n",Two_Code_Data_parsed_Store1);
+////            printf("%s\r\n",Two_Code_Data_parsed_Store2);
+////            printf("%s\r\n",Two_Code_Data_parsed_Store3);
+//
+//            char Vioce_Store[50] = "识别结果为";
+//            strcat(Vioce_Store,Two_Code_Data_parsed_Store1);
+
+//            Voice_Report_Data.xVoice_Report_Set_Complex_Command(Vioce_Store);
+//            Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add(Two_Code_Data_parsed_Store2);
+
+//        }
+
+/************************************************车型识别*********************************************************/
+//        Identify_TFT_CheXin_Arr[3]=0x02;
+//        Android_Data.xMainCar_Send_Android(Identify_TFT_CheXin_Arr);
+
+/************************************************车库*******************************************************/
+//        CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A,3);
+/************************************************LED显示*********************************************************/
+//        LED_Display_Data.xLED_Display_Data(0x00,0x00,0x00,2);//LED显示标志物第二排显示000000
+//        LED_Display_Data.xLED_Display_Time(LED_Display_Data.TimeStart);   //开始计时
+//        LED_Display_Data.xLED_Display_Time(LED_Display_Data.TimeClose);
+//        LED_Display_Data.xLED_Display_Distance(125);
+//        delay_ms(500);
+//        delay_ms(500);
+//        uint8_t Display_Data[]={0xF3,0xF5,0xF1};
+//        LED_Display_Data.xLED_Display_Data(Display_Data,2);//LED显示标志物第二排显示F3F5F1
+//        Motor_Data.xCAR_Track_Go();
+//        Motor_Data.xCAR_L90(wheel_Speed, wheel_Time*2);
+
+/****************************************************RFID**************************************************/
+//        RFID_Data.xRFID_Write(Judge_Card_Block);
+//        RFID_Data.xRFID_Track_Read_2(30,Judge_Card_Block,Real_Card1_Block,Real_Card2_Block);
+//        Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
+//        RFID_Data.xRFID_Track_Read_2(30,Judge_Card_Block,Real_Card1_Block,Real_Card2_Block);
+//        Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
+//        RFID_Data.xRFID_Track_Read_L2(30,1400,Judge_Card_Block,Real_Card1_Block,Real_Card2_Block);
+//        uint8_t block_add = 0;
+//        block_add = 4*4+2-1; //(a-1)*4+b-1;(a-1)*4+b;a*4+b-1; a*4+b  第5扇区第2数据块  17 18 21 22
+//        RFID_Data.xRFID_Read_2(Judge_Card_Block,Real_Card1_Block,Real_Card2_Block);
+/**********************************************打印数据**********************************************************/
+//    sprintf((char*)Buf,"%s \r\n",WRITE_RFID);
+//      Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));
+//        for(uint8_t i=100;i<120;i++)
+//        {
+//            sprintf((char*)Buf,"%d ",i);
+//            Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));
+//            delay_ms(500);
+//        }
+/*****************************************************无线充电标志物***********************************************/
+//        Wireless_Charge_Data.xWireless_Charge_Open_Close(Wireless_Charge_OPEN);
+//        delay_ms(500);
+//        delay_ms(500);
+//        Wireless_Charge_Data.xWireless_Charge_Open_Close(Wireless_Charge_CLOSE);
+
+//        uint8_t Init_Open_Kaiqima[3]={0xA1,0x23,0xB4};
+//        Wireless_Charge_Data.xWireless_Charge_KaiQiMa_XiuGai(Init_Open_Kaiqima);
+//        delay_ms(500);
+//        delay_ms(500);
+//        Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Init_Open_Kaiqima);
+
+/*****************************************************烽火台标志物***********************************************/
+//        SmokeTower_Data.SmokeTower_Infrared_Open();
+//        uint8_t SmokeTower_Open_Data[6]={0};
+//        SmokeTower_Data.xSmokeTower_Zigbee_Open(SmokeTower_Open_Data);
+
+//            uint8_t  Kai_Qi_Ma[3]={0x00,0x00,0x00};
+//            Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma);//需修改开启码
 
 #if YT1_2026
 uint8_t Count = 0;
@@ -340,29 +446,29 @@ void xAuto_Run_Function(void)
   case 1:
   {
     /*
-              if(Communication_Data.FollowCar_Start_flag == 1)
-              {
-                  Count++;
-                  sprintf((char*)Buf1,"%d\r\n ",Count);
-                  Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
-                  Communication_Data.FollowCar_Start_flag = 0;
-                  Motor_Data.xCAR_Track_Go();
-                  Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-                  Motor_Data.xCAR_Track_Go();
-                  Run_State = 2;
-               }
-    */
+     *        if(Communication_Data.FollowCar_Start_flag == 1)
+     *        {
+     *            Count++;
+     *            sprintf((char*)Buf1,"%d\r\n ",Count);
+     *            Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+     *            Communication_Data.FollowCar_Start_flag = 0;
+     *            Motor_Data.xCAR_Track_Go();
+     *            Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
+     *            Motor_Data.xCAR_Track_Go();
+     *            Run_State = 2;
+  }
+  */
     /*
-              Motor_Data.xCAR_Track_Go();
-              delay_ms(200);
-              Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-              Motor_Data.xCAR_Track_Go();
-              Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-              delay_ms(200);
-              Motor_Data.xCAR_L45(wheel_Speed,wheel_Time);
-              delay_ms(200);
-              Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
-              */
+     *        Motor_Data.xCAR_Track_Go();
+     *        delay_ms(200);
+     *        Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
+     *        Motor_Data.xCAR_Track_Go();
+     *        Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
+     *        delay_ms(200);
+     *        Motor_Data.xCAR_L45(wheel_Speed,wheel_Time);
+     *        delay_ms(200);
+     *        Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
+     */
     // Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("我是僧人");
     // Barrier_Data.xBarrier_Open_Close(1);
 
