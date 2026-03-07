@@ -447,7 +447,7 @@ void xAuto_Run_Function(void)
   {
   case 1:
   {
-
+    while(Communication_Data.FollowCar_Start_flag == 1)
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
     delay_ms(200);
