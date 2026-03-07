@@ -18,6 +18,7 @@ MainCar_Typedef MainCar_Data =
 	.XSend_Text_To_MainCar = &XSend_Text_To_MainCar,
 };
 uint8_t MainCar_Send_Licence_Data_Store[6] = {0};   //存储主车发送过来的车牌号
+uint8_t MainCar_Send_Cewnshu[20] = {0};    //存储主车发送过来的文字数据
 
 uint8_t MainCar_start[8] = {0x55,0x01,0xA0,0x01,0x00,0x00,0x00,0xBB};//主车启动
 uint8_t FllowCar_start_Finish[8] = {0x55,0x01,0xA0,0x02,0x00,0x00,0x00,0xBB};//从车已经启动 
