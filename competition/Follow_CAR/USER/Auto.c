@@ -464,7 +464,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
-      //            Motor_Data.xCAR_Go(20,150);
+      Motor_Data.xCAR_Go(20,150);
     }
     if (Android_Data.Two_Code_State == 0)
     {
