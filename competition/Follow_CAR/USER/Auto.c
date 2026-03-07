@@ -795,9 +795,9 @@ void xAuto_Run_Function(void)
 
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
-      if (strcmp((char *)Two_Code_Data_parsed_Store1, "D7") == 0)
+      if (strcmp((char *)Two_Code_Data_parsed_Store1, "B7") == 0)
         Send_Weizhi_To_MainCar[3] = 0x01;
-      else if (strcmp(Two_Code_Data_parsed_Store1, "F7") == 0)
+      else if (strcmp(Two_Code_Data_parsed_Store1, "D7") == 0)
         Send_Weizhi_To_MainCar[3] = 0x02;
       else if (strcmp(Two_Code_Data_parsed_Store1, "G6") == 0) // G6
         Send_Weizhi_To_MainCar[3] = 0x03;
