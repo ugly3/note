@@ -592,22 +592,14 @@ void xAuto_Run_Function(void)
     delay_ms(200); // F6
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_Track_Go(); // D6
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_Track_Go(); // B6
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
-    Motor_Data.xCAR_Track_Time(20, 300);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(200);
-    Motor_Data.xCAR_Back(20, 1000);
+    Motor_Data.xCAR_Track_Time(35, 700);
     delay_ms(200);
-    Motor_Data.xCAR_Track_Time(20, 300);
-    delay_ms(200);
-    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Track_Time(20, 300);
-    delay_ms(200);
-    Motor_Data.xCAR_Back(20, 1000);
-
-    delay_ms(500);
-    delay_ms(500);
+    Motor_Data.xCAR_Back(35, 500);
+    Motor_Data.xCAR_Back(35, 600);
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 2);
 
     Run_State = 5;
