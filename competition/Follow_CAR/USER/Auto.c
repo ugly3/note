@@ -444,43 +444,43 @@ void xAuto_Run_Function(void)
 {
   switch (Run_State)
   {
-  case 1:
-  {
-
-    // Motor_Data.xCAR_Track_Go();
-    // Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
-    // delay_ms(200);
-    Identify_Two_Code_Arr[3] = 0x01;
-    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
-    delay_ms(500);
-    delay_ms(500);
-    delay_ms(500);
-    YT1_parse_two_codes();
-
-    if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
+     case 1:
     {
-      //            Motor_Data.xCAR_Back(20,150);
-      Rx_count = 0;
-      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
-      delay_ms(500);
-      delay_ms(500);
-      delay_ms(500);
-      //            Motor_Data.xCAR_Go(20,150);
-    }
-    if (Android_Data.Two_Code_State == 0)
-    {
-      Android_Data.Two_Code_State = 1;
-      printf("aaa  ");
-    }
-    if (Android_Data.Two_Code_State == 1)
-    {
-      Android_Data.Two_Code_State = 0;
-      Rx_count = 0;
-      YT1_parse_two_codes();
 
-      printf("sdv\r\n");
-      printf("%s\r\n", Two_Code_Data_parsed_Store1);
-      printf("%s\r\n", Two_Code_Data_parsed_Store2);
+      Motor_Data.xCAR_Track_Go();
+      Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
+      delay_ms(200);
+      // Identify_Two_Code_Arr[3] = 0x01;
+      // Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
+      // delay_ms(500);
+      // delay_ms(500);
+      // delay_ms(500);
+      // YT1_parse_two_codes();
+
+      // if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
+      // {
+      //   //            Motor_Data.xCAR_Back(20,150);
+      //   Rx_count = 0;
+      //   Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
+      //   delay_ms(500);
+      //   delay_ms(500);
+      //   delay_ms(500);
+      //   //            Motor_Data.xCAR_Go(20,150);
+      // }
+      // if (Android_Data.Two_Code_State == 0)
+      // {
+      //   Android_Data.Two_Code_State = 1;
+      //   printf("aaa  ");
+      // }
+      // if (Android_Data.Two_Code_State == 1)
+      // {
+      //   Android_Data.Two_Code_State = 0;
+      //   Rx_count = 0;
+      //   YT1_parse_two_codes();
+
+      //   printf("sdv\r\n");
+      //   printf("%s\r\n", Two_Code_Data_parsed_Store1);
+      //   printf("%s\r\n", Two_Code_Data_parsed_Store2);
       //            printf("%s\r\n",Two_Code_Data_parsed_Store3);
 
       //  char Vioce_Store[50] = "识别结果为";
@@ -488,204 +488,203 @@ void xAuto_Run_Function(void)
 
       //  Voice_Report_Data.xVoice_Report_Set_Complex_Command(Vioce_Store);
       //  Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add(Two_Code_Data_parsed_Store2);
+
+      Identify_Two_Code_Arr[3] = 0x01;
+      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
+      delay_ms(500);
+      delay_ms(500);
+      delay_ms(500);
+      YT1_parse_two_codes();
+
+      if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
+      {
+        Motor_Data.xCAR_Back(20, 300);
+        Rx_count = 0;
+        Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
+        delay_ms(500);
+        delay_ms(500);
+        delay_ms(500);
+        Motor_Data.xCAR_Go(20, 300);
+      }
+      if (Android_Data.Two_Code_State == 0)
+      {
+        Android_Data.Two_Code_State = 1;
+        printf("aaa  ");
+      }
+      if (Android_Data.Two_Code_State == 1)
+      {
+        Android_Data.Two_Code_State = 0;
+        Rx_count = 0;
+        YT1_parse_two_codes();
+
+        printf("sdv\r\n");
+        printf("%s\r\n", Two_Code_Data_parsed_Store1);
+        printf("%s\r\n", Two_Code_Data_parsed_Store2);
+      }
+      Run_State = 2;
+      break;
     }
-
-    // Identify_Two_Code_Arr[3] = 0x01;
-    // Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
-    // delay_ms(500);
-    // delay_ms(500);
-    // delay_ms(500);
-    // YT1_parse_two_codes();
-
-    // if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
-    // {
-    //   Motor_Data.xCAR_Back(20, 300);
-    //   Rx_count = 0;
-    //   Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
-    //   delay_ms(500);
-    //   delay_ms(500);
-    //   delay_ms(500);
-    //   Motor_Data.xCAR_Go(20, 300);
-    // }
-    // if (Android_Data.Two_Code_State == 0)
-    // {
-    //   Android_Data.Two_Code_State = 1;
-    //   printf("aaa  ");
-    // }
-    // if (Android_Data.Two_Code_State == 1)
-    // {
-    //   Android_Data.Two_Code_State = 0;
-    //   Rx_count = 0;
-    //   YT1_parse_two_codes();
-
-    // printf("sdv\r\n");
-    // printf("%s\r\n", Two_Code_Data_parsed_Store1);
-    // printf("%s\r\n", Two_Code_Data_parsed_Store2);
-    // }
-    // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
-    Run_State = 0;
-    break;
   }
-  case 2:
+case 2:
+{
+  Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
+  Motor_Data.xCAR_Track_Go();
+  delay_ms(200);                                                            // B4
+  Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 请求交通灯进入识别模式，并请求安卓识别红绿灯
+  for (uint8_t i = 0; i < 3; i++)                                           // 等待安卓回传
   {
-    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
-    Motor_Data.xCAR_Track_Go();
-    delay_ms(200);                                                            // B4
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 请求交通灯进入识别模式，并请求安卓识别红绿灯
-    for (uint8_t i = 0; i < 3; i++)                                           // 等待安卓回传
-    {
-      delay_ms(500);
-      delay_ms(500);
-    }
-    if (Android_Data.Red_State == 1)
-    {
-      Android_Data.Red_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
-      delay_ms(500);
-    }
-    else if (Android_Data.Yellow_State == 1)
-    {
-      Android_Data.Yellow_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
-      delay_ms(500);
-    }
-    else if (Android_Data.Green_State == 1)
-    {
-      Android_Data.Green_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
-      delay_ms(500);
-    }
-    else // 蒙一个
-    {
-      Android_Data.Green_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
-      delay_ms(500);
-    }
-    Motor_Data.xCAR_Track_Go();
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-
-    //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
-    //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
-
-    Run_State = 3;
-    break;
+    delay_ms(500);
+    delay_ms(500);
   }
-  case 3:
+  if (Android_Data.Red_State == 1)
   {
-    // B2->F2
+    Android_Data.Red_State = 0;
+    Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
+    delay_ms(500);
+  }
+  else if (Android_Data.Yellow_State == 1)
+  {
+    Android_Data.Yellow_State = 0;
+    Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
+    delay_ms(500);
+  }
+  else if (Android_Data.Green_State == 1)
+  {
+    Android_Data.Green_State = 0;
+    Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+    delay_ms(500);
+  }
+  else // 蒙一个
+  {
+    Android_Data.Green_State = 0;
+    Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+    delay_ms(500);
+  }
+  Motor_Data.xCAR_Track_Go();
+  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+
+  //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
+  //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+
+  Run_State = 3;
+  break;
+}
+case 3:
+{
+  // B2->F2
+  delay_ms(200);
+  track_time_Start = 1;
+  Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
+  delay_ms(200);
+  sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
+  Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
+
+  if (Count_ms < 600) // B2
+  {
+    Count_ms = 0;
+    Motor_Data.xCAR_Go(25, 500); // 冲
+    Motor_Data.xCAR_Go(25, 500);
+    delay_ms(500);
+    Motor_Data.xCAR_Track_Go();
+    Motor_Data.xCAR_Track_Go();
     delay_ms(200);
-    track_time_Start = 1;
+  }
+  else if ((1100 > Count_ms) && (Count_ms >= 600)) // D2
+  {
+    Send_InfoData_To_Fifo("1\r\n", 3);
+    Count_ms = 0;
+    Motor_Data.xCAR_Go(25, 500); // 冲
+    Motor_Data.xCAR_Go(25, 500);
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(200);
+  }
+  else // E2
+  {
+    Count_ms = 0;
+    Motor_Data.xCAR_Go(25, 300); // 使车身对准十字路口
+    delay_ms(500);
     Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
-    delay_ms(200);
-    sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
-    Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
 
-    if (Count_ms < 600) // B2
-    {
-      Count_ms = 0;
-      Motor_Data.xCAR_Go(25, 500); // 冲
-      Motor_Data.xCAR_Go(25, 500);
-      delay_ms(500);
-      Motor_Data.xCAR_Track_Go();
-      Motor_Data.xCAR_Track_Go();
-      delay_ms(200);
-    }
-    else if ((1100 > Count_ms) && (Count_ms >= 600)) // D2
-    {
-      Send_InfoData_To_Fifo("1\r\n", 3);
-      Count_ms = 0;
-      Motor_Data.xCAR_Go(25, 500); // 冲
-      Motor_Data.xCAR_Go(25, 500);
-      Motor_Data.xCAR_Track_Go();
-      delay_ms(200);
-    }
-    else // E2
-    {
-      Count_ms = 0;
-      Motor_Data.xCAR_Go(25, 300); // 使车身对准十字路口
-      delay_ms(500);
-      Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
+    delay_ms(500);
 
-      delay_ms(500);
+    Motor_Data.xCAR_Go(25, 500);
+    Motor_Data.xCAR_Go(25, 500);
+    delay_ms(500);
 
-      Motor_Data.xCAR_Go(25, 500);
-      Motor_Data.xCAR_Go(25, 500);
-      delay_ms(500);
-
-      Motor_Data.xCAR_Track_Go();
-      delay_ms(300);
-    }
-    Run_State = 4;
-    break;
-  }
-  case 4:
-  {
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_Track_Go();
-    Motor_Data.xCAR_Track_Go();
-    delay_ms(200); // F6
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Track_Go(); // D6
-    Motor_Data.xCAR_Track_Go(); // B6
-    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    delay_ms(200);
-    Motor_Data.xCAR_Track_Time(35, 700);
-    Motor_Data.xCAR_Back(35, 600);
+    delay_ms(300);
+  }
+  Run_State = 4;
+  break;
+}
+case 4:
+{
+  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+  Motor_Data.xCAR_Track_Go();
+  Motor_Data.xCAR_Track_Go();
+  delay_ms(200); // F6
+  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+  Motor_Data.xCAR_Track_Go(); // D6
+  Motor_Data.xCAR_Track_Go(); // B6
+  CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
+  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+  delay_ms(200);
+  Motor_Data.xCAR_Track_Time(35, 700);
+  Motor_Data.xCAR_Back(35, 600);
 
-    Motor_Data.xCAR_Track_Time(35, 700);
-    delay_ms(200);
-    Motor_Data.xCAR_Back(35, 600);
-    Motor_Data.xCAR_Back(35, 600);
-    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 2);
+  Motor_Data.xCAR_Track_Time(35, 700);
+  delay_ms(200);
+  Motor_Data.xCAR_Back(35, 600);
+  Motor_Data.xCAR_Back(35, 600);
+  CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 2);
 
-    Run_State = 5;
-    break;
-  }
-  case 5:
-  {
-    Run_State = 6;
-    break;
-  }
-  case 6:
-  {
-    Run_State = 7;
-    break;
-  }
-  case 7:
-  {
-    Run_State = 8;
-    break;
-  }
-  case 8:
-  {
-    Run_State = 9;
-    break;
-  }
-  case 9:
-  {
-    Run_State = 10;
-    break;
-  }
-  case 10:
-  {
+  Run_State = 5;
+  break;
+}
+case 5:
+{
+  Run_State = 6;
+  break;
+}
+case 6:
+{
+  Run_State = 7;
+  break;
+}
+case 7:
+{
+  Run_State = 8;
+  break;
+}
+case 8:
+{
+  Run_State = 9;
+  break;
+}
+case 9:
+{
+  Run_State = 10;
+  break;
+}
+case 10:
+{
 
-    Run_State = 11;
-    break;
-  }
-  case 11:
-  {
+  Run_State = 11;
+  break;
+}
+case 11:
+{
 
-    Run_State = 12;
-    break;
-  }
-  case 12:
-  {
+  Run_State = 12;
+  break;
+}
+case 12:
+{
 
-    Run_State = 13;
-    break;
-  }
-  }
+  Run_State = 13;
+  break;
+}
+}
 }
 
 #endif
