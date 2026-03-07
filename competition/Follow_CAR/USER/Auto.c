@@ -448,16 +448,17 @@ void xAuto_Run_Function(void)
   {
   case 1:
   {
-    while(Communication_Data.FollowCar_Start_flag == 0)
-{
-    delay_ms(500);
-    delay_ms(500);
-    time_out++;
-    if(time_out > 250) // 等待10秒后超时
+    while (Communication_Data.FollowCar_Start_flag == 0)
     {
-        break; // 跳出循环，继续执行后续代码
+      delay_ms(500);
+      delay_ms(500);
+      time_out++;
+      if (time_out > 230) // 等待10秒后超时
+      {
+        time_out = 0; // 重置超时计数器
+        break;        // 跳出循环，继续执行后续代码
+      }
     }
-}
 
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
