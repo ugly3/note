@@ -458,7 +458,7 @@ void xAuto_Run_Function(void)
 
     if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
     {
-      //            Motor_Data.xCAR_Back(20,150);
+      Motor_Data.xCAR_Back(20,150);
       Rx_count = 0;
       Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
       delay_ms(500);
@@ -481,7 +481,6 @@ void xAuto_Run_Function(void)
       //            printf("%s\r\n",Two_Code_Data_parsed_Store1);
       //            printf("%s\r\n",Two_Code_Data_parsed_Store2);
       //            printf("%s\r\n",Two_Code_Data_parsed_Store3);
-
       
     }
     // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
