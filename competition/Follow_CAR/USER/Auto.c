@@ -440,6 +440,8 @@ void xAuto_Run_Function(void)
 #define Two_Code_Count 2
 uint8_t Count = 0;
 uint8_t Buf1[200];
+uint8_t Hex_Data_Store1[10];
+uint8_t Hex_Data_Store2[10];
 void xAuto_Run_Function(void)
 {
   switch (Run_State)
@@ -520,6 +522,34 @@ void xAuto_Run_Function(void)
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
       printf("%s\r\n", Two_Code_Data_parsed_Store2);
+      if (strlen(Two_Code_Data_parsed_Store1) > 0)
+      {
+        // 假设任务需要将字符 'D' 和 '7' 识别为十六进制数值
+        // 这里提供一种通用的字符转数值方法
+        for (int i = 0; i < strlen(Two_Code_Data_parsed_Store1); i++)
+        {
+          char c = Two_Code_Data_parsed_Store1[i];
+          if (c >= '0' && c <= '9')
+            Hex_Data_Store1[i] = c - '0';
+          else if (c >= 'A' && c <= 'F')
+            Hex_Data_Store1[i] = c - 'A' + 10;
+          else if (c >= 'a' && c <= 'f')
+            Hex_Data_Store1[i] = c - 'a' + 10;
+        }
+      }
+
+      // 示例2：处理类似 "02,03,05" 的逻辑
+      // 针对样题要求的提取有效数字（0-9），并存入十六进制数组
+      int j = 0;
+      for (int i = 0; i < strlen(Two_Code_Data_parsed_Store2); i++)
+      {
+        char c = Two_Code_Data_parsed_Store2[i];
+        if (c >= '0' && c <= '9')
+        {
+          Hex_Data_Store2[j++] = c - '0'; // 转换为 0x00, 0x01... 格式
+        }
+      }
+      
     }
     Run_State = 2;
     break;
@@ -770,7 +800,7 @@ void xAuto_Run_Function(void)
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
       printf("%s\r\n", Two_Code_Data_parsed_Store2);
     }
-    
+
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_Track_Go(); // F2
