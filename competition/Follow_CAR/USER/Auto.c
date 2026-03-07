@@ -445,45 +445,7 @@ void xAuto_Run_Function(void)
   {
   case 1:
   {
-    /*
-     *        if(Communication_Data.FollowCar_Start_flag == 1)
-     *        {
-     *            Count++;
-     *            sprintf((char*)Buf1,"%d\r\n ",Count);
-     *            Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
-     *            Communication_Data.FollowCar_Start_flag = 0;
-     *            Motor_Data.xCAR_Track_Go();
-     *            Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-     *            Motor_Data.xCAR_Track_Go();
-     *            Run_State = 2;
-  }
-  */
-    /*
-     *        Motor_Data.xCAR_Track_Go();
-     *        delay_ms(200);
-     *        Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-     *        Motor_Data.xCAR_Track_Go();
-     *        Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
-     *        delay_ms(200);
-     *        Motor_Data.xCAR_L45(wheel_Speed,wheel_Time);
-     *        delay_ms(200);
-     *        Motor_Data.xCAR_R45(wheel_Speed,wheel_Time);
-     */
-    // Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("Œ“ «…Æ»À");
-    // Barrier_Data.xBarrier_Open_Close(1);
 
-    // // if (Communication_Data.Barrier_Open_Flag == 1)
-    // // {
-    // //   Communication_Data.Barrier_Open_Flag = 0;
-    // //   Motor_Data.xCAR_Track_Go();
-    // //   delay_ms(200);
-    // //   Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    // //   // Motor_Data.xCAR_Track_Go();
-    // // }
-    // Motor_Data.xCAR_Track_Time(40, 300);
-    // ETC_Data.xETC_Pass();
-    // delay_ms(200);
-    // Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
 
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // B6
