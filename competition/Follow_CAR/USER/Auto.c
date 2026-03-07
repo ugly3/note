@@ -764,7 +764,7 @@ void xAuto_Run_Function(void)
   {
     Motor_Data.xCAR_Track_Go(); // B2
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
-    delay_ms(200); 
+    delay_ms(200);
     Identify_Two_Code_Arr[3] = 0x01;
     Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
     delay_ms(500);
@@ -811,14 +811,15 @@ void xAuto_Run_Function(void)
     }
 
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Track_Go();
-    Motor_Data.xCAR_Track_Go(); // F2
+
     Run_State = 3;
     break;
   }
   case 3:
   {
-
+    SmokeTower_Data.
+    Motor_Data.xCAR_Track_Go();
+    Motor_Data.xCAR_Track_Go(); // F2
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_Track_Go(); // F4
     Run_State = 4;
