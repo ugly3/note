@@ -542,6 +542,7 @@ void xAuto_Run_Function(void)
     delay_ms(200);
     track_time_Start = 1;
     Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
+    delay_ms(200);
     sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
     Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
 
