@@ -698,7 +698,7 @@ void xAuto_Run_Function(void)
   {
     Motor_Data.xCAR_Track_Go(); // B6
     Motor_Data.xCAR_Track_Go();
-     delay_ms(200);                                                            // B4
+    delay_ms(200);                                                            // B4
     Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 请求交通灯进入识别模式，并请求安卓识别红绿灯
     for (uint8_t i = 0; i < 3; i++)                                           // 等待安卓回传
     {
@@ -737,36 +737,38 @@ void xAuto_Run_Function(void)
   {
     Motor_Data.xCAR_Track_Go(); // B2
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
-    delay_ms(200);                                                            // B4
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 请求交通灯进入识别模式，并请求安卓识别红绿灯
-    for (uint8_t i = 0; i < 3; i++)                                           // 等待安卓回传
+    delay_ms(200); // B4
+    Identify_Two_Code_Arr[3] = 0x01;
+    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
+    delay_ms(500);
+    delay_ms(500);
+    delay_ms(500);
+    YT2_parse_two_codes();
+
+    if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
     {
+      Motor_Data.xCAR_Back(20, 300);
+      Rx_count = 0;
+      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
       delay_ms(500);
       delay_ms(500);
+      delay_ms(500);
+      Motor_Data.xCAR_Go(20, 300);
     }
-    if (Android_Data.Red_State == 1)
+    if (Android_Data.Two_Code_State == 0)
     {
-      Android_Data.Red_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
-      delay_ms(500);
+      Android_Data.Two_Code_State = 1;
+      printf("aaa  ");
     }
-    else if (Android_Data.Yellow_State == 1)
+    if (Android_Data.Two_Code_State == 1)
     {
-      Android_Data.Yellow_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
-      delay_ms(500);
-    }
-    else if (Android_Data.Green_State == 1)
-    {
-      Android_Data.Green_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
-      delay_ms(500);
-    }
-    else // 蒙一个
-    {
-      Android_Data.Green_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
-      delay_ms(500);
+      Android_Data.Two_Code_State = 0;
+      Rx_count = 0;
+      YT2_parse_two_codes();
+
+      printf("sdv\r\n");
+      printf("%s\r\n", Two_Code_Data_parsed_Store1);
+      printf("%s\r\n", Two_Code_Data_parsed_Store2);
     }
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_Track_Go();
