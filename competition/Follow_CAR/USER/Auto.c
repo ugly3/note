@@ -451,13 +451,10 @@ void xAuto_Run_Function(void)
     while(Communication_Data.FollowCar_Start_flag == 0)
 {
     delay_ms(500);
-    
+    delay_ms(500);
     time_out++;
-    if(time_out > 20) // 等待10秒后超时
+    if(time_out > 250) // 等待10秒后超时
     {
-        // 超时处理，例如打印日志或执行其他操作
-        sprintf((char*)Buf1, "Follow car start timeout\r\n");
-        Send_InfoData_To_Fifo((char*)Buf1, strlen((char*)Buf1));
         break; // 跳出循环，继续执行后续代码
     }
 }
