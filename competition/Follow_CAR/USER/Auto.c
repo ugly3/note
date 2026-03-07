@@ -445,6 +445,23 @@ uint8_t Hex_Data_Store1[10];
 bool lock_flag = 0; // 锁车标志，0为未锁车，1为已锁车
 void xAuto_Run_Function(void)
 {
+  if(lock_flag==0)
+  {
+    if(Communication_Data.FollowCar_Start_flag == 1)
+    {
+      Count++;
+      sprintf((char*)Buf1,"%d\r\n ",Count);
+      Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+      Communication_Data.FollowCar_Start_flag = 0;
+      Motor_Data.xCAR_Track_Go();
+      Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
+      Motor_Data.xCAR_Track_Go();
+      Run_State = 2;
+      lock_flag=1; // 锁车，防止重复进入
+    }
+    sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
+    Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
+  }
   //  while (Communication_Data.FollowCar_Start_flag == 0)
   //   {
   //     delay_ms(500);
