@@ -795,6 +795,19 @@ void xAuto_Run_Function(void)
 
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
+      if (strcmp((char *)Two_Code_Data_parsed_Store1, "D7") == 0)
+        Send_Weizhi_To_MainCar[3] = 0x01;
+      else if (strcmp(Two_Code_Data_parsed_Store1, "F7") == 0)
+        Send_Weizhi_To_MainCar[3] = 0x02;
+      else if (strcmp(Two_Code_Data_parsed_Store1, "G6") == 0) // G6
+        Send_Weizhi_To_MainCar[3] = 0x03;
+      else // G4
+        Send_Weizhi_To_MainCar[3] = 0x04;
+
+      MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
+      delay_ms(100);
+      MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
+      delay_ms(100);
     }
 
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
