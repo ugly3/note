@@ -437,6 +437,7 @@ void xAuto_Run_Function(void)
 //            Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma);//需修改开启码
 
 #if YT1_2026
+#define Two_Code_Count 2
 uint8_t Count = 0;
 uint8_t Buf1[200];
 void xAuto_Run_Function(void)
@@ -478,9 +479,9 @@ void xAuto_Run_Function(void)
       YT1_parse_two_codes();
 
       printf("sdv\r\n");
-      //            printf("%s\r\n",Two_Code_Data_parsed_Store1);
-      //            printf("%s\r\n",Two_Code_Data_parsed_Store2);
-      //            printf("%s\r\n",Two_Code_Data_parsed_Store3);
+      printf("%s\r\n",Two_Code_Data_parsed_Store1);
+         printf("%s\r\n",Two_Code_Data_parsed_Store2);
+
       
     }
     // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
