@@ -539,17 +539,18 @@ void xAuto_Run_Function(void)
             Hex_Data_Store1[i] = c - 'a' + 10;
         }
       }
-
-
-
-
-      
       Send_Weizhi_To_MainCar[3]= Hex_Data_Store1[0];
       Send_Weizhi_To_MainCar[4]= Hex_Data_Store1[1];
       Send_Weizhi_To_MainCar[5]= Hex_Data_Store1[2];
       MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
       delay_ms(100);
       MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
+
+      if((strcmp(Two_Code_Data_parsed_Store1, "D7")==0))
+    {
+      Send_Weizhi_To_MainCar[3]= 0x01;
+    }
+    else if()
 
       // 示例2：处理类似 "02,03,05" 的逻辑
       // 针对样题要求的提取有效数字（0-9），并存入十六进制数组
