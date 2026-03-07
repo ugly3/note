@@ -770,6 +770,7 @@ void xAuto_Run_Function(void)
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
       printf("%s\r\n", Two_Code_Data_parsed_Store2);
     }
+    
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_Track_Go(); // F2
