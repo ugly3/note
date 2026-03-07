@@ -439,6 +439,7 @@ void xAuto_Run_Function(void)
 #if YT1_2026
 #define Two_Code_Count 2
 uint8_t Count = 0;
+uint8_t time_out = 0;
 uint8_t Buf1[200];
 uint8_t Hex_Data_Store1[10];
 void xAuto_Run_Function(void)
@@ -447,7 +448,11 @@ void xAuto_Run_Function(void)
   {
   case 1:
   {
-    while(Communication_Data.FollowCar_Start_flag == 1)
+    while(Communication_Data.FollowCar_Start_flag == 0);
+{
+    time_out++
+}
+
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
     delay_ms(200);
