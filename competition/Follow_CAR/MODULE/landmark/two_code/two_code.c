@@ -232,7 +232,7 @@ void YT1_parse_two_codes(void)
         }
         else    //没有--/括号情况或有--/括号
         {
-            extract_data_5(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store2);
+            extract_data_5(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);
         }
         Two_Code_Init_Data_Store[i][0] = '\0';
     }

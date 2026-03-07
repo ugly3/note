@@ -428,7 +428,7 @@ void Can_WifiRx_Check(void)
             
             
             /* 变长包(0x0A)：55 EE 0x0A len data[] checksum BB */
-            if (Wifi_Rx_Buf[0] == 0x55 && Wifi_Rx_Buf[1] == 0xEE && Wifi_Rx_Buf[2] == 0x0A && Wifi_Rx_Buf[Wifi_Rx_num] == 0xBB)
+            if (Wifi_Rx_Buf[0] == 0x55 && Wifi_Rx_Buf[1] == 0xEE && Wifi_Rx_Buf[2] == 0x02 && Wifi_Rx_Buf[Wifi_Rx_num] == 0xBB)
             {
                 /* 至少要有 4 字节才能拿到 len */
                 if (Wifi_Rx_num >= 3)
