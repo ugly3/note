@@ -520,6 +520,7 @@ void xAuto_Run_Function(void)
       delay_ms(100);
       MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
 
+      if(strcmpy())
       Send_Weizhi_To_MainCar[3] = (CharToHex(Two_Code_Data_parsed_Store1[0]) << 4) |
                                   CharToHex(Two_Code_Data_parsed_Store1[1]);
       MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
@@ -644,6 +645,8 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Back(35, 200);
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, MainCar_Send_Cengshu);
     delay_ms(200);
+    MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
+    MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
     MainCar_Data.xStart_Command_To_MainCar();
     delay_ms(200);
     MainCar_Data.xStart_Command_To_MainCar();
