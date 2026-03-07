@@ -251,6 +251,10 @@ void Can_ZigBeeRx_Check(void)
                     MainCar_Send_Licence_Data_Store[4] = Zigb_Rx_Buf[3];
                     MainCar_Send_Licence_Data_Store[5] = Zigb_Rx_Buf[4];
                 }
+                else if()
+                {
+                    MainCar_Send_Cengshu
+                }
             }
 
             Zigbee_Rx_flag = 0;    
