@@ -28,15 +28,19 @@ Project File Date:  03/07/2026
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Car_Demo'
 compiling Auto.c...
-Auto.c(499): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+Auto.c(504): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
         if (strlen(Two_Code_Data_parsed_Store1) > 0)
-Auto.c(505): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+Auto.c(510): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
           for (int i = 0; i < strlen(Two_Code_Data_parsed_Store2); i++)
-Auto.c: 2 warnings, 0 errors
+Auto.c(528): warning:  #223-D: function "strcmpy" declared implicitly
+        if (strcmpy(Two_Code_Data_parsed_Store1, "D7") == 0)
+Auto.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=26468 RO-data=696 RW-data=6860 ZI-data=3140  
-FromELF: creating hex file...
-"..\OUTPUT\CarV.axf" - 0 Error(s), 2 Warning(s).
+..\OUTPUT\CarV.axf: Error: L6218E: Undefined symbol strcmpy (referred from auto.o).
+Not enough information to list image symbols.
+Not enough information to list load addresses in the image map.
+Finished: 2 information, 0 warning and 1 error messages.
+"..\OUTPUT\CarV.axf" - 1 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -48,6 +52,7 @@ Package Vendor: Keil
 <h2>Collection of Component include folders:</h2>
 
 <h2>Collection of Component Files used:</h2>
+Target not created.
 Build Time Elapsed:  00:00:10
 </pre>
 </body>
