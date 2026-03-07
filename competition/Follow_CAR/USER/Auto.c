@@ -698,7 +698,7 @@ void xAuto_Run_Function(void)
   {
     Motor_Data.xCAR_Track_Go(); // B6
     Motor_Data.xCAR_Track_Go();
-    delay_ms(200);                                                            // B4
+     delay_ms(200);                                                            // B4
     Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 请求交通灯进入识别模式，并请求安卓识别红绿灯
     for (uint8_t i = 0; i < 3; i++)                                           // 等待安卓回传
     {
