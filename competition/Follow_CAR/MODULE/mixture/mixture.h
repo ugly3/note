@@ -51,4 +51,6 @@ void xBubble_Sort(uint16_t*arr,uint8_t len);
 void xTba_Both_Led(uint8_t swch);
 
 extern void xHexStringToGraphic(const char *hexString, char *graphicArray);
+uint8_t CharToHex(char c);//// 字符转 4位二进制的函数
+
 #endif

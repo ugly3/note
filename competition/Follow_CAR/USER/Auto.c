@@ -441,7 +441,7 @@ void xAuto_Run_Function(void)
 uint8_t Count = 0;
 uint8_t Buf1[200];
 uint8_t Hex_Data_Store1[10];
-uint8_t Hex_Data_Store2[10];
+uint8_t Hex_Data_Store2=0;//主车位置信息
 void xAuto_Run_Function(void)
 {
   switch (Run_State)
@@ -546,14 +546,10 @@ void xAuto_Run_Function(void)
       delay_ms(100);
       MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
 
-      if((strcmp(Two_Code_Data_parsed_Store1, "D7")==0))
-    {
+     Hex_Data_Store2 = (CharToHex(Two_Code_Data_parsed_Store1[0]) << 4) | 
+                     CharToHex(Two_Code_Data_parsed_Store1[1]);
       Send_Weizhi_To_MainCar[3]= 0x01;
-    }
-    else if()
-    {
-
-    }
+    
     MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
       delay_ms(100);
       MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
