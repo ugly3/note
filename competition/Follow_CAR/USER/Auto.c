@@ -447,9 +447,9 @@ void xAuto_Run_Function(void)
   case 1:
   {
 
-    Motor_Data.xCAR_Track_Go();
-    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
-    delay_ms(200);
+    // Motor_Data.xCAR_Track_Go();
+    // Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
+    // delay_ms(200);
     Identify_Two_Code_Arr[3] = 0x01;
     Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
     delay_ms(500);
@@ -459,13 +459,13 @@ void xAuto_Run_Function(void)
 
     if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
     {
-      Motor_Data.xCAR_Back(20, 300);
+      //            Motor_Data.xCAR_Back(20,150);
       Rx_count = 0;
       Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
-      Motor_Data.xCAR_Go(20, 300);
+      //            Motor_Data.xCAR_Go(20,150);
     }
     if (Android_Data.Two_Code_State == 0)
     {
@@ -481,9 +481,49 @@ void xAuto_Run_Function(void)
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
       printf("%s\r\n", Two_Code_Data_parsed_Store2);
+      //            printf("%s\r\n",Two_Code_Data_parsed_Store3);
+
+      //  char Vioce_Store[50] = "识别结果为";
+      //  strcat(Vioce_Store,Two_Code_Data_parsed_Store1);
+
+      //  Voice_Report_Data.xVoice_Report_Set_Complex_Command(Vioce_Store);
+      //  Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add(Two_Code_Data_parsed_Store2);
     }
+
+    // Identify_Two_Code_Arr[3] = 0x01;
+    // Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
+    // delay_ms(500);
+    // delay_ms(500);
+    // delay_ms(500);
+    // YT1_parse_two_codes();
+
+    // if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
+    // {
+    //   Motor_Data.xCAR_Back(20, 300);
+    //   Rx_count = 0;
+    //   Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
+    //   delay_ms(500);
+    //   delay_ms(500);
+    //   delay_ms(500);
+    //   Motor_Data.xCAR_Go(20, 300);
+    // }
+    // if (Android_Data.Two_Code_State == 0)
+    // {
+    //   Android_Data.Two_Code_State = 1;
+    //   printf("aaa  ");
+    // }
+    // if (Android_Data.Two_Code_State == 1)
+    // {
+    //   Android_Data.Two_Code_State = 0;
+    //   Rx_count = 0;
+    //   YT1_parse_two_codes();
+
+    // printf("sdv\r\n");
+    // printf("%s\r\n", Two_Code_Data_parsed_Store1);
+    // printf("%s\r\n", Two_Code_Data_parsed_Store2);
+    // }
     // mart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //请求交通灯进入识别模式，并请求安卓识别红绿灯
-    Run_State = 2;
+    Run_State = 0;
     break;
   }
   case 2:
