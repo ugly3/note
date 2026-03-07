@@ -549,7 +549,7 @@ void xAuto_Run_Function(void)
           Hex_Data_Store2[j++] = c - '0'; // 转换为 0x00, 0x01... 格式
         }
       }
-      Send_ZigbeeData_To_Fifo(AGV_Thread1,8);
+      
     }
     Run_State = 2;
     break;
