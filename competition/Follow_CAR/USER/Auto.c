@@ -667,7 +667,7 @@ void xAuto_Run_Function(void)
     delay_ms(200);
     Motor_Data.xCAR_Back(35, 600);
     Motor_Data.xCAR_Back(35, 200);
-    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 2);
+    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, MainCar_Send_Cengshu);
 
     Run_State = 5;
     break;
