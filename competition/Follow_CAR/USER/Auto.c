@@ -442,6 +442,7 @@ uint8_t Count = 0;
 uint8_t time_out = 0;
 uint8_t Buf1[200];
 uint8_t Hex_Data_Store1[10];
+bool lock_flag = 0; // 锁车标志，0为未锁车，1为已锁车
 void xAuto_Run_Function(void)
 {
   //  while (Communication_Data.FollowCar_Start_flag == 0)
@@ -520,9 +521,15 @@ void xAuto_Run_Function(void)
       delay_ms(100);
       MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
 
-      if(strcmpy())
-      Send_Weizhi_To_MainCar[3] = (CharToHex(Two_Code_Data_parsed_Store1[0]) << 4) |
-                                  CharToHex(Two_Code_Data_parsed_Store1[1]);
+      if(strcmpy(Two_Code_Data_parsed_Store1,"D7")==0)
+         Send_Weizhi_To_MainCar[3]=0x01;
+      else if(strcmpy(Two_Code_Data_parsed_Store1,"F7")==0)
+         Send_Weizhi_To_MainCar[3]=0x02;
+      else if(strcmpy(Two_Code_Data_parsed_Store1,"G6")==0)//G6
+          Send_Weizhi_To_MainCar[3]=0x03;
+      else //G4
+          Send_Weizhi_To_MainCar[3]=0x04;
+    
       MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
       delay_ms(100);
       MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
