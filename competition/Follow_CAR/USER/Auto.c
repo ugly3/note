@@ -729,13 +729,13 @@ void xAuto_Run_Function(void)
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
       delay_ms(500);
     }
-    Motor_Data.xCAR_Track_Go(); // B2
 
     Run_State = 2;
     break;
   }
   case 2:
   {
+    Motor_Data.xCAR_Track_Go(); // B2
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
     delay_ms(200);                                                            // B4
     Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 请求交通灯进入识别模式，并请求安卓识别红绿灯
