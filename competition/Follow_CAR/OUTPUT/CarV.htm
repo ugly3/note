@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OUTPUT\CarV.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OUTPUT\CarV.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Mar 08 00:32:56 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Mar 08 02:32:55 2026
 <BR><P>
 <H3>Maximum Stack Usage =        136 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -543,6 +543,12 @@ Global Symbols
 <LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xVoice_Report_Set_Complex_Command
 </UL>
 
+<P><STRONG><a name="[150]"></a>strcmp</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, strcmp.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = strcmp
+</UL>
+<BR>[Called By]<UL><LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xAuto_Run_Function
+</UL>
+
 <P><STRONG><a name="[a2]"></a>__aeabi_ddiv</STRONG> (Thumb, 222 bytes, Stack size 32 bytes, ddiv.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = __aeabi_ddiv &rArr; _double_round
 </UL>
@@ -997,10 +1003,6 @@ Global Symbols
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hardware_Init
-</UL>
-
-<P><STRONG><a name="[150]"></a>CharToHex</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, mixture.o(i.CharToHex))
-<BR><BR>[Called By]<UL><LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xAuto_Run_Function
 </UL>
 
 <P><STRONG><a name="[f5]"></a>Control</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, roadway_check.o(i.Control))
@@ -2116,13 +2118,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hardware_Init
 </UL>
 
-<P><STRONG><a name="[14f]"></a>xAuto_Run_Function</STRONG> (Thumb, 1328 bytes, Stack size 8 bytes, auto.o(i.xAuto_Run_Function))
+<P><STRONG><a name="[14f]"></a>xAuto_Run_Function</STRONG> (Thumb, 1512 bytes, Stack size 8 bytes, auto.o(i.xAuto_Run_Function))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = xAuto_Run_Function &rArr; YT1_parse_two_codes &rArr; extract_data_5
 </UL>
 <BR>[Calls]<UL><LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[146]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;YT1_parse_two_codes
 <LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_InfoData_To_Fifo
-<LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CharToHex
+<LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 <LI><a href="#[145]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf

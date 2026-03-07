@@ -507,7 +507,7 @@ void xAuto_Run_Function(void)
         // 这里提供一种通用的字符转数值方法
 
         // 转成十六进制，无线充电标志物开启码
-        for (int i = 0; i < strlen(Two_Code_Data_parsed_Store2); i++)
+        for (int i = 0; i < strlen((char *)Two_Code_Data_parsed_Store2); i++)
         {
           char c = Two_Code_Data_parsed_Store2[i];
           if (c >= '0' && c <= '9')
@@ -525,11 +525,11 @@ void xAuto_Run_Function(void)
       delay_ms(100);
       MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
 
-      if (strcmpy(Two_Code_Data_parsed_Store1, "D7") == 0)
+      if (strcmp((char *)Two_Code_Data_parsed_Store1, "D7") == 0)
         Send_Weizhi_To_MainCar[3] = 0x01;
-      else if (strcmpy(Two_Code_Data_parsed_Store1, "F7") == 0)
+      else if (strcmp(Two_Code_Data_parsed_Store1, "F7") == 0)
         Send_Weizhi_To_MainCar[3] = 0x02;
-      else if (strcmpy(Two_Code_Data_parsed_Store1, "G6") == 0) // G6
+      else if (strcmp(Two_Code_Data_parsed_Store1, "G6") == 0) // G6
         Send_Weizhi_To_MainCar[3] = 0x03;
       else // G4
         Send_Weizhi_To_MainCar[3] = 0x04;
@@ -794,7 +794,6 @@ void xAuto_Run_Function(void)
 
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
-      
     }
 
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
