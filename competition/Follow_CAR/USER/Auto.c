@@ -549,7 +549,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // B4
     uint8_t time_out = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_B); // 发送请求识别红绿灯B
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 发送请求识别红绿灯B
     while (Android_Data.traffic_light_flag != 1)
     {
       delay_ms(500);
@@ -565,22 +565,22 @@ void xAuto_Run_Function(void)
     if (Android_Data.Red_State == 1)
     {
       Android_Data.Red_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 1); // 发送给交通灯标志物请求确认
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
     }
     else if (Android_Data.Yellow_State == 1)
     {
       Android_Data.Yellow_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 3);
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
     }
     else if (Android_Data.Green_State == 1)
     {
       Android_Data.Green_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
     }
     else // 蒙一个
     {
       Android_Data.Green_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
     }
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
