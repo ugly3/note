@@ -447,20 +447,20 @@ void xAuto_Run_Function(void)
 {
   if (lock_flag == 0)
   {
-    while (Communication_Data.FollowCar_Start_flag == 0)
-    {
-      delay_ms(500);
-      delay_ms(500);
-      time_out++;
-      if (time_out > 230) // 等待10秒后超时
-      {
-        Run_State = 1; // 设置状态为1，进入下一阶段
-        time_out = 0;  // 重置超时计数器
-        break;         // 跳出循环，继续执行后续代码
-      }
-    }
-    Run_State = 1; // 设置状态为1，进入下一阶段
-    lock_flag = 1;
+    // while (Communication_Data.FollowCar_Start_flag == 0)
+    // {
+    //   delay_ms(500);
+    //   delay_ms(500);
+    //   time_out++;
+    //   if (time_out > 230) // 等待10秒后超时
+    //   {
+    //     Run_State = 1; // 设置状态为1，进入下一阶段
+    //     time_out = 0;  // 重置超时计数器
+    //     break;         // 跳出循环，继续执行后续代码
+    //   }
+    // }
+    // Run_State = 1; // 设置状态为1，进入下一阶段
+    // lock_flag = 1;
   }
   switch (Run_State)
   {
