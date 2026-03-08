@@ -818,13 +818,54 @@ void xAuto_Run_Function(void)
   case 3:
   {
     SmokeTower_Data.SmokeTower_Infrared_Open();
-   
+
     Run_State = 4;
     break;
   }
   case 4:
   {
-   
+    delay_ms(200);
+    track_time_Start = 1;
+    Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
+    delay_ms(200);
+    sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
+    Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
+
+    if (Count_ms < 600) // B2
+    {
+      Count_ms = 0;
+      Motor_Data.xCAR_Go(25, 500); // 冲
+      Motor_Data.xCAR_Go(25, 500);
+      delay_ms(500);
+      Motor_Data.xCAR_Track_Go();
+      Motor_Data.xCAR_Track_Go();
+      delay_ms(200);
+    }
+    else if ((1100 > Count_ms) && (Count_ms >= 600)) // D2
+    {
+      Send_InfoData_To_Fifo("1\r\n", 3);
+      Count_ms = 0;
+      Motor_Data.xCAR_Go(25, 500); // 冲
+      Motor_Data.xCAR_Go(25, 500);
+      Motor_Data.xCAR_Track_Go();
+      delay_ms(200);
+    }
+    else // E2
+    {
+      Count_ms = 0;
+      Motor_Data.xCAR_Go(25, 300); // 使车身对准十字路口
+      delay_ms(500);
+      Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
+
+      delay_ms(500);
+
+      Motor_Data.xCAR_Go(25, 500);
+      Motor_Data.xCAR_Go(25, 500);
+      delay_ms(500);
+
+      Motor_Data.xCAR_Track_Go();
+      delay_ms(300);
+    }
     Run_State = 5;
     break;
   }
