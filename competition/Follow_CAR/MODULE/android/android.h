@@ -20,7 +20,7 @@ typedef struct
 
 	bool TFT_Car_Type_sucess_flag;
 	bool TFT_ChePai_sucess_flag;
-
+	bool traffic_light_flag;
 	void (*xMainCar_Send_Android)(uint8_t *);
 } Typedef_Android;
 

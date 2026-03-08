@@ -474,6 +474,7 @@ void Can_WifiRx_Check(void)
             }
             case 0x01: // 红绿灯识别成功
             {
+                Android_Data.traffic_light_flag = 1;
                 if (Wifi_Rx_Buf[3] == 0x01) // 识别为红灯
                 {
                     Android_Data.Red_State = 1;

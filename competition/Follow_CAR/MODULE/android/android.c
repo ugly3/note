@@ -25,6 +25,7 @@ Typedef_Android Android_Data =
     
     .TFT_Car_Type_sucess_flag=0,//车型识别
     .TFT_ChePai_sucess_flag=0,
+	.traffic_light_flag = 0,
 };
 uint8_t Two_Code_Init_Data_Store[Two_Code_Count][200] = {0};   //存储全部二维码初始数据
 uint8_t Two_Code_Data_parsed_Store1[50] = {0};       // 存储二维码1解析结果
