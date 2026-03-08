@@ -877,11 +877,11 @@ void xAuto_Run_Function(void)
   case 5:
   {
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Track_Go();// F4
+    Motor_Data.xCAR_Track_Go(); // F4
     Motor_Data.xCAR_Track_Go();
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);//F6
-    Motor_Data.xCAR_Track_Go(); // D6
-    Motor_Data.xCAR_Track_Go(); // B6
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // F6
+    Motor_Data.xCAR_Track_Go();                       // D6
+    Motor_Data.xCAR_Track_Go();                       // B6
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
@@ -889,9 +889,9 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(200);
-        Motor_Data.xCAR_Back(50, 600);
+    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, MainCar_Send_Cengshu);
+    Motor_Data.xCAR_Back(50, 600);
     Motor_Data.xCAR_Back(35, 200);
-
 
     Run_State = 6;
     break;
