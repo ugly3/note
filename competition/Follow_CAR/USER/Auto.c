@@ -651,11 +651,16 @@ void xAuto_Run_Function(void)
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(200);
-    
-    // ★ 调用立体车库倒车入库函数，使用红外检测实现精确停车
-    CarPort_Data.xCarPort_CarBack_Into(CarPort_Data.Device_A);
-    
+    Motor_Data.xCAR_Track_Time(35, 700);
+    Motor_Data.xCAR_Back(35, 600);
+
+    Motor_Data.xCAR_Track_Time(35, 700);
     delay_ms(200);
+
+
+    
+    Motor_Data.xCAR_Back(35, 600);
+    Motor_Data.xCAR_Back(35, 200);
     printf("%d\r\n", MainCar_Send_Cengshu);
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, MainCar_Send_Cengshu);
     delay_ms(200);
