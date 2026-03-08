@@ -818,19 +818,13 @@ void xAuto_Run_Function(void)
   case 3:
   {
     SmokeTower_Data.SmokeTower_Infrared_Open();
-    Motor_Data.xCAR_Track_Go();
-    Motor_Data.xCAR_Track_Go(); // F2
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Track_Go(); // F4
+   
     Run_State = 4;
     break;
   }
   case 4:
   {
-    Motor_Data.xCAR_Track_Go(); // F4 -> F6
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Back(20, 700);
+   
     Run_State = 5;
     break;
   }
