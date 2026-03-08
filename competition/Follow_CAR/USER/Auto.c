@@ -659,7 +659,7 @@ void xAuto_Run_Function(void)
     delay_ms(200);
     MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
     MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
-    MainCar_Data.xStart_Command_To_MainCar();
+    MainCar_Data.xStart_Command_To_MainCar();// Æô¶¯Ö÷³µ
     delay_ms(200);
     MainCar_Data.xStart_Command_To_MainCar();
     delay_ms(200);
