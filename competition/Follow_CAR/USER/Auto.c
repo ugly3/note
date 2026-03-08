@@ -479,13 +479,13 @@ void xAuto_Run_Function(void)
 
     if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
     {
-      Motor_Data.xCAR_Back(20, 300);
+      Motor_Data.xCAR_Back(20, 500);
       Rx_count = 0;
       Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
-      Motor_Data.xCAR_Go(20, 300);
+      Motor_Data.xCAR_Go(20, 550);
     }
     if (Android_Data.Two_Code_State == 0)
     {
