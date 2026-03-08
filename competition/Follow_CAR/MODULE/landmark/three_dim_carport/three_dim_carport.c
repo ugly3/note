@@ -45,6 +45,7 @@ void xCarPort_Control_Arrive_Level(uint8_t device,uint8_t num)
 {
 	uint8_t Temp[8] = {0};
 	uint8_t CheckSum;
+	uint8_t Buf[50];
 
     memcpy(Temp,Carport_Buf,sizeof(Carport_Buf));
 	
