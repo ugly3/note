@@ -501,7 +501,7 @@ void xAuto_Run_Function(void)
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
       printf("%s\r\n", Two_Code_Data_parsed_Store2);
-      if (strlen(Two_Code_Data_parsed_Store1) > 0)
+      if (strlen((const char *)Two_Code_Data_parsed_Store1) > 0)
       {
         // 假设任务需要将字符 'D' 和 '7' 识别为十六进制数值
         // 这里提供一种通用的字符转数值方法
@@ -525,11 +525,11 @@ void xAuto_Run_Function(void)
       delay_ms(100);
       MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
 
-      if (strcmp((char *)Two_Code_Data_parsed_Store1, "D7") == 0)
+      if (strcmp((const char *)Two_Code_Data_parsed_Store1, "D7") == 0)
         Send_Weizhi_To_MainCar[3] = 0x01;
-      else if (strcmp(Two_Code_Data_parsed_Store1, "F7") == 0)
+      else if (strcmp((const char *)Two_Code_Data_parsed_Store1, "F7") == 0)
         Send_Weizhi_To_MainCar[3] = 0x02;
-      else if (strcmp(Two_Code_Data_parsed_Store1, "G6") == 0) // G6
+      else if (strcmp((const char *)Two_Code_Data_parsed_Store1, "G6") == 0) // G6
         Send_Weizhi_To_MainCar[3] = 0x03;
       else // G4
         Send_Weizhi_To_MainCar[3] = 0x04;
@@ -795,11 +795,11 @@ void xAuto_Run_Function(void)
 
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
-      if (strcmp((char *)Two_Code_Data_parsed_Store1, "B7") == 0)
+      if (strcmp((const char *)Two_Code_Data_parsed_Store1, "B7") == 0)
         Send_Weizhi_To_MainCar[3] = 0x01;
-      else if (strcmp(Two_Code_Data_parsed_Store1, "D7") == 0)
+      else if (strcmp((const char *)Two_Code_Data_parsed_Store1, "D7") == 0)
         Send_Weizhi_To_MainCar[3] = 0x02;
-      else if (strcmp(Two_Code_Data_parsed_Store1, "G6") == 0)
+      else if (strcmp((const char *)Two_Code_Data_parsed_Store1, "G6") == 0)
         Send_Weizhi_To_MainCar[3] = 0x03;
       else // F4
         Send_Weizhi_To_MainCar[3] = 0x04;

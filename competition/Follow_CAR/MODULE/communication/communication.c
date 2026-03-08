@@ -406,8 +406,6 @@ uint8_t YT5_Carport = 0;
 /* WIFI 数据接收 （安卓与主车通信）*/
 void Can_WifiRx_Check(void)
 {
-    uint8_t Buf1[100];
-
     if (Wifi_Rx_flag)
     {
         if (gt_get_sub(canu_wifi_rxtime) == 0) // Wifi_Rx_flag为1之后等待10ms再检验
