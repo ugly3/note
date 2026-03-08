@@ -532,7 +532,7 @@ void xAuto_Run_Function(void)
       else if (strcmp((const char *)Two_Code_Data_parsed_Store1, "G6") == 0) // G6
         Send_Weizhi_To_MainCar[3] = 0x03;
       else // G4
-        Send_Weizhi_To_MainCar[3] = 0x04;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+        Send_Weizhi_To_MainCar[3] = 0x04;
 
       MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
       delay_ms(100);
@@ -656,9 +656,7 @@ void xAuto_Run_Function(void)
 
     Motor_Data.xCAR_Track_Time(35, 700);
     delay_ms(200);
-if(CarPort_Data.xCarPort_Ack_Infrared_State(Receive_A_State)=)
 
-    
     Motor_Data.xCAR_Back(35, 600);
     Motor_Data.xCAR_Back(35, 200);
     printf("%d\r\n", MainCar_Send_Cengshu);
