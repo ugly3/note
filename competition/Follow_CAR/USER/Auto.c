@@ -656,7 +656,7 @@ void xAuto_Run_Function(void)
 
     Motor_Data.xCAR_Track_Time(35, 700);
     delay_ms(200);
-
+if(CarPort_Data.xCarPort_Ack_Infrared_State(Receive_A_State)=)
 
     
     Motor_Data.xCAR_Back(35, 600);
