@@ -447,20 +447,20 @@ void xAuto_Run_Function(void)
 {
   if (lock_flag == 0)
   {
-    while (Communication_Data.FollowCar_Start_flag == 0)
-    {
-      delay_ms(500);
-      delay_ms(500);
-      time_out++;
-      if (time_out > 230) // 等待10秒后超时
-      {
-        Run_State = 1; // 设置状态为1，进入下一阶段
-        time_out = 0;  // 重置超时计数器
-        break;         // 跳出循环，继续执行后续代码
-      }
-    }
-    Run_State = 1; // 设置状态为1，进入下一阶段
-    lock_flag = 1;
+    // while (Communication_Data.FollowCar_Start_flag == 0)
+    // {
+    //   delay_ms(500);
+    //   delay_ms(500);
+    //   time_out++;
+    //   if (time_out > 230) // 等待10秒后超时
+    //   {
+    //     Run_State = 1; // 设置状态为1，进入下一阶段
+    //     time_out = 0;  // 重置超时计数器
+    //     break;         // 跳出循环，继续执行后续代码
+    //   }
+    // }
+    // Run_State = 1; // 设置状态为1，进入下一阶段
+    // lock_flag = 1;
   }
   switch (Run_State)
   {
@@ -548,6 +548,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // B4
+    // 交通灯
     uint8_t time_out = 0;
     Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 发送请求识别红绿灯B
     while (Android_Data.traffic_light_flag != 1)
@@ -649,6 +650,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go(); // D6
     Motor_Data.xCAR_Track_Go(); // B6
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
+
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(200);
     Motor_Data.xCAR_Track_Time(35, 700);

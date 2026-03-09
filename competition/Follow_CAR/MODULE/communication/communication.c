@@ -161,10 +161,6 @@ void Can_ZigBeeRx_Check(void)
                         {
                             Communication_Data.Smart_Traffic_A_Recognition_State = 1;
                         }
-                        else if (Zigb_Rx_Buf[4] == 0x08) // 进入识别模式失败
-                        {
-                            Communication_Data.Smart_Traffic_A_Recognition_State = 0;
-                        }
                     }
                 }
                 else if (Zigb_Rx_Buf[1] == 0x0F) // 设备B
@@ -174,10 +170,6 @@ void Can_ZigBeeRx_Check(void)
                         if (Zigb_Rx_Buf[4] == 0x07) // 进入识别模式成功
                         {
                             Communication_Data.Smart_Traffic_B_Recognition_State = 1;
-                        }
-                        else if (Zigb_Rx_Buf[4] == 0x08) // 进入识别模式失败
-                        {
-                            Communication_Data.Smart_Traffic_B_Recognition_State = 0;
                         }
                     }
                 }

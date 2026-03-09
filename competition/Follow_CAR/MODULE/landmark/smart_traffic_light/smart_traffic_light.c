@@ -84,7 +84,10 @@ void xSmart_Traffic_Ask_State(uint8_t device)
 	}
 	Communication_Data.Smart_Traffic_A_Recognition_State = 0; // 设备A识别标志位清零
 	Communication_Data.Smart_Traffic_B_Recognition_State = 0; // 设备B识别标志位清零
+
+	Android_Data.xMainCar_Send_Android(Identify_Traffic_Light);
 	delay_ms(500);
+	Android_Data.xMainCar_Send_Android(Identify_Traffic_Light);
 	delay_ms(500);
 	Android_Data.xMainCar_Send_Android(Identify_Traffic_Light);
 }

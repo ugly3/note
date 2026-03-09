@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OUTPUT\CarV.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OUTPUT\CarV.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Mar 09 02:49:06 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Mar 09 08:29:48 2026
 <BR><P>
 <H3>Maximum Stack Usage =        136 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -959,7 +959,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CanP_Host_Main
 </UL>
 
-<P><STRONG><a name="[ec]"></a>Can_ZigBeeRx_Check</STRONG> (Thumb, 942 bytes, Stack size 8 bytes, communication.o(i.Can_ZigBeeRx_Check))
+<P><STRONG><a name="[ec]"></a>Can_ZigBeeRx_Check</STRONG> (Thumb, 910 bytes, Stack size 8 bytes, communication.o(i.Can_ZigBeeRx_Check))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = Can_ZigBeeRx_Check &rArr; gt_get_sub
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gt_get_sub
@@ -1993,6 +1993,7 @@ Global Symbols
 
 <P><STRONG><a name="[106]"></a>delay_ms</STRONG> (Thumb, 78 bytes, Stack size 0 bytes, delay.o(i.delay_ms))
 <BR><BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xMainCar_Send_Android
+<LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xCAR_KeyRun_Function
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_InfoData_To_Fifo
 <LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xAuto_Run_Function
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Ranging
@@ -2117,7 +2118,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hardware_Init
 </UL>
 
-<P><STRONG><a name="[14f]"></a>xAuto_Run_Function</STRONG> (Thumb, 1498 bytes, Stack size 8 bytes, auto.o(i.xAuto_Run_Function))
+<P><STRONG><a name="[14f]"></a>xAuto_Run_Function</STRONG> (Thumb, 1408 bytes, Stack size 8 bytes, auto.o(i.xAuto_Run_Function))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = xAuto_Run_Function &rArr; YT1_parse_two_codes &rArr; extract_data_5
 </UL>
 <BR>[Calls]<UL><LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
@@ -2154,7 +2155,11 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> motor_drive.o(.data)
 </UL>
-<P><STRONG><a name="[4]"></a>xCAR_KeyRun_Function</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, mixture.o(i.xCAR_KeyRun_Function))
+<P><STRONG><a name="[4]"></a>xCAR_KeyRun_Function</STRONG> (Thumb, 222 bytes, Stack size 8 bytes, mixture.o(i.xCAR_KeyRun_Function))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = xCAR_KeyRun_Function
+</UL>
+<BR>[Calls]<UL><LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+</UL>
 <BR>[Address Reference Count : 1]<UL><LI> mixture.o(.data)
 </UL>
 <P><STRONG><a name="[11]"></a>xCAR_L45</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, motor_drive.o(i.xCAR_L45))
@@ -2387,7 +2392,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> smart_tft_display.o(.data)
 </UL>
-<P><STRONG><a name="[1e]"></a>xSmart_Traffic_Ask_State</STRONG> (Thumb, 220 bytes, Stack size 32 bytes, smart_traffic_light.o(i.xSmart_Traffic_Ask_State))
+<P><STRONG><a name="[1e]"></a>xSmart_Traffic_Ask_State</STRONG> (Thumb, 236 bytes, Stack size 32 bytes, smart_traffic_light.o(i.xSmart_Traffic_Ask_State))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = xSmart_Traffic_Ask_State &rArr; Send_ZigbeeData_To_Fifo &rArr; FifoDrv_BufWrite &rArr; FifoDrv_WriteOne &rArr; FifoDrv_CheckWriteEn
 </UL>
 <BR>[Calls]<UL><LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
