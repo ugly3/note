@@ -71,6 +71,7 @@ extern int LSpeed;                        //左轮速度
 extern int RSpeed;                        //右轮速度
 extern int Car_Spend;                     //车速度的临时变量
 extern uint16_t count;
+extern uint8_t Hex_Data_Store1[10];
 /*********************************************************************************************************************/
 
 
