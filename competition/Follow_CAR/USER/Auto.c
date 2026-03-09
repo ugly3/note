@@ -659,10 +659,10 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Time(35, 700);
     delay_ms(200);
 
-    Motor_Data.xCAR_Back(50, 600);
-    Motor_Data.xCAR_Back(35, 200);
+    Motor_Data.xCAR_Back(40, 600);
+    Motor_Data.xCAR_Back(35, 250);
     printf("%d\r\n", MainCar_Send_Cengshu);
-    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, MainCar_Send_Cengshu);
+    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 2);
     delay_ms(200);
     MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
     MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
