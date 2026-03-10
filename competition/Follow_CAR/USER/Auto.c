@@ -775,7 +775,7 @@ void xAuto_Run_Function(void)
   case 2:
   {
     Motor_Data.xCAR_Track_Go(); // B2
-    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
     delay_ms(200);
     Identify_Two_Code_Arr[3] = 0x01;
     Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
@@ -822,7 +822,7 @@ void xAuto_Run_Function(void)
       delay_ms(100);
     }
 
-    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
 
     Run_State = 3;
     break;
@@ -994,7 +994,7 @@ void xAuto_Run_Function(void)
     }
     delay_ms(500);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
     Run_State = 2;
     break;
   }
@@ -1016,9 +1016,9 @@ void xAuto_Run_Function(void)
   }
   case 3:
   {
-    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
     Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add((char *)Two_Code_Data_parsed_Store2);
-    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Run_State = 4;
     break;
