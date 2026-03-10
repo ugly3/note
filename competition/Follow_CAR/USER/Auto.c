@@ -1112,6 +1112,7 @@ void xAuto_Run_Function(void)
 
     CarPort_Data.xCarPort_CarBack_Into(1);
 
+    printf("Cengshu:%d ", MainCar_Send_Cengshu);
     uint8_t M = (Two_Code_Data_parsed_Store1[0] + Two_Code_Data_parsed_Store1[1]) * MainCar_Send_Cengshu % 4 + 1;
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, M);
     Run_State = 6;
