@@ -993,8 +993,9 @@ void xAuto_Run_Function(void)
       printf("%s\r\n", Two_Code_Data_parsed_Store2);
     }
     delay_ms(500);
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+
     Run_State = 2;
     break;
   }
