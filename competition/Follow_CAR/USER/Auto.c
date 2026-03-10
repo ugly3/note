@@ -1031,7 +1031,7 @@ void xAuto_Run_Function(void)
   {
     // 交通灯
     uint8_t time_out = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 发送请求识别红绿灯B
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 发送请求识别红绿A
     while (Android_Data.traffic_light_flag != 1)
     {
       delay_ms(500);
