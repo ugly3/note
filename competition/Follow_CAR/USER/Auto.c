@@ -1232,8 +1232,6 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
     }
-    Voice_Report_Data.xVoice_Report_Inquire_Weather_Temperatur(); // 查询天气温度
-    Voice_Report_Data.xVoice_Report_Speak_temperature();          // 播报温度
 
     Run_State = 4;
     break;
