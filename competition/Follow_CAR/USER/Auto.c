@@ -1392,7 +1392,8 @@ void xAuto_Run_Function(void)
 case 2:
 {
 Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-SmokeTower_Data.
+SmokeTower_Data.SmokeTower_Infrared_Open();
+
   Run_State = 3;
   break;
 }
