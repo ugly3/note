@@ -1151,22 +1151,22 @@ void xAuto_Run_Function(void)
     if (Android_Data.Red_State == 1)
     {
       Android_Data.Red_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 1); // 发送给交通灯标志物请求确认
     }
     else if (Android_Data.Yellow_State == 1)
     {
       Android_Data.Yellow_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 3);
     }
     else if (Android_Data.Green_State == 1)
     {
       Android_Data.Green_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
     }
     else // 蒙一个
     {
       Android_Data.Green_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
     }
     Motor_Data.xCAR_Track_Go(); // B4
     Run_State = 2;
