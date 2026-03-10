@@ -1386,7 +1386,6 @@ void xAuto_Run_Function(void)
     delay_ms(100);
   }
     delay_ms(500);
-
     Run_State = 2;
     break;
   }
