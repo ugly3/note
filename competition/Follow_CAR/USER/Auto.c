@@ -1227,12 +1227,11 @@ void xAuto_Run_Function(void)
     XiaoChuang_Data.xSend_To_XiaoChuang_Rouse(); // 识别前先唤醒小创
     delay_ms(500);
     Voice_Report_Data.xVoice_Report_Random_Command(); // 播报随机指令
-    for (uint8_t i = 0; i < 8; i++)                   // 延时8秒等待小创识别并重复播报
+    for (uint8_t i = 0; i < 5; i++)                   // 延时8秒等待小创识别并重复播报
     {
       delay_ms(500);
       delay_ms(500);
     }
-    XiaoChuang_Data.xXiaoChuang_Analyze_Rx_Command();
     Run_State = 4;
     break;
   }
