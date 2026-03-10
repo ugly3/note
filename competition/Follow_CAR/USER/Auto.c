@@ -8,8 +8,8 @@
 #include "all_module.h"
 
 #define YT3_2025 0
-#define YT1_2026 1
-#define YT2_2026 0
+#define YT1_2026 0
+#define YT2_2026 1
 #define YT3_2026 0
 #define YT4_2026 0
 #define YT5_2026 0
@@ -732,38 +732,42 @@ void xAuto_Run_Function(void)
   {
     Motor_Data.xCAR_Track_Go(); // B6
     Motor_Data.xCAR_Track_Go();
-    delay_ms(200);                                                            // B4
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 请求交通灯进入识别模式，并请求安卓识别红绿灯
-    for (uint8_t i = 0; i < 3; i++)                                           // 等待安卓回传
+    delay_ms(200); // B4
+                   // 交通灯
+    uint8_t time_out = 0;
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 发送请求识别红绿灯B
+    while (Android_Data.traffic_light_flag != 1)
     {
       delay_ms(500);
       delay_ms(500);
+      time_out++;
+      if (time_out >= 5)
+      {
+        time_out = 0;
+        break;
+      }
     }
+    Android_Data.traffic_light_flag = 0;
     if (Android_Data.Red_State == 1)
     {
       Android_Data.Red_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
-      delay_ms(500);
     }
     else if (Android_Data.Yellow_State == 1)
     {
       Android_Data.Yellow_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
-      delay_ms(500);
     }
     else if (Android_Data.Green_State == 1)
     {
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
-      delay_ms(500);
     }
     else // 蒙一个
     {
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
-      delay_ms(500);
     }
-
     Run_State = 2;
     break;
   }
