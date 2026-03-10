@@ -1232,7 +1232,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
     }
-
+    XiaoChuang_Data.xXiaoChuang_Analyze_Rx_Command();
     Run_State = 4;
     break;
   }
