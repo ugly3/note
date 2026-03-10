@@ -227,7 +227,7 @@ void Can_ZigBeeRx_Check(void)
                 }
                 else if (0xA3 == Zigb_Rx_Buf[2]) // 主车传来的车牌前三位信息
                 {
-                    // MainCar_Data.MainCar_Send_Licence_Data_Flag = 1;
+                    MainCar_Data.MainCar_Send_Licence_Data_Flag = 1;
                     MainCar_Send_Licence_Data_Store[0] = Zigb_Rx_Buf[3];
                     MainCar_Send_Licence_Data_Store[1] = Zigb_Rx_Buf[4];
                     MainCar_Send_Licence_Data_Store[2] = Zigb_Rx_Buf[5];
