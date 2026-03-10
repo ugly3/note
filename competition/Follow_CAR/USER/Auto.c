@@ -724,6 +724,7 @@ void xAuto_Run_Function(void)
 #endif
 
 #if YT2_2026
+uint8_t Buf1[200];
 void xAuto_Run_Function(void)
 {
   switch (Run_State)
@@ -999,7 +1000,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     Barrier_Data.xBarrier_Licence_Tx("B8542D"); // ³µÅÆºÅ
     Motor_Data.xCAR_Track_Go();                 // D4
-    Motor_Data.xCAR_Track_Go();// B4
+    Motor_Data.xCAR_Track_Go();                 // B4
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_Track_Go(); // B2
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time * 2);
@@ -1008,8 +1009,8 @@ void xAuto_Run_Function(void)
   }
   case 3:
   {
- Motor_Data.xCAR_L45(wheel_Speed, wheel_Time * 2);
- Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add((char *)Two_Code_Data_parsed_Store2);
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time * 2);
+    Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add((char *)Two_Code_Data_parsed_Store2);
     Run_State = 4;
     break;
   }
