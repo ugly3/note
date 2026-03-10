@@ -1329,7 +1329,8 @@ void xAuto_Run_Function(void)
   {
   case 1:
   {
-Motor_Data.
+Motor_Data.xCAR_Track_Go(); 
+Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     Run_State = 2;
     break;
   }
