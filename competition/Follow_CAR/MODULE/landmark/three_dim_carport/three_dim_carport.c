@@ -274,7 +274,7 @@ void xCarPort_CarBack_Into(uint8_t device)
 			}
 			else if (flag == 1)
 			{
-				Motor_Data.xCAR_Back(25, 300); // ÂıÂıºóÍË
+				Motor_Data.xCAR_Back(28, 300); // ÂıÂıºóÍË
 			}
 			//                    else if(flag ==2)
 			//                    {

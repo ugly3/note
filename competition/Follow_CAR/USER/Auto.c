@@ -1234,11 +1234,15 @@ void xAuto_Run_Function(void)
     }
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms
-    Motor_Data.xCAR_Track_Go(); // D2
+        Motor_Data.xCAR_Track_Go(); // D2
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(200);
     Motor_Data.xCAR_Track_Go(); // F2
-if()
+    if (MainCar_Send_Cengshu % 2 + 1 == 1)
+    {
+      Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+      Motor_Data.
+    }
 
     Run_State = 4;
     break;
