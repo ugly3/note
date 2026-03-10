@@ -1369,74 +1369,90 @@ void xAuto_Run_Function(void)
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
     }
+    uint8_t Hex_Data_Store1[10];
+
+    if (strcmp((const char *)Two_Code_Data_parsed_Store1, "D7") == 0)
+      Send_Weizhi_To_MainCar[3] = 0x01;
+    else if (strcmp((const char *)Two_Code_Data_parsed_Store1, "F7") == 0)
+      Send_Weizhi_To_MainCar[3] = 0x02;
+    else if (strcmp((const char *)Two_Code_Data_parsed_Store1, "G6") == 0) // G6
+      Send_Weizhi_To_MainCar[3] = 0x03;
+    else // G4
+      Send_Weizhi_To_MainCar[3] = 0x04;
+
+    MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
+    delay_ms(100);
+    MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
+    delay_ms(100);
+  }
     delay_ms(500);
 
     Run_State = 2;
     break;
   }
 
-  case 2:
-  {
+case 2:
+{
 
-    Run_State = 3;
-    break;
-  }
-  case 3:
-  {
+  Run_State = 3;
+  break;
+}
+case 3:
+{
 
-    Run_State = 4;
-    break;
-  }
-  case 4:
-  {
+  Run_State = 4;
+  break;
+}
+case 4:
+{
 
-    Run_State = 5;
-    break;
-  }
-  case 5:
-  {
-    Run_State = 6;
-    break;
-  }
-  case 6:
-  {
-    Run_State = 7;
-    break;
-  }
-  case 7:
-  {
-    Run_State = 8;
-    break;
-  }
-  case 8:
-  {
-    Run_State = 9;
-    break;
-  }
-  case 9:
-  {
-    Run_State = 10;
-    break;
-  }
-  case 10:
-  {
+  Run_State = 5;
+  break;
+}
+case 5:
+{
+  Run_State = 6;
+  break;
+}
+case 6:
+{
+  Run_State = 7;
+  break;
+}
+case 7:
+{
+  Run_State = 8;
+  break;
+}
+case 8:
+{
+  Run_State = 9;
+  break;
+}
+case 9:
+{
+  Run_State = 10;
+  break;
+}
+case 10:
+{
 
-    Run_State = 11;
-    break;
-  }
-  case 11:
-  {
+  Run_State = 11;
+  break;
+}
+case 11:
+{
 
-    Run_State = 12;
-    break;
-  }
-  case 12:
-  {
+  Run_State = 12;
+  break;
+}
+case 12:
+{
 
-    Run_State = 13;
-    break;
-  }
-  }
+  Run_State = 13;
+  break;
+}
+}
 }
 
 #endif
