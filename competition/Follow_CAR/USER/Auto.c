@@ -1241,7 +1241,7 @@ void xAuto_Run_Function(void)
     if (MainCar_Send_Cengshu % 2 + 1 == 1)
     {
       Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-      Motor_Data.
+      Motor_Data.xCarPort_CarBack_Into(1);
     }
 
     Run_State = 4;
