@@ -10,8 +10,8 @@
 #define YT3_2025 0
 #define YT1_2026 0
 #define YT2_2026 0
-#define YT3_2026 1
-#define YT4_2026 0
+#define YT3_2026 0
+#define YT4_2026 1
 #define YT5_2026 0
 
 uint8_t Go_Speed = 50;     // 全局行进速度值
@@ -1233,15 +1233,15 @@ void xAuto_Run_Function(void)
       delay_ms(500);
     }
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    delay_ms
-        Motor_Data.xCAR_Track_Go(); // D2
+    delay_ms(500);
+    Motor_Data.xCAR_Track_Go(); // D2
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(200);
     Motor_Data.xCAR_Track_Go(); // F2
     if (MainCar_Send_Cengshu % 2 + 1 == 1)
     {
       Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-      Motor_Data.xCarPort_CarBack_Into(1);
+      CarPort_Data.xCarPort_CarBack_Into(1);
     }
     else
     {
