@@ -1168,7 +1168,7 @@ void xAuto_Run_Function(void)
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
     }
-
+    Motor_Data.xCAR_Track_Go(); // B4
     Run_State = 2;
     break;
   }
