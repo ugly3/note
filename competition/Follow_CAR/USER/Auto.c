@@ -1450,12 +1450,58 @@ case 3:
 }
 case 4:
 {
-Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);// F2
+  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // F2
+                                                    // 交通灯
+  uint8_t time_out = 0;
+  Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 发送请求识别红绿A
+  while (Android_Data.traffic_light_flag != 1)
+  {
+    delay_ms(500);
+    delay_ms(500);
+    time_out++;
+    if (time_out >= 5)
+    {
+      time_out = 0;
+      break;
+    }
+  }
+  Android_Data.traffic_light_flag = 0;
+  if (Android_Data.Red_State == 1)
+  {
+    Android_Data.Red_State = 0;
+    Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
+  }
+  else if (Android_Data.Yellow_State == 1)
+  {
+    Android_Data.Yellow_State = 0;
+    Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
+  }
+  else if (Android_Data.Green_State == 1)
+  {
+    Android_Data.Green_State = 0;
+    Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+  }
+  else // 蒙一个
+  {
+    Android_Data.Green_State = 0;
+    Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+  }
+  Motor_Data.xCAR_Track_Go(); // F4
+  Motor_Data.xCAR_Track_Go();
+  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // F6
+  delay_ms(200);
+  Motor_Data.xCAR_Track_Go();
+  Motor_Data.xCAR_Track_Go();
   Run_State = 5;
   break;
 }
 case 5:
 {
+  CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
+  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+  delay_ms(300);
+  CarPort_Data.xCarPort_CarBack_Into(1);
+  CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, MainCar_Send_Cengshu);
   Run_State = 6;
   break;
 }
