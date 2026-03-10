@@ -9,8 +9,8 @@
 
 #define YT3_2025 0
 #define YT1_2026 0
-#define YT2_2026 1
-#define YT3_2026 0
+#define YT2_2026 0
+#define YT3_2026 1
 #define YT4_2026 0
 #define YT5_2026 0
 
@@ -1131,8 +1131,7 @@ void xAuto_Run_Function(void)
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Back(35, 200);
-    Motor_Data.xCAR_Back(35, 500);
+    CarPort_Data¡£
     uint8_t M = (DH + DL) * T % 4 + 1;
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, M);
     Run_State = 6;

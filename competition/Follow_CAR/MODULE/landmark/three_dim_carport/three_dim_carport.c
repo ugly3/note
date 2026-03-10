@@ -40,7 +40,6 @@ void xCarPort_Control_Arrive_Level(uint8_t device, uint8_t num)
 {
 	uint8_t Temp[8] = {0};
 	uint8_t CheckSum;
-	// uint8_t Buf[50];
 
 	memcpy(Temp, Carport_Buf, sizeof(Carport_Buf));
 
@@ -178,17 +177,19 @@ Communication_Data.CarPort_Back_B_Infrared
 uint8_t xCarPort_Ack_Infrared_State(uint8_t device)
 {
 	uint8_t Temp[8] = {0};
-	uint8_t CheckSum;
+	uint8_t CheckSum = 0;
 	uint8_t TimeOut = 0;
-	uint8_t Receive_A_State; // 接收设备A的
-	uint8_t Receive_B_State; // 接收设备B的
+	uint8_t Receive_A_State = 0; // 接收设备A的
+	uint8_t Receive_B_State = 0; // 接收设备B的
+	Communication_Data.CarPort_Back_A_Infrared = 0;
+	Communication_Data.CarPort_Back_B_Infrared = 0;
 
 	memcpy(Temp, Carport_Buf, sizeof(Carport_Buf));
-	if (device == 0x0D) // 设备A
+	if (device == 0x01) // 设备A
 	{
 		Temp[1] = 0x0D;
 	}
-	else if (device == 0x05) // 设备B
+	else if (device == 0x02) // 设备B
 	{
 		Temp[1] = 0x05;
 	}
@@ -198,15 +199,16 @@ uint8_t xCarPort_Ack_Infrared_State(uint8_t device)
 	Temp[5] = 0x00;
 	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);
 	Temp[6] = CheckSum; // 校验和
-	if (device == 0x0D) // 设备A
+	if (device == 0x01) // 设备A
 	{
 		while (Communication_Data.CarPort_Back_A_Infrared == 0) // 未接收到前后侧状态进入while
 		{
 			Send_ZigbeeData_To_Fifo(Temp, 8); // 发送请求回传前后侧状态命令
-			delay_ms(150);
+			delay_ms(200);
 			TimeOut++;
-			if (TimeOut > 5) // 一定要加多次请求判断循环，才能确保发送了请求回传命令，防止倒车入库失败
+			if (TimeOut > 10) // 一定要加多次请求判断循环，才能确保发送了请求回传命令，防止倒车入库失败
 			{
+				printf("NO");
 				break; // 超时2.5s后，退出此循环，防止卡死
 			}
 		}
@@ -214,14 +216,14 @@ uint8_t xCarPort_Ack_Infrared_State(uint8_t device)
 		Communication_Data.CarPort_Back_A_Infrared = 0; // 接收到的前后测状态清零
 		return Receive_A_State;
 	}
-	else if (device == 0x05) // 设备B
+	else if (device == 0x02) // 设备B
 	{
 		while (Communication_Data.CarPort_Back_B_Infrared == 0) // 未接收到前后侧状态进入while
 		{
 			Send_ZigbeeData_To_Fifo(Temp, 8); // 发送请求回传前后侧状态命令
-			delay_ms(150);
+			delay_ms(200);
 			TimeOut++;
-			if (TimeOut > 5) // 一定要加多次请求判断循环，才能确保发送了请求回传命令，防止倒车入库失败
+			if (TimeOut > 10) // 一定要加多次请求判断循环，才能确保发送了请求回传命令，防止倒车入库失败
 			{
 				break; // 超时2.5s后，退出此循环，防止卡死
 			}
@@ -240,23 +242,59 @@ uint8_t xCarPort_Ack_Infrared_State(uint8_t device)
 */
 void xCarPort_CarBack_Into(uint8_t device)
 {
-	Motor_Data.xCAR_Track_Time(35, 750);
-	delay_ms(200);
-	Motor_Data.xCAR_Back(35, 600);
-	delay_ms(200);
-	Motor_Data.xCAR_Track_Time(35, 700);
-	delay_ms(200);
-	Motor_Data.xCAR_Back(35, 600);
-	delay_ms(200);
-	Motor_Data.xCAR_Track_Time(35, 600);
-	delay_ms(200);
-	Motor_Data.xCAR_Back(35, 500);
-	Motor_Data.xCAR_Back(35, 600);
-	uint8_t Back_Flag = 0;
-	while (Back_Flag != 3) // 工作室为3，比赛为4
+	Motor_Data.xCAR_Track_Time(25, 800);
+	delay_ms(500);
+	Motor_Data.xCAR_Back(25, 800);
+	delay_ms(500);
+	Motor_Data.xCAR_Track_Time(25, 800);
+	delay_ms(500);
+	Motor_Data.xCAR_Back(25, 800);
+	uint8_t Carport_Back_Flag = 0;
+	uint8_t flag = 0;
+	while (Carport_Back_Flag != 2) // 都检测到
 	{
-		Motor_Data.xCAR_Back(40, 250);
-		Back_Flag = CarPort_Data.xCarPort_Ack_Infrared_State(device);
+		Carport_Back_Flag = CarPort_Data.xCarPort_Ack_Infrared_State(device);
+		switch (Carport_Back_Flag)
+		{
+		case 1: // 前后都未触发
+		{
+			if (flag == 0)
+				Motor_Data.xCAR_Back(30, 400);
+			else if (flag == 1 || flag == 2)
+				Carport_Back_Flag = 2; // 已对齐
+
+			break;
+		}
+		case 3: // 前侧触发
+		{
+			if (flag == 0)
+			{
+				flag = 1;
+				Motor_Data.xCAR_Back(30, 500); // 上车库有斜坡速度要快点
+			}
+			else if (flag == 1)
+			{
+				Motor_Data.xCAR_Back(25, 300); // 慢慢后退
+			}
+			//                    else if(flag ==2)
+			//                    {
+			//                        Motor_Data.xCAR_Back(25,300);
+			//                        Carport_Back_Flag=2;//已对齐
+			//                    }
+
+			break;
+		}
+		case 4: // 后侧触发
+		{
+			flag = 2;
+			Motor_Data.xCAR_Go(18, 200);
+			Carport_Back_Flag = 2; // 已对齐
+
+			break;
+		}
+		default:
+			break;
+		}
 	}
-	Motor_Data.xCAR_Go(30, 200);
+	Roadway_Flag_clean();
 }
