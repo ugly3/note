@@ -30,11 +30,15 @@ Build target 'Car_Demo'
 compiling Auto.c...
 Auto.c(1045): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "char *"
       Barrier_Data.xBarrier_Licence_Tx(MainCar_Send_Licence_Data_Store); // ³µÅÆºÅ
-Auto.c: 1 warning, 0 errors
+Auto.c(1113): warning:  #223-D: function "elay_ms" declared implicitly
+      elay_ms(500);
+Auto.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=28644 RO-data=696 RW-data=7512 ZI-data=2928  
-FromELF: creating hex file...
-"..\OUTPUT\CarV.axf" - 0 Error(s), 1 Warning(s).
+..\OUTPUT\CarV.axf: Error: L6218E: Undefined symbol elay_ms (referred from auto.o).
+Not enough information to list image symbols.
+Not enough information to list load addresses in the image map.
+Finished: 2 information, 0 warning and 1 error messages.
+"..\OUTPUT\CarV.axf" - 1 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -46,6 +50,7 @@ Package Vendor: Keil
 <h2>Collection of Component include folders:</h2>
 
 <h2>Collection of Component Files used:</h2>
+Target not created.
 Build Time Elapsed:  00:00:10
 </pre>
 </body>

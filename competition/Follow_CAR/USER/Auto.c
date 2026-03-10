@@ -1108,10 +1108,11 @@ void xAuto_Run_Function(void)
   case 5:
   {
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    delay_ms(300);
 
     MainCar_Data.xStart_Command_To_MainCar();
+    elay_ms(500);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    delay_ms(300);
 
     CarPort_Data.xCarPort_CarBack_Into(1);
 
