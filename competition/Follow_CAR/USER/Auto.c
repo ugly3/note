@@ -944,6 +944,8 @@ void xAuto_Run_Function(void)
 #if YT3_2026
 void xAuto_Run_Function(void)
 {
+
+  
   switch (Run_State)
   {
   case 1:
