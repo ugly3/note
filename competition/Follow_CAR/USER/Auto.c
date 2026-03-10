@@ -1132,6 +1132,42 @@ void xAuto_Run_Function(void)
   {
   case 1:
   {
+    Motor_Data.xCAR_Track_Go(); // B6
+                                // 交通灯
+    uint8_t time_out = 0;
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 发送请求识别红绿A
+    while (Android_Data.traffic_light_flag != 1)
+    {
+      delay_ms(500);
+      delay_ms(500);
+      time_out++;
+      if (time_out >= 5)
+      {
+        time_out = 0;
+        break;
+      }
+    }
+    Android_Data.traffic_light_flag = 0;
+    if (Android_Data.Red_State == 1)
+    {
+      Android_Data.Red_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
+    }
+    else if (Android_Data.Yellow_State == 1)
+    {
+      Android_Data.Yellow_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
+    }
+    else if (Android_Data.Green_State == 1)
+    {
+      Android_Data.Green_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+    }
+    else // 蒙一个
+    {
+      Android_Data.Green_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+    }
 
     Run_State = 2;
     break;
