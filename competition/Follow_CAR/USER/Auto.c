@@ -954,7 +954,7 @@ void xAuto_Run_Function(void)
   {
     Motor_Data.xCAR_Track_Go(); // F6
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
     delay_ms(500);
     delay_ms(500);
     // 二维码识别
@@ -1000,14 +1000,14 @@ void xAuto_Run_Function(void)
   }
   case 2:
   {
-    
+
     Motor_Data.xCAR_Track_Go(); // F4
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
 
-    //道闸系统任务
+    // 道闸系统任务
     Barrier_Data.xBarrier_Licence_Tx(MainCar_Send_Licence_Data_Store); // 车牌号
-    Motor_Data.xCAR_Track_Go();                 // D4
-    Motor_Data.xCAR_Track_Go();                 // B4
+    Motor_Data.xCAR_Track_Go();                                        // D4
+    Motor_Data.xCAR_Track_Go();                                        // B4
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_Track_Go(); // B2
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time * 2);
