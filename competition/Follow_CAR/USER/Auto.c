@@ -501,12 +501,9 @@ void xAuto_Run_Function(void)
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
       printf("%s\r\n", Two_Code_Data_parsed_Store2);
-      if (strlen((const char *)Two_Code_Data_parsed_Store1) > 0)
-      {
-        // 假设任务需要将字符 'D' 和 '7' 识别为十六进制数值
-        // 这里提供一种通用的字符转数值方法
 
-        // 转成十六进制，无线充电标志物开启码
+
+        // zi转成十六进制，无线充电标志物开启码
         for (int i = 0; i < strlen((char *)Two_Code_Data_parsed_Store2); i++)
         {
           char c = Two_Code_Data_parsed_Store2[i];
@@ -517,7 +514,7 @@ void xAuto_Run_Function(void)
           else if (c >= 'a' && c <= 'f')
             Hex_Data_Store1[i] = c - 'a' + 10;
         }
-      }
+      
       Send_wireless_open_To_MainCar[3] = Hex_Data_Store1[0];
       Send_wireless_open_To_MainCar[4] = Hex_Data_Store1[1];
       Send_wireless_open_To_MainCar[5] = Hex_Data_Store1[2];
