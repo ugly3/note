@@ -1391,8 +1391,11 @@ void xAuto_Run_Function(void)
 
 case 2:
 {
-Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-SmokeTower_Data.SmokeTower_Infrared_Open();
+  Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+  SmokeTower_Data.SmokeTower_Infrared_Open();
+  delay_ms(200);
+  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+  Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
 
   Run_State = 3;
   break;
