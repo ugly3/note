@@ -1385,14 +1385,14 @@ void xAuto_Run_Function(void)
     delay_ms(100);
   }
     delay_ms(500);
-    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
     Run_State = 2;
     break;
   }
 
 case 2:
 {
-
+Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+SmokeTower_Data.
   Run_State = 3;
   break;
 }
