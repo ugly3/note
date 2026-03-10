@@ -992,7 +992,7 @@ void xAuto_Run_Function(void)
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
       printf("%s\r\n", Two_Code_Data_parsed_Store2);
     }
-
+uint8_t Hex_Data_Store1[10];
     for (int i = 0; i < strlen((char *)Two_Code_Data_parsed_Store2); i++)
     {
       char c = Two_Code_Data_parsed_Store2[i];
