@@ -1040,6 +1040,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go(); // F4
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
 
+    printf("Licence_Data:%s ", MainCar_Send_Licence_Data_Store);
     // 道闸系统任务
     Barrier_Data.xBarrier_Licence_Tx(MainCar_Send_Licence_Data_Store); // 车牌号
     Motor_Data.xCAR_Track_Go();                                        // D4
@@ -1110,11 +1111,14 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
 
+    MainCar_Data.xStart_Command_To_MainCar();
+
     CarPort_Data.xCarPort_CarBack_Into(1);
 
-    printf("Cengshu:%d ", MainCar_Send_Cengshu);
-    uint8_t M = (Two_Code_Data_parsed_Store1[0] + Two_Code_Data_parsed_Store1[1]) * MainCar_Send_Cengshu % 4 + 1;
-    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, M);
+    printf("MainCar_Send_Cengshu:%d ", MainCar_Send_Cengshu);
+    uint8_t shiji_Cengshu = (Two_Code_Data_parsed_Store1[0] + Two_Code_Data_parsed_Store1[1]) * MainCar_Send_Cengshu % 4 + 1;
+    printf("shiji_Cengshu:%d ", shiji_Cengshu);
+    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, shiji_Cengshu);
     Run_State = 6;
     break;
   }
