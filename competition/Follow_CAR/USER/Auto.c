@@ -1243,7 +1243,12 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
       Motor_Data.xCarPort_CarBack_Into(1);
     }
-
+    else
+    {
+      Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+      Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+      Motor_Data.xCAR_Back(35, 200);
+    }
     Run_State = 4;
     break;
   }
