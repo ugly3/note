@@ -1011,6 +1011,8 @@ void xAuto_Run_Function(void)
   {
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time * 2);
     Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add((char *)Two_Code_Data_parsed_Store2);
+    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Run_State = 4;
     break;
   }

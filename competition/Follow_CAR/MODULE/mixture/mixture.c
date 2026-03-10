@@ -276,75 +276,7 @@ void xCAR_KeyRun_Function(void)
 	{
 		KeyData.S3_Flag = 0; // 禁止屏蔽
 		Run_State = 0;
-		  Identify_Two_Code_Arr[3] = 0x01;
-    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
-    delay_ms(500);
-    delay_ms(500);
-    delay_ms(500);
-    YT1_parse_two_codes();
 
-    if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
-    {
-      Motor_Data.xCAR_Back(20, 450);
-      Rx_count = 0;
-      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
-      delay_ms(500);
-      delay_ms(500);
-      delay_ms(500);
-      Motor_Data.xCAR_Go(20, 520);
-    }
-    if (Android_Data.Two_Code_State == 0)
-    {
-      Android_Data.Two_Code_State = 1;
-      printf("aaa  ");
-    }
-    if (Android_Data.Two_Code_State == 1)
-    {
-      Android_Data.Two_Code_State = 0;
-      Rx_count = 0;
-      YT1_parse_two_codes();
-
-      printf("sdv\r\n");
-      printf("%s\r\n", Two_Code_Data_parsed_Store1);
-      printf("%s\r\n", Two_Code_Data_parsed_Store2);
-      if (strlen((const char *)Two_Code_Data_parsed_Store1) > 0)
-      {
-        // 假设任务需要将字符 'D' 和 '7' 识别为十六进制数值
-        // 这里提供一种通用的字符转数值方法
-
-        // 转成十六进制，无线充电标志物开启码
-        for (int i = 0; i < strlen((char *)Two_Code_Data_parsed_Store2); i++)
-        {
-          char c = Two_Code_Data_parsed_Store2[i];
-          if (c >= '0' && c <= '9')
-            Hex_Data_Store1[i] = c - '0';
-          else if (c >= 'A' && c <= 'F')
-            Hex_Data_Store1[i] = c - 'A' + 10;
-          else if (c >= 'a' && c <= 'f')
-            Hex_Data_Store1[i] = c - 'a' + 10;
-        }
-      }
-      Send_wireless_open_To_MainCar[3] = Hex_Data_Store1[0];
-      Send_wireless_open_To_MainCar[4] = Hex_Data_Store1[1];
-      Send_wireless_open_To_MainCar[5] = Hex_Data_Store1[2];
-      MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
-      delay_ms(100);
-      MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
-
-      if (strcmp((const char *)Two_Code_Data_parsed_Store1, "D7") == 0)
-        Send_Weizhi_To_MainCar[3] = 0x01;
-      else if (strcmp((const char *)Two_Code_Data_parsed_Store1, "F7") == 0)
-        Send_Weizhi_To_MainCar[3] = 0x02;
-      else if (strcmp((const char *)Two_Code_Data_parsed_Store1, "G6") == 0) // G6
-        Send_Weizhi_To_MainCar[3] = 0x03;
-      else // G4
-        Send_Weizhi_To_MainCar[3] = 0x04;
-
-      MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
-      delay_ms(100);
-      MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
-      delay_ms(100);
-    }
 		//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//车牌
 
 		//		 unsigned int Kai_Qi_Ma[3]={0xA1,0x23,0xB4};
