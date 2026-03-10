@@ -231,12 +231,12 @@ void Can_ZigBeeRx_Check(void)
                     MainCar_Send_Licence_Data_Store[0] = Zigb_Rx_Buf[3];
                     MainCar_Send_Licence_Data_Store[1] = Zigb_Rx_Buf[4];
                     MainCar_Send_Licence_Data_Store[2] = Zigb_Rx_Buf[5];
-                    MainCar_Send_Licence_Data_Store[3] = Zigb_Rx_Buf[6];
                 }
                 else if (0xA4 == Zigb_Rx_Buf[2]) // 从车传来的车牌后三位信息
                 {
-                    MainCar_Send_Licence_Data_Store[4] = Zigb_Rx_Buf[3];
-                    MainCar_Send_Licence_Data_Store[5] = Zigb_Rx_Buf[4];
+                    MainCar_Send_Licence_Data_Store[3] = Zigb_Rx_Buf[3];
+                    MainCar_Send_Licence_Data_Store[4] = Zigb_Rx_Buf[4];
+                    MainCar_Send_Licence_Data_Store[5] = Zigb_Rx_Buf[5];
                 }
                 else if (0x01 == Zigb_Rx_Buf[2]) // 主车传来的车库层数信息
                 {
