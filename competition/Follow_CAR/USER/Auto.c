@@ -1005,7 +1005,8 @@ void xAuto_Run_Function(void)
       YT3_parse_two_codes();
 
       printf("sdv\r\n");
-      printf("%s\r\n", Two_Code_Data_parsed_Store1);
+      printf("%d\r\n", Two_Code_Data_parsed_Store1[0]);
+      printf("%d\r\n", Two_Code_Data_parsed_Store1[1]);
       printf("%s\r\n", Two_Code_Data_parsed_Store2);
     }
     uint8_t Hex_Data_Store1[10];
