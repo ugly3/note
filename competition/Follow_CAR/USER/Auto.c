@@ -1009,7 +1009,7 @@ void xAuto_Run_Function(void)
   case 3:
   {
  Motor_Data.xCAR_L45(wheel_Speed, wheel_Time * 2);
- Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("富强民主");
+ Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("%s",Two_Code_Data_parsed_Store2);
     Run_State = 4;
     break;
   }
