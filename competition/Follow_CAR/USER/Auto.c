@@ -1369,7 +1369,6 @@ void xAuto_Run_Function(void)
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
     }
-    uint8_t Hex_Data_Store1[10];
 
     if (strcmp((const char *)Two_Code_Data_parsed_Store1, "D7") == 0)
       Send_Weizhi_To_MainCar[3] = 0x01;
@@ -1386,6 +1385,7 @@ void xAuto_Run_Function(void)
     delay_ms(100);
   }
     delay_ms(500);
+    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
     Run_State = 2;
     break;
   }
