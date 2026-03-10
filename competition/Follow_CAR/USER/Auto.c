@@ -1018,12 +1018,12 @@ void xAuto_Run_Function(void)
   case 3:
   {
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
-    delay_ms(450);
+    delay_ms(300);
     Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add((char *)Two_Code_Data_parsed_Store2);
-    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
-    delay_ms(450);
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    delay_ms(450);
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
+    delay_ms(300);
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    delay_ms(300);
     Run_State = 4;
     break;
   }
@@ -1072,7 +1072,7 @@ void xAuto_Run_Function(void)
   {
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    delay_ms(450);
+    delay_ms(300);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
     CarPort_Data.xCarPort_CarBack_Into(1);
