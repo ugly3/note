@@ -1000,9 +1000,12 @@ void xAuto_Run_Function(void)
   }
   case 2:
   {
+    
     Motor_Data.xCAR_Track_Go(); // F4
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    Barrier_Data.xBarrier_Licence_Tx("B8542D"); // 车牌号
+
+    //道闸系统任务
+    Barrier_Data.xBarrier_Licence_Tx(MainCar_Send_Licence_Data_Store); // 车牌号
     Motor_Data.xCAR_Track_Go();                 // D4
     Motor_Data.xCAR_Track_Go();                 // B4
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
