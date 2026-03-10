@@ -1224,7 +1224,7 @@ void xAuto_Run_Function(void)
   case 3:
   {
     Voice_Report_Data.xVoice_Report_Random_Command();
-    
+    XiaoChuang_Data.
     Run_State = 4;
     break;
   }
