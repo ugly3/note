@@ -1002,12 +1002,14 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go();// B4
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_Track_Go(); // B2
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time * 2);
     Run_State = 3;
     break;
   }
   case 3:
   {
-
+ Motor_Data.xCAR_L45(wheel_Speed, wheel_Time * 2);
+ Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("富强民主");
     Run_State = 4;
     break;
   }
