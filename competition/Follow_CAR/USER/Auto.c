@@ -992,6 +992,24 @@ void xAuto_Run_Function(void)
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
       printf("%s\r\n", Two_Code_Data_parsed_Store2);
     }
+
+    for (int i = 0; i < strlen((char *)Two_Code_Data_parsed_Store2); i++)
+    {
+      char c = Two_Code_Data_parsed_Store2[i];
+      if (c >= '0' && c <= '9')
+        Hex_Data_Store1[i] = c - '0';
+      else if (c >= 'A' && c <= 'F')
+        Hex_Data_Store1[i] = c - 'A' + 10;
+      else if (c >= 'a' && c <= 'f')
+        Hex_Data_Store1[i] = c - 'a' + 10;
+    }
+
+    Send_wireless_open_To_MainCar[3] = Hex_Data_Store1[0];
+    Send_wireless_open_To_MainCar[4] = Hex_Data_Store1[1];
+    Send_wireless_open_To_MainCar[5] = Hex_Data_Store1[2];
+    MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
+    delay_ms(100);
+    MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
     delay_ms(500);
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
