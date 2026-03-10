@@ -1179,6 +1179,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_Track_Time(35, 700);
     Motor_Data.xCAR_Track_Go();//D4
+    
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
 
     Run_State = 3;
