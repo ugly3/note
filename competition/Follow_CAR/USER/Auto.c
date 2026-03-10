@@ -997,7 +997,11 @@ void xAuto_Run_Function(void)
   {
     Motor_Data.xCAR_Track_Go(); // F4
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    
+    Barrier_Data.xBarrier_Licence_Tx("B8542D"); // ³µÅÆºÅ
+    Motor_Data.xCAR_Track_Go();                 // D4
+    Motor_Data.xCAR_Track_Go();// B4
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_Track_Go(); // B2
     Run_State = 3;
     break;
   }
