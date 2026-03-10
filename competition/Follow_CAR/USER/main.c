@@ -119,7 +119,7 @@ void Hardware_Init(void)
 	Ultrasonic_Ranging();                               // 先获取一次超声波（保证后面的准确度）
 	Infrared_Send(test_buf,8);                          // 红外发送数据0
 	Send_ZigbeeData_To_Fifo(test_buf,8);                // ZigBee发送数据0
-	// Send_WifiData_To_Fifo(test_buf,8);                  // WIFI发送数据0
+	Send_WifiData_To_Fifo(test_buf,8);                  // WIFI发送数据0
 	/* Mycode END*/
 }
 
