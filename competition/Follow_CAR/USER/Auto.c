@@ -955,7 +955,8 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go(); // F6
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time * 2);
-    delay_ms(200);
+    delay_ms(500);
+    delay_ms(500);
     // 二维码识别
     Identify_Two_Code_Arr[3] = 0x01;
     Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
@@ -968,6 +969,8 @@ void xAuto_Run_Function(void)
     {
       Motor_Data.xCAR_Back(20, 450);
       Rx_count = 0;
+      delay_ms(500);
+      delay_ms(500);
       Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
       delay_ms(500);
       delay_ms(500);
@@ -988,76 +991,8 @@ void xAuto_Run_Function(void)
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
       printf("%s\r\n", Two_Code_Data_parsed_Store2);
-      // 变量定义（建议放在文件开头或作为全局变量）
-      char XL[17] = {0};         // 提取出的 01 序列
-      char XL_Shifted[17] = {0}; // 移位后的序列
-      char First_Sign = 0;       // 首个特殊字符
-      int xl_idx = 0;
-      uint8_t DH = 0, DL = 0;
-
-      // --- 二维码（一）逻辑开始 ---
-      // 1. 遍历 Store1 提取 0/1 和首个符号
-      for (int i = 0; i < strlen((char *)Two_Code_Data_parsed_Store1); i++)
-      {
-        char c = Two_Code_Data_parsed_Store1[i];
-        if (c == '0' || c == '1')
-        {
-          XL[xl_idx++] = c;
-        }
-        else if ((c == '+' || c == '-') && First_Sign == 0)
-        {
-          First_Sign = c;
-        }
-      }
-      XL[xl_idx] = '\0'; // 闭合字符串
-
-      // 2. 依据首个符号执行循环位移
-      if (First_Sign == '+')
-      { // 循环左移 2 位
-        for (int i = 0; i < xl_idx; i++)
-        {
-          XL_Shifted[i] = XL[(i + 2) % xl_idx];
-        }
-      }
-      else if (First_Sign == '-')
-      { // 循环右移 3 位
-        for (int i = 0; i < xl_idx; i++)
-        {
-          XL_Shifted[i] = XL[(i + xl_idx - 3) % xl_idx];
-        }
-      }
-      XL_Shifted[xl_idx] = '\0';
-
-      // 3. 将二进制字符串转为 16 位整数，并拆分为 DH 和 DL
-      uint16_t temp_val = 0;
-      for (int i = 0; i < xl_idx; i++)
-      {
-        if (XL_Shifted[i] == '1')
-        {
-          // 从高位到低位计算权值
-          temp_val |= (1 << (xl_idx - 1 - i));
-        }
-      }
-      DH = (uint8_t)(temp_val >> 8);   // 取高8位
-      DL = (uint8_t)(temp_val & 0xFF); // 取低8位
-                                       // --- 二维码（一）逻辑结束 ---
-                                       // 变量定义
-      uint8_t W[3] = {0};
-
-      // --- 二维码（二）逻辑开始 ---
-      int w_count = 0;
-      for (int i = 0; i < strlen((char *)Two_Code_Data_parsed_Store2); i++)
-      {
-        char c = Two_Code_Data_parsed_Store2[i];
-        if (c >= '0' && c <= '9')
-        {
-          W[w_count++] = c - '0'; // 字符转数字
-        }
-        if (w_count >= 3)
-          break;
-      }
-      // --- 二维码（二）逻辑结束 ---
     }
+    delay_ms(500);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time * 2);
     Run_State = 2;
@@ -1133,7 +1068,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
     CarPort_Data.xCarPort_CarBack_Into(1);
-    uint8_t M = (DH + DL) * T % 4 + 1;
+    uint8_t M = (Two_Code_Data_parsed_Store1[0] + Two_Code_Data_parsed_Store1[1]) * T % 4 + 1;
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, M);
     Run_State = 6;
     break;
