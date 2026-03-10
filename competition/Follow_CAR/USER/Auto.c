@@ -1223,8 +1223,10 @@ void xAuto_Run_Function(void)
   }
   case 3:
   {
+    XiaoChuang_Data.xSend_To_XiaoChuang_Rouse();
     Voice_Report_Data.xVoice_Report_Random_Command();
-    XiaoChuang_Data.
+     XiaoChuang_Data.xXiaoChuang_Analyze_Rx_Command();
+
     Run_State = 4;
     break;
   }
