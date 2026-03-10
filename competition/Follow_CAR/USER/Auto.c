@@ -1223,9 +1223,17 @@ void xAuto_Run_Function(void)
   }
   case 3:
   {
-    XiaoChuang_Data.xSend_To_XiaoChuang_Rouse();
-    Voice_Report_Data.xVoice_Report_Random_Command();
-     XiaoChuang_Data.xXiaoChuang_Analyze_Rx_Command();
+    // 公交站随机播报
+    XiaoChuang_Data.xSend_To_XiaoChuang_Rouse(); // 识别前先唤醒小创
+    delay_ms(500);
+    Voice_Report_Data.xVoice_Report_Random_Command(); // 播报随机指令
+    for (uint8_t i = 0; i < 8; i++)                   // 延时8秒等待小创识别并重复播报
+    {
+      delay_ms(500);
+      delay_ms(500);
+    }
+    Voice_Report_Data.xVoice_Report_Inquire_Weather_Temperatur(); // 查询天气温度
+    Voice_Report_Data.xVoice_Report_Speak_temperature();          // 播报温度
 
     Run_State = 4;
     break;
