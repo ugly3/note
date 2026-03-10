@@ -1238,7 +1238,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(200);
     Motor_Data.xCAR_Track_Go(); // F2
-
+if()
 
     Run_State = 4;
     break;
