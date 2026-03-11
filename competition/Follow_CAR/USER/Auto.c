@@ -1599,136 +1599,133 @@ void xAuto_Run_Function(void)
   default:
     break;
   }
-
+}
 #endif
 
-// #if BS_2026
+#if BS_2026
 
-// #define Two_Code_Count 2
+#define Two_Code_Count 2
 
-//   void xAuto_Run_Function(void)
+void xAuto_Run_Function(void)
 
-//   {
+{
 
-//     switch (Run_State)
+  switch (Run_State)
 
-//     {
+  {
 
-//     case 1:
+  case 1:
 
-//     {
+  {
 
-//       Run_State = 2;
+    Run_State = 2;
 
-//       break;
-//     }
+    break;
+  }
 
-//     case 2:
+  case 2:
 
-//     {
+  {
 
-//       Run_State = 3;
+    Run_State = 3;
 
-//       break;
-//     }
+    break;
+  }
 
-//     case 3:
+  case 3:
 
-//     {
+  {
 
-//       Run_State = 4;
+    Run_State = 4;
 
-//       break;
-//     }
+    break;
+  }
 
-//     case 4:
+  case 4:
 
-//     {
+  {
 
-//       Run_State = 5;
+    Run_State = 5;
 
-//       break;
-//     }
+    break;
+  }
 
-//     case 5:
+  case 5:
 
-//     {
+  {
 
-//       Run_State = 6;
+    Run_State = 6;
 
-//       break;
-//     }
+    break;
+  }
 
-//     case 6:
+  case 6:
 
-//     {
+  {
 
-//       Run_State = 7;
+    Run_State = 7;
 
-//       break;
-//     }
+    break;
+  }
 
-//     case 7:
+  case 7:
 
-//     {
+  {
 
-//       Run_State = 8;
+    Run_State = 8;
 
-//       break;
-//     }
+    break;
+  }
 
-//     case 8:
+  case 8:
 
-//     {
+  {
 
-//       Run_State = 9;
+    Run_State = 9;
 
-//       break;
-//     }
+    break;
+  }
 
-//     case 9:
+  case 9:
 
-//     {
+  {
 
-//       Run_State = 10;
+    Run_State = 10;
 
-//       break;
-//     }
+    break;
+  }
 
-//     case 10:
+  case 10:
 
-//     {
+  {
 
-//       Run_State = 11;
+    Run_State = 11;
 
-//       break;
-//     }
+    break;
+  }
 
-//     case 11:
+  case 11:
 
-//     {
+  {
 
-//       Run_State = 12;
+    Run_State = 12;
 
-//       break;
-//     }
+    break;
+  }
 
-//     case 12:
+  case 12:
 
-//     {
+  {
 
-//       Run_State = 13;
+    Run_State = 13;
 
-//       break;
-//     }
+    break;
+  }
 
-//     default:
+  default:
 
-//       break;
-//     }
-//   }
+    break;
+  }
+}
 
-
-// #endif
-
-
+#endif
