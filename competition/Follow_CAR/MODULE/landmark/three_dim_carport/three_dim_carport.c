@@ -259,7 +259,7 @@ void xCarPort_CarBack_Into(uint8_t device)
 		case 1: // 前后都未触发
 		{
 			if (flag == 0)
-				Motor_Data.xCAR_Back(30, 400);
+				Motor_Data.xCAR_Back(33, 500);
 			else if (flag == 1 || flag == 2)
 				Carport_Back_Flag = 2; // 已对齐
 
