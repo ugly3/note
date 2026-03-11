@@ -580,7 +580,7 @@ void xAuto_Run_Function(void)
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
     }
     Motor_Data.xCAR_Track_Go();
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_R90(wheel_Speed + 10, wheel_Time * 2);
 
     //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
     //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
@@ -600,8 +600,11 @@ void xAuto_Run_Function(void)
 
     if (Count_ms < 600) // B2
     {
-
       Count_ms = 0;
+      Motor_Data.xCAR_Back(20, 600);
+      delay_ms(400);
+      Motor_Data.xCAR_Track(20);
+      delay_ms(400);
       Motor_Data.xCAR_Go(30, 610); // 冲
       Motor_Data.xCAR_Go(30, 610); // 冲
       delay_ms(500);
@@ -611,10 +614,10 @@ void xAuto_Run_Function(void)
     }
     else if (1200 > Count_ms) // D2
     {
-      Send_InfoData_To_Fifo("1\r\n", 3);
       Count_ms = 0;
       Motor_Data.xCAR_Go(30, 610); // 冲
       Motor_Data.xCAR_Go(30, 610); // 冲
+      delay_ms(400);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
     }
@@ -624,7 +627,6 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Go(25, 300); // 使车身对准十字路口
       delay_ms(500);
       Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
-
       delay_ms(500);
 
       Motor_Data.xCAR_Go(30, 610); // 冲
