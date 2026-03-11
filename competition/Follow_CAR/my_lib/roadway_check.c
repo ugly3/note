@@ -210,7 +210,7 @@ void Roadway_Check(void)
 	// wheel_Track_check();         //循迹线转弯检测
 	// wheel_Nav_check();           // 码盘转弯检测
 	Track_Check(); // 循迹检测
-	//    Check_diatace();           //超出距离检测******************************有问题，开启后程序不能用了
+				   //    Check_diatace();           //超出距离检测******************************有问题，开启后程序不能用了
 }
 
 /***************************************************************
@@ -310,7 +310,7 @@ void Track_Correct(uint8_t gd)
 	}
 	else if ((gd == 0xF7) || (gd == 0XF3)) // F7---1111 0111   F3---1111 0011  车偏左
 	{
-		LSpeed = Car_Spend + 20;
+		LSpeed = Car_Spend + 30;
 		RSpeed = Car_Spend - 40;
 	}
 	else if ((gd == 0XFB) || (gd == 0XF9)) // FB---1111 1011    F9---1111 1001 车偏左+
@@ -330,7 +330,7 @@ void Track_Correct(uint8_t gd)
 	}
 	else if ((gd == 0XEF) || (gd == 0XCF)) // EF---1110 1111      CF---1100 1111  车偏右
 	{
-		RSpeed = Car_Spend + 20;
+		RSpeed = Car_Spend + 30;
 		LSpeed = Car_Spend - 40;
 	}
 	else if ((gd == 0XDF) || (gd == 0X9F)) // DF---1101 1111       9F---1001 1111  车偏右+
