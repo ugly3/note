@@ -1228,6 +1228,9 @@ void xAuto_Run_Function(void)
 
   case 2:
   {
+    Motor_Data.xCAR_Back(35, 200);
+    delay_ms(500);
+    Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_Track_Go();
     delay_ms(400);
     Motor_Data.xCAR_Track_Time(35, 700);
