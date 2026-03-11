@@ -601,8 +601,8 @@ void xAuto_Run_Function(void)
     if (Count_ms < 600) // B2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(30, 600); // ³å
-      Motor_Data.xCAR_Go(30, 600); // ³å
+      Motor_Data.xCAR_Go(30, 610); // ³å
+      Motor_Data.xCAR_Go(30, 610); // ³å
       delay_ms(500);
       Motor_Data.xCAR_Track_Go();
       Motor_Data.xCAR_Track_Go();
@@ -612,8 +612,8 @@ void xAuto_Run_Function(void)
     {
       Send_InfoData_To_Fifo("1\r\n", 3);
       Count_ms = 0;
-      Motor_Data.xCAR_Go(30, 600); // ³å
-      Motor_Data.xCAR_Go(30, 600); // ³å
+      Motor_Data.xCAR_Go(30, 610); // ³å
+      Motor_Data.xCAR_Go(30, 610); // ³å
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
     }
@@ -626,8 +626,8 @@ void xAuto_Run_Function(void)
 
       delay_ms(500);
 
-      Motor_Data.xCAR_Go(30, 600); // ³å
-      Motor_Data.xCAR_Go(30, 600); // ³å
+      Motor_Data.xCAR_Go(30, 610); // ³å
+      Motor_Data.xCAR_Go(30, 610); // ³å
       delay_ms(500);
 
       Motor_Data.xCAR_Track_Go();
@@ -1231,10 +1231,9 @@ void xAuto_Run_Function(void)
     delay_ms(200);
     Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
     delay_ms(200);
-    Motor_Data.xCAR_Go(30, 600); // ³å
-    Motor_Data.xCAR_Go(30, 600); // ³å
+    Motor_Data.xCAR_Go(30, 610); // ³å
+    Motor_Data.xCAR_Go(30, 610); // ³å
     delay_ms(500);
-    Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_Track_Go();
     delay_ms(500);
     // ¶þÎ¬ÂëÊ¶±ð
@@ -1255,7 +1254,19 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
-      Motor_Data.xCAR_Go(20, 520);
+      Motor_Data.xCAR_Go(20, 450);
+    }
+    if (Android_Data.Two_Code_State == 0) // Èç¹ûÎ´½øÈëÊ¶±ðÄ£Ê½
+    {
+      Motor_Data.xCAR_Back(20, 300);
+      Rx_count = 0;
+      delay_ms(500);
+      delay_ms(500);
+      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ð¶þÎ¬Âë
+      delay_ms(500);
+      delay_ms(500);
+      delay_ms(500);
+      Motor_Data.xCAR_Go(20, 300);
     }
     if (Android_Data.Two_Code_State == 0)
     {
