@@ -1220,6 +1220,7 @@ void xAuto_Run_Function(void)
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
     }
     Motor_Data.xCAR_Track_Go(); // B4
+    delay_ms(400);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     Run_State = 2;
     break;
@@ -1228,6 +1229,7 @@ void xAuto_Run_Function(void)
   case 2:
   {
     Motor_Data.xCAR_Track_Go();
+    delay_ms(400);
     Motor_Data.xCAR_Track_Time(35, 700);
     Motor_Data.xCAR_Track_Go(); // D4
     delay_ms(500);
@@ -1286,8 +1288,9 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(500);
     Motor_Data.xCAR_Track_Go(); // D2
+    delay_ms(500);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    delay_ms(200);
+    delay_ms(400);
     Motor_Data.xCAR_Track_Go(); // F2
     if (MainCar_Send_Cengshu % 2 + 1 == 1)
     {
