@@ -1409,80 +1409,76 @@ void xAuto_Run_Function(void)
   {
   case 1:
   {
-   
+
     Run_State = 2;
     break;
   }
 
-case 2:
-{
+  case 2:
+  {
 
-  Run_State = 3;
-  break;
-}
-case 3:
-{
- 
-  Run_State = 4;
-  break;
-}
-case 4:
-{
-  
-  Run_State = 5;
-  break;
-}
-case 5:
-{
-  CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
-  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-  delay_ms(300);
-  CarPort_Data.xCarPort_CarBack_Into(1);
-  CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, MainCar_Send_Cengshu);
-  Run_State = 6;
-  break;
-}
-case 6:
-{
-  Run_State = 7;
-  break;
-}
-case 7:
-{
-  Run_State = 8;
-  break;
-}
-case 8:
-{
-  Run_State = 9;
-  break;
-}
-case 9:
-{
-  Run_State = 10;
-  break;
-}
-case 10:
-{
+    Run_State = 3;
+    break;
+  }
+  case 3:
+  {
 
-  Run_State = 11;
-  break;
-}
-case 11:
-{
+    Run_State = 4;
+    break;
+  }
+  case 4:
+  {
 
-  Run_State = 12;
-  break;
-}
-case 12:
-{
+    Run_State = 5;
+    break;
+  }
+  case 5:
+  {
 
-  Run_State = 13;
-  break;
-}
-default:
-  break;
-}
+    Run_State = 6;
+    break;
+  }
+  case 6:
+  {
+    Run_State = 7;
+    break;
+  }
+  case 7:
+  {
+    Run_State = 8;
+    break;
+  }
+  case 8:
+  {
+    Run_State = 9;
+    break;
+  }
+  case 9:
+  {
+    Run_State = 10;
+    break;
+  }
+  case 10:
+  {
 
+    Run_State = 11;
+    break;
+  }
+  case 11:
+  {
+
+    Run_State = 12;
+    break;
+  }
+  case 12:
+  {
+
+    Run_State = 13;
+    break;
+  }
+  default:
+    break;
+  }
+}
 
 #endif
