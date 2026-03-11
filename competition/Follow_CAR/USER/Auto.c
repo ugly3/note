@@ -600,6 +600,7 @@ void xAuto_Run_Function(void)
 
     if (Count_ms < 600) // B2
     {
+      
       Count_ms = 0;
       Motor_Data.xCAR_Go(30, 610); // ³å
       Motor_Data.xCAR_Go(30, 610); // ³å
