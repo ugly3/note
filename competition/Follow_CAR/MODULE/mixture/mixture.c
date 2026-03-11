@@ -200,7 +200,7 @@ void xCAR_KeyRun_Function(void)
 	if (KeyData.S1_Flag) // °´¼ü1
 	{
 		KeyData.S1_Flag = 0; // ½ûÖ¹ÆÁ±Î
-		Run_State = 0;
+
 	}
 	if (KeyData.S2_Flag) // °´¼ü2
 	{
@@ -275,7 +275,7 @@ void xCAR_KeyRun_Function(void)
 	if (KeyData.S3_Flag) // °´¼ü3
 	{
 		KeyData.S3_Flag = 0; // ½ûÖ¹ÆÁ±Î
-		Run_State = 0;
+
 
 		//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//³µÅÆ
 
@@ -290,7 +290,7 @@ void xCAR_KeyRun_Function(void)
 	if (KeyData.S4_Flag) // °´¼ü4
 	{
 		KeyData.S4_Flag = 0;
-		Run_State = 0;
+
 		uint8_t time_out = 0;
 		Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // ·¢ËÍÇëÇóÊ¶±ðºìÂÌµÆB
 		while (Android_Data.traffic_light_flag != 1)
