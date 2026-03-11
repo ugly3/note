@@ -628,7 +628,9 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
       delay_ms(500);
-
+      Motor_Data.xCAR_Back(20, 600);
+      delay_ms(400);
+      Motor_Data.xCAR_Track(20);
       Motor_Data.xCAR_Go(30, 610); // ³å
       Motor_Data.xCAR_Go(30, 610); // ³å
       delay_ms(500);
@@ -1234,7 +1236,10 @@ void xAuto_Run_Function(void)
     delay_ms(200);
     Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
     delay_ms(200);
-    
+    Motor_Data.xCAR_Back(20, 600);
+    delay_ms(400);
+    Motor_Data.xCAR_Track(20);
+    delay_ms(400);
     Motor_Data.xCAR_Go(30, 610); // ³å
     Motor_Data.xCAR_Go(30, 610); // ³å
     delay_ms(500);
