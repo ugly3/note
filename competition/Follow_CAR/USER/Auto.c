@@ -1300,7 +1300,9 @@ void xAuto_Run_Function(void)
     else
     {
       Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+      delay_ms(500);
       Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+      delay_ms(500);
       Motor_Data.xCAR_Back(35, 200);
     }
     Run_State = 4;
