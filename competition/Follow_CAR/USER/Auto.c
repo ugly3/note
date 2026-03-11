@@ -1585,6 +1585,5 @@ case 12:
 default:
   break;
 }
-}
 
 #endif
