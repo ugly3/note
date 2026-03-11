@@ -1266,6 +1266,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       YT4_parse_two_codes();
       Motor_Data.xCAR_Go(20, 450);
+      delay_ms(500);
     }
     if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
     {
@@ -1280,6 +1281,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       YT4_parse_two_codes();
       Motor_Data.xCAR_Go(20, 300);
+      delay_ms(500);
     }
     if (Android_Data.Two_Code_State == 0)
     {
@@ -1295,7 +1297,6 @@ void xAuto_Run_Function(void)
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
     }
-    delay_ms(500);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(400);
     Motor_Data.xCAR_Track_Go(); // D2
