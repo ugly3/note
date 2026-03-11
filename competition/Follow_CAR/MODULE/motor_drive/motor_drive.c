@@ -188,7 +188,7 @@ void xCAR_Track_Go(void)
 	delay_ms(100);
 	Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
 	delay_ms(200);
-	Motor_Data.xCAR_Go(30, 350); // 前进
+	Motor_Data.xCAR_Go(30, 400); // 前进
 	delay_ms(100);
 }
 

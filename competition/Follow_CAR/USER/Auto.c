@@ -1234,11 +1234,11 @@ void xAuto_Run_Function(void)
   case 2:
   {
     delay_ms(200);
-    Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
+    Motor_Data.xCAR_Track(30); // Ñ­¼£
     delay_ms(200);
-    Motor_Data.xCAR_Back(20, 600);
+    Motor_Data.xCAR_Back(20, 750);
     delay_ms(400);
-    Motor_Data.xCAR_Track(20);
+    Motor_Data.xCAR_Track(30);
     delay_ms(400);
     Motor_Data.xCAR_Go(30, 550); // ³å
     Motor_Data.xCAR_Go(30, 550); // ³å
