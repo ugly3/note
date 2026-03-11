@@ -1240,8 +1240,8 @@ void xAuto_Run_Function(void)
     delay_ms(400);
     Motor_Data.xCAR_Track(30);
     delay_ms(400);
-    Motor_Data.xCAR_Go(30, 550); // ³å
-    Motor_Data.xCAR_Go(30, 550); // ³å
+    Motor_Data.xCAR_Go(30, 500); // ³å
+    Motor_Data.xCAR_Go(30, 500); // ³å
     delay_ms(500);
     Motor_Data.xCAR_Track_Go();
     delay_ms(500);
@@ -1317,8 +1317,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go(); // D2
     delay_ms(400);
     printf("%d\r\n", MainCar_Send_Cengshu);
-    CarPort_Data.xCarPort_Control_Arrive_Level(1);
-
+    CarPort_Data.xCarPort_Control_Arrive_Level(1, 1);
 
     if (MainCar_Send_Cengshu % 2 + 1 == 1)
     {
