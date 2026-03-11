@@ -1228,15 +1228,10 @@ void xAuto_Run_Function(void)
 
   case 2:
   {
-    Motor_Data.xCAR_Track_Time(-35,)
-    delay_ms(500);
-    Motor_Data.xCAR_Track_Go();
-    Motor_Data.xCAR_Track_Go();
-    delay_ms(400);
-    Motor_Data.xCAR_Go(30, 600); // ³å
-    Motor_Data.xCAR_Go(30, 600); // ³å
-    delay_ms(400);
-    Motor_Data.xCAR_Track_Go(); // D4
+    delay_ms(200);
+    Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
+    delay_ms(200);
+    
     delay_ms(500);
     // ¶þÎ¬ÂëÊ¶±ð
     Identify_Two_Code_Arr[3] = 0x01;
