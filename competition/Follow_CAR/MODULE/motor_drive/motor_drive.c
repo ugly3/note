@@ -92,6 +92,36 @@ void xCAR_Track(uint8_t speed)
 参数1：
 参数2：
 */
+void xCAR_Track_Time(uint8_t speed, uint16_t time)
+{
+	Stop_Flag = 0;		// 运行状态标志位
+	Go_Flag = 0;		// 前进标志位
+	wheel_L_Flag = 0;	// 左转标志位
+	wheel_R_Flag = 0;	// 右转标志位
+	wheel_Nav_Flag = 0; // 码盘旋转标志位
+	Back_Flag = 0;		// 后退标志位
+	Track_Flag = 1;		// 循迹标志位
+	Car_Spend = speed;	// 速度值
+	track_time_ms = 0;
+	track_time_Start = 1; // 开始计时
+
+	Control(Car_Spend, Car_Spend); // 电机驱动函数
+
+	while (Stop_Flag != 1)
+	{
+		if (track_time_ms >= time)
+		{
+			Send_UpMotor(0, 0); // 寻卡成功后停车
+			track_time_ms = 0;
+			track_time_Start = 0;
+			Stop_Flag = 1;
+			Track_Flag = 0;
+			break;
+		}
+	}
+	delay_ms(500);
+	Roadway_Flag_clean();
+}
 
 /*
 主车前进
@@ -126,7 +156,7 @@ void xCAR_Go(uint8_t speed, uint16_t time)
 	Control(Car_Spend, Car_Spend);
 	delay_ms(time);
 	Send_UpMotor(0, 0); // 停车
-						//	delay_ms(100);
+	//	delay_ms(100);
 }
 
 /*
@@ -146,7 +176,7 @@ void xCAR_Back(uint8_t speed, uint16_t time)
 	}
 	delay_ms(time);
 	Send_UpMotor(0, 0); // 停车
-						//	delay_ms(100);
+	//	delay_ms(100);
 }
 
 /*
