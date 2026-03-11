@@ -10,8 +10,8 @@
 #define YT3_2025 0
 #define YT1_2026 0
 #define YT2_2026 0
-#define YT3_2026 1
-#define YT4_2026 0
+#define YT3_2026 0
+#define YT4_2026 1
 #define YT5_2026 0
 
 uint8_t Go_Speed = 50;     // 全局行进速度值
