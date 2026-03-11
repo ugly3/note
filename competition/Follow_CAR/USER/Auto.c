@@ -1191,7 +1191,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go(); // B6
                                 // 交通灯
     uint8_t time_out = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 发送请求识别红绿A
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_B); // 发送请求识别红绿B
     while (Android_Data.traffic_light_flag != 1)
     {
       delay_ms(500);
@@ -1241,7 +1241,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track(20);
     delay_ms(400);
     Motor_Data.xCAR_Go(30, 550); // 冲
-    Motor_Data.xCAR_Go(30, 500); // 冲
+    Motor_Data.xCAR_Go(30, 550); // 冲
     delay_ms(500);
     Motor_Data.xCAR_Track_Go();
     delay_ms(500);
@@ -1317,6 +1317,9 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go(); // D2
     delay_ms(400);
     printf("%d\r\n", MainCar_Send_Cengshu);
+    
+
+
     if (MainCar_Send_Cengshu % 2 + 1 == 1)
     {
       Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
