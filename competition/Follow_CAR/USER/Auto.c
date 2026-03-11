@@ -947,23 +947,23 @@ bool lock_flag = 0; // 锁车标志，0为未锁车，1为已锁车
 uint8_t time_out = 0;
 void xAuto_Run_Function(void)
 {
-  // if (lock_flag == 0)
-  // {
-  //   while (Communication_Data.FollowCar_Start_flag == 0)
-  //   {
-  //     delay_ms(500);
-  //     delay_ms(500);
-  //     time_out++;
-  //     if (time_out > 230) // 等待10秒后超时
-  //     {
-  //       Run_State = 1; // 设置状态为1，进入下一阶段
-  //       time_out = 0;  // 重置超时计数器
-  //       break;         // 跳出循环，继续执行后续代码
-  //     }
-  //   }
-  //   Run_State = 1; // 设置状态为1，进入下一阶段
-  //   lock_flag = 1;
-  // }
+  if (lock_flag == 0)
+  {
+    while (Communication_Data.FollowCar_Start_flag == 0)
+    {
+      delay_ms(500);
+      delay_ms(500);
+      time_out++;
+      if (time_out > 230) // 等待10秒后超时
+      {
+        Run_State = 1; // 设置状态为1，进入下一阶段
+        time_out = 0;  // 重置超时计数器
+        break;         // 跳出循环，继续执行后续代码
+      }
+    }
+    Run_State = 1; // 设置状态为1，进入下一阶段
+    lock_flag = 1;
+  }
   switch (Run_State)
   {
   case 1:
@@ -1063,6 +1063,7 @@ void xAuto_Run_Function(void)
     delay_ms(300);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
+    MainCar_Data.xStart_Command_To_MainCar();
     Run_State = 4;
     break;
   }
@@ -1110,10 +1111,6 @@ void xAuto_Run_Function(void)
   case 5:
   {
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
-
-    MainCar_Data.xStart_Command_To_MainCar();
-    delay_ms(500);
-    delay_ms(500);
     delay_ms(500);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
