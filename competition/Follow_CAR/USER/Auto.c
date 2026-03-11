@@ -1317,7 +1317,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go(); // D2
     delay_ms(400);
     printf("%d\r\n", MainCar_Send_Cengshu);
-    
+    CarPort_Data.xCarPort_Control_Arrive_Level(1);
 
 
     if (MainCar_Send_Cengshu % 2 + 1 == 1)
