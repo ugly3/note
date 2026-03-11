@@ -1240,8 +1240,8 @@ void xAuto_Run_Function(void)
     delay_ms(400);
     Motor_Data.xCAR_Track(20);
     delay_ms(400);
-    Motor_Data.xCAR_Go(30, 590); // 冲
-    Motor_Data.xCAR_Go(30, 590); // 冲
+    Motor_Data.xCAR_Go(30, 550); // 冲
+    Motor_Data.xCAR_Go(30, 500); // 冲
     delay_ms(500);
     Motor_Data.xCAR_Track_Go();
     delay_ms(500);
@@ -1263,6 +1263,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
+      YT4_parse_two_codes();
       Motor_Data.xCAR_Go(20, 450);
     }
     if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
@@ -1275,6 +1276,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
+      YT4_parse_two_codes();
       Motor_Data.xCAR_Go(20, 300);
     }
     if (Android_Data.Two_Code_State == 0)
