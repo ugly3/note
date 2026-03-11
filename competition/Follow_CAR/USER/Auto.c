@@ -1231,6 +1231,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go();
     delay_ms(400);
     Motor_Data.xCAR_Track_Time(35, 700);
+    delay_ms(400);
     Motor_Data.xCAR_Track_Go(); // D4
     delay_ms(500);
     // ¶þÎ¬ÂëÊ¶±ð
@@ -1269,6 +1270,7 @@ void xAuto_Run_Function(void)
     }
     delay_ms(500);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    delay_ms(400);
     Motor_Data.xCAR_Track_Go(); // D2
 
     Run_State = 3;
@@ -1295,6 +1297,7 @@ void xAuto_Run_Function(void)
     if (MainCar_Send_Cengshu % 2 + 1 == 1)
     {
       Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+      delay_ms(500);
       CarPort_Data.xCarPort_CarBack_Into(1);
     }
     else
