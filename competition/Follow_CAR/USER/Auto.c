@@ -1463,453 +1463,272 @@ void xAuto_Run_Function(void)
     delay_ms(100);
     MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
     delay_ms(100);
-  }
+
     delay_ms(500);
     Run_State = 2;
     break;
   }
 
-case 2:
-{
-  Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-  SmokeTower_Data.SmokeTower_Infrared_Open();
-  delay_ms(200);
-  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-  Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
-
-  Run_State = 3;
-  break;
-}
-case 3:
-{
-  uint8_t Buf1[200];
-  delay_ms(200);
-  track_time_Start = 1;
-  Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
-  delay_ms(200);
-  sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
-  Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
-
-  if (Count_ms < 600) // B2
+  case 2:
   {
-    Count_ms = 0;
-    Motor_Data.xCAR_Back(20, 600);
-    delay_ms(400);
-    Motor_Data.xCAR_Track(20);
-    delay_ms(400);
-    Motor_Data.xCAR_Go(30, 570); // 冲
-    Motor_Data.xCAR_Go(30, 570); // 冲
-    delay_ms(500);
-    Motor_Data.xCAR_Track_Go();
-    Motor_Data.xCAR_Track_Go();
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    SmokeTower_Data.SmokeTower_Infrared_Open();
     delay_ms(200);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
+
+    Run_State = 3;
+    break;
   }
-  else if (1200 > Count_ms) // D2
+  case 3:
   {
-    Count_ms = 0;
-    Motor_Data.xCAR_Go(30, 570); // 冲
-    Motor_Data.xCAR_Go(30, 570); // 冲
-    delay_ms(400);
-    Motor_Data.xCAR_Track_Go();
+    uint8_t Buf1[200];
     delay_ms(200);
-  }
-  else // E2
-  {
-    Count_ms = 0;
-    Motor_Data.xCAR_Go(25, 300); // 使车身对准十字路口
-    delay_ms(500);
+    track_time_Start = 1;
     Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
-    delay_ms(500);
-    Motor_Data.xCAR_Back(20, 600);
-    delay_ms(400);
-    Motor_Data.xCAR_Track(20);
-    Motor_Data.xCAR_Go(30, 570); // 冲
-    Motor_Data.xCAR_Go(30, 570); // 冲
-    delay_ms(500);
+    delay_ms(200);
+    sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
+    Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
 
-    Motor_Data.xCAR_Track_Go();
-    delay_ms(300);
-  }
-  Run_State = 4;
-  break;
-}
-case 4:
-{
-  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // F2
-                                                    // 交通灯
-  uint8_t time_out = 0;
-  Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 发送请求识别红绿A
-  while (Android_Data.traffic_light_flag != 1)
-  {
-    delay_ms(500);
-    delay_ms(500);
-    time_out++;
-    if (time_out >= 5)
+    if (Count_ms < 600) // B2
     {
-      time_out = 0;
-      break;
+      Count_ms = 0;
+      Motor_Data.xCAR_Back(20, 600);
+      delay_ms(400);
+      Motor_Data.xCAR_Track(20);
+      delay_ms(400);
+      Motor_Data.xCAR_Go(30, 570); // 冲
+      Motor_Data.xCAR_Go(30, 570); // 冲
+      delay_ms(500);
+      Motor_Data.xCAR_Track_Go();
+      Motor_Data.xCAR_Track_Go();
+      delay_ms(200);
     }
-  }
-  Android_Data.traffic_light_flag = 0;
-  if (Android_Data.Red_State == 1)
-  {
-    Android_Data.Red_State = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
-  }
-  else if (Android_Data.Yellow_State == 1)
-  {
-    Android_Data.Yellow_State = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
-  }
-  else if (Android_Data.Green_State == 1)
-  {
-    Android_Data.Green_State = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
-  }
-  else // 蒙一个
-  {
-    Android_Data.Green_State = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
-  }
-  Motor_Data.xCAR_Track_Go(); // F4
-  Motor_Data.xCAR_Track_Go();
-  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // F6
-  delay_ms(200);
-  Motor_Data.xCAR_Track_Go();
-  Motor_Data.xCAR_Track_Go();
-  Run_State = 5;
-  break;
-}
-case 5:
-{
-  CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
-  Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-  delay_ms(300);
-  CarPort_Data.xCarPort_CarBack_Into(1);
-  CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, MainCar_Send_Cengshu);
-  Run_State = 6;
-  break;
-}
-case 6:
-{
-  Run_State = 7;
-  break;
-}
+    else if (1200 > Count_ms) // D2
+    {
+      Count_ms = 0;
+      Motor_Data.xCAR_Go(30, 570); // 冲
+      Motor_Data.xCAR_Go(30, 570); // 冲
+      delay_ms(400);
+      Motor_Data.xCAR_Track_Go();
+      delay_ms(200);
+    }
+    else // E2
+    {
+      Count_ms = 0;
+      Motor_Data.xCAR_Go(25, 300); // 使车身对准十字路口
+      delay_ms(500);
+      Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
+      delay_ms(500);
+      Motor_Data.xCAR_Back(20, 600);
+      delay_ms(400);
+      Motor_Data.xCAR_Track(20);
+      Motor_Data.xCAR_Go(30, 570); // 冲
+      Motor_Data.xCAR_Go(30, 570); // 冲
+      delay_ms(500);
 
-default:
-  break;
-}
-
-#endif
-
-
-
-
-#if YT5_2026
-
-#define Two_Code_Count 2
-
-
-void xAuto_Run_Function(void)
-
-{
-
-
-  switch (Run_State)
-
-  {
-
-  case 1:
-
-  {
-
-
-    Run_State = 2;
-
-    break;
-
-  }
-
-
-  case 2:
-
-  {
-
-
-    Run_State = 3;
-
-    break;
-
-  }
-
-  case 3:
-
-  {
-
-
+      Motor_Data.xCAR_Track_Go();
+      delay_ms(300);
+    }
     Run_State = 4;
-
     break;
-
   }
-
   case 4:
-
   {
-
-
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // F2
+                                                      // 交通灯
+    uint8_t time_out = 0;
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // 发送请求识别红绿A
+    while (Android_Data.traffic_light_flag != 1)
+    {
+      delay_ms(500);
+      delay_ms(500);
+      time_out++;
+      if (time_out >= 5)
+      {
+        time_out = 0;
+        break;
+      }
+    }
+    Android_Data.traffic_light_flag = 0;
+    if (Android_Data.Red_State == 1)
+    {
+      Android_Data.Red_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // 发送给交通灯标志物请求确认
+    }
+    else if (Android_Data.Yellow_State == 1)
+    {
+      Android_Data.Yellow_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 3);
+    }
+    else if (Android_Data.Green_State == 1)
+    {
+      Android_Data.Green_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+    }
+    else // 蒙一个
+    {
+      Android_Data.Green_State = 0;
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
+    }
+    Motor_Data.xCAR_Track_Go(); // F4
+    Motor_Data.xCAR_Track_Go();
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // F6
+    delay_ms(200);
+    Motor_Data.xCAR_Track_Go();
+    Motor_Data.xCAR_Track_Go();
     Run_State = 5;
-
     break;
-
   }
-
   case 5:
-
   {
-
-
+    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    delay_ms(300);
+    CarPort_Data.xCarPort_CarBack_Into(1);
+    CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, MainCar_Send_Cengshu);
     Run_State = 6;
-
     break;
-
   }
-
   case 6:
-
   {
-
     Run_State = 7;
-
     break;
-
-  }
-
-  case 7:
-
-  {
-
-    Run_State = 8;
-
-    break;
-
-  }
-
-  case 8:
-
-  {
-
-    Run_State = 9;
-
-    break;
-
-  }
-
-  case 9:
-
-  {
-
-    Run_State = 10;
-
-    break;
-
-  }
-
-  case 10:
-
-  {
-
-
-    Run_State = 11;
-
-    break;
-
-  }
-
-  case 11:
-
-  {
-
-
-    Run_State = 12;
-
-    break;
-
-  }
-
-  case 12:
-
-  {
-
-
-    Run_State = 13;
-
-    break;
-
   }
 
   default:
-
     break;
-
   }
-
-}
-
 
 #endif
 
+// #if BS_2026
 
-#if BS_2026
+// #define Two_Code_Count 2
 
-#define Two_Code_Count 2
+//   void xAuto_Run_Function(void)
 
+//   {
 
-void xAuto_Run_Function(void)
+//     switch (Run_State)
 
-{
+//     {
 
+//     case 1:
 
-  switch (Run_State)
+//     {
 
-  {
+//       Run_State = 2;
 
-  case 1:
+//       break;
+//     }
 
-  {
+//     case 2:
 
+//     {
 
-    Run_State = 2;
+//       Run_State = 3;
 
-    break;
+//       break;
+//     }
 
-  }
+//     case 3:
 
+//     {
 
-  case 2:
+//       Run_State = 4;
 
-  {
+//       break;
+//     }
 
+//     case 4:
 
-    Run_State = 3;
+//     {
 
-    break;
+//       Run_State = 5;
 
-  }
+//       break;
+//     }
 
-  case 3:
+//     case 5:
 
-  {
+//     {
 
+//       Run_State = 6;
 
-    Run_State = 4;
+//       break;
+//     }
 
-    break;
+//     case 6:
 
-  }
+//     {
 
-  case 4:
+//       Run_State = 7;
 
-  {
+//       break;
+//     }
 
+//     case 7:
 
-    Run_State = 5;
+//     {
 
-    break;
+//       Run_State = 8;
 
-  }
+//       break;
+//     }
 
-  case 5:
+//     case 8:
 
-  {
+//     {
 
+//       Run_State = 9;
 
-    Run_State = 6;
+//       break;
+//     }
 
-    break;
+//     case 9:
 
-  }
+//     {
 
-  case 6:
+//       Run_State = 10;
 
-  {
+//       break;
+//     }
 
-    Run_State = 7;
+//     case 10:
 
-    break;
+//     {
 
-  }
+//       Run_State = 11;
 
-  case 7:
+//       break;
+//     }
 
-  {
+//     case 11:
 
-    Run_State = 8;
+//     {
 
-    break;
+//       Run_State = 12;
 
-  }
+//       break;
+//     }
 
-  case 8:
+//     case 12:
 
-  {
+//     {
 
-    Run_State = 9;
+//       Run_State = 13;
 
-    break;
+//       break;
+//     }
 
-  }
+//     default:
 
-  case 9:
+//       break;
+//     }
+//   }
 
-  {
 
-    Run_State = 10;
+// #endif
 
-    break;
 
-  }
-
-  case 10:
-
-  {
-
-
-    Run_State = 11;
-
-    break;
-
-  }
-
-  case 11:
-
-  {
-
-
-    Run_State = 12;
-
-    break;
-
-  }
-
-  case 12:
-
-  {
-
-
-    Run_State = 13;
-
-    break;
-
-  }
-
-  default:
-
-    break;
-
-  }
-
-}
-
-
-#endif
