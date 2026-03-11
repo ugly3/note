@@ -1295,7 +1295,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(400);
     Motor_Data.xCAR_Track_Go(); // D2
-
+    delay_ms(400);
     Run_State = 3;
     break;
   }
@@ -1310,7 +1310,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
     }
-    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(500);
     Motor_Data.xCAR_Track_Go(); // D2
     delay_ms(500);
