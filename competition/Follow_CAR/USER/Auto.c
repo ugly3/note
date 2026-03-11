@@ -993,7 +993,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
-      Motor_Data.xCAR_Go(20, 520);
+      Motor_Data.xCAR_Go(20, 450);
     }
     if (Android_Data.Two_Code_State == 0)
     {
@@ -1031,6 +1031,7 @@ void xAuto_Run_Function(void)
     MainCar_Data.xSend_Command_To_MainCar(Send_Algorithm_Parameters_To_MainCar);
     delay_ms(500);
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
+    delay_ms(400);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
 
     Run_State = 2;
@@ -1040,15 +1041,20 @@ void xAuto_Run_Function(void)
   {
 
     Motor_Data.xCAR_Track_Go(); // F4
+    delay_ms(400);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-
+    delay_ms(400);
     printf("Licence_Data:%s ", MainCar_Send_Licence_Data_Store);
     // 道闸系统任务
     Barrier_Data.xBarrier_Licence_Tx(MainCar_Send_Licence_Data_Store); // 车牌号
     Motor_Data.xCAR_Track_Go();                                        // D4
-    Motor_Data.xCAR_Track_Go();                                        // B4
+    delay_ms(400);
+    Motor_Data.xCAR_Track_Go(); // B4
+    delay_ms(400);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    delay_ms(400);
     Motor_Data.xCAR_Track_Go(); // B2
+    delay_ms(400);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(450);
     Run_State = 3;
@@ -1057,12 +1063,12 @@ void xAuto_Run_Function(void)
   case 3:
   {
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
-    delay_ms(300);
+    delay_ms(400);
     Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add((char *)Two_Code_Data_parsed_Store2);
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
-    delay_ms(300);
+    delay_ms(400);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    delay_ms(300);
+    delay_ms(400);
     MainCar_Data.xStart_Command_To_MainCar();
     Run_State = 4;
     break;
@@ -1105,6 +1111,7 @@ void xAuto_Run_Function(void)
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
     }
     Motor_Data.xCAR_Track_Go(); // D2
+    delay_ms(400);
     Run_State = 5;
     break;
   }
@@ -1162,6 +1169,8 @@ void xAuto_Run_Function(void)
     Run_State = 13;
     break;
   }
+  default:
+    break;
   }
 }
 #endif
@@ -1343,6 +1352,8 @@ void xAuto_Run_Function(void)
     Run_State = 13;
     break;
   }
+  default:
+    break;
   }
 }
 
@@ -1571,6 +1582,8 @@ case 12:
   Run_State = 13;
   break;
 }
+default:
+  break;
 }
 }
 
