@@ -628,7 +628,6 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
       delay_ms(500);
-      
 
       Motor_Data.xCAR_Go(30, 610); // ³å
       Motor_Data.xCAR_Go(30, 610); // ³å
@@ -1225,7 +1224,7 @@ void xAuto_Run_Function(void)
     }
     Motor_Data.xCAR_Track_Go(); // B4
     delay_ms(400);
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_R90(wheel_Speed + 10, wheel_Time * 2);
     Run_State = 2;
     break;
   }
@@ -1235,6 +1234,7 @@ void xAuto_Run_Function(void)
     delay_ms(200);
     Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
     delay_ms(200);
+    
     Motor_Data.xCAR_Go(30, 610); // ³å
     Motor_Data.xCAR_Go(30, 610); // ³å
     delay_ms(500);
