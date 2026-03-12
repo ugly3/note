@@ -1206,7 +1206,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
       time_out++;
-      if (time_out > 230) // 等待10秒后超时
+      if (time_out > 200) // 等待10秒后超时
       {
         Run_State = 1; // 设置状态为1，进入下一阶段
         time_out = 0;  // 重置超时计数器
