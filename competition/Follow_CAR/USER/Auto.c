@@ -1335,7 +1335,7 @@ void xAuto_Run_Function(void)
       hex_num[i] = CharToHex(Two_Code_Data_parsed_Store1[i]) << 4 | CharToHex(Two_Code_Data_parsed_Store1[i + 1]);
     }
     Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(Smart_TFT_Data.Device_B, hex_num);
-
+    
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
     Motor_Data.xCAR_Track_Go(); // D2
