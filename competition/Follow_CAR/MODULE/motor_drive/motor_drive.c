@@ -156,7 +156,7 @@ void xCAR_Go(uint8_t speed, uint16_t time)
 	Control(Car_Spend, Car_Spend);
 	delay_ms(time);
 	Send_UpMotor(0, 0); // 停车
-	//	delay_ms(100);
+						//	delay_ms(100);
 }
 
 /*
@@ -176,7 +176,7 @@ void xCAR_Back(uint8_t speed, uint16_t time)
 	}
 	delay_ms(time);
 	Send_UpMotor(0, 0); // 停车
-	//	delay_ms(100);
+						//	delay_ms(100);
 }
 
 /*
@@ -188,7 +188,7 @@ void xCAR_Track_Go(void)
 	delay_ms(100);
 	Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
 	delay_ms(200);
-	Motor_Data.xCAR_Go(30, 400); // 前进
+	Motor_Data.xCAR_Go(30, 430); // 前进
 	delay_ms(100);
 }
 
