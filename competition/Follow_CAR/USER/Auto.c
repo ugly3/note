@@ -605,9 +605,9 @@ void xAuto_Run_Function(void)
       delay_ms(300);
       Motor_Data.xCAR_Track(20);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 550); // ³å
+      Motor_Data.xCAR_Go(30, 565); // ³å
       delay_ms(200);
-      Motor_Data.xCAR_Go(30, 550); // ³å
+      Motor_Data.xCAR_Go(30, 565); // ³å
       delay_ms(500);
       Motor_Data.xCAR_Track_Go();
       Motor_Data.xCAR_Track_Go();
@@ -616,9 +616,9 @@ void xAuto_Run_Function(void)
     else if (1200 > Count_ms) // D2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(30, 550); // ³å
+      Motor_Data.xCAR_Go(30, 565); // ³å
       delay_ms(200);
-      Motor_Data.xCAR_Go(30, 550); // ³å
+      Motor_Data.xCAR_Go(30, 565); // ³å
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
@@ -632,9 +632,9 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       Motor_Data.xCAR_Back(20, 600);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 550); // ³å
+      Motor_Data.xCAR_Go(30, 565); // ³å
       delay_ms(200);
-      Motor_Data.xCAR_Go(30, 550); // ³å
+      Motor_Data.xCAR_Go(30, 565); // ³å
       delay_ms(500);
 
       Motor_Data.xCAR_Track_Go();
@@ -854,9 +854,9 @@ void xAuto_Run_Function(void)
       delay_ms(300);
       Motor_Data.xCAR_Track(20);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 550); // ³å
+      Motor_Data.xCAR_Go(30, 565); // ³å
       delay_ms(200);
-      Motor_Data.xCAR_Go(30, 550); // ³å
+      Motor_Data.xCAR_Go(30, 565); // ³å
       delay_ms(500);
       Motor_Data.xCAR_Track_Go();
       Motor_Data.xCAR_Track_Go();
@@ -865,9 +865,9 @@ void xAuto_Run_Function(void)
     else if (1200 > Count_ms) // D2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(30, 550); // ³å
+      Motor_Data.xCAR_Go(30, 565); // ³å
       delay_ms(200);
-      Motor_Data.xCAR_Go(30, 550); // ³å
+      Motor_Data.xCAR_Go(30, 565); // ³å
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
@@ -882,9 +882,9 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Back(20, 600);
       delay_ms(300);
       Motor_Data.xCAR_Track(20);
-      Motor_Data.xCAR_Go(30, 550); // ³å
+      Motor_Data.xCAR_Go(30, 565); // ³å
       delay_ms(200);
-      Motor_Data.xCAR_Go(30, 550); // ³å
+      Motor_Data.xCAR_Go(30, 565); // ³å
       delay_ms(500);
 
       Motor_Data.xCAR_Track_Go();
@@ -1271,9 +1271,9 @@ void xAuto_Run_Function(void)
     delay_ms(300);
     Motor_Data.xCAR_Track(25);
     delay_ms(300);
-    Motor_Data.xCAR_Go(30, 550); // ³å
+    Motor_Data.xCAR_Go(30, 565); // ³å
     delay_ms(200);
-    Motor_Data.xCAR_Go(30, 550); // ³å
+    Motor_Data.xCAR_Go(30, 565); // ³å
     delay_ms(500);
     Motor_Data.xCAR_Track(20);
     delay_ms(500);
