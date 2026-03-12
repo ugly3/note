@@ -1275,7 +1275,7 @@ void xAuto_Run_Function(void)
     delay_ms(100);
     Motor_Data.xCAR_Go(30, 620); // 冲
     delay_ms(500);
-    Motor_Data.xCAR_Track_Go(25);
+    Motor_Data.xCAR_Track_Go();
     delay_ms(500);
     // 二维码识别
     Identify_Two_Code_Arr[3] = 0x01;
@@ -1335,7 +1335,7 @@ void xAuto_Run_Function(void)
       hex_num[i] = CharToHex(Two_Code_Data_parsed_Store1[i]) << 4 | CharToHex(Two_Code_Data_parsed_Store1[i + 1]);
     }
     Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(Smart_TFT_Data.Device_B, hex_num);
-    
+
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
     Motor_Data.xCAR_Track_Go(); // D2
@@ -1362,11 +1362,12 @@ void xAuto_Run_Function(void)
 
     if (MainCar_Send_Init_light % 2 + 1 == 1) // 立体车库
     {
-      CarPort_Data.xCarPort_Control_Arrive_Level(1, 1);
+      CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
       Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
       delay_ms(500);
       CarPort_Data.xCarPort_CarBack_Into(CarPort_Data.Device_A);
-      CarPort_Data.xCarPort_Control_Arrive_Level(1, MainCar_Send_Cengshu);
+      CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, MainCar_Send_Cengshu);
+      printf("Cengshu:%d ", MainCar_Send_Cengshu);
     }
     else
     {
