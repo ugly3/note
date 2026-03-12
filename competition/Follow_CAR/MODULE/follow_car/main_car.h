@@ -21,7 +21,7 @@ extern MainCar_Typedef MainCar_Data;
 extern uint8_t MainCar_start[8];
 extern uint8_t FllowCar_start_Finish[8];
 extern uint8_t MainCar_Send_Licence_Data_Store[6];
-extern uint8_t MainCar_Send_Cengshu;
+extern uint8_t MainCar_Send_Init_light;
 extern uint8_t Send_wireless_open_To_MainCar[8];  //发送无线充电标志物开启码给主车
 extern uint8_t Send_Weizhi_To_MainCar[8];//发送位置给主车
 
