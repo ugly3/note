@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OUTPUT\CarV.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OUTPUT\CarV.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Mar 13 06:18:07 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Mar 13 06:50:11 2026
 <BR><P>
 <H3>Maximum Stack Usage =        136 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1950,6 +1950,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Can_WifiRx_Check
 <LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xAuto_Run_Function
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xCarPort_Ack_Infrared_State
 <LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintAndroidData_Array
 <LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_A72_PortInit
@@ -2087,7 +2088,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Track_Correct
 </UL>
 
-<P><STRONG><a name="[98]"></a>main</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, main.o(i.main))
+<P><STRONG><a name="[98]"></a>main</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = main &rArr; Hardware_Init &rArr; UartA72_Init &rArr; Uart_A72_PortInit &rArr; USART_Init &rArr; RCC_GetClocksFreq
 </UL>
 <BR>[Calls]<UL><LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xAuto_Run_Function
@@ -2096,6 +2097,7 @@ Global Symbols
 <LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_UpMotor
 <LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Power_Check
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hardware_Init
+<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
