@@ -1281,7 +1281,6 @@ void xAuto_Run_Function(void)
 
     if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
     {
-      printf("1");
       Motor_Data.xCAR_Back(20, 450);
       Rx_count = 0;
       delay_ms(500);
@@ -1296,7 +1295,6 @@ void xAuto_Run_Function(void)
     }
     if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
     {
-      printf("2");
       Motor_Data.xCAR_Back(20, 300);
       Rx_count = 0;
       delay_ms(500);
