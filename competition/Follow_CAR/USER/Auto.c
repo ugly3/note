@@ -1279,7 +1279,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track(20);
     delay_ms(500);
     // 二维码识别
-    Identify_Two_Code _Arr[3] = 0x01;
+    Identify_Two_Code_Arr[3] = 0x01;
     Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
     delay_ms(500);
     delay_ms(500);
