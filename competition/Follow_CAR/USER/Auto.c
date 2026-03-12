@@ -1921,6 +1921,7 @@ void xAuto_Run_Function(void)
   {
     delay_ms(500);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2); // D4
+    
     Run_State = 9;
     break;
   }
