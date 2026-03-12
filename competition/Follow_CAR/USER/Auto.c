@@ -605,9 +605,9 @@ void xAuto_Run_Function(void)
       delay_ms(300);
       Motor_Data.xCAR_Track(20);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 565); // 冲
+      Motor_Data.xCAR_Go(30, 600); // 冲
       delay_ms(200);
-      Motor_Data.xCAR_Go(30, 565); // 冲
+      Motor_Data.xCAR_Go(30, 600); // 冲
       delay_ms(500);
       Motor_Data.xCAR_Track_Go();
       Motor_Data.xCAR_Track_Go();
@@ -616,9 +616,9 @@ void xAuto_Run_Function(void)
     else if (1200 > Count_ms) // D2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(30, 565); // 冲
+      Motor_Data.xCAR_Go(30, 600); // 冲
       delay_ms(200);
-      Motor_Data.xCAR_Go(30, 565); // 冲
+      Motor_Data.xCAR_Go(30, 600); // 冲
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
@@ -632,9 +632,9 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       Motor_Data.xCAR_Back(20, 600);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 565); // 冲
+      Motor_Data.xCAR_Go(30, 600); // 冲
       delay_ms(200);
-      Motor_Data.xCAR_Go(30, 565); // 冲
+      Motor_Data.xCAR_Go(30, 600); // 冲
       delay_ms(500);
 
       Motor_Data.xCAR_Track_Go();
@@ -854,9 +854,9 @@ void xAuto_Run_Function(void)
       delay_ms(300);
       Motor_Data.xCAR_Track(20);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 565); // 冲
+      Motor_Data.xCAR_Go(30, 610); // 冲
       delay_ms(200);
-      Motor_Data.xCAR_Go(30, 565); // 冲
+      Motor_Data.xCAR_Go(30, 610); // 冲
       delay_ms(500);
       Motor_Data.xCAR_Track_Go();
       Motor_Data.xCAR_Track_Go();
@@ -865,9 +865,9 @@ void xAuto_Run_Function(void)
     else if (1200 > Count_ms) // D2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(30, 565); // 冲
+      Motor_Data.xCAR_Go(30, 610); // 冲
       delay_ms(200);
-      Motor_Data.xCAR_Go(30, 565); // 冲
+      Motor_Data.xCAR_Go(30, 610); // 冲
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
@@ -882,9 +882,9 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Back(20, 600);
       delay_ms(300);
       Motor_Data.xCAR_Track(20);
-      Motor_Data.xCAR_Go(30, 565); // 冲
+      Motor_Data.xCAR_Go(30, 610); // 冲
       delay_ms(200);
-      Motor_Data.xCAR_Go(30, 565); // 冲
+      Motor_Data.xCAR_Go(30, 610); // 冲
       delay_ms(500);
 
       Motor_Data.xCAR_Track_Go();
@@ -1198,23 +1198,23 @@ uint8_t time_out = 0;
 uint8_t Two_Code_Count = 1;
 void xAuto_Run_Function(void)
 {
-  // if (lock_flag == 0)
-  // {
-  //   while (Communication_Data.FollowCar_Start_flag == 0)
-  //   {
-  //     delay_ms(500);
-  //     delay_ms(500);
-  //     time_out++;
-  //     if (time_out > 200) // 等待10秒后超时
-  //     {
-  //       Run_State = 1; // 设置状态为1，进入下一阶段
-  //       time_out = 0;  // 重置超时计数器
-  //       break;         // 跳出循环，继续执行后续代码
-  //     }
-  //   }
-  //   Run_State = 1; // 设置状态为1，进入下一阶段
-  //   lock_flag = 1;
-  // }
+  if (lock_flag == 0)
+  {
+    while (Communication_Data.FollowCar_Start_flag == 0)
+    {
+      delay_ms(500);
+      delay_ms(500);
+      time_out++;
+      if (time_out > 200) // 等待10秒后超时
+      {
+        Run_State = 1; // 设置状态为1，进入下一阶段
+        time_out = 0;  // 重置超时计数器
+        break;         // 跳出循环，继续执行后续代码
+      }
+    }
+    Run_State = 1; // 设置状态为1，进入下一阶段
+    lock_flag = 1;
+  }
   switch (Run_State)
   {
   case 1:
@@ -1267,13 +1267,13 @@ void xAuto_Run_Function(void)
     delay_ms(200);
     Motor_Data.xCAR_Track(30); // 循迹
     delay_ms(200);
-    Motor_Data.xCAR_Back(25, 800);
+    Motor_Data.xCAR_Back(25, 600);
     delay_ms(300);
     Motor_Data.xCAR_Track(30);
     delay_ms(300);
-    Motor_Data.xCAR_Go(30, 565); // 冲
-    delay_ms(200);
-    Motor_Data.xCAR_Go(30, 565); // 冲
+    Motor_Data.xCAR_Go(30, 620); // 冲
+    delay_ms(100);
+    Motor_Data.xCAR_Go(30, 620); // 冲
     delay_ms(500);
     Motor_Data.xCAR_Track(20);
     delay_ms(500);
@@ -1287,7 +1287,7 @@ void xAuto_Run_Function(void)
 
     if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
     {
-      Motor_Data.xCAR_Go(20, 250);
+      Motor_Data.xCAR_Go(30, 320);
       Rx_count = 0;
       delay_ms(500);
       delay_ms(500);
@@ -1296,12 +1296,12 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
       YT4_parse_two_codes();
-      Motor_Data.xCAR_Go(20, 250);
+      Motor_Data.xCAR_Go(30, 320);
       delay_ms(500);
     }
     if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
     {
-      Motor_Data.xCAR_Back(20, 280);
+      Motor_Data.xCAR_Back(30, 300);
       Rx_count = 0;
       delay_ms(500);
       delay_ms(500);
@@ -1310,7 +1310,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
       YT4_parse_two_codes();
-      Motor_Data.xCAR_Go(20, 280);
+      Motor_Data.xCAR_Go(30, 300);
       delay_ms(500);
     }
     if (Android_Data.Two_Code_State == 0)
@@ -1327,6 +1327,12 @@ void xAuto_Run_Function(void)
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
     }
+
+    uint8_t len = strlen(Two_Code_Data_parsed_Store1);
+    for(uint8_t i=0;i<len)
+    Smart_TFT_Data.xSmart_TFT_Hex_Diaplay();
+
+
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
     Motor_Data.xCAR_Track_Go(); // D2
@@ -1512,7 +1518,7 @@ void xAuto_Run_Function(void)
     uint8_t Buf1[200];
     delay_ms(200);
     track_time_Start = 1;
-    Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
+    Motor_Data.xCAR_Track(30); // 循迹
     delay_ms(200);
     sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
     Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
@@ -1520,13 +1526,13 @@ void xAuto_Run_Function(void)
     if (Count_ms < 600) // B2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Back(20, 600);
+      Motor_Data.xCAR_Back(25, 600);
       delay_ms(300);
       Motor_Data.xCAR_Track(20);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 530); // 冲
-      delay_ms(300);
-      Motor_Data.xCAR_Go(30, 530); // 冲
+      Motor_Data.xCAR_Go(30, 620); // 冲
+      delay_ms(100);
+      Motor_Data.xCAR_Go(30, 620); // 冲
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       Motor_Data.xCAR_Track_Go();
@@ -1535,9 +1541,9 @@ void xAuto_Run_Function(void)
     else if (1200 > Count_ms) // D2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(30, 530); // 冲
-      delay_ms(300);
-      Motor_Data.xCAR_Go(30, 530); // 冲
+      Motor_Data.xCAR_Go(30, 620); // 冲
+      delay_ms(100);
+      Motor_Data.xCAR_Go(30, 620); // 冲
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
@@ -1545,16 +1551,16 @@ void xAuto_Run_Function(void)
     else // E2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(25, 300); // 使车身对准十字路口
-      delay_ms(500);
+      Motor_Data.xCAR_Go(25, 400); // 使车身对准十字路口
+      delay_ms(300);
       Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
-      delay_ms(500);
-      Motor_Data.xCAR_Back(20, 600);
       delay_ms(300);
-      Motor_Data.xCAR_Track(20);
-      Motor_Data.xCAR_Go(30, 530); // 冲
+      Motor_Data.xCAR_Back(25, 600);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 530); // 冲
+      Motor_Data.xCAR_Track(30);
+      Motor_Data.xCAR_Go(30, 620); // 冲
+      delay_ms(100);
+      Motor_Data.xCAR_Go(30, 620); // 冲
       delay_ms(500);
 
       Motor_Data.xCAR_Track_Go();
@@ -1604,7 +1610,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go(); // F4
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // F6
-    delay_ms(200);
+    delay_ms(300);
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_Track_Go();
     Run_State = 5;
