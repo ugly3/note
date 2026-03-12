@@ -1718,6 +1718,7 @@ Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);//F6
 delay_ms(500);
 Motor_Data.xCAR_Track_Go();//F4
 Motor_Data.xCAR_Track_Go();//F2
+delay_ms(500);
 //二维码识别任务
 
 
@@ -1726,8 +1727,10 @@ Motor_Data.xCAR_Track_Go();//F2
   }
   case 4:
   {
-Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);//F2
-//特殊地形
+delay_ms(500);
+Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);//F2
+delay_ms(500);
+//语音交互任务
 
 
     Run_State = 5;
@@ -1735,8 +1738,12 @@ Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);//F2
   }
   case 5:
   {
-    delay_ms(500);
-Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);//B2
+delay_ms(500);
+Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+delay_ms(500);
+Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+//特殊地形任务,RFID识别
+
 
     Run_State = 6;
     break;
