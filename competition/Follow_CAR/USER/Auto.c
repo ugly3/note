@@ -852,7 +852,7 @@ void xAuto_Run_Function(void)
       Count_ms = 0;
       Motor_Data.xCAR_Back(20, 600);
       delay_ms(300);
-      Motor_Data.xCAR_Track(20);
+      Motor_Data.xCAR_Track(30);
       delay_ms(300);
       Motor_Data.xCAR_Go(30, 610); // ³å
       delay_ms(200);
