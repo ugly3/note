@@ -1872,7 +1872,7 @@ void xAuto_Run_Function(void)
   }
   case 6:
   {
-    delay_ms(500);//B2
+    delay_ms(500); // B2
     // 智能路灯感知调节任务
 
     Run_State = 7;
@@ -1880,17 +1880,23 @@ void xAuto_Run_Function(void)
   }
   case 7:
   {
-    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2); // B2
     delay_ms(500);
     Motor_Data.xCAR_Track_Go();
     delay_ms(500);
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2); // B4
+    delay_ms(500);
+    // ETC
+
+
 
     Run_State = 8;
     break;
   }
   case 8:
   {
-
+    delay_ms(500);
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2); // D4
     Run_State = 9;
     break;
   }
