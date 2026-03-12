@@ -593,7 +593,7 @@ void xAuto_Run_Function(void)
     // B2->F2
     delay_ms(300);
     track_time_Start = 1;
-    Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
+    Motor_Data.xCAR_Track(40); // Ñ­¼£
     delay_ms(300);
     sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
     Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
@@ -605,9 +605,9 @@ void xAuto_Run_Function(void)
       delay_ms(300);
       Motor_Data.xCAR_Track(20);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 600); // ³å
-      delay_ms(200);
-      Motor_Data.xCAR_Go(30, 600); // ³å
+      Motor_Data.xCAR_Go(30, 610); // ³å
+      delay_ms(100);
+      Motor_Data.xCAR_Go(30, 610); // ³å
       delay_ms(500);
       Motor_Data.xCAR_Track_Go();
       Motor_Data.xCAR_Track_Go();
@@ -616,9 +616,9 @@ void xAuto_Run_Function(void)
     else if (1200 > Count_ms) // D2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(30, 600); // ³å
-      delay_ms(200);
-      Motor_Data.xCAR_Go(30, 600); // ³å
+      Motor_Data.xCAR_Go(30, 610); // ³å
+      delay_ms(100);
+      Motor_Data.xCAR_Go(30, 610); // ³å
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
@@ -632,9 +632,9 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       Motor_Data.xCAR_Back(20, 600);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 600); // ³å
-      delay_ms(200);
-      Motor_Data.xCAR_Go(30, 600); // ³å
+      Motor_Data.xCAR_Go(30, 610); // ³å
+      delay_ms(100);
+      Motor_Data.xCAR_Go(30, 610); // ³å
       delay_ms(500);
 
       Motor_Data.xCAR_Track_Go();
@@ -855,9 +855,9 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Track(30);
       delay_ms(300);
       Motor_Data.xCAR_Go(30, 610); // ³å
-      delay_ms(200);
+      delay_ms(100);
       Motor_Data.xCAR_Go(30, 610); // ³å
-      delay_ms(500);
+      delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
@@ -866,7 +866,7 @@ void xAuto_Run_Function(void)
     {
       Count_ms = 0;
       Motor_Data.xCAR_Go(30, 610); // ³å
-      delay_ms(200);
+      delay_ms(100);
       Motor_Data.xCAR_Go(30, 610); // ³å
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
@@ -883,9 +883,9 @@ void xAuto_Run_Function(void)
       delay_ms(300);
       Motor_Data.xCAR_Track(20);
       Motor_Data.xCAR_Go(30, 610); // ³å
-      delay_ms(200);
+      delay_ms(100);
       Motor_Data.xCAR_Go(30, 610); // ³å
-      delay_ms(500);
+      delay_ms(300);
 
       Motor_Data.xCAR_Track_Go();
       delay_ms(300);
