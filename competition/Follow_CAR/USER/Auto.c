@@ -1325,13 +1325,14 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go(); // D2
     delay_ms(400);
     printf("%d\r\n", MainCar_Send_Init_light);
-    CarPort_Data.xCarPort_Control_Arrive_Level(1, 1);
 
-    if (MainCar_Send_Init_light % 2 + 1 == 1)
+    if (MainCar_Send_Init_light % 2 + 1 == 1) // Á¢Ìå³µ¿â
     {
+      CarPort_Data.xCarPort_Control_Arrive_Level(1, 1);
       Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
       delay_ms(500);
       CarPort_Data.xCarPort_CarBack_Into(1);
+      CarPort_Data.xCarPort_Control_Arrive_Level(1, MainCar_Send_Cengshu);
     }
     else
     {
@@ -1887,8 +1888,6 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2); // B4
     delay_ms(500);
     // ETC
-
-
 
     Run_State = 8;
     break;
