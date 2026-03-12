@@ -1272,9 +1272,9 @@ void xAuto_Run_Function(void)
     delay_ms(300);
     Motor_Data.xCAR_Track(25);
     delay_ms(300);
-    Motor_Data.xCAR_Go(30, 530); // ³å
-    delay_ms(300);
-    Motor_Data.xCAR_Go(30, 530); // ³å
+    Motor_Data.xCAR_Go(30, 550); // ³å
+    delay_ms(200);
+    Motor_Data.xCAR_Go(30, 550); // ³å
     delay_ms(500);
     Motor_Data.xCAR_Track(20);
     delay_ms(500);
