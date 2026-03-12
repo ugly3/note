@@ -1342,7 +1342,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       Motor_Data.xCAR_Back(25, 800);
     }
-    
+    MainCar_Data.xStart_Command_To_MainCar();
     Run_State = 4;
     break;
   }
@@ -1594,7 +1594,7 @@ void xAuto_Run_Function(void)
     delay_ms(100);
     MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
     delay_ms(100);
-    
+
     Run_State = 6;
     break;
   }
