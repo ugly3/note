@@ -1727,12 +1727,16 @@ Motor_Data.xCAR_Track_Go();//F2
   case 4:
   {
 Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);//F2
+//Ãÿ ‚µÿ–Œ
+
 
     Run_State = 5;
     break;
   }
   case 5:
   {
+    delay_ms(500);
+Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);//B2
 
     Run_State = 6;
     break;
