@@ -1329,9 +1329,12 @@ void xAuto_Run_Function(void)
     }
 
     uint8_t len = strlen(Two_Code_Data_parsed_Store1);
-    for(uint8_t i=0;i<len)
-    Smart_TFT_Data.xSmart_TFT_Hex_Diaplay();
-
+    uint8_t hex_num[3] = 0;
+    for (uint8_t i = 0; i < len / 2; i++)
+    {
+      hex_num[i] = CharToHex(Two_Code_Data_parsed_Store1[i]) << 4 | CharToHex(Two_Code_Data_parsed_Store1[i + 1]);
+    }
+    Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(hex_num);
 
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
