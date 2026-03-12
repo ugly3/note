@@ -9,8 +9,8 @@
 
 CarPort_Tyepdef CarPort_Data =
 	{
-		.Device_A = 0x0D,
-		.Device_B = 0x05,
+		.Device_A = 0x01,
+		.Device_B = 0x02,
 		.xCarPort_Control_Arrive_Level = &xCarPort_Control_Arrive_Level,
 		.xCarPort_Ack_State = &xCarPort_Ack_State,
 		.xCarPort_Ack_Infrared_State = &xCarPort_Ack_Infrared_State,
@@ -43,11 +43,11 @@ void xCarPort_Control_Arrive_Level(uint8_t device, uint8_t num)
 
 	memcpy(Temp, Carport_Buf, sizeof(Carport_Buf));
 
-	if (device == 0x0D) // 设备A
+	if (device == 0x01) // 设备A
 	{
 		Temp[1] = 0x0D;
 	}
-	else if (device == 0x05) // 设备B
+	else if (device == 0x02) // 设备B
 	{
 		Temp[1] = 0x05;
 	}
@@ -63,11 +63,11 @@ void xCarPort_Control_Arrive_Level(uint8_t device, uint8_t num)
 		delay_ms(100);
 	}
 	CarPort_Data.xCarPort_Ack_State(device);
-	if (device == 0x0D)
+	if (device == 0x01)
 		while (CarPort_Data.xCarPort_Ack_State(device) != num)
 			;
 
-	else if (device == 0x05)
+	else if (device == 0x02)
 		while (CarPort_Data.xCarPort_Ack_State(device) != num)
 			;
 }
@@ -96,11 +96,11 @@ uint8_t xCarPort_Ack_State(uint8_t device)
 	uint8_t Receive_B_State; // 接收设备B的层数
 
 	memcpy(Temp, Carport_Buf, sizeof(Carport_Buf));
-	if (device == 0x0D) // 设备A
+	if (device == 0x01) // 设备A
 	{
 		Temp[1] = 0x0D;
 	}
-	else if (device == 0x05) // 设备B
+	else if (device == 0x02) // 设备B
 	{
 		Temp[1] = 0x05;
 	}
@@ -110,7 +110,7 @@ uint8_t xCarPort_Ack_State(uint8_t device)
 	Temp[5] = 0x00;
 	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);
 	Temp[6] = CheckSum; // 校验和
-	if (device == 0x0D) // 设备A
+	if (device == 0x01) // 设备A
 	{
 		while (Communication_Data.CarPort_Back_A_Level == 0) // 判断有没有返回当前车库位于第几层数据
 		{
@@ -126,7 +126,7 @@ uint8_t xCarPort_Ack_State(uint8_t device)
 		Communication_Data.CarPort_Back_A_Level = 0; // 对设备A的标志位清零
 		return Receive_A_State;
 	}
-	else if (device == 0x05) // 设备B
+	else if (device == 0x02) // 设备B
 	{
 		while (Communication_Data.CarPort_Back_B_Level == 0) // 判断有没有返回当前车库位于第几层数据
 		{
@@ -259,7 +259,7 @@ void xCarPort_CarBack_Into(uint8_t device)
 		case 1: // 前后都未触发
 		{
 			if (flag == 0)
-				Motor_Data.xCAR_Back(33, 500);
+				Motor_Data.xCAR_Back(30, 400);
 			else if (flag == 1 || flag == 2)
 				Carport_Back_Flag = 2; // 已对齐
 
