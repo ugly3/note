@@ -1330,11 +1330,13 @@ void xAuto_Run_Function(void)
 
     uint8_t len = strlen((char *)Two_Code_Data_parsed_Store1);
     char hex_num[3] = {0};
-    for (uint8_t i = 0; i < len / 2; i++)
+    for (uint8_t i = 0; i < len / 2; i += 2)
     {
       hex_num[i] = CharToHex(Two_Code_Data_parsed_Store1[i]) << 4 | CharToHex(Two_Code_Data_parsed_Store1[i + 1]);
     }
     Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(Smart_TFT_Data.Device_B, hex_num);
+    for (uint8_t i = 0; i < 3; i++)
+      printf("%02x ", hex_num[i]);
 
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
