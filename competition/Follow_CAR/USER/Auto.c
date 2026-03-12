@@ -1343,7 +1343,7 @@ void xAuto_Run_Function(void)
     delay_ms(500);
     Motor_Data.xCAR_Track_Go(); // D2
     delay_ms(400);
-    printf("Init_light:d\r\n", MainCar_Send_Init_light);
+    printf("Init_light:% d\r\n", MainCar_Send_Init_light);
 
     if (MainCar_Send_Init_light % 2 + 1 == 1) // Á¢Ìå³µ¿â
     {
@@ -1922,6 +1922,7 @@ void xAuto_Run_Function(void)
   {
     delay_ms(500);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2); // D4
+    delay_ms(500);
 
     Run_State = 9;
     break;
