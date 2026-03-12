@@ -1273,12 +1273,13 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track(25);
     delay_ms(300);
     Motor_Data.xCAR_Go(30, 530); // 冲
+    delay_ms(300);
     Motor_Data.xCAR_Go(30, 530); // 冲
     delay_ms(500);
     Motor_Data.xCAR_Track_Go();
     delay_ms(500);
     // 二维码识别
-    Identify_Two_Code_Arr[3] = 0x01;
+    Identify_Two_Code _Arr[3] = 0x01;
     Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // 发送请求识别二维码
     delay_ms(500);
     delay_ms(500);
@@ -1287,7 +1288,7 @@ void xAuto_Run_Function(void)
 
     if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
     {
-      Motor_Data.xCAR_Back(20, 450);
+      Motor_Data.xCAR_Back(20, 400);
       Rx_count = 0;
       delay_ms(500);
       delay_ms(500);
