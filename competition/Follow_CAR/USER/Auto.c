@@ -1705,6 +1705,7 @@ void xAuto_Run_Function(void)
   case 2:
   {
 Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);//F6
+delay_ms(500);
 //车牌与车型识别任务
 
 
@@ -1713,12 +1714,19 @@ Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);//F6
   }
   case 3:
   {
+Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);//F6
+delay_ms(500);
+Motor_Data.xCAR_Track_Go();//F4
+Motor_Data.xCAR_Track_Go();//F2
+//二维码识别任务
+
 
     Run_State = 4;
     break;
   }
   case 4:
   {
+Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);//F2
 
     Run_State = 5;
     break;
