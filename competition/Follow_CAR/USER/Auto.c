@@ -1132,7 +1132,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
 
-    CarPort_Data.xCarPort_CarBack_Into(1);
+    CarPort_Data.xCarPort_CarBack_Into(CarPort_Data.Device_A);
 
     printf("MainCar_Send_Init_light:%d ", MainCar_Send_Init_light);
     uint8_t shiji_Cengshu = (Two_Code_Data_parsed_Store1[0] + Two_Code_Data_parsed_Store1[1]) * MainCar_Send_Init_light % 4 + 1;
@@ -1349,7 +1349,7 @@ void xAuto_Run_Function(void)
       CarPort_Data.xCarPort_Control_Arrive_Level(1, 1);
       Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
       delay_ms(500);
-      CarPort_Data.xCarPort_CarBack_Into(1);
+      CarPort_Data.xCarPort_CarBack_Into(CarPort_Data.Device_A);
       CarPort_Data.xCarPort_Control_Arrive_Level(1, MainCar_Send_Cengshu);
     }
     else
@@ -1605,7 +1605,7 @@ void xAuto_Run_Function(void)
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
-    CarPort_Data.xCarPort_CarBack_Into(1);
+    CarPort_Data.xCarPort_CarBack_Into(CarPort_Data.Device_A);
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, MainCar_Send_Init_light);
 
     MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
@@ -1921,7 +1921,7 @@ void xAuto_Run_Function(void)
   {
     delay_ms(500);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2); // D4
-    
+
     Run_State = 9;
     break;
   }
