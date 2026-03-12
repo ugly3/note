@@ -1821,42 +1821,69 @@ void xAuto_Run_Function(void)
   {
   case 1:
   {
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(500);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    delay_ms(500);
+    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time); // F6
+                                                  // 车牌与车型识别任务
 
     Run_State = 2;
     break;
   }
   case 2:
   {
+    delay_ms(500);
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
+    delay_ms(500);
+    Motor_Data.xCAR_Track_Go(); // F4
+                                // 交通灯识别任务
 
     Run_State = 3;
     break;
   }
   case 3:
   {
+    Motor_Data.xCAR_Track_Go(); // F2
+    delay_ms(500);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // F2
+    delay_ms(500);
+    // 智能语音交互任务
 
     Run_State = 4;
     break;
   }
   case 4:
   {
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    // 二维码识别任务
 
     Run_State = 5;
     break;
   }
   case 5:
   {
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    delay_ms(500);
+    // 特殊地形任务,RFID识别
 
     Run_State = 6;
     break;
   }
   case 6:
   {
+    delay_ms(500);//B2
+    // 智能路灯感知调节任务
 
     Run_State = 7;
     break;
   }
   case 7:
   {
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    delay_ms(500);
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(500);
 
     Run_State = 8;
     break;
