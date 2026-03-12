@@ -1,30 +1,25 @@
 /**
 ************************************************************************
- *    文件名：three_dim_carport
- *      说明：立体车库标志物
- *  通信方式：Zigbee无线通信
+*    文件名：three_dim_carport
+*      说明：立体车库标志物
+*  通信方式：Zigbee无线通信
 ************************************************************************
 **/
 #include "three_dim_carport.h"
 
-
-CarPort_Tyepdef CarPort_Data = 
-{
-	.Device_A = 0x0D,
-	.Device_B = 0x05,
-	.xCarPort_Control_Arrive_Level = &xCarPort_Control_Arrive_Level,
-	.xCarPort_Ack_State = &xCarPort_Ack_State,
-	.xCarPort_Ack_Infrared_State = &xCarPort_Ack_Infrared_State,
-	.xCarPort_CarBack_Into = &xCarPort_CarBack_Into
-};
-
+CarPort_Tyepdef CarPort_Data =
+	{
+		.Device_A = 0x0D,
+		.Device_B = 0x05,
+		.xCarPort_Control_Arrive_Level = &xCarPort_Control_Arrive_Level,
+		.xCarPort_Ack_State = &xCarPort_Ack_State,
+		.xCarPort_Ack_Infrared_State = &xCarPort_Ack_Infrared_State,
+		.xCarPort_CarBack_Into = &xCarPort_CarBack_Into};
 
 /*立体车库标志物发送固定指令，帧头和帧尾
 注意---当前我们的立体车库标志物为A
 */
-uint8_t Carport_Buf[8] = {0x55,0x00,0x00,0x00,0x00,0x00,0x00,0xBB};  
-
-
+uint8_t Carport_Buf[8] = {0x55, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xBB};
 
 /*
  ******************************指定立体车库到达的层数*****************************
@@ -41,48 +36,48 @@ uint8_t Carport_Buf[8] = {0x55,0x00,0x00,0x00,0x00,0x00,0x00,0xBB};
 返回值：无
 */
 
-void xCarPort_Control_Arrive_Level(uint8_t device,uint8_t num)
+void xCarPort_Control_Arrive_Level(uint8_t device, uint8_t num)
 {
 	uint8_t Temp[8] = {0};
 	uint8_t CheckSum;
 
-    memcpy(Temp,Carport_Buf,sizeof(Carport_Buf));
-	
-	if(device == 0x0D)  //设备A
+	memcpy(Temp, Carport_Buf, sizeof(Carport_Buf));
+
+	if (device == 0x0D) // 设备A
 	{
 		Temp[1] = 0x0D;
 	}
-	else if(device == 0x05)  //设备B
+	else if (device == 0x05) // 设备B
 	{
 		Temp[1] = 0x05;
 	}
-	Temp[2] = 0x01;  //主指令
-	Temp[3] = num;   //选择到达的层数
+	Temp[2] = 0x01; // 主指令
+	Temp[3] = num;	// 选择到达的层数
 	Temp[4] = 0x00;
 	Temp[5] = 0x00;
-	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);
+	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);
 	Temp[6] = CheckSum;
-	for(uint8_t i=0;i<3;i++) //发送三次控制指令；注意：一定要让i=0初始化；
+	for (uint8_t i = 0; i < 3; i++) // 发送三次控制指令；注意：一定要让i=0初始化；
 	{
-		Send_ZigbeeData_To_Fifo(Temp, 8);	//发送控制命令
-		delay_ms(100);		
+		Send_ZigbeeData_To_Fifo(Temp, 8); // 发送控制命令
+		delay_ms(100);
 	}
-    CarPort_Data.xCarPort_Ack_State(device);
-    if(device == 0x0D)
-        while(CarPort_Data.xCarPort_Ack_State(device)!=num);
+	CarPort_Data.xCarPort_Ack_State(device);
+	if (device == 0x0D)
+		while (CarPort_Data.xCarPort_Ack_State(device) != num)
+			;
 
-    else if(device == 0x05)
-        while(CarPort_Data.xCarPort_Ack_State(device)!=num);
-    
+	else if (device == 0x05)
+		while (CarPort_Data.xCarPort_Ack_State(device) != num)
+			;
 }
-
 
 /*
  ******************************请求回传立体车库当前位于的层数************************
-* 帧头1---> 0x55   * 帧头2---车库A：0x0D--车库B：0x05    帧尾---> 0xBB       
+* 帧头1---> 0x55   * 帧头2---车库A：0x0D--车库B：0x05    帧尾---> 0xBB
 ---------------------------------------------------------------------------------
    主指令 |   副指令1     |   副指令2  |   副指令3  |     说明                     主指令0x02:发送指令请求返回数据
-   0x02   |    0x01       |   0x00     |     0x00   | 请求返回立体车库当前层数     
+   0x02   |    0x01       |   0x00     |     0x00   | 请求返回立体车库当前层数
 -----------------------------------------------------------------------------------
    0x03	  |    0x01       |   0x01     |     0x00   | 返回车库位于第一层       主指令0x03:接收车库Zigbee回传的指令
    0x03   |    0x01       |   0x02     |     0x00   | 返回车库位于第二层
@@ -97,67 +92,65 @@ uint8_t xCarPort_Ack_State(uint8_t device)
 	uint8_t Temp[8] = {0};
 	uint8_t CheckSum;
 	uint8_t TimeOut = 0;
-	uint8_t Receive_A_State;  //接收设备A的层数
-	uint8_t Receive_B_State;  //接收设备B的层数
-	
-	memcpy(Temp,Carport_Buf,sizeof(Carport_Buf));
-	if(device == 0x0D)   //设备A
+	uint8_t Receive_A_State; // 接收设备A的层数
+	uint8_t Receive_B_State; // 接收设备B的层数
+
+	memcpy(Temp, Carport_Buf, sizeof(Carport_Buf));
+	if (device == 0x0D) // 设备A
 	{
 		Temp[1] = 0x0D;
 	}
-	else if(device == 0x05)  //设备B
+	else if (device == 0x05) // 设备B
 	{
 		Temp[1] = 0x05;
 	}
-	Temp[2] = 0x02;  //主指令，请求返回
-	Temp[3] = 0x01;  //副指令1，返回立体车库当前层数
+	Temp[2] = 0x02; // 主指令，请求返回
+	Temp[3] = 0x01; // 副指令1，返回立体车库当前层数
 	Temp[4] = 0x00;
 	Temp[5] = 0x00;
-	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);
-	Temp[6] = CheckSum; //校验和  
-	if(device == 0x0D) //设备A
+	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);
+	Temp[6] = CheckSum; // 校验和
+	if (device == 0x0D) // 设备A
 	{
-		while(Communication_Data.CarPort_Back_A_Level == 0)  //判断有没有返回当前车库位于第几层数据
+		while (Communication_Data.CarPort_Back_A_Level == 0) // 判断有没有返回当前车库位于第几层数据
 		{
-			Send_ZigbeeData_To_Fifo(Temp,8);  //若没有返回车库位于第几层数据，则发送请求回传车库位于几层数据
+			Send_ZigbeeData_To_Fifo(Temp, 8); // 若没有返回车库位于第几层数据，则发送请求回传车库位于几层数据
 			delay_ms(100);
 			TimeOut++;
-			if(TimeOut >3)
+			if (TimeOut > 3)
 			{
-				break;    //超时2.5s后，退出此循环，防止卡死
+				break; // 超时2.5s后，退出此循环，防止卡死
 			}
-            
 		}
 		Receive_A_State = Communication_Data.CarPort_Back_A_Level;
-		Communication_Data.CarPort_Back_A_Level = 0;     //对设备A的标志位清零
+		Communication_Data.CarPort_Back_A_Level = 0; // 对设备A的标志位清零
 		return Receive_A_State;
 	}
-	else if(device == 0x05)  //设备B
+	else if (device == 0x05) // 设备B
 	{
-		while(Communication_Data.CarPort_Back_B_Level == 0)  //判断有没有返回当前车库位于第几层数据
+		while (Communication_Data.CarPort_Back_B_Level == 0) // 判断有没有返回当前车库位于第几层数据
 		{
-			Send_ZigbeeData_To_Fifo(Temp,8);  //若没有返回车库位于第几层数据，则发送请求回传车库位于几层数据
+			Send_ZigbeeData_To_Fifo(Temp, 8); // 若没有返回车库位于第几层数据，则发送请求回传车库位于几层数据
 			delay_ms(100);
 			TimeOut++;
-			if(TimeOut >3)
+			if (TimeOut > 3)
 			{
-				break;    //超时2.5s后，退出此循环，防止卡死
+				break; // 超时2.5s后，退出此循环，防止卡死
 			}
 		}
 		Receive_B_State = Communication_Data.CarPort_Back_B_Level;
-		Communication_Data.CarPort_Back_B_Level = 0;     //对设备A的标志位清零
+		Communication_Data.CarPort_Back_B_Level = 0; // 对设备A的标志位清零
 		return Receive_B_State;
 	}
 	return 0;
 }
 
-
 /*
  ******************************请求回传立体车库前/后侧红外状态************************
-* 帧头1---> 0x55   * 帧头2---车库A：0x0D--车库B：0x05    帧尾---> 0xBB       
+* 帧头1---> 0x55   * 帧头2---车库A：0x0D--车库B：0x05    帧尾---> 0xBB
 ---------------------------------------------------------------------------------
    主指令 |   副指令1     |   副指令2  |   副指令3  |     说明                     主指令0x02:发送指令请求返回数据
-   0x02   |    0x02       |   0x00     |     0x00   | 请求返回立体车库前/后侧红外状态    
+   0x02   |    0x02       |   0x00     |     0x00   | 请求返回立体车库前/后侧红外状态
 -----------------------------------------------------------------------------------
    0x03	  |    0x02       |   0x01     |     0x01   |  前侧和后侧被触发            主指令0x03:接收车库Zigbee回传的指令
    0x03   |    0x02       |   0x02     |     0x02   |  前侧和后侧未触发
@@ -168,7 +161,7 @@ uint8_t xCarPort_Ack_State(uint8_t device)
 返回值：返回前侧和后侧的状态
 ---副指令2（前）---副指令3（后）
 ---0x01（被触发）---（0x02未触发）
-0x01 -- 0x01（前后被触发）  
+0x01 -- 0x01（前后被触发）
 0x02 -- 0x02（前后未触发）
 0x01 -- 0x02（前触发，后未触发）
 0x02 -- 0x01（前未触发，后触发）
@@ -184,65 +177,64 @@ Communication_Data.CarPort_Back_B_Infrared
 uint8_t xCarPort_Ack_Infrared_State(uint8_t device)
 {
 	uint8_t Temp[8] = {0};
-	uint8_t CheckSum=0;
+	uint8_t CheckSum = 0;
 	uint8_t TimeOut = 0;
-	uint8_t Receive_A_State=0;  //接收设备A的
-	uint8_t Receive_B_State=0;  //接收设备B的
-    Communication_Data.CarPort_Back_A_Infrared=0;
-    Communication_Data.CarPort_Back_B_Infrared=0;
-	
-	memcpy(Temp,Carport_Buf,sizeof(Carport_Buf));
-	if(device == 0x0D)   //设备A
+	uint8_t Receive_A_State = 0; // 接收设备A的
+	uint8_t Receive_B_State = 0; // 接收设备B的
+	Communication_Data.CarPort_Back_A_Infrared = 0;
+	Communication_Data.CarPort_Back_B_Infrared = 0;
+
+	memcpy(Temp, Carport_Buf, sizeof(Carport_Buf));
+	if (device == 0x0D) // 设备A
 	{
 		Temp[1] = 0x0D;
 	}
-	else if(device == 0x05)  //设备B
+	else if (device == 0x05) // 设备B
 	{
 		Temp[1] = 0x05;
 	}
-	Temp[2] = 0x02;  //主指令，请求返回
-	Temp[3] = 0x02;  //副指令1，返回前后触发状态
+	Temp[2] = 0x02; // 主指令，请求返回
+	Temp[3] = 0x02; // 副指令1，返回前后触发状态
 	Temp[4] = 0x00;
 	Temp[5] = 0x00;
-	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);
-	Temp[6] = CheckSum; //校验和
-    if(device == 0x0D)	//设备A
+	CheckSum = Mixture_Data.xGet_CheckSum(Temp[2], Temp[3], Temp[4], Temp[5]);
+	Temp[6] = CheckSum; // 校验和
+	if (device == 0x0D) // 设备A
 	{
-		while(Communication_Data.CarPort_Back_A_Infrared == 0)    //未接收到前后侧状态进入while
+		while (Communication_Data.CarPort_Back_A_Infrared == 0) // 未接收到前后侧状态进入while
 		{
-			Send_ZigbeeData_To_Fifo(Temp,8);    //发送请求回传前后侧状态命令
+			Send_ZigbeeData_To_Fifo(Temp, 8); // 发送请求回传前后侧状态命令
 			delay_ms(200);
 			TimeOut++;
-			if(TimeOut > 10)  //一定要加多次请求判断循环，才能确保发送了请求回传命令，防止倒车入库失败
+			if (TimeOut > 10) // 一定要加多次请求判断循环，才能确保发送了请求回传命令，防止倒车入库失败
 			{
-                printf("NO");
-				break;    //超时2.5s后，退出此循环，防止卡死
+				printf("NO");
+				break; // 超时2.5s后，退出此循环，防止卡死
 			}
 		}
 		Receive_A_State = Communication_Data.CarPort_Back_A_Infrared;
-        printf("R:%d ",Receive_A_State);
-		Communication_Data.CarPort_Back_A_Infrared = 0;   //接收到的前后测状态清零
-        return Receive_A_State;
+		printf("R:%d ", Receive_A_State);
+		Communication_Data.CarPort_Back_A_Infrared = 0; // 接收到的前后测状态清零
+		return Receive_A_State;
 	}
-	else if(device == 0x05) //设备B
+	else if (device == 0x05) // 设备B
 	{
-		while(Communication_Data.CarPort_Back_B_Infrared == 0)    //未接收到前后侧状态进入while
+		while (Communication_Data.CarPort_Back_B_Infrared == 0) // 未接收到前后侧状态进入while
 		{
-			Send_ZigbeeData_To_Fifo(Temp,8);     //发送请求回传前后侧状态命令
+			Send_ZigbeeData_To_Fifo(Temp, 8); // 发送请求回传前后侧状态命令
 			delay_ms(200);
 			TimeOut++;
-			if(TimeOut > 10)  //一定要加多次请求判断循环，才能确保发送了请求回传命令，防止倒车入库失败
+			if (TimeOut > 10) // 一定要加多次请求判断循环，才能确保发送了请求回传命令，防止倒车入库失败
 			{
-				break;    //超时2.5s后，退出此循环，防止卡死
+				break; // 超时2.5s后，退出此循环，防止卡死
 			}
 		}
 		Receive_B_State = Communication_Data.CarPort_Back_B_Infrared;
-		Communication_Data.CarPort_Back_B_Infrared = 0;   //接收到的前后测状态清零
+		Communication_Data.CarPort_Back_B_Infrared = 0; // 接收到的前后测状态清零
 		return Receive_B_State;
 	}
 	return 0;
 }
-
 
 /*
 倒车入库
@@ -251,58 +243,59 @@ uint8_t xCarPort_Ack_Infrared_State(uint8_t device)
 */
 void xCarPort_CarBack_Into(uint8_t device)
 {
-    Motor_Data.xCAR_Track_Time(25,800);
+	Motor_Data.xCAR_Track_Time(25, 800);
 	delay_ms(500);
-	Motor_Data.xCAR_Back(25,800);
+	Motor_Data.xCAR_Back(25, 800);
 	delay_ms(500);
-	Motor_Data.xCAR_Track_Time(25,800);
+	Motor_Data.xCAR_Track_Time(25, 800);
 	delay_ms(500);
-	Motor_Data.xCAR_Back(25,800);
-    uint8_t Carport_Back_Flag = 0;
-    uint8_t flag =0;
-    while(Carport_Back_Flag != 2)//都检测到
-    {
-        Carport_Back_Flag =  CarPort_Data.xCarPort_Ack_Infrared_State(device);
-        switch(Carport_Back_Flag)                         
-        {
-            case 1: //前后都未触发
-            {
-                if(flag==0)
-                    Motor_Data.xCAR_Back(30,400);
-                else if(flag ==1 || flag ==2)
-                    Carport_Back_Flag=2;//已对齐 
+	Motor_Data.xCAR_Back(25, 800);
+	uint8_t Carport_Back_Flag = 0;
+	uint8_t flag = 0;
+	while (Carport_Back_Flag != 2) // 都检测到
+	{
+		Carport_Back_Flag = CarPort_Data.xCarPort_Ack_Infrared_State(device);
+		switch (Carport_Back_Flag)
+		{
+		case 1: // 前后都未触发
+		{
+			if (flag == 0)
+				Motor_Data.xCAR_Back(30, 400);
+			else if (flag == 1 || flag == 2)
+				Carport_Back_Flag = 2; // 已对齐
 
-                break;
-            }
-            case 3: //前侧触发
-            {
-                if(flag ==0)
-                {
-                    flag =1;
-                    Motor_Data.xCAR_Back(30,500);//上车库有斜坡速度要快点
-                }
-                else if(flag ==1)
-                {
-                    Motor_Data.xCAR_Back(28,300);//慢慢后退
-                }
-//                    else if(flag ==2)
-//                    {
-//                        Motor_Data.xCAR_Back(25,300);
-//                        Carport_Back_Flag=2;//已对齐
-//                    }
+			break;
+		}
+		case 3: // 前侧触发
+		{
+			if (flag == 0)
+			{
+				flag = 1;
+				Motor_Data.xCAR_Back(30, 500); // 上车库有斜坡速度要快点
+			}
+			else if (flag == 1)
+			{
+				Motor_Data.xCAR_Back(28, 300); // 慢慢后退
+			}
+			//                    else if(flag ==2)
+			//                    {
+			//                        Motor_Data.xCAR_Back(25,300);
+			//                        Carport_Back_Flag=2;//已对齐
+			//                    }
 
-                break;
-            }
-            case 4: //后侧触发
-            {
-                flag=2;
-                Motor_Data.xCAR_Go(18,200);
-                Carport_Back_Flag=2;//已对齐
+			break;
+		}
+		case 4: // 后侧触发
+		{
+			flag = 2;
+			Motor_Data.xCAR_Go(18, 200);
+			Carport_Back_Flag = 2; // 已对齐
 
-                break;
-            }
-            default: break;
-        } 
-    }
-    Roadway_Flag_clean();
+			break;
+		}
+		default:
+			break;
+		}
+	}
+	Roadway_Flag_clean();
 }
