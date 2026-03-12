@@ -1778,6 +1778,7 @@ void xAuto_Run_Function(void)
   {
 Motor_Data.xCAR_R45(wheel_Speed, wheel_Time); // D4
 Motor_Data.xCAR_R45(wheel_Speed, wheel_Time); // D4
+
     Run_State = 10;
     break;
   }
