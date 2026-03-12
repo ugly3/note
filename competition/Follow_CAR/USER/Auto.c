@@ -1694,81 +1694,90 @@ void xAuto_Run_Function(void)
   {
   case 1:
   {
-    Motor_Data.xCAR_Track_Go(); 
+    Motor_Data.xCAR_Track_Go();
     delay_ms(500)
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);//D6
-    //ETC
-
+        Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // D6
+    // ETC
 
     break;
   }
   case 2:
   {
-Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);//F6
-delay_ms(500);
-//车牌与车型识别任务
-
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time); // F6
+    delay_ms(500);
+    // 车牌与车型识别任务
 
     Run_State = 3;
     break;
   }
   case 3:
   {
-Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);//F6
-delay_ms(500);
-Motor_Data.xCAR_Track_Go();//F4
-Motor_Data.xCAR_Track_Go();//F2
-delay_ms(500);
-//二维码识别任务
-
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time); // F6
+    delay_ms(500);
+    Motor_Data.xCAR_Track_Go(); // F4
+    Motor_Data.xCAR_Track_Go(); // F2
+    delay_ms(500);
+    // 二维码识别任务
 
     Run_State = 4;
     break;
   }
   case 4:
   {
-delay_ms(500);
-Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);//F2
-delay_ms(500);
-//语音交互任务
-
+    delay_ms(500);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // F2
+    delay_ms(500);
+    // 语音交互任务
 
     Run_State = 5;
     break;
   }
   case 5:
   {
-delay_ms(500);
-Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-delay_ms(500);
-Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-//特殊地形任务,RFID识别
-
+    delay_ms(500);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    delay_ms(500);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    // 特殊地形任务,RFID识别
 
     Run_State = 6;
     break;
   }
   case 6:
   {
+    delay_ms(500);
+    // 智能路灯感知调节任务
 
     Run_State = 7;
     break;
   }
   case 7:
   {
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+    // 交通灯识别任务
 
     Run_State = 8;
     break;
   }
   case 8:
   {
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(500);
+    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2); // B4
+    delay_ms(500);
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(500);
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time); // D4
+    // 图形识别任务
+
 
     Run_State = 9;
     break;
   }
   case 9:
   {
-
+Motor_Data.xCAR_R45(wheel_Speed, wheel_Time); // D4
+Motor_Data.xCAR_R45(wheel_Speed, wheel_Time); // D4
     Run_State = 10;
     break;
   }
