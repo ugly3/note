@@ -1704,7 +1704,10 @@ void xAuto_Run_Function(void)
   }
   case 2:
   {
-Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);//F6
+Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);//F6
+//车牌与车型识别任务
+
+
     Run_State = 3;
     break;
   }
