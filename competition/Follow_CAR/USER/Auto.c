@@ -1342,6 +1342,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       Motor_Data.xCAR_Back(25, 800);
     }
+    
     Run_State = 4;
     break;
   }
@@ -1588,6 +1589,12 @@ void xAuto_Run_Function(void)
     delay_ms(300);
     CarPort_Data.xCarPort_CarBack_Into(1);
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, MainCar_Send_Init_light);
+
+    MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
+    delay_ms(100);
+    MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
+    delay_ms(100);
+    
     Run_State = 6;
     break;
   }
