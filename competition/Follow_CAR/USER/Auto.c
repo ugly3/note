@@ -437,7 +437,7 @@ void xAuto_Run_Function(void)
 //            Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma);//需修改开启码
 
 #if YT1_2026
-#define Two_Code_Count 2
+uint8_t Two_Code_Count = 2;
 uint8_t Count = 0;
 uint8_t time_out = 0;
 uint8_t Buf1[200];
@@ -726,6 +726,7 @@ void xAuto_Run_Function(void)
 
 #if YT2_2026
 uint8_t Buf1[200];
+uint8_t Two_Code_Count = 1;
 void xAuto_Run_Function(void)
 {
   switch (Run_State)
@@ -1188,6 +1189,7 @@ void xAuto_Run_Function(void)
 #if YT4_2026
 bool lock_flag = 0; // 锁车标志，0为未锁车，1为已锁车
 uint8_t time_out = 0;
+uint8_t Two_Code_Count = 1;
 void xAuto_Run_Function(void)
 {
   if (lock_flag == 0)
@@ -1342,7 +1344,7 @@ void xAuto_Run_Function(void)
     delay_ms(500);
     Motor_Data.xCAR_Track_Go(); // D2
     delay_ms(400);
-    printf("%d\r\n", MainCar_Send_Init_light);
+    printf("Init_light:d\r\n", MainCar_Send_Init_light);
 
     if (MainCar_Send_Init_light % 2 + 1 == 1) // 立体车库
     {
@@ -1420,7 +1422,7 @@ void xAuto_Run_Function(void)
 
 #endif
 #if YT5_2026
-#define Two_Code_Count 2
+uint8_t Two_Code_Count = 1;
 
 void xAuto_Run_Function(void)
 {
@@ -1629,7 +1631,7 @@ void xAuto_Run_Function(void)
 #endif
 
 #if BS_2026
-#define Two_Code_Count 2
+uint8_t Two_Code_Count = 2;
 void xAuto_Run_Function(void)
 {
   switch (Run_State)
@@ -1713,7 +1715,7 @@ void xAuto_Run_Function(void)
 #endif
 
 #if main2_2026
-#define Two_Code_Count 2
+uint8_t Two_Code_Count = 2;
 void xAuto_Run_Function(void)
 {
   switch (Run_State)
@@ -1840,7 +1842,7 @@ void xAuto_Run_Function(void)
 #endif
 
 #if main5_2026
-#define Two_Code_Count 2
+uint8_t Two_Code_Count = 2;
 void xAuto_Run_Function(void)
 {
   switch (Run_State)

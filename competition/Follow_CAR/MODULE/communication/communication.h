@@ -4,7 +4,7 @@
 
 typedef struct
 {
-	bool Smart_Traffic_A_Recognition_State;    
+	bool Smart_Traffic_A_Recognition_State;
 	bool Smart_Traffic_B_Recognition_State;
 	bool ETC_Open_Flag;
 	uint8_t Voice_Report_Rx_State;
@@ -14,8 +14,8 @@ typedef struct
 	uint8_t CarPort_Back_B_Level;
 	uint8_t CarPort_Back_A_Level;
 	bool Barrier_Open_Flag;
-    bool FollowCar_Start_flag;
-}Communication_Typedef;
+	bool FollowCar_Start_flag;
+} Communication_Typedef;
 
 extern Communication_Typedef Communication_Data;
 extern uint8_t jixun;
@@ -23,6 +23,6 @@ extern uint8_t YT5_Carport;
 extern volatile uint8_t Rx_count;
 
 void Can_ZigBeeRx_Check(void);
-
+extern uint8_t Two_Code_Count;
 
 #endif

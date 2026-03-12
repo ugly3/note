@@ -1,63 +1,61 @@
 /**
 ************************************************************************
- *    文件名：android（安卓部分）
- *      说明：安卓与主车之间的通信
+*    文件名：android（安卓部分）
+*      说明：安卓与主车之间的通信
 ************************************************************************
 **/
 #include "android.h"
 
-Typedef_Android Android_Data = 
-{
-	.Android_Main_Car_Start_Flag = 0, //主车开始启动标志位
-	.Red_State = 0,         // 识别为红灯
-	.Yellow_State = 0,      // 识别为黄灯         
-	.Green_State = 0,      // 识别为绿灯
-	.Two_Code_State = 0,   //识别二维码
-	.TFT_Licence_Flag = 0,    // TFT车牌识别
-	.TFT_Traffic_Flag = 0,    // TFT交通标志识别 
-	.Control_TFT_Paging = 0,        //安卓回传控制TFT向下翻页
-	.TFT_GraphCount_Flag = 0, //TFT图形数量识别
-	.TFT_GraphColour_Flag = 0, //TFT图形颜色识别
-	.TFT_Graph_CountAndColour_Flag = 0, //TFT图形识别(数量+颜色)
-	.TFT_Mask_Flag = 0,  //TFT口罩识别    
-	.TFT_Words_Flag = 0, //TFT文字识别  
-	.xMainCar_Send_Android = &xMainCar_Send_Android,
-    
-    .TFT_Car_Type_sucess_flag=0,//车型识别
-    .TFT_ChePai_sucess_flag=0,
-	.traffic_light_flag = 0,
+Typedef_Android Android_Data =
+	{
+		.Android_Main_Car_Start_Flag = 0,	// 主车开始启动标志位
+		.Red_State = 0,						// 识别为红灯
+		.Yellow_State = 0,					// 识别为黄灯
+		.Green_State = 0,					// 识别为绿灯
+		.Two_Code_State = 0,				// 识别二维码
+		.TFT_Licence_Flag = 0,				// TFT车牌识别
+		.TFT_Traffic_Flag = 0,				// TFT交通标志识别
+		.Control_TFT_Paging = 0,			// 安卓回传控制TFT向下翻页
+		.TFT_GraphCount_Flag = 0,			// TFT图形数量识别
+		.TFT_GraphColour_Flag = 0,			// TFT图形颜色识别
+		.TFT_Graph_CountAndColour_Flag = 0, // TFT图形识别(数量+颜色)
+		.TFT_Mask_Flag = 0,					// TFT口罩识别
+		.TFT_Words_Flag = 0,				// TFT文字识别
+		.xMainCar_Send_Android = &xMainCar_Send_Android,
+
+		.TFT_Car_Type_sucess_flag = 0, // 车型识别
+		.TFT_ChePai_sucess_flag = 0,
+		.traffic_light_flag = 0,
 };
-uint8_t Two_Code_Init_Data_Store[Two_Code_Count][200] = {0};   //存储全部二维码初始数据
-uint8_t Two_Code_Data_parsed_Store1[50] = {0};       // 存储二维码1解析结果
-uint8_t Two_Code_Data_parsed_Store2[50] = {0};       // 存储二维码2解析结果
-uint8_t Two_Code_Data_parsed_Store3[50] = {0};       // 存储二维码3解析结果
+uint8_t Two_Code_Init_Data_Store[3][200] = {0}; // 存储全部二维码初始数据
+uint8_t Two_Code_Data_parsed_Store1[50] = {0};	// 存储二维码1解析结果
+uint8_t Two_Code_Data_parsed_Store2[50] = {0};	// 存储二维码2解析结果
+uint8_t Two_Code_Data_parsed_Store3[50] = {0};	// 存储二维码3解析结果
 
-uint8_t TFT_License_Data_Store[6] = {0}; //TFT车牌数据存储
-uint8_t TFT_Traffic_Data_Store[7] = {0}; //TFT交通标志数据存储
-uint8_t TFT_GraphCount_Data_Store[7] = {0}; //TFT图形数量数据存储
-uint8_t TFT_GraphColour_Data_Store[7] = {0}; //TFT图形颜色数据存储
-uint8_t TFT_GraphAndColour_Data_Store[7] = {0}; //TFT图形(数量+颜色)数据存储
-uint8_t TFT_Mask_Data_Store[7] = {0}; //TFT口罩行人数量
-uint8_t TFT_Words_Data_Store[7] = {0}; //TFT文字识别存储数据
+uint8_t TFT_License_Data_Store[6] = {0};		// TFT车牌数据存储
+uint8_t TFT_Traffic_Data_Store[7] = {0};		// TFT交通标志数据存储
+uint8_t TFT_GraphCount_Data_Store[7] = {0};		// TFT图形数量数据存储
+uint8_t TFT_GraphColour_Data_Store[7] = {0};	// TFT图形颜色数据存储
+uint8_t TFT_GraphAndColour_Data_Store[7] = {0}; // TFT图形(数量+颜色)数据存储
+uint8_t TFT_Mask_Data_Store[7] = {0};			// TFT口罩行人数量
+uint8_t TFT_Words_Data_Store[7] = {0};			// TFT文字识别存储数据
 
-
-
-uint8_t Identify_Traffic_Light[8] = {0x55,0xFF,0x01,0x00,0x00,0x00,0x00,0xBB};//主车发给安卓请求识别红绿灯
-uint8_t Identify_Two_Code_Arr[8] = {0x55,0xFF,0x02,0x00,0x00,0x00,0x00,0xBB};//主车发给安卓请求识别二维码
-uint8_t Identify_TFT_License_Arr[8] = {0x55,0xFF,0x03,0x00,0x00,0x00,0x00,0xBB};//主车发给安卓请求识别TFT车牌
-uint8_t Identify_TFT_Traffic_Arr[8] = {0x55,0xFF,0x04,0x00,0x00,0x00,0x00,0xBB};//主车发给安卓请求识别TFT交通标志
-uint8_t Identify_TFT_GraphCount_Arr[8] = {0x55,0xFF,0x05,0x00,0x00,0x00,0x00,0xBB};//主车发给安卓请求识别TFT图形数量
-uint8_t Identify_TFT_GraphColour_Arr[8] = {0x55,0xFF,0x06,0x00,0x00,0x00,0x00,0xBB};//主车发给安卓请求识别TFT图形颜色
-uint8_t Identify_TFT_Graph_CountAndColour_Arr[8] = {0x55,0xFF,0x07,0x00,0x00,0x00,0x00,0xBB};//主车发给安卓请求识别TFT图形（数量+颜色）
-uint8_t Identify_TFT_Mask_Arr[8] = {0x55,0xFF,0x08,0x00,0x00,0x00,0x00,0xBB};//主车发给安卓请求识别TFT口罩行人
-uint8_t Identify_TFT_Words_Arr[8] = {0x55,0xFF,0x09,0x00,0x00,0x00,0x00,0xBB};//主车发给安卓请求识别TFT文字识别
-uint8_t Identify_TFT_CheXin_Arr[8] = {0x55,0xFF,0x10,0x00,0x00,0x00,0x00,0xBB};//主车发给安卓请求识别车型
-/* 
+uint8_t Identify_Traffic_Light[8] = {0x55, 0xFF, 0x01, 0x00, 0x00, 0x00, 0x00, 0xBB};				 // 主车发给安卓请求识别红绿灯
+uint8_t Identify_Two_Code_Arr[8] = {0x55, 0xFF, 0x02, 0x00, 0x00, 0x00, 0x00, 0xBB};				 // 主车发给安卓请求识别二维码
+uint8_t Identify_TFT_License_Arr[8] = {0x55, 0xFF, 0x03, 0x00, 0x00, 0x00, 0x00, 0xBB};				 // 主车发给安卓请求识别TFT车牌
+uint8_t Identify_TFT_Traffic_Arr[8] = {0x55, 0xFF, 0x04, 0x00, 0x00, 0x00, 0x00, 0xBB};				 // 主车发给安卓请求识别TFT交通标志
+uint8_t Identify_TFT_GraphCount_Arr[8] = {0x55, 0xFF, 0x05, 0x00, 0x00, 0x00, 0x00, 0xBB};			 // 主车发给安卓请求识别TFT图形数量
+uint8_t Identify_TFT_GraphColour_Arr[8] = {0x55, 0xFF, 0x06, 0x00, 0x00, 0x00, 0x00, 0xBB};			 // 主车发给安卓请求识别TFT图形颜色
+uint8_t Identify_TFT_Graph_CountAndColour_Arr[8] = {0x55, 0xFF, 0x07, 0x00, 0x00, 0x00, 0x00, 0xBB}; // 主车发给安卓请求识别TFT图形（数量+颜色）
+uint8_t Identify_TFT_Mask_Arr[8] = {0x55, 0xFF, 0x08, 0x00, 0x00, 0x00, 0x00, 0xBB};				 // 主车发给安卓请求识别TFT口罩行人
+uint8_t Identify_TFT_Words_Arr[8] = {0x55, 0xFF, 0x09, 0x00, 0x00, 0x00, 0x00, 0xBB};				 // 主车发给安卓请求识别TFT文字识别
+uint8_t Identify_TFT_CheXin_Arr[8] = {0x55, 0xFF, 0x10, 0x00, 0x00, 0x00, 0x00, 0xBB};				 // 主车发给安卓请求识别车型
+/*
 【终端发送给主车的格式】
 帧头第一位--0x55 帧头第二位--0xEE   帧头第三位判断哪个识别哪个任务
 帧头第二位：用来判断是由安卓发送给主车，再由主车来处理，还是直接由安卓发送数据给主车给zigbee直接发送出去给标志物
-操作码--0xXX 
-校验和                                                  
+操作码--0xXX
+校验和
 帧尾--0xBB
 */
 
@@ -92,7 +90,6 @@ uint8_t Identify_TFT_CheXin_Arr[8] = {0x55,0xFF,0x10,0x00,0x00,0x00,0x00,0xBB};/
 
 */
 
-
 /*   安卓回传给主车红绿灯数据
 
 | 帧头3| 数据1 | 数据2| 数据3| 数据4 | 数据5| 数据6 | 校验码 | 帧尾 |
@@ -104,12 +101,9 @@ uint8_t Identify_TFT_CheXin_Arr[8] = {0x55,0xFF,0x10,0x00,0x00,0x00,0x00,0xBB};/
 | 0x01 | 0x03 | 0x00 | 0x00 | 0x00 | 0x00 | 0x00  |  0x00 | 0xBB |绿灯
 */
 
-
-
-
 /*帧头第一位--0x55 帧头第二位--0xFF
 主指令--0xXX
-校验和 0x00 
+校验和 0x00
 帧尾--0xBB
 */
 /*
@@ -151,10 +145,8 @@ uint8_t Identify_TFT_CheXin_Arr[8] = {0x55,0xFF,0x10,0x00,0x00,0x00,0x00,0xBB};/
 --------------------------------------------------------------------------------
 */
 
-
-
 // 主车发送给安卓终端命令
-void xMainCar_Send_Android(uint8_t* Cmd)
+void xMainCar_Send_Android(uint8_t *Cmd)
 {
 	uint8_t CheckSum;
 	CheckSum = Mixture_Data.xGet_CheckSum(Cmd[2], Cmd[3], Cmd[4], Cmd[5]);
@@ -163,49 +155,4 @@ void xMainCar_Send_Android(uint8_t* Cmd)
 	delay_ms(100);
 }
 
-
-
 //   红绿灯识别，  二维码识别， TFT车牌， TFT形状， TFT交通标志，  TFT翻页，
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
