@@ -1921,14 +1921,21 @@ void xAuto_Run_Function(void)
   case 8:
   {
     delay_ms(500);
-    Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2); // D4
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time); // D4
     delay_ms(500);
+    // 图形识别任务
 
     Run_State = 9;
     break;
   }
   case 9:
   {
+    delay_ms(500);
+    Motor_Data.xCAR_R45(wheel_Speed, wheel_Time); // D4
+    delay_ms(500);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // D4
+    delay_ms(500);
+    // 道闸系统任务
 
     Run_State = 10;
     break;
@@ -1936,6 +1943,13 @@ void xAuto_Run_Function(void)
   case 10:
   {
 
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(500);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    delay_ms(500);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    delay_ms(500);
+    Motor_Data.xCAR_Back(25, 800);
     Run_State = 11;
     break;
   }
