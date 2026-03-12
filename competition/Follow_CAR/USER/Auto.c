@@ -954,6 +954,7 @@ void xAuto_Run_Function(void)
 
 #if YT3_2026
 extern uint8_t Send_Algorithm_Parameters_To_MainCar[8];
+uint8_t Two_Code_Count = 2;
 bool lock_flag = 0; // 锁车标志，0为未锁车，1为已锁车
 uint8_t time_out = 0;
 void xAuto_Run_Function(void)

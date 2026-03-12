@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OUTPUT\CarV.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OUTPUT\CarV.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Mar 12 19:21:57 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Mar 12 20:21:24 2026
 <BR><P>
 <H3>Maximum Stack Usage =        136 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -928,11 +928,11 @@ Global Symbols
 <P><STRONG><a name="[e4]"></a>Can_WifiRx_Check</STRONG> (Thumb, 818 bytes, Stack size 16 bytes, communication.o(i.Can_WifiRx_Check))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = Can_WifiRx_Check &rArr; PrintAndroidData_Array &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintAndroidData_Array
+<BR>[Calls]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check_VariableLen_Packet
+<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gt_get_sub
+<LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintAndroidData_Array
 <LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Normal_data
 <LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Abnormal_data
-<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check_VariableLen_Packet
-<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gt_get_sub
 <LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
@@ -1293,7 +1293,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[ea]"></a>PrintAndroidData_Array</STRONG> (Thumb, 126 bytes, Stack size 16 bytes, communication.o(i.PrintAndroidData_Array))
+<P><STRONG><a name="[ea]"></a>PrintAndroidData_Array</STRONG> (Thumb, 130 bytes, Stack size 16 bytes, communication.o(i.PrintAndroidData_Array))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = PrintAndroidData_Array &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -1943,10 +1943,10 @@ Global Symbols
 <P><STRONG><a name="[e7]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf8.o(i.__0printf$8))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintAndroidData_Array
-<LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Can_WifiRx_Check
+<BR>[Called By]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Can_WifiRx_Check
 <LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xAuto_Run_Function
 <LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xCarPort_Ack_Infrared_State
+<LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintAndroidData_Array
 <LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_A72_PortInit
 </UL>
 
@@ -2106,7 +2106,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hardware_Init
 </UL>
 
-<P><STRONG><a name="[14e]"></a>xAuto_Run_Function</STRONG> (Thumb, 1242 bytes, Stack size 16 bytes, auto.o(i.xAuto_Run_Function))
+<P><STRONG><a name="[14e]"></a>xAuto_Run_Function</STRONG> (Thumb, 1250 bytes, Stack size 16 bytes, auto.o(i.xAuto_Run_Function))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = xAuto_Run_Function &rArr; YT4_parse_two_codes &rArr; extract_data_7
 </UL>
 <BR>[Calls]<UL><LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
