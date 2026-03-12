@@ -243,13 +243,13 @@ uint8_t xCarPort_Ack_Infrared_State(uint8_t device)
 */
 void xCarPort_CarBack_Into(uint8_t device)
 {
-	Motor_Data.xCAR_Track_Time(25, 800);
+	Motor_Data.xCAR_Track_Time(30, 800);
 	delay_ms(500);
-	Motor_Data.xCAR_Back(25, 800);
+	Motor_Data.xCAR_Back(30, 800);
 	delay_ms(500);
-	Motor_Data.xCAR_Track_Time(25, 800);
+	Motor_Data.xCAR_Track_Time(30, 800);
 	delay_ms(500);
-	Motor_Data.xCAR_Back(25, 800);
+	Motor_Data.xCAR_Back(30, 800);
 	uint8_t Carport_Back_Flag = 0;
 	uint8_t flag = 0;
 	while (Carport_Back_Flag != 2) // ¶¼¼ì²âµ½

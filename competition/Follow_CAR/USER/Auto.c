@@ -1205,7 +1205,7 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
       time_out++;
-      if (time_out > 230) // 等待10秒后超时
+      if (time_out >= 240)
       {
         Run_State = 1; // 设置状态为1，进入下一阶段
         time_out = 0;  // 重置超时计数器
@@ -1275,7 +1275,7 @@ void xAuto_Run_Function(void)
     delay_ms(100);
     Motor_Data.xCAR_Go(30, 620); // 冲
     delay_ms(500);
-    Motor_Data.xCAR_Track(20);
+    Motor_Data.xCAR_Track_Go(25);
     delay_ms(500);
     // 二维码识别
     Identify_Two_Code_Arr[3] = 0x01;
@@ -1287,7 +1287,7 @@ void xAuto_Run_Function(void)
 
     if (Android_Data.Two_Code_State == 0) // 如果未进入识别模式
     {
-      Motor_Data.xCAR_Go(30, 320);
+      Motor_Data.xCAR_Back(30, 320);
       Rx_count = 0;
       delay_ms(500);
       delay_ms(500);
@@ -1376,7 +1376,7 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Track_Time(30, 800);
 
       delay_ms(500);
-      Motor_Data.xCAR_Back(25, 1000);
+      Motor_Data.xCAR_Back(25, 1500);
     }
     MainCar_Data.xStart_Command_To_MainCar();
     Run_State = 4;
