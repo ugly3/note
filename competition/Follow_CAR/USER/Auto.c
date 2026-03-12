@@ -145,7 +145,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Go(25, 250); // 走开十字路口，防止可能重复识别十字路口的卡片
 
     // F2→B2
-    delay_ms(400);
+    delay_ms(300);
 
     if (Count_ms < 600) // 特殊标志物在E2
     {
@@ -591,10 +591,10 @@ void xAuto_Run_Function(void)
   case 3:
   {
     // B2->F2
-    delay_ms(400);
+    delay_ms(300);
     track_time_Start = 1;
     Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
-    delay_ms(400);
+    delay_ms(300);
     sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
     Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
 
@@ -602,10 +602,11 @@ void xAuto_Run_Function(void)
     {
       Count_ms = 0;
       Motor_Data.xCAR_Back(20, 600);
-      delay_ms(400);
+      delay_ms(300);
       Motor_Data.xCAR_Track(20);
-      delay_ms(400);
+      delay_ms(300);
       Motor_Data.xCAR_Go(30, 530); // 冲
+      delay_ms(300);
       Motor_Data.xCAR_Go(30, 530); // 冲
       delay_ms(500);
       Motor_Data.xCAR_Track_Go();
@@ -616,8 +617,9 @@ void xAuto_Run_Function(void)
     {
       Count_ms = 0;
       Motor_Data.xCAR_Go(30, 530); // 冲
+      delay_ms(300);
       Motor_Data.xCAR_Go(30, 530); // 冲
-      delay_ms(400);
+      delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
     }
@@ -629,9 +631,10 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
       delay_ms(500);
       Motor_Data.xCAR_Back(20, 600);
-      delay_ms(400);
+      delay_ms(300);
       Motor_Data.xCAR_Track(20);
       Motor_Data.xCAR_Go(30, 530); // 冲
+      delay_ms(300);
       Motor_Data.xCAR_Go(30, 530); // 冲
       delay_ms(500);
 
@@ -849,10 +852,11 @@ void xAuto_Run_Function(void)
     {
       Count_ms = 0;
       Motor_Data.xCAR_Back(20, 600);
-      delay_ms(400);
+      delay_ms(300);
       Motor_Data.xCAR_Track(20);
-      delay_ms(400);
+      delay_ms(300);
       Motor_Data.xCAR_Go(30, 530); // 冲
+      delay_ms(300);
       Motor_Data.xCAR_Go(30, 530); // 冲
       delay_ms(500);
       Motor_Data.xCAR_Track_Go();
@@ -863,8 +867,9 @@ void xAuto_Run_Function(void)
     {
       Count_ms = 0;
       Motor_Data.xCAR_Go(30, 530); // 冲
+      delay_ms(300);
       Motor_Data.xCAR_Go(30, 530); // 冲
-      delay_ms(400);
+      delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
     }
@@ -876,9 +881,10 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
       delay_ms(500);
       Motor_Data.xCAR_Back(20, 600);
-      delay_ms(400);
+      delay_ms(300);
       Motor_Data.xCAR_Track(20);
       Motor_Data.xCAR_Go(30, 530); // 冲
+      delay_ms(300);
       Motor_Data.xCAR_Go(30, 530); // 冲
       delay_ms(500);
 
@@ -981,9 +987,9 @@ void xAuto_Run_Function(void)
   case 1:
   {
     Motor_Data.xCAR_Track_Go(); // F6
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
     delay_ms(500);
     delay_ms(500);
@@ -1043,7 +1049,7 @@ void xAuto_Run_Function(void)
     MainCar_Data.xSend_Command_To_MainCar(Send_Algorithm_Parameters_To_MainCar);
     delay_ms(500);
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
 
     Run_State = 2;
@@ -1053,20 +1059,20 @@ void xAuto_Run_Function(void)
   {
 
     Motor_Data.xCAR_Track_Go(); // F4
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    delay_ms(400);
+    delay_ms(300);
     printf("Licence_Data:%s ", MainCar_Send_Licence_Data_Store);
     // 道闸系统任务
     Barrier_Data.xBarrier_Licence_Tx(MainCar_Send_Licence_Data_Store); // 车牌号
     Motor_Data.xCAR_Track_Go();                                        // D4
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_Track_Go(); // B4
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_Track_Go(); // B2
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(450);
     Run_State = 3;
@@ -1075,12 +1081,12 @@ void xAuto_Run_Function(void)
   case 3:
   {
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
-    delay_ms(400);
+    delay_ms(300);
     Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add((char *)Two_Code_Data_parsed_Store2);
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    delay_ms(400);
+    delay_ms(300);
     MainCar_Data.xStart_Command_To_MainCar();
     Run_State = 4;
     break;
@@ -1123,7 +1129,7 @@ void xAuto_Run_Function(void)
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
     }
     Motor_Data.xCAR_Track_Go(); // D2
-    delay_ms(400);
+    delay_ms(300);
     Run_State = 5;
     break;
   }
@@ -1251,7 +1257,7 @@ void xAuto_Run_Function(void)
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
     }
     Motor_Data.xCAR_Track_Go(); // B4
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_R90(wheel_Speed + 10, wheel_Time * 2);
     Run_State = 2;
     break;
@@ -1263,9 +1269,9 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track(30); // 循迹
     delay_ms(200);
     Motor_Data.xCAR_Back(20, 680);
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_Track(25);
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_Go(30, 530); // 冲
     Motor_Data.xCAR_Go(30, 530); // 冲
     delay_ms(500);
@@ -1322,9 +1328,9 @@ void xAuto_Run_Function(void)
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
     }
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    delay_ms(400);
+    delay_ms(300);
     Motor_Data.xCAR_Track_Go(); // D2
-    delay_ms(400);
+    delay_ms(300);
     Run_State = 3;
     break;
   }
@@ -1342,7 +1348,7 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(500);
     Motor_Data.xCAR_Track_Go(); // D2
-    delay_ms(400);
+    delay_ms(300);
     printf("Init_light:%d\r\n", MainCar_Send_Init_light);
 
     if (MainCar_Send_Init_light % 2 + 1 == 1) // 立体车库
@@ -1515,12 +1521,13 @@ void xAuto_Run_Function(void)
     {
       Count_ms = 0;
       Motor_Data.xCAR_Back(20, 600);
-      delay_ms(400);
+      delay_ms(300);
       Motor_Data.xCAR_Track(20);
-      delay_ms(400);
+      delay_ms(300);
       Motor_Data.xCAR_Go(30, 530); // 冲
+      delay_ms(300);
       Motor_Data.xCAR_Go(30, 530); // 冲
-      delay_ms(500);
+      delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
@@ -1529,8 +1536,9 @@ void xAuto_Run_Function(void)
     {
       Count_ms = 0;
       Motor_Data.xCAR_Go(30, 530); // 冲
+      delay_ms(300);
       Motor_Data.xCAR_Go(30, 530); // 冲
-      delay_ms(400);
+      delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
     }
@@ -1542,9 +1550,10 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
       delay_ms(500);
       Motor_Data.xCAR_Back(20, 600);
-      delay_ms(400);
+      delay_ms(300);
       Motor_Data.xCAR_Track(20);
       Motor_Data.xCAR_Go(30, 530); // 冲
+      delay_ms(300);
       Motor_Data.xCAR_Go(30, 530); // 冲
       delay_ms(500);
 
