@@ -200,7 +200,6 @@ void xCAR_KeyRun_Function(void)
 	if (KeyData.S1_Flag) // 按键1
 	{
 		KeyData.S1_Flag = 0; // 禁止屏蔽
-
 	}
 	if (KeyData.S2_Flag) // 按键2
 	{
@@ -275,7 +274,6 @@ void xCAR_KeyRun_Function(void)
 	if (KeyData.S3_Flag) // 按键3
 	{
 		KeyData.S3_Flag = 0; // 禁止屏蔽
-
 
 		//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//车牌
 
@@ -400,11 +398,6 @@ uint8_t CharToHex(char c)
 	return 0;
 }
 
-
-
-
-
-
 // // 将十六进制转为十进制
 // uint16_t HEX_DEC(uint8_t *buf,uint16_t value)
 // {
@@ -417,15 +410,15 @@ uint8_t CharToHex(char c)
 // }
 
 // //将字符串中的每个字符变成十六进制表示,比如‘1’-> 0x01   'b'->0x0b
-// void string_to_hex_digits(const unsigned char *str, unsigned char *hex_output) 
+// void string_to_hex_digits(const unsigned char *str, unsigned char *hex_output)
 // {
 //     int length = strlen((char *)str);
-    
-//     for (int i = 0; i < length; i++) 
+
+//     for (int i = 0; i < length; i++)
 //     {
 //         char c = str[i];
 //         unsigned char value;
-        
+
 //         // 处理数字 0-9
 //         if (c >= '0' && c <= '9') {
 //             value = c - '0';
@@ -442,14 +435,11 @@ uint8_t CharToHex(char c)
 //         else {
 //             break;
 //         }
-        
+
 //         hex_output[count++] = value;
 //     }
-    
 
 // }
-
-
 
 // //字符串4562，转变成字符串F4F5F6F2
 // void transform(const uint8_t* input, uint8_t* output) {
@@ -463,18 +453,17 @@ uint8_t CharToHex(char c)
 //     output[len * 2] = '\0';  // 结尾
 // }
 
-
 // //字符转十六进制
 // int binary_string_to_value(const char *str) {
 //     int value = 0;
 //     int len = strlen(str);
-    
+
 //     for(int i = 0; i < len; i++) {
 //         value = value << 1;
 //         if(str[i] == '1') {
 //             value = value | 1;
 //         }
 //     }
-    
+
 //     return value;
 // }
