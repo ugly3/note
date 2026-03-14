@@ -1534,7 +1534,7 @@ void xAuto_Run_Function(void)
   }
   case 2:
   {
-    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
+    Motor_Data.xCAR_L45(wheel_Speed + 10, wheel_Time);
     delay_ms(200);
     // ¶þÎ¬ÂëÊ¶±ð
     Identify_Two_Code_Arr[3] = 0x01;
