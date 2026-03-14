@@ -1615,7 +1615,10 @@ void xAuto_Run_Function(void)
   }
   case 5:
   {
-
+if(TwoCode_ParityFrom8Bytes(Two_Code_Data_parsed_Store1) == 1)
+{
+  
+}
     Run_State = 6;
     break;
   }
