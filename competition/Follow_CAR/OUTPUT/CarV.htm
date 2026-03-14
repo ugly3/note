@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\OUTPUT\CarV.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OUTPUT\CarV.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Mar 14 10:24:26 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Mar 14 10:42:00 2026
 <BR><P>
 <H3>Maximum Stack Usage =        352 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -741,16 +741,16 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[bc]"></a>ADC_Configure</STRONG> (Thumb, 132 bytes, Stack size 56 bytes, power_check.o(i.ADC_Configure))
-<BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = ADC_Configure &rArr; ADC_RegularChannelConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = ADC_Configure &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphResetCmd
+<BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphResetCmd
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_RegularChannelConfig
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_CommonInit
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Cmd
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Electricity_Init
 </UL>
@@ -806,8 +806,8 @@ Global Symbols
 <P><STRONG><a name="[c8]"></a>BH1750_RecvACK</STRONG> (Thumb, 42 bytes, Stack size 8 bytes, bh1750.o(i.BH1750_RecvACK))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = BH1750_RecvACK &rArr; SDA_IN &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_IN
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_IN
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BH1750_SendByte
 </UL>
@@ -815,8 +815,8 @@ Global Symbols
 <P><STRONG><a name="[cb]"></a>BH1750_RecvByte</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, bh1750.o(i.BH1750_RecvByte))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = BH1750_RecvByte &rArr; SDA_IN &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_IN
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_IN
 </UL>
 <BR>[Called By]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Multiple_Read_BH1750
 </UL>
@@ -824,8 +824,8 @@ Global Symbols
 <P><STRONG><a name="[cc]"></a>BH1750_SendACK</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, bh1750.o(i.BH1750_SendACK))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = BH1750_SendACK &rArr; SDA_OUT &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_OUT
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_OUT
 </UL>
 <BR>[Called By]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Multiple_Read_BH1750
 </UL>
@@ -833,9 +833,9 @@ Global Symbols
 <P><STRONG><a name="[ce]"></a>BH1750_SendByte</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, bh1750.o(i.BH1750_SendByte))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = BH1750_SendByte &rArr; BH1750_RecvACK &rArr; SDA_IN &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_OUT
+<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_OUT
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BH1750_RecvACK
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Single_Write_BH1750
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Multiple_Read_BH1750
@@ -844,8 +844,8 @@ Global Symbols
 <P><STRONG><a name="[cf]"></a>BH1750_Start</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, bh1750.o(i.BH1750_Start))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = BH1750_Start &rArr; SDA_OUT &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_OUT
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_OUT
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Single_Write_BH1750
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Multiple_Read_BH1750
@@ -854,8 +854,8 @@ Global Symbols
 <P><STRONG><a name="[d0]"></a>BH1750_Stop</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, bh1750.o(i.BH1750_Stop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = BH1750_Stop &rArr; SDA_OUT &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_OUT
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_OUT
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Single_Write_BH1750
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Multiple_Read_BH1750
@@ -1172,7 +1172,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[10d]"></a>Electricity_Init</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, power_check.o(i.Electricity_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = Electricity_Init &rArr; ADC_Configure &rArr; ADC_RegularChannelConfig
+<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = Electricity_Init &rArr; ADC_Configure &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Parameter_Init
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Configure
@@ -1251,25 +1251,25 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Infrared_Init
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hard_Can_Init
 <LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Cba_Init
+<LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Port
+<LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tba_WheelLED_Config
+<LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tba_Photoresistance_Config
+<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tba_Beep_Config
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_Hardware_Init
 <LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_A72_PortInit
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Configure
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_OUT
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SDA_IN
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BH1750_PortInit
-<LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Port
-<LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tba_WheelLED_Config
-<LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tba_Photoresistance_Config
-<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tba_Beep_Config
 </UL>
 
 <P><STRONG><a name="[11d]"></a>GPIO_PinAFConfig</STRONG> (Thumb, 70 bytes, Stack size 20 bytes, stm32f4xx_gpio.o(i.GPIO_PinAFConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = GPIO_PinAFConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hard_Can_Init
+<LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Port
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_Hardware_Init
 <LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_A72_PortInit
-<LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Port
 </UL>
 
 <P><STRONG><a name="[10b]"></a>GPIO_ReadInputDataBit</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(i.GPIO_ReadInputDataBit))
@@ -1283,9 +1283,9 @@ Global Symbols
 
 <P><STRONG><a name="[122]"></a>GPIO_SetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(i.GPIO_SetBits))
 <BR><BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
-<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hard_Uart_MurtSel
 <LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tba_WheelLED_Config
 <LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tba_Beep_Config
+<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hard_Uart_MurtSel
 <LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hard_Can_SpeedMode
 </UL>
 
@@ -1421,10 +1421,10 @@ Global Symbols
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;roadway_check_TimInit
 <LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
 <LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Can_check_Init
-<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_Hardware_Init
-<LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_A72_PortInit
 <LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_TIM
 <LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_EXTI
+<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_Hardware_Init
+<LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_A72_PortInit
 </UL>
 
 <P><STRONG><a name="[126]"></a>NVIC_PriorityGroupConfig</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, misc.o(i.NVIC_PriorityGroupConfig))
@@ -1470,14 +1470,14 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[129]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Infrared_Init
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hard_Can_Init
 <LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Cba_Init
-<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_Hardware_Init
-<LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_A72_PortInit
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Configure
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BH1750_PortInit
 <LI><a href="#[157]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Port
 <LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tba_WheelLED_Config
 <LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tba_Photoresistance_Config
 <LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Tba_Beep_Config
+<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_Hardware_Init
+<LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_A72_PortInit
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Configure
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BH1750_PortInit
 </UL>
 
 <P><STRONG><a name="[101]"></a>RCC_APB1PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB1PeriphClockCmd))
@@ -1485,8 +1485,8 @@ Global Symbols
 <LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTIM2_Init
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hard_Can_Init
 <LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Can_check_Init
-<LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_A72_PortInit
 <LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_TIM
+<LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_A72_PortInit
 </UL>
 
 <P><STRONG><a name="[d4]"></a>RCC_APB1PeriphResetCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB1PeriphResetCmd))
@@ -1496,9 +1496,9 @@ Global Symbols
 <P><STRONG><a name="[be]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB2PeriphClockCmd))
 <BR><BR>[Called By]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;roadway_check_TimInit
 <LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
+<LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_EXTI
 <LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_Hardware_Init
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Configure
-<LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_EXTI
 </UL>
 
 <P><STRONG><a name="[c1]"></a>RCC_APB2PeriphResetCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB2PeriphResetCmd))
@@ -1941,9 +1941,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[150]"></a>USART_GetFlagStatus</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_usart.o(i.USART_GetFlagStatus))
-<BR><BR>[Called By]<UL><LI><a href="#[147]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_Irq
+<BR><BR>[Called By]<UL><LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_Send_Byte
+<LI><a href="#[147]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_Irq
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
-<LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_Send_Byte
 </UL>
 
 <P><STRONG><a name="[148]"></a>USART_GetITStatus</STRONG> (Thumb, 84 bytes, Stack size 16 bytes, stm32f4xx_usart.o(i.USART_GetITStatus))
@@ -1978,8 +1978,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[14f]"></a>USART_SendData</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f4xx_usart.o(i.USART_SendData))
-<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
-<LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_Send_Byte
+<BR><BR>[Called By]<UL><LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART6_Send_Byte
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
 </UL>
 
 <P><STRONG><a name="[12b]"></a>UartA72_Init</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, uart_a72.o(i.UartA72_Init))
@@ -1995,13 +1995,13 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Init
+<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hard_Uart_MurtSel
 <LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Init
 <LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ITConfig
 <LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Cmd
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 <LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartA72_Init
@@ -2245,6 +2245,7 @@ Global Symbols
 <P><STRONG><a name="[11b]"></a>delay_ms</STRONG> (Thumb, 78 bytes, Stack size 0 bytes, delay.o(i.delay_ms))
 <BR><BR>[Called By]<UL><LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xMainCar_Send_Android
 <LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_InfoData_To_Fifo
+<LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xCAR_KeyRun_Function
 <LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xAuto_Run_Function
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Ultrasonic_Ranging
 <LI><a href="#[12f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Infrared_Send
@@ -2276,7 +2277,6 @@ Global Symbols
 <LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xCAR_L45
 <LI><a href="#[d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xCAR_Go
 <LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xCAR_Back
-<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Electricity
 <LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xStart_Command_To_MainCar
 <LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xSend_Command_To_MainCar
 <LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;XSend_dis_To_MainCar
@@ -2298,6 +2298,7 @@ Global Symbols
 <LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xVoice_Report_InquireRTC_Current_Date
 <LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xVoice_Report_Complex_Control
 <LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xVoice_Report_Appoint_Command
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Electricity
 </UL>
 
 <P><STRONG><a name="[ca]"></a>delay_us</STRONG> (Thumb, 72 bytes, Stack size 0 bytes, delay.o(i.delay_us))
@@ -2393,7 +2394,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[160]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_pow
 </UL>
 
-<P><STRONG><a name="[170]"></a>xAuto_Run_Function</STRONG> (Thumb, 980 bytes, Stack size 48 bytes, auto.o(i.xAuto_Run_Function))
+<P><STRONG><a name="[170]"></a>xAuto_Run_Function</STRONG> (Thumb, 1184 bytes, Stack size 48 bytes, auto.o(i.xAuto_Run_Function))
 <BR><BR>[Stack]<UL><LI>Max Depth = 352<LI>Call Chain = xAuto_Run_Function &rArr; __hardfp_pow &rArr; __kernel_poly &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
@@ -2463,7 +2464,11 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> motor_drive.o(.data)
 </UL>
-<P><STRONG><a name="[5]"></a>xCAR_KeyRun_Function</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, mixture.o(i.xCAR_KeyRun_Function))
+<P><STRONG><a name="[5]"></a>xCAR_KeyRun_Function</STRONG> (Thumb, 210 bytes, Stack size 8 bytes, mixture.o(i.xCAR_KeyRun_Function))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = xCAR_KeyRun_Function
+</UL>
+<BR>[Calls]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+</UL>
 <BR>[Address Reference Count : 1]<UL><LI> mixture.o(.data)
 </UL>
 <P><STRONG><a name="[12]"></a>xCAR_L45</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, motor_drive.o(i.xCAR_L45))
@@ -2933,13 +2938,13 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = USART6_Hardware_Init &rArr; USART_Init &rArr; RCC_GetClocksFreq
 </UL>
 <BR>[Calls]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Init
-<LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Init
-<LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ITConfig
-<LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Cmd
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinAFConfig
 <LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Init
+<LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ITConfig
+<LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Cmd
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BKRC_Voice_Init
 </UL>
