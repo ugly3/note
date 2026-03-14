@@ -1771,7 +1771,7 @@ void xAuto_Run_Function(void)
     delay_ms(300);
     Motor_Data.xCAR_Back(25, 300); // µπÕÀ“ªµ„µ„
     delay_ms(500);
-
+Motor_Data.xCAR_Track_Go();
     Run_State = 4;
     break;
   }
