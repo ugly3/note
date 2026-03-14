@@ -1754,11 +1754,11 @@ void xAuto_Run_Function(void)
   case 3:
   {
     // µ¿’¢
+    
     Barrier_Data.xBarrier_Licence_Tx("");
-    delay_ms(200);
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // B4
-    
+
     Run_State = 4;
     break;
   }
