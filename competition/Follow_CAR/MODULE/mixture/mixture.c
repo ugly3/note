@@ -199,61 +199,61 @@ void xCAR_KeyRun_Function(void)
 {
 	if (KeyData.S1_Flag) // 按键1
 	{
-		uint8_t Buf1[200];
-		delay_ms(200);
-		Motor_Data.xCAR_Track_Go();
-		delay_ms(200);
-		Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-		delay_ms(200);
-		track_time_Start = 1;
-		Motor_Data.xCAR_Track(40); // 循迹
-		delay_ms(200);
-		sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
-		Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
+		// uint8_t Buf1[200];
+		// delay_ms(200);
+		// Motor_Data.xCAR_Track_Go();
+		// delay_ms(200);
+		// Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
+		// delay_ms(200);
+		// track_time_Start = 1;
+		// Motor_Data.xCAR_Track(40); // 循迹
+		// delay_ms(200);
+		// sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
+		// Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
 
-		if (Count_ms < 600) // B2
-		{
-			Count_ms = 0;
-			Motor_Data.xCAR_Back(25, 600);
-			delay_ms(300);
-			Motor_Data.xCAR_Track(20);
-			delay_ms(300);
-			Motor_Data.xCAR_Go(30, 620); // 冲
-			delay_ms(100);
-			Motor_Data.xCAR_Go(30, 620); // 冲
-			delay_ms(300);
-			Motor_Data.xCAR_Track_Go();
-			Motor_Data.xCAR_Track_Go();
-			delay_ms(200);
-		}
-		else if (1200 > Count_ms) // D2
-		{
-			Count_ms = 0;
-			Motor_Data.xCAR_Go(30, 620); // 冲
-			delay_ms(100);
-			Motor_Data.xCAR_Go(30, 620); // 冲
-			delay_ms(300);
-			Motor_Data.xCAR_Track_Go();
-			delay_ms(200);
-		}
-		else // E2
-		{
-			Count_ms = 0;
-			Motor_Data.xCAR_Go(25, 400); // 使车身对准十字路口
-			delay_ms(300);
-			Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
-			delay_ms(300);
-			Motor_Data.xCAR_Back(25, 600);
-			delay_ms(300);
-			Motor_Data.xCAR_Track(30);
-			Motor_Data.xCAR_Go(30, 620); // 冲
-			delay_ms(100);
-			Motor_Data.xCAR_Go(30, 620); // 冲
-			delay_ms(500);
+		// if (Count_ms < 600) // B2
+		// {
+		// 	Count_ms = 0;
+		// 	Motor_Data.xCAR_Back(25, 600);
+		// 	delay_ms(300);
+		// 	Motor_Data.xCAR_Track(20);
+		// 	delay_ms(300);
+		// 	Motor_Data.xCAR_Go(30, 620); // 冲
+		// 	delay_ms(100);
+		// 	Motor_Data.xCAR_Go(30, 620); // 冲
+		// 	delay_ms(300);
+		// 	Motor_Data.xCAR_Track_Go();
+		// 	Motor_Data.xCAR_Track_Go();
+		// 	delay_ms(200);
+		// }
+		// else if (1200 > Count_ms) // D2
+		// {
+		// 	Count_ms = 0;
+		// 	Motor_Data.xCAR_Go(30, 620); // 冲
+		// 	delay_ms(100);
+		// 	Motor_Data.xCAR_Go(30, 620); // 冲
+		// 	delay_ms(300);
+		// 	Motor_Data.xCAR_Track_Go();
+		// 	delay_ms(200);
+		// }
+		// else // E2
+		// {
+		// 	Count_ms = 0;
+		// 	Motor_Data.xCAR_Go(25, 400); // 使车身对准十字路口
+		// 	delay_ms(300);
+		// 	Motor_Data.xCAR_Track(Motor_Data.Go_speed); // 循迹
+		// 	delay_ms(300);
+		// 	Motor_Data.xCAR_Back(25, 600);
+		// 	delay_ms(300);
+		// 	Motor_Data.xCAR_Track(30);
+		// 	Motor_Data.xCAR_Go(30, 620); // 冲
+		// 	delay_ms(100);
+		// 	Motor_Data.xCAR_Go(30, 620); // 冲
+		// 	delay_ms(500);
 
-			Motor_Data.xCAR_Track_Go();
-			delay_ms(300);
-		}
+		// 	Motor_Data.xCAR_Track_Go();
+		// 	delay_ms(300);
+		// }
 		KeyData.S1_Flag = 0; // 禁止屏蔽
 	}
 	if (KeyData.S2_Flag) // 按键2

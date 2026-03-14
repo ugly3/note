@@ -1754,10 +1754,23 @@ void xAuto_Run_Function(void)
   case 3:
   {
     // 道闸
+    uint8_t Init_dangwei = 0;
     printf("Licence_Data:%s ", MainCar_Send_Licence_Data_Store);
     Barrier_Data.xBarrier_Licence_Tx(MainCar_Send_Licence_Data_Store);
     Motor_Data.xCAR_Track_Go();
-    delay_ms(200); // B4
+    delay_ms(200);               // B4
+                                 //***********************************************************智能路灯感知调节任务**************************************
+    Motor_Data.xCAR_Go(25, 300); // 前进一点点
+    delay_ms(500);
+    delay_ms(500);
+    Init_dangwei = Smart_Light_Data.xSmart_Light_Get_Init_Level();
+    printf("Init:%d\r\n", Init_dangwei);
+    uint8_t Object_dangwei = ((int)pow((dis / 100), Init_dangwei)) % 4 + 1; //********pow为次幂运算函数
+    Smart_Light_Data.xSmart_Light_Appoint_Level(Object_dangwei);
+    printf("Object:%d\r\n", Object_dangwei);
+    delay_ms(300);
+    Motor_Data.xCAR_Back(25, 300); // 倒退一点点
+    delay_ms(500);
 
     Run_State = 4;
     break;
