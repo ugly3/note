@@ -1654,7 +1654,7 @@ void xAuto_Run_Function(void)
 #endif
 
 #if BS_2026
-uint8_t Two_Code_Count = 2;
+uint8_t Two_Code_Count = 1;
 void xAuto_Run_Function(void)
 {
   switch (Run_State)
