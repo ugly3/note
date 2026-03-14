@@ -1610,6 +1610,12 @@ void xAuto_Run_Function(void)
     delay_ms(200);
     Motor_Data.xCAR_Track_Go();
     printf("Init_dangwei:%d\r\n", Init_dangwei);
+    Send_Weizhi_To_MainCar[3] = Init_dangwei;
+    MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
+    delay_ms(200);
+    MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
+    delay_ms(200);
+    MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
     printf("Object:%d\r\n", Object_dangwei);
 
     delay_ms(200); // B2
