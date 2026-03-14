@@ -1756,7 +1756,7 @@ void xAuto_Run_Function(void)
     // 道闸
     uint8_t Init_dangwei = 0;
     printf("Licence_Data:%s ", MainCar_Send_Licence_Data_Store);
-    Barrier_Data.xBarrier_Licence_Tx(MainCar_Send_Licence_Data_Store);
+    Barrier_Data.xBarrier_Licence_Tx((char *)MainCar_Send_Licence_Data_Store);
     Motor_Data.xCAR_Track_Go();
     delay_ms(200);               // B4
                                  //***********************************************************智能路灯感知调节任务**************************************
