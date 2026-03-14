@@ -1609,6 +1609,9 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(200);
     Motor_Data.xCAR_Track_Go();
+    printf("Init_dangwei:%d\r\n", Init_dangwei);
+    printf("Object:%d\r\n", Object_dangwei);
+
     delay_ms(200); // B2
     Run_State = 5;
     break;
