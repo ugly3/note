@@ -1661,6 +1661,11 @@ void xAuto_Run_Function(void)
   {
   case 1:
   {
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(200);//F6
+    
+
+    
     Run_State = 2;
     break;
   }
