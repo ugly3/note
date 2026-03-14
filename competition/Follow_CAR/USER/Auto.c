@@ -1698,13 +1698,17 @@ void xAuto_Run_Function(void)
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
     }
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(300); // F4
 
     Run_State = 2;
     break;
   }
   case 2:
   {
-
+    Motor_Data.xCAR_L45(wheel_Speed + 10, wheel_Time);
+    delay_ms(200);
+    
     Run_State = 3;
     break;
   }
