@@ -224,6 +224,34 @@ void extract_data_7(const uint8_t *input, uint8_t *output_buffer)
     }
 }
 
+/**
+ * @brief 统计 8 字节数据中 1 的个数，并按奇偶性输出：
+ *        - 奇数 -> 1
+ *        - 偶数 -> 2
+ *
+ * @param data  指向 8 字节数据的指针
+ * @return uint8_t 输出值（1 或 2）
+ */
+uint8_t TwoCode_ParityFrom8Bytes(const uint8_t *data)
+{
+    if (data == NULL)
+        return 2;
+
+    uint8_t count = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        uint8_t byte = data[i];
+        // 统计该字节中 1 的个数
+        // GNU C 提供 __builtin_popcount，但这里手动统计以保证兼容性
+        for (int bit = 0; bit < 8; bit++)
+        {
+            count += (byte >> bit) & 0x01;
+        }
+    }
+
+    return (count % 2) ? 1 : 2;
+}
+
 /*******************************************************从车二维码数据处理**********************************************/
 
 void YT1_parse_two_codes(void)
