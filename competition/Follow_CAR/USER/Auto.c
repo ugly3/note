@@ -1754,12 +1754,19 @@ void xAuto_Run_Function(void)
   case 3:
   {
     // 道闸
-    uint8_t Init_dangwei = 0;
+
     printf("Licence_Data:%s ", MainCar_Send_Licence_Data_Store);
     Barrier_Data.xBarrier_Licence_Tx((char *)MainCar_Send_Licence_Data_Store);
     Motor_Data.xCAR_Track_Go();
-    delay_ms(200);               // B4
-                                 //***********************************************************智能路灯感知调节任务**************************************
+
+    Run_State = 4;
+    break;
+  }
+  case 4:
+  {
+    delay_ms(200); // B4
+    uint8_t Init_dangwei = 0;
+    //***********************************************************智能路灯感知调节任务**************************************
     Motor_Data.xCAR_Go(25, 300); // 前进一点点
     delay_ms(500);
     delay_ms(500);
@@ -1771,17 +1778,10 @@ void xAuto_Run_Function(void)
     delay_ms(300);
     Motor_Data.xCAR_Back(25, 300); // 倒退一点点
     delay_ms(500);
-    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2)
-        delay_ms(200);
+    Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+    delay_ms(200);
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // B2
-
-    Run_State = 4;
-    break;
-  }
-  case 4:
-  {
-if(Init_dangwei==)
     Run_State = 5;
     break;
   }
