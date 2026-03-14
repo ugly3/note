@@ -1615,10 +1615,20 @@ void xAuto_Run_Function(void)
   }
   case 5:
   {
-if(TwoCode_ParityFrom8Bytes(Two_Code_Data_parsed_Store1) == 1)
-{
-  
-}
+    if (TwoCode_ParityFrom8Bytes(Two_Code_Data_parsed_Store1) == 1)
+    {
+      Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+      delay_ms(300);
+      Motor_Data.xCAR_Back(30, 800);
+    }
+    else
+    {
+      Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+      delay_ms(200);
+      Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
+      delay_ms(300);
+      Motor_Data.xCAR_Track_Time(30, 800);
+    }
     Run_State = 6;
     break;
   }
