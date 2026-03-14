@@ -679,49 +679,6 @@ void xAuto_Run_Function(void)
     Run_State = 5;
     break;
   }
-  case 5:
-  {
-    Run_State = 6;
-    break;
-  }
-  case 6:
-  {
-    Run_State = 7;
-    break;
-  }
-  case 7:
-  {
-    Run_State = 8;
-    break;
-  }
-  case 8:
-  {
-    Run_State = 9;
-    break;
-  }
-  case 9:
-  {
-    Run_State = 10;
-    break;
-  }
-  case 10:
-  {
-
-    Run_State = 11;
-    break;
-  }
-  case 11:
-  {
-
-    Run_State = 12;
-    break;
-  }
-  case 12:
-  {
-
-    Run_State = 13;
-    break;
-  }
   }
 }
 
@@ -914,44 +871,6 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Back(35, 200);
 
     Run_State = 6;
-    break;
-  }
-  case 6:
-  {
-    Run_State = 7;
-    break;
-  }
-  case 7:
-  {
-    Run_State = 8;
-    break;
-  }
-  case 8:
-  {
-    Run_State = 9;
-    break;
-  }
-  case 9:
-  {
-    Run_State = 10;
-    break;
-  }
-  case 10:
-  {
-
-    Run_State = 11;
-    break;
-  }
-  case 11:
-  {
-
-    Run_State = 12;
-    break;
-  }
-  case 12:
-  {
-
-    Run_State = 13;
     break;
   }
   }
@@ -1149,46 +1068,6 @@ void xAuto_Run_Function(void)
     Run_State = 6;
     break;
   }
-  case 6:
-  {
-    Run_State = 7;
-    break;
-  }
-  case 7:
-  {
-    Run_State = 8;
-    break;
-  }
-  case 8:
-  {
-    Run_State = 9;
-    break;
-  }
-  case 9:
-  {
-    Run_State = 10;
-    break;
-  }
-  case 10:
-  {
-
-    Run_State = 11;
-    break;
-  }
-  case 11:
-  {
-
-    Run_State = 12;
-    break;
-  }
-  case 12:
-  {
-
-    Run_State = 13;
-    break;
-  }
-  default:
-    break;
   }
 }
 #endif
@@ -1386,57 +1265,6 @@ void xAuto_Run_Function(void)
     Run_State = 4;
     break;
   }
-  case 4:
-  {
-
-    Run_State = 5;
-    break;
-  }
-  case 5:
-  {
-    Run_State = 6;
-    break;
-  }
-  case 6:
-  {
-    Run_State = 7;
-    break;
-  }
-  case 7:
-  {
-    Run_State = 8;
-    break;
-  }
-  case 8:
-  {
-    Run_State = 9;
-    break;
-  }
-  case 9:
-  {
-    Run_State = 10;
-    break;
-  }
-  case 10:
-  {
-
-    Run_State = 11;
-    break;
-  }
-  case 11:
-  {
-
-    Run_State = 12;
-    break;
-  }
-  case 12:
-  {
-
-    Run_State = 13;
-    break;
-  }
-  default:
-    break;
   }
 }
 
