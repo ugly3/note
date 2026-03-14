@@ -1742,13 +1742,23 @@ void xAuto_Run_Function(void)
       printf("sdv\r\n");
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
     }
+    delay_ms(200);
+    Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
+    delay_ms(200);
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(200); // D4
 
     Run_State = 3;
     break;
   }
   case 3:
   {
-
+    // µ¿’¢
+    Barrier_Data.xBarrier_Licence_Tx("");
+    delay_ms(200);
+    Motor_Data.xCAR_Track_Go();
+    delay_ms(200); // B4
+    
     Run_State = 4;
     break;
   }
