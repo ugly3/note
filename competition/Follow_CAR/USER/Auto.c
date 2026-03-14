@@ -1754,8 +1754,8 @@ void xAuto_Run_Function(void)
   case 3:
   {
     // µ¿’¢
-    
-    Barrier_Data.xBarrier_Licence_Tx("");
+
+    Barrier_Data.xBarrier_Licence_Tx(MainCar_Send_Licence_Data_Store);
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // B4
 
