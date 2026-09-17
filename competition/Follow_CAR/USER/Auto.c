@@ -8,12 +8,12 @@
 #include "all_module.h"
 
 #define YT3_2025 0
-#define YT1_2026 0
+#define YT1_2026 1
 #define YT2_2026 0
 #define YT3_2026 0
 #define YT4_2026 0
 #define YT5_2026 0
-#define BS_2026 1
+#define BS_2026 0
 
 uint8_t Go_Speed = 50;     // 全局行进速度值
 uint8_t wheel_Speed = 90;  // 全局转弯速度值
@@ -446,23 +446,23 @@ uint8_t Hex_Data_Store1[10];
 bool lock_flag = 0; // 锁车标志，0为未锁车，1为已锁车
 void xAuto_Run_Function(void)
 {
-  if (lock_flag == 0)
-  {
-    while (Communication_Data.FollowCar_Start_flag == 0)
-    {
-      delay_ms(500);
-      delay_ms(500);
-      time_out++;
-      if (time_out > 230) // 等待10秒后超时
-      {
-        Run_State = 1; // 设置状态为1，进入下一阶段
-        time_out = 0;  // 重置超时计数器
-        break;         // 跳出循环，继续执行后续代码
-      }
-    }
-    Run_State = 1; // 设置状态为1，进入下一阶段
-    lock_flag = 1;
-  }
+  // if (lock_flag == 0)
+  // {
+  //   while (Communication_Data.FollowCar_Start_flag == 0)
+  //   {
+  //     delay_ms(500);
+  //     delay_ms(500);
+  //     time_out++;
+  //     if (time_out > 230) // 等待10秒后超时
+  //     {
+  //       Run_State = 1; // 设置状态为1，进入下一阶段
+  //       time_out = 0;  // 重置超时计数器
+  //       break;         // 跳出循环，继续执行后续代码
+  //     }
+  //   }
+  //   Run_State = 1; // 设置状态为1，进入下一阶段
+  //   lock_flag = 1;
+  // }
   switch (Run_State)
   {
   case 1:
