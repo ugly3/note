@@ -8,20 +8,20 @@
 #include "bkrc_voice.h"
 
 
-/* ±äÁ¿¶¨Òå ---------------------------------------------------------*/
-uint8_t uart6_data = 0;			// USART6 ½ÓÊÕÊı¾İ»º´æ
-uint8_t uart6_flag = 0;			// USART6 ½ÓÊÕÊı¾İÊ±Ğò
-uint8_t UART6_RxData[8];		// USART6 ½ÓÊÕÊı¾İ»º´æ
-uint8_t voice_falg = 0;		// ÓïÒôÄ£¿é·µ»Ø×´Ì¬
+/* å˜é‡å®šä¹‰ ---------------------------------------------------------*/
+uint8_t uart6_data = 0;			// USART6 æ¥æ”¶æ•°æ®ç¼“å­˜
+uint8_t uart6_flag = 0;			// USART6 æ¥æ”¶æ•°æ®æ—¶åº
+uint8_t UART6_RxData[8];		// USART6 æ¥æ”¶æ•°æ®ç¼“å­˜
+uint8_t voice_falg = 0;		// è¯­éŸ³æ¨¡å—è¿”å›çŠ¶æ€
 uint8_t YY_Init[5] = {0xFD, 0x00, 0x00, 0x01, 0x01};
-uint8_t Zigbee[8];           // Zigbee·¢ËÍÊı¾İ»º´æ
+uint8_t Zigbee[8];           // Zigbeeå‘é€æ•°æ®ç¼“å­˜
 
-uint8_t start_voice_dis[5]= {0xFA,0xFA,0xFA,0xFA,0xA1};   //»½ĞÑ´Ê
-uint8_t bkrc_voice_Flag = 0;           // SYN7318ÓïÒôÊ¶±ğÃüÁîID±àºÅ
+uint8_t start_voice_dis[5]= {0xFA,0xFA,0xFA,0xFA,0xA1};   //å”¤é†’è¯
+uint8_t bkrc_voice_Flag = 0;           // SYN7318è¯­éŸ³è¯†åˆ«å‘½ä»¤IDç¼–å·
 /*******************************************************
-¹¦¡¡ÄÜ£º³õÊ¼»¯´®¿Ú
-²Î¡¡Êı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸã€€èƒ½ï¼šåˆå§‹åŒ–ä¸²å£
+å‚ã€€æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 ********************************************************/
 static void USART6_Hardware_Init(void)
 {
@@ -29,65 +29,65 @@ static void USART6_Hardware_Init(void)
     USART_InitTypeDef USART_InitStructure;
     NVIC_InitTypeDef NVIC_InitStructure;
 
-    /* Ê¹ÄÜ GPIOC ÍâÉèÊ±ÖÓ */
+    /* ä½¿èƒ½ GPIOC å¤–è®¾æ—¶é’Ÿ */
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
 
-    /* Ê¹ÄÜ USART6 ÍâÉèÊ±ÖÓ */
+    /* ä½¿èƒ½ USART6 å¤–è®¾æ—¶é’Ÿ */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART6, ENABLE);
 
-    /* ÅäÖÃ PC6/PC7 Òı½Å¸´ÓÃÓ³Éä */
+    /* é…ç½® PC6/PC7 å¼•è„šå¤ç”¨æ˜ å°„ */
     GPIO_PinAFConfig(GPIOC, GPIO_PinSource6, GPIO_AF_USART6);
     GPIO_PinAFConfig(GPIOC, GPIO_PinSource7, GPIO_AF_USART6);
 
-    /* ½« PC6/PC7 Òı½ÅÅäÖÃÎª¸´ÓÃ¹¦ÄÜÄ£Ê½£¨ÉÏÀ­£© */
+    /* å°† PC6/PC7 å¼•è„šé…ç½®ä¸ºå¤ç”¨åŠŸèƒ½æ¨¡å¼ï¼ˆä¸Šæ‹‰ï¼‰ */
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;		// ¶Ë¿ÚÄ£Ê½ -> ¸´ÓÃ¹¦ÄÜÄ£Ê½
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;		// ¶Ë¿ÚÊä³öÀàĞÍ -> ÍÆÍìÊä³ö
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;	// ¶Ë¿ÚÊä³öËÙ¶È -> ¸ßËÙ 100MHz(30pF)
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;  		// ¶Ë¿ÚÉÏÀ­/ÏÂÀ­ -> ÉÏÀ­
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;		// ç«¯å£æ¨¡å¼ -> å¤ç”¨åŠŸèƒ½æ¨¡å¼
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;		// ç«¯å£è¾“å‡ºç±»å‹ -> æ¨æŒ½è¾“å‡º
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;	// ç«¯å£è¾“å‡ºé€Ÿåº¦ -> é«˜é€Ÿ 100MHz(30pF)
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;  		// ç«¯å£ä¸Šæ‹‰/ä¸‹æ‹‰ -> ä¸Šæ‹‰
     GPIO_Init(GPIOC, &GPIO_InitStructure);
 
-    /* USART6 ³õÊ¼»¯ÅäÖÃ */
-    USART_InitStructure.USART_BaudRate = 115200;					// ²¨ÌØÂÊÉèÖÃ
-    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;	// Ó²¼şÁ÷ÉèÖÃ -> ÎŞÓ²¼şÁ÷¿ØÖÆ
-    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	// ÊÕ·¢Ä£Ê½ÉèÖÃ -> ½ÓÊÕ+·¢ËÍ
-    USART_InitStructure.USART_Parity = USART_Parity_No;				// ÆæÅ¼Ğ£ÑéÎ»ÉèÖÃ -> ÎŞÆæÅ¼Ğ£ÑéÎ»
-    USART_InitStructure.USART_StopBits = USART_StopBits_1;			// Í£Ö¹Î»ÉèÖÃ -> 1Î»Í£Ö¹Î»
-    USART_InitStructure.USART_WordLength = USART_WordLength_8b;		// Êı¾İÎ»³¤¶È -> 8Î»Êı¾İ¸ñÊ½
+    /* USART6 åˆå§‹åŒ–é…ç½® */
+    USART_InitStructure.USART_BaudRate = 115200;					// æ³¢ç‰¹ç‡è®¾ç½®
+    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;	// ç¡¬ä»¶æµè®¾ç½® -> æ— ç¡¬ä»¶æµæ§åˆ¶
+    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	// æ”¶å‘æ¨¡å¼è®¾ç½® -> æ¥æ”¶+å‘é€
+    USART_InitStructure.USART_Parity = USART_Parity_No;				// å¥‡å¶æ ¡éªŒä½è®¾ç½® -> æ— å¥‡å¶æ ¡éªŒä½
+    USART_InitStructure.USART_StopBits = USART_StopBits_1;			// åœæ­¢ä½è®¾ç½® -> 1ä½åœæ­¢ä½
+    USART_InitStructure.USART_WordLength = USART_WordLength_8b;		// æ•°æ®ä½é•¿åº¦ -> 8ä½æ•°æ®æ ¼å¼
     USART_Init(USART6, &USART_InitStructure);
 
-    /* Ê¹ÄÜ USART6 ÖĞ¶Ï */
-    USART_ITConfig(USART6, USART_IT_RXNE, ENABLE);		// ½ÓÊÕÊı¾İ¼Ä´æÆ÷²»Îª¿ÕÖĞ¶Ï
+    /* ä½¿èƒ½ USART6 ä¸­æ–­ */
+    USART_ITConfig(USART6, USART_IT_RXNE, ENABLE);		// æ¥æ”¶æ•°æ®å¯„å­˜å™¨ä¸ä¸ºç©ºä¸­æ–­
 
-    /* ÉèÖÃ USART6 ÖĞ¶ÏÓÅÏÈ¼¶ */
-    NVIC_InitStructure.NVIC_IRQChannel = USART6_IRQn;				// Ñ¡Ôñ IRQ Í¨µÀ
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x00;	// ÇÀÕ¼ÓÅÏÈ¼¶ÉèÖÃ
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x00;			// ÏìÓ¦ÓÅÏÈ¼¶ÉèÖÃ
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;					// ÆôÓÃ USART6 IRQ Í¨µÀ
+    /* è®¾ç½® USART6 ä¸­æ–­ä¼˜å…ˆçº§ */
+    NVIC_InitStructure.NVIC_IRQChannel = USART6_IRQn;				// é€‰æ‹© IRQ é€šé“
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x00;	// æŠ¢å ä¼˜å…ˆçº§è®¾ç½®
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x00;			// å“åº”ä¼˜å…ˆçº§è®¾ç½®
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;					// å¯ç”¨ USART6 IRQ é€šé“
     NVIC_Init(&NVIC_InitStructure);
 
-    /* Ê¹ÄÜ USART6 */
+    /* ä½¿èƒ½ USART6 */
     USART_Cmd(USART6, ENABLE);
 }
 
 /*******************************************************
-¹¦¡¡ÄÜ£º´®¿ÚÖĞ¶Ïº¯Êı
-²Î¡¡Êı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸã€€èƒ½ï¼šä¸²å£ä¸­æ–­å‡½æ•°
+å‚ã€€æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 ********************************************************/
 void USART6_IRQHandler(void)
 {
-    /* ÅĞ¶Ï USART6 ÊÇ·ñ´¥·¢Ö¸¶¨ÖĞ¶Ï -> ½ÓÊÕÊı¾İ¼Ä´æÆ÷²»Îª¿ÕÖĞ¶Ï */
+    /* åˆ¤æ–­ USART6 æ˜¯å¦è§¦å‘æŒ‡å®šä¸­æ–­ -> æ¥æ”¶æ•°æ®å¯„å­˜å™¨ä¸ä¸ºç©ºä¸­æ–­ */
     if (USART_GetITStatus(USART6, USART_IT_RXNE) != RESET)
     {
-        uart6_data = USART_ReceiveData(USART6);		// ¶ÁÈ¡ USART6 Êı¾İ¼Ä´æÆ÷
+        uart6_data = USART_ReceiveData(USART6);		// è¯»å– USART6 æ•°æ®å¯„å­˜å™¨
 
         if (uart6_flag == 0x00)
         {
-            if (uart6_data == 0x55)				// ×Ô¶¨ÒåÊı¾İÖ¡Í·
+            if (uart6_data == 0x55)				// è‡ªå®šä¹‰æ•°æ®å¸§å¤´
             {
                 uart6_flag = 0x01;
-                UART6_RxData[0] = uart6_data;	// Ö¡Í·
+                UART6_RxData[0] = uart6_data;	// å¸§å¤´
                 UART6_RxData[1] = 0x00;
                 UART6_RxData[2] = 0x00;
                 UART6_RxData[3] = 0x00;
@@ -96,18 +96,18 @@ void USART6_IRQHandler(void)
         else if (uart6_flag == 0x01)
         {
             uart6_flag = 0x02;
-            UART6_RxData[1] = uart6_data;		// Êı¾İÀàĞÍ
+            UART6_RxData[1] = uart6_data;		// æ•°æ®ç±»å‹
         }
         else if(uart6_flag == 0x02)
         {
             uart6_flag = 0x03;
-            UART6_RxData[2] = uart6_data;		// ×´Ì¬±êÖ¾
+            UART6_RxData[2] = uart6_data;		// çŠ¶æ€æ ‡å¿—
         }
         else if(uart6_flag == 0x03)
         {
             uart6_flag = 0x00;
-            UART6_RxData[3] = uart6_data;		// Êı¾İÎ»
-            voice_falg = 0x01;					// ×Ô¶¨ÒåÊı¾İÖ¡½ÓÊÕÍê±Ï
+            UART6_RxData[3] = uart6_data;		// æ•°æ®ä½
+            voice_falg = 0x01;					// è‡ªå®šä¹‰æ•°æ®å¸§æ¥æ”¶å®Œæ¯•
         }
         else
         {
@@ -117,14 +117,14 @@ void USART6_IRQHandler(void)
         }
 
     }
-    //Çå³ı´®¿ÚÖĞ¶Ï½ÓÊÕ±êÖ¾Î»
+    //æ¸…é™¤ä¸²å£ä¸­æ–­æ¥æ”¶æ ‡å¿—ä½
     USART_ClearITPendingBit(USART6,USART_IT_RXNE);
 }
 
 /*******************************************************
-¹¦¡¡ÄÜ£ºÍ¨¹ı´®¿Ú1·¢ËÍÒ»¸ö×Ö½Ú£¬Èç0x12¡¢0xffµÈ
-²Î¡¡Êı£ºhex -> ×Ö½Ú
-·µ»ØÖµ£ºÎŞ
+åŠŸã€€èƒ½ï¼šé€šè¿‡ä¸²å£1å‘é€ä¸€ä¸ªå­—èŠ‚ï¼Œå¦‚0x12ã€0xffç­‰
+å‚ã€€æ•°ï¼šhex -> å­—èŠ‚
+è¿”å›å€¼ï¼šæ— 
 ********************************************************/
 void USART6_Send_Byte(uint8_t byte)
 {
@@ -133,10 +133,10 @@ void USART6_Send_Byte(uint8_t byte)
 }
 
 /*******************************************************
-¹¦¡¡ÄÜ£ºÍ¨¹ı´®¿Ú1·¢ËÍÒ»¸öÊı×é
-²Î¡¡Êı£º*buf -> Ö¸ÕëÖ¸ÏòÒ»¸öÊı×é
-		 length -> Êı×éµÄ³¤¶È
-·µ»ØÖµ£ºÎŞ
+åŠŸã€€èƒ½ï¼šé€šè¿‡ä¸²å£1å‘é€ä¸€ä¸ªæ•°ç»„
+å‚ã€€æ•°ï¼š*buf -> æŒ‡é’ˆæŒ‡å‘ä¸€ä¸ªæ•°ç»„
+		 length -> æ•°ç»„çš„é•¿åº¦
+è¿”å›å€¼ï¼šæ— 
 ********************************************************/
 void USART6_Send_Length(uint8_t *buf,uint8_t length)
 {
@@ -148,35 +148,35 @@ void USART6_Send_Length(uint8_t *buf,uint8_t length)
 }
 
 /**************************************************
-¹¦  ÄÜ£ºÓïÒôÊ¶±ğº¯Êı
-²Î  Êı£º	0¿ØÖÆÓïÒô²¥±¨Ëæ¼´²¥±¨Ö¸ÁîÓïÒôÊ¶±ğ²âÊÔ£¬2-6²¥±¨Ö¸¶¨ÃüÁî½øĞĞÓïÒôÊ¶±ğ²âÊÔ
-·µ»ØÖµ£º	ÓïÒô´ÊÌõID        ´ÊÌõÄÚÈİ
-        0x02      ->     ¸»Ç¿Â·Õ¾
-			  0x03      ->     ÃñÖ÷Â·Õ¾
-			  0x04      ->     ÎÄÃ÷Â·Õ¾
-			  0x05      ->     ºÍĞ³Â·Õ¾
-			  0x06      ->     °®¹úÂ·Õ¾
-			  0x07      ->     ¾´ÒµÂ·Õ¾
-			  0x08      ->     ÓÑÉÆÂ·Õ¾
+åŠŸ  èƒ½ï¼šè¯­éŸ³è¯†åˆ«å‡½æ•°
+å‚  æ•°ï¼š	0æ§åˆ¶è¯­éŸ³æ’­æŠ¥éšå³æ’­æŠ¥æŒ‡ä»¤è¯­éŸ³è¯†åˆ«æµ‹è¯•ï¼Œ2-6æ’­æŠ¥æŒ‡å®šå‘½ä»¤è¿›è¡Œè¯­éŸ³è¯†åˆ«æµ‹è¯•
+è¿”å›å€¼ï¼š	è¯­éŸ³è¯æ¡ID        è¯æ¡å†…å®¹
+        0x02      ->     å¯Œå¼ºè·¯ç«™
+			  0x03      ->     æ°‘ä¸»è·¯ç«™
+			  0x04      ->     æ–‡æ˜è·¯ç«™
+			  0x05      ->     å’Œè°è·¯ç«™
+			  0x06      ->     çˆ±å›½è·¯ç«™
+			  0x07      ->     æ•¬ä¸šè·¯ç«™
+			  0x08      ->     å‹å–„è·¯ç«™
 		
 **************************************************/
-uint8_t BKRC_Voice_Extern(uint8_t yy_mode)		// ÓïÒôÊ¶±ğ
+uint8_t BKRC_Voice_Extern(uint8_t yy_mode)		// è¯­éŸ³è¯†åˆ«
 {
-    uint16_t timers = 0;               // ¼ÆÊıÖµ2
-    USART6_Send_Length(start_voice_dis,5);//·¢ËÍ¿ªÆôÓïÒôÊ¶±ğÖ¸Áî
+    uint16_t timers = 0;               // è®¡æ•°å€¼2
+    USART6_Send_Length(start_voice_dis,5);//å‘é€å¼€å¯è¯­éŸ³è¯†åˆ«æŒ‡ä»¤
     delay_ms(500);
-    bkrc_voice_Flag = Voice_Drive();//½ÓÊÕ·µ»Ø×´Ì¬
+    bkrc_voice_Flag = Voice_Drive();//æ¥æ”¶è¿”å›çŠ¶æ€
 
     delay_ms(500);
     delay_ms(500);
     delay_ms(500);
 	if(yy_mode==0)
 	{
-	    YY_Comm_Zigbee(0x20,0x01);			//ÓïÒô²¥±¨Ëæ»úÓïÒôÃüÁî
+	    YY_Comm_Zigbee(0x20,0x01);			//è¯­éŸ³æ’­æŠ¥éšæœºè¯­éŸ³å‘½ä»¤
 	}
 	else
 	{
-		YY_Comm_Zigbee(0x10,yy_mode);			//ÓïÒô²¥±¨Ëæ»úÓïÒôÃüÁî
+		YY_Comm_Zigbee(0x10,yy_mode);			//è¯­éŸ³æ’­æŠ¥éšæœºè¯­éŸ³å‘½ä»¤
 	}
 
     bkrc_voice_Flag=0;
@@ -187,7 +187,7 @@ uint8_t BKRC_Voice_Extern(uint8_t yy_mode)		// ÓïÒôÊ¶±ğ
         timers++;
         bkrc_voice_Flag = Voice_Drive();
 
-        if (bkrc_voice_Flag != 0x00||timers>6000)   //ÅĞ¶Ï³¬Ê±ÍË³ö
+        if (bkrc_voice_Flag != 0x00||timers>6000)   //åˆ¤æ–­è¶…æ—¶é€€å‡º
         {
             timers=0;
             return bkrc_voice_Flag;
@@ -197,14 +197,14 @@ uint8_t BKRC_Voice_Extern(uint8_t yy_mode)		// ÓïÒôÊ¶±ğ
 
 
 /**************************************************
-¹¦  ÄÜ£ºÓïÒôÊ¶±ğ»Ø´«ÃüÁî½âÎöº¯Êı
-²Î  Êı£º	ÎŞ
-·µ»ØÖµ£º	ÓïÒô´ÊÌõID /Ğ¡´´ÓïÒôÊ¶±ğÄ£¿é×´Ì¬
+åŠŸ  èƒ½ï¼šè¯­éŸ³è¯†åˆ«å›ä¼ å‘½ä»¤è§£æå‡½æ•°
+å‚  æ•°ï¼š	æ— 
+è¿”å›å€¼ï¼š	è¯­éŸ³è¯æ¡ID /å°åˆ›è¯­éŸ³è¯†åˆ«æ¨¡å—çŠ¶æ€
 **************************************************/
 uint8_t Voice_Drive(void)
 {
     uint8_t status = 0;
-    if ((voice_falg == 0x01) && (UART6_RxData[0] == 0x55))			// ×Ô¶¨ÒåÊı¾İÖ¡½ÓÊÕÍê±Ï
+    if ((voice_falg == 0x01) && (UART6_RxData[0] == 0x55))			// è‡ªå®šä¹‰æ•°æ®å¸§æ¥æ”¶å®Œæ¯•
     {
         if (UART6_RxData[1] == 0x01)
         {
@@ -212,22 +212,22 @@ uint8_t Voice_Drive(void)
             switch (UART6_RxData[2])
             {
             case 0x01: {
-                //                printf("* ³õÊ¼»¯Íê³É *");
+                //                printf("* åˆå§‹åŒ–å®Œæˆ *");
                 status |= 0x80;
                 break;
             }
             case 0x02: {
-                //                printf("* ½øÈëÊ¶±ğÄ£Ê½ *");
+                //                printf("* è¿›å…¥è¯†åˆ«æ¨¡å¼ *");
                 status |= 0x40;
                 break;
             }
             case 0x03: {
-                //                printf("* ÍË³öÊ¶±ğÄ£Ê½ *");
+                //                printf("* é€€å‡ºè¯†åˆ«æ¨¡å¼ *");
                 status &= 0xB0;
                 break;
             }
             case 0x04: {
-                //                printf("* ½øÈëĞİÃßÄ£Ê½ *");
+                //                printf("* è¿›å…¥ä¼‘çœ æ¨¡å¼ *");
                 status = 0x00;
                 break;
             }
@@ -244,49 +244,49 @@ uint8_t Voice_Drive(void)
             case 0x01: {
 //                USART6_Send_Byte(0x01);
 				Send_InfoData_To_Fifo("ID: 2\n", 9);
-//				printf("* ¸»Ç¿Â·Õ¾ *");
+//				printf("* å¯Œå¼ºè·¯ç«™ *");
                 status |= 0x02;
                 break;
             }
             case 0x02: {
 //                USART6_Send_Byte(0x02);
 				Send_InfoData_To_Fifo("ID: 3\n", 9);
-//                printf("* ÃñÖ÷Â·Õ¾ *");
+//                printf("* æ°‘ä¸»è·¯ç«™ *");
                 status |= 0x03;
                 break;
             }
             case 0x03: {
 //                USART6_Send_Byte(0x03);
 				Send_InfoData_To_Fifo("ID: 4\n", 9);
-//                printf("* ÎÄÃ÷Â·Õ¾ *");
+//                printf("* æ–‡æ˜è·¯ç«™ *");
                 status |= 0x04;
                 break;
             }
             case 0x04: {
 //                USART6_Send_Byte(0x04);
 				Send_InfoData_To_Fifo("ID: 5\n", 9);
-//                printf("* ºÍĞ³Â·Õ¾ *");
+//                printf("* å’Œè°è·¯ç«™ *");
                 status |= 0x05;
                 break;
             }
             case 0x05: {
 //                USART6_Send_Byte(0x05);
 				Send_InfoData_To_Fifo("ID: 6\n", 9);
-//                printf("* °®¹úÂ·Õ¾ *");
+//                printf("* çˆ±å›½è·¯ç«™ *");
                 status |= 0x06;
                 break;
             }
 			case 0x06: {
 //                USART6_Send_Byte(0x06);
 				Send_InfoData_To_Fifo("ID: 7\n", 9);
-//                printf("* ¾´ÒµÂ·Õ¾ *");
+//                printf("* æ•¬ä¸šè·¯ç«™ *");
                 status |= 0x07;
                 break;
             }
 			case 0x07: {
 //                USART6_Send_Byte(0x07);
 				Send_InfoData_To_Fifo("ID: 8\n", 9);
-//                printf("* ÓÑÉÆÂ·Õ¾ *");
+//                printf("* å‹å–„è·¯ç«™ *");
                 status |= 0x08;
                 break;
             }
@@ -300,7 +300,7 @@ uint8_t Voice_Drive(void)
             {
             case 0x01:
 						{							
-                //                printf("* TTS: ÃÀºÃÉú»î *");
+                //                printf("* TTS: ç¾å¥½ç”Ÿæ´» *");
 							uint8_t Buf[50];
 							sprintf((char*)Buf,"fu qiang lu zhan OK!\r\n");  
 							Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));  
@@ -308,16 +308,16 @@ uint8_t Voice_Drive(void)
                 break;
 						}
             case 0x02:
-                //                printf("* TTS: ĞãÀöÉ½ºÓ *");
+                //                printf("* TTS: ç§€ä¸½å±±æ²³ *");
                 break;
             case 0x03:
-                //                printf("* TTS: ×·ÖğÃÎÏë *");
+                //                printf("* TTS: è¿½é€æ¢¦æƒ³ *");
                 break;
             case 0x04:
-                //                printf("* TTS: Ñï·«Æôº½ *");
+                //                printf("* TTS: æ‰¬å¸†å¯èˆª *");
                 break;
             case 0x05:
-                //                printf("* TTS: ÆëÍ·²¢½ø *");
+                //                printf("* TTS: é½å¤´å¹¶è¿› *");
                 break;
             case 0x10:
                 //                printf("* 00.mp3 *");
@@ -338,42 +338,42 @@ uint8_t Voice_Drive(void)
 }
 
 /**************************************************
-¹¦  ÄÜ£º¿ØÖÆÓïÒô²¥±¨±êÖ¾Îï²¥±¨Ö¸¶¨ÎÄ±¾ĞÅÏ¢
-²Î  Êı£º	*p  --> ĞèÒª·¢ËÍµÄÊı¾İ
-·µ»ØÖµ£º	ÎŞ
+åŠŸ  èƒ½ï¼šæ§åˆ¶è¯­éŸ³æ’­æŠ¥æ ‡å¿—ç‰©æ’­æŠ¥æŒ‡å®šæ–‡æœ¬ä¿¡æ¯
+å‚  æ•°ï¼š	*p  --> éœ€è¦å‘é€çš„æ•°æ®
+è¿”å›å€¼ï¼š	æ— 
 **************************************************/
 void YY_Play_Zigbee(char *p)
 {
-    uint16_t p_len = strlen(p);             // ÎÄ±¾³¤¶È
+    uint16_t p_len = strlen(p);             // æ–‡æœ¬é•¿åº¦
 
-    YY_Init[1] = 0xff & ((p_len + 2) >> 8); // Êı¾İÇø³¤¶È¸ß°ËÎ»
-    YY_Init[2] = 0xff & (p_len + 2);        // Êı¾İÇø³¤¶ÈµÍ°ËÎ»
+    YY_Init[1] = 0xff & ((p_len + 2) >> 8); // æ•°æ®åŒºé•¿åº¦é«˜å…«ä½
+    YY_Init[2] = 0xff & (p_len + 2);        // æ•°æ®åŒºé•¿åº¦ä½å…«ä½
     Send_ZigbeeData_To_Fifo(YY_Init, 5);
     Send_ZigbeeData_To_Fifo((uint8_t *)p, p_len);
     delay_ms(100);
 }
 
 /**********************************************************************
- * º¯ Êı Ãû £º  ¿ØÖÆÓïÒô²¥±¨±êÖ¾Îï²¥±¨ÓïÒô¿ØÖÆÃüÁî
- * ²Î    Êı £º  Primary   -> Ö÷Ö¸Áî
-                Secondary -> ¸±Ö°Áî
-                Ïê¼û¸½Â¼1
- * ·µ »Ø Öµ £º  ÎŞ
- * ¼ò    Àı £º  YY_Comm_Zigbee(0x20, 0x01);     // ÓïÒô²¥±¨Ëæ»úÓïÒôÃüÁî
+ * å‡½ æ•° å ï¼š  æ§åˆ¶è¯­éŸ³æ’­æŠ¥æ ‡å¿—ç‰©æ’­æŠ¥è¯­éŸ³æ§åˆ¶å‘½ä»¤
+ * å‚    æ•° ï¼š  Primary   -> ä¸»æŒ‡ä»¤
+                Secondary -> å‰¯èŒä»¤
+                è¯¦è§é™„å½•1
+ * è¿” å› å€¼ ï¼š  æ— 
+ * ç®€    ä¾‹ ï¼š  YY_Comm_Zigbee(0x20, 0x01);     // è¯­éŸ³æ’­æŠ¥éšæœºè¯­éŸ³å‘½ä»¤
 
-¸½Â¼1£º
+é™„å½•1ï¼š
 -----------------------------------------------------------------------
-| Primary | Secondary | ËµÃ÷
+| Primary | Secondary | è¯´æ˜
 |---------|-----------|------------------------------------------------
-|  0x10   |  0x01     | ¸»Ç¿Â·Õ¾
-|         |  0x02     | ÃñÖ÷Â·Õ¾
-|         |  0x03     | ÎÄÃ÷Â·Õ¾
-|         |  0x04     | ºÍĞ³Â·Õ¾
-|         |  0x05     | °®¹úÂ·Õ¾
-|         |  0x06     | ¾´ÒµÂ·Õ¾
-|         |  0x07     | ÓÑÉÆÂ·Õ¾
+|  0x10   |  0x01     | å¯Œå¼ºè·¯ç«™
+|         |  0x02     | æ°‘ä¸»è·¯ç«™
+|         |  0x03     | æ–‡æ˜è·¯ç«™
+|         |  0x04     | å’Œè°è·¯ç«™
+|         |  0x05     | çˆ±å›½è·¯ç«™
+|         |  0x06     | æ•¬ä¸šè·¯ç«™
+|         |  0x07     | å‹å–„è·¯ç«™
 |---------|-----------|------------------------------------------------
-|  0x20   |  0x01     | Ëæ»úÖ¸Áî
+|  0x20   |  0x01     | éšæœºæŒ‡ä»¤
 |---------|-----------|------------------------------------------------
 ***********************************************************************/
 void YY_Comm_Zigbee(uint8_t Primary, uint8_t Secondary)
@@ -389,9 +389,9 @@ void YY_Comm_Zigbee(uint8_t Primary, uint8_t Secondary)
     Send_ZigbeeData_To_Fifo(Zigbee, 8);
 }
 /*******************************************************
-¹¦¡¡ÄÜ£ºÓïÒôÊ¶±ğ³õÊ¼»¯º¯Êı
-²Î¡¡Êı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+åŠŸã€€èƒ½ï¼šè¯­éŸ³è¯†åˆ«åˆå§‹åŒ–å‡½æ•°
+å‚ã€€æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 ********************************************************/
 void BKRC_Voice_Init(void)
 {

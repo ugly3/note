@@ -81,7 +81,7 @@ void genPla(uint8_t matrix1[5][5], uint8_t matrix2[5][5], uint8_t plaMatrix[5][5
     output[2] = '\0';
 }
 
-// ½«×Ö·û´®×ª»»ÎªÊ®Áù½øÖÆÊıÖµÊı×é£¬·µ»Ø³¤¶È
+// å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºåå…­è¿›åˆ¶æ•°å€¼æ•°ç»„ï¼Œè¿”å›é•¿åº¦
 int stringToHexBytes(const char *str, uint8_t *hexBytes) {
     int len = strlen(str);
     for (int i = 0; i < len; i++) {
@@ -90,7 +90,7 @@ int stringToHexBytes(const char *str, uint8_t *hexBytes) {
     return len;
 }
 
-// ´òÓ¡Ê®Áù½øÖÆÊıÖµ
+// æ‰“å°åå…­è¿›åˆ¶æ•°å€¼
 void printHexBytes(const uint8_t *hexBytes, int len) {
     printf("Plaintext (as hex values): ");
     for (int i = 0; i < len; i++) {
@@ -99,7 +99,7 @@ void printHexBytes(const uint8_t *hexBytes, int len) {
     printf("\n");
 }
 /********************************************************************************************************/
-// YT_1_Algorithmº¯Êı·µ»ØplaintextµÄ³¤¶È
+// YT_1_Algorithmå‡½æ•°è¿”å›plaintextçš„é•¿åº¦
 int YT_1_Algorithm(const uint8_t *key1, const uint8_t *key2, const uint8_t *cip, 
          uint8_t *plaintext, uint8_t *plainHex) {
     const uint8_t *matrix = (uint8_t*)"ABCDEFGHIKLMNOPQRSTUVWXYZ";
@@ -114,7 +114,7 @@ int YT_1_Algorithm(const uint8_t *key1, const uint8_t *key2, const uint8_t *cip,
     
     uint8_t temp[3];
     
-    // Çå¿Õplaintext
+    // æ¸…ç©ºplaintext
     plaintext[0] = '\0';
     
     int cip_len = strlen((char*)cip);
@@ -125,7 +125,7 @@ int YT_1_Algorithm(const uint8_t *key1, const uint8_t *key2, const uint8_t *cip,
         }
     }
     
-    // ½«Ã÷ÎÄ×ª»»ÎªÊ®Áù½øÖÆÊıÖµÊı×é£¬²¢»ñÈ¡³¤¶È
+    // å°†æ˜æ–‡è½¬æ¢ä¸ºåå…­è¿›åˆ¶æ•°å€¼æ•°ç»„ï¼Œå¹¶è·å–é•¿åº¦
     int hexLen = stringToHexBytes((char*)plaintext, plainHex);
     
     printf("\nCiphertext: %s\n", cip);
@@ -136,21 +136,21 @@ int YT_1_Algorithm(const uint8_t *key1, const uint8_t *key2, const uint8_t *cip,
 }
 
 /********************************************************************************************************/
-// Ò»Î¬¾í»ıº¯Êı
+// ä¸€ç»´å·ç§¯å‡½æ•°
 int YT_3_Algorithm(const char *input_str, const uint8_t *kernel, uint8_t kernel_size, 
                          uint8_t *output, uint8_t output_len) 
 {
     uint8_t input_size = strlen(input_str);
     
-    // ÊäÈëÑéÖ¤
+    // è¾“å…¥éªŒè¯
     if (input_size < kernel_size) {
         return -1;
     }
 
-    // Valid¾í»ıµÄÊµ¼ÊÊä³ö³¤¶È
+    // Validå·ç§¯çš„å®é™…è¾“å‡ºé•¿åº¦
     uint8_t valid_output_size = input_size - kernel_size + 1;
     
-    // ¼ÆËãValid¾í»ı
+    // è®¡ç®—Validå·ç§¯
     for (uint8_t i = 0; i < output_len; i++) {
         if (i < valid_output_size) {
             uint16_t sum = 0;
@@ -160,11 +160,11 @@ int YT_3_Algorithm(const char *input_str, const uint8_t *kernel, uint8_t kernel_
             }
             output[i] = (uint8_t)(sum & 0xFF);
         } else {
-            output[i] = 0;  // ³¬³öÊµ¼Ê³¤¶È²¹0
+            output[i] = 0;  // è¶…å‡ºå®é™…é•¿åº¦è¡¥0
         }
     }
     
-    return valid_output_size;  // ·µ»ØÊµ¼Ê¾í»ı½á¹û³¤¶È
+    return valid_output_size;  // è¿”å›å®é™…å·ç§¯ç»“æœé•¿åº¦
 }
 
 

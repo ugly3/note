@@ -7,11 +7,11 @@
 
 void SYN7318_Init(void);
 void SYN_TTS(char *Pst);
-void SYN7318_Test( void);					// ¿ªÆôÓïÒô²âÊÔ
-void SYN_7318_One_test(uint8_t mode,uint8_t num);		// mode Ä£Ê½²âÊÔ 1 Ëæ»úÖ¸Áî 0 Ö¸¶¨Ö¸Áî
-void Yu_Yin_Asr(void);						// ÓïÒôÊ¶±ğ´¦Àíº¯Êı
+void SYN7318_Test( void);					// å¼€å¯è¯­éŸ³æµ‹è¯•
+void SYN_7318_One_test(uint8_t mode,uint8_t num);		// mode æ¨¡å¼æµ‹è¯• 1 éšæœºæŒ‡ä»¤ 0 æŒ‡å®šæŒ‡ä»¤
+void Yu_Yin_Asr(void);						// è¯­éŸ³è¯†åˆ«å¤„ç†å‡½æ•°
 
-uint8_t SYN7318_Extern(void);		// ÓïÒôÊ¶±ğ
+uint8_t SYN7318_Extern(void);		// è¯­éŸ³è¯†åˆ«
 	
 
 #endif

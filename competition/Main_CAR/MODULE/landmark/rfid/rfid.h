@@ -2,7 +2,7 @@
 #define __RFID_H
 #include "all_module.h"
 
-#define RFID_Debug 0   //Êı¾İÏÔÊ¾µ½DebugÏÔÊ¾ÆÁ
+#define RFID_Debug 0   //æ•°æ®æ˜¾ç¤ºåˆ°Debugæ˜¾ç¤ºå±
 
 typedef struct
 {
@@ -21,25 +21,25 @@ typedef struct
 extern RFID_Typedef RFID_Data;
 extern volatile uint8_t RFID_Angle_or_shizilukou_Flag;
 extern bool RFID_Track_Flag;
-extern int card2_sector_block;  //¿¨2µÄµØÖ·
-extern char card2_position[3];      //¿¨2ÔÚµØÍ¼ÉÏµÄ×ø±ê
+extern int card2_sector_block;  //å¡2çš„åœ°å€
+extern char card2_position[3];      //å¡2åœ¨åœ°å›¾ä¸Šçš„åæ ‡
 
-extern uint8_t READ_RFID_Store[17];		// ´æ·ÅRFID¶ÁÈ¡µ½µÄÊı¾İ
-extern char Judge_READ_RFID[16];// ´æ·ÅRFID¶Áµ½µÄÊı¾İ,ÓÃÀ´ÅĞ¶Ï¿¨Æ¬µÄÕæ¼Ù 
-extern char READ_RFID1[16];     //µÚÒ»ÕÅ¿¨ÓĞĞ§Êı¾İ
-extern char READ_RFID2[16];     //µÚ¶şÕÅ¿¨ÓĞĞ§Êı¾İ
-extern char READ_RFID3[16];     //µÚÈıÕÅ¿¨ÓĞĞ§Êı¾İ
+extern uint8_t READ_RFID_Store[17];		// å­˜æ”¾RFIDè¯»å–åˆ°çš„æ•°æ®
+extern char Judge_READ_RFID[16];// å­˜æ”¾RFIDè¯»åˆ°çš„æ•°æ®,ç”¨æ¥åˆ¤æ–­å¡ç‰‡çš„çœŸå‡ 
+extern char READ_RFID1[16];     //ç¬¬ä¸€å¼ å¡æœ‰æ•ˆæ•°æ®
+extern char READ_RFID2[16];     //ç¬¬äºŒå¼ å¡æœ‰æ•ˆæ•°æ®
+extern char READ_RFID3[16];     //ç¬¬ä¸‰å¼ å¡æœ‰æ•ˆæ•°æ®
 extern char Init_READ_RFID1[17];    
 extern char Init_READ_RFID2[17];    
 extern char Init_READ_RFID3[17];
 
-extern uint8_t WRITE_RFID[16];     //´æ·ÅRFIDĞ´ÈëµÄÊı¾İ
-extern unsigned int hex_codes[3];//ÎŞÏß³äµçÕ¾¿ªÆôÂë
+extern uint8_t WRITE_RFID[16];     //å­˜æ”¾RFIDå†™å…¥çš„æ•°æ®
+extern unsigned int hex_codes[3];//æ— çº¿å……ç”µç«™å¼€å¯ç 
 
 extern char Judge_Card1_Str[];
 extern char Judge_Card2_Str[];
 
-//»¹Î´Íê³É
+//è¿˜æœªå®Œæˆ
 extern bool RFID_Read_Flag;
 extern uint16_t Distance;
 extern bool Check_Distance;

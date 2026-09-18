@@ -2,7 +2,7 @@
 ..\output\stm32f4xx_cryp_aes.o: ..\FWLIB\inc\stm32f4xx_cryp.h
 ..\output\stm32f4xx_cryp_aes.o: ..\CMSIS\stm32f4xx.h
 ..\output\stm32f4xx_cryp_aes.o: ..\CMSIS\core_cm4.h
-..\output\stm32f4xx_cryp_aes.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\stm32f4xx_cryp_aes.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\stm32f4xx_cryp_aes.o: ..\CMSIS\core_cmInstr.h
 ..\output\stm32f4xx_cryp_aes.o: ..\CMSIS\core_cmFunc.h
 ..\output\stm32f4xx_cryp_aes.o: ..\CMSIS\core_cmSimd.h

@@ -1,7 +1,7 @@
 /**
 ************************************************************************
- *    ÎÄ¼şÃû£ºsmoke_tower
- *      ËµÃ÷£º·é»ğÌ¨£¨±¨¾¯Ì¨£©±êÖ¾Îï
+ *    æ–‡ä»¶åï¼šsmoke_tower
+ *      è¯´æ˜ï¼šçƒ½ç«å°ï¼ˆæŠ¥è­¦å°ï¼‰æ ‡å¿—ç‰©
 ************************************************************************
 **/
 #include "smoke_tower.h"
@@ -13,24 +13,24 @@ SmokeTower_Typedef SmokeTower_Data =
     .xSmokeTower_Zigbee_Open = &xSmokeTower_Zigbee_Open,
 };
 
-/*·é»ğÌ¨£¨±¨¾¯Ì¨£©±êÖ¾ÎïºìÍâ¿ØÖÆÖ¸Áî£¨¿ªÆôÂë£©¡¾ºìÍâÍ¨ĞÅ¡¿*/
+/*çƒ½ç«å°ï¼ˆæŠ¥è­¦å°ï¼‰æ ‡å¿—ç‰©çº¢å¤–æ§åˆ¶æŒ‡ä»¤ï¼ˆå¼€å¯ç ï¼‰ã€çº¢å¤–é€šä¿¡ã€‘*/
 uint8_t SmokeTower_Infrared[6] = {0x03,0x05,0x14,0x45,0xDE,0x92};
 
-/*·é»ğÌ¨£¨±¨¾¯Ì¨£©±êÖ¾Îï·¢ËÍ¿ØÖÆÃüÁî¡¾ZigBeeÍ¨ĞÅ¡¿---Ö¡Í·1£¬Ö¡Í·2£¬Ö¡Î²¹Ì¶¨*/
+/*çƒ½ç«å°ï¼ˆæŠ¥è­¦å°ï¼‰æ ‡å¿—ç‰©å‘é€æ§åˆ¶å‘½ä»¤ã€ZigBeeé€šä¿¡ã€‘---å¸§å¤´1ï¼Œå¸§å¤´2ï¼Œå¸§å°¾å›ºå®š*/
 uint8_t SmokeTower_Zigbee[8] = {0x55,0x07,0x00,0x00,0x00,0x00,0x00,0xBB};
 
 
 
 /*
- ******************************·é»ğÌ¨¿ªÆô£¨ºìÍâÍ¨ĞÅ£©*****************************
-²ÎÊı1£ºSmokeTower_Infrared
-·µ»ØÖµ£ºÎŞ
+ ******************************çƒ½ç«å°å¼€å¯ï¼ˆçº¢å¤–é€šä¿¡ï¼‰*****************************
+å‚æ•°1ï¼šSmokeTower_Infrared
+è¿”å›å€¼ï¼šæ— 
 */
 void SmokeTower_Infrared_Open(void)
 {
 	for(uint8_t i=0;i<3;i++)   
 	{
-		Infrared_Send(SmokeTower_Infrared,sizeof(SmokeTower_Infrared));   //·¢Èı´Î·é»ğÌ¨¿ªÆôÂë
+		Infrared_Send(SmokeTower_Infrared,sizeof(SmokeTower_Infrared));   //å‘ä¸‰æ¬¡çƒ½ç«å°å¼€å¯ç 
 		delay_ms(100);
 	}
 }
@@ -38,12 +38,12 @@ void SmokeTower_Infrared_Open(void)
 
 
 /*
-*********************************Zigbee·¢ËÍ¿ªÆôÂë¿ªÆô*************************
- * Ö¡Í·1---> 0x55   * Ö¡Í·2--0x07   * Ö¡Î²---> 0xBB
+*********************************Zigbeeå‘é€å¼€å¯ç å¼€å¯*************************
+ * å¸§å¤´1---> 0x55   * å¸§å¤´2--0x07   * å¸§å°¾---> 0xBB
 ------------------------------------------------------------------------------
-   Ö÷Ö¸Áî | ¸±Ö¸Áî1| ¸±Ö¸Áî2 |  ¸±Ö¸Áî3  | ËµÃ÷
-   0x010  |  0xXX  |   0xXX  |    0xXX   | ·¢ËÍÇ°ÈıÎ»¿ªÆôÂëÊı¾İ
-   0x011  |  0xXX  |   0xXX  |    0xXX   | ·¢ËÍºóÈıÎ»¿ªÆôÂëÊı¾İ
+   ä¸»æŒ‡ä»¤ | å‰¯æŒ‡ä»¤1| å‰¯æŒ‡ä»¤2 |  å‰¯æŒ‡ä»¤3  | è¯´æ˜
+   0x010  |  0xXX  |   0xXX  |    0xXX   | å‘é€å‰ä¸‰ä½å¼€å¯ç æ•°æ®
+   0x011  |  0xXX  |   0xXX  |    0xXX   | å‘é€åä¸‰ä½å¼€å¯ç æ•°æ®
 ******************************************************************************
 */
 void xSmokeTower_Zigbee_Open(uint8_t *str)    
@@ -51,22 +51,22 @@ void xSmokeTower_Zigbee_Open(uint8_t *str)
     uint8_t CheckSum;
 	uint8_t Temp[8] = {0};
 	memcpy(Temp,SmokeTower_Zigbee,sizeof(SmokeTower_Zigbee));
-    Temp[2] = 0x10;  //Ö÷Ö¸Áî
+    Temp[2] = 0x10;  //ä¸»æŒ‡ä»¤
     Temp[3] = *(str+0);
     Temp[4] = *(str+1);
     Temp[5] = *(str+2);
-    CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //¼ÆËãĞ£ÑéºÍ
+    CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //è®¡ç®—æ ¡éªŒå’Œ
     Temp[6] = CheckSum;
     for(uint8_t i=0;i<3;i++)
 	{
 		Send_ZigbeeData_To_Fifo(Temp,8);
 		delay_ms(100);
 	}
-    Temp[2] = 0x11;  //Ö÷Ö¸Áî
+    Temp[2] = 0x11;  //ä¸»æŒ‡ä»¤
     Temp[3] = *(str+3);
     Temp[4] = *(str+4);
     Temp[5] = *(str+5);
-    CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //¼ÆËãĞ£ÑéºÍ
+    CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //è®¡ç®—æ ¡éªŒå’Œ
     Temp[6] = CheckSum;
     for(uint8_t i=0;i<3;i++)
 	{
@@ -75,11 +75,11 @@ void xSmokeTower_Zigbee_Open(uint8_t *str)
 	}
 }
 /*
-*********************************Zigbee·¢ËÍÇëÇó»Ø´«Ëæ»ú¾ÈÔ®Î»ÖÃ×ø±êµã************************
- * Ö¡Í·1---> 0x55   * Ö¡Í·2--0x07   * Ö¡Î²---> 0xBB
+*********************************Zigbeeå‘é€è¯·æ±‚å›ä¼ éšæœºæ•‘æ´ä½ç½®åæ ‡ç‚¹************************
+ * å¸§å¤´1---> 0x55   * å¸§å¤´2--0x07   * å¸§å°¾---> 0xBB
 ------------------------------------------------------------------------------
-   Ö÷Ö¸Áî | ¸±Ö¸Áî1| ¸±Ö¸Áî2 |  ¸±Ö¸Áî3  | ËµÃ÷
-   0x009  |  0x00  |   0x00  |    0x00   | ÇëÇó»Ø´«Ëæ»ú¾ÈÔ®Î»ÖÃ×ø±êµã
+   ä¸»æŒ‡ä»¤ | å‰¯æŒ‡ä»¤1| å‰¯æŒ‡ä»¤2 |  å‰¯æŒ‡ä»¤3  | è¯´æ˜
+   0x009  |  0x00  |   0x00  |    0x00   | è¯·æ±‚å›ä¼ éšæœºæ•‘æ´ä½ç½®åæ ‡ç‚¹
 ******************************************************************************
 */
 void xSmokeTower_Zigbee_Weizhi(void)    
@@ -87,11 +87,11 @@ void xSmokeTower_Zigbee_Weizhi(void)
     uint8_t CheckSum;
 	uint8_t Temp[8] = {0};
 	memcpy(Temp,SmokeTower_Zigbee,sizeof(SmokeTower_Zigbee));
-    Temp[2] = 0x09;  //Ö÷Ö¸Áî
+    Temp[2] = 0x09;  //ä¸»æŒ‡ä»¤
     Temp[3] = 0x00;
     Temp[4] = 0x00;
     Temp[5] = 0x00;
-    CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //¼ÆËãĞ£ÑéºÍ
+    CheckSum = Mixture_Data.xGet_CheckSum(Temp[2],Temp[3],Temp[4],Temp[5]);  //è®¡ç®—æ ¡éªŒå’Œ
     Temp[6] = CheckSum;
     for(uint8_t i=0;i<3;i++)
 	{

@@ -1,12 +1,12 @@
 /**
 ************************************************************************
-*    ÎÄ¼şÃû£º¶şÎ¬ÂëÊı¾İ´¦Àí
-*      ËµÃ÷£º
+*    æ–‡ä»¶åï¼šäºŒç»´ç æ•°æ®å¤„ç†
+*      è¯´æ˜ï¼š
 ************************************************************************
 **/
 #include "two_code.h"
 
-// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
+// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å°–æ‹¬å·å†…çš„å†…å®¹
 uint8_t extract_data_1(const uint8_t *qr_info, uint8_t *output_buffer)
 {
     const char *start = strchr((const char *)qr_info, '<');
@@ -14,21 +14,21 @@ uint8_t extract_data_1(const uint8_t *qr_info, uint8_t *output_buffer)
 
     if (start == NULL || end == NULL || end <= start)
     {
-        output_buffer[0] = '\0'; // ÎŞĞ§¸ñÊ½£¬Êä³ö¿Õ×Ö·û´®
+        output_buffer[0] = '\0'; // æ— æ•ˆæ ¼å¼ï¼Œè¾“å‡ºç©ºå­—ç¬¦ä¸²
         return 0;
     }
     int data_len = end - start - 1;
-    // È·±£²»»á³¬³ö»º³åÇø´óĞ¡
+    // ç¡®ä¿ä¸ä¼šè¶…å‡ºç¼“å†²åŒºå¤§å°
     if (data_len >= 50)
     {
-        data_len = 49; // ±£ÁôÒ»¸ö×Ö½Ú¸ø½áÊø·û
+        data_len = 49; // ä¿ç•™ä¸€ä¸ªå­—èŠ‚ç»™ç»“æŸç¬¦
     }
     strncpy((char *)output_buffer, start + 1, data_len);
     output_buffer[data_len] = '\0';
     return 1;
 }
 
-// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡´óÀ¨ºÅÄÚµÄÄÚÈİ
+// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å¤§æ‹¬å·å†…çš„å†…å®¹
 uint8_t extract_data_2(const uint8_t *qr_info, uint8_t *output_buffer)
 {
     const char *start = strchr((const char *)qr_info, '{');
@@ -36,16 +36,16 @@ uint8_t extract_data_2(const uint8_t *qr_info, uint8_t *output_buffer)
 
     if (start == NULL || end == NULL || end <= start)
     {
-        output_buffer[0] = '\0'; // ÎŞĞ§¸ñÊ½£¬Êä³ö¿Õ×Ö·û´®
+        output_buffer[0] = '\0'; // æ— æ•ˆæ ¼å¼ï¼Œè¾“å‡ºç©ºå­—ç¬¦ä¸²
         return 0;
     }
 
     int data_len = end - start - 1;
 
-    // È·±£²»»á³¬³ö»º³åÇø´óĞ¡
+    // ç¡®ä¿ä¸ä¼šè¶…å‡ºç¼“å†²åŒºå¤§å°
     if (data_len >= 50)
     {
-        data_len = 49; // ±£ÁôÒ»¸ö×Ö½Ú¸ø½áÊø·û
+        data_len = 49; // ä¿ç•™ä¸€ä¸ªå­—èŠ‚ç»™ç»“æŸç¬¦
     }
 
     strncpy((char *)output_buffer, start + 1, data_len);
@@ -53,7 +53,7 @@ uint8_t extract_data_2(const uint8_t *qr_info, uint8_t *output_buffer)
     return 1;
 }
 
-// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡´óĞ´×ÖÄ¸A~Z
+// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å¤§å†™å­—æ¯A~Z
 uint8_t extract_data_3(const uint8_t *qr_info, uint8_t *output_buffer)
 {
     int out_pos = 0;
@@ -69,7 +69,7 @@ uint8_t extract_data_3(const uint8_t *qr_info, uint8_t *output_buffer)
         return 0;
 }
 
-// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡×Ö·û0~9
+// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å­—ç¬¦0~9
 uint8_t extract_data_4(const uint8_t *qr_info, uint8_t *output_buffer)
 {
     int out_pos = 0;
@@ -85,30 +85,30 @@ uint8_t extract_data_4(const uint8_t *qr_info, uint8_t *output_buffer)
         return 0;
 }
 
-// º¯Êı£ºÊı×Ö0~7¡¢×ÖÄ¸A~GÌáÈ¡£¬È»ºó°´ÕÕ×ÖÄ¸ÔÚÇ°£¬Êı×ÖÔÚºó×éºÏÆğÀ´
+// å‡½æ•°ï¼šæ•°å­—0~7ã€å­—æ¯A~Gæå–ï¼Œç„¶åæŒ‰ç…§å­—æ¯åœ¨å‰ï¼Œæ•°å­—åœ¨åç»„åˆèµ·æ¥
 void extract_data_5(const uint8_t *input, uint8_t *output_buffer)
 {
     char letters[10] = {0};
     char numbers[10] = {0};
     uint8_t letterCount = 0;
     uint8_t numberCount = 0;
-    // ±éÀúÊäÈë×Ö·û´®£¬ÌáÈ¡ÓĞĞ§×Ö·û
+    // éå†è¾“å…¥å­—ç¬¦ä¸²ï¼Œæå–æœ‰æ•ˆå­—ç¬¦
     for (int i = 0; input[i] != '\0'; i++)
     {
         char c = input[i];
 
-        // ¼ì²éÊÇ·ñÊÇ×ÖÄ¸A-G
+        // æ£€æŸ¥æ˜¯å¦æ˜¯å­—æ¯A-G
         if (c >= 'A' && c <= 'G')
         {
             letters[letterCount++] = c;
         }
-        // ¼ì²éÊÇ·ñÊÇÊı×Ö0-7
+        // æ£€æŸ¥æ˜¯å¦æ˜¯æ•°å­—0-7
         else if (c >= '0' && c <= '7')
         {
             numbers[numberCount++] = c;
         }
     }
-    // ÏÈ¸´ÖÆ×ÖÄ¸£¬ÔÙ¸´ÖÆÊı×Öµ½Êä³ö
+    // å…ˆå¤åˆ¶å­—æ¯ï¼Œå†å¤åˆ¶æ•°å­—åˆ°è¾“å‡º
     int index = 0;
     for (int i = 0; i < letterCount; i++)
     {
@@ -120,7 +120,7 @@ void extract_data_5(const uint8_t *input, uint8_t *output_buffer)
     }
     output_buffer[index] = '\0';
 }
-// º¯Êı£ºÌáÈ¡³ö'0' '1'ºÍ+-ºÅ£¬Ñ­»·ÒÆÎ»ºó²ğ³É¸ß°ËÎ»ºÍµÍ°ËÎ»£¬×îºó×ª³ÉÁ©¸öÊ®½øÖÆÊı
+// å‡½æ•°ï¼šæå–å‡º'0' '1'å’Œ+-å·ï¼Œå¾ªç¯ç§»ä½åæ‹†æˆé«˜å…«ä½å’Œä½å…«ä½ï¼Œæœ€åè½¬æˆä¿©ä¸ªåè¿›åˆ¶æ•°
 void extract_data_6(const uint8_t *input, uint8_t *output_buffer)
 {
     char xl[17] = {0};
@@ -128,7 +128,7 @@ void extract_data_6(const uint8_t *input, uint8_t *output_buffer)
     char first_special = 0;
     int special_found = 0;
 
-    // ÌáÈ¡0ºÍ1ĞòÁĞ£¬Í¬Ê±ÕÒµ½µÚÒ»¸öÌØÊâ×Ö·û
+    // æå–0å’Œ1åºåˆ—ï¼ŒåŒæ—¶æ‰¾åˆ°ç¬¬ä¸€ä¸ªç‰¹æ®Šå­—ç¬¦
     for (int i = 0; i < 16; i++)
     {
         if (input[i] == '0' || input[i] == '1')
@@ -143,9 +143,9 @@ void extract_data_6(const uint8_t *input, uint8_t *output_buffer)
     }
     xl[xl_index] = '\0';
 
-    //    printf("Ô­Ê¼XL: %s\n", xl);  // µ÷ÊÔÊä³ö
+    //    printf("åŸå§‹XL: %s\n", xl);  // è°ƒè¯•è¾“å‡º
 
-    // Ö´ĞĞÑ­»·ÒÆÎ»²Ù×÷
+    // æ‰§è¡Œå¾ªç¯ç§»ä½æ“ä½œ
     int len = strlen(xl); // len = 14
     char shifted[17] = {0};
 
@@ -163,24 +163,24 @@ void extract_data_6(const uint8_t *input, uint8_t *output_buffer)
             shifted[i] = xl[(i - 3 + len) % len];
         }
     }
-    //    printf("ÒÆÎ»ºó: %s\n", shifted);  // µ÷ÊÔÊä³ö
-    //    printf("³¤¶È: %d\n", len);        // µ÷ÊÔÊä³ö
+    //    printf("ç§»ä½å: %s\n", shifted);  // è°ƒè¯•è¾“å‡º
+    //    printf("é•¿åº¦: %d\n", len);        // è°ƒè¯•è¾“å‡º
 
-    // ÌáÈ¡¸ß8Î»
+    // æå–é«˜8ä½
     unsigned char DH = 0;
     for (int i = 0; i < 8; i++)
     {
-        DH = (DH << 1) | (shifted[i] - '0'); // ½«×Ö·û×ª»»ÎªÊ®½øÖÆÊı×Ö
+        DH = (DH << 1) | (shifted[i] - '0'); // å°†å­—ç¬¦è½¬æ¢ä¸ºåè¿›åˆ¶æ•°å­—
     }
 
-    // ÌáÈ¡µÍ6Î»£¨²»ÊÇµÍ8Î»£¡£©
+    // æå–ä½6ä½ï¼ˆä¸æ˜¯ä½8ä½ï¼ï¼‰
     unsigned char DL = 0;
     for (int i = 8; i < len; i++)
-    {                                        // len=14£¬ËùÒÔi´Ó8µ½13£¬¹²6Î»
-        DL = (DL << 1) | (shifted[i] - '0'); // ½«×Ö·û×ª»»ÎªÊ®½øÖÆÊı×Ö
+    {                                        // len=14ï¼Œæ‰€ä»¥iä»8åˆ°13ï¼Œå…±6ä½
+        DL = (DL << 1) | (shifted[i] - '0'); // å°†å­—ç¬¦è½¬æ¢ä¸ºåè¿›åˆ¶æ•°å­—
     }
-    // µÍ6Î»²»ĞèÒª×óÒÆ£¬Ö±½Ó±£´æ
-    // DLÒÑ¾­ÊÇ6Î»µÄÖµ
+    // ä½6ä½ä¸éœ€è¦å·¦ç§»ï¼Œç›´æ¥ä¿å­˜
+    // DLå·²ç»æ˜¯6ä½çš„å€¼
 
     output_buffer[0] = DH;
     output_buffer[1] = DL;
@@ -189,15 +189,15 @@ void extract_data_6(const uint8_t *input, uint8_t *output_buffer)
 void extract_data_7(const uint8_t *input, uint8_t *output_buffer)
 {
     int i = 0;
-    int letter_index = 0;     // ¼ÇÂ¼ÕÒµ½µÄ×ÖÄ¸Î»ÖÃ
-    int digit_index = 0;      // ¼ÇÂ¼ÕÒµ½µÄÊı×ÖÎ»ÖÃ
-    uint8_t letters[3] = {0}; // ´æ´¢3¸ö×ÖÄ¸
-    uint8_t digits[3] = {0};  // ´æ´¢3¸öÊı×Ö
+    int letter_index = 0;     // è®°å½•æ‰¾åˆ°çš„å­—æ¯ä½ç½®
+    int digit_index = 0;      // è®°å½•æ‰¾åˆ°çš„æ•°å­—ä½ç½®
+    uint8_t letters[3] = {0}; // å­˜å‚¨3ä¸ªå­—æ¯
+    uint8_t digits[3] = {0};  // å­˜å‚¨3ä¸ªæ•°å­—
 
-    // Çå¿ÕÊä³ö»º³åÇø
+    // æ¸…ç©ºè¾“å‡ºç¼“å†²åŒº
     output_buffer[0] = '\0';
 
-    // µÚÒ»´Î±éÀú£ºÊÕ¼¯ËùÓĞA-F×ÖÄ¸ºÍ0-9Êı×Ö
+    // ç¬¬ä¸€æ¬¡éå†ï¼šæ”¶é›†æ‰€æœ‰A-Få­—æ¯å’Œ0-9æ•°å­—
     int len = strlen((const char *)input);
     for (i = 0; i < len; i++)
     {
@@ -211,7 +211,7 @@ void extract_data_7(const uint8_t *input, uint8_t *output_buffer)
         }
     }
 
-    // Èç¹ûÕÒµ½ÁË3¸ö×ÖÄ¸ºÍ3¸öÊı×Ö£¬°´ÕÕXYXYXY¸ñÊ½×éºÏ
+    // å¦‚æœæ‰¾åˆ°äº†3ä¸ªå­—æ¯å’Œ3ä¸ªæ•°å­—ï¼ŒæŒ‰ç…§XYXYXYæ ¼å¼ç»„åˆ
     if (letter_index == 3 && digit_index == 3)
     {
         output_buffer[0] = letters[0]; // X
@@ -225,12 +225,12 @@ void extract_data_7(const uint8_t *input, uint8_t *output_buffer)
 }
 
 /**
- * @brief Í³¼Æ 8 ×Ö½ÚÊı¾İÖĞ 1 µÄ¸öÊı£¬²¢°´ÆæÅ¼ĞÔÊä³ö£º
- *        - ÆæÊı -> 1
- *        - Å¼Êı -> 2
+ * @brief ç»Ÿè®¡ 8 å­—èŠ‚æ•°æ®ä¸­ 1 çš„ä¸ªæ•°ï¼Œå¹¶æŒ‰å¥‡å¶æ€§è¾“å‡ºï¼š
+ *        - å¥‡æ•° -> 1
+ *        - å¶æ•° -> 2
  *
- * @param data  Ö¸Ïò 8 ×Ö½ÚÊı¾İµÄÖ¸Õë
- * @return uint8_t Êä³öÖµ£¨1 »ò 2£©
+ * @param data  æŒ‡å‘ 8 å­—èŠ‚æ•°æ®çš„æŒ‡é’ˆ
+ * @return uint8_t è¾“å‡ºå€¼ï¼ˆ1 æˆ– 2ï¼‰
  */
 uint8_t TwoCode_ParityFrom8Bytes(const uint8_t *data)
 {
@@ -241,8 +241,8 @@ uint8_t TwoCode_ParityFrom8Bytes(const uint8_t *data)
     for (int i = 0; i < 8; i++)
     {
         uint8_t byte = data[i];
-        // Í³¼Æ¸Ã×Ö½ÚÖĞ 1 µÄ¸öÊı
-        // GNU C Ìá¹© __builtin_popcount£¬µ«ÕâÀïÊÖ¶¯Í³¼ÆÒÔ±£Ö¤¼æÈİĞÔ
+        // ç»Ÿè®¡è¯¥å­—èŠ‚ä¸­ 1 çš„ä¸ªæ•°
+        // GNU C æä¾› __builtin_popcountï¼Œä½†è¿™é‡Œæ‰‹åŠ¨ç»Ÿè®¡ä»¥ä¿è¯å…¼å®¹æ€§
         for (int bit = 0; bit < 8; bit++)
         {
             count += (byte >> bit) & 0x01;
@@ -252,18 +252,18 @@ uint8_t TwoCode_ParityFrom8Bytes(const uint8_t *data)
     return (count % 2) ? 1 : 2;
 }
 
-/*******************************************************´Ó³µ¶şÎ¬ÂëÊı¾İ´¦Àí**********************************************/
+/*******************************************************ä»è½¦äºŒç»´ç æ•°æ®å¤„ç†**********************************************/
 
 void YT1_parse_two_codes(void)
 {
-    // µÚÒ»²½£ºÊ¶±ğA3£¨ÕÒ°üº¬--/µÄ¶şÎ¬Âë£©
+    // ç¬¬ä¸€æ­¥ï¼šè¯†åˆ«A3ï¼ˆæ‰¾åŒ…å«--/çš„äºŒç»´ç ï¼‰
     for (int i = 0; i < Two_Code_Count; i++)
     {
         char *data = (char *)Two_Code_Init_Data_Store[i];
         //        char *output = NULL;
-        if (strlen((char *)Two_Code_Init_Data_Store[i]) == 0) // ÎŞÊı¾İÖ±½ÓÌø¹ı
+        if (strlen((char *)Two_Code_Init_Data_Store[i]) == 0) // æ— æ•°æ®ç›´æ¥è·³è¿‡
             continue;
-        // ÕÒµ½--/£¬ÌáÈ¡ÖĞ¼äµÄÁ½¸ö×Ö·û
+        // æ‰¾åˆ°--/ï¼Œæå–ä¸­é—´çš„ä¸¤ä¸ªå­—ç¬¦
         char *start = strstr(data, "--/");
         start += 3;
         char *end = strstr(start, "--/");
@@ -278,7 +278,7 @@ void YT1_parse_two_codes(void)
                 }
             Two_Code_Data_parsed_Store2[j] = '\0';
         }
-        else // Ã»ÓĞ--/À¨ºÅÇé¿ö»òÓĞ--/À¨ºÅ
+        else // æ²¡æœ‰--/æ‹¬å·æƒ…å†µæˆ–æœ‰--/æ‹¬å·
         {
             extract_data_5(Two_Code_Init_Data_Store[i], Two_Code_Data_parsed_Store1);
         }
@@ -289,7 +289,7 @@ void YT2_parse_two_codes(void)
 {
     for (int i = 0; i < Two_Code_Count; i++)
     {
-        if (strlen((char *)Two_Code_Init_Data_Store[i]) == 0) // ÎŞÊı¾İÖ±½ÓÌø¹ı
+        if (strlen((char *)Two_Code_Init_Data_Store[i]) == 0) // æ— æ•°æ®ç›´æ¥è·³è¿‡
             continue;
         extract_data_5(Two_Code_Init_Data_Store[i], Two_Code_Data_parsed_Store1);
         Two_Code_Init_Data_Store[i][0] = '\0';
@@ -299,7 +299,7 @@ void YT3_parse_two_codes(void)
 {
     for (int i = 0; i < Two_Code_Count; i++)
     {
-        if (strlen((char *)Two_Code_Init_Data_Store[i]) == 0) // ÎŞÊı¾İÖ±½ÓÌø¹ı
+        if (strlen((char *)Two_Code_Init_Data_Store[i]) == 0) // æ— æ•°æ®ç›´æ¥è·³è¿‡
             continue;
         else if (strlen((char *)Two_Code_Init_Data_Store[i]) == 3)
             memcpy(Two_Code_Data_parsed_Store2, Two_Code_Init_Data_Store[i], sizeof(Two_Code_Init_Data_Store[i]));
@@ -318,21 +318,21 @@ void YT5_parse_two_codes(void)
     extract_data_5(Two_Code_Init_Data_Store[0], Two_Code_Data_parsed_Store1);
 }
 
-/*******************************************************Ö÷³µ¶şÎ¬ÂëÊı¾İ´¦Àí**********************************************/
+/*******************************************************ä¸»è½¦äºŒç»´ç æ•°æ®å¤„ç†**********************************************/
 // char current_data[200] ={0};
 ///*
-// * 2026ÑùÌâ1½âÎö¶şÎ¬ÂëÊı¾İ
+// * 2026æ ·é¢˜1è§£æäºŒç»´ç æ•°æ®
 // */
 // void YT1_parse_two_codes(void)
 //{
-//    // µÚÒ»²½£ºÊ¶±ğA3£¨ÕÒ°üº¬<>µÄ¶şÎ¬Âë£©
+//    // ç¬¬ä¸€æ­¥ï¼šè¯†åˆ«A3ï¼ˆæ‰¾åŒ…å«<>çš„äºŒç»´ç ï¼‰
 //    for (int i = 0; i < Two_Code_Count; i++)
 //    {
 //        char *data = (char *)Two_Code_Init_Data_Store[i];
 ////        char *output = NULL;
-//        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//ÎŞÊı¾İÖ±½ÓÌø¹ı
+//        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//æ— æ•°æ®ç›´æ¥è·³è¿‡
 //            continue;
-//        // ÕÒµ½<>£¬ÌáÈ¡ÖĞ¼äµÄÁ½¸ö×Ö·û
+//        // æ‰¾åˆ°<>ï¼Œæå–ä¸­é—´çš„ä¸¤ä¸ªå­—ç¬¦
 //        char *start = strchr(data, '<');
 //        char *end = strchr(data, '>');
 //        int len = end - start - 1;
@@ -343,7 +343,7 @@ void YT5_parse_two_codes(void)
 //             Two_Code_Data_parsed_Store3[1] = start[2];
 //             Two_Code_Data_parsed_Store3[2] = '\0';
 //        }
-//        else    //Ã»ÓĞ¼âÀ¨ºÅÇé¿ö»òÓĞ¼âÀ¨ºÅµ«²»ÊÇÁ©¸ö×Ö½Ú
+//        else    //æ²¡æœ‰å°–æ‹¬å·æƒ…å†µæˆ–æœ‰å°–æ‹¬å·ä½†ä¸æ˜¯ä¿©ä¸ªå­—èŠ‚
 //        {
 //            if(strlen((char *)Two_Code_Data_parsed_Store1)==0)
 //            {
@@ -360,36 +360,36 @@ void YT5_parse_two_codes(void)
 //}
 
 ///*
-// * 2026ÑùÌâ2½âÎö¶şÎ¬ÂëÊı¾İ
+// * 2026æ ·é¢˜2è§£æäºŒç»´ç æ•°æ®
 // */
 // void YT2_parse_two_codes(void)
 //{
 //    for (int i = 0; i < Two_Code_Count; i++)
 //    {
 //        if(Two_Code_Init_Data_Store[i][0] == 0x01)
-//            extract_data_1(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);  //ÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
+//            extract_data_1(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);  //æå–å°–æ‹¬å·å†…çš„å†…å®¹
 //        else if(Two_Code_Init_Data_Store[i][0] == 0x02)
-//            extract_data_1(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store2);  //ÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
+//            extract_data_1(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store2);  //æå–å°–æ‹¬å·å†…çš„å†…å®¹
 //        else if(Two_Code_Init_Data_Store[i][0] == 0x03)
-//            extract_data_1(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store3);  //ÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
+//            extract_data_1(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store3);  //æå–å°–æ‹¬å·å†…çš„å†…å®¹
 //        else
-//            continue;  // ÎŞĞ§µÄID£¬Ìø¹ı
+//            continue;  // æ— æ•ˆçš„IDï¼Œè·³è¿‡
 //
 //        Two_Code_Init_Data_Store[i][0] = '\0';
 //    }
 //}
 
 ///*
-// * 2026ÑùÌâ3½âÎö¶şÎ¬ÂëÊı¾İ
+// * 2026æ ·é¢˜3è§£æäºŒç»´ç æ•°æ®
 // */
 // void YT3_parse_two_codes(void)
 //{
 //    for (int i = 0; i < Two_Code_Count; i++)
 //    {
 //        if (strstr((char *)Two_Code_Init_Data_Store[i], "N01") != NULL)
-//            extract_data_2(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);    //ÌáÈ¡´óÀ¨ºÅÀïµÄÄÚÈİ
+//            extract_data_2(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);    //æå–å¤§æ‹¬å·é‡Œçš„å†…å®¹
 //        else if (strstr((char *)Two_Code_Init_Data_Store[i], "N02") != NULL)
-//            extract_data_2(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store2);    //ÌáÈ¡´óÀ¨ºÅÀïµÄÄÚÈİ
+//            extract_data_2(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store2);    //æå–å¤§æ‹¬å·é‡Œçš„å†…å®¹
 //        else
 //            continue;
 //        Two_Code_Init_Data_Store[i][0] = '\0';
@@ -397,20 +397,20 @@ void YT5_parse_two_codes(void)
 //}
 
 ///*
-// * 2026ÑùÌâ4½âÎö¶şÎ¬ÂëÊı¾İ
+// * 2026æ ·é¢˜4è§£æäºŒç»´ç æ•°æ®
 // */
 // void YT4_parse_two_codes(void)
 //{
 //    uint8_t temp_data1[50] = {0};
 //    uint8_t temp_data2[50] = {0};
-//    if(strlen((char *)Two_Code_Init_Data_Store[0])!=0 && strlen((char *)Two_Code_Init_Data_Store[1])!=0)//Í¬Ê±É¨Ãèµ½Á©¸ö¶şÎ¬Âë
+//    if(strlen((char *)Two_Code_Init_Data_Store[0])!=0 && strlen((char *)Two_Code_Init_Data_Store[1])!=0)//åŒæ—¶æ‰«æåˆ°ä¿©ä¸ªäºŒç»´ç 
 //    {
-//        extract_data_1(Two_Code_Init_Data_Store[0], temp_data1);    //ÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
-//        extract_data_1(Two_Code_Init_Data_Store[1], temp_data2);    //ÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
+//        extract_data_1(Two_Code_Init_Data_Store[0], temp_data1);    //æå–å°–æ‹¬å·å†…çš„å†…å®¹
+//        extract_data_1(Two_Code_Init_Data_Store[1], temp_data2);    //æå–å°–æ‹¬å·å†…çš„å†…å®¹
 //        Two_Code_Init_Data_Store[0][0] = '\0';
 //        Two_Code_Init_Data_Store[1][0] = '\0';
 
-//        // ±È½ÏÊı¾İ³¤¶È£¬È·¶¨ÄÄ¸öÊÇ¶şÎ¬Âë(1)ºÍ¶şÎ¬Âë(2)
+//        // æ¯”è¾ƒæ•°æ®é•¿åº¦ï¼Œç¡®å®šå“ªä¸ªæ˜¯äºŒç»´ç (1)å’ŒäºŒç»´ç (2)
 //        int len1 = strlen((char *)temp_data1);
 //        int len2 = strlen((char *)temp_data2);
 
@@ -425,9 +425,9 @@ void YT5_parse_two_codes(void)
 //            memcpy(Two_Code_Data_parsed_Store2, temp_data1, sizeof(temp_data1));
 //         }
 //    }
-//    else if(strlen((char *)Two_Code_Init_Data_Store[0])!=0 && strlen((char *)Two_Code_Init_Data_Store[1])==0)//É¨Ãèµ½Á©¸ö¶şÎ¬ÂëÆäÖĞÒ»¸ö
+//    else if(strlen((char *)Two_Code_Init_Data_Store[0])!=0 && strlen((char *)Two_Code_Init_Data_Store[1])==0)//æ‰«æåˆ°ä¿©ä¸ªäºŒç»´ç å…¶ä¸­ä¸€ä¸ª
 //    {
-//        extract_data_1(Two_Code_Init_Data_Store[0], temp_data1);    //ÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
+//        extract_data_1(Two_Code_Init_Data_Store[0], temp_data1);    //æå–å°–æ‹¬å·å†…çš„å†…å®¹
 //        Two_Code_Init_Data_Store[0][0] = '\0';
 //        if(strlen((char *)temp_data1)>strlen((char *)Two_Code_Data_parsed_Store1) && strlen((char *)Two_Code_Data_parsed_Store1)!=0)
 //        {
@@ -443,14 +443,14 @@ void YT5_parse_two_codes(void)
 //}
 
 ///*
-// * 2026ÑùÌâ5½âÎö¶şÎ¬ÂëÊı¾İ
+// * 2026æ ·é¢˜5è§£æäºŒç»´ç æ•°æ®
 // */
 // void YT5_parse_two_codes(void)
 //{
-//    // µÚÒ»²½£ºÊ¶±ğA3
+//    // ç¬¬ä¸€æ­¥ï¼šè¯†åˆ«A3
 //    for (int i = 0; i < Two_Code_Count; i++)
 //    {
-//        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//ÎŞÊı¾İÖ±½ÓÌø¹ı
+//        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//æ— æ•°æ®ç›´æ¥è·³è¿‡
 //            continue;
 //
 //        int out_pos = 0;

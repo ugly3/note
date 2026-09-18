@@ -2,9 +2,9 @@
 
 
 
-/* ================= DES ±ê×¼ÖÃ»»±í ================= */
+/* ================= DES æ ‡å‡†ç½®æ¢è¡¨ ================= */
 
-/* ³õÊ¼ÖÃ»»±í IP */
+/* åˆå§‹ç½®æ¢è¡¨ IP */
 static const int IP[64] = {
     58, 50, 42, 34, 26, 18, 10, 2, 60, 52, 44, 36, 28, 20, 12, 4,
     62, 54, 46, 38, 30, 22, 14, 6, 64, 56, 48, 40, 32, 24, 16, 8,
@@ -12,7 +12,7 @@ static const int IP[64] = {
     61, 53, 45, 37, 29, 21, 13, 5, 63, 55, 47, 39, 31, 23, 15, 7
 };
 
-/* Äæ³õÊ¼ÖÃ»»±í IP-1 */
+/* é€†åˆå§‹ç½®æ¢è¡¨ IP-1 */
 static const int IP_1[64] = {
     40, 8, 48, 16, 56, 24, 64, 32, 39, 7, 47, 15, 55, 23, 63, 31,
     38, 6, 46, 14, 54, 22, 62, 30, 37, 5, 45, 13, 53, 21, 61, 29,
@@ -20,20 +20,20 @@ static const int IP_1[64] = {
     34, 2, 42, 10, 50, 18, 58, 26, 33, 1, 41, 9, 49, 17, 57, 25
 };
 
-/* À©Õ¹ÖÃ»»±í E */
+/* æ‰©å±•ç½®æ¢è¡¨ E */
 static const int E[48] = {
     32, 1, 2, 3, 4, 5, 4, 5, 6, 7, 8, 9, 8, 9, 10, 11, 12, 13,
     12, 13, 14, 15, 16, 17, 16, 17, 18, 19, 20, 21, 20, 21, 22, 23, 24, 25,
     24, 25, 26, 27, 28, 29, 28, 29, 30, 31, 32, 1
 };
 
-/* P ºÐÖÃ»» */
+/* P ç›’ç½®æ¢ */
 static const int P[32] = {
     16, 7, 20, 21, 29, 12, 28, 17, 1, 15, 23, 26, 5, 18, 31, 10,
     2, 8, 24, 14, 32, 27, 3, 9, 19, 13, 30, 6, 22, 11, 4, 25
 };
 
-/* S ºÐ (8 ¸ö£¬Ã¿¸ö 4 ÐÐ 16 ÁÐ) */
+/* S ç›’ (8 ä¸ªï¼Œæ¯ä¸ª 4 è¡Œ 16 åˆ—) */
 static const int S[8][4][16] = {
     { {14,4,13,1,2,15,11,8,3,10,6,12,5,9,0,7},
       {0,15,7,4,14,2,13,1,10,6,12,11,9,5,3,8},
@@ -69,7 +69,7 @@ static const int S[8][4][16] = {
       {2,1,14,7,4,10,8,13,15,12,9,0,3,5,6,11} }
 };
 
-/* ÃÜÔ¿ÖÃ»»Ñ¡Ôñ 1 (PC-1) - 64 Î»->56 Î» */
+/* å¯†é’¥ç½®æ¢é€‰æ‹© 1 (PC-1) - 64 ä½->56 ä½ */
 static const int PC_1[56] = {
     57, 49, 41, 33, 25, 17, 9, 1, 58, 50, 42, 34, 26, 18,
     10, 2, 59, 51, 43, 35, 27, 19, 11, 3, 60, 52, 44, 36,
@@ -77,7 +77,7 @@ static const int PC_1[56] = {
     14, 6, 61, 53, 45, 37, 29, 21, 13, 5, 28, 20, 12, 4
 };
 
-/* ÃÜÔ¿ÖÃ»»Ñ¡Ôñ 2 (PC-2) - 56 Î»->48 Î» */
+/* å¯†é’¥ç½®æ¢é€‰æ‹© 2 (PC-2) - 56 ä½->48 ä½ */
 static const int PC_2[48] = {
     14, 17, 11, 24, 1, 5, 3, 28, 15, 6, 21, 10,
     23, 19, 12, 4, 26, 8, 16, 7, 27, 20, 13, 2,
@@ -85,24 +85,24 @@ static const int PC_2[48] = {
     44, 49, 39, 56, 34, 53, 46, 42, 50, 36, 29, 32
 };
 
-/* Ã¿ÂÖ×óÒÆÎ»Êý */
+/* æ¯è½®å·¦ç§»ä½æ•° */
 static const int SHIFT_SCHEDULE[16] = {
     1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1
 };
 
-/* ================= DES ÉÏÏÂÎÄ ================= */
+/* ================= DES ä¸Šä¸‹æ–‡ ================= */
 typedef struct {
-    uint8_t subkeys[16][6];  // 16 ¸ö×ÓÃÜÔ¿£¬Ã¿¸ö 48 Î» (6 ×Ö½Ú)
+    uint8_t subkeys[16][6];  // 16 ä¸ªå­å¯†é’¥ï¼Œæ¯ä¸ª 48 ä½ (6 å­—èŠ‚)
 } DES_Context;
 
-/* ================= Î»²Ù×÷¸¨Öúº¯Êý ================= */
+/* ================= ä½æ“ä½œè¾…åŠ©å‡½æ•° ================= */
 
-/* ´Ó 64 Î»¿éÖÐ»ñÈ¡Ö¸¶¨Î» (Î»Ë÷Òý 0-63, 0 Îª MSB) */
+/* ä»Ž 64 ä½å—ä¸­èŽ·å–æŒ‡å®šä½ (ä½ç´¢å¼• 0-63, 0 ä¸º MSB) */
 static inline int get_bit64(const uint8_t *block, int pos) {
     return (block[pos >> 3] >> (7 - (pos & 7))) & 1;
 }
 
-/* ÉèÖÃ 64 Î»¿éÖÐÖ¸¶¨Î» */
+/* è®¾ç½® 64 ä½å—ä¸­æŒ‡å®šä½ */
 static inline void set_bit64(uint8_t *block, int pos, int val) {
     if (val)
         block[pos >> 3] |= (1 << (7 - (pos & 7)));
@@ -110,12 +110,12 @@ static inline void set_bit64(uint8_t *block, int pos, int val) {
         block[pos >> 3] &= ~(1 << (7 - (pos & 7)));
 }
 
-/* ´Ó 56 Î»ÃÜÔ¿ÖÐ»ñÈ¡Ö¸¶¨Î» */
+/* ä»Ž 56 ä½å¯†é’¥ä¸­èŽ·å–æŒ‡å®šä½ */
 static inline int get_bit56(const uint8_t *key, int pos) {
     return (key[pos >> 3] >> (7 - (pos & 7))) & 1;
 }
 
-/* ÉèÖÃ 56 Î»ÃÜÔ¿ÖÐÖ¸¶¨Î» */
+/* è®¾ç½® 56 ä½å¯†é’¥ä¸­æŒ‡å®šä½ */
 static inline void set_bit56(uint8_t *key, int pos, int val) {
     if (val)
         key[pos >> 3] |= (1 << (7 - (pos & 7)));
@@ -123,7 +123,7 @@ static inline void set_bit56(uint8_t *key, int pos, int val) {
         key[pos >> 3] &= ~(1 << (7 - (pos & 7)));
 }
 
-/* Í¨ÓÃÖÃ»»º¯Êý */
+/* é€šç”¨ç½®æ¢å‡½æ•° */
 static void permute(const uint8_t *in, uint8_t *out, const int *table, int n_bits) {
     memset(out, 0, (n_bits + 7) >> 3);
     for (int i = 0; i < n_bits; i++) {
@@ -131,9 +131,9 @@ static void permute(const uint8_t *in, uint8_t *out, const int *table, int n_bit
     }
 }
 
-/* ================= ÃÜÔ¿µ÷¶È ================= */
+/* ================= å¯†é’¥è°ƒåº¦ ================= */
 
-/* 28 Î»×óÑ­»·ÒÆÎ» */
+/* 28 ä½å·¦å¾ªçŽ¯ç§»ä½ */
 static void left_rotate_28(uint8_t *key, int shift) {
     uint8_t temp[4] = {0};
     for (int i = 0; i < shift; i++) {
@@ -147,7 +147,7 @@ static void left_rotate_28(uint8_t *key, int shift) {
     }
 }
 
-/* Éú³É 16 ¸ö×ÓÃÜÔ¿ */
+/* ç”Ÿæˆ 16 ä¸ªå­å¯†é’¥ */
 static void des_key_schedule(const uint8_t *key, DES_Context *ctx) {
     uint8_t k56[7] = {0};
     uint8_t c[4] = {0};
@@ -174,7 +174,7 @@ static void des_key_schedule(const uint8_t *key, DES_Context *ctx) {
     }
 }
 
-/* ================= F º¯Êý ================= */
+/* ================= F å‡½æ•° ================= */
 
 static void des_f(const uint8_t *r, uint8_t *out, const uint8_t *subkey) {
     uint8_t expanded[6] = {0};
@@ -206,7 +206,7 @@ static void des_f(const uint8_t *r, uint8_t *out, const uint8_t *subkey) {
     permute(sbox_out, out, P, 32);
 }
 
-/* ================= DES ¼Ó½âÃÜºËÐÄ ================= */
+/* ================= DES åŠ è§£å¯†æ ¸å¿ƒ ================= */
 
 static void des_crypt(const uint8_t *input, uint8_t *output, const DES_Context *ctx, int decrypt) {
     uint8_t ip_out[8] = {0};
@@ -239,9 +239,9 @@ static void des_crypt(const uint8_t *input, uint8_t *output, const DES_Context *
     permute(pre_final, output, IP_1, 64);
 }
 
-/* ================= ÒµÎñÂß¼­º¯Êý ================= */
+/* ================= ä¸šåŠ¡é€»è¾‘å‡½æ•° ================= */
 
-/* Ê®Áù½øÖÆ×Ö·û´®×ª×Ö½ÚÊý×é */
+/* åå…­è¿›åˆ¶å­—ç¬¦ä¸²è½¬å­—èŠ‚æ•°ç»„ */
 static int hex_to_bytes(const char *hex, uint8_t *bytes, int max_bytes) {
     int len = strlen(hex);
     if (len % 2 != 0) return -1;
@@ -256,15 +256,15 @@ static int hex_to_bytes(const char *hex, uint8_t *bytes, int max_bytes) {
     return byte_len;
 }
 
-/* ================= ¶ÔÍâ½Ó¿Úº¯Êý ================= */
+/* ================= å¯¹å¤–æŽ¥å£å‡½æ•° ================= */
 
 /**
- * @brief YT_4_Algorithm - DES ½âÃÜ²¢ÌáÈ¡×ÖÄ¸
- * @param input_str   ÊäÈëÃÜÎÄ (Ê®Áù½øÖÆ×Ö·û´®)
- * @param kernel      ÃÜÔ¿ (×Ö·û´®)
- * @param output      Êä³ö»º³åÇø (´æ·ÅÌáÈ¡µÄ×ÖÄ¸ ASCII Âë)
- * @param output_len  Êä³ö»º³åÇø³¤¶È
- * @return            ³É¹¦·µ»ØÌáÈ¡µÄ×ÖÄ¸ÊýÁ¿£¬Ê§°Ü·µ»Ø -1
+ * @brief YT_4_Algorithm - DES è§£å¯†å¹¶æå–å­—æ¯
+ * @param input_str   è¾“å…¥å¯†æ–‡ (åå…­è¿›åˆ¶å­—ç¬¦ä¸²)
+ * @param kernel      å¯†é’¥ (å­—ç¬¦ä¸²)
+ * @param output      è¾“å‡ºç¼“å†²åŒº (å­˜æ”¾æå–çš„å­—æ¯ ASCII ç )
+ * @param output_len  è¾“å‡ºç¼“å†²åŒºé•¿åº¦
+ * @return            æˆåŠŸè¿”å›žæå–çš„å­—æ¯æ•°é‡ï¼Œå¤±è´¥è¿”å›ž -1
  */
 int YT_4_Algorithm(const uint8_t *input_str, const uint8_t *kernel, 
                    uint8_t *output, uint8_t output_len) 
@@ -273,29 +273,29 @@ int YT_4_Algorithm(const uint8_t *input_str, const uint8_t *kernel,
     uint8_t key_bytes[8] = {0};
     uint8_t plain_bytes[32] = {0};
 
-    // 1. Ê®Áù½øÖÆÃÜÎÄ×ª×Ö½Ú
+    // 1. åå…­è¿›åˆ¶å¯†æ–‡è½¬å­—èŠ‚
     int cipher_len = hex_to_bytes((const char *)input_str, cipher_bytes, sizeof(cipher_bytes));
     if (cipher_len <= 0 || cipher_len % 8 != 0) {
         return -1;
     }
 
-    // 2. ÃÜÔ¿´¦Àí (DES ÐèÒª 8 ×Ö½Ú)
+    // 2. å¯†é’¥å¤„ç† (DES éœ€è¦ 8 å­—èŠ‚)
     int key_len = strlen((const char *)kernel);
     if (key_len > 8) key_len = 8;
     memcpy(key_bytes, kernel, key_len);
     for (int i = key_len; i < 8; i++) key_bytes[i] = 0;
 
-    // 3. DES ÃÜÔ¿µ÷¶È
+    // 3. DES å¯†é’¥è°ƒåº¦
     DES_Context ctx;
     des_key_schedule(key_bytes, &ctx);
 
-    // 4. DES ½âÃÜ
+    // 4. DES è§£å¯†
     int block_count = cipher_len / 8;
     for (int i = 0; i < block_count; i++) {
         des_crypt(cipher_bytes + (i * 8), plain_bytes + (i * 8), &ctx, 1);
     }
 
-    // 5. ÌáÈ¡Ó¢ÎÄ×ÖÄ¸
+    // 5. æå–è‹±æ–‡å­—æ¯
     int code_idx = 0;
     for (int i = 0; i < cipher_len && code_idx < output_len; i++) {
         char c = plain_bytes[i];

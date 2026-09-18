@@ -2,27 +2,27 @@
 #define __VOICE_REPORT_H
 #include "all_module.h"
 
-/*****************************ÓïÒô²¥±¨ÃüÁî¼¯*****************************************/
-//²¥±¨Ö¸¶¨ÓïÒôÃüÁî
-//#define   JiNengChengCai          0x01      //¼¼ÄÜ³É²Å
-//#define   JiangXinZhuMeng         0x02      //½³ĞÄÖşÃÎ
-//#define   ZhuMengYangWei          0x03      //ÖşÃÎÑïÍş
-//#define   JiXingTianXia           0x04      //¼¼ĞĞÌìÏÂ
-//#define   ZhanHangYeBaiJi         0x05      //Õ¹ĞĞÒµ°Ù¼¼
-//#define   ShuRenCaiXinGui         0x06      //Ê÷ÈË²ÅĞÂ¹æ
+/*****************************è¯­éŸ³æ’­æŠ¥å‘½ä»¤é›†*****************************************/
+//æ’­æŠ¥æŒ‡å®šè¯­éŸ³å‘½ä»¤
+//#define   JiNengChengCai          0x01      //æŠ€èƒ½æˆæ‰
+//#define   JiangXinZhuMeng         0x02      //åŒ å¿ƒç­‘æ¢¦
+//#define   ZhuMengYangWei          0x03      //ç­‘æ¢¦æ‰¬å¨
+//#define   JiXingTianXia           0x04      //æŠ€è¡Œå¤©ä¸‹
+//#define   ZhanHangYeBaiJi         0x05      //å±•è¡Œä¸šç™¾æŠ€
+//#define   ShuRenCaiXinGui         0x06      //æ ‘äººæ‰æ–°è§„
 
-//ÌìÆøÊı¾İÃüÁî
-#define   gale                       1      //´ó·ç
-#define   cloudy                     2      //¶àÔÆ
-#define   sunny                      3      //Çç
-#define   little_snow                4      //Ğ¡Ñ©
-#define   little_rain                5      //Ğ¡Óê
-#define   overcase                   6      //ÒõÌì
+//å¤©æ°”æ•°æ®å‘½ä»¤
+#define   gale                       1      //å¤§é£
+#define   cloudy                     2      //å¤šäº‘
+#define   sunny                      3      //æ™´
+#define   little_snow                4      //å°é›ª
+#define   little_rain                5      //å°é›¨
+#define   overcase                   6      //é˜´å¤©
 
-//ÓïÒôºÏ³É¿ØÖÆÖ¸Áî
-#define   stop_complex               1      //Í£Ö¹ºÏ³ÉÓïÒô
-#define   pause_complex              2      //ÔİÍ£ºÏ³ÉÓïÒô
-#define   recover_complex            3      //»Ö¸´ºÏ³ÉÓïÒô
+//è¯­éŸ³åˆæˆæ§åˆ¶æŒ‡ä»¤
+#define   stop_complex               1      //åœæ­¢åˆæˆè¯­éŸ³
+#define   pause_complex              2      //æš‚åœåˆæˆè¯­éŸ³
+#define   recover_complex            3      //æ¢å¤åˆæˆè¯­éŸ³
 /***************************************************************************************/
 
 typedef struct

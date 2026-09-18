@@ -10,14 +10,14 @@ void YT5_parse_two_codes(void);
 
 extern uint8_t Two_Code_Count;
 
-uint8_t extract_data_1(const uint8_t* qr_info, uint8_t* output_buffer);// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
-uint8_t extract_data_2(const uint8_t* qr_info, uint8_t* output_buffer);// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡´óÀ¨ºÅÄÚµÄÄÚÈİ
-uint8_t extract_data_3(const uint8_t* qr_info, uint8_t* output_buffer);// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡´óĞ´×ÖÄ¸A~Z
-uint8_t extract_data_3_1(const uint8_t* qr_info, uint8_t* output_buffer);// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡´óĞ´×ÖÄ¸A~F
-uint8_t extract_data_4(const uint8_t* qr_info, uint8_t* output_buffer);// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡×Ö·û0~9
-uint8_t extract_data_5(const uint8_t* qr_info, uint8_t* output_buffer);// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡×Ö·û1~4
-uint8_t extract_data_6(const uint8_t* qr_info, uint8_t* output_buffer);// º¯Êı£ºÍ³¼Æ×ÖÄ¸ABCD³öÏÖµÄÆµ´Î£¬·µ»ØÊ®Áù½øÖÆ×éºÏ
-uint8_t extract_data_7(const uint8_t* qr_info, uint8_t* output_buffer);// º¯Êı£ºÈ¡³ö{}ÄÚÓĞĞ§Êı¾İ£¬Êı×ÖÔÚÇ°£¬×ÖÄ¸ÔÚºó£¬´ÓĞ¡µ½´óÅÅĞò£¬È¡³öÖØ¸´Êı¾İ£¬Êä³öÈı¸öÊ®Áù½øÖÆÎ»
+uint8_t extract_data_1(const uint8_t* qr_info, uint8_t* output_buffer);// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å°–æ‹¬å·å†…çš„å†…å®¹
+uint8_t extract_data_2(const uint8_t* qr_info, uint8_t* output_buffer);// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å¤§æ‹¬å·å†…çš„å†…å®¹
+uint8_t extract_data_3(const uint8_t* qr_info, uint8_t* output_buffer);// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å¤§å†™å­—æ¯A~Z
+uint8_t extract_data_3_1(const uint8_t* qr_info, uint8_t* output_buffer);// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å¤§å†™å­—æ¯A~F
+uint8_t extract_data_4(const uint8_t* qr_info, uint8_t* output_buffer);// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å­—ç¬¦0~9
+uint8_t extract_data_5(const uint8_t* qr_info, uint8_t* output_buffer);// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å­—ç¬¦1~4
+uint8_t extract_data_6(const uint8_t* qr_info, uint8_t* output_buffer);// å‡½æ•°ï¼šç»Ÿè®¡å­—æ¯ABCDå‡ºç°çš„é¢‘æ¬¡ï¼Œè¿”å›åå…­è¿›åˆ¶ç»„åˆ
+uint8_t extract_data_7(const uint8_t* qr_info, uint8_t* output_buffer);// å‡½æ•°ï¼šå–å‡º{}å†…æœ‰æ•ˆæ•°æ®ï¼Œæ•°å­—åœ¨å‰ï¼Œå­—æ¯åœ¨åï¼Œä»å°åˆ°å¤§æ’åºï¼Œå–å‡ºé‡å¤æ•°æ®ï¼Œè¾“å‡ºä¸‰ä¸ªåå…­è¿›åˆ¶ä½
 #endif
 
 

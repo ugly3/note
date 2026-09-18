@@ -4,7 +4,7 @@
 
 #define CAR_CODE 0
 
-/*¹Ù·½Ö÷³µÇ°½øºóÍËÔ­´úÂë*/
+/*å®˜æ–¹ä¸»è½¦å‰è¿›åé€€åŸä»£ç */
 #if CAR_CODE
 void Car_Go(uint8_t speed, uint16_t temp);
 void Car_Back(uint8_t speed, uint16_t temp);

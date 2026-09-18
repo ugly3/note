@@ -1,7 +1,7 @@
 ..\output\data_base.o: ..\my_lib\data_base.c
 ..\output\data_base.o: ..\CMSIS\stm32f4xx.h
 ..\output\data_base.o: ..\CMSIS\core_cm4.h
-..\output\data_base.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\output\data_base.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
 ..\output\data_base.o: ..\CMSIS\core_cmInstr.h
 ..\output\data_base.o: ..\CMSIS\core_cmFunc.h
 ..\output\data_base.o: ..\CMSIS\core_cmSimd.h

@@ -6,23 +6,23 @@
 #define  RFID_Write			0x02
 #define  RFID_Write_Read	0x03
 
-extern uint8_t CT[2];		// ¿¨ÀàĞÍ
-extern uint8_t SN[4];		// ¿¨ºÅ
-extern char READ_RFID[16];		// ´æ·ÅRFID¶ÁÈ¡µ½µÄÊı¾İ
-extern char Judge_READ_RFID[16];// ´æ·ÅRFID¶Áµ½µÄÊı¾İ,ÓÃÀ´ÅĞ¶Ï¿¨Æ¬µÄÕæ¼Ù 
-extern char READ_RFID1[16];     //µÚÒ»ÕÅ¿¨
-extern char READ_RFID2[16];     //µÚ¶şÕÅ¿¨
-extern char READ_RFID3[16];     //µÚÈıÕÅ¿¨
-extern char Judge_READ_RFID1[7];     //´æ·ÅµÚÒ»ÕÅ¿¨¶Áµ½µÄÊı¾İ£¬ÓÃÀ´ÅĞ¶Ï¿¨Æ¬µÄÕæ¼Ù 
-extern char Judge_READ_RFID2[7];     //´æ·ÅµÚ¶şÕÅ¿¨¶Áµ½µÄÊı¾İ £¬ÓÃÀ´ÅĞ¶Ï¿¨Æ¬µÄÕæ¼Ù 
+extern uint8_t CT[2];		// å¡ç±»å‹
+extern uint8_t SN[4];		// å¡å·
+extern char READ_RFID[16];		// å­˜æ”¾RFIDè¯»å–åˆ°çš„æ•°æ®
+extern char Judge_READ_RFID[16];// å­˜æ”¾RFIDè¯»åˆ°çš„æ•°æ®,ç”¨æ¥åˆ¤æ–­å¡ç‰‡çš„çœŸå‡ 
+extern char READ_RFID1[16];     //ç¬¬ä¸€å¼ å¡
+extern char READ_RFID2[16];     //ç¬¬äºŒå¼ å¡
+extern char READ_RFID3[16];     //ç¬¬ä¸‰å¼ å¡
+extern char Judge_READ_RFID1[7];     //å­˜æ”¾ç¬¬ä¸€å¼ å¡è¯»åˆ°çš„æ•°æ®ï¼Œç”¨æ¥åˆ¤æ–­å¡ç‰‡çš„çœŸå‡ 
+extern char Judge_READ_RFID2[7];     //å­˜æ”¾ç¬¬äºŒå¼ å¡è¯»åˆ°çš„æ•°æ® ï¼Œç”¨æ¥åˆ¤æ–­å¡ç‰‡çš„çœŸå‡ 
 
-extern uint8_t WRITE_RFID[16];     //´æ·ÅRFIDĞ´ÈëµÄÊı¾İ
-extern unsigned int hex_codes[3];//ÎŞÏß³äµçÕ¾¿ªÆôÂë
+extern uint8_t WRITE_RFID[16];     //å­˜æ”¾RFIDå†™å…¥çš„æ•°æ®
+extern unsigned int hex_codes[3];//æ— çº¿å……ç”µç«™å¼€å¯ç 
 
-extern uint8_t Read_RFID(uint8_t card_addr);		// RFID ¶Á¿¨
+extern uint8_t Read_RFID(uint8_t card_addr);		// RFID è¯»å¡
 
 
-extern void RC522(uint8_t card_addr,uint8_t mode);	// RFID¶Á¿¨¿ØÖÆ
+extern void RC522(uint8_t card_addr,uint8_t mode);	// RFIDè¯»å¡æ§åˆ¶
 extern uint8_t RXRFID[16];
 
 extern char PcdReset(void);
@@ -66,40 +66,40 @@ extern void Read_Card1(void);
 extern void Xie_Read_Card1(void);
 extern void Xie_Read_Card2(void);
 /////////////////////////////////////////////////////////////////////
-//MF522ÃüÁî×Ö
+//MF522å‘½ä»¤å­—
 /////////////////////////////////////////////////////////////////////
-#define PCD_IDLE              0x00               //È¡Ïûµ±Ç°ÃüÁî
-#define PCD_AUTHENT           0x0E               //ÑéÖ¤ÃÜÔ¿
-#define PCD_RECEIVE           0x08               //½ÓÊÕÊı¾İ
-#define PCD_TRANSMIT          0x04               //·¢ËÍÊı¾İ
-#define PCD_TRANSCEIVE        0x0C               //·¢ËÍ²¢½ÓÊÕÊı¾İ
-#define PCD_RESETPHASE        0x0F               //¸´Î»
-#define PCD_CALCCRC           0x03               //CRC¼ÆËã
+#define PCD_IDLE              0x00               //å–æ¶ˆå½“å‰å‘½ä»¤
+#define PCD_AUTHENT           0x0E               //éªŒè¯å¯†é’¥
+#define PCD_RECEIVE           0x08               //æ¥æ”¶æ•°æ®
+#define PCD_TRANSMIT          0x04               //å‘é€æ•°æ®
+#define PCD_TRANSCEIVE        0x0C               //å‘é€å¹¶æ¥æ”¶æ•°æ®
+#define PCD_RESETPHASE        0x0F               //å¤ä½
+#define PCD_CALCCRC           0x03               //CRCè®¡ç®—
 
 /////////////////////////////////////////////////////////////////////
-//Mifare_One¿¨Æ¬ÃüÁî×Ö
+//Mifare_Oneå¡ç‰‡å‘½ä»¤å­—
 /////////////////////////////////////////////////////////////////////
-#define PICC_REQIDL           0x26               //Ñ°ÌìÏßÇøÄÚÎ´½øÈëĞİÃß×´Ì¬
-#define PICC_REQALL           0x52               //Ñ°ÌìÏßÇøÄÚÈ«²¿¿¨
-#define PICC_ANTICOLL1        0x93               //·À³å×²
-#define PICC_ANTICOLL2        0x95               //·À³å×²
-#define PICC_AUTHENT1A        0x60               //ÑéÖ¤AÃÜÔ¿
-#define PICC_AUTHENT1B        0x61               //ÑéÖ¤BÃÜÔ¿
-#define PICC_READ             0x30               //¶Á¿é
-#define PICC_WRITE            0xA0               //Ğ´¿é
-#define PICC_DECREMENT        0xC0               //¿Û¿î
-#define PICC_INCREMENT        0xC1               //³äÖµ
-#define PICC_RESTORE          0xC2               //µ÷¿éÊı¾İµ½»º³åÇø
-#define PICC_TRANSFER         0xB0               //±£´æ»º³åÇøÖĞÊı¾İ
-#define PICC_HALT             0x50               //ĞİÃß
+#define PICC_REQIDL           0x26               //å¯»å¤©çº¿åŒºå†…æœªè¿›å…¥ä¼‘çœ çŠ¶æ€
+#define PICC_REQALL           0x52               //å¯»å¤©çº¿åŒºå†…å…¨éƒ¨å¡
+#define PICC_ANTICOLL1        0x93               //é˜²å†²æ’
+#define PICC_ANTICOLL2        0x95               //é˜²å†²æ’
+#define PICC_AUTHENT1A        0x60               //éªŒè¯Aå¯†é’¥
+#define PICC_AUTHENT1B        0x61               //éªŒè¯Bå¯†é’¥
+#define PICC_READ             0x30               //è¯»å—
+#define PICC_WRITE            0xA0               //å†™å—
+#define PICC_DECREMENT        0xC0               //æ‰£æ¬¾
+#define PICC_INCREMENT        0xC1               //å……å€¼
+#define PICC_RESTORE          0xC2               //è°ƒå—æ•°æ®åˆ°ç¼“å†²åŒº
+#define PICC_TRANSFER         0xB0               //ä¿å­˜ç¼“å†²åŒºä¸­æ•°æ®
+#define PICC_HALT             0x50               //ä¼‘çœ 
 
 /////////////////////////////////////////////////////////////////////
-//MF522 FIFO³¤¶È¶¨Òå
+//MF522 FIFOé•¿åº¦å®šä¹‰
 /////////////////////////////////////////////////////////////////////
 #define DEF_FIFO_LENGTH       64                 //FIFO size=64byte
 
 /////////////////////////////////////////////////////////////////////
-//MF522¼Ä´æÆ÷¶¨Òå
+//MF522å¯„å­˜å™¨å®šä¹‰
 /////////////////////////////////////////////////////////////////////
 // PAGE 0
 #define     RFU00                 0x00    
@@ -175,7 +175,7 @@ extern void Xie_Read_Card2(void);
 #define     KEYA                  0x60
 
 /////////////////////////////////////////////////////////////////////
-//ºÍMF522Í¨Ñ¶Ê±·µ»ØµÄ´íÎó´úÂë
+//å’ŒMF522é€šè®¯æ—¶è¿”å›çš„é”™è¯¯ä»£ç 
 /////////////////////////////////////////////////////////////////////
 #define    MI_OK                         ((char)0)
 #define    MI_NOTAGERR                   ((char)-1)

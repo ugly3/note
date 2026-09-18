@@ -1,27 +1,27 @@
 /**
 ************************************************************************
- *    ÎÄ¼şÃû£º¶şÎ¬ÂëÊı¾İ´¦Àí
- *      ËµÃ÷£º
+ *    æ–‡ä»¶åï¼šäºŒç»´ç æ•°æ®å¤„ç†
+ *      è¯´æ˜ï¼š
 ************************************************************************
 **/
 #include "two_code.h"
 
 
 
-// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
+// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å°–æ‹¬å·å†…çš„å†…å®¹
 uint8_t extract_data_1(const uint8_t* qr_info, uint8_t* output_buffer) {
     const char* start = strchr((const char*)qr_info, '(');
     const char* end = strchr((const char*)qr_info, ')');
     uint8_t* output_buffer1 =NULL;
     
     if (start == NULL || end == NULL || end <= start) {
-        output_buffer[0] = '\0'; // ÎŞĞ§¸ñÊ½£¬Êä³ö¿Õ×Ö·û´®
+        output_buffer[0] = '\0'; // æ— æ•ˆæ ¼å¼ï¼Œè¾“å‡ºç©ºå­—ç¬¦ä¸²
         return 0;
     }
     int data_len = end - start - 1;
-    // È·±£²»»á³¬³ö»º³åÇø´óĞ¡
+    // ç¡®ä¿ä¸ä¼šè¶…å‡ºç¼“å†²åŒºå¤§å°
     if (data_len >= 50) {
-        data_len = 49; // ±£ÁôÒ»¸ö×Ö½Ú¸ø½áÊø·û
+        data_len = 49; // ä¿ç•™ä¸€ä¸ªå­—èŠ‚ç»™ç»“æŸç¬¦
     }
     strncpy((char *)output_buffer1, start + 1, data_len);
     output_buffer1[data_len] = '\0';
@@ -37,21 +37,21 @@ uint8_t extract_data_1(const uint8_t* qr_info, uint8_t* output_buffer) {
     return 1;
 }
 
-// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡´óÀ¨ºÅÄÚµÄÄÚÈİ
+// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å¤§æ‹¬å·å†…çš„å†…å®¹
 uint8_t extract_data_2(const uint8_t* qr_info, uint8_t* output_buffer) {
     const char* start = strchr((const char*)qr_info, '{');
     const char* end = strchr((const char*)qr_info, '}');
     
     if (start == NULL || end == NULL || end <= start) {
-        output_buffer[0] = '\0'; // ÎŞĞ§¸ñÊ½£¬Êä³ö¿Õ×Ö·û´®
+        output_buffer[0] = '\0'; // æ— æ•ˆæ ¼å¼ï¼Œè¾“å‡ºç©ºå­—ç¬¦ä¸²
         return 0;
     }
     
     int data_len = end - start - 1;
     
-    // È·±£²»»á³¬³ö»º³åÇø´óĞ¡
+    // ç¡®ä¿ä¸ä¼šè¶…å‡ºç¼“å†²åŒºå¤§å°
     if (data_len >= 50) {
-        data_len = 49; // ±£ÁôÒ»¸ö×Ö½Ú¸ø½áÊø·û
+        data_len = 49; // ä¿ç•™ä¸€ä¸ªå­—èŠ‚ç»™ç»“æŸç¬¦
     }
     
     strncpy((char *)output_buffer, start + 1, data_len);
@@ -59,7 +59,7 @@ uint8_t extract_data_2(const uint8_t* qr_info, uint8_t* output_buffer) {
     return 1;
 }
 
-// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡´óĞ´×ÖÄ¸A~Z
+// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å¤§å†™å­—æ¯A~Z
 uint8_t extract_data_3(const uint8_t* qr_info, uint8_t* output_buffer) 
 {
      int out_pos = 0;
@@ -74,7 +74,7 @@ uint8_t extract_data_3(const uint8_t* qr_info, uint8_t* output_buffer)
       else
           return 0;
 }
-// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡´óĞ´×ÖÄ¸A~F  (ÑùÌâ1_RFID)
+// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å¤§å†™å­—æ¯A~F  (æ ·é¢˜1_RFID)
 uint8_t extract_data_3_1(const uint8_t* qr_info, uint8_t* output_buffer) 
 {
      int out_pos = 0;
@@ -90,7 +90,7 @@ uint8_t extract_data_3_1(const uint8_t* qr_info, uint8_t* output_buffer)
           return 0;
 }
 
-// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡×Ö·û0~9
+// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å­—ç¬¦0~9
 uint8_t extract_data_4(const uint8_t* qr_info, uint8_t* output_buffer) 
 {
      int out_pos = 0;
@@ -106,7 +106,7 @@ uint8_t extract_data_4(const uint8_t* qr_info, uint8_t* output_buffer)
           return 0;
 }
 
-// º¯Êı£º´Ó×Ö·û´®ÖĞÌáÈ¡×Ö·û1~4      
+// å‡½æ•°ï¼šä»å­—ç¬¦ä¸²ä¸­æå–å­—ç¬¦1~4      
 uint8_t extract_data_5(const uint8_t* qr_info, uint8_t* output_buffer) 
 {
      int out_pos = 0;
@@ -121,11 +121,11 @@ uint8_t extract_data_5(const uint8_t* qr_info, uint8_t* output_buffer)
       else
           return 0;
 }
-/**ÑùÌâ3£ºRFID´¦Àí
- * @brief Í³¼Æ×ÖÄ¸ABCD³öÏÖµÄÆµ´Î£¬·µ»ØÊ®Áù½øÖÆ×éºÏ
- * @param qr_info ÊäÈëµÄRFIDÊı¾İ£¨16×Ö½Ú£©
- * @param output_buffer Êä³ö»º³åÇø£¨´æ·Å4¸öÊ®Áù½øÖÆÆµ´Î×Ö·û£¬Èç"2323"£©
- * @return ×´Ì¬Âë£¨1:³É¹¦£¬0:Ê§°Ü£©
+/**æ ·é¢˜3ï¼šRFIDå¤„ç†
+ * @brief ç»Ÿè®¡å­—æ¯ABCDå‡ºç°çš„é¢‘æ¬¡ï¼Œè¿”å›åå…­è¿›åˆ¶ç»„åˆ
+ * @param qr_info è¾“å…¥çš„RFIDæ•°æ®ï¼ˆ16å­—èŠ‚ï¼‰
+ * @param output_buffer è¾“å‡ºç¼“å†²åŒºï¼ˆå­˜æ”¾4ä¸ªåå…­è¿›åˆ¶é¢‘æ¬¡å­—ç¬¦ï¼Œå¦‚"2323"ï¼‰
+ * @return çŠ¶æ€ç ï¼ˆ1:æˆåŠŸï¼Œ0:å¤±è´¥ï¼‰
  */
 uint8_t extract_data_6(const uint8_t* qr_info, uint8_t* output_buffer) 
 {
@@ -134,10 +134,10 @@ uint8_t extract_data_6(const uint8_t* qr_info, uint8_t* output_buffer)
     uint8_t temp;
     
     if (qr_info == NULL || output_buffer == NULL) {
-        return 0; // ²ÎÊı´íÎó
+        return 0; // å‚æ•°é”™è¯¯
     }
     
-    // Í³¼ÆÃ¿¸ö×ÖÄ¸³öÏÖµÄ´ÎÊı
+    // ç»Ÿè®¡æ¯ä¸ªå­—æ¯å‡ºç°çš„æ¬¡æ•°
     for (i = 0; i < 16; i++) {
         temp = qr_info[i];
         if (temp == 'A') 
@@ -150,43 +150,43 @@ uint8_t extract_data_6(const uint8_t* qr_info, uint8_t* output_buffer)
             count_D++;
     }
     
-    // ½«Ê®½øÖÆÆµ´Î×ª»»ÎªÊ®Áù½øÖÆ×Ö·û
-    // Ã¿¸öÆµ´Î×ª»»Îª1Î»Ê®Áù½øÖÆÊı£¨0-15£©
+    // å°†åè¿›åˆ¶é¢‘æ¬¡è½¬æ¢ä¸ºåå…­è¿›åˆ¶å­—ç¬¦
+    // æ¯ä¸ªé¢‘æ¬¡è½¬æ¢ä¸º1ä½åå…­è¿›åˆ¶æ•°ï¼ˆ0-15ï¼‰
     output_buffer[0] = (count_A <= 9) ? (count_A + '0') : (count_A - 10 + 'A');
     output_buffer[1] = (count_B <= 9) ? (count_B + '0') : (count_B - 10 + 'A');
     output_buffer[2] = (count_C <= 9) ? (count_C + '0') : (count_C - 10 + 'A');
     output_buffer[3] = (count_D <= 9) ? (count_D + '0') : (count_D - 10 + 'A');
-    output_buffer[4] = '\0';  // ×Ö·û´®½áÊø·û
+    output_buffer[4] = '\0';  // å­—ç¬¦ä¸²ç»“æŸç¬¦
     
     return 1;
 }
 
 
 
-//ÑùÌâ5£ºRFIDÊı¾İ´¦Àí,È¡³ö{}ÄÚÓĞĞ§Êı¾İ£¬Êı×ÖÔÚÇ°£¬×ÖÄ¸ÔÚºó£¬´ÓĞ¡µ½´óÅÅĞò£¬È¡³öÖØ¸´Êı¾İ£¬Êä³öÈı¸öÊ®Áù½øÖÆÎ»
+//æ ·é¢˜5ï¼šRFIDæ•°æ®å¤„ç†,å–å‡º{}å†…æœ‰æ•ˆæ•°æ®ï¼Œæ•°å­—åœ¨å‰ï¼Œå­—æ¯åœ¨åï¼Œä»å°åˆ°å¤§æ’åºï¼Œå–å‡ºé‡å¤æ•°æ®ï¼Œè¾“å‡ºä¸‰ä¸ªåå…­è¿›åˆ¶ä½
 uint8_t extract_data_7(const uint8_t* qr_info, uint8_t* output_buffer) {
     const char* start = strchr((const char*)qr_info, '{');
     const char* end = strchr((const char*)qr_info, '}');
     
     if (start == NULL || end == NULL || end <= start) {
-        output_buffer[0] = '\0'; // ÎŞĞ§¸ñÊ½£¬Êä³ö¿Õ×Ö·û´®
+        output_buffer[0] = '\0'; // æ— æ•ˆæ ¼å¼ï¼Œè¾“å‡ºç©ºå­—ç¬¦ä¸²
         return 0;
     }
     int data_len = end - start - 1;
-    // È·±£²»»á³¬³ö»º³åÇø´óĞ¡
+    // ç¡®ä¿ä¸ä¼šè¶…å‡ºç¼“å†²åŒºå¤§å°
     if (data_len >= 50) {
-        data_len = 49; // ±£ÁôÒ»¸ö×Ö½Ú¸ø½áÊø·û
+        data_len = 49; // ä¿ç•™ä¸€ä¸ªå­—èŠ‚ç»™ç»“æŸç¬¦
     }
-    // ÁÙÊ±´æ´¢ÌáÈ¡µÄÓĞĞ§Êı¾İ
+    // ä¸´æ—¶å­˜å‚¨æå–çš„æœ‰æ•ˆæ•°æ®
     char temp_data[50] = {0};
     strncpy(temp_data, start + 1, data_len);
     temp_data[data_len] = '\0';
     
-    // Í³¼ÆÊı×ÖºÍ×ÖÄ¸µÄ³öÏÖ´ÎÊı
+    // ç»Ÿè®¡æ•°å­—å’Œå­—æ¯çš„å‡ºç°æ¬¡æ•°
     int digit_count[10] = {0};  // 0-9
-    int letter_count[6] = {0};   // A-F (¶ÔÓ¦Ë÷Òı0-5)
+    int letter_count[6] = {0};   // A-F (å¯¹åº”ç´¢å¼•0-5)
     
-    // ±éÀúÓĞĞ§Êı¾İ£¬Í³¼ÆÃ¿¸ö×Ö·û³öÏÖµÄ´ÎÊı
+    // éå†æœ‰æ•ˆæ•°æ®ï¼Œç»Ÿè®¡æ¯ä¸ªå­—ç¬¦å‡ºç°çš„æ¬¡æ•°
     for (int i = 0; i < data_len; i++) {
         char c = temp_data[i];
         if (c >= '0' && c <= '9') {
@@ -196,53 +196,53 @@ uint8_t extract_data_7(const uint8_t* qr_info, uint8_t* output_buffer) {
         }
     }
 
-    // ÊÕ¼¯²»ÖØ¸´µÄÊı×ÖºÍ×ÖÄ¸£¨Ö»±£Áô³öÏÖ´ÎÊıÎª1µÄ£©
+    // æ”¶é›†ä¸é‡å¤çš„æ•°å­—å’Œå­—æ¯ï¼ˆåªä¿ç•™å‡ºç°æ¬¡æ•°ä¸º1çš„ï¼‰
     char unique_digits[10] = {0};
     char unique_letters[6] = {0};
     int digit_pos = 0;
     int letter_pos = 0;
     
-    // ÊÕ¼¯³öÏÖ´ÎÊıÎª1µÄÊı×Ö£¨°´0-9Ë³Ğò£©
+    // æ”¶é›†å‡ºç°æ¬¡æ•°ä¸º1çš„æ•°å­—ï¼ˆæŒ‰0-9é¡ºåºï¼‰
     for (int i = 0; i < 10; i++) {
         if (digit_count[i] == 1) {
             unique_digits[digit_pos++] = '0' + i;
         }
     }
-    // ÊÕ¼¯³öÏÖ´ÎÊıÎª1µÄ×ÖÄ¸£¨°´A-FË³Ğò£©
+    // æ”¶é›†å‡ºç°æ¬¡æ•°ä¸º1çš„å­—æ¯ï¼ˆæŒ‰A-Fé¡ºåºï¼‰
     for (int i = 0; i < 6; i++) {
         if (letter_count[i] == 1) {
             unique_letters[letter_pos++] = 'A' + i;
         }
     }
-    // °´ÕÕÊı×ÖÔÚÇ°£¬×ÖÄ¸ÔÚºóµÄË³ĞòÖØĞÂÅÅÁĞ
+    // æŒ‰ç…§æ•°å­—åœ¨å‰ï¼Œå­—æ¯åœ¨åçš„é¡ºåºé‡æ–°æ’åˆ—
     char sorted_data[20] = {0};
     int sorted_pos = 0;
-    // ÏÈ¸´ÖÆÊı×Ö
+    // å…ˆå¤åˆ¶æ•°å­—
     for (int i = 0; i < digit_pos; i++) {
         sorted_data[sorted_pos++] = unique_digits[i];
     }
-    // ÔÙ¸´ÖÆ×ÖÄ¸
+    // å†å¤åˆ¶å­—æ¯
     for (int i = 0; i < letter_pos; i++) {
         sorted_data[sorted_pos++] = unique_letters[i];
     }
     
     uint8_t code[3];
     
-    // ½«×Ö·ûÁ½Á½×éºÏ³ÉÊ®Áù½øÖÆÖµ
+    // å°†å­—ç¬¦ä¸¤ä¸¤ç»„åˆæˆåå…­è¿›åˆ¶å€¼
     int code_pos = 0;
-    // Ö»´¦ÀíÅ¼Êı¸ö×Ö·û£¬Èç¹ûÓĞÆæÊı¸ö×Ö·û£¬×îºóÒ»¸öÉáÆú
-    int pair_count = sorted_pos / 2;  // ¼ÆËã¿ÉÒÔ×é³É¶àÉÙ¶Ô
+    // åªå¤„ç†å¶æ•°ä¸ªå­—ç¬¦ï¼Œå¦‚æœæœ‰å¥‡æ•°ä¸ªå­—ç¬¦ï¼Œæœ€åä¸€ä¸ªèˆå¼ƒ
+    int pair_count = sorted_pos / 2;  // è®¡ç®—å¯ä»¥ç»„æˆå¤šå°‘å¯¹
     for (int i = 0; i < pair_count * 2; i += 2) {
         uint8_t high, low;
         
-        // µÚÒ»¸ö×Ö·û£¨¸ßÎ»£©
+        // ç¬¬ä¸€ä¸ªå­—ç¬¦ï¼ˆé«˜ä½ï¼‰
         if (sorted_data[i] >= '0' && sorted_data[i] <= '9') {
             high = sorted_data[i] - '0';
         } else {
             high = sorted_data[i] - 'A' + 10;
         }
         
-        // µÚ¶ş¸ö×Ö·û£¨µÍÎ»£©
+        // ç¬¬äºŒä¸ªå­—ç¬¦ï¼ˆä½ä½ï¼‰
         if (sorted_data[i+1] >= '0' && sorted_data[i+1] <= '9') {
             low = sorted_data[i+1] - '0';
         } else {
@@ -250,25 +250,25 @@ uint8_t extract_data_7(const uint8_t* qr_info, uint8_t* output_buffer) {
         }
         code[code_pos++] = (high << 4) | low;
     }
-    // ½«½á¹û¸´ÖÆµ½Êä³ö»º³åÇø
+    // å°†ç»“æœå¤åˆ¶åˆ°è¾“å‡ºç¼“å†²åŒº
     memcpy(output_buffer, code, 3);
-    return 3; // ·µ»ØÉú³ÉµÄ×Ö½ÚÊı
+    return 3; // è¿”å›ç”Ÿæˆçš„å­—èŠ‚æ•°
 }
 /*************************************************************************************************/
 char current_data[200] ={0};
 /*
- * 2026ÑùÌâ1½âÎö¶şÎ¬ÂëÊı¾İ
+ * 2026æ ·é¢˜1è§£æäºŒç»´ç æ•°æ®
  */
 void YT1_parse_two_codes(void) 
 {
-    // µÚÒ»²½£ºÊ¶±ğA3£¨ÕÒ°üº¬<>µÄ¶şÎ¬Âë£©
+    // ç¬¬ä¸€æ­¥ï¼šè¯†åˆ«A3ï¼ˆæ‰¾åŒ…å«<>çš„äºŒç»´ç ï¼‰
     for (int i = 0; i < Two_Code_Count; i++) 
     {
         char *data = (char *)Two_Code_Init_Data_Store[i];
 //        char *output = NULL;
-        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//ÎŞÊı¾İÖ±½ÓÌø¹ı
+        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//æ— æ•°æ®ç›´æ¥è·³è¿‡
             continue;
-        // ÕÒµ½<>£¬ÌáÈ¡ÖĞ¼äµÄÁ½¸ö×Ö·û
+        // æ‰¾åˆ°<>ï¼Œæå–ä¸­é—´çš„ä¸¤ä¸ªå­—ç¬¦
         char *start = strchr(data, '<');
         char *end = strchr(data, '>');
         int len = end - start - 1;
@@ -279,7 +279,7 @@ void YT1_parse_two_codes(void)
              Two_Code_Data_parsed_Store3[1] = start[2];
              Two_Code_Data_parsed_Store3[2] = '\0';
         }
-        else    //Ã»ÓĞ¼âÀ¨ºÅÇé¿ö»òÓĞ¼âÀ¨ºÅµ«²»ÊÇÁ©¸ö×Ö½Ú
+        else    //æ²¡æœ‰å°–æ‹¬å·æƒ…å†µæˆ–æœ‰å°–æ‹¬å·ä½†ä¸æ˜¯ä¿©ä¸ªå­—èŠ‚
         {
             if(strlen((char *)Two_Code_Data_parsed_Store1)==0)
             {
@@ -296,20 +296,20 @@ void YT1_parse_two_codes(void)
 }
 
 /*
- * 2026ÑùÌâ2½âÎö¶şÎ¬ÂëÊı¾İ
+ * 2026æ ·é¢˜2è§£æäºŒç»´ç æ•°æ®
  */
 void YT2_parse_two_codes(void) 
 {
     for (int i = 0; i < Two_Code_Count; i++) 
     {
         if(Two_Code_Init_Data_Store[i][0] == 0x00)
-            extract_data_1(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);  //ÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
+            extract_data_1(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);  //æå–å°–æ‹¬å·å†…çš„å†…å®¹
 //        else if(Two_Code_Init_Data_Store[i][0] == 0x01)
-//            extract_data_1(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store2);  //ÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ  
+//            extract_data_1(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store2);  //æå–å°–æ‹¬å·å†…çš„å†…å®¹  
 //        else if(Two_Code_Init_Data_Store[i][0] == 0x03)
-//            extract_data_1(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store3);  //ÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
+//            extract_data_1(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store3);  //æå–å°–æ‹¬å·å†…çš„å†…å®¹
         else
-            continue;  // ÎŞĞ§µÄID£¬Ìø¹ı
+            continue;  // æ— æ•ˆçš„IDï¼Œè·³è¿‡
         
         Two_Code_Init_Data_Store[i][0] = '\0';
     }
@@ -317,16 +317,16 @@ void YT2_parse_two_codes(void)
 
 
 /*
- * 2026ÑùÌâ3½âÎö¶şÎ¬ÂëÊı¾İ
+ * 2026æ ·é¢˜3è§£æäºŒç»´ç æ•°æ®
  */
 void YT3_parse_two_codes(void) 
 {
     for (int i = 0; i < Two_Code_Count; i++) 
     {
         if (strstr((char *)Two_Code_Init_Data_Store[i], "N01") != NULL) 
-            extract_data_2(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);    //ÌáÈ¡´óÀ¨ºÅÀïµÄÄÚÈİ
+            extract_data_2(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store1);    //æå–å¤§æ‹¬å·é‡Œçš„å†…å®¹
         else if (strstr((char *)Two_Code_Init_Data_Store[i], "N02") != NULL) 
-            extract_data_2(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store2);    //ÌáÈ¡´óÀ¨ºÅÀïµÄÄÚÈİ
+            extract_data_2(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store2);    //æå–å¤§æ‹¬å·é‡Œçš„å†…å®¹
         else 
             continue;
         Two_Code_Init_Data_Store[i][0] = '\0';
@@ -336,20 +336,20 @@ void YT3_parse_two_codes(void)
 
 
 /*
- * 2026ÑùÌâ4½âÎö¶şÎ¬ÂëÊı¾İ
+ * 2026æ ·é¢˜4è§£æäºŒç»´ç æ•°æ®
  */
 void YT4_parse_two_codes(void) 
 {
     uint8_t temp_data1[50] = {0};
     uint8_t temp_data2[50] = {0};
-    if(strlen((char *)Two_Code_Init_Data_Store[0])!=0 && strlen((char *)Two_Code_Init_Data_Store[1])!=0)//Í¬Ê±É¨Ãèµ½Á©¸ö¶şÎ¬Âë
+    if(strlen((char *)Two_Code_Init_Data_Store[0])!=0 && strlen((char *)Two_Code_Init_Data_Store[1])!=0)//åŒæ—¶æ‰«æåˆ°ä¿©ä¸ªäºŒç»´ç 
     {
-        extract_data_1(Two_Code_Init_Data_Store[0], temp_data1);    //ÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
-        extract_data_1(Two_Code_Init_Data_Store[1], temp_data2);    //ÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
+        extract_data_1(Two_Code_Init_Data_Store[0], temp_data1);    //æå–å°–æ‹¬å·å†…çš„å†…å®¹
+        extract_data_1(Two_Code_Init_Data_Store[1], temp_data2);    //æå–å°–æ‹¬å·å†…çš„å†…å®¹
         Two_Code_Init_Data_Store[0][0] = '\0';
         Two_Code_Init_Data_Store[1][0] = '\0';
 
-        // ±È½ÏÊı¾İ³¤¶È£¬È·¶¨ÄÄ¸öÊÇ¶şÎ¬Âë(1)ºÍ¶şÎ¬Âë(2)
+        // æ¯”è¾ƒæ•°æ®é•¿åº¦ï¼Œç¡®å®šå“ªä¸ªæ˜¯äºŒç»´ç (1)å’ŒäºŒç»´ç (2)
         int len1 = strlen((char *)temp_data1);
         int len2 = strlen((char *)temp_data2);
 
@@ -364,9 +364,9 @@ void YT4_parse_two_codes(void)
             memcpy(Two_Code_Data_parsed_Store2, temp_data1, sizeof(temp_data1));
          }
     }
-    else if(strlen((char *)Two_Code_Init_Data_Store[0])!=0 && strlen((char *)Two_Code_Init_Data_Store[1])==0)//É¨Ãèµ½Á©¸ö¶şÎ¬ÂëÆäÖĞÒ»¸ö
+    else if(strlen((char *)Two_Code_Init_Data_Store[0])!=0 && strlen((char *)Two_Code_Init_Data_Store[1])==0)//æ‰«æåˆ°ä¿©ä¸ªäºŒç»´ç å…¶ä¸­ä¸€ä¸ª
     {
-        extract_data_1(Two_Code_Init_Data_Store[0], temp_data1);    //ÌáÈ¡¼âÀ¨ºÅÄÚµÄÄÚÈİ
+        extract_data_1(Two_Code_Init_Data_Store[0], temp_data1);    //æå–å°–æ‹¬å·å†…çš„å†…å®¹
         Two_Code_Init_Data_Store[0][0] = '\0';
         if(strlen((char *)temp_data1)>strlen((char *)Two_Code_Data_parsed_Store1) && strlen((char *)Two_Code_Data_parsed_Store1)!=0)
         {
@@ -383,23 +383,23 @@ void YT4_parse_two_codes(void)
 
 
 /*
- * 2026ÑùÌâ5½âÎö¶şÎ¬ÂëÊı¾İ
+ * 2026æ ·é¢˜5è§£æäºŒç»´ç æ•°æ®
  */
 void YT5_parse_two_codes(void) 
 {
-    // µÚÒ»²½£ºÊ¶±ğA3
+    // ç¬¬ä¸€æ­¥ï¼šè¯†åˆ«A3
     for (int i = 0; i < Two_Code_Count; i++) 
     {
-        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//ÎŞÊı¾İÖ±½ÓÌø¹ı
+        if(strlen((char *)Two_Code_Init_Data_Store[i])==0)//æ— æ•°æ®ç›´æ¥è·³è¿‡
             continue;
         
         int out_pos = 0;
-        for (int j = 0; Two_Code_Init_Data_Store[i][j] != '\0' && out_pos < 49; j++) //¼ÆËã×Ö·û¡®0¡¯~¡®9¡¯µÄ¸öÊı
+        for (int j = 0; Two_Code_Init_Data_Store[i][j] != '\0' && out_pos < 49; j++) //è®¡ç®—å­—ç¬¦â€˜0â€™~â€˜9â€™çš„ä¸ªæ•°
         {
             if (Two_Code_Init_Data_Store[i][j] >= '0' && Two_Code_Init_Data_Store[i][j] <= '9') 
                 out_pos++;
         }
-        if(out_pos == 2)//¶şÎ¬Âë3
+        if(out_pos == 2)//äºŒç»´ç 3
             extract_data_4(Two_Code_Init_Data_Store[i],Two_Code_Data_parsed_Store3);
         
         else if(out_pos>=4)  

@@ -58,7 +58,7 @@ void Hard_Can_Init(void)
 
 	
 	CAN_FilterInitStructure.CAN_FilterNumber = 0;
-	CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdMask;				//±êÊ¶·ûÆÁ±ÎÄ£Ê½
+	CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdMask;				//æ ‡è¯†ç¬¦å±è”½æ¨¡å¼
 	CAN_FilterInitStructure.CAN_FilterScale = CAN_FilterScale_32bit;			
 	CAN_FilterInitStructure.CAN_FilterIdHigh = 0x0000;
 	CAN_FilterInitStructure.CAN_FilterIdLow = 0x0000;
@@ -91,7 +91,7 @@ void Hard_Can_SpeedMode(uint8_t f)
 
 
 /**
-º¯Êı¹¦ÄÜ£ºCANÉè±¸¶¨Ê±¼ì²â
+å‡½æ•°åŠŸèƒ½ï¼šCANè®¾å¤‡å®šæ—¶æ£€æµ‹
 */
 void Hard_Can_While(void)
 {

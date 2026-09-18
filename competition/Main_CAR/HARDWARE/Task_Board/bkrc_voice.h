@@ -6,19 +6,19 @@
 #include "stm32f4xx.h"
 
 /* Exported constants --------------------------------------------------------*/
-extern uint8_t uart6_data;			// USART6 ½ÓÊÕÊı¾İ»º´æ
-extern uint8_t uart6_flag;			// USART6 ½ÓÊÕÊı¾İÊ±Ğò
-extern uint8_t UART6_RxData[8];		// USART6 ½ÓÊÕÊı¾İ»º´æ
-extern uint8_t voice_falg;			// ÓïÒôÄ£¿é·µ»Ø×´Ì¬
+extern uint8_t uart6_data;			// USART6 æ¥æ”¶æ•°æ®ç¼“å­˜
+extern uint8_t uart6_flag;			// USART6 æ¥æ”¶æ•°æ®æ—¶åº
+extern uint8_t UART6_RxData[8];		// USART6 æ¥æ”¶æ•°æ®ç¼“å­˜
+extern uint8_t voice_falg;			// è¯­éŸ³æ¨¡å—è¿”å›çŠ¶æ€
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 void USART6_Config_Lib(void);
 void SendData_USART6(uint8_t *Data, uint16_t length);
 uint8_t Voice_Drive(void);
-void YY_Play_Zigbee(char *p);		// ÓïÒô²¥±¨±êÖ¾Îï²¥±¨Ö¸¶¨ÎÄ±¾ĞÅÏ¢
-void YY_Comm_Zigbee(uint8_t Primary, uint8_t Secondary); // ²¥±¨ÓïÒô¿ØÖÆÃüÁî
-uint8_t BKRC_Voice_Extern(uint8_t yy_mode)	;	// ÓïÒôÊ¶±ğ
-void BKRC_Voice_Init(void);// ÓïÒôÊ¶±ğ³õÊ¼»¯
+void YY_Play_Zigbee(char *p);		// è¯­éŸ³æ’­æŠ¥æ ‡å¿—ç‰©æ’­æŠ¥æŒ‡å®šæ–‡æœ¬ä¿¡æ¯
+void YY_Comm_Zigbee(uint8_t Primary, uint8_t Secondary); // æ’­æŠ¥è¯­éŸ³æ§åˆ¶å‘½ä»¤
+uint8_t BKRC_Voice_Extern(uint8_t yy_mode)	;	// è¯­éŸ³è¯†åˆ«
+void BKRC_Voice_Init(void);// è¯­éŸ³è¯†åˆ«åˆå§‹åŒ–
 #endif /* __VOICE_H */
 
 

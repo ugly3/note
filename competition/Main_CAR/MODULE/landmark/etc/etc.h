@@ -2,8 +2,8 @@
 #define __ETC_H
 #include "all_module.h"
 
-#define ETC_Middle 1	//ETCÔÚÖĞ¼ä
-#define ETC_Cross 0	//ETCÔÚÊ®×ÖÂ·¿Ú
+#define ETC_Middle 1	//ETCåœ¨ä¸­é—´
+#define ETC_Cross 0	//ETCåœ¨åå­—è·¯å£
 
 typedef struct
 {

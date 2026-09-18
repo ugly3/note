@@ -6,7 +6,7 @@
 
 
 
-//º¯ÊıÖ¸Õë£¬Ö÷ÒªÓÃÓÚº¯Êı
+//å‡½æ•°æŒ‡é’ˆï¼Œä¸»è¦ç”¨äºå‡½æ•°
 typedef struct
 {
 	uint8_t (*xGet_CheckSum)(uint8_t,uint8_t,uint8_t,uint8_t);
@@ -22,7 +22,7 @@ typedef struct
 
 
 
-/*°´¼ü*/
+/*æŒ‰é”®*/
 typedef struct
 {
 	uint8_t Trg;    
@@ -51,6 +51,6 @@ void xBubble_Sort(uint16_t*arr,uint8_t len);
 void xTba_Both_Led(uint8_t swch);
 
 extern void xHexStringToGraphic(const char *hexString, char *graphicArray);
-uint8_t CharToHex(char c);//// ×Ö·û×ª 4Î»¶ş½øÖÆµÄº¯Êı
+uint8_t CharToHex(char c);//// å­—ç¬¦è½¬ 4ä½äºŒè¿›åˆ¶çš„å‡½æ•°
 
 #endif

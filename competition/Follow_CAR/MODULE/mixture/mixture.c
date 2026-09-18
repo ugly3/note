@@ -1,12 +1,12 @@
 /**
 ************************************************************************
-*    ÎÄ¼şÃû£ºmixture
-*      ËµÃ÷£º»ìºÏÄ£¿é£¬ÀıÈç£º°´¼ü----×Ô¼º´´½¨µÄº¯Êı
+*    æ–‡ä»¶åï¼šmixture
+*      è¯´æ˜ï¼šæ··åˆæ¨¡å—ï¼Œä¾‹å¦‚ï¼šæŒ‰é”®----è‡ªå·±åˆ›å»ºçš„å‡½æ•°
 ************************************************************************
 **/
 #include "mixture.h"
 
-// ³õÊ¼»¯º¯Êı
+// åˆå§‹åŒ–å‡½æ•°
 Mixture_Typedef Mixture_Data =
 	{
 		.xGet_CheckSum = &xGet_CheckSum,
@@ -30,15 +30,15 @@ Key_Typedef KeyData =
 		.S2_Flag = 0,
 		.S3_Flag = 0,
 		.S4_Flag = 0,
-		.Trg = 0x00, // ¶Ì°´
-		.Cont = 0x00 // ³¤°´£¨Ò»°ã²»ÓÃ£©
+		.Trg = 0x00, // çŸ­æŒ‰
+		.Cont = 0x00 // é•¿æŒ‰ï¼ˆä¸€èˆ¬ä¸ç”¨ï¼‰
 };
 
-/* ¼ÆËãĞ£ÑéºÍ---Ö÷Ö¸Áî---¸±Ö¸Áî1---¸±Ö¸Áî2--¸±Ö¸Áî3 -
-²ÎÊı1£ºÖ÷Ö¸Áî
-²ÎÊı2£º¸±Ö¸Áî1
-²ÎÊı3£º¸±Ö¸Áî2
-²ÎÊı4£º¸±Ö¸Áî3
+/* è®¡ç®—æ ¡éªŒå’Œ---ä¸»æŒ‡ä»¤---å‰¯æŒ‡ä»¤1---å‰¯æŒ‡ä»¤2--å‰¯æŒ‡ä»¤3 -
+å‚æ•°1ï¼šä¸»æŒ‡ä»¤
+å‚æ•°2ï¼šå‰¯æŒ‡ä»¤1
+å‚æ•°3ï¼šå‰¯æŒ‡ä»¤2
+å‚æ•°4ï¼šå‰¯æŒ‡ä»¤3
 */
 uint8_t xGet_CheckSum(uint8_t main_com, uint8_t sub_com1, uint8_t sub_com2, uint8_t sub_com3)
 {
@@ -47,38 +47,38 @@ uint8_t xGet_CheckSum(uint8_t main_com, uint8_t sub_com1, uint8_t sub_com2, uint
 	return SUM;
 }
 
-/* ÈıĞĞ°´¼ü·¨ */
-#define KEYPORT (S1) | (S2 << 1) | (S3 << 2) | (S4 << 3) | 0xF0 // °´¼üÏà¹Ø
+/* ä¸‰è¡ŒæŒ‰é”®æ³• */
+#define KEYPORT (S1) | (S2 << 1) | (S3 << 2) | (S4 << 3) | 0xF0 // æŒ‰é”®ç›¸å…³
 void xKey_Read(void)
 {
-	uint8_t ReadDate = (KEYPORT) ^ 0xFF; // È¡·´
+	uint8_t ReadDate = (KEYPORT) ^ 0xFF; // å–å
 	KeyData.Trg = ReadDate & (ReadDate ^ KeyData.Cont);
 	KeyData.Cont = ReadDate;
 
-	/* °´¼ü±êÖ¾Î»*/
-	if (KeyData.Trg & KeyData.S1_value) // °´¼ü1
+	/* æŒ‰é”®æ ‡å¿—ä½*/
+	if (KeyData.Trg & KeyData.S1_value) // æŒ‰é”®1
 	{
 		KeyData.S1_Flag = 1;
 	}
-	if (KeyData.Trg & KeyData.S2_value) // °´¼ü2
+	if (KeyData.Trg & KeyData.S2_value) // æŒ‰é”®2
 	{
 		KeyData.S2_Flag = 1;
 	}
-	if (KeyData.Trg & KeyData.S3_value) // °´¼ü3
+	if (KeyData.Trg & KeyData.S3_value) // æŒ‰é”®3
 	{
 		KeyData.S3_Flag = 1;
 	}
-	if (KeyData.Trg & KeyData.S4_value) // °´¼ü4
+	if (KeyData.Trg & KeyData.S4_value) // æŒ‰é”®4
 	{
 		KeyData.S4_Flag = 1;
 	}
 }
 
-/* TIM2 Ã¿1ms½øÈëÒ»´Î */
+/* TIM2 æ¯1msè¿›å…¥ä¸€æ¬¡ */
 void xTIM2_Init(void)
 {
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE); // ¿ªÆô¶¨Ê±Æ÷2µÄÊ±ÖÓ
-	TIM_InternalClockConfig(TIM2);						 // Ñ¡ÔñÄÚ²¿Ê±ÖÓ
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE); // å¼€å¯å®šæ—¶å™¨2çš„æ—¶é’Ÿ
+	TIM_InternalClockConfig(TIM2);						 // é€‰æ‹©å†…éƒ¨æ—¶é’Ÿ
 
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct;
 	TIM_TimeBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;
@@ -87,7 +87,7 @@ void xTIM2_Init(void)
 	TIM_TimeBaseInitStruct.TIM_Prescaler = 168 - 1;
 	TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0;
 	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStruct);
-	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE); // Ê¹ÄÜ¸üĞÂÖĞ¶Ï
+	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE); // ä½¿èƒ½æ›´æ–°ä¸­æ–­
 
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	NVIC_InitTypeDef NVIC_InitStruct;
@@ -96,14 +96,14 @@ void xTIM2_Init(void)
 	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 2;
 	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
 	NVIC_Init(&NVIC_InitStruct);
-	TIM_Cmd(TIM2, ENABLE); // ¿ªÆô¶¨Ê±Æ÷2
+	TIM_Cmd(TIM2, ENABLE); // å¼€å¯å®šæ—¶å™¨2
 }
 
-/* TIM3 Ã¿1ms½øÈëÒ»´Î */
+/* TIM3 æ¯1msè¿›å…¥ä¸€æ¬¡ */
 void xTIM3_Init(void)
 {
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); // ¿ªÆô¶¨Ê±Æ÷2µÄÊ±ÖÓ
-	TIM_InternalClockConfig(TIM3);						 // Ñ¡ÔñÄÚ²¿Ê±ÖÓ
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE); // å¼€å¯å®šæ—¶å™¨2çš„æ—¶é’Ÿ
+	TIM_InternalClockConfig(TIM3);						 // é€‰æ‹©å†…éƒ¨æ—¶é’Ÿ
 
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct;
 	TIM_TimeBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;
@@ -112,7 +112,7 @@ void xTIM3_Init(void)
 	TIM_TimeBaseInitStruct.TIM_Prescaler = 168 - 1;
 	TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0;
 	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseInitStruct);
-	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE); // Ê¹ÄÜ¸üĞÂÖĞ¶Ï
+	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE); // ä½¿èƒ½æ›´æ–°ä¸­æ–­
 
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	NVIC_InitTypeDef NVIC_InitStruct;
@@ -121,10 +121,10 @@ void xTIM3_Init(void)
 	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 1;
 	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 1;
 	NVIC_Init(&NVIC_InitStruct);
-	TIM_Cmd(TIM3, ENABLE); // ¿ªÆô¶¨Ê±Æ÷2
+	TIM_Cmd(TIM3, ENABLE); // å¼€å¯å®šæ—¶å™¨2
 }
 
-/*¶¨Ê±Æ÷3µÄÖĞ¶Ï·şÎñº¯Êı  Ã¿1ms½øÈëÒ»´Î*/
+/*å®šæ—¶å™¨3çš„ä¸­æ–­æœåŠ¡å‡½æ•°  æ¯1msè¿›å…¥ä¸€æ¬¡*/
 void TIM3_IRQHandler(void)
 {
 	static uint8_t zigbee_cnt2ms = 0;
@@ -137,21 +137,21 @@ void TIM3_IRQHandler(void)
 		if (zigbee_cnt2ms >= 2)
 		{
 			zigbee_cnt2ms = 0;
-			Can_ZigBeeRx_Check(); // Zigbee½»»¥Êı¾İ´¦Àí
+			Can_ZigBeeRx_Check(); // Zigbeeäº¤äº’æ•°æ®å¤„ç†
 		}
 		if (wifi_cnt3ms >= 3)
 		{
 			wifi_cnt3ms = 0;
-			Can_WifiRx_Check(); // Wifi½»»¥Êı¾İ´¦Àí (°²×¿ÓëÖ÷³µ)
+			Can_WifiRx_Check(); // Wifiäº¤äº’æ•°æ®å¤„ç† (å®‰å“ä¸ä¸»è½¦)
 		}
 	}
 	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 }
 
-// ÈÎÎñ°åË«ÏòµÆ±êÖ¾Î»
+// ä»»åŠ¡æ¿åŒå‘ç¯æ ‡å¿—ä½
 volatile bool Tab_Both_Led_Flag = 0;
 
-/*¶¨Ê±Æ÷2µÄÖĞ¶Ï·şÎñº¯Êı  Ã¿1ms½øÈëÒ»´Î*/
+/*å®šæ—¶å™¨2çš„ä¸­æ–­æœåŠ¡å‡½æ•°  æ¯1msè¿›å…¥ä¸€æ¬¡*/
 void TIM2_IRQHandler(void)
 {
 	static uint8_t Key_cnt10ms = 0;
@@ -170,12 +170,12 @@ void TIM2_IRQHandler(void)
 			XiaoChuang_Data.xXiaoChuang_Analyze_Rx_Command();
 		}
 
-		if (Key_cnt10ms >= 10) // °´¼ü¼ì²â10ms
+		if (Key_cnt10ms >= 10) // æŒ‰é”®æ£€æµ‹10ms
 		{
 			Key_cnt10ms = 0;
 			Mixture_Data.xKey_Read();
 		}
-		if (Led_cnt250ms >= 250) // ledÉÁË¸
+		if (Led_cnt250ms >= 250) // ledé—ªçƒ
 		{
 			Led_cnt250ms = 0;
 			LED4 = !LED4;
@@ -194,10 +194,10 @@ void TIM2_IRQHandler(void)
 	TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
 }
 
-extern uint8_t Run_State; // ÔËĞĞÎ»ÖÃ×´Ì¬
+extern uint8_t Run_State; // è¿è¡Œä½ç½®çŠ¶æ€
 void xCAR_KeyRun_Function(void)
 {
-	if (KeyData.S1_Flag) // °´¼ü1
+	if (KeyData.S1_Flag) // æŒ‰é”®1
 	{
 		// uint8_t Buf1[200];
 		// delay_ms(200);
@@ -206,7 +206,7 @@ void xCAR_KeyRun_Function(void)
 		// Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
 		// delay_ms(200);
 		// track_time_Start = 1;
-		// Motor_Data.xCAR_Track(40); // Ñ­¼£
+		// Motor_Data.xCAR_Track(40); // å¾ªè¿¹
 		// delay_ms(200);
 		// sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
 		// Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
@@ -218,9 +218,9 @@ void xCAR_KeyRun_Function(void)
 		// 	delay_ms(300);
 		// 	Motor_Data.xCAR_Track(20);
 		// 	delay_ms(300);
-		// 	Motor_Data.xCAR_Go(30, 620); // ³å
+		// 	Motor_Data.xCAR_Go(30, 620); // å†²
 		// 	delay_ms(100);
-		// 	Motor_Data.xCAR_Go(30, 620); // ³å
+		// 	Motor_Data.xCAR_Go(30, 620); // å†²
 		// 	delay_ms(300);
 		// 	Motor_Data.xCAR_Track_Go();
 		// 	Motor_Data.xCAR_Track_Go();
@@ -229,9 +229,9 @@ void xCAR_KeyRun_Function(void)
 		// else if (1200 > Count_ms) // D2
 		// {
 		// 	Count_ms = 0;
-		// 	Motor_Data.xCAR_Go(30, 620); // ³å
+		// 	Motor_Data.xCAR_Go(30, 620); // å†²
 		// 	delay_ms(100);
-		// 	Motor_Data.xCAR_Go(30, 620); // ³å
+		// 	Motor_Data.xCAR_Go(30, 620); // å†²
 		// 	delay_ms(300);
 		// 	Motor_Data.xCAR_Track_Go();
 		// 	delay_ms(200);
@@ -239,58 +239,58 @@ void xCAR_KeyRun_Function(void)
 		// else // E2
 		// {
 		// 	Count_ms = 0;
-		// 	Motor_Data.xCAR_Go(25, 400); // Ê¹³µÉí¶Ô×¼Ê®×ÖÂ·¿Ú
+		// 	Motor_Data.xCAR_Go(25, 400); // ä½¿è½¦èº«å¯¹å‡†åå­—è·¯å£
 		// 	delay_ms(300);
-		// 	Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
+		// 	Motor_Data.xCAR_Track(Motor_Data.Go_speed); // å¾ªè¿¹
 		// 	delay_ms(300);
 		// 	Motor_Data.xCAR_Back(25, 600);
 		// 	delay_ms(300);
 		// 	Motor_Data.xCAR_Track(30);
-		// 	Motor_Data.xCAR_Go(30, 620); // ³å
+		// 	Motor_Data.xCAR_Go(30, 620); // å†²
 		// 	delay_ms(100);
-		// 	Motor_Data.xCAR_Go(30, 620); // ³å
+		// 	Motor_Data.xCAR_Go(30, 620); // å†²
 		// 	delay_ms(500);
 
 		// 	Motor_Data.xCAR_Track_Go();
 		// 	delay_ms(300);
 		// }
-		KeyData.S1_Flag = 0; // ½ûÖ¹ÆÁ±Î
+		KeyData.S1_Flag = 0; // ç¦æ­¢å±è”½
 	}
-	if (KeyData.S2_Flag) // °´¼ü2
+	if (KeyData.S2_Flag) // æŒ‰é”®2
 	{
-		KeyData.S2_Flag = 0; // ½ûÖ¹ÆÁ±Î
+		KeyData.S2_Flag = 0; // ç¦æ­¢å±è”½
 		Run_State = 1;
-		/*********************************************************ÎŞÏß³äµç±êÖ¾Îï**************************************/
+		/*********************************************************æ— çº¿å……ç”µæ ‡å¿—ç‰©**************************************/
 		//		unsigned int Kai_Qi_Ma[3]={0xA1,0x23,0xB4};
 		//		Wireless_Charge_Data.xWireless_Charge_KaiQiMa_XiuGai(Kai_Qi_Ma);
-		//		Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma);//ĞèĞŞ¸Ä¿ªÆôÂë
+		//		Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma);//éœ€ä¿®æ”¹å¼€å¯ç 
 
 		//      char Hex_num[3]={0x01,0x20,0x26};
-		//      Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,Hex_num);//TFTAÊ®Áù½øÖÆÏÔÊ¾Ä£Ê½£¬ÏÔÊ¾012026
-		//		Smart_TFT_Data.xSmart_TFT_Licence_Display(1,"F222F2");//TFTA³µÅÆÏÔÊ¾Ä£Ê½
-		//		LED_Display_Data.xLED_Display_Data(0xF3,0xF5,0xF1,2);//LEDÏÔÊ¾±êÖ¾ÎïµÚ¶şÅÅÏÔÊ¾F3F5F1
-		/*********************************************************°²×¿Ê¶±ğ********************************************/
-		//		Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//Í¼ĞÎ¼ÓÑÕÉ«µÄÊıÁ¿
-		/*********************************************************¹«½»Õ¾***********************************************/
-		//		Voice_Report_Data.xVoice_Report_Inquire_Weather_Temperatur();  //²éÑ¯ÌìÆøÎÂ¶È
-		//		Voice_Report_Data.xVoice_Report_Speak_temperature();//²¥±¨ÎÂ¶È
-		//		Voice_Report_Data.xVoice_Report_Speak_Weather();//²¥±¨ÌìÆø×´¿ö
+		//      Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,Hex_num);//TFTAåå…­è¿›åˆ¶æ˜¾ç¤ºæ¨¡å¼ï¼Œæ˜¾ç¤º012026
+		//		Smart_TFT_Data.xSmart_TFT_Licence_Display(1,"F222F2");//TFTAè½¦ç‰Œæ˜¾ç¤ºæ¨¡å¼
+		//		LED_Display_Data.xLED_Display_Data(0xF3,0xF5,0xF1,2);//LEDæ˜¾ç¤ºæ ‡å¿—ç‰©ç¬¬äºŒæ’æ˜¾ç¤ºF3F5F1
+		/*********************************************************å®‰å“è¯†åˆ«********************************************/
+		//		Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//å›¾å½¢åŠ é¢œè‰²çš„æ•°é‡
+		/*********************************************************å…¬äº¤ç«™***********************************************/
+		//		Voice_Report_Data.xVoice_Report_Inquire_Weather_Temperatur();  //æŸ¥è¯¢å¤©æ°”æ¸©åº¦
+		//		Voice_Report_Data.xVoice_Report_Speak_temperature();//æ’­æŠ¥æ¸©åº¦
+		//		Voice_Report_Data.xVoice_Report_Speak_Weather();//æ’­æŠ¥å¤©æ°”çŠ¶å†µ
 		//		if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x00)
-		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("´ó·ç");
+		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("å¤§é£");
 		//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x01)
-		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("¶àÔÆ");
+		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("å¤šäº‘");
 		//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x02)
-		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("Çç");
+		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("æ™´");
 		//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x03)
-		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("Ğ¡Ñ©");
+		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("å°é›ª");
 		//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x04)
-		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("Ğ¡Óê");
+		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("å°é›¨");
 		//		else if(Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[0]==0x05)
-		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("ÒõÌì");
+		//				Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add_2("é˜´å¤©");
 
-		/*********************************************************½»Í¨µÆ***********************************************/
-		//	    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //·¢ËÍÇëÇóÊ¶±ğºìÂÌµÆ
-		//		for(uint8_t i=0;i<3;i++) //µÈ´ı°²×¿»Ø´«
+		/*********************************************************äº¤é€šç¯***********************************************/
+		//	    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);  //å‘é€è¯·æ±‚è¯†åˆ«çº¢ç»¿ç¯
+		//		for(uint8_t i=0;i<3;i++) //ç­‰å¾…å®‰å“å›ä¼ 
 		//		{
 		//			delay_ms(500);
 		//			delay_ms(500);
@@ -299,7 +299,7 @@ void xCAR_KeyRun_Function(void)
 		//		if(Android_Data.Red_State == 1)
 		//		{
 		//				Android_Data.Red_State = 0;
-		//				Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,1);//·¢ËÍ¸ø½»Í¨µÆ±êÖ¾ÎïÇëÇóÈ·ÈÏ
+		//				Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A,1);//å‘é€ç»™äº¤é€šç¯æ ‡å¿—ç‰©è¯·æ±‚ç¡®è®¤
 		//				delay_ms(500);
 		//		}
 		//		else if(Android_Data.Yellow_State == 1)
@@ -315,36 +315,36 @@ void xCAR_KeyRun_Function(void)
 		//				delay_ms(500);
 		//		}
 		//	}
-		/*********************************************************Á¢ÌåÏÔÊ¾±êÖ¾Îï***********************************************/
+		/*********************************************************ç«‹ä½“æ˜¾ç¤ºæ ‡å¿—ç‰©***********************************************/
 		//        Three_Dim_Display_Data.xThree_Dim_Display_licence_coord("ABS123",'A',1);
 		//        delay_ms(500);
 		//        delay_ms(500);
-		//        Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("»Æ¶«ÛÚ");
+		//        Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("é»„ä¸œåœ³");
 		//        Three_Dim_Display_Data.xThree_Dim_Display_Distance(16);
 		//        Three_Dim_Display_Data.xThree_Dim_Display_Graph(0X01);
 		//        Three_Dim_Display_Data.xThree_Dim_Display_Colour(0X01);
 		//        Three_Dim_Display_Data.xThree_Dim_Display_Traffic_Caution(0X01);
 		//        Three_Dim_Display_Data.xThree_Dim_Display_RGB_Colour(0xff,0x00,0x00);
 	}
-	if (KeyData.S3_Flag) // °´¼ü3
+	if (KeyData.S3_Flag) // æŒ‰é”®3
 	{
-		KeyData.S3_Flag = 0; // ½ûÖ¹ÆÁ±Î
+		KeyData.S3_Flag = 0; // ç¦æ­¢å±è”½
 
-		//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//³µÅÆ
+		//		Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr);//è½¦ç‰Œ
 
 		//		 unsigned int Kai_Qi_Ma[3]={0xA1,0x23,0xB4};
-		//		Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//Í¼ĞÎ¼ÓÑÕÉ«µÄÊıÁ¿
-		//		for(uint8_t i=0;i<8;i++)//µÈ´ı°ËÃë
+		//		Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr);//å›¾å½¢åŠ é¢œè‰²çš„æ•°é‡
+		//		for(uint8_t i=0;i<8;i++)//ç­‰å¾…å…«ç§’
 		//		{
 		//				delay_ms(500);
 		//				delay_ms(500);
 		//		}
 	}
-	if (KeyData.S4_Flag) // °´¼ü4
+	if (KeyData.S4_Flag) // æŒ‰é”®4
 	{
-		//  ½»Í¨µÆ
+		//  äº¤é€šç¯
 		uint8_t time_out = 0;
-		Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_B); // ·¢ËÍÇëÇóÊ¶±ğºìÂÌB
+		Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_B); // å‘é€è¯·æ±‚è¯†åˆ«çº¢ç»¿B
 		while (Android_Data.traffic_light_flag != 1)
 		{
 			delay_ms(500);
@@ -360,7 +360,7 @@ void xCAR_KeyRun_Function(void)
 		if (Android_Data.Red_State == 1)
 		{
 			Android_Data.Red_State = 0;
-			Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 1); // ·¢ËÍ¸ø½»Í¨µÆ±êÖ¾ÎïÇëÇóÈ·ÈÏ
+			Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 1); // å‘é€ç»™äº¤é€šç¯æ ‡å¿—ç‰©è¯·æ±‚ç¡®è®¤
 		}
 		else if (Android_Data.Yellow_State == 1)
 		{
@@ -372,7 +372,7 @@ void xCAR_KeyRun_Function(void)
 			Android_Data.Green_State = 0;
 			Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
 		}
-		else // ÃÉÒ»¸ö
+		else // è’™ä¸€ä¸ª
 		{
 			Android_Data.Green_State = 0;
 			Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
@@ -381,7 +381,7 @@ void xCAR_KeyRun_Function(void)
 	}
 }
 
-// ¿ªÆô / ¹Ø±ÕÈÎÎñ°åÖĞµÄË«ÏòµÆ
+// å¼€å¯ / å…³é—­ä»»åŠ¡æ¿ä¸­çš„åŒå‘ç¯
 void xTba_Both_Led(uint8_t swch)
 {
 	switch (swch)
@@ -397,22 +397,22 @@ void xTba_Both_Led(uint8_t swch)
 	}
 }
 
-// ½ÓÊÕµ½ZigbeeµÄ´íÎóÖ¸Áî¾Í½«´íÎóÖ¸Áî·¢µ½DebugÇø
+// æ¥æ”¶åˆ°Zigbeeçš„é”™è¯¯æŒ‡ä»¤å°±å°†é”™è¯¯æŒ‡ä»¤å‘åˆ°DebugåŒº
 void xMixture_Zigbe_RecceiveError_Handler(uint8_t Cmd1, uint8_t Cmd2)
 {
 	uint8_t Buf[50];
-	sprintf((char *)Buf, "CMD2-3: %#x-%#x", Cmd1, Cmd2); // ½«´íÎóÖ¸Áî´òÓ¡µ½Debug
+	sprintf((char *)Buf, "CMD2-3: %#x-%#x", Cmd1, Cmd2); // å°†é”™è¯¯æŒ‡ä»¤æ‰“å°åˆ°Debug
 	Send_InfoData_To_Fifo((char *)Buf, strlen((char *)Buf));
 }
 
-// ½«Êı¾İ´òÓ¡µ½Debug£¬ÅĞ¶ÏÊı¾İ
+// å°†æ•°æ®æ‰“å°åˆ°Debugï¼Œåˆ¤æ–­æ•°æ®
 void xMixture_Debug_Data(uint8_t num)
 {
 	uint8_t buf[50];
 	Send_InfoData_To_Fifo((char *)buf, strlen((char *)buf));
 }
 
-// Ã°ÅİÅÅĞò £¨´ÓĞ¡µ½´ó£©
+// å†’æ³¡æ’åº ï¼ˆä»å°åˆ°å¤§ï¼‰
 void xBubble_Sort(uint16_t *arr, uint8_t len)
 {
 	uint8_t i, j;
@@ -431,7 +431,7 @@ void xBubble_Sort(uint16_t *arr, uint8_t len)
 	}
 }
 
-// ½«Ê®Áù½øÖÆ×ªÎªÊ®½øÖÆ
+// å°†åå…­è¿›åˆ¶è½¬ä¸ºåè¿›åˆ¶
 uint16_t HEX_DEC(uint8_t *buf, uint16_t value)
 {
 	value = 0;
@@ -453,7 +453,7 @@ uint8_t CharToHex(char c)
 	return 0;
 }
 
-// // ½«Ê®Áù½øÖÆ×ªÎªÊ®½øÖÆ
+// // å°†åå…­è¿›åˆ¶è½¬ä¸ºåè¿›åˆ¶
 // uint16_t HEX_DEC(uint8_t *buf,uint16_t value)
 // {
 // 	value = 0;
@@ -464,7 +464,7 @@ uint8_t CharToHex(char c)
 // 	return value;
 // }
 
-// //½«×Ö·û´®ÖĞµÄÃ¿¸ö×Ö·û±ä³ÉÊ®Áù½øÖÆ±íÊ¾,±ÈÈç¡®1¡¯-> 0x01   'b'->0x0b
+// //å°†å­—ç¬¦ä¸²ä¸­çš„æ¯ä¸ªå­—ç¬¦å˜æˆåå…­è¿›åˆ¶è¡¨ç¤º,æ¯”å¦‚â€˜1â€™-> 0x01   'b'->0x0b
 // void string_to_hex_digits(const unsigned char *str, unsigned char *hex_output)
 // {
 //     int length = strlen((char *)str);
@@ -474,19 +474,19 @@ uint8_t CharToHex(char c)
 //         char c = str[i];
 //         unsigned char value;
 
-//         // ´¦ÀíÊı×Ö 0-9
+//         // å¤„ç†æ•°å­— 0-9
 //         if (c >= '0' && c <= '9') {
 //             value = c - '0';
 //         }
-//         // ´¦Àí´óĞ´×ÖÄ¸ A-F
+//         // å¤„ç†å¤§å†™å­—æ¯ A-F
 //         else if (c >= 'A' && c <= 'F') {
 //             value = c - 'A' + 10;
 //         }
-//         // ´¦ÀíĞ¡Ğ´×ÖÄ¸ a-f
+//         // å¤„ç†å°å†™å­—æ¯ a-f
 //         else if (c >= 'a' && c <= 'f') {
 //             value = c - 'a' + 10;
 //         }
-//         // ·Ç·¨×Ö·û£¬Í£Ö¹×ª»»
+//         // éæ³•å­—ç¬¦ï¼Œåœæ­¢è½¬æ¢
 //         else {
 //             break;
 //         }
@@ -496,19 +496,19 @@ uint8_t CharToHex(char c)
 
 // }
 
-// //×Ö·û´®4562£¬×ª±ä³É×Ö·û´®F4F5F6F2
+// //å­—ç¬¦ä¸²4562ï¼Œè½¬å˜æˆå­—ç¬¦ä¸²F4F5F6F2
 // void transform(const uint8_t* input, uint8_t* output) {
-//     // output ĞèÒªÓĞ×ã¹»¿Õ¼ä£ºlen(input)*2 + 1
+//     // output éœ€è¦æœ‰è¶³å¤Ÿç©ºé—´ï¼šlen(input)*2 + 1
 //     int len = strlen((const char*)input);
 //     for (int i = 0; i < len; i++) {
-//         uint8_t digit = input[i] - '0';  // µÃµ½ÊıÖµ 0-9
-//         uint8_t b = (0xF0) | digit;      // ¸ß4Î» F, µÍ4Î» digit
+//         uint8_t digit = input[i] - '0';  // å¾—åˆ°æ•°å€¼ 0-9
+//         uint8_t b = (0xF0) | digit;      // é«˜4ä½ F, ä½4ä½ digit
 //         sprintf((char*)output + i * 2, "%02X", b);
 //     }
-//     output[len * 2] = '\0';  // ½áÎ²
+//     output[len * 2] = '\0';  // ç»“å°¾
 // }
 
-// //×Ö·û×ªÊ®Áù½øÖÆ
+// //å­—ç¬¦è½¬åå…­è¿›åˆ¶
 // int binary_string_to_value(const char *str) {
 //     int value = 0;
 //     int len = strlen(str);

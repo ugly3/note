@@ -3,7 +3,7 @@
 #include "delay.h"
 #include "cba.h"
 
-void Cba_Init()		// 核心板硬件初始化
+void Cba_Init()		// 鏍稿績鏉跨‖浠跺垵濮嬪寲
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 
@@ -11,23 +11,23 @@ void Cba_Init()		// 核心板硬件初始化
 
 	//GPIOI4\5\6\7----KEY
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;  //通用输出 
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;   //上拉
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;  //閫氱敤杈撳嚭 
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;   //涓婃媺
 	GPIO_Init(GPIOI,&GPIO_InitStructure);
 	
 	//GPIOH12\13\14\15-----LED
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;  //通用输出
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //推挽输出 
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;   //上拉
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;  //閫氱敤杈撳嚭
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //鎺ㄦ尳杈撳嚭 
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;   //涓婃媺
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz; 
 	GPIO_Init(GPIOH,&GPIO_InitStructure);
 	
 	//GPIOH5 ---- MP_SPK
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;  //通用输出
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //推挽输出 
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;   //上拉
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;  //閫氱敤杈撳嚭
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; //鎺ㄦ尳杈撳嚭 
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;   //涓婃媺
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz; 
 	GPIO_Init(GPIOH,&GPIO_InitStructure);
 }

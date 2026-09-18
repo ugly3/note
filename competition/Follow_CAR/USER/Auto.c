@@ -1,7 +1,7 @@
 /**
 ************************************************************************
-*    ÎÄ¼şÃû£ºall_module
-*      ËµÃ÷£ºÈ«×Ô¶¯ÔËĞĞ£¨ËùÓÃÍ·ÎÄ¼ş+ÈÎÎñ£©
+*    æ–‡ä»¶åï¼šall_module
+*      è¯´æ˜ï¼šå…¨è‡ªåŠ¨è¿è¡Œï¼ˆæ‰€ç”¨å¤´æ–‡ä»¶+ä»»åŠ¡ï¼‰
 ************************************************************************
 **/
 
@@ -15,24 +15,24 @@
 #define YT5_2026 0
 #define BS_2026 0
 
-uint8_t Go_Speed = 50;     // È«¾ÖĞĞ½øËÙ¶ÈÖµ
-uint8_t wheel_Speed = 90;  // È«¾Ö×ªÍäËÙ¶ÈÖµ
-uint16_t wheel_Time = 330; // È«¾Ö×ª45¡ãÊ±¼ä
-uint16_t distance = 0;     // ¼ÇÂ¼³¬Éù²¨Êı¾İ
-uint8_t gear_init = 0;     // ÖÇÄÜÂ·µÆ³õÊ¼µµÎ»
+uint8_t Go_Speed = 50;     // å…¨å±€è¡Œè¿›é€Ÿåº¦å€¼
+uint8_t wheel_Speed = 90;  // å…¨å±€è½¬å¼¯é€Ÿåº¦å€¼
+uint16_t wheel_Time = 330; // å…¨å±€è½¬45Â°æ—¶é—´
+uint16_t distance = 0;     // è®°å½•è¶…å£°æ³¢æ•°æ®
+uint8_t gear_init = 0;     // æ™ºèƒ½è·¯ç¯åˆå§‹æ¡£ä½
 
-uint8_t Run_State = 0; // ÔËĞĞÎ»ÖÃ×´Ì¬
+uint8_t Run_State = 0; // è¿è¡Œä½ç½®çŠ¶æ€
 
 #if YT3_2025
 
-#define Card1_Block 17 // ÌîĞ´¿¨1µØÖ·¿é
-#define Card2_Block 2  //****************¿¨2µØÖ·¿éĞèĞŞ¸ÄÎª0~2ÆäÖĞÒ»¸öÊı£¬¾ßÌå¿´°²×¿µÄÊ¶±ğ½á¹û
-#define Card3_Block 0  // ¿¨3µØÖ·¿é
+#define Card1_Block 17 // å¡«å†™å¡1åœ°å€å—
+#define Card2_Block 2  //****************å¡2åœ°å€å—éœ€ä¿®æ”¹ä¸º0~2å…¶ä¸­ä¸€ä¸ªæ•°ï¼Œå…·ä½“çœ‹å®‰å“çš„è¯†åˆ«ç»“æœ
+#define Card3_Block 0  // å¡3åœ°å€å—
 
-#define Card2_Place card2_position // ¿¨2µÄ×ø±ê
+#define Card2_Place card2_position // å¡2çš„åæ ‡
 
-uint8_t Get_ChuShi_Num_LuDeng; // Â·µÆ³õÊ¼µ²Î»
-uint8_t Get_MuBiao_Num_LuDeng; // Â·µÆÄ¿±êµ²Î»
+uint8_t Get_ChuShi_Num_LuDeng; // è·¯ç¯åˆå§‹æŒ¡ä½
+uint8_t Get_MuBiao_Num_LuDeng; // è·¯ç¯ç›®æ ‡æŒ¡ä½
 
 void xAuto_Run_Function(void)
 {
@@ -40,17 +40,17 @@ void xAuto_Run_Function(void)
   {
   case 1:
   {
-    LED_Display_Data.xLED_Display_Data(0x00, 0x00, 0x00, 2);        // LEDÏÔÊ¾±êÖ¾ÎïµÚ¶şÅÅÏÔÊ¾000000
-    LED_Display_Data.xLED_Display_Time(LED_Display_Data.TimeStart); // ¿ªÊ¼¼ÆÊ±
+    LED_Display_Data.xLED_Display_Data(0x00, 0x00, 0x00, 2);        // LEDæ˜¾ç¤ºæ ‡å¿—ç‰©ç¬¬äºŒæ’æ˜¾ç¤º000000
+    LED_Display_Data.xLED_Display_Time(LED_Display_Data.TimeStart); // å¼€å§‹è®¡æ—¶
     delay_ms(300);
 
-    // G6¡úF6
-    Motor_Data.xCAR_Go(30, 140); // Ê¹³µÉí¶Ô×¼Ê®×ÖÂ·¿Ú
+    // G6â†’F6
+    Motor_Data.xCAR_Go(30, 140); // ä½¿è½¦èº«å¯¹å‡†åå­—è·¯å£
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
 
-    // F6¡úF4 ½»Í¨µÆÊ¶±ğ
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // ÇëÇó½»Í¨µÆ½øÈëÊ¶±ğÄ£Ê½£¬²¢ÇëÇó°²×¿Ê¶±ğºìÂÌµÆ
-    for (uint8_t i = 0; i < 3; i++)                                           // µÈ´ı°²×¿»Ø´«
+    // F6â†’F4 äº¤é€šç¯è¯†åˆ«
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // è¯·æ±‚äº¤é€šç¯è¿›å…¥è¯†åˆ«æ¨¡å¼ï¼Œå¹¶è¯·æ±‚å®‰å“è¯†åˆ«çº¢ç»¿ç¯
+    for (uint8_t i = 0; i < 3; i++)                                           // ç­‰å¾…å®‰å“å›ä¼ 
     {
       delay_ms(500);
       delay_ms(500);
@@ -58,7 +58,7 @@ void xAuto_Run_Function(void)
     if (Android_Data.Red_State == 1)
     {
       Android_Data.Red_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // ·¢ËÍ¸ø½»Í¨µÆ±êÖ¾ÎïÇëÇóÈ·ÈÏ
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // å‘é€ç»™äº¤é€šç¯æ ‡å¿—ç‰©è¯·æ±‚ç¡®è®¤
       delay_ms(500);
     }
     else if (Android_Data.Yellow_State == 1)
@@ -73,14 +73,14 @@ void xAuto_Run_Function(void)
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
       delay_ms(500);
     }
-    else // ÃÉÒ»¸ö
+    else // è’™ä¸€ä¸ª
     {
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
       delay_ms(500);
     }
-    Motor_Data.xCAR_Go(25, 250); // ×ß¿ªÊ®×ÖÂ·¿Ú£¬·ÀÖ¹¿ÉÄÜÖØ¸´Ê¶±ğÊ®×ÖÂ·¿ÚµÄ¿¨Æ¬
-    Motor_Data.xCAR_Go(30, 140); // Ê¹³µÉí¶Ô×¼Ê®×ÖÂ·¿Ú
+    Motor_Data.xCAR_Go(25, 250); // èµ°å¼€åå­—è·¯å£ï¼Œé˜²æ­¢å¯èƒ½é‡å¤è¯†åˆ«åå­—è·¯å£çš„å¡ç‰‡
+    Motor_Data.xCAR_Go(30, 140); // ä½¿è½¦èº«å¯¹å‡†åå­—è·¯å£
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(200);
 
@@ -89,25 +89,25 @@ void xAuto_Run_Function(void)
   }
   case 2:
   {
-    // ¹«½»Õ¾Ëæ»ú²¥±¨
-    XiaoChuang_Data.xSend_To_XiaoChuang_Rouse(); // Ê¶±ğÇ°ÏÈ»½ĞÑĞ¡´´
+    // å…¬äº¤ç«™éšæœºæ’­æŠ¥
+    XiaoChuang_Data.xSend_To_XiaoChuang_Rouse(); // è¯†åˆ«å‰å…ˆå”¤é†’å°åˆ›
     delay_ms(500);
-    Voice_Report_Data.xVoice_Report_Random_Command(); // ²¥±¨Ëæ»úÖ¸Áî
-    for (uint8_t i = 0; i < 8; i++)                   // ÑÓÊ±8ÃëµÈ´ıĞ¡´´Ê¶±ğ²¢ÖØ¸´²¥±¨
+    Voice_Report_Data.xVoice_Report_Random_Command(); // æ’­æŠ¥éšæœºæŒ‡ä»¤
+    for (uint8_t i = 0; i < 8; i++)                   // å»¶æ—¶8ç§’ç­‰å¾…å°åˆ›è¯†åˆ«å¹¶é‡å¤æ’­æŠ¥
     {
       delay_ms(500);
       delay_ms(500);
     }
-    Voice_Report_Data.xVoice_Report_Inquire_Weather_Temperatur(); // ²éÑ¯ÌìÆøÎÂ¶È
-    Voice_Report_Data.xVoice_Report_Speak_temperature();          // ²¥±¨ÎÂ¶È
+    Voice_Report_Data.xVoice_Report_Inquire_Weather_Temperatur(); // æŸ¥è¯¢å¤©æ°”æ¸©åº¦
+    Voice_Report_Data.xVoice_Report_Speak_temperature();          // æ’­æŠ¥æ¸©åº¦
 
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    Motor_Data.xCAR_Go(25, 250); // ×ß¿ªÊ®×ÖÂ·¿Ú£¬·ÀÖ¹¿ÉÄÜÖØ¸´Ê¶±ğÊ®×ÖÂ·¿ÚµÄ¿¨Æ¬
+    Motor_Data.xCAR_Go(25, 250); // èµ°å¼€åå­—è·¯å£ï¼Œé˜²æ­¢å¯èƒ½é‡å¤è¯†åˆ«åå­—è·¯å£çš„å¡ç‰‡
 
-    // F4¡úF2  ETC
+    // F4â†’F2  ETC
     ETC_Data.xETC_Pass_RFID(Card1_Block, Card1_Block, 0);
-    Motor_Data.xCAR_Go(25, 250); // ×ß¿ªÊ®×ÖÂ·¿Ú£¬·ÀÖ¹¿ÉÄÜÖØ¸´Ê¶±ğÊ®×ÖÂ·¿ÚµÄ¿¨Æ¬
-    //            Motor_Data.xCAR_Go(30,140);       //Ê¹³µÉí¶Ô×¼Ê®×ÖÂ·¿Ú
+    Motor_Data.xCAR_Go(25, 250); // èµ°å¼€åå­—è·¯å£ï¼Œé˜²æ­¢å¯èƒ½é‡å¤è¯†åˆ«åå­—è·¯å£çš„å¡ç‰‡
+    //            Motor_Data.xCAR_Go(30,140);       //ä½¿è½¦èº«å¯¹å‡†åå­—è·¯å£
     delay_ms(200);
     Run_State = 3;
     break;
@@ -116,24 +116,24 @@ void xAuto_Run_Function(void)
   {
 
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    // °²×¿Ê¶±ğÎÄ×ÖÍ¼Æ¬ÓëÍ¼ĞÎÑÕÉ«Í¼Æ¬
-    Android_Data.xMainCar_Send_Android(Identify_TFT_Words_Arr);                // ÎÄ×Ö
-    Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr); // Í¼ĞÎ¼ÓÑÕÉ«µÄÊıÁ¿
-    for (uint8_t i = 0; i < 8; i++)                                            // µÈ´ı°ËÃë
+    // å®‰å“è¯†åˆ«æ–‡å­—å›¾ç‰‡ä¸å›¾å½¢é¢œè‰²å›¾ç‰‡
+    Android_Data.xMainCar_Send_Android(Identify_TFT_Words_Arr);                // æ–‡å­—
+    Android_Data.xMainCar_Send_Android(Identify_TFT_Graph_CountAndColour_Arr); // å›¾å½¢åŠ é¢œè‰²çš„æ•°é‡
+    for (uint8_t i = 0; i < 8; i++)                                            // ç­‰å¾…å…«ç§’
     {
       delay_ms(500);
       delay_ms(500);
     }
 
     //        char Hex_num[3]={0x01,0x20,0x26};
-    //        Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,Hex_num);//TFTÏÔÊ¾012026
-    LED_Display_Data.xLED_Display_Data(0xF3, 0xF5, 0xF1, 2); // LEDÏÔÊ¾±êÖ¾ÎïµÚ¶şÅÅÏÔÊ¾F3F5F1
+    //        Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,Hex_num);//TFTæ˜¾ç¤º012026
+    LED_Display_Data.xLED_Display_Data(0xF3, 0xF5, 0xF1, 2); // LEDæ˜¾ç¤ºæ ‡å¿—ç‰©ç¬¬äºŒæ’æ˜¾ç¤ºF3F5F1
     delay_ms(500);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
 
-    // Â·µÆ
-    Get_ChuShi_Num_LuDeng = Smart_Light_Data.xSmart_Light_Get_Init_Level();                     // »ñµÃÂ·µÆ³õÊ¼µ²
-    Get_MuBiao_Num_LuDeng = (Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[1] % 4) + 1; // »ñµÃÂ·µÆÄ¿±êµ²
+    // è·¯ç¯
+    Get_ChuShi_Num_LuDeng = Smart_Light_Data.xSmart_Light_Get_Init_Level();                     // è·å¾—è·¯ç¯åˆå§‹æŒ¡
+    Get_MuBiao_Num_LuDeng = (Voice_Report_Data.xVoice_Report_Rx_Weather_Temperatur[1] % 4) + 1; // è·å¾—è·¯ç¯ç›®æ ‡æŒ¡
     Smart_Light_Data.xSmart_Light_Appoint_Level(Get_MuBiao_Num_LuDeng);
     delay_ms(500);
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
@@ -143,45 +143,45 @@ void xAuto_Run_Function(void)
   }
   case 4:
   {
-    Motor_Data.xCAR_Go(25, 250); // ×ß¿ªÊ®×ÖÂ·¿Ú£¬·ÀÖ¹¿ÉÄÜÖØ¸´Ê¶±ğÊ®×ÖÂ·¿ÚµÄ¿¨Æ¬
+    Motor_Data.xCAR_Go(25, 250); // èµ°å¼€åå­—è·¯å£ï¼Œé˜²æ­¢å¯èƒ½é‡å¤è¯†åˆ«åå­—è·¯å£çš„å¡ç‰‡
 
-    // F2¡úB2
+    // F2â†’B2
     delay_ms(300);
 
-    if (Count_ms < 600) // ÌØÊâ±êÖ¾ÎïÔÚE2
+    if (Count_ms < 600) // ç‰¹æ®Šæ ‡å¿—ç‰©åœ¨E2
     {
       Count_ms = 0;
-      // ¹ıÌØÊâ±êÖ¾Îï
+      // è¿‡ç‰¹æ®Šæ ‡å¿—ç‰©
       Motor_Data.xCAR_Go(25, 500);
       Motor_Data.xCAR_Go(25, 300);
       delay_ms(500);
-      Motor_Data.xCAR_Go(25, 250); // ×ß¿ªÊ®×ÖÂ·¿Ú£¬·ÀÖ¹¿ÉÄÜÖØ¸´Ê¶±ğÊ®×ÖÂ·¿ÚµÄ¿¨Æ¬
+      Motor_Data.xCAR_Go(25, 250); // èµ°å¼€åå­—è·¯å£ï¼Œé˜²æ­¢å¯èƒ½é‡å¤è¯†åˆ«åå­—è·¯å£çš„å¡ç‰‡
       // D2->B2
-      Motor_Data.xCAR_Go(30, 140); // Ê¹³µÉí¶Ô×¼Ê®×ÖÂ·¿Ú
+      Motor_Data.xCAR_Go(30, 140); // ä½¿è½¦èº«å¯¹å‡†åå­—è·¯å£
       delay_ms(200);
     }
-    else if ((1500 > Count_ms) && (Count_ms >= 600)) // ÌØÊâ±êÖ¾ÎïÔÚD2    1450
+    else if ((1500 > Count_ms) && (Count_ms >= 600)) // ç‰¹æ®Šæ ‡å¿—ç‰©åœ¨D2    1450
     {
       Count_ms = 0;
-      // ¹ıÌØÊâ±êÖ¾Îï
+      // è¿‡ç‰¹æ®Šæ ‡å¿—ç‰©
       Motor_Data.xCAR_Go(25, 500);
       Motor_Data.xCAR_Go(25, 300);
       delay_ms(500);
-      Motor_Data.xCAR_Go(30, 140); // Ê¹³µÉí¶Ô×¼Ê®×ÖÂ·¿Ú
+      Motor_Data.xCAR_Go(30, 140); // ä½¿è½¦èº«å¯¹å‡†åå­—è·¯å£
       delay_ms(200);
     }
-    else // ÌØÊâ±êÖ¾ÎïÔÚC2
+    else // ç‰¹æ®Šæ ‡å¿—ç‰©åœ¨C2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(25, 250); // ×ß¿ªÊ®×ÖÂ·¿Ú£¬·ÀÖ¹¿ÉÄÜÖØ¸´Ê¶±ğÊ®×ÖÂ·¿ÚµÄ¿¨Æ¬
+      Motor_Data.xCAR_Go(25, 250); // èµ°å¼€åå­—è·¯å£ï¼Œé˜²æ­¢å¯èƒ½é‡å¤è¯†åˆ«åå­—è·¯å£çš„å¡ç‰‡
       delay_ms(200);
 
-      // ¹ıÌØÊâ±êÖ¾Îï
+      // è¿‡ç‰¹æ®Šæ ‡å¿—ç‰©
       Motor_Data.xCAR_Go(25, 500);
       Motor_Data.xCAR_Go(25, 500);
       delay_ms(600);
 
-      Motor_Data.xCAR_Go(30, 140); // Ê¹³µÉí¶Ô×¼Ê®×ÖÂ·¿Ú
+      Motor_Data.xCAR_Go(30, 140); // ä½¿è½¦èº«å¯¹å‡†åå­—è·¯å£
       delay_ms(300);
     }
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
@@ -193,31 +193,31 @@ void xAuto_Run_Function(void)
   }
   case 5:
   {
-    // B2 °²×¿Ê¶±ğ³µÅÆ
-    Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr); // ³µÅÆ
-                                                                  // ³µĞÍ
-    for (uint8_t i = 0; i < 8; i++)                               // µÈ´ı°ËÃë
+    // B2 å®‰å“è¯†åˆ«è½¦ç‰Œ
+    Android_Data.xMainCar_Send_Android(Identify_TFT_License_Arr); // è½¦ç‰Œ
+                                                                  // è½¦å‹
+    for (uint8_t i = 0; i < 8; i++)                               // ç­‰å¾…å…«ç§’
     {
       delay_ms(500);
       delay_ms(500);
     }
     uint8_t
         //        char Hex_num[3]={0x01,0x20,0x26};
-        //        Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,Hex_num);//TFTÏÔÊ¾012026
+        //        Smart_TFT_Data.xSmart_TFT_Hex_Diaplay(1,Hex_num);//TFTæ˜¾ç¤º012026
         delay_ms(200);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
-    Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("¸»Ç¿ÃñÖ÷");
+    Three_Dim_Display_Data.xThree_Dim_Display_Custom_Add("å¯Œå¼ºæ°‘ä¸»");
     delay_ms(500);
     delay_ms(500);
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
     delay_ms(500);
-    // Æô¶¯´Ó³µ
-    for (uint8_t i = 0; i < 3; i++) // Æô¶¯´Ó³µ
+    // å¯åŠ¨ä»è½¦
+    for (uint8_t i = 0; i < 3; i++) // å¯åŠ¨ä»è½¦
     {
       FollowCar_Data.xStart_Command_To_FollowCar();
       delay_ms(100);
     }
-    for (uint8_t i = 0; i < 50; i++) // µÈ´ı
+    for (uint8_t i = 0; i < 50; i++) // ç­‰å¾…
     {
       delay_ms(500);
       delay_ms(500);
@@ -241,7 +241,7 @@ void xAuto_Run_Function(void)
   case 7:
   {
     // D6->F6
-    Barrier_Data.xBarrier_Licence_Tx("B8542D"); // ³µÅÆºÅ
+    Barrier_Data.xBarrier_Licence_Tx("B8542D"); // è½¦ç‰Œå·
     delay_ms(500);
     Motor_Data.xCAR_Track_Go();
 
@@ -251,20 +251,20 @@ void xAuto_Run_Function(void)
   case 8:
   {
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
-    // B6->B7(µ¹³µ)
-    Motor_Data.xCAR_Go(30, 140); // ÍùÇ°Ò»µã·ÀÖ¹³µ¿â½µÒ»Ê±Ñ¹µ½³µÎ²
+    // B6->B7(å€’è½¦)
+    Motor_Data.xCAR_Go(30, 140); // å¾€å‰ä¸€ç‚¹é˜²æ­¢è½¦åº“é™ä¸€æ—¶å‹åˆ°è½¦å°¾
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 0x01);
     Motor_Data.xCAR_Track_Time(20, 1000);
-    delay_ms(300);                 // ÑÓÊ±
-    Motor_Data.xCAR_Back(20, 850); // ³¤
-    Motor_Data.xCAR_Back(20, 850); // ³¤
-    delay_ms(500);                 // ÑÓÊ±
+    delay_ms(300);                 // å»¶æ—¶
+    Motor_Data.xCAR_Back(20, 850); // é•¿
+    Motor_Data.xCAR_Back(20, 850); // é•¿
+    delay_ms(500);                 // å»¶æ—¶
     CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, Get_ChuShi_Num_LuDeng);
     //            unsigned int Kai_Qi_Ma[3]={0x00,0x00,0x00};
     YT3_Handle_Card1_Data();
-    Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma); // ĞèĞŞ¸Ä¿ªÆôÂë
+    Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma); // éœ€ä¿®æ”¹å¼€å¯ç 
     delay_ms(200);
-    LED_Display_Data.xLED_Display_Time(0x00); // Í£Ö¹¼ÆÊ±
+    LED_Display_Data.xLED_Display_Time(0x00); // åœæ­¢è®¡æ—¶
     Run_State = 9;
     break;
   }
@@ -282,33 +282,33 @@ void xAuto_Run_Function(void)
   }
   case 11:
   {
-    //					  track_time_Start=1;//¿ªÊ¼¼ÆÊ±(1ms)
-    //				 //F4¡úF2  ETC
+    //					  track_time_Start=1;//å¼€å§‹è®¡æ—¶(1ms)
+    //				 //F4â†’F2  ETC
     //            ETC_Data.xETC_Pass_RFID(Card1_Block,Card1_Block,0);
-    //            Motor_Data.xCAR_Go(30,140);       //Ê¹³µÉí¶Ô×¼Ê®×ÖÂ·¿Ú
+    //            Motor_Data.xCAR_Go(30,140);       //ä½¿è½¦èº«å¯¹å‡†åå­—è·¯å£
     //						Motor_Data.xCAR_R90(wheel_Speed,wheel_Time*2);
     //            Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
     //						Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
-    //						RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//Ñ°¿¨
-    //						Motor_Data.xCAR_Go(25,250);//×ß¿ªÊ®×ÖÂ·¿Ú£¬·ÀÖ¹¿ÉÄÜÖØ¸´Ê¶±ğÊ®×ÖÂ·¿ÚµÄ¿¨Æ¬
+    //						RFID_Data.xRFID_Track_Read(25,Card1_Block,Card2_Block,Card2_Block);//å¯»å¡
+    //						Motor_Data.xCAR_Go(25,250);//èµ°å¼€åå­—è·¯å£ï¼Œé˜²æ­¢å¯èƒ½é‡å¤è¯†åˆ«åå­—è·¯å£çš„å¡ç‰‡
     //          Run_State=12;
     break;
   }
   case 12:
   {
-    //				for(uint8_t i=0;i<5;i++)//µÈ´ı°ËÃë
+    //				for(uint8_t i=0;i<5;i++)//ç­‰å¾…å…«ç§’
     //        {
     //             Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A);
     //        }
     //				Run_State=13;
     //				break;
-    //				XiaoChuang_Data.xSend_Command_To_XiaoChuang(0x02);  //¿ªÊ¼²â¾à
+    //				XiaoChuang_Data.xSend_Command_To_XiaoChuang(0x02);  //å¼€å§‹æµ‹è·
     Ultrasonic_Ranging();
     LED_Display_Data.xLED_Display_Distance(dis);
     FollowCar_Data.XSend_dis_To_fromcar();
     delay_ms(500);
-    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
-    if (Android_Data.Two_Code_State == 1)                      // Ê¶±ğ¶şÎ¬Âë³É¹¦
+    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
+    if (Android_Data.Two_Code_State == 1)                      // è¯†åˆ«äºŒç»´ç æˆåŠŸ
     {
       Android_Data.Two_Code_State = 0;
       uint8_t buf[50];
@@ -323,7 +323,7 @@ void xAuto_Run_Function(void)
   }
 }
 #endif
-/*****************************************´Ó³µÆô¶¯*********************************/
+/*****************************************ä»è½¦å¯åŠ¨*********************************/
 //          if(Communication_Data.FollowCar_Start_flag == 1)
 //          {
 //              Count++;
@@ -338,19 +338,19 @@ void xAuto_Run_Function(void)
 //          sprintf((char*)Buf1,"flag:%d\r\n ",Communication_Data.FollowCar_Start_flag);
 //          Send_InfoData_To_Fifo((char*)Buf1,strlen((char*)Buf1));
 
-/*****************************************¶şÎ¬ÂëÊ¶±ğ*********************************/
+/*****************************************äºŒç»´ç è¯†åˆ«*********************************/
 //        Identify_Two_Code_Arr[3] = 0x01;
-//        Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr);   //·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+//        Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr);   //å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
 //        delay_ms(500);
 //        delay_ms(500);
 //        delay_ms(500);
 //        YT3_parse_two_codes();
 //
-//        if(Android_Data.Two_Code_State == 0)  //Èç¹ûÎ´½øÈëÊ¶±ğÄ£Ê½
+//        if(Android_Data.Two_Code_State == 0)  //å¦‚æœæœªè¿›å…¥è¯†åˆ«æ¨¡å¼
 //		{
 ////            Motor_Data.xCAR_Back(20,150);
 //            Rx_count = 0;
-//			Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr);   //·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+//			Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr);   //å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
 //			delay_ms(500);
 //            delay_ms(500);
 //            delay_ms(500);
@@ -372,7 +372,7 @@ void xAuto_Run_Function(void)
 ////            printf("%s\r\n",Two_Code_Data_parsed_Store2);
 ////            printf("%s\r\n",Two_Code_Data_parsed_Store3);
 //
-//            char Vioce_Store[50] = "Ê¶±ğ½á¹ûÎª";
+//            char Vioce_Store[50] = "è¯†åˆ«ç»“æœä¸º";
 //            strcat(Vioce_Store,Two_Code_Data_parsed_Store1);
 
 //            Voice_Report_Data.xVoice_Report_Set_Complex_Command(Vioce_Store);
@@ -380,21 +380,21 @@ void xAuto_Run_Function(void)
 
 //        }
 
-/************************************************³µĞÍÊ¶±ğ*********************************************************/
+/************************************************è½¦å‹è¯†åˆ«*********************************************************/
 //        Identify_TFT_CheXin_Arr[3]=0x02;
 //        Android_Data.xMainCar_Send_Android(Identify_TFT_CheXin_Arr);
 
-/************************************************³µ¿â*******************************************************/
+/************************************************è½¦åº“*******************************************************/
 //        CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A,3);
-/************************************************LEDÏÔÊ¾*********************************************************/
-//        LED_Display_Data.xLED_Display_Data(0x00,0x00,0x00,2);//LEDÏÔÊ¾±êÖ¾ÎïµÚ¶şÅÅÏÔÊ¾000000
-//        LED_Display_Data.xLED_Display_Time(LED_Display_Data.TimeStart);   //¿ªÊ¼¼ÆÊ±
+/************************************************LEDæ˜¾ç¤º*********************************************************/
+//        LED_Display_Data.xLED_Display_Data(0x00,0x00,0x00,2);//LEDæ˜¾ç¤ºæ ‡å¿—ç‰©ç¬¬äºŒæ’æ˜¾ç¤º000000
+//        LED_Display_Data.xLED_Display_Time(LED_Display_Data.TimeStart);   //å¼€å§‹è®¡æ—¶
 //        LED_Display_Data.xLED_Display_Time(LED_Display_Data.TimeClose);
 //        LED_Display_Data.xLED_Display_Distance(125);
 //        delay_ms(500);
 //        delay_ms(500);
 //        uint8_t Display_Data[]={0xF3,0xF5,0xF1};
-//        LED_Display_Data.xLED_Display_Data(Display_Data,2);//LEDÏÔÊ¾±êÖ¾ÎïµÚ¶şÅÅÏÔÊ¾F3F5F1
+//        LED_Display_Data.xLED_Display_Data(Display_Data,2);//LEDæ˜¾ç¤ºæ ‡å¿—ç‰©ç¬¬äºŒæ’æ˜¾ç¤ºF3F5F1
 //        Motor_Data.xCAR_Track_Go();
 //        Motor_Data.xCAR_L90(wheel_Speed, wheel_Time*2);
 
@@ -406,9 +406,9 @@ void xAuto_Run_Function(void)
 //        Motor_Data.xCAR_L90(wheel_Speed,wheel_Time*2);
 //        RFID_Data.xRFID_Track_Read_L2(30,1400,Judge_Card_Block,Real_Card1_Block,Real_Card2_Block);
 //        uint8_t block_add = 0;
-//        block_add = 4*4+2-1; //(a-1)*4+b-1;(a-1)*4+b;a*4+b-1; a*4+b  µÚ5ÉÈÇøµÚ2Êı¾İ¿é  17 18 21 22
+//        block_add = 4*4+2-1; //(a-1)*4+b-1;(a-1)*4+b;a*4+b-1; a*4+b  ç¬¬5æ‰‡åŒºç¬¬2æ•°æ®å—  17 18 21 22
 //        RFID_Data.xRFID_Read_2(Judge_Card_Block,Real_Card1_Block,Real_Card2_Block);
-/**********************************************´òÓ¡Êı¾İ**********************************************************/
+/**********************************************æ‰“å°æ•°æ®**********************************************************/
 //    sprintf((char*)Buf,"%s \r\n",WRITE_RFID);
 //      Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));
 //        for(uint8_t i=100;i<120;i++)
@@ -417,7 +417,7 @@ void xAuto_Run_Function(void)
 //            Send_InfoData_To_Fifo((char*)Buf,strlen((char*)Buf));
 //            delay_ms(500);
 //        }
-/*****************************************************ÎŞÏß³äµç±êÖ¾Îï***********************************************/
+/*****************************************************æ— çº¿å……ç”µæ ‡å¿—ç‰©***********************************************/
 //        Wireless_Charge_Data.xWireless_Charge_Open_Close(Wireless_Charge_OPEN);
 //        delay_ms(500);
 //        delay_ms(500);
@@ -429,13 +429,13 @@ void xAuto_Run_Function(void)
 //        delay_ms(500);
 //        Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Init_Open_Kaiqima);
 
-/*****************************************************·é»ğÌ¨±êÖ¾Îï***********************************************/
+/*****************************************************çƒ½ç«å°æ ‡å¿—ç‰©***********************************************/
 //        SmokeTower_Data.SmokeTower_Infrared_Open();
 //        uint8_t SmokeTower_Open_Data[6]={0};
 //        SmokeTower_Data.xSmokeTower_Zigbee_Open(SmokeTower_Open_Data);
 
 //            uint8_t  Kai_Qi_Ma[3]={0x00,0x00,0x00};
-//            Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma);//ĞèĞŞ¸Ä¿ªÆôÂë
+//            Wireless_Charge_Data.xWireless_Charge_KaiQiMa_Open(Kai_Qi_Ma);//éœ€ä¿®æ”¹å¼€å¯ç 
 
 #if YT1_2026
 uint8_t Two_Code_Count = 2;
@@ -443,7 +443,7 @@ uint8_t Count = 0;
 uint8_t time_out = 0;
 uint8_t Buf1[200];
 uint8_t Hex_Data_Store1[10];
-bool lock_flag = 0; // Ëø³µ±êÖ¾£¬0ÎªÎ´Ëø³µ£¬1ÎªÒÑËø³µ
+bool lock_flag = 0; // é”è½¦æ ‡å¿—ï¼Œ0ä¸ºæœªé”è½¦ï¼Œ1ä¸ºå·²é”è½¦
 void xAuto_Run_Function(void)
 {
   // if (lock_flag == 0)
@@ -453,14 +453,14 @@ void xAuto_Run_Function(void)
   //     delay_ms(500);
   //     delay_ms(500);
   //     time_out++;
-  //     if (time_out > 230) // µÈ´ı10Ãëºó³¬Ê±
+  //     if (time_out > 230) // ç­‰å¾…10ç§’åè¶…æ—¶
   //     {
-  //       Run_State = 1; // ÉèÖÃ×´Ì¬Îª1£¬½øÈëÏÂÒ»½×¶Î
-  //       time_out = 0;  // ÖØÖÃ³¬Ê±¼ÆÊıÆ÷
-  //       break;         // Ìø³öÑ­»·£¬¼ÌĞøÖ´ĞĞºóĞø´úÂë
+  //       Run_State = 1; // è®¾ç½®çŠ¶æ€ä¸º1ï¼Œè¿›å…¥ä¸‹ä¸€é˜¶æ®µ
+  //       time_out = 0;  // é‡ç½®è¶…æ—¶è®¡æ•°å™¨
+  //       break;         // è·³å‡ºå¾ªç¯ï¼Œç»§ç»­æ‰§è¡Œåç»­ä»£ç 
   //     }
   //   }
-  //   Run_State = 1; // ÉèÖÃ×´Ì¬Îª1£¬½øÈëÏÂÒ»½×¶Î
+  //   Run_State = 1; // è®¾ç½®çŠ¶æ€ä¸º1ï¼Œè¿›å…¥ä¸‹ä¸€é˜¶æ®µ
   //   lock_flag = 1;
   // }
   switch (Run_State)
@@ -470,19 +470,19 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go();
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
     delay_ms(200);
-    // ¶şÎ¬ÂëÊ¶±ğ
+    // äºŒç»´ç è¯†åˆ«
     Identify_Two_Code_Arr[3] = 0x01;
-    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
     delay_ms(500);
     delay_ms(500);
     delay_ms(500);
     YT1_parse_two_codes();
 
-    if (Android_Data.Two_Code_State == 0) // Èç¹ûÎ´½øÈëÊ¶±ğÄ£Ê½
+    if (Android_Data.Two_Code_State == 0) // å¦‚æœæœªè¿›å…¥è¯†åˆ«æ¨¡å¼
     {
       Motor_Data.xCAR_Back(20, 450);
       Rx_count = 0;
-      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
@@ -503,7 +503,7 @@ void xAuto_Run_Function(void)
       printf("%s\r\n", Two_Code_Data_parsed_Store1);
       printf("%s\r\n", Two_Code_Data_parsed_Store2);
 
-      // Ã¿¸ö×Ö·û×ª³ÉÊ®Áù½øÖÆ£¬ÎŞÏß³äµç±êÖ¾Îï¿ªÆôÂë
+      // æ¯ä¸ªå­—ç¬¦è½¬æˆåå…­è¿›åˆ¶ï¼Œæ— çº¿å……ç”µæ ‡å¿—ç‰©å¼€å¯ç 
       for (int i = 0; i < strlen((char *)Two_Code_Data_parsed_Store2); i++)
       {
         char c = Two_Code_Data_parsed_Store2[i];
@@ -545,9 +545,9 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // B4
-    // ½»Í¨µÆ
+    // äº¤é€šç¯
     uint8_t time_out = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // ·¢ËÍÇëÇóÊ¶±ğºìÂÌµÆB
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // å‘é€è¯·æ±‚è¯†åˆ«çº¢ç»¿ç¯B
     while (Android_Data.traffic_light_flag != 1)
     {
       delay_ms(500);
@@ -563,7 +563,7 @@ void xAuto_Run_Function(void)
     if (Android_Data.Red_State == 1)
     {
       Android_Data.Red_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // ·¢ËÍ¸ø½»Í¨µÆ±êÖ¾ÎïÇëÇóÈ·ÈÏ
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // å‘é€ç»™äº¤é€šç¯æ ‡å¿—ç‰©è¯·æ±‚ç¡®è®¤
     }
     else if (Android_Data.Yellow_State == 1)
     {
@@ -575,7 +575,7 @@ void xAuto_Run_Function(void)
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
     }
-    else // ÃÉÒ»¸ö
+    else // è’™ä¸€ä¸ª
     {
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
@@ -594,7 +594,7 @@ void xAuto_Run_Function(void)
     // B2->F2
     delay_ms(300);
     track_time_Start = 1;
-    Motor_Data.xCAR_Track(40); // Ñ­¼£
+    Motor_Data.xCAR_Track(40); // å¾ªè¿¹
     delay_ms(300);
     sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
     Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
@@ -606,9 +606,9 @@ void xAuto_Run_Function(void)
       delay_ms(300);
       Motor_Data.xCAR_Track(20);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(100);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(500);
       Motor_Data.xCAR_Track_Go();
       Motor_Data.xCAR_Track_Go();
@@ -617,9 +617,9 @@ void xAuto_Run_Function(void)
     else if (1200 > Count_ms) // D2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(100);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
@@ -627,15 +627,15 @@ void xAuto_Run_Function(void)
     else // E2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(25, 300); // Ê¹³µÉí¶Ô×¼Ê®×ÖÂ·¿Ú
+      Motor_Data.xCAR_Go(25, 300); // ä½¿è½¦èº«å¯¹å‡†åå­—è·¯å£
       delay_ms(500);
-      Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
+      Motor_Data.xCAR_Track(Motor_Data.Go_speed); // å¾ªè¿¹
       delay_ms(500);
       Motor_Data.xCAR_Back(20, 600);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(100);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(500);
 
       Motor_Data.xCAR_Track_Go();
@@ -670,7 +670,7 @@ void xAuto_Run_Function(void)
     delay_ms(200);
     MainCar_Data.xSend_Command_To_MainCar(Send_wireless_open_To_MainCar);
     MainCar_Data.xSend_Command_To_MainCar(Send_Weizhi_To_MainCar);
-    MainCar_Data.xStart_Command_To_MainCar(); // Æô¶¯Ö÷³µ
+    MainCar_Data.xStart_Command_To_MainCar(); // å¯åŠ¨ä¸»è½¦
     delay_ms(200);
     MainCar_Data.xStart_Command_To_MainCar();
     delay_ms(200);
@@ -696,9 +696,9 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go(); // B6
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // B4
-                   // ½»Í¨µÆ
+                   // äº¤é€šç¯
     uint8_t time_out = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // ·¢ËÍÇëÇóÊ¶±ğºìÂÌµÆB
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // å‘é€è¯·æ±‚è¯†åˆ«çº¢ç»¿ç¯B
     while (Android_Data.traffic_light_flag != 1)
     {
       delay_ms(500);
@@ -714,7 +714,7 @@ void xAuto_Run_Function(void)
     if (Android_Data.Red_State == 1)
     {
       Android_Data.Red_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // ·¢ËÍ¸ø½»Í¨µÆ±êÖ¾ÎïÇëÇóÈ·ÈÏ
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // å‘é€ç»™äº¤é€šç¯æ ‡å¿—ç‰©è¯·æ±‚ç¡®è®¤
     }
     else if (Android_Data.Yellow_State == 1)
     {
@@ -726,7 +726,7 @@ void xAuto_Run_Function(void)
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
     }
-    else // ÃÉÒ»¸ö
+    else // è’™ä¸€ä¸ª
     {
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
@@ -740,17 +740,17 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
     delay_ms(200);
     Identify_Two_Code_Arr[3] = 0x01;
-    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
     delay_ms(500);
     delay_ms(500);
     delay_ms(500);
     YT2_parse_two_codes();
 
-    if (Android_Data.Two_Code_State == 0) // Èç¹ûÎ´½øÈëÊ¶±ğÄ£Ê½
+    if (Android_Data.Two_Code_State == 0) // å¦‚æœæœªè¿›å…¥è¯†åˆ«æ¨¡å¼
     {
       Motor_Data.xCAR_Back(20, 300);
       Rx_count = 0;
-      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
@@ -800,7 +800,7 @@ void xAuto_Run_Function(void)
   {
     delay_ms(200);
     track_time_Start = 1;
-    Motor_Data.xCAR_Track(40); // Ñ­¼£
+    Motor_Data.xCAR_Track(40); // å¾ªè¿¹
     delay_ms(200);
     sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
     Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
@@ -812,9 +812,9 @@ void xAuto_Run_Function(void)
       delay_ms(300);
       Motor_Data.xCAR_Track(30);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(100);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       Motor_Data.xCAR_Track_Go();
@@ -823,9 +823,9 @@ void xAuto_Run_Function(void)
     else if (1200 > Count_ms) // D2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(100);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
@@ -833,16 +833,16 @@ void xAuto_Run_Function(void)
     else // E2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(25, 300); // Ê¹³µÉí¶Ô×¼Ê®×ÖÂ·¿Ú
+      Motor_Data.xCAR_Go(25, 300); // ä½¿è½¦èº«å¯¹å‡†åå­—è·¯å£
       delay_ms(500);
-      Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
+      Motor_Data.xCAR_Track(Motor_Data.Go_speed); // å¾ªè¿¹
       delay_ms(500);
       Motor_Data.xCAR_Back(20, 600);
       delay_ms(300);
       Motor_Data.xCAR_Track(20);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(100);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(300);
 
       Motor_Data.xCAR_Track_Go();
@@ -880,7 +880,7 @@ void xAuto_Run_Function(void)
 #if YT3_2026
 extern uint8_t Send_Algorithm_Parameters_To_MainCar[8];
 uint8_t Two_Code_Count = 2;
-bool lock_flag = 0; // Ëø³µ±êÖ¾£¬0ÎªÎ´Ëø³µ£¬1ÎªÒÑËø³µ
+bool lock_flag = 0; // é”è½¦æ ‡å¿—ï¼Œ0ä¸ºæœªé”è½¦ï¼Œ1ä¸ºå·²é”è½¦
 uint8_t time_out = 0;
 void xAuto_Run_Function(void)
 {
@@ -891,14 +891,14 @@ void xAuto_Run_Function(void)
       delay_ms(500);
       delay_ms(500);
       time_out++;
-      if (time_out > 230) // µÈ´ı10Ãëºó³¬Ê±
+      if (time_out > 230) // ç­‰å¾…10ç§’åè¶…æ—¶
       {
-        Run_State = 1; // ÉèÖÃ×´Ì¬Îª1£¬½øÈëÏÂÒ»½×¶Î
-        time_out = 0;  // ÖØÖÃ³¬Ê±¼ÆÊıÆ÷
-        break;         // Ìø³öÑ­»·£¬¼ÌĞøÖ´ĞĞºóĞø´úÂë
+        Run_State = 1; // è®¾ç½®çŠ¶æ€ä¸º1ï¼Œè¿›å…¥ä¸‹ä¸€é˜¶æ®µ
+        time_out = 0;  // é‡ç½®è¶…æ—¶è®¡æ•°å™¨
+        break;         // è·³å‡ºå¾ªç¯ï¼Œç»§ç»­æ‰§è¡Œåç»­ä»£ç 
       }
     }
-    Run_State = 1; // ÉèÖÃ×´Ì¬Îª1£¬½øÈëÏÂÒ»½×¶Î
+    Run_State = 1; // è®¾ç½®çŠ¶æ€ä¸º1ï¼Œè¿›å…¥ä¸‹ä¸€é˜¶æ®µ
     lock_flag = 1;
   }
   switch (Run_State)
@@ -912,21 +912,21 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_L45(wheel_Speed, wheel_Time);
     delay_ms(500);
     delay_ms(500);
-    // ¶şÎ¬ÂëÊ¶±ğ
+    // äºŒç»´ç è¯†åˆ«
     Identify_Two_Code_Arr[3] = 0x01;
-    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
     delay_ms(500);
     delay_ms(500);
     delay_ms(500);
     YT3_parse_two_codes();
 
-    if (Android_Data.Two_Code_State == 0) // Èç¹ûÎ´½øÈëÊ¶±ğÄ£Ê½
+    if (Android_Data.Two_Code_State == 0) // å¦‚æœæœªè¿›å…¥è¯†åˆ«æ¨¡å¼
     {
       Motor_Data.xCAR_Back(20, 450);
       Rx_count = 0;
       delay_ms(500);
       delay_ms(500);
-      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
@@ -982,8 +982,8 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_L90(wheel_Speed, wheel_Time * 2);
     delay_ms(300);
     printf("Licence_Data:%s ", MainCar_Send_Licence_Data_Store);
-    // µÀÕ¢ÏµÍ³ÈÎÎñ
-    Barrier_Data.xBarrier_Licence_Tx(MainCar_Send_Licence_Data_Store); // ³µÅÆºÅ
+    // é“é—¸ç³»ç»Ÿä»»åŠ¡
+    Barrier_Data.xBarrier_Licence_Tx(MainCar_Send_Licence_Data_Store); // è½¦ç‰Œå·
     Motor_Data.xCAR_Track_Go();                                        // D4
     delay_ms(300);
     Motor_Data.xCAR_Track_Go(); // B4
@@ -1012,9 +1012,9 @@ void xAuto_Run_Function(void)
   }
   case 4:
   {
-    // ½»Í¨µÆ
+    // äº¤é€šç¯
     uint8_t time_out = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // ·¢ËÍÇëÇóÊ¶±ğºìÂÌA
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // å‘é€è¯·æ±‚è¯†åˆ«çº¢ç»¿A
     while (Android_Data.traffic_light_flag != 1)
     {
       delay_ms(500);
@@ -1030,7 +1030,7 @@ void xAuto_Run_Function(void)
     if (Android_Data.Red_State == 1)
     {
       Android_Data.Red_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // ·¢ËÍ¸ø½»Í¨µÆ±êÖ¾ÎïÇëÇóÈ·ÈÏ
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // å‘é€ç»™äº¤é€šç¯æ ‡å¿—ç‰©è¯·æ±‚ç¡®è®¤
     }
     else if (Android_Data.Yellow_State == 1)
     {
@@ -1042,7 +1042,7 @@ void xAuto_Run_Function(void)
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
     }
-    else // ÃÉÒ»¸ö
+    else // è’™ä¸€ä¸ª
     {
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
@@ -1073,7 +1073,7 @@ void xAuto_Run_Function(void)
 #endif
 
 #if YT4_2026
-bool lock_flag = 0; // Ëø³µ±êÖ¾£¬0ÎªÎ´Ëø³µ£¬1ÎªÒÑËø³µ
+bool lock_flag = 0; // é”è½¦æ ‡å¿—ï¼Œ0ä¸ºæœªé”è½¦ï¼Œ1ä¸ºå·²é”è½¦
 uint8_t time_out = 0;
 uint8_t Two_Code_Count = 1;
 void xAuto_Run_Function(void)
@@ -1087,12 +1087,12 @@ void xAuto_Run_Function(void)
       time_out++;
       if (time_out >= 240)
       {
-        Run_State = 1; // ÉèÖÃ×´Ì¬Îª1£¬½øÈëÏÂÒ»½×¶Î
-        time_out = 0;  // ÖØÖÃ³¬Ê±¼ÆÊıÆ÷
-        break;         // Ìø³öÑ­»·£¬¼ÌĞøÖ´ĞĞºóĞø´úÂë
+        Run_State = 1; // è®¾ç½®çŠ¶æ€ä¸º1ï¼Œè¿›å…¥ä¸‹ä¸€é˜¶æ®µ
+        time_out = 0;  // é‡ç½®è¶…æ—¶è®¡æ•°å™¨
+        break;         // è·³å‡ºå¾ªç¯ï¼Œç»§ç»­æ‰§è¡Œåç»­ä»£ç 
       }
     }
-    Run_State = 1; // ÉèÖÃ×´Ì¬Îª1£¬½øÈëÏÂÒ»½×¶Î
+    Run_State = 1; // è®¾ç½®çŠ¶æ€ä¸º1ï¼Œè¿›å…¥ä¸‹ä¸€é˜¶æ®µ
     lock_flag = 1;
   }
   switch (Run_State)
@@ -1100,9 +1100,9 @@ void xAuto_Run_Function(void)
   case 1:
   {
     Motor_Data.xCAR_Track_Go(); // B6
-                                // ½»Í¨µÆ
+                                // äº¤é€šç¯
     uint8_t time_out = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_B); // ·¢ËÍÇëÇóÊ¶±ğºìÂÌB
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_B); // å‘é€è¯·æ±‚è¯†åˆ«çº¢ç»¿B
     while (Android_Data.traffic_light_flag != 1)
     {
       delay_ms(500);
@@ -1118,7 +1118,7 @@ void xAuto_Run_Function(void)
     if (Android_Data.Red_State == 1)
     {
       Android_Data.Red_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 1); // ·¢ËÍ¸ø½»Í¨µÆ±êÖ¾ÎïÇëÇóÈ·ÈÏ
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 1); // å‘é€ç»™äº¤é€šç¯æ ‡å¿—ç‰©è¯·æ±‚ç¡®è®¤
     }
     else if (Android_Data.Yellow_State == 1)
     {
@@ -1130,7 +1130,7 @@ void xAuto_Run_Function(void)
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
     }
-    else // ÃÉÒ»¸ö
+    else // è’™ä¸€ä¸ª
     {
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
@@ -1145,33 +1145,33 @@ void xAuto_Run_Function(void)
   case 2:
   {
     delay_ms(200);
-    Motor_Data.xCAR_Track(30); // Ñ­¼£
+    Motor_Data.xCAR_Track(30); // å¾ªè¿¹
     delay_ms(200);
     Motor_Data.xCAR_Back(25, 600);
     delay_ms(300);
     Motor_Data.xCAR_Track(30);
     delay_ms(300);
-    Motor_Data.xCAR_Go(30, 620); // ³å
+    Motor_Data.xCAR_Go(30, 620); // å†²
     delay_ms(100);
-    Motor_Data.xCAR_Go(30, 620); // ³å
+    Motor_Data.xCAR_Go(30, 620); // å†²
     delay_ms(500);
     Motor_Data.xCAR_Track_Go();
     delay_ms(500);
-    // ¶şÎ¬ÂëÊ¶±ğ
+    // äºŒç»´ç è¯†åˆ«
     Identify_Two_Code_Arr[3] = 0x01;
-    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
     delay_ms(500);
     delay_ms(500);
     delay_ms(500);
     YT4_parse_two_codes();
 
-    if (Android_Data.Two_Code_State == 0) // Èç¹ûÎ´½øÈëÊ¶±ğÄ£Ê½
+    if (Android_Data.Two_Code_State == 0) // å¦‚æœæœªè¿›å…¥è¯†åˆ«æ¨¡å¼
     {
       Motor_Data.xCAR_Back(30, 320);
       Rx_count = 0;
       delay_ms(500);
       delay_ms(500);
-      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
@@ -1179,13 +1179,13 @@ void xAuto_Run_Function(void)
       Motor_Data.xCAR_Go(30, 320);
       delay_ms(500);
     }
-    if (Android_Data.Two_Code_State == 0) // Èç¹ûÎ´½øÈëÊ¶±ğÄ£Ê½
+    if (Android_Data.Two_Code_State == 0) // å¦‚æœæœªè¿›å…¥è¯†åˆ«æ¨¡å¼
     {
       Motor_Data.xCAR_Back(30, 300);
       Rx_count = 0;
       delay_ms(500);
       delay_ms(500);
-      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
@@ -1227,11 +1227,11 @@ void xAuto_Run_Function(void)
   }
   case 3:
   {
-    // ¹«½»Õ¾Ëæ»ú²¥±¨
-    XiaoChuang_Data.xSend_To_XiaoChuang_Rouse(); // Ê¶±ğÇ°ÏÈ»½ĞÑĞ¡´´
+    // å…¬äº¤ç«™éšæœºæ’­æŠ¥
+    XiaoChuang_Data.xSend_To_XiaoChuang_Rouse(); // è¯†åˆ«å‰å…ˆå”¤é†’å°åˆ›
     delay_ms(500);
-    Voice_Report_Data.xVoice_Report_Random_Command(); // ²¥±¨Ëæ»úÖ¸Áî
-    for (uint8_t i = 0; i < 5; i++)                   // ÑÓÊ±8ÃëµÈ´ıĞ¡´´Ê¶±ğ²¢ÖØ¸´²¥±¨
+    Voice_Report_Data.xVoice_Report_Random_Command(); // æ’­æŠ¥éšæœºæŒ‡ä»¤
+    for (uint8_t i = 0; i < 5; i++)                   // å»¶æ—¶8ç§’ç­‰å¾…å°åˆ›è¯†åˆ«å¹¶é‡å¤æ’­æŠ¥
     {
       delay_ms(500);
       delay_ms(500);
@@ -1242,7 +1242,7 @@ void xAuto_Run_Function(void)
     delay_ms(300);
     printf("Init_light:%d\r\n", MainCar_Send_Init_light);
 
-    if (MainCar_Send_Init_light % 2 + 1 == 1) // Á¢Ìå³µ¿â
+    if (MainCar_Send_Init_light % 2 + 1 == 1) // ç«‹ä½“è½¦åº“
     {
       CarPort_Data.xCarPort_Control_Arrive_Level(CarPort_Data.Device_A, 1);
       Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
@@ -1285,21 +1285,21 @@ void xAuto_Run_Function(void)
     Motor_Data.xCAR_Track_Go(); // B2
     delay_ms(200);
     Motor_Data.xCAR_R45(wheel_Speed, wheel_Time);
-    // ¶şÎ¬ÂëÊ¶±ğ
+    // äºŒç»´ç è¯†åˆ«
     Identify_Two_Code_Arr[3] = 0x01;
-    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
     delay_ms(500);
     delay_ms(500);
     delay_ms(500);
     YT5_parse_two_codes();
 
-    if (Android_Data.Two_Code_State == 0) // Èç¹ûÎ´½øÈëÊ¶±ğÄ£Ê½
+    if (Android_Data.Two_Code_State == 0) // å¦‚æœæœªè¿›å…¥è¯†åˆ«æ¨¡å¼
     {
       Motor_Data.xCAR_Back(20, 450);
       Rx_count = 0;
       delay_ms(500);
       delay_ms(500);
-      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
@@ -1355,7 +1355,7 @@ void xAuto_Run_Function(void)
     uint8_t Buf1[200];
     delay_ms(200);
     track_time_Start = 1;
-    Motor_Data.xCAR_Track(40); // Ñ­¼£
+    Motor_Data.xCAR_Track(40); // å¾ªè¿¹
     delay_ms(200);
     sprintf((char *)Buf1, "Count_ms:%d\r\n ", Count_ms);
     Send_InfoData_To_Fifo((char *)Buf1, strlen((char *)Buf1));
@@ -1367,9 +1367,9 @@ void xAuto_Run_Function(void)
       delay_ms(300);
       Motor_Data.xCAR_Track(20);
       delay_ms(300);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(100);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       Motor_Data.xCAR_Track_Go();
@@ -1378,9 +1378,9 @@ void xAuto_Run_Function(void)
     else if (1200 > Count_ms) // D2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(100);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(300);
       Motor_Data.xCAR_Track_Go();
       delay_ms(200);
@@ -1388,16 +1388,16 @@ void xAuto_Run_Function(void)
     else // E2
     {
       Count_ms = 0;
-      Motor_Data.xCAR_Go(25, 400); // Ê¹³µÉí¶Ô×¼Ê®×ÖÂ·¿Ú
+      Motor_Data.xCAR_Go(25, 400); // ä½¿è½¦èº«å¯¹å‡†åå­—è·¯å£
       delay_ms(300);
-      Motor_Data.xCAR_Track(Motor_Data.Go_speed); // Ñ­¼£
+      Motor_Data.xCAR_Track(Motor_Data.Go_speed); // å¾ªè¿¹
       delay_ms(300);
       Motor_Data.xCAR_Back(25, 600);
       delay_ms(300);
       Motor_Data.xCAR_Track(30);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(100);
-      Motor_Data.xCAR_Go(30, 620); // ³å
+      Motor_Data.xCAR_Go(30, 620); // å†²
       delay_ms(500);
 
       Motor_Data.xCAR_Track_Go();
@@ -1409,9 +1409,9 @@ void xAuto_Run_Function(void)
   case 4:
   {
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2); // F2
-                                                      // ½»Í¨µÆ
+                                                      // äº¤é€šç¯
     uint8_t time_out = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // ·¢ËÍÇëÇóÊ¶±ğºìÂÌA
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_A); // å‘é€è¯·æ±‚è¯†åˆ«çº¢ç»¿A
     while (Android_Data.traffic_light_flag != 1)
     {
       delay_ms(500);
@@ -1427,7 +1427,7 @@ void xAuto_Run_Function(void)
     if (Android_Data.Red_State == 1)
     {
       Android_Data.Red_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // ·¢ËÍ¸ø½»Í¨µÆ±êÖ¾ÎïÇëÇóÈ·ÈÏ
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 1); // å‘é€ç»™äº¤é€šç¯æ ‡å¿—ç‰©è¯·æ±‚ç¡®è®¤
     }
     else if (Android_Data.Yellow_State == 1)
     {
@@ -1439,7 +1439,7 @@ void xAuto_Run_Function(void)
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
     }
-    else // ÃÉÒ»¸ö
+    else // è’™ä¸€ä¸ª
     {
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_A, 2);
@@ -1482,7 +1482,7 @@ void xAuto_Run_Function(void)
 #endif
 
 #if BS_2026
-bool lock_flag = 0; // Ëø³µ±êÖ¾£¬0ÎªÎ´Ëø³µ£¬1ÎªÒÑËø³µ
+bool lock_flag = 0; // é”è½¦æ ‡å¿—ï¼Œ0ä¸ºæœªé”è½¦ï¼Œ1ä¸ºå·²é”è½¦
 uint8_t time_out = 0;
 uint8_t Two_Code_Count = 1;
 void xAuto_Run_Function(void)
@@ -1496,12 +1496,12 @@ void xAuto_Run_Function(void)
       time_out++;
       if (time_out >= 240)
       {
-        Run_State = 1; // ÉèÖÃ×´Ì¬Îª1£¬½øÈëÏÂÒ»½×¶Î
-        time_out = 0;  // ÖØÖÃ³¬Ê±¼ÆÊıÆ÷
-        break;         // Ìø³öÑ­»·£¬¼ÌĞøÖ´ĞĞºóĞø´úÂë
+        Run_State = 1; // è®¾ç½®çŠ¶æ€ä¸º1ï¼Œè¿›å…¥ä¸‹ä¸€é˜¶æ®µ
+        time_out = 0;  // é‡ç½®è¶…æ—¶è®¡æ•°å™¨
+        break;         // è·³å‡ºå¾ªç¯ï¼Œç»§ç»­æ‰§è¡Œåç»­ä»£ç 
       }
     }
-    Run_State = 1; // ÉèÖÃ×´Ì¬Îª1£¬½øÈëÏÂÒ»½×¶Î
+    Run_State = 1; // è®¾ç½®çŠ¶æ€ä¸º1ï¼Œè¿›å…¥ä¸‹ä¸€é˜¶æ®µ
     lock_flag = 1;
   }
   switch (Run_State)
@@ -1510,9 +1510,9 @@ void xAuto_Run_Function(void)
   {
     Motor_Data.xCAR_Track_Go();
     delay_ms(200); // F6
-                   //  ½»Í¨µÆ
+                   //  äº¤é€šç¯
     uint8_t time_out = 0;
-    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_B); // ·¢ËÍÇëÇóÊ¶±ğºìÂÌB
+    Smart_Traffic_Data.xSmart_Traffic_Ask_State(Smart_Traffic_Data.Device_B); // å‘é€è¯·æ±‚è¯†åˆ«çº¢ç»¿B
     while (Android_Data.traffic_light_flag != 1)
     {
       delay_ms(500);
@@ -1528,7 +1528,7 @@ void xAuto_Run_Function(void)
     if (Android_Data.Red_State == 1)
     {
       Android_Data.Red_State = 0;
-      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 1); // ·¢ËÍ¸ø½»Í¨µÆ±êÖ¾ÎïÇëÇóÈ·ÈÏ
+      Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 1); // å‘é€ç»™äº¤é€šç¯æ ‡å¿—ç‰©è¯·æ±‚ç¡®è®¤
     }
     else if (Android_Data.Yellow_State == 1)
     {
@@ -1540,7 +1540,7 @@ void xAuto_Run_Function(void)
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
     }
-    else // ÃÉÒ»¸ö
+    else // è’™ä¸€ä¸ª
     {
       Android_Data.Green_State = 0;
       Smart_Traffic_Data.xSmart_Traffic_Colour_Recognition(Smart_Traffic_Data.Device_B, 2);
@@ -1555,21 +1555,21 @@ void xAuto_Run_Function(void)
   {
     Motor_Data.xCAR_L45(wheel_Speed + 10, wheel_Time);
     delay_ms(200);
-    // ¶şÎ¬ÂëÊ¶±ğ
+    // äºŒç»´ç è¯†åˆ«
     Identify_Two_Code_Arr[3] = 0x01;
-    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+    Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
     delay_ms(500);
     delay_ms(500);
     delay_ms(500);
     YT5_parse_two_codes();
 
-    if (Android_Data.Two_Code_State == 0) // Èç¹ûÎ´½øÈëÊ¶±ğÄ£Ê½
+    if (Android_Data.Two_Code_State == 0) // å¦‚æœæœªè¿›å…¥è¯†åˆ«æ¨¡å¼
     {
       Motor_Data.xCAR_Back(20, 450);
       Rx_count = 0;
       delay_ms(500);
       delay_ms(500);
-      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // ·¢ËÍÇëÇóÊ¶±ğ¶şÎ¬Âë
+      Android_Data.xMainCar_Send_Android(Identify_Two_Code_Arr); // å‘é€è¯·æ±‚è¯†åˆ«äºŒç»´ç 
       delay_ms(500);
       delay_ms(500);
       delay_ms(500);
@@ -1600,7 +1600,7 @@ void xAuto_Run_Function(void)
   }
   case 3:
   {
-    // µÀÕ¢
+    // é“é—¸
 
     printf("Licence_Data:%s ", MainCar_Send_Licence_Data_Store);
     Barrier_Data.xBarrier_Licence_Tx((char *)MainCar_Send_Licence_Data_Store);
@@ -1613,17 +1613,17 @@ void xAuto_Run_Function(void)
   {
     delay_ms(200); // B4
     uint8_t Init_dangwei = 0;
-    //***********************************************************ÖÇÄÜÂ·µÆ¸ĞÖªµ÷½ÚÈÎÎñ**************************************
-    Motor_Data.xCAR_Go(25, 300); // Ç°½øÒ»µãµã
+    //***********************************************************æ™ºèƒ½è·¯ç¯æ„ŸçŸ¥è°ƒèŠ‚ä»»åŠ¡**************************************
+    Motor_Data.xCAR_Go(25, 300); // å‰è¿›ä¸€ç‚¹ç‚¹
     delay_ms(500);
     delay_ms(500);
     Init_dangwei = Smart_Light_Data.xSmart_Light_Get_Init_Level();
     printf("Init:%d\r\n", Init_dangwei);
-    uint8_t Object_dangwei = ((int)pow((dis / 100), Init_dangwei)) % 4 + 1; //********powÎª´ÎÃİÔËËãº¯Êı
+    uint8_t Object_dangwei = ((int)pow((dis / 100), Init_dangwei)) % 4 + 1; //********powä¸ºæ¬¡å¹‚è¿ç®—å‡½æ•°
     Smart_Light_Data.xSmart_Light_Appoint_Level(Object_dangwei);
     printf("Object:%d\r\n", Object_dangwei);
     delay_ms(300);
-    Motor_Data.xCAR_Back(25, 300); // µ¹ÍËÒ»µãµã
+    Motor_Data.xCAR_Back(25, 300); // å€’é€€ä¸€ç‚¹ç‚¹
     delay_ms(500);
     Motor_Data.xCAR_R90(wheel_Speed, wheel_Time * 2);
     delay_ms(200);
@@ -1657,7 +1657,7 @@ void xAuto_Run_Function(void)
       delay_ms(300);
       Motor_Data.xCAR_Back(30, 800);
     }
-    MainCar_Data.xStart_Command_To_MainCar(); // Æô¶¯Ö÷³µ
+    MainCar_Data.xStart_Command_To_MainCar(); // å¯åŠ¨ä¸»è½¦
     delay_ms(200);
     MainCar_Data.xStart_Command_To_MainCar();
     delay_ms(200);

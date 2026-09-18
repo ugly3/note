@@ -1,6 +1,6 @@
 ..\output\canp_hostcom.o: ..\HARDWARE\CAN\CanP_HostCom.c
-..\output\canp_hostcom.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
-..\output\canp_hostcom.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\string.h
+..\output\canp_hostcom.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+..\output\canp_hostcom.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
 ..\output\canp_hostcom.o: ..\CMSIS\stm32f4xx.h
 ..\output\canp_hostcom.o: ..\CMSIS\core_cm4.h
 ..\output\canp_hostcom.o: ..\CMSIS\core_cmInstr.h
@@ -43,11 +43,11 @@
 ..\output\canp_hostcom.o: ..\HARDWARE\CAN\can_user.h
 ..\output\canp_hostcom.o: ..\SYSTEM\timer\Timer.h
 ..\output\canp_hostcom.o: ..\MODULE\all_module\all_module.h
-..\output\canp_hostcom.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdio.h
-..\output\canp_hostcom.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
-..\output\canp_hostcom.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdbool.h
-..\output\canp_hostcom.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\math.h
-..\output\canp_hostcom.o: D:\keil5\ARM\ARM_Compiler_5.06u7\Bin\..\include\ctype.h
+..\output\canp_hostcom.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\output\canp_hostcom.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\canp_hostcom.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h
+..\output\canp_hostcom.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
+..\output\canp_hostcom.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\ctype.h
 ..\output\canp_hostcom.o: ..\HARDWARE\Task_Board\infrared.h
 ..\output\canp_hostcom.o: ..\HARDWARE\Core_Board\cba.h
 ..\output\canp_hostcom.o: ..\HARDWARE\Task_Board\ultrasonic.h
